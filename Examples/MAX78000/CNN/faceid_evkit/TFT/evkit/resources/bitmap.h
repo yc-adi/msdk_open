@@ -31,8 +31,8 @@
  *
  ******************************************************************************/
 
-#ifndef _BITMAP_H_
-#define _BITMAP_H_
+#ifndef EXAMPLES_MAX78000_CNN_FACEID_EVKIT_TFT_EVKIT_RESOURCES_BITMAP_H_
+#define EXAMPLES_MAX78000_CNN_FACEID_EVKIT_TFT_EVKIT_RESOURCES_BITMAP_H_
 
 // bitmaps id
 #define left_arrow_bmp 0
@@ -41,4 +41,4 @@
 // fonts id
 #define urw_gothic_12_grey_bg_white 0
 
-#endif //_BITMAP_H_
+#endif // EXAMPLES_MAX78000_CNN_FACEID_EVKIT_TFT_EVKIT_RESOURCES_BITMAP_H_

@@ -31,8 +31,9 @@
 * property whatsoever. Maxim Integrated Products, Inc. retains all
 * ownership rights.
 *******************************************************************************/
-#ifndef __CAMERA_UTIL_H__
-#define __CAMERA_UTIL_H__
+
+#ifndef EXAMPLES_MAX78000_CNN_AISEGMENT_UNET_DEMO_CAMERA_UTIL_H_
+#define EXAMPLES_MAX78000_CNN_AISEGMENT_UNET_DEMO_CAMERA_UTIL_H_
 
 #define CAMERA_FREQ (10 * 1000 * 1000)
 #define BYTE_PER_PIXEL 2
@@ -65,4 +66,4 @@ void run_camera(void);
 void dump_cnn(void);
 void display_camera(void);
 
-#endif
+#endif // EXAMPLES_MAX78000_CNN_AISEGMENT_UNET_DEMO_CAMERA_UTIL_H_

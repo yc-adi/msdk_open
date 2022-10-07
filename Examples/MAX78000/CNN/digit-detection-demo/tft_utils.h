@@ -31,6 +31,10 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *******************************************************************************/
+
+#ifndef EXAMPLES_MAX78000_CNN_DIGIT_DETECTION_DEMO_TFT_UTILS_H_
+#define EXAMPLES_MAX78000_CNN_DIGIT_DETECTION_DEMO_TFT_UTILS_H_
+
 #ifdef BOARD_EVKIT_V1
 #include "bitmap.h"
 #include "tft_ssd2119.h"
@@ -45,3 +49,5 @@
 
 void TFT_Print(char *str, int x, int y, int font, int length);
 void draw_obj_rect(float *xy, int class_idx, uint32_t w, uint32_t h, uint8_t scale);
+
+#endif // EXAMPLES_MAX78000_CNN_DIGIT_DETECTION_DEMO_TFT_UTILS_H_

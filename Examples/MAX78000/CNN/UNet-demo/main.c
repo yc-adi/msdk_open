@@ -62,7 +62,7 @@
 // SELECT THE FOLLOWING BUILD OPTIONS
 // To use camera, comment out both
 //#define USE_SAMPLEDATA        // shows the sample data
-//#define USE_SPIDATA			// shows images received from serial SPI - ONLY EVKIT
+//#define USE_SPIDATA           // shows images received from serial SPI - ONLY EVKIT
 
 #define IMAGE_SIZE_X (80)
 #define IMAGE_SIZE_Y (80)

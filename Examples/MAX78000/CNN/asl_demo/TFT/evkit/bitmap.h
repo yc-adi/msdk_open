@@ -31,8 +31,8 @@
  *
  ******************************************************************************/
 
-#ifndef _BITMAP_H_
-#define _BITMAP_H_
+#ifndef EXAMPLES_MAX78000_CNN_ASL_DEMO_TFT_EVKIT_BITMAP_H_
+#define EXAMPLES_MAX78000_CNN_ASL_DEMO_TFT_EVKIT_BITMAP_H_
 
 // bitmaps id
 #define logo_white_bg_darkgrey_bmp 0
@@ -45,4 +45,4 @@
 #define urw_gothic_13_grey_bg_white 2
 #define urw_gothic_13_white_bg_grey 3
 
-#endif //_BITMAP_H_
+#endif // EXAMPLES_MAX78000_CNN_ASL_DEMO_TFT_EVKIT_BITMAP_H_

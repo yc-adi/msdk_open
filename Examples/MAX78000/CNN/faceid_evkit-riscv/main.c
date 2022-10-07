@@ -243,7 +243,6 @@ static int init(void)
             /* Enable TouchScreen */
             MXC_TS_Start();
 #endif
-
         } //Get FaceID result
         else if (riscv_mail_box[0] == RESULT_READY) {
             text_t cnnTime, cnnResult;

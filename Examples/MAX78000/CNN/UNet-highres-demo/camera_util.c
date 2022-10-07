@@ -379,7 +379,7 @@ void load_input_camera(void)
             if (camera_is_image_rcv()) {
                 break;
             }
-        };
+        }
 
         LED_Toggle(LED2);
 
@@ -428,7 +428,7 @@ void display_camera(void)
             if (camera_is_image_rcv()) {
                 break;
             }
-        };
+        }
 
         LED_Toggle(LED2);
 

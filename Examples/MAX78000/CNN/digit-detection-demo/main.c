@@ -52,7 +52,6 @@
 #include "camera.h"
 #include "spi.h"
 #include "mxc.h"
-#include "mxc_device.h"
 #include "board.h"
 #include "rtc.h"
 #include "uart.h"

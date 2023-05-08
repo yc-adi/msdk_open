@@ -53,7 +53,7 @@ void dmAdvCbInit(uint8_t advHandle)
   dmAdvCb.advType[advHandle] = DM_ADV_NONE;
   dmAdvCb.intervalMin[advHandle] = DM_GAP_ADV_SLOW_INT_MIN;
   dmAdvCb.intervalMax[advHandle] = DM_GAP_ADV_SLOW_INT_MAX;
-  dmAdvCb.channelMap[advHandle] = DM_ADV_CHAN_ALL;  // remove me !!!
+  dmAdvCb.channelMap[advHandle] = DM_ADV_CHAN_37; // DM_ADV_CHAN_ALL;  // remove me !!!
   dmCb.advFiltPolicy[advHandle] = HCI_ADV_FILT_NONE;
   dmAdvCb.advState[advHandle] = DM_ADV_STATE_IDLE;
 }

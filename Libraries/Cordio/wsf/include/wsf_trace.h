@@ -545,8 +545,7 @@ bool_t WsfTokenService(void);
 /*! \brief 0 argument App info trace. */
 #define APP_TRACE_INFO0(msg)                        WSF_TRACE0("APP", "INFO", msg)
 /*! \brief 1 argument App info trace. */
-//remove me !!! #define APP_TRACE_INFO1(msg, var1)                  WSF_TRACE1("APP", "INFO", msg, var1)
-#define APP_TRACE_INFO1(msg, var1)
+#define APP_TRACE_INFO1(msg, var1)                  WSF_TRACE1("APP", "INFO", msg, var1)
 /*! \brief 2 argument App info trace. */
 #define APP_TRACE_INFO2(msg, var1, var2)            WSF_TRACE2("APP", "INFO", msg, var1, var2)
 /*! \brief 3 argument App info trace. */

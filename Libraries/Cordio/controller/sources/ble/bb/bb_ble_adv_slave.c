@@ -101,10 +101,12 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
     }
   }
 
+  APP_TRACE_INFO0("BLE chan cfg data to RF-PHY-close");  // remove me !!!
   PalBbBleSetChannelParam(&pBle->chan);
 
   if (firstOpInSet)
   {
+    APP_TRACE_INFO2("firstOpInSet: dueUsec %d, setupdealyus: %d", pBod->dueUsec, BbGetRfSetupDelayUs());  // remove me !!!
     bbBleCb.bbParam.dueUsec = BbAdjustTime(pBod->dueUsec + BbGetRfSetupDelayUs());
     pBod->dueUsec = bbBleCb.bbParam.dueUsec;
   }
@@ -113,6 +115,7 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
     if (pAdv->pRxReqBuf)
     {
       /* Schedule with relative frame gap. */
+      APP_TRACE_INFO2("not first: currtime %d, setupdealyus: %d", PalBbGetCurrentTime(), BbGetRfSetupDelayUs());  // remove me !!!
       bbBleCb.bbParam.dueUsec = BbAdjustTime(PalBbGetCurrentTime() + BbGetSchSetupDelayUs());
     }
     else
@@ -131,7 +134,7 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
   {
     pAdv->txAdvSetupCback(pBod, BbAdjustTime(bbBleCb.bbParam.dueUsec));
   }
-
+  
   PalBbBleSetDataParams(&bbBleCb.bbParam);
 
   if (pAdv->pRxReqBuf)
@@ -142,10 +145,11 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
   {
     bbBleClrIfs();    /* non-connectable advertising */
   }
+
   PalBbBleTxBufDesc_t desc = {.pBuf = pAdv->pTxAdvBuf, .len = pAdv->txAdvLen};
   PalBbBleTxData(&desc, 1);
 
-  APP_TRACE_INFO2("bbSetupAdvOp, end, rxTimeoutUsec: %d %d,", bbBleCb.bbParam.rxTimeoutUsec, bbBleCb.bbParam.dueUsec);  // remove me !!! every adv interval
+  APP_TRACE_INFO2("bbSetupAdvOp, end, rxTimeoutUsec: %d, dueUsec: %d,", bbBleCb.bbParam.rxTimeoutUsec, bbBleCb.bbParam.dueUsec);  // remove me !!! every adv interval
 
   /* Tx may fail; no more important statements in the FALSE code path. */
 
@@ -435,7 +439,7 @@ static void bbSlvExecuteAdvOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
   bbBleCb.numChUsed = 0;
   bbBleCb.advChIdx = pAdv->firstAdvChIdx;
 
-  APP_TRACE_INFO1("bbSlvExecuteAdvOp rxTimeoutUsec:%d", bbBleCb.bbParam.rxTimeoutUsec);  // remove me !!! 4=2*2
+  APP_TRACE_INFO2("bbSlvExecuteAdvOp rxTimeoutUsec:%d, advChnIdx: %d", bbBleCb.bbParam.rxTimeoutUsec, bbBleCb.advChIdx );  // remove me !!! 4=2*2
   if (bbSetupAdvOp(pBod, pAdv, BB_STATUS_SUCCESS, TRUE))
   {
     BbSetBodTerminateFlag();

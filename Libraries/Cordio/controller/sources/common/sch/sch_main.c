@@ -91,7 +91,7 @@ static void schBodCurtailHandler(void)
 static void schBodLoadHandler(uint8_t src)
 {
   uint32_t start = PalBbGetCurrentTime();
-  APP_TRACE_INFO3("\nschBodLoadHandler %d %d %d", src, schCb.eventSetFlagCount, xTickCount);  // remove me !!!, c 3, or c 10(from timer), flagcnt always 0
+  APP_TRACE_INFO4("\nschBodLoadHandler src:%d %d %d %d", src, schCb.eventSetFlagCount, xTickCount, PalBbGetCurrentTime());  // remove me !!!, c 3, or c 10(from timer), flagcnt always 0
   BbOpDesc_t* pNextBod = schCb.pHead;
 
   if (schCb.eventSetFlagCount)
@@ -202,7 +202,7 @@ void SchInit(void)
 {
   memset(&schCb, 0, sizeof(schCb));
   SchReset();
-  PalTimerInit(schBodLoadHandler);
+  PalTimerInit(schBodLoadHandler);  // remove me !!! 10
 }
 
 /*************************************************************************************************/
@@ -251,12 +251,12 @@ void SchReset(void)
 
 void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
-  APP_TRACE_INFO1("d0 %d", xTickCount);  // remove me !!!
   /* Unused parameters */
   (void)pMsg;
 
   /* Assume scheduler clock started. */
   uint32_t startTime = PalBbGetCurrentTime();
+  APP_TRACE_INFO2("SchHandler() xTick: %d, Bb: %d", xTickCount, startTime);  // remove me !!!
 
   while (event != 0)
   {
@@ -337,7 +337,6 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
   {
     schCb.schHandlerWatermarkUsec = durUsec;
   }
-  APP_TRACE_INFO2("d9 %d %d", endTime - startTime, xTickCount);  // remove me !!!
 }
 
 /*************************************************************************************************/
@@ -356,7 +355,7 @@ static bool_t schLoadBod(BbOpDesc_t *pBod)
   if (schDueTimeInFuture(pBod))
   {
     uint32_t curTime = PalBbGetCurrentTime();
-    APP_TRACE_INFO2("schLoadBod %d %d", xTickCount, BbGetTargetTimeDelta(pBod->dueUsec, curTime));  // remove me !!!
+    APP_TRACE_INFO2("schLoadBod xTick: %d BbDelta: %d", xTickCount, BbGetTargetTimeDelta(pBod->dueUsec, curTime));  // remove me !!!
 
     /* Setup BB services. */
     BbExecuteBod(pBod);

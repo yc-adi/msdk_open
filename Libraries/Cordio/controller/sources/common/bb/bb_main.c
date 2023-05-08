@@ -314,7 +314,7 @@ bool_t BbGetBodTerminateFlag(void)
 /*************************************************************************************************/
 void BbTerminateBod(void)
 {
-  APP_TRACE_INFO0("BbTerminateBod");  // remove me !!!
+  APP_TRACE_INFO0("BbTerminateBod => SCH_EVENT_BOD_COMPLETE");  // remove me !!!
   WSF_ASSERT(bbCb.bodCompCback);
 
   BbOpDesc_t * const pBod = bbCb.pOpInProgress;

@@ -586,10 +586,10 @@ static bool_t SchIsConflictResolvable(BbOpDesc_t *pItem, BbOpDesc_t *pTgt, BbCon
  *  \param      pBod    Inserted BOD.
  */
 /*************************************************************************************************/
-static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
+static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod, uint8_t src)
 {
   uint32_t execTimeUsec = schGetTimeToExecBod(pBod);
-  APP_TRACE_INFO1("SchInsertTryLoadBod, execTimeUsec: %d to next BOD", execTimeUsec);  // remove me !!!
+  APP_TRACE_INFO2("%d SchInsertTryLoadBod, execTimeUsec: %d to next BOD", src, execTimeUsec);  // remove me !!!
 
   WSF_ASSERT(pBod);
   WSF_ASSERT(schCb.pHead);
@@ -694,7 +694,7 @@ void SchInsertNextAvailable(BbOpDesc_t *pBod)
     }
   }
 
-  SchInsertTryLoadBod(pBod);
+  SchInsertTryLoadBod(pBod, 1);
 }
 
 /*************************************************************************************************/
@@ -771,7 +771,7 @@ bool_t SchInsertAtDueTime(BbOpDesc_t *pBod, BbConflictAct_t conflictCback)
 
   if (result)
   {
-    SchInsertTryLoadBod(pBod);
+    SchInsertTryLoadBod(pBod, 2);
   }
 
   return result;
@@ -882,7 +882,7 @@ bool_t SchInsertEarlyAsPossible(BbOpDesc_t *pBod, uint32_t min, uint32_t max)
 
   if (result)
   {
-    SchInsertTryLoadBod(pBod);
+    SchInsertTryLoadBod(pBod, 3);
   }
 
   if (!result)
@@ -996,7 +996,7 @@ bool_t SchInsertLateAsPossible(BbOpDesc_t *pBod, uint32_t min, uint32_t max)
 
   if (result)
   {
-    SchInsertTryLoadBod(pBod);
+    SchInsertTryLoadBod(pBod, 4);
   }
 
   if (!result)
@@ -1130,7 +1130,7 @@ void SchReload(BbOpDesc_t *pBod)
   {
     PalTimerStop();
 
-    SchInsertTryLoadBod(pBod);
+    SchInsertTryLoadBod(pBod, 5);
   }
 }
 

@@ -34,6 +34,8 @@
 #include "app_api.h"
 #include "app_main.h"
 
+#include "wsf_trace.h"
+
 /**************************************************************************************************
   Macros
 **************************************************************************************************/
@@ -1515,7 +1517,7 @@ void appSetAdvType(uint8_t advHandle, uint8_t advType, uint16_t interval, uint16
       {
         /* start advertising with new type */
         appSlaveCb.advState[advHandle] = APP_ADV_STATE1;
-
+        APP_TRACE_INFO0("@@@ appAdvStart");  // remove me !!!
         appAdvStart(1, &advHandle, &interval, &duration, &maxEaEvents, cfgAdvParam);
       }
       /* else advertising with old type */

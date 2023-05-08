@@ -107,7 +107,7 @@ static void bbBleExecOp(BbOpDesc_t *pBod)
 
   if (bbBleCb.opCbacks[pBle->chan.opType].execOpCback)
   {
-    APP_TRACE_INFO2("bbBleExecOp %d %d", xTickCount, pBle->chan.opType);  // remove me !!! 3 BB_BLE_OP_SLV_ADV_EVENT, bbSlvExecuteAdvOp 
+    APP_TRACE_INFO2("bbBleExecOp %d opType: %d", xTickCount, pBle->chan.opType);  // remove me !!! 3 BB_BLE_OP_SLV_ADV_EVENT, bbSlvExecuteAdvOp 
     bbBleCb.opCbacks[pBle->chan.opType].execOpCback(pBod, pBle);
   }
 }

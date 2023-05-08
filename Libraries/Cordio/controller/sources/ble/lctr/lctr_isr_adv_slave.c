@@ -202,7 +202,7 @@ void lctrSlvAdvPostProcessHandler(BbOpDesc_t *pOp, const uint8_t *pReqBuf)
 /*************************************************************************************************/
 void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
 {
-  APP_TRACE_INFO1("lctrSlvAdvEndOp, %d", xTickCount); // remove me !!!
+  APP_TRACE_INFO1("pBod->endCback => lctrSlvAdvEndOp, %d", xTickCount); // remove me !!!
 
   BbBleData_t * const pBle = pOp->prot.pBle;
   BbBleSlvAdvEvent_t * const pAdv = &pBle->op.slvAdv;

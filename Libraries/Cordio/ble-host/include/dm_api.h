@@ -574,7 +574,7 @@ enum
   DM_VENDOR_SPEC_IND                      /*!< \brief Vendor specific event */
 };
 
-#define DM_CBACK_END                DM_VENDOR_SPEC_IND  /*!< \brief DM callback event ending value */
+#define DM_CBACK_END                DM_VENDOR_SPEC_IND  /*!< \brief DM callback event ending value 121*/
 /**@}*/
 
 /**************************************************************************************************

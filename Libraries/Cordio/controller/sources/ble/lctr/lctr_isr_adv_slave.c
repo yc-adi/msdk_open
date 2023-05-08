@@ -37,6 +37,9 @@
 #include "util/bstream.h"
 #include <string.h>
 
+
+extern uint32_t xTickCount;  // remove me !!!
+
 /*************************************************************************************************/
 /*!
  *  \brief      Scan request packet handler.
@@ -108,6 +111,7 @@ void lctrConnIndHandler(BbOpDesc_t *pOp, uint8_t reqLen, const uint8_t *pReqBuf)
 /*************************************************************************************************/
 bool_t lctrSlvAdvHandler(BbOpDesc_t *pOp, const uint8_t *pReqBuf)
 {
+  APP_TRACE_INFO0("xxx lctrSlvAdvHandler"); // remove me !!!
   BbBleData_t * const pBle = pOp->prot.pBle;
   BbBleSlvAdvEvent_t * const pAdv = &pBle->op.slvAdv;
 
@@ -150,11 +154,12 @@ bool_t lctrSlvAdvHandler(BbOpDesc_t *pOp, const uint8_t *pReqBuf)
 /*************************************************************************************************/
 void lctrSlvAdvPostProcessHandler(BbOpDesc_t *pOp, const uint8_t *pReqBuf)
 {
+  APP_TRACE_INFO1("lctrSlvAdvPostProcessHandler, %d", xTickCount);  // remove me !!!
   BbBleData_t * const pBle = pOp->prot.pBle;
   BbBleSlvAdvEvent_t * const pAdv = &pBle->op.slvAdv;
 
   bool_t sendRsp = FALSE;
-
+  
   /* Unwanted PDUs must have been filtered in the BB. */
   uint8_t pduLen = pAdv->filtResults.pduLen;
   uint8_t pduType = pAdv->filtResults.pduType;
@@ -197,6 +202,8 @@ void lctrSlvAdvPostProcessHandler(BbOpDesc_t *pOp, const uint8_t *pReqBuf)
 /*************************************************************************************************/
 void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
 {
+  APP_TRACE_INFO1("lctrSlvAdvEndOp, %d", xTickCount); // remove me !!!
+
   BbBleData_t * const pBle = pOp->prot.pBle;
   BbBleSlvAdvEvent_t * const pAdv = &pBle->op.slvAdv;
 

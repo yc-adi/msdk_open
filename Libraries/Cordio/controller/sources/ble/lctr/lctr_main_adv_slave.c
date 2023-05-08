@@ -209,8 +209,8 @@ void lctrChoosePeerAddr(BbBleData_t * const pBle, uint8_t ownAddrType,
 /*************************************************************************************************/
 void lctrSlvAdvBuildOp(void)
 {
+  APP_TRACE_INFO0("\nxxx lctrSlvAdvBuildOp");  // remove me !!!
   lctrAdvbPduHdr_t pduHdr = { 0 };
-
   if ((lmgrCb.features & LL_FEAT_CH_SEL_2) &&
       ((lmgrSlvAdvCb.advParam.advType == LL_ADV_CONN_DIRECT_HIGH_DUTY) ||
        (lmgrSlvAdvCb.advParam.advType == LL_ADV_CONN_DIRECT_LOW_DUTY) ||

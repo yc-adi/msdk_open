@@ -258,6 +258,8 @@ static void prvWSFMsgTask(void *pvParameters)
       /* handle msg queue */
       while ((pMsg = WsfMsgDeq(&pTask->msgQueue, &handlerId)) != NULL) {
         WSF_ASSERT(handlerId < WSF_MAX_HANDLERS);
+        //printf("msg hdlId: %d\n", handlerId);  // remove me !!!
+        APP_TRACE_INFO1("\nmsg handleId: %u\n", handlerId);
         (*pTask->handler[handlerId])(0, pMsg);
         WsfMsgFree(pMsg);
       }
@@ -267,6 +269,7 @@ static void prvWSFMsgTask(void *pvParameters)
       /* service timers */
       while ((pTimer = WsfTimerServiceExpired(0)) != NULL) {
         WSF_ASSERT(pTimer->handlerId < WSF_MAX_HANDLERS);
+        APP_TRACE_INFO1("\npTimer handleId: %u\n", pTimer->handlerId);
         (*pTask->handler[pTimer->handlerId])(0, &pTimer->msg);
       }
     }

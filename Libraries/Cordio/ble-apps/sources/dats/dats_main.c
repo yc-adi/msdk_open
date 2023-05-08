@@ -792,7 +792,7 @@ void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
   if (pMsg != NULL)
   {
-    //remove me !!! APP_TRACE_INFO1("Dats got evt %d", pMsg->event);
+    APP_TRACE_INFO1("Dats got evt %d", pMsg->event);  //remove me !!! 
 
     /* process ATT messages */
     if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END)

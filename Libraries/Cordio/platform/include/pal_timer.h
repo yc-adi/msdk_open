@@ -52,7 +52,7 @@ typedef enum
 **************************************************************************************************/
 
 /*! \brief      Completion callback. */
-typedef void (*PalTimerCompCback_t)(void);
+typedef void (*PalTimerCompCback_t)(uint8_t);
 
 /**************************************************************************************************
   Function Declarations

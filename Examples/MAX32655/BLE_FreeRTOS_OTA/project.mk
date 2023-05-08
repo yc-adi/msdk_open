@@ -17,10 +17,10 @@ PROJ_CFLAGS += -DUSE_TICKLESS_IDLE=1
 LIB_CORDIO = 1
 
 # Set to zero to minimize code size
-DEBUG = 0
+DEBUG = 1
 
 # Set to zero to minimize code size
-TRACE = 0
+TRACE = 2
 
 # Minimize the database for storing pairing information
 PAL_NVM_SIZE = 0x2000

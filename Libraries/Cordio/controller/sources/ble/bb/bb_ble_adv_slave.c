@@ -42,7 +42,7 @@
 
 BbBleAdvPktStats_t  bbAdvStats;         /*!< Advertising packet statistics. */
 uint32_t            bbIsrStartTime;     /*!< ISR start time. */
-
+extern uint32_t xTickCount;  // remove me !!!
 /*************************************************************************************************/
 /*!
  *  \brief      Setup an advertising operation.
@@ -145,6 +145,8 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
   PalBbBleTxBufDesc_t desc = {.pBuf = pAdv->pTxAdvBuf, .len = pAdv->txAdvLen};
   PalBbBleTxData(&desc, 1);
 
+  APP_TRACE_INFO2("bbSetupAdvOp, end, rxTimeoutUsec: %d %d,", bbBleCb.bbParam.rxTimeoutUsec, bbBleCb.bbParam.dueUsec);  // remove me !!! every adv interval
+
   /* Tx may fail; no more important statements in the FALSE code path. */
 
   return FALSE;
@@ -161,6 +163,8 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
 /*************************************************************************************************/
 static void bbSlvAdvTxCompCback(uint8_t status)
 {
+  APP_TRACE_INFO1("bbSlvAdvTxCompCback, %d", xTickCount);  // remove me !!!
+
   BB_ISR_START();
 
   WSF_ASSERT(BbGetCurrentBod());
@@ -200,6 +204,7 @@ static void bbSlvAdvTxCompCback(uint8_t status)
         BB_ISR_MARK(bbAdvStats.rxSetupUsec);
 
         bbBleSetTifs();     /* set up for Tx SCAN_RSP */
+        APP_TRACE_INFO1("*** PalBbBleRxTifsData, %d", xTickCount);  // remove me !!!
         PalBbBleRxTifsData(pAdv->pRxReqBuf, BB_REQ_PDU_MAX_LEN);   /* reduce max length requirement */
       }
       else
@@ -270,6 +275,7 @@ Cleanup:
 /*************************************************************************************************/
 static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint32_t timestamp, uint8_t rxPhyOptions)
 {
+  APP_TRACE_INFO1("bbSlvAdvRxCompCback %d", xTickCount); // remove me !!!
   BB_ISR_START();
 
   WSF_ASSERT(BbGetCurrentBod());
@@ -423,6 +429,7 @@ static void bbSlvExecuteAdvOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
   bbBleCb.numChUsed = 0;
   bbBleCb.advChIdx = pAdv->firstAdvChIdx;
 
+  APP_TRACE_INFO1("bbSlvExecuteAdvOp rxTimeoutUsec:%d", bbBleCb.bbParam.rxTimeoutUsec);  // remove me !!! 4=2*2
   if (bbSetupAdvOp(pBod, pAdv, BB_STATUS_SUCCESS, TRUE))
   {
     BbSetBodTerminateFlag();

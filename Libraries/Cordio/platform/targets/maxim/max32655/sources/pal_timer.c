@@ -111,7 +111,7 @@ void TMR0_IRQHandler(void)
   palTimerCb.state = PAL_TIMER_STATE_READY;
 
   if (palTimerCb.expCback) {
-    palTimerCb.expCback();
+    palTimerCb.expCback(10);
   }
 }
 
@@ -226,7 +226,7 @@ void PalTimerDeInit(void)
 void PalTimerExecCallback(void)
 {
   if (palTimerCb.expCback) {
-    palTimerCb.expCback();
+    palTimerCb.expCback(10);
   }
 }
 

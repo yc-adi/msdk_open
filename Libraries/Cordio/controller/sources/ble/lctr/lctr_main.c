@@ -259,6 +259,7 @@ void LctrEventHandler(uint8_t event)
 
   if (lctrEventHdlrTbl[event])
   {
+    //APP_TRACE_INFO1("%d,", event);  // remove me !!!
     lctrEventHdlrTbl[event]();
   }
 }

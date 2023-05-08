@@ -27,13 +27,14 @@
 #include "bb_int.h"
 #include "pal_bb.h"
 
+#include "wsf_trace.h"
 /**************************************************************************************************
   Globals
 **************************************************************************************************/
 
 BbCtrlBlk_t bbCb;                       /*!< BB control block. */
 const BbRtCfg_t *pBbRtCfg = NULL;       /*!< Runtime configuration. */
-
+extern uint32_t xTickCount;  // remove me !!!
 /**************************************************************************************************
   Functions
 **************************************************************************************************/
@@ -198,6 +199,8 @@ void BbStop(PalBbProt_t protId)
 /*************************************************************************************************/
 void BbExecuteBod(BbOpDesc_t *pBod)
 {
+  APP_TRACE_INFO1("BbExecuteBod %d", xTickCount);  // remove me !!!
+  
   WSF_ASSERT(pBod);
 
   WSF_ASSERT(pBod->protId < BB_PROT_NUM);
@@ -226,6 +229,7 @@ void BbExecuteBod(BbOpDesc_t *pBod)
 
   if (bbCb.prot[pBod->protId].execOpCback != NULL)
   {
+    APP_TRACE_INFO1("protId: %d", pBod->protId);  // remove me !!! 1, bbBleExecOp
     bbCb.prot[pBod->protId].execOpCback(pBod);
   }
 
@@ -275,12 +279,15 @@ BbOpDesc_t *BbGetCurrentBod(void)
  *  \note       This function is expected to be called during the execution context of the
  *              current executing BOD, typically in the related ISRs. In the end, termination
  *              flag will help to decide if BbTerminateBod() should be called.
+ *              For example, after ADV, a connection will be established. Then this will be called
+ *              to terminate the BOD of ADV.
  */
 /*************************************************************************************************/
 void BbSetBodTerminateFlag(void)
 {
   if (bbCb.pOpInProgress)
   {
+    APP_TRACE_INFO0("BbSetBodTerminateFlag");  // remove me !!!
     bbCb.termBod = TRUE;
   }
 }

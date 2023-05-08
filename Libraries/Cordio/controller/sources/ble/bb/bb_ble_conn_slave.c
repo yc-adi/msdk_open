@@ -70,6 +70,7 @@ static void bbSlvConnTxCompCback(uint8_t status)
       BB_ISR_MARK(bbConnStats.rxSetupUsec);
 
       bbBleSetTifs();     /* slave always Tx's after Rx */
+      APP_TRACE_INFO0("***0");  // remove me !!!
       PalBbBleRxTifsData(bbBleCb.pRxDataBuf, bbBleCb.rxDataLen);
     }
     else

@@ -381,6 +381,9 @@ uint16_t diagRxTifsBlueMoonWin     = 0;
 /* misc */
 uint16_t diagCancels               = 0;
 #endif
+
+extern uint32_t xTickCount;  // remove me !!!
+
 /////////////////////////////////////////////////////////////////////////////////
 
 /*************************************************************************************************/
@@ -942,6 +945,8 @@ void PalBbBleSetDataParams(const PalBbBleDataParam_t *pParam)
 
   /* store timeout value for future use */
   bbRxTimeoutUsec = pParam->rxTimeoutUsec;
+
+  APP_TRACE_INFO2("PalBbBleSetDataParams dueUsec: %d, rxTimeoutUsec: %d");  // remove me !!!
 
   /////////////////////////////////////////////////////////////////////////////////
   #ifdef DIAGNOSTICS

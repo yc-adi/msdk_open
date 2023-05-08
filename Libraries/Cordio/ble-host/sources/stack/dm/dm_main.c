@@ -525,7 +525,7 @@ uint8_t DmHostAddrType(uint8_t addrType)
 uint16_t DmSizeOfEvt(dmEvt_t *pDmEvt)
 {
   uint16_t len;
-
+  APP_TRACE_INFO1("xxx %d", pDmEvt->hdr.event);// remove me !!!
   /* if a valid DM event ID */
   if ((pDmEvt->hdr.event >= DM_CBACK_START) && (pDmEvt->hdr.event <= DM_CBACK_END))
   {

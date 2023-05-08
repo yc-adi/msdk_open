@@ -663,8 +663,8 @@ static void datsProcMsg(dmEvt_t *pMsg)
 #endif /* BT_VER */
 
     case TRIM_TIMER_EVT:
-        trimStart();
-        WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
+        // remove me !!! trimStart();
+        // remove me !!! WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
         break;
 
     default:
@@ -903,7 +903,7 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
 void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
-        APP_TRACE_INFO1("Dats got evt %d", pMsg->event);
+        APP_TRACE_INFO1("Dats got evt %d", pMsg->event);  
 
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {

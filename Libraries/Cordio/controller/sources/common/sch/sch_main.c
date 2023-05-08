@@ -48,6 +48,8 @@ enum
 /*! \brief      Scheduler control block. */
 SchCtrlBlk_t schCb;
 
+extern uint32_t xTickCount;  // remove me !!!
+
 /*************************************************************************************************/
 /*!
  *  \brief      BOD completion handler.
@@ -86,12 +88,15 @@ static void schBodCurtailHandler(void)
  *  \brief      BOD load handler.
  */
 /*************************************************************************************************/
-static void schBodLoadHandler(void)
+static void schBodLoadHandler(uint8_t src)
 {
+  uint32_t start = PalBbGetCurrentTime();
+  APP_TRACE_INFO3("\nschBodLoadHandler %d %d %d", src, schCb.eventSetFlagCount, xTickCount);  // remove me !!!, c 3, or c 10(from timer), flagcnt always 0
   BbOpDesc_t* pNextBod = schCb.pHead;
 
   if (schCb.eventSetFlagCount)
   {
+    APP_TRACE_INFO0("c-1");  // remove me !!!
     WSF_ASSERT(pNextBod);
     /* Delay loading after event flag is cleared. */
     WsfSetEvent(schCb.handlerId, SCH_EVENT_BOD_LOAD);
@@ -111,6 +116,7 @@ static void schBodLoadHandler(void)
     if (!schTryLoadHead())
     {
       /* Head load failed. */
+      APP_TRACE_INFO0("c01");  // remove me !!!
       schBodAbortHandler();
     }
     /* Move to next BOD. */
@@ -120,6 +126,7 @@ static void schBodLoadHandler(void)
   /* If head is executed, check cur tail operation is needed or not. */
   else
   {
+    APP_TRACE_INFO0("c2");  // remove me !!!
     /* Head BOD and next BOD must exist. */
     WSF_ASSERT(schCb.pHead);
     WSF_ASSERT(schCb.pHead->pNext);
@@ -128,6 +135,7 @@ static void schBodLoadHandler(void)
     /* Skip curtail load if next BOD has same or lower priority than current BOD. */
     if ((pNextBod->reschPolicy) >= (schCb.pHead->reschPolicy))
     {
+      APP_TRACE_INFO0("c3");  // remove me !!!
       /* Delay loading until idle state. */
       WsfSetEvent(schCb.handlerId, SCH_EVENT_BOD_LOAD);
       schCb.delayLoadCount++;
@@ -141,22 +149,26 @@ static void schBodLoadHandler(void)
 
     if (!schTryCurTailLoadNext())
     {
+      APP_TRACE_INFO0("c4");  // remove me !!!
       /* Curtail load failed. */
       schBodAbortHandler();
     }
     /* Move to the next next BOD. */
     pNextBod = pNextBod->pNext;
+    APP_TRACE_INFO0("c5");  // remove me !!!
   }
 
   /* If pNextBod exists, it should start scheduler timer. */
   if (pNextBod)
   {
+    APP_TRACE_INFO0("c1");  // remove me !!!
     uint32_t execTimeUsec = schGetTimeToExecBod(pNextBod);
 
     if (execTimeUsec)
     {
       /* Always stop existing timer first for simplicity. */
       PalTimerStop();
+      APP_TRACE_INFO1("c2 %d", execTimeUsec);  // remove me !!! never be here
       PalTimerStart(execTimeUsec);
     }
     else
@@ -167,6 +179,7 @@ static void schBodLoadHandler(void)
       SchLoadHandler();
     }
   }
+  APP_TRACE_INFO2("schBodLoadHandler, end, %d %d", xTickCount, PalBbGetCurrentTime() - start); // remove me !!!
 #endif
 }
 
@@ -235,8 +248,10 @@ void SchReset(void)
  *  \param      pMsg        WSF message.
  */
 /*************************************************************************************************/
+
 void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
+  APP_TRACE_INFO1("d0 %d", xTickCount);  // remove me !!!
   /* Unused parameters */
   (void)pMsg;
 
@@ -270,7 +285,7 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
       schCb.eventSetFlagCount--;
 
 #if SCH_TIMER_REQUIRED == FALSE
-      schBodLoadHandler();
+      schBodLoadHandler(1);
 #endif
       event &= ~SCH_EVENT_BOD_COMPLETE;
     }
@@ -290,7 +305,7 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
       schCb.eventSetFlagCount--;
 
 #if SCH_TIMER_REQUIRED == FALSE
-      schBodLoadHandler();
+      schBodLoadHandler(2);
 #endif
       event &= ~SCH_EVENT_BOD_ABORT;
     }
@@ -311,7 +326,7 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 
     else if (event & SCH_EVENT_BOD_LOAD)
     {
-      schBodLoadHandler();
+      schBodLoadHandler(3);  // remove me !!! c 3
       event &= ~SCH_EVENT_BOD_LOAD;
     }
   }
@@ -322,6 +337,7 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
   {
     schCb.schHandlerWatermarkUsec = durUsec;
   }
+  APP_TRACE_INFO2("d9 %d %d", endTime - startTime, xTickCount);  // remove me !!!
 }
 
 /*************************************************************************************************/
@@ -336,9 +352,12 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 static bool_t schLoadBod(BbOpDesc_t *pBod)
 {
   bool_t loaded = FALSE;
-
+  
   if (schDueTimeInFuture(pBod))
   {
+    uint32_t curTime = PalBbGetCurrentTime();
+    APP_TRACE_INFO2("schLoadBod %d %d", xTickCount, BbGetTargetTimeDelta(pBod->dueUsec, curTime));  // remove me !!!
+
     /* Setup BB services. */
     BbExecuteBod(pBod);
     schCb.delayLoadCount = 0;
@@ -414,6 +433,8 @@ bool_t schTryCurTailLoadNext(void)
 /*************************************************************************************************/
 bool_t schTryLoadHead(void)
 {
+  APP_TRACE_INFO0("schTryLoadHead");
+
   bool_t loaded = TRUE;
 
   /* It should only be called when scheduler is in idle state. */

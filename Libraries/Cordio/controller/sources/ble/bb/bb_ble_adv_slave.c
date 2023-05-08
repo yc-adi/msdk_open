@@ -275,7 +275,7 @@ Cleanup:
 /*************************************************************************************************/
 static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint32_t timestamp, uint8_t rxPhyOptions)
 {
-  APP_TRACE_INFO1("bbSlvAdvRxCompCback %d", xTickCount); // remove me !!!
+  APP_TRACE_INFO4("bbSlvAdvRxCompCback %d, ts:%d, evt:%d, st:%d", xTickCount, timestamp, bbBleCb.evtState, status); // remove me !!!
   BB_ISR_START();
 
   WSF_ASSERT(BbGetCurrentBod());
@@ -306,6 +306,7 @@ static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint3
       {
         case BB_STATUS_SUCCESS:
         {
+          APP_TRACE_INFO0("@ 1");  // remove me !!!
           WSF_ASSERT(pAdv->rxReqCback);
           WSF_ASSERT(pAdv->pRxReqBuf);
 
@@ -322,6 +323,7 @@ static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint3
           bool_t pduAllow = BbBlePduFiltCheck(pAdv->pRxReqBuf, &pBle->pduFilt, FALSE, &pAdv->filtResults);
           if (pduAllow && pAdv->rxReqCback(pCur, pAdv->pRxReqBuf))
           {
+            APP_TRACE_INFO0("@ 2");  // remove me !!!
             BB_ISR_MARK(bbAdvStats.txSetupUsec);
 
             bbBleClrIfs();  /* last operation in event */
@@ -331,11 +333,13 @@ static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint3
           else
           {
             /* Operation completed. */
+            APP_TRACE_INFO0("@ 3");  // remove me !!!
             bodComplete = bbSetupAdvOp(pCur, pAdv, status, FALSE);
           }
 
           if (pduAllow && pAdv->rxReqPostCback)
           {
+            APP_TRACE_INFO0("@ 4");  // remove me !!!
             pAdv->rxReqPostCback(pCur, pAdv->pRxReqBuf);
           }
 
@@ -347,6 +351,7 @@ static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint3
         case BB_STATUS_FAILED:
         default:
           /* Operation completed. */
+          APP_TRACE_INFO0("@ 5 default");  // remove me !!!
           bodComplete = bbSetupAdvOp(pCur, pAdv, status, FALSE);
           break;
       }
@@ -369,17 +374,18 @@ static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint3
           break;
       }
 
-      break;
+    break;
 
     default:    /* unexpected state */
       WSF_ASSERT(FALSE);
-      break;
+    break;
   }
 
   /* Tx may fail; no more important statements in the !bodComplete code path */
 
   if (bodComplete)
   {
+    APP_TRACE_INFO0("@ 6 bodCOmplete");  // remove me !!!
     /* Cancel TIFS timer if active. */
     switch (status)
     {

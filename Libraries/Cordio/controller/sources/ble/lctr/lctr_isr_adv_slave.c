@@ -111,7 +111,7 @@ void lctrConnIndHandler(BbOpDesc_t *pOp, uint8_t reqLen, const uint8_t *pReqBuf)
 /*************************************************************************************************/
 bool_t lctrSlvAdvHandler(BbOpDesc_t *pOp, const uint8_t *pReqBuf)
 {
-  APP_TRACE_INFO0("xxx lctrSlvAdvHandler"); // remove me !!!
+  APP_TRACE_INFO0("lctrSlvAdvHandler"); // remove me !!! in the case of SCAN_REQ
   BbBleData_t * const pBle = pOp->prot.pBle;
   BbBleSlvAdvEvent_t * const pAdv = &pBle->op.slvAdv;
 

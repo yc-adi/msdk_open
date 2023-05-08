@@ -663,8 +663,9 @@ static void datsProcMsg(dmEvt_t *pMsg)
 #endif /* BT_VER */
 
     case TRIM_TIMER_EVT:
-        trimStart();
-        WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
+        // remove me !!!
+        //trimStart();
+        //WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
         break;
 
     default:

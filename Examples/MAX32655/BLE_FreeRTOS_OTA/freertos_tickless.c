@@ -228,8 +228,8 @@ void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTime)
 
         MXC_LP_EnterStandbyMode();
 
-        LED_On(DEEPSLEEP_LED);  // remove me !!!
-        LED_On(SLEEP_LED);
+        LED_Off(DEEPSLEEP_LED);  // remove me !!!
+        LED_Off(SLEEP_LED);
 
         if (schTimerActive) {
             /* Enable and restore the BB hardware */

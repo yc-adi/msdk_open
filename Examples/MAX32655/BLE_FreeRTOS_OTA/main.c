@@ -103,7 +103,7 @@ void vApplicationIdleHook(void)
 
     MXC_LP_EnterSleepMode();
 
-    LED_On(SLEEP_LED);
+    LED_On(SLEEP_LED);  // remove me !!!
 }
 
 /* =| main |==============================================

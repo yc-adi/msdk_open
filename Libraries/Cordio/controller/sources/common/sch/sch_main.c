@@ -91,7 +91,7 @@ static void schBodCurtailHandler(void)
 static void schBodLoadHandler(uint8_t src)
 {
   uint32_t start = PalBbGetCurrentTime();
-  APP_TRACE_INFO4("\nschBodLoadHandler src:%d %d %d %d", src, schCb.eventSetFlagCount, xTickCount, PalBbGetCurrentTime());  // remove me !!!, c 3, or c 10(from timer), flagcnt always 0
+  APP_TRACE_INFO3("\nschBodLoadHandler src:%d %d %d ", src, xTickCount, PalBbGetCurrentTime());  // remove me !!!, c 3, or c 10(from timer), flagcnt always 0
   BbOpDesc_t* pNextBod = schCb.pHead;
 
   if (schCb.eventSetFlagCount)
@@ -179,7 +179,7 @@ static void schBodLoadHandler(uint8_t src)
       SchLoadHandler();
     }
   }
-  APP_TRACE_INFO2("schBodLoadHandler, end, %d %d", xTickCount, PalBbGetCurrentTime() - start); // remove me !!!
+  //APP_TRACE_INFO2("schBodLoadHandler, end, %d %d", xTickCount, PalBbGetCurrentTime() - start); // remove me !!!
 #endif
 }
 

@@ -147,9 +147,10 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
   }
 
   PalBbBleTxBufDesc_t desc = {.pBuf = pAdv->pTxAdvBuf, .len = pAdv->txAdvLen};
+  APP_TRACE_INFO2("** PalBbBleTxData, %d, %d", xTickCount, PalBbGetCurrentTime());  // remove me !!!
   PalBbBleTxData(&desc, 1);
 
-  APP_TRACE_INFO2("bbSetupAdvOp, end, rxTimeoutUsec: %d, dueUsec: %d,", bbBleCb.bbParam.rxTimeoutUsec, bbBleCb.bbParam.dueUsec);  // remove me !!! every adv interval
+  //APP_TRACE_INFO2("bbSetupAdvOp, end, rxTimeoutUsec: %d, dueUsec: %d,", bbBleCb.bbParam.rxTimeoutUsec, bbBleCb.bbParam.dueUsec);  // remove me !!! every adv interval
 
   /* Tx may fail; no more important statements in the FALSE code path. */
 
@@ -167,7 +168,7 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
 /*************************************************************************************************/
 static void bbSlvAdvTxCompCback(uint8_t status)
 {
-  APP_TRACE_INFO1("bbSlvAdvTxCompCback, %d", xTickCount);  // remove me !!!
+  APP_TRACE_INFO2("bbSlvAdvTxCompCback, %d %d", xTickCount, PalBbGetCurrentTime());  // remove me !!!
 
   BB_ISR_START();
 

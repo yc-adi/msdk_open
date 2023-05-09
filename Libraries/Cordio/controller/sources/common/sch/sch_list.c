@@ -589,7 +589,7 @@ static bool_t SchIsConflictResolvable(BbOpDesc_t *pItem, BbOpDesc_t *pTgt, BbCon
 static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod, uint8_t src)
 {
   uint32_t execTimeUsec = schGetTimeToExecBod(pBod);
-  APP_TRACE_INFO2("%d SchInsertTryLoadBod, execTimeUsec: %d to next BOD", src, execTimeUsec);  // remove me !!!
+  APP_TRACE_INFO3("%d SchInsertTryLoadBod, execTimeUsec: %d to next BOD, %d", src, execTimeUsec, PalBbGetCurrentTime());  // remove me !!!
 
   WSF_ASSERT(pBod);
   WSF_ASSERT(schCb.pHead);

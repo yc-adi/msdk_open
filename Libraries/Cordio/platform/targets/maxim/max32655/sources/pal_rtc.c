@@ -49,7 +49,7 @@ static struct {
 /*************************************************************************************************/
 __attribute__ ((weak)) void WUT_IRQHandler(void)
 {
-  PalLedOn(PAL_LED_ID_CPU_ACTIVE);
+  //PalLedOn(PAL_LED_ID_CPU_ACTIVE);  // remove me !!!
 #ifndef __riscv
   MXC_WUT_IntClear();
 #endif

@@ -32,6 +32,8 @@
 #include <string.h>
 #include "bb_ble_sniffer_api.h"
 
+#include "led.h"
+
 /**************************************************************************************************
   Macros
 **************************************************************************************************/
@@ -143,6 +145,7 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
     bbBleClrIfs();    /* non-connectable advertising */
   }
   PalBbBleTxBufDesc_t desc = {.pBuf = pAdv->pTxAdvBuf, .len = pAdv->txAdvLen};
+  //LED_On(0);  // remove me !!!
   PalBbBleTxData(&desc, 1);
 
   /* Tx may fail; no more important statements in the FALSE code path. */
@@ -159,8 +162,11 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
  *  Setup for next action in the operation or complete the operation.
  */
 /*************************************************************************************************/
+uint8_t deepsleep_jump_scan_req = 0;  // remove me !!!
+
 static void bbSlvAdvTxCompCback(uint8_t status)
 {
+  //LED_Off(0);  // remove me !!!
   BB_ISR_START();
 
   WSF_ASSERT(BbGetCurrentBod());
@@ -195,11 +201,13 @@ static void bbSlvAdvTxCompCback(uint8_t status)
   switch (bbBleCb.evtState++)
   {
     case BB_EVT_STATE_TX_ADV_IND:
+      //if (pAdv->pRxReqBuf && (deepsleep_jump_scan_req++ % 2 == 0))
       if (pAdv->pRxReqBuf)
       {
         BB_ISR_MARK(bbAdvStats.rxSetupUsec);
 
         bbBleSetTifs();     /* set up for Tx SCAN_RSP */
+        //LED_On(0);  // remove me !!! DEEPSLEEP_LED red
         PalBbBleRxTifsData(pAdv->pRxReqBuf, BB_REQ_PDU_MAX_LEN);   /* reduce max length requirement */
       }
       else
@@ -270,6 +278,7 @@ Cleanup:
 /*************************************************************************************************/
 static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint32_t timestamp, uint8_t rxPhyOptions)
 {
+  //LED_Off(0);  // remove me !!! DEEPSLEEP_LED red
   BB_ISR_START();
 
   WSF_ASSERT(BbGetCurrentBod());

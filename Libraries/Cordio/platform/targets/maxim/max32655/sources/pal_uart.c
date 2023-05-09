@@ -71,7 +71,7 @@ static struct {
 void UART0_IRQHandler(void)
 {
   int result0;
-  PalLedOn(PAL_LED_ID_CPU_ACTIVE);
+  //PalLedOn(PAL_LED_ID_CPU_ACTIVE);  // remove me !!!
   result0 = MXC_UART_AsyncHandler(MXC_UART0);
   (void)result0;
   PAL_SYS_ASSERT(result0 == 0);
@@ -79,7 +79,7 @@ void UART0_IRQHandler(void)
 void UART1_IRQHandler(void)
 {
   int result1;
-  PalLedOn(PAL_LED_ID_CPU_ACTIVE);
+  //PalLedOn(PAL_LED_ID_CPU_ACTIVE);  // remove me !!!
   result1 = MXC_UART_AsyncHandler(MXC_UART1);
   (void)result1;
   PAL_SYS_ASSERT(result1 == 0);
@@ -87,7 +87,7 @@ void UART1_IRQHandler(void)
 void UART2_IRQHandler(void)
 {
   int result2;
-  PalLedOn(PAL_LED_ID_CPU_ACTIVE);
+  //PalLedOn(PAL_LED_ID_CPU_ACTIVE);  // remove me !!!
   result2 = MXC_UART_AsyncHandler(MXC_UART2);
   (void)result2;
   PAL_SYS_ASSERT(result2 == 0);
@@ -95,7 +95,7 @@ void UART2_IRQHandler(void)
 void UART3_IRQHandler(void)
 {
   int result3;
-  PalLedOn(PAL_LED_ID_CPU_ACTIVE);
+  //PalLedOn(PAL_LED_ID_CPU_ACTIVE);  // remove me !!!
   result3 = MXC_UART_AsyncHandler(MXC_UART3);
   (void)result3;
   PAL_SYS_ASSERT(result3 == 0);

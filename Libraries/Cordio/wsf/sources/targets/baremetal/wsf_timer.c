@@ -416,7 +416,7 @@ void WsfTimerSleep(void)
       {
         PalLedOff(PAL_LED_ID_CPU_ACTIVE);
         PalSysSleep();
-        PalLedOn(PAL_LED_ID_CPU_ACTIVE);
+        //PalLedOn(PAL_LED_ID_CPU_ACTIVE);  // remove me !!!
       }
       PalExitCs();
     }
@@ -437,7 +437,7 @@ void WsfTimerSleep(void)
     {
       PalLedOff(PAL_LED_ID_CPU_ACTIVE);
       PalSysSleep();
-      PalLedOn(PAL_LED_ID_CPU_ACTIVE);
+      //PalLedOn(PAL_LED_ID_CPU_ACTIVE);  // remove me !!!
     }
     PalExitCs();
   }

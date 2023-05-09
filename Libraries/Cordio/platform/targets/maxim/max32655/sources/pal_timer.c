@@ -99,7 +99,7 @@ void TMR1_IRQHandler(void)
 void TMR0_IRQHandler(void)
 #endif
 {
-  PalLedOn(PAL_LED_ID_CPU_ACTIVE);
+  //PalLedOn(PAL_LED_ID_CPU_ACTIVE);  // remove me !!!
 
   /* Check hardware status */
   PAL_TIMER_CHECK(palTimerCb.state == PAL_TIMER_STATE_BUSY);
@@ -136,7 +136,7 @@ void TMR1_IRQHandler(void)
 void TMR0_IRQHandler(void)
 #endif
 {
-  PalLedOn(PAL_LED_ID_CPU_ACTIVE);
+  //PalLedOn(PAL_LED_ID_CPU_ACTIVE);  // remove me !!!
 
   /* Disable and clear PAL_TMR interrupt */
   NVIC_DisableIRQ(PAL_SLEEP_TMR_IRQn);
@@ -359,7 +359,7 @@ void PalTimerSleep(uint32_t expUsec)
 
   MXC_LP_EnterSleepMode();
 
-  PalLedOn(PAL_LED_ID_CPU_ACTIVE);
+  //PalLedOn(PAL_LED_ID_CPU_ACTIVE);  // remove me !!!
 
   MXC_TMR_Shutdown(PAL_SLEEP_TMR);
 }

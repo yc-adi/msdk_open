@@ -102,7 +102,7 @@ void PalSysInit(void)
 
   PalLedInit();
   PalLedOff(PAL_LED_ID_ERROR);
-  PalLedOn(PAL_LED_ID_CPU_ACTIVE);
+  //PalLedOn(PAL_LED_ID_CPU_ACTIVE);  // remove me !!!
   PalCryptoInit();
   PalRtcInit();
 

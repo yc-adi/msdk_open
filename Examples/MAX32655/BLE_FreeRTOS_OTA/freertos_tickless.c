@@ -56,7 +56,7 @@
 
 #define MAX_WUT_TICKS           (configRTC_TICK_RATE_HZ) /* Maximum deep sleep time, units of 32 kHz ticks */
 #define MIN_WUT_TICKS           100 /* Minimum deep sleep time, units of 32 kHz ticks */
-#define WAKEUP_US               750 /* Deep sleep recovery time, units of us */
+#define WAKEUP_US               730 /* Deep sleep recovery time, units of us, 730 good, 720 ADV ok, fail to conn*/
 #define WAKEUP_IN_WUT_TICK      ((uint64_t)WAKEUP_US / (uint64_t)1000000 * (uint64_t)configRTC_TICK_RATE_HZ)
 #define RESTORE_OP_IN_WUT_TICK  65
 #define RESTORE_OP_IN_US        ((uint64_t)RESTORE_OP_IN_WUT_TICK / (uint64_t)configRTC_TICK_RATE_HZ * (uint64_t)1000000)
@@ -229,7 +229,7 @@ void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTime)
         MXC_LP_EnterStandbyMode();
 
         LED_Off(DEEPSLEEP_LED);  // remove me !!!
-        LED_Off(SLEEP_LED);
+        LED_Off(SLEEP_LED);  // remove me !!!
 
         if (schTimerActive) {
             /* Enable and restore the BB hardware */
@@ -261,8 +261,7 @@ void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTime)
     /*
      * Advance ticks by # actually elapsed
      */
-    dsSysTickPeriods =
-        (uint64_t)dsWutTicks * (uint64_t)configTICK_RATE_HZ / (uint64_t)configRTC_TICK_RATE_HZ;
+    dsSysTickPeriods = (uint64_t)dsWutTicks * (uint64_t)configTICK_RATE_HZ / (uint64_t)configRTC_TICK_RATE_HZ;
     vTaskStepTick(dsSysTickPeriods);
 
     /* Re-enable SysTick */

@@ -63,7 +63,7 @@
 /* Faster tick rate will result in more CPU interrupts while not in standby mode, but will
 increase the amount of time spent in standby mode, thus reducing average power consumption. */
 #ifdef configUSE_TICKLESS_IDLE
-#define configTICK_RATE_HZ ((portTickType)10000)
+#define configTICK_RATE_HZ ((portTickType)10000)  // remove me !!!
 #else
 #define configTICK_RATE_HZ ((portTickType)1000)
 #endif

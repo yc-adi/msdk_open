@@ -266,6 +266,11 @@ void WsfTimerStartSec(wsfTimer_t *pTimer, wsfTimerTicks_t sec)
 /*************************************************************************************************/
 void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms)
 {
+  if (ms == 65535)
+  {
+    APP_TRACE_INFO1("ms: %d", ms);  // remove me !!!
+    ms = 15 * 60 * 1000;
+  }
   WSF_TRACE_INFO2("WsfTimerStartMs pTimer:0x%x ticks:%u", (uint32_t)pTimer, WSF_TIMER_MS_TO_TICKS(ms));
 
   /* insert timer into queue */

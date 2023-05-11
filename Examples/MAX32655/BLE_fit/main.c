@@ -56,6 +56,8 @@
 
 #include "pal_bb.h"
 #include "pal_cfg.h"
+#include "pal_timer.h"
+#include "pal_sys.h"
 
 #include "fit_api.h"
 #include "app_ui.h"
@@ -131,7 +133,7 @@ static void mainWsfInit(void)
 /*!
 *  \fn     WUT_IRQHandler
 *
-*  \brief  WUY interrupt handler.
+*  \brief  WUT interrupt handler.
 *
 *  \return None.
 */
@@ -139,6 +141,7 @@ static void mainWsfInit(void)
 void WUT_IRQHandler(void)
 {
     MXC_WUT_Handler(MXC_WUT0);
+    PalTimerIRQCallBack();
 }
 
 /*************************************************************************************************/
@@ -161,6 +164,20 @@ void wutTrimCb(int err)
                                                      MXC_F_TRIMSIR_RTC_X1TRIM_POS);
     }
     wutTrimComplete = 1;
+}
+
+/*************************************************************************************************/
+/*!
+*  \fn     setAdvTxPower
+*
+*  \brief  Set the default advertising TX power.
+*
+*  \return None.
+*/
+/*************************************************************************************************/
+void setAdvTxPower(void)
+{
+    LlSetAdvTxPower(DEFAULT_TX_POWER);
 }
 
 /*************************************************************************************************/
@@ -242,8 +259,10 @@ int main(void)
 
     /* Execute the trim procedure */
     wutTrimComplete = 0;
-    MXC_WUT_TrimCrystalAsync(MXC_WUT0, wutTrimCb);
-    while (!wutTrimComplete) {}
+    if (PalSharedTimerIsInit()) {
+        MXC_WUT_TrimCrystalAsync(MXC_WUT0, wutTrimCb);
+        while (!wutTrimComplete) {}
+    }
 
     /* Shutdown the 32 MHz crystal and the BLE DBB */
     PalBbDisable();

@@ -51,6 +51,33 @@
 #include "pal_btn.h"
 #include "tmr.h"
 
+/* Bluetooth Cordio library */
+#include "pal_timer.h"
+#include "pal_uart.h"
+#include "pal_bb.h"
+#include "pal_rtc.h"
+
+#include "mxc_device.h"
+#include "board.h"
+#include "uart.h"
+#include "mxc_assert.h"
+#include "lp.h"
+#include "pwrseq_regs.h"
+#include "wut.h"
+#include "mcr_regs.h"
+#include "icc.h"
+#include "simo.h"
+
+#define RTC_TICK_RATE_HZ (32768)
+#define WAKEUP_US 1500
+#define BB_CLK_RATE_HZ 1000000
+#define MIN_WUT_TICKS 100
+#define MAX_WUT_TICKS (RTC_TICK_RATE_HZ)
+
+/* Timer for testing frequent advert changes */
+wsfHandlerId_t advTimerHandlerId;
+wsfTimer_t advTimer;
+
 /**************************************************************************************************
   Macros
 **************************************************************************************************/
@@ -75,6 +102,16 @@ enum {
 
 #define BTN_1_TMR MXC_TMR2
 #define BTN_2_TMR MXC_TMR3
+
+typedef struct {
+    uint8_t goingToSleep;
+    uint8_t wokeUp;
+    uint32_t sleepStart;
+    uint32_t sleepEnd;
+    uint32_t sleepDelta;
+    bool_t readyToAdvertise;
+} stateCounter_t;
+stateCounter_t state = { 0, 0, 0, 0, 0, FALSE };
 
 /**************************************************************************************************
   Data Types
@@ -154,7 +191,7 @@ static const smpCfg_t fitSmpCfg = {
 **************************************************************************************************/
 
 /*! advertising data, discoverable mode */
-static const uint8_t fitAdvDataDisc[] = {
+static uint8_t fitAdvDataDisc[] = {
     /*! flags */
     2, /*! length */
     DM_ADV_TYPE_FLAGS, /*! AD type */
@@ -162,15 +199,18 @@ static const uint8_t fitAdvDataDisc[] = {
         DM_FLAG_LE_BREDR_NOT_SUP,
 
     /*! tx power */
-    2, /*! length */
-    DM_ADV_TYPE_TX_POWER, /*! AD type */
-    0, /*! tx power */
+    6, /*! length */
+    DM_ADV_TYPE_MANUFACTURER, /*! AD type */
+    UINT16_TO_BYTES(HCI_ID_ANALOG), /*! company ID */
+    'c',
+    'g',
+    'm'
 
     /*! service UUID list */
-    9, /*! length */
-    DM_ADV_TYPE_16_UUID, /*! AD type */
-    UINT16_TO_BYTES(ATT_UUID_HEART_RATE_SERVICE), UINT16_TO_BYTES(ATT_UUID_RUNNING_SPEED_SERVICE),
-    UINT16_TO_BYTES(ATT_UUID_DEVICE_INFO_SERVICE), UINT16_TO_BYTES(ATT_UUID_BATTERY_SERVICE)
+    //9, /*! length */
+    //DM_ADV_TYPE_16_UUID, /*! AD type */
+    //UINT16_TO_BYTES(ATT_UUID_HEART_RATE_SERVICE), UINT16_TO_BYTES(ATT_UUID_RUNNING_SPEED_SERVICE),
+    //UINT16_TO_BYTES(ATT_UUID_DEVICE_INFO_SERVICE), UINT16_TO_BYTES(ATT_UUID_BATTERY_SERVICE)
 };
 
 /*! scan data, discoverable mode */
@@ -181,6 +221,18 @@ static const uint8_t fitScanDataDisc[] = {
     'C', 'G', 'M'
 };
 
+/*when updating advertising data using AppAdvSetAdValue, 
+  there is no need to pass all the flags */
+uint8_t newData1[] = { UINT16_TO_BYTES(HCI_ID_ANALOG), /*! company ID */
+                       'd', 'a', 't', 'a' };
+uint8_t newData2[] = { UINT16_TO_BYTES(HCI_ID_ANALOG), /*! company ID */
+                       't',
+                       'e',
+                       's',
+                       't',
+                       'i',
+                       'n',
+                       'g' };
 /**************************************************************************************************
   Client Characteristic Configuration Descriptors
 **************************************************************************************************/
@@ -218,6 +270,125 @@ static uint16_t fitRscmPeriod = FIT_DEFAULT_RSCM_PERIOD;
 
 /* Heart Rate Monitor feature flags */
 static uint8_t fitHrmFlags = CH_HRM_FLAGS_VALUE_8BIT | CH_HRM_FLAGS_ENERGY_EXP;
+
+/******************* Deep sleep stuff *****************************/
+int allow_sleep(void)
+{
+    /* Can not disable BLE DBB and 32 MHz clock while trim procedure is ongoing */
+    if (MXC_WUT_TrimPending(MXC_WUT0) != E_NO_ERROR) {
+        APP_TRACE_INFO0("Cant sleep Trim pending");
+        return E_BUSY;
+    }
+
+    /* I disable checking uart because i need to see debug messages  */
+    /* Figure out if the UART is active */
+    while (PalUartGetState(PAL_UART_ID_TERMINAL) != PAL_UART_STATE_READY) {
+        //APP_TRACE_INFO0("UART busy");
+        // return E_BUSY;
+    }
+
+    /* Prevent characters from being corrupted if still transmitting,
+      UART will shutdown in deep sleep  */
+    if (MXC_UART_GetActive(MXC_UART_GET_UART(CONSOLE_UART)) != E_NO_ERROR) {
+        // APP_TRACE_INFO0("UART active");
+        //  return E_BUSY;
+    }
+
+    return E_NO_ERROR;
+}
+
+/*
+ *  Switch the system clock to the HIRC / 4
+ *
+ *  Enable the HIRC, set the divide ration to /4, and disable the HIRC96 oscillator.
+ */
+void switchToHIRCD4(void)
+{
+    MXC_SETFIELD(MXC_GCR->clkcn, MXC_F_GCR_CLKCN_PSC, MXC_S_GCR_CLKCN_PSC_DIV4);
+    MXC_GCR->clkcn |= MXC_F_GCR_CLKCN_HIRC_EN;
+    MXC_SETFIELD(MXC_GCR->clkcn, MXC_F_GCR_CLKCN_CLKSEL, MXC_S_GCR_CLKCN_CLKSEL_HIRC);
+    /* Disable unused clocks */
+    while (!(MXC_GCR->clkcn & MXC_F_GCR_CLKCN_CKRDY)) {}
+    /* Wait for the switch to occur */
+    MXC_GCR->clkcn &= ~(MXC_F_GCR_CLKCN_HIRC96M_EN);
+    SystemCoreClockUpdate();
+}
+
+/*
+ *  Switch the system clock to the HIRC96
+ *
+ *  Enable the HIRC96, set the divide ration to /1, and disable the HIRC oscillator.
+ */
+void switchToHIRC(void)
+{
+    MXC_SETFIELD(MXC_GCR->clkcn, MXC_F_GCR_CLKCN_PSC, MXC_S_GCR_CLKCN_PSC_DIV1);
+    MXC_GCR->clkcn |= MXC_F_GCR_CLKCN_HIRC96M_EN;
+    MXC_SETFIELD(MXC_GCR->clkcn, MXC_F_GCR_CLKCN_CLKSEL, MXC_S_GCR_CLKCN_CLKSEL_HIRC96);
+    /* Disable unused clocks */
+    while (!(MXC_GCR->clkcn & MXC_F_GCR_CLKCN_CKRDY)) {}
+    /* Wait for the switch to occur */
+    MXC_GCR->clkcn &= ~(MXC_F_GCR_CLKCN_HIRC_EN);
+    SystemCoreClockUpdate();
+}
+
+static void deepSleep(void)
+{
+    MXC_ICC_Disable();
+    MXC_LP_ICache0Shutdown();
+
+    /* Shutdown unused power domains */
+    MXC_PWRSEQ->lpcn |= MXC_F_PWRSEQ_LPCN_BGOFF;
+
+    /* Prevent SIMO soft start on wakeup */
+    MXC_LP_FastWakeupDisable();
+
+    /* Enable VDDCSWEN=1 prior to enter backup/deepsleep mode */
+    MXC_MCR->ctrl |= MXC_F_MCR_CTRL_VDDCSWEN;
+
+    /* Switch the system clock to a lower frequency to conserve power in deep sleep
+       and reduce current inrush on wakeup */
+    switchToHIRCD4();
+
+    /* Reduce VCOREB to 0.81v */
+    MXC_SIMO_SetVregO_B(810);
+
+    // DEBUG ----------------------------
+    state.goingToSleep = 1;
+    state.sleepStart = PalRtcCounterGet();
+    //-----------------------------------
+
+    MXC_LP_EnterDeepSleepMode();
+
+    // DEBUG ----------------------------
+    state.sleepEnd = PalRtcCounterGet();
+    state.sleepDelta = state.sleepEnd - state.sleepStart;
+    state.wokeUp = 1;
+    //-----------------------------------
+
+    /*  If VCOREA not ready and VCOREB ready, switch VCORE=VCOREB
+    (set VDDCSW=2’b01). Configure VCOREB=1.1V wait for VCOREB ready. */
+
+    /* Check to see if VCOREA is ready on  */
+    if (!(MXC_SIMO->buck_out_ready & MXC_F_SIMO_BUCK_OUT_READY_BUCKOUTRDYC)) {
+        /* Wait for VCOREB to be ready */
+        while (!(MXC_SIMO->buck_out_ready & MXC_F_SIMO_BUCK_OUT_READY_BUCKOUTRDYB)) {}
+
+        /* Move VCORE switch back to VCOREB */
+        MXC_MCR->ctrl = (MXC_MCR->ctrl & ~(MXC_F_MCR_CTRL_VDDCSW)) |
+                        (0x1 << MXC_F_MCR_CTRL_VDDCSW_POS);
+
+        /* Raise the VCORE_B voltage */
+        while (!(MXC_SIMO->buck_out_ready & MXC_F_SIMO_BUCK_OUT_READY_BUCKOUTRDYB)) {}
+        MXC_SIMO_SetVregO_B(1000);
+        while (!(MXC_SIMO->buck_out_ready & MXC_F_SIMO_BUCK_OUT_READY_BUCKOUTRDYB)) {}
+    }
+
+    MXC_LP_ICache0PowerUp();
+    MXC_ICC_Enable();
+
+    /* Restore the system clock */
+    switchToHIRC();
+}
 
 /*************************************************************************************************/
 /*!
@@ -418,6 +589,137 @@ static void fitSetup(fitMsg_t *pMsg)
     AppAdvStart(APP_MODE_AUTO_INIT);
 }
 
+void enterDeepSleep(void)
+{
+    bool_t schTimerActive;
+    uint32_t preCapture, schUsec, dsTicks, dsWutTicks;
+    uint64_t bleSleepTicks, idleTicks, schUsecElapsed;
+
+    if (allow_sleep() != E_NO_ERROR) {
+        // re enable interupts
+        __asm volatile("cpsie i");
+        APP_TRACE_INFO0("Allow sleep failed,");
+        return;
+    }
+
+    /* Calculate the number of WUT ticks, but we need one to synchronize */
+    // idleTicks = (uint64_t)(xExpectedIdleTime - 1) * (uint64_t)configRTC_TICK_RATE_HZ /
+    //             (uint64_t)configTICK_RATE_HZ;
+    idleTicks = MAX_WUT_TICKS;
+
+    if (idleTicks > MAX_WUT_TICKS) {
+        idleTicks = MAX_WUT_TICKS;
+    }
+
+    /* Check to see if we meet the minimum requirements for deep sleep */
+    if (idleTicks < (MIN_WUT_TICKS + WAKEUP_US)) {
+        return;
+    }
+
+    /* Enter a critical section but don't use the taskENTER_CRITICAL()
+       method as that will mask interrupts that should exit sleep mode. */
+    __asm volatile("cpsid i");
+
+    /* Determine if the Bluetooth scheduler is running */
+    if (PalTimerGetState() == PAL_TIMER_STATE_BUSY) {
+        schTimerActive = TRUE;
+    } else {
+        schTimerActive = FALSE;
+    }
+    if (!schTimerActive) {
+        uint32_t ts;
+        if (PalBbGetTimestamp(&ts)) {
+            /*Determine if PalBb is active, return if we get a valid time stamp indicating 
+            that the scheduler is waiting for a PalBb event */
+            __asm volatile("cpsie i");
+            APP_TRACE_INFO0("PalBb active");
+            return;
+        }
+    }
+    /* Disable SysTick */
+    //@ PAUL this might be freetos related
+    //SysTick->CTRL &= ~(SysTick_CTRL_ENABLE_Msk);
+
+    /* Enable wakeup from WUT */
+    // WUT is the source for PAL_RTC
+    NVIC_EnableIRQ(WUT_IRQn);
+    MXC_LP_EnableWUTAlarmWakeup();
+
+    if (schTimerActive) {
+        /* Snapshot the current WUT value with the PalBb clock */
+        MXC_WUT_Store();
+        preCapture = MXC_WUT_GetCount();
+        schUsec = PalTimerGetExpTime();
+
+        // /* Adjust idleTicks for the time it takes to restart the BLE hardware */
+        idleTicks -= ((WAKEUP_US)*RTC_TICK_RATE_HZ / 1000000);
+
+        /* Calculate the time to the next BLE scheduler event */
+        if (schUsec < WAKEUP_US) {
+            bleSleepTicks = 0;
+        } else {
+            bleSleepTicks = ((uint64_t)schUsec - (uint64_t)WAKEUP_US) * (uint64_t)RTC_TICK_RATE_HZ /
+                            (uint64_t)BB_CLK_RATE_HZ;
+        }
+    } else {
+        /* Snapshot the current WUT value */
+        MXC_WUT_Edge();
+        preCapture = MXC_WUT_GetCount();
+        bleSleepTicks = 0;
+        schUsec = 0;
+    }
+
+    /* Sleep for the shortest tick duration */
+    if ((schTimerActive) && (bleSleepTicks < idleTicks)) {
+        dsTicks = bleSleepTicks;
+    } else {
+        dsTicks = idleTicks;
+    }
+
+    /* Bound the deep sleep time */
+    if (dsTicks > MAX_WUT_TICKS) {
+        dsTicks = MAX_WUT_TICKS;
+    }
+
+    /* Don't deep sleep if we don't have time */
+    if (dsTicks >= MIN_WUT_TICKS) {
+        /* Arm the WUT interrupt */
+        MXC_WUT->cmp = preCapture + dsTicks;
+
+        if (schTimerActive) {
+            /* Stop the BLE scheduler timer */
+            PalTimerStop();
+
+            /* Shutdown BB hardware */
+            PalBbDisable();
+        }
+
+        deepSleep();
+
+        if (schTimerActive) {
+            /* Enable and restore the BB hardware */
+            PalBbEnable();
+
+            PalBbRestore();
+
+            /* Restore the BB counter */
+            MXC_WUT_RestoreBBClock(BB_CLK_RATE_HZ);
+
+            /* Restart the BLE scheduler timer */
+            dsWutTicks = MXC_WUT->cnt - preCapture;
+            schUsecElapsed = (uint64_t)dsWutTicks * (uint64_t)1000000 / (uint64_t)RTC_TICK_RATE_HZ;
+
+            int palTimerStartTicks = schUsec - schUsecElapsed;
+            if (palTimerStartTicks < 1) {
+                palTimerStartTicks = 1;
+            }
+            PalTimerStart(palTimerStartTicks);
+        }
+
+    } else {
+        APP_TRACE_INFO0("Not enough time to deep sleep");
+    }
+}
 /*************************************************************************************************/
 /*!
  *  \brief  Button press callback.
@@ -427,8 +729,28 @@ static void fitSetup(fitMsg_t *pMsg)
  *  \return None.
  */
 /*************************************************************************************************/
+void advTimerHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
+{
+    static bool_t swtich = FALSE;
+
+    /* switching between two advertising packets of same length */
+    if (swtich) {
+        AppAdvSetAdValue(APP_ADV_DATA_DISCOVERABLE, DM_ADV_TYPE_MANUFACTURER, sizeof(newData1),
+                         (uint8_t *)newData1);
+        swtich = FALSE;
+    } else {
+        AppAdvSetAdValue(APP_ADV_DATA_DISCOVERABLE, DM_ADV_TYPE_MANUFACTURER, sizeof(newData2),
+                         (uint8_t *)newData2);
+        swtich = TRUE;
+    }
+    /* enter deep sleep */
+    //enterDeepSleep();
+    /* Continue next erase */
+    WsfTimerStartMs(&advTimer, 1000);
+}
 static void fitBtnCback(uint8_t btn)
 {
+    static bool_t switchData = FALSE;
     dmConnId_t connId;
     static uint8_t heartRate = 78; /* for testing/demonstration */
 
@@ -483,7 +805,6 @@ static void fitBtnCback(uint8_t btn)
     } else { /* button actions when not connected */
         switch (btn) {
         case APP_UI_BTN_1_SHORT:
-            /* start or restart advertising */
             AppAdvStart(APP_MODE_AUTO_INIT);
             break;
 
@@ -496,20 +817,30 @@ static void fitBtnCback(uint8_t btn)
         case APP_UI_BTN_1_LONG:
             /* clear all bonding info */
             AppSlaveClearAllBondingInfo();
-
-            /* restart advertising */
-            AppAdvStart(APP_MODE_AUTO_INIT);
             break;
 
         case APP_UI_BTN_2_SHORT:
-            /* Toggle HRM Flag for 8 and 16 bit values */
-            if (fitHrmFlags & CH_HRM_FLAGS_VALUE_16BIT) {
-                fitHrmFlags &= ~CH_HRM_FLAGS_VALUE_16BIT;
-            } else {
-                fitHrmFlags |= CH_HRM_FLAGS_VALUE_16BIT;
-            }
 
-            HrpsSetFlags(fitHrmFlags);
+            // AppAdvStop();
+
+            if (switchData) {
+                AppAdvSetAdValue(APP_ADV_DATA_DISCOVERABLE, DM_ADV_TYPE_MANUFACTURER,
+                                 sizeof(newData2), (uint8_t *)newData2);
+            } else {
+                AppAdvSetAdValue(APP_ADV_DATA_DISCOVERABLE, DM_ADV_TYPE_MANUFACTURER,
+                                 sizeof(newData1), (uint8_t *)newData1);
+            }
+            enterDeepSleep(); // to test if adv resumes after deep sleep
+
+            if (state.sleepDelta) {
+                APP_TRACE_INFO1("Slept for %d ticks", state.sleepDelta);
+                //reset state struct
+                memset(&state, 0, sizeof(stateCounter_t));
+            }
+            switchData = !switchData;
+            // flag to restart advertising on next wsf loop
+            //state.readyToAdvertise = TRUE;
+
             break;
 
         default:
@@ -625,8 +956,20 @@ static void fitProcMsg(fitMsg_t *pMsg)
         uiEvent = APP_UI_HW_ERROR;
         break;
 
+    case DM_VENDOR_SPEC_IND:
+        // restart advertising
+        state.sleepEnd = PalRtcCounterGet();
+
+        APP_TRACE_INFO1("TIME to restart advt: %d", state.sleepEnd - state.sleepStart);
+        AppAdvStart(APP_MODE_AUTO_INIT);
+
     default:
         break;
+    }
+
+    if (state.readyToAdvertise) {
+        AppAdvStart(APP_MODE_AUTO_INIT);
+        state.readyToAdvertise = FALSE;
     }
 
     if (uiEvent != APP_UI_NONE) {

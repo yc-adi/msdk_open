@@ -241,6 +241,10 @@ MXC_OPTIMIZE_CFLAGS ?= -Og
 PROJ_CFLAGS += -Wall # Enable warnings
 PROJ_CFLAGS += -DMXC_ASSERT_ENABLE
 
+ifeq "$(DEEP_SLEEP)" "1"
+PROJ_CFLAGS += -DDEEP_SLEEP
+endif
+
 # Set hardware floating point acceleration.
 # Options are:
 # - hard

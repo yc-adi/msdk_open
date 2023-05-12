@@ -187,7 +187,7 @@ static void wsfTimerInsert(wsfTimer_t *pTimer, wsfTimerTicks_t ticks)
  *  \return Number of RTC ticks
  */
 /*************************************************************************************************/
-static uint32_t wsfTimerTicksToRtc(wsfTimerTicks_t wsfTicks)
+uint32_t wsfTimerTicksToRtc(wsfTimerTicks_t wsfTicks)
 {
   uint32_t numSec = wsfTicks / WSF_TIMER_TICKS_PER_SEC;
   uint32_t remainder = wsfTicks - numSec * WSF_TIMER_TICKS_PER_SEC;
@@ -204,7 +204,7 @@ static uint32_t wsfTimerTicksToRtc(wsfTimerTicks_t wsfTicks)
  *  \return The number of ticks until the next timer expiration.
  */
 /*************************************************************************************************/
-static wsfTimerTicks_t wsfTimerNextExpiration(void)
+wsfTimerTicks_t wsfTimerNextExpiration(void)
 {
   wsfTimerTicks_t ticks;
 
@@ -266,6 +266,11 @@ void WsfTimerStartSec(wsfTimer_t *pTimer, wsfTimerTicks_t sec)
 /*************************************************************************************************/
 void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms)
 {
+  if (ms == 65535)
+  {
+    APP_TRACE_INFO1("ms: %d", ms);  // remove me !!!
+    ms = 15 * 60 * 1000;
+  }
   WSF_TRACE_INFO2("WsfTimerStartMs pTimer:0x%x ticks:%u", (uint32_t)pTimer, WSF_TIMER_MS_TO_TICKS(ms));
 
   /* insert timer into queue */
@@ -381,6 +386,12 @@ wsfTimer_t *WsfTimerServiceExpired(wsfTaskId_t taskId)
  *          go to sleep and going to sleep.
  */
 /*************************************************************************************************/
+// remove me !!!
+#define DBG_BUF_SIZE    (512)
+extern uint32_t debugBuf[DBG_BUF_SIZE];
+extern uint32_t debugBufHead;
+extern uint32_t debugBufTail;
+
 void WsfTimerSleep(void)
 {
   wsfTimerTicks_t nextExpiration;

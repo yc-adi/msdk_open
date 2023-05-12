@@ -311,6 +311,8 @@ static inline int MXC_SYS_In_Crit_Section(void)
  */
 int MXC_SYS_GetUSN(uint8_t *usn, uint8_t *checksum);
 
+int MXC_SYS_GetRevision(void);
+
 /**
  * @brief Determines if the selected peripheral clock is enabled.
  * @param clock   Enumeration for desired clock.

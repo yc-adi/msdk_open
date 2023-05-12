@@ -94,8 +94,8 @@ typedef union {
 
 /*! configurable parameters for advertising */
 static const appAdvCfg_t cgmAdvCfg = {
-    { 60000, 0, 0 }, /*! Advertising durations in ms */
-    { 800, 0, 0 } /*! Advertising intervals in 0.625 ms units */
+    { 65535, 0, 0 }, /*! Advertising durations in ms, 60000 */
+    { 1280, 0, 0 } /*! Advertising intervals in 0.625 ms units, 800 */
 };
 
 /*! configurable parameters for slave */

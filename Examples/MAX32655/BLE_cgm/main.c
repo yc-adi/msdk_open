@@ -87,6 +87,7 @@ static LlRtCfg_t mainLlRtCfg;
 
 volatile int wutTrimComplete;
 
+#ifdef DEEP_SLEEP
 /**
  * @brief global variable to keep the minimal time for the next job (task). 
  * After each job, task, action, or response, need to update this variable.
@@ -122,18 +123,22 @@ typedef void SDMASleepState_t;
 
 static volatile bool_t bHaveWUTEvent;
 
+
 #define DBG_BUF_SIZE    (512)
 uint32_t debugBuf[512];
 uint32_t debugBufHead = 0;
 uint32_t debugBufTail = 0;
-
+#endif  // DEEP_SLEEP
 /**************************************************************************************************
   Functions
 **************************************************************************************************/
+#ifdef DEEP_SLEEP
 extern wsfTimerTicks_t wsfTimerNextExpiration(void);
 extern uint32_t wsfTimerTicksToRtc(wsfTimerTicks_t wsfTicks);
 extern void MXC_LP_EnableWUTAlarmWakeup(void);
+#endif  
 
+#ifdef DEEP_SLEEP
 /*************************************************************************************************/
 /* Get the time delay expected on powerup */
 uint32_t get_powerup_delay(uint32_t wait_ticks)
@@ -144,7 +149,7 @@ uint32_t get_powerup_delay(uint32_t wait_ticks)
 
     return ret;
 }
-
+#endif  // DEEP_SLEEP
 
 /*************************************************************************************************/
 #ifdef DEEP_SLEEP
@@ -511,7 +516,14 @@ int main(void)
 
         wsfOsDispatcher();
 
+#ifdef DEEP_SLEEP
         DeepSleep();
+#else
+        if (!WsfOsActive())
+        {
+            WsfTimerSleep();
+        }
+#endif
     }
 
     /* Does not return. Should never be reached here. */

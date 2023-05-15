@@ -122,7 +122,7 @@ uint32_t gNextJobTimeInUs = 0;
 typedef void SDMASleepState_t;
 
 static volatile bool_t bHaveWUTEvent;
-
+#endif  // DEEP_SLEEP
 
 #define DBG_BUF_SIZE    (512)
 uint32_t debugFlag = 0;
@@ -132,7 +132,7 @@ uint32_t debugBufTail = 0;
 uint32_t debugMax = 0;
 uint32_t debugMin = 0xFFFFFFFF;
 
-#endif  // DEEP_SLEEP
+
 /**************************************************************************************************
   Functions
 **************************************************************************************************/
@@ -193,24 +193,6 @@ void DeepSleep(void)
         //remove me !!! TODO: && UART_PrepForSleep(MXC_UART_GET_UART(CONSOLE_UART)) == E_NO_ERROR) {
     {
         goto EXIT_SLEEP_FUNC;
-    }
-
-    // remove me !!!
-    if (debugFlag > 0)
-    {
-        debugBuf[debugBufHead++] = idleInWutCnt;
-        if (debugBufHead >= DBG_BUF_SIZE)
-        {
-            debugBufHead = 0;
-        }
-        if (idleInWutCnt > debugMax)
-        {
-            debugMax = idleInWutCnt;
-        }
-        if (idleInWutCnt < debugMin)
-        {
-            debugMin = idleInWutCnt;
-        }
     }
     
     /* Determine if the Bluetooth scheduler is running */
@@ -287,6 +269,26 @@ void DeepSleep(void)
         dsInWutCnt = MAX_WUT_TICKS;
     }
 
+    // remove me !!!
+    if (debugFlag > 0)
+    {
+        debugBuf[debugBufHead++] = dsInWutCnt;        
+        if (debugBufHead >= DBG_BUF_SIZE)
+        {
+            debugBufHead = 0;
+        }
+
+        if (dsInWutCnt > debugMax)
+        {
+            debugMax = dsInWutCnt;
+        }
+
+        if (dsInWutCnt < debugMin)
+        {
+            debugMin = dsInWutCnt;
+        }
+    }
+
     /* Only enter deep sleep if we have enough time */
     if (dsInWutCnt >= MIN_WUT_TICKS) {
         /* Arm the WUT interrupt */
@@ -301,13 +303,13 @@ void DeepSleep(void)
             PalBbDisable();
         }
 
-        LED_Off(SLEEP_LED);
-        LED_Off(DEEPSLEEP_LED);
+        LED_Toggle(SLEEP_LED);
+        //LED_Off(DEEPSLEEP_LED);
 
-        //MXC_LP_EnterStandbyMode();    // remove me !!!
+        MXC_LP_EnterStandbyMode();    // remove me !!!
 
-        LED_On(DEEPSLEEP_LED);  // remove me !!!
-        LED_On(SLEEP_LED);
+        LED_Toggle(DEEPSLEEP_LED);  // remove me !!!
+        //LED_On(SLEEP_LED);
 
         if (schTimerActive)
         {
@@ -347,6 +349,7 @@ void DeepSleep(void)
 EXIT_SLEEP_FUNC:
     /* Re-enable interrupts - see comments above */
     __asm volatile("cpsie i");
+
     WsfTaskUnlock();
 }
 #endif /* DEEP_SLEEP */
@@ -443,8 +446,8 @@ void wutTrimCb(int err)
 int main(void)
 {
 #ifdef DEEP_SLEEP
-    printf("\n\n***** MAX32665 BLE GGM Profile, Deep Sleep Version *****");
-    printf("SystemCoreClock = %d", SystemCoreClock);
+    printf("\n\n***** MAX32665 BLE GGM Profile, Deep Sleep Version *****\n");
+    printf("SystemCoreClock = %d\n", SystemCoreClock);
 #endif /* DEEP_SLEEP */
 
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)

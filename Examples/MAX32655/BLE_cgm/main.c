@@ -136,13 +136,15 @@ uint32_t debugMin = 0xFFFFFFFF;
 /**************************************************************************************************
   Functions
 **************************************************************************************************/
-#ifdef DEEP_SLEEP
+#if DEEP_SLEEP == 1
 extern wsfTimerTicks_t wsfTimerNextExpiration(void);
 extern uint32_t wsfTimerTicksToRtc(wsfTimerTicks_t wsfTicks);
 extern void MXC_LP_EnableWUTAlarmWakeup(void);
+extern bool_t PalSysIsBusy(void);
+extern void MXC_LP_EnterStandbyMode(void);
 #endif  
 
-#ifdef DEEP_SLEEP
+#ifdef DEEP_SLEEP == 1
 /*************************************************************************************************/
 /* Get the time delay expected on powerup */
 uint32_t get_powerup_delay(uint32_t wait_ticks)
@@ -163,6 +165,12 @@ void DeepSleep(void)
     uint32_t dsInWutCnt, dsWutTicks;
     uint64_t bleSleepTicks, idleInWutCnt, schUsecElapsed; //dsSysTickPeriods, ;
     bool_t schTimerActive;
+
+    /* If PAL system is busy, no need to sleep. */
+    if (PalSysIsBusy())
+    {
+        return;
+    }
 
     uint32_t wsfTicksToNextExpiration = wsfTimerNextExpiration();
     if (wsfTicksToNextExpiration > 0)
@@ -210,7 +218,6 @@ void DeepSleep(void)
         if (PalBbGetTimestamp(&ts)) {
             /*Determine if PalBb is active, return if we get a valid time stamp indicating 
              * that the scheduler is waiting for a PalBb event */
-
             goto EXIT_SLEEP_FUNC;
         }
     }
@@ -446,9 +453,26 @@ void wutTrimCb(int err)
 int main(void)
 {
 #ifdef DEEP_SLEEP
+    volatile int m, n;
+    LED_Off(SLEEP_LED);
+    for (m = 0; m < 4; m++)
+    {
+        for (n = 0; n < 0x3FFFFF; n++){}
+        LED_Toggle(SLEEP_LED);
+    }
+    LED_On(SLEEP_LED);
+
+    LED_Off(DEEPSLEEP_LED);
+    for (m = 0; m < 4; m++)
+    {
+        for (n = 0; n < 0x3FFFFF; n++) {}
+        LED_Toggle(DEEPSLEEP_LED);
+    }
+    LED_On(DEEPSLEEP_LED);
+
     printf("\n\n***** MAX32665 BLE GGM Profile, Deep Sleep Version *****\n");
-    printf("SystemCoreClock = %d\n", SystemCoreClock);
-#endif /* DEEP_SLEEP */
+    printf("SystemCoreClock = %d MHz\n", SystemCoreClock/1000000);
+#endif  // DEEP_SLEEP
 
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)
     /* Configurations must be persistent. */
@@ -488,7 +512,10 @@ int main(void)
     WsfCsExit();
 
     mainWsfInit();
+
+#if DEEP_SLEEP != 1    
     AppTerminalInit();
+#endif
 
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)
     WsfCsEnter();
@@ -534,14 +561,14 @@ int main(void)
 
         wsfOsDispatcher();
 
-#ifdef DEEP_SLEEP
-        DeepSleep();
-#else
         if (!WsfOsActive())
         {
+#if DEEP_SLEEP == 1
+            DeepSleep();
+#else
             WsfTimerSleep();
-        }
 #endif
+        }
     }
 
     /* Does not return. Should never be reached here. */

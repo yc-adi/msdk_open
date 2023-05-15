@@ -242,7 +242,7 @@ PROJ_CFLAGS += -Wall # Enable warnings
 PROJ_CFLAGS += -DMXC_ASSERT_ENABLE
 
 ifeq "$(DEEP_SLEEP)" "1"
-PROJ_CFLAGS += -DDEEP_SLEEP
+PROJ_CFLAGS += -DDEEP_SLEEP=1
 endif
 
 # Set hardware floating point acceleration.

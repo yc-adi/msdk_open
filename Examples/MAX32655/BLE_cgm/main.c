@@ -125,9 +125,13 @@ static volatile bool_t bHaveWUTEvent;
 
 
 #define DBG_BUF_SIZE    (512)
+uint32_t debugFlag = 0;
 uint32_t debugBuf[512];
 uint32_t debugBufHead = 0;
 uint32_t debugBufTail = 0;
+uint32_t debugMax = 0;
+uint32_t debugMin = 0xFFFFFFFF;
+
 #endif  // DEEP_SLEEP
 /**************************************************************************************************
   Functions
@@ -170,13 +174,6 @@ void DeepSleep(void)
         idleInWutCnt = 0;
     }
 
-    // remove me !!!
-    debugBuf[debugBufHead++] = wsfTicksToNextExpiration;
-    if (debugBufHead >= DBG_BUF_SIZE)
-    {
-        debugBufHead = 0;
-    }
-
     if (idleInWutCnt > MAX_WUT_TICKS) {
         idleInWutCnt = MAX_WUT_TICKS;
     }
@@ -198,6 +195,24 @@ void DeepSleep(void)
         goto EXIT_SLEEP_FUNC;
     }
 
+    // remove me !!!
+    if (debugFlag > 0)
+    {
+        debugBuf[debugBufHead++] = idleInWutCnt;
+        if (debugBufHead >= DBG_BUF_SIZE)
+        {
+            debugBufHead = 0;
+        }
+        if (idleInWutCnt > debugMax)
+        {
+            debugMax = idleInWutCnt;
+        }
+        if (idleInWutCnt < debugMin)
+        {
+            debugMin = idleInWutCnt;
+        }
+    }
+    
     /* Determine if the Bluetooth scheduler is running */
     if (PalTimerGetState() == PAL_TIMER_STATE_BUSY)
     {

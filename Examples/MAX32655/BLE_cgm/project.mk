@@ -14,8 +14,6 @@ LIB_CORDIO = 1
 INIT_PERIPHERAL = 1
 INIT_CENTRAL = 0
 
-DEBUG = 0
-
 # TRACE option
 # Set to 0 to disable
 # Set to 1 to enable serial port trace messages
@@ -28,4 +26,4 @@ BLE_HOST = 1
 BLE_CONTROLLER = 0
 endif
 
-DEEP_SLEEP = 0
+DEEP_SLEEP = 1

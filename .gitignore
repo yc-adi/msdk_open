@@ -3,7 +3,10 @@ Examples/*/*/buildrv
 Examples/*/*/*/build
 Examples/*/*/*/buildrv
 .vscode/settings.json
+
 Libraries/PeriphDrivers/Documentation/MAX*
+Libraries/PeriphDrivers/bin/MAX32655/softfp/ar_args.txt
+
 docs
 Documentation/Libraries
 Documentation/res

@@ -34,6 +34,8 @@
 /*! \brief Callback struct */
 static appUiCback_t appUiCbackTbl;
 
+extern uint32_t debugFlag;
+
 /*************************************************************************************************/
 /*!
  *  \brief  Perform a user interface action based on the event value passed to the function.
@@ -57,6 +59,7 @@ void AppUiAction(uint8_t event)
 
     case APP_UI_ADV_START:
       APP_TRACE_INFO0(">>> Advertising started <<<");
+      debugFlag = 1;
       break;
 
     case APP_UI_ADV_STOP:

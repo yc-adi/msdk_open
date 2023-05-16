@@ -14,6 +14,8 @@ LIB_CORDIO = 1
 INIT_PERIPHERAL = 1
 INIT_CENTRAL = 0
 
+DEBUG = 1
+
 # TRACE option
 # Set to 0 to disable
 # Set to 1 to enable serial port trace messages
@@ -63,3 +65,5 @@ bl_obj: $(BOOTLOADER_OBJ)
 ${BOOTLOADER_OBJ}: bl_build.S ${BOOTLOADER_BIN}
 	${CC} ${AFLAGS} -o ${@} -c bl_build.S
 endif
+
+DEEP_SLEEP = 1

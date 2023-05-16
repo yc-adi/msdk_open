@@ -187,7 +187,7 @@ static void wsfTimerInsert(wsfTimer_t *pTimer, wsfTimerTicks_t ticks)
  *  \return Number of RTC ticks
  */
 /*************************************************************************************************/
-static uint32_t wsfTimerTicksToRtc(wsfTimerTicks_t wsfTicks)
+uint32_t wsfTimerTicksToRtc(wsfTimerTicks_t wsfTicks)
 {
   uint32_t numSec = wsfTicks / WSF_TIMER_TICKS_PER_SEC;
   uint32_t remainder = wsfTicks - numSec * WSF_TIMER_TICKS_PER_SEC;
@@ -204,7 +204,7 @@ static uint32_t wsfTimerTicksToRtc(wsfTimerTicks_t wsfTicks)
  *  \return The number of ticks until the next timer expiration.
  */
 /*************************************************************************************************/
-static wsfTimerTicks_t wsfTimerNextExpiration(void)
+wsfTimerTicks_t wsfTimerNextExpiration(void)
 {
   wsfTimerTicks_t ticks;
 

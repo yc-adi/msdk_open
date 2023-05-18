@@ -310,7 +310,7 @@ void PalUartDeInit(PalUartId_t id)
 
   result = MXC_UART_Shutdown(MXC_UART_GET_UART(uartNum));
   (void)result;
-  PAL_SYS_ASSERT(result);
+  PAL_SYS_ASSERT(result == 0);
 
   NVIC_DisableIRQ(MXC_UART_GET_IRQ(uartNum));
 

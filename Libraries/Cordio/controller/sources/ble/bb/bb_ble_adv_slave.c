@@ -32,6 +32,8 @@
 #include <string.h>
 #include "bb_ble_sniffer_api.h"
 
+#include "pal_led.h"
+
 /**************************************************************************************************
   Macros
 **************************************************************************************************/
@@ -143,6 +145,7 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
     bbBleClrIfs();    /* non-connectable advertising */
   }
   PalBbBleTxBufDesc_t desc = {.pBuf = pAdv->pTxAdvBuf, .len = pAdv->txAdvLen};
+  //LED_Off(0);  // remove me !!!
   PalBbBleTxData(&desc, 1);
 
   /* Tx may fail; no more important statements in the FALSE code path. */
@@ -161,6 +164,7 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
 /*************************************************************************************************/
 static void bbSlvAdvTxCompCback(uint8_t status)
 {
+  //LED_Toggle(0);  // remove me !!!
   BB_ISR_START();
 
   WSF_ASSERT(BbGetCurrentBod());
@@ -270,6 +274,7 @@ Cleanup:
 /*************************************************************************************************/
 static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint32_t timestamp, uint8_t rxPhyOptions)
 {
+  //LED_Off(0);  // remove me !!!
   BB_ISR_START();
 
   WSF_ASSERT(BbGetCurrentBod());

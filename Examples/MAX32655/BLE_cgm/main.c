@@ -62,7 +62,10 @@
 
 #include "board.h"
 #include "max32655.h"
-//#include "wakeup.h"
+#include "pal_btn.h"
+#include "pal_i2s.h"
+#include "pal_led.h"
+#include "pal_uart.h"
 #include "pal_timer.h"
 #include "led.h"
 
@@ -161,7 +164,7 @@ uint32_t get_powerup_delay(uint32_t wait_ticks)
 #ifdef DEEP_SLEEP
 void DeepSleep(void)
 {
-    uint32_t preCaptureInWutCnt, postCaptureInWutCnt, schUsec;
+    uint32_t preCaptureInWutCnt, schUsec;
     uint32_t dsInWutCnt, dsWutTicks;
     uint64_t bleSleepTicks, idleInWutCnt, schUsecElapsed; //dsSysTickPeriods, ;
     bool_t schTimerActive;
@@ -276,26 +279,6 @@ void DeepSleep(void)
         dsInWutCnt = MAX_WUT_TICKS;
     }
 
-    // remove me !!!
-    if (debugFlag > 0)
-    {
-        debugBuf[debugBufHead++] = dsInWutCnt;        
-        if (debugBufHead >= DBG_BUF_SIZE)
-        {
-            debugBufHead = 0;
-        }
-
-        if (dsInWutCnt > debugMax)
-        {
-            debugMax = dsInWutCnt;
-        }
-
-        if (dsInWutCnt < debugMin)
-        {
-            debugMin = dsInWutCnt;
-        }
-    }
-
     /* Only enter deep sleep if we have enough time */
     if (dsInWutCnt >= MIN_WUT_TICKS) {
         /* Arm the WUT interrupt */
@@ -315,19 +298,23 @@ void DeepSleep(void)
 
         MXC_LP_EnterStandbyMode();    // remove me !!!
 
-        LED_On(DEEPSLEEP_LED);  // remove me !!!
-        LED_On(SLEEP_LED);
+        LED_Off(DEEPSLEEP_LED);  // remove me !!!
+        LED_Off(SLEEP_LED);
 
         if (schTimerActive)
         {
             /* Enable and restore the BB hardware */
+            //LED_On(DEEPSLEEP_LED);  // low level, remove me !!!
             PalBbEnable();
 
+            LED_Off(DEEPSLEEP_LED);  // low level, remove me !!!
             PalBbRestore();
 
+            //LED_On(DEEPSLEEP_LED);  // low level, remove me !!!
             /* Restore the BB counter */
             MXC_WUT_RestoreBBClock(MXC_WUT, BB_CLK_RATE_HZ);
 
+            LED_Off(DEEPSLEEP_LED);  // low level, remove me !!!
             /* Restart the BLE scheduler timer */
             dsWutTicks = MXC_WUT->cnt - preCaptureInWutCnt;
             schUsecElapsed = (uint64_t)dsWutTicks * (uint64_t)1000000 / (uint64_t)32768;
@@ -340,16 +327,6 @@ void DeepSleep(void)
         }
     }
 
-    /* Recalculate dsWutTicks for the FreeRTOS tick counter update */
-    MXC_WUT_Edge(MXC_WUT);
-    postCaptureInWutCnt = MXC_WUT_GetCount(MXC_WUT);
-    dsWutTicks = postCaptureInWutCnt - preCaptureInWutCnt;
-    
-    /*
-    * Advance ticks by # actually elapsed
-    */
-    //dsSysTickPeriods = (uint64_t)dsWutTicks * (uint64_t)1000 / (uint64_t)32768;
-
     /* Re-enable SysTick */
     SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;                               /* if(not busy) */
 
@@ -358,6 +335,7 @@ EXIT_SLEEP_FUNC:
     __asm volatile("cpsie i");
 
     WsfTaskUnlock();
+    //LED_On(0);  // remove me !!!
 }
 #endif /* DEEP_SLEEP */
 
@@ -396,6 +374,7 @@ static void mainWsfInit(void)
     WsfCsExit();
 
     WsfOsInit();
+
     WsfTimerInit();
 
 #if (WSF_TOKEN_ENABLED == TRUE) || (WSF_TRACE_ENABLED == TRUE)
@@ -571,7 +550,17 @@ int main(void)
 #endif
 
     StackInitDats();
+
     DatsStart();
+
+#ifdef DEEP_SLEEP
+    //PalBtnDeInit();
+    //PalLedDeInit();
+    //PalI2sDeInit();
+    //PalUartDeInit(PAL_UART_ID_USER);
+    //PalUartDeInit(PAL_UART_ID_CHCI);
+    //PalUartDeInit(PAL_UART_ID_TERMINAL);
+#endif
 
     // WsfOsEnterMainLoop();
     while(TRUE)

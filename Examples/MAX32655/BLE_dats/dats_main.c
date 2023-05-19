@@ -215,7 +215,7 @@ static const uint8_t datsScanDataDisc[] = {
     /*! device name */
     5, /*! length */
     DM_ADV_TYPE_LOCAL_NAME, /*! AD type */
-    'D',
+    'Z',
     'A',
     'T',
     'S'

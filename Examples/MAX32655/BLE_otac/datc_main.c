@@ -494,7 +494,7 @@ static void datcScanReport(dmEvt_t *pMsg)
         /* check length and device name */
         if (pData[DM_AD_LEN_IDX] >= 4 && (pData[DM_AD_DATA_IDX] == 'O') &&
             (pData[DM_AD_DATA_IDX + 1] == 'T') && (pData[DM_AD_DATA_IDX + 2] == 'A') &&
-            (pData[DM_AD_DATA_IDX + 3] == 'S')) {
+            (pData[DM_AD_DATA_IDX + 3] == 'Z')) {
             connect = TRUE;
         }
     }

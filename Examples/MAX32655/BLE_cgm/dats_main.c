@@ -895,7 +895,7 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
 void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
-        APP_TRACE_INFO1("Dats got evt %d", pMsg->event);
+        // remove me !!! APP_TRACE_INFO1("Dats got evt %d", pMsg->event);
 
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {

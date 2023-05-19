@@ -14,13 +14,13 @@ LIB_CORDIO = 1
 INIT_PERIPHERAL = 1
 INIT_CENTRAL = 0
 
-DEBUG = 1
+DEBUG = 0
 
 # TRACE option
 # Set to 0 to disable
 # Set to 1 to enable serial port trace messages
 # Set to 2 to enable verbose messages
-TRACE = 1
+TRACE = 0
 
 BUILD_BOOTLOADER?=1
 

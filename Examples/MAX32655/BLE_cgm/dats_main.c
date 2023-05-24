@@ -120,7 +120,7 @@ static const appSecCfg_t datsSecCfg = {
     DM_KEY_DIST_IRK, /*! Initiator key distribution flags */
     DM_KEY_DIST_LTK | DM_KEY_DIST_IRK, /*! Responder key distribution flags */
     FALSE, /*! TRUE if Out-of-band pairing data is present */
-    FALSE /*! TRUE to initiate security upon connection */
+    TRUE /*! TRUE to initiate security upon connection */
 };
 
 /*! TRUE if Out-of-band pairing data is to be sent */
@@ -204,9 +204,7 @@ static const uint8_t datsScanDataDisc[] = {
     /*! device name */
     4, /*! length */
     DM_ADV_TYPE_LOCAL_NAME, /*! AD type */
-    'C',
-    'G',
-    'M'
+    'C','G','M'
 };
 
 /**************************************************************************************************
@@ -243,6 +241,11 @@ static dmSecLescOobCfg_t *datsOobCfg;
 
 /* Timer for trimming of the 32 kHz crystal */
 wsfTimer_t trimTimer;
+
+/**************************************************************************************************
+  global Variables
+**************************************************************************************************/
+uint8_t conn_opened = 0; /// 0: connection is not opened
 
 extern void setAdvTxPower(void);
 
@@ -561,6 +564,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
 
     case DM_CONN_OPEN_IND:
         uiEvent = APP_UI_CONN_OPEN;
+        conn_opened = 1;
         break;
 
     case DM_CONN_CLOSE_IND:
@@ -586,6 +590,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
             break;
         }
         uiEvent = APP_UI_CONN_CLOSE;
+        conn_opened = 0;
         break;
 
     case DM_SEC_PAIR_CMPL_IND:
@@ -895,7 +900,7 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
 void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
-        // remove me !!! APP_TRACE_INFO1("Dats got evt %d", pMsg->event);
+        APP_TRACE_INFO1("Dats got evt %d", pMsg->event);
 
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {

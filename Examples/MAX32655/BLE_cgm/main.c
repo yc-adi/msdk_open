@@ -125,6 +125,9 @@ uint32_t gNextJobTimeInUs = 0;
 typedef void SDMASleepState_t;
 
 static volatile bool_t bHaveWUTEvent;
+
+extern uint8_t conn_opened;
+
 #endif  // DEEP_SLEEP
 
 #define DBG_BUF_SIZE    (512)
@@ -200,8 +203,9 @@ void DeepSleep(void)
      */
     __asm volatile("cpsid i");
 
-    if (!wsfOsReadyToSleep())
-        //remove me !!! TODO: && UART_PrepForSleep(MXC_UART_GET_UART(CONSOLE_UART)) == E_NO_ERROR) {
+    if (!wsfOsReadyToSleep()
+        // TODO: && UART_PrepForSleep(MXC_UART_GET_UART(CONSOLE_UART)) == E_NO_ERROR)
+    )
     {
         goto EXIT_SLEEP_FUNC;
     }
@@ -296,25 +300,21 @@ void DeepSleep(void)
         LED_Off(SLEEP_LED);
         LED_Off(DEEPSLEEP_LED);
 
-        MXC_LP_EnterStandbyMode();    // remove me !!!
+        MXC_LP_EnterStandbyMode();
 
-        LED_Off(DEEPSLEEP_LED);  // remove me !!!
-        LED_Off(SLEEP_LED);
+        LED_On(DEEPSLEEP_LED);
+        LED_On(SLEEP_LED);
 
         if (schTimerActive)
         {
             /* Enable and restore the BB hardware */
-            //LED_On(DEEPSLEEP_LED);  // low level, remove me !!!
             PalBbEnable();
 
-            LED_Off(DEEPSLEEP_LED);  // low level, remove me !!!
             PalBbRestore();
 
-            //LED_On(DEEPSLEEP_LED);  // low level, remove me !!!
             /* Restore the BB counter */
             MXC_WUT_RestoreBBClock(MXC_WUT, BB_CLK_RATE_HZ);
 
-            LED_Off(DEEPSLEEP_LED);  // low level, remove me !!!
             /* Restart the BLE scheduler timer */
             dsWutTicks = MXC_WUT->cnt - preCaptureInWutCnt;
             schUsecElapsed = (uint64_t)dsWutTicks * (uint64_t)1000000 / (uint64_t)32768;
@@ -335,7 +335,6 @@ EXIT_SLEEP_FUNC:
     __asm volatile("cpsie i");
 
     WsfTaskUnlock();
-    //LED_On(0);  // remove me !!!
 }
 #endif /* DEEP_SLEEP */
 
@@ -455,28 +454,12 @@ void setAdvTxPower(void)
 /*************************************************************************************************/
 int main(void)
 {
-#ifdef DEEP_SLEEP
-    volatile int m, n;
-    LED_Off(SLEEP_LED);
-    for (m = 0; m < 4; m++)
-    {
-        for (n = 0; n < 0x3FFFFF; n++){}
-        LED_Toggle(SLEEP_LED);
-    }
-    LED_On(SLEEP_LED);
-
-    LED_Off(DEEPSLEEP_LED);
-    for (m = 0; m < 4; m++)
-    {
-        for (n = 0; n < 0x3FFFFF; n++) {}
-        LED_Toggle(DEEPSLEEP_LED);
-    }
-    LED_On(DEEPSLEEP_LED);
-
-    printf("\n\n***** MAX32665 BLE GGM Profile, Deep Sleep Version *****\n");
+#if DEEP_SLEEP == 1
+    printf("\n\n***** MAX32665 BLE CGM, Deep Sleep Version *****\n");
+#else
+    printf("\n\n***** MAX32665 BLE CGM, Non Deep Sleep Version *****\n");
+#endif
     printf("SystemCoreClock = %d MHz\n", SystemCoreClock/1000000);
-#endif  // DEEP_SLEEP
-
     uint32_t memUsed;
 
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)
@@ -571,8 +554,15 @@ int main(void)
 
         if (!WsfOsActive())
         {
-#if DEEP_SLEEP == 1
-            DeepSleep();
+#if  DEEP_SLEEP == 1
+            if (conn_opened)
+            {
+                WsfTimerSleep();
+            }
+            else
+            {
+                DeepSleep();
+            }
 #else
             WsfTimerSleep();
 #endif

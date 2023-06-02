@@ -140,7 +140,7 @@ void BlpsMeasStart(dmConnId_t connId, uint8_t timerEvt, uint8_t icpCccIdx)
   blpsCb.measTimer.msg.status = icpCccIdx;
 
   /* start timer */
-  WsfTimerStartMs(&blpsCb.measTimer, blpsCb.cfg.period);
+  WsfTimerStartMs(&blpsCb.measTimer, blpsCb.cfg.period, 8);
 }
 
 /*************************************************************************************************/
@@ -223,7 +223,7 @@ void BlpsProcMsg(wsfMsgHdr_t *pMsg)
     AttsHandleValueNtf((dmConnId_t) pMsg->param, BPS_ICP_HDL, len, buf);
 
     /* restart timer */
-    WsfTimerStartMs(&blpsCb.measTimer, blpsCb.cfg.period);
+    WsfTimerStartMs(&blpsCb.measTimer, blpsCb.cfg.period, 9);
   }
 }
 

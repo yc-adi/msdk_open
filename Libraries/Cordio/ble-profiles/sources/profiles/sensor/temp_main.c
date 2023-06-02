@@ -84,7 +84,7 @@ static void tempUpdateTimer(void)
     if (!tempCb.measTimerStarted)
     {
       tempCb.measTimerStarted = TRUE;
-      WsfTimerStartMs(&tempCb.measTimer, period * 10u);
+      WsfTimerStartMs(&tempCb.measTimer, period * 10u, 17);
     }
   }
   else

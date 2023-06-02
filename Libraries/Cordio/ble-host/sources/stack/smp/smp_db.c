@@ -81,7 +81,7 @@ static void smpDbStartServiceTimer(void)
 {
   if (smpDbCb.serviceTimer.isStarted == FALSE)
   {
-    WsfTimerStartMs(&smpDbCb.serviceTimer, SMP_DB_SRV_MS);
+    WsfTimerStartMs(&smpDbCb.serviceTimer, SMP_DB_SRV_MS, 19);
   }
 }
 

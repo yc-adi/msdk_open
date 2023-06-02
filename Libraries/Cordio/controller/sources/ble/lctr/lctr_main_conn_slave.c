@@ -297,7 +297,7 @@ void lctrSlvConnBuildOp(lctrConnCtx_t *pCtx)
   /* Initially use fast termination. */
   uint32_t fastTermCnt = txWinOffsetCnt + pConnInd->txWinSize +
                          (LCTR_FAST_TERM_CNT * pConnInd->interval);
-  WsfTimerStartMs(&pCtx->tmrSupTimeout, LCTR_CONN_IND_MS(fastTermCnt));
+  WsfTimerStartMs(&pCtx->tmrSupTimeout, LCTR_CONN_IND_MS(fastTermCnt), 41);
 
   lctrBuildRemapTable(pCtx);
   pCtx->chIdentifier = (pConnInd->accessAddr >> 16) ^

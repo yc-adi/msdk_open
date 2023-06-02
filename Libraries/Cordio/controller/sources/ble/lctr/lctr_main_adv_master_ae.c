@@ -191,10 +191,10 @@ static void lctrMstExtScanExecuteCommonSm(LctrExtScanMsg_t *pMsg)
       lctrMstExtScan.scanPerMs = pMsg->enable.perMs;
       if (lctrMstExtScan.scanDurMs)
       {
-        WsfTimerStartMs(&lctrMstExtScan.tmrScanDur, lctrMstExtScan.scanDurMs);
+        WsfTimerStartMs(&lctrMstExtScan.tmrScanDur, lctrMstExtScan.scanDurMs, 34);
         if (lctrMstExtScan.scanPerMs)
         {
-          WsfTimerStartMs(&lctrMstExtScan.tmrScanPer, lctrMstExtScan.scanPerMs);
+          WsfTimerStartMs(&lctrMstExtScan.tmrScanPer, lctrMstExtScan.scanPerMs, 35);
         }
       }
       break;
@@ -230,8 +230,8 @@ static void lctrMstExtScanExecuteCommonSm(LctrExtScanMsg_t *pMsg)
       }
 
       /* Restart timers. */
-      WsfTimerStartMs(&lctrMstExtScan.tmrScanDur, lctrMstExtScan.scanDurMs);
-      WsfTimerStartMs(&lctrMstExtScan.tmrScanPer, lctrMstExtScan.scanPerMs);
+      WsfTimerStartMs(&lctrMstExtScan.tmrScanDur, lctrMstExtScan.scanDurMs, 36);
+      WsfTimerStartMs(&lctrMstExtScan.tmrScanPer, lctrMstExtScan.scanPerMs, 37);
       break;
 
     case LCTR_EXT_SCAN_MSG_RESET:

@@ -510,5 +510,5 @@ void lctrNotifyAuthPayloadTimeout(lctrConnCtx_t *pCtx)
 /*************************************************************************************************/
 void lctrRestartAuthPayloadTimer(lctrConnCtx_t *pCtx)
 {
-  WsfTimerStartMs(&pCtx->tmrAuthTimeout, pCtx->authTimeoutMs);
+  WsfTimerStartMs(&pCtx->tmrAuthTimeout, pCtx->authTimeoutMs, 25);
 }

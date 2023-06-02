@@ -702,8 +702,8 @@ void lctrConnRxPendingHandler(void)
         if (pCtx->bleData.chan.enc.enaDecrypt)
         {
           /* Restart authentication timers. */
-          WsfTimerStartMs(&pCtx->tmrAuthTimeout, pCtx->authTimeoutMs);
-          WsfTimerStartMs(&pCtx->tmrPingTimeout, pCtx->pingPeriodMs);
+          WsfTimerStartMs(&pCtx->tmrAuthTimeout, pCtx->authTimeoutMs, 38);
+          WsfTimerStartMs(&pCtx->tmrPingTimeout, pCtx->pingPeriodMs, 39);
         }
       }
       else

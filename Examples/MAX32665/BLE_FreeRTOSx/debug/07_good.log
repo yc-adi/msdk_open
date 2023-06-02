@@ -1,0 +1,3003 @@
+[14:04:18:637] ␍␊
+[14:04:18:637] -=- 32665 BLE FreeRTOS (V10.2.0) Demo -=- c866ec457 no tail = prev ␍␊
+[14:04:18:658] SystemCoreClock = 96000000␍␊
+[14:04:19:347] terminal: init␍␊
+[14:04:19:754]     RAM: 1 x 752 bytes -- connection context␍␊
+[14:04:19:754]     RAM: 4 x 386 bytes -- Tx buffer descriptors␍␊
+[14:04:19:754]     RAM: 1 x 2296 bytes -- advertising set context␍␊
+[14:04:19:754] LlHandlerInit: LL initialization completed␍␊
+[14:04:19:754]     opModeFlags = 0x005F5C40␍␊
+[14:04:19:754] ### LlApi ###  LlSetBdAddr␍␊
+[14:04:19:754] Static BDA[5:3]=00:18:80␍␊
+[14:04:19:754]        BDA[2:0]=10:44:B1␍␊
+[14:04:19:885] 32kHz trimmed to 0xE␍␊
+[14:04:19:885] ### LlApi ###  LlGetAclTxBufs, numBufs=4␍␊
+[14:04:19:885] ### LlApi ###  LlGetAclTxBufs, numBufs=4␍␊
+[14:04:19:885] ### LlApi ###  LlGetAclMaxSize, maxBufSize=256␍␊
+[14:04:19:885] DatsHandlerInit␍␊
+[14:04:19:885] ### LlApi ###  LlReset␍␊
+[14:04:19:885] lctrSlvAdvExecuteSm: state=0, event=0␍␊
+[14:04:19:885] lctrSlvAcadDisp: handle=1, event=0␍␊
+[14:04:19:885] ### LlEvent ###  LL_RESET_CNF, status=LL_SUCCESS␍␊
+[14:04:19:885] ### LlApi ###  LlGetBdAddr␍␊
+[14:04:19:885] ### LlApi ###  LlGetFeatures␍␊
+[14:04:19:885] ### LlApi ###  LlReadResolvingListSize␍␊
+[14:04:19:885] ### LlApi ###  LlGetFeatures␍␊
+[14:04:19:885] ### LlApi ###  LlReadMaximumDataLen␍␊
+[14:04:19:885] ### LlApi ###  LlWriteDefaultDataLen␍␊
+[14:04:19:927] ### LlApi ###  LlGetVersion␍␊
+[14:04:19:927] ### LlApi ###  LlGetRandNum␍␊
+[14:04:19:927] ### LlApi ###  LlGetRandNum␍␊
+[14:04:19:927] ### LlApi ###  LlGetRandNum␍␊
+[14:04:19:927] 00000000: Dats got evt 32␍␊
+[14:04:19:927] ### LlApi ###  LlEncrypt␍␊
+[14:04:19:927] ### LlApi ###  LlSetAdvTxPower, advTxPwr=0␍␊
+[14:04:19:927] >>> Reset complete <<<␍␊
+[14:04:19:927] dmAdvActConfig: state: 0␍␊
+[14:04:19:927] ### LlApi ###  LlSetAdvParam, advType=0␍␊
+[14:04:19:927] dmAdvActSetData: state: 0␍␊
+[14:04:19:927] ### LlApi ###  LlSetAdvData, len=7␍␊
+[14:04:19:927] dmAdvActSetData: state: 0␍␊
+[14:04:19:927] ### LlApi ###  LlSetScanRespData, len=6␍␊
+[14:04:19:927] dmAdvActStart: state: 0␍␊
+[14:04:19:927] ### LlApi ###  LlAdvEnable: enable=1␍␊
+[14:04:19:969] lctrSlvAdvExecuteSm: state=0, event=5␍␊
+[14:04:19:969] lctrSlvAdvExecuteSm: state=0, event=1␍␊
+[14:04:19:969] ### AdvEvent ###  Advertising enabled, dueUsec=500␍␊
+[14:04:19:969] ### LlEvent ###  LL_ADV_ENABLE_CNF, status=0␍␊
+[14:04:19:969] ### LlApi ###  LlEncrypt␍␊
+[14:04:19:969] HCI_LE_ADV_ENABLE_CMD_CMPL_CBACK_EVT: state: 3␍␊
+[14:04:19:969] dmDevPassEvtToDevPriv: event: 12, param: 33, advHandle: 0␍␊
+[14:04:19:969] 00000000: Dats got evt 33␍␊
+[14:04:19:969] @!@ DONE WsfTimerStartMs, 1, 60000 (ms), 22␍␊
+[14:04:19:969] >>> Advertising started <<<␍␊
+[14:04:19:969] ### LlApi ###  LlEncrypt␍␊
+[14:04:19:969] ### LlApi ###  LlEncrypt␍␊
+[14:04:19:969] ### LlApi ###  LlEncrypt␍␊
+[14:04:20:005] ### LlApi ###  LlEncrypt␍␊
+[14:04:20:005] ### LlApi ###  LlEncrypt␍␊
+[14:04:20:005] ### LlApi ###  LlEncrypt␍␊
+[14:04:20:005] ### LlApi ###  LlEncrypt␍␊
+[14:04:20:005] 00000001: Dats got evt 21␍␊
+[14:04:20:005] Database hash updated␍␊
+[14:04:20:005] ### LlEvent ###  LL_READ_LOCAL_P256_PUB_KEY_CMPL_IND, status=LL_SUCCESS␍␊
+[14:05:10:567] lctrSlvAdvExecuteSm: state=1, event=4␍␊
+[14:05:10:567] lctrSlvConnExecuteSm: handle=0, state=INITIALIZED, event=RX_CONNECT_IND␍␊
+[14:05:10:609] @!@ DONE WsfTimerStartMs, 2, 214 (ms), 21␍␊
+[14:05:10:609]     >>> Connection established, handle=0 <<<␍␊
+[14:05:10:609]                                 connIntervalUsec=30000␍␊
+[14:05:10:609]                                 dueUsec=50746911␍␊
+[14:05:10:609]                                 minDurUsec=4576␍␊
+[14:05:10:609] Topology Add, handle=0, interval_ms=30␍␊
+[14:05:10:609] Topology Add,            durUsec=806␍␊
+[14:05:10:609] lctrLlcpExecuteCommonSm: handle=0, proc=4, state=IDLE, event=1␍␊
+[14:05:10:609] @!@ DONE WsfTimerStartMs, 3, 40000 (ms), 21␍␊
+[14:05:10:609] ### LlEvent ###  LL_CONN_IND, handle=0, status=0␍␊
+[14:05:10:651] ### LlEvent ###  LL_CH_SEL_ALGO_IND, handle=0, status=0, usedChSel=0␍␊
+[14:05:10:651] dmConnIdByBdAddr not found␍␊
+[14:05:10:651] dmConnCcbAlloc 1␍␊
+[14:05:10:651] dmConnSmExecute event=28 state=0␍␊
+[14:05:10:651] dmAdvConnected: state: 1␍␊
+[14:05:10:651] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:10:651] dmDevPassEvtToDevPriv: event: 13, param: 34, advHandle: 0␍␊
+[14:05:10:651] smpDbGetRecord: connId: 1 type: 1␍␊
+[14:05:10:651] smpDbAddDevice␍␊
+[14:05:10:651] SmpDbGetFailureCount: connId: 1 count: 0␍␊
+[14:05:10:651] smpDbGetRecord: connId: 1 type: 1␍␊
+[14:05:10:651] smpDbAddDevice␍␊
+[14:05:10:651] SmpDbGetPairingDisabledTime: connId: 1 period: 0 attemptMult: 0␍␊
+[14:05:10:694] 00050864: Dats got evt 39␍␊
+[14:05:10:694] @!@ DONE WsfTimerStartMs, 4, 5000 (ms), 21␍␊
+[14:05:10:694] ### LlApi ###  LlReadRemoteFeat, handle=0␍␊
+[14:05:10:694] >>> Connection opened <<<␍␊
+[14:05:10:694] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=BUSY, event=0␍␊
+[14:05:10:694] Pending procedure in progress: activeProc=4␍␊
+[14:05:10:694] @!@ DONE WsfTimerStartMs, 5, 720 (ms), 11␍␊
+[14:05:10:694] lctrLlcpExecuteCommonSm: handle=0, proc=3, state=BUSY, event=3␍␊
+[14:05:10:694] Procedure collision; pending incomplete request, activeProc=4␍␊
+[14:05:10:694] @!@ DONE WsfTimerStartMs, 6, 720 (ms), 11␍␊
+[14:05:10:694] lctrLlcpExecuteCommonSm: handle=0, proc=4, state=BUSY, event=5␍␊
+[14:05:10:736] ### LlEvent ###  LL_DATA_LEN_CHANGE_IND, handle=0, status=0␍␊
+[14:05:10:736] Effective data lengths maxTxLen=251, maxRxLen=251␍␊
+[14:05:10:736] Effective data times maxTxTime=2120, maxRxTime=2120␍␊
+[14:05:10:736] @!@ DONE WsfTimerStop, branch: 111␍␊
+[14:05:10:736] lctrLlcpExecuteCommonSm: handle=0, proc=3, state=IDLE, event=2␍␊
+[14:05:10:736] 00050925: Dats got evt 65␍␊
+[14:05:10:736] @!@ DONE WsfTimerStartMs, 7, 720 (ms), 11␍␊
+[14:05:10:736] @!@ DONE WsfTimerStartMs, 8, 720 (ms), 11␍␊
+[14:05:10:736] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=IDLE, event=4␍␊
+[14:05:10:736] @!@ DONE WsfTimerStartMs, 9, 720 (ms), 11␍␊
+[14:05:10:791] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=IDLE, phyUpdState=0, event=2␍␊
+[14:05:10:791]     >>> Data Path Tx Paused, handle=0 <<<␍␊
+[14:05:10:791] Unhandled LLCP SM event, handle=0, event=42␍␊
+[14:05:10:791] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=BUSY, phyUpdState=3, event=6␍␊
+[14:05:10:791]     >>> Data Path Tx Unpaused/Resumed, handle=0 <<<␍␊
+[14:05:10:791] @!@ DONE WsfTimerStartMs, 10, 40000 (ms), 21␍␊
+[14:05:10:791] @!@ DONE WsfTimerStartMs, 11, 720 (ms), 11␍␊
+[14:05:10:791] @!@ DONE WsfTimerStartMs, 12, 720 (ms), 11␍␊
+[14:05:10:807] @!@ DONE WsfTimerStartMs, 13, 720 (ms), 11␍␊
+[14:05:10:807] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=BUSY, phyUpdState=4, event=1␍␊
+[14:05:10:828] @!@ DONE WsfTimerStop, branch: 1011␍␊
+[14:05:10:844] @!@ DONE WsfTimerStartMs, 14, 720 (ms), 11␍␊
+[14:05:10:876] @!@ DONE WsfTimerStartMs, 15, 720 (ms), 11␍␊
+[14:05:10:909] @!@ DONE WsfTimerStartMs, 16, 720 (ms), 11␍␊
+[14:05:10:924] @!@ DONE WsfTimerStartMs, 17, 720 (ms), 11␍␊
+[14:05:10:956] @!@ DONE WsfTimerStartMs, 18, 720 (ms), 11␍␊
+[14:05:10:989] @!@ DONE WsfTimerStartMs, 19, 720 (ms), 11␍␊
+[14:05:11:034] @!@ DONE WsfTimerStartMs, 20, 720 (ms), 11␍␊
+[14:05:11:034]     >>> PHY updated, handle=0, eventCounter=15 <<<␍␊
+[14:05:11:034]         txPhy=2, rxPhy=2␍␊
+[14:05:11:085] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=BUSY, phyUpdState=5, event=4␍␊
+[14:05:11:085] ### LlEvent ###  LL_PHY_UPDATE_IND, phy=2, handle=0, status=0␍␊
+[14:05:11:085] ### LlEvent ###  LL_DATA_LEN_CHANGE_IND, handle=0, status=0␍␊
+[14:05:11:085] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:11:085] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=IDLE, event=1␍␊
+[14:05:11:085] @!@ DONE WsfTimerStartMs, 21, 40000 (ms), 21␍␊
+[14:05:11:085] @!@ DONE WsfTimerStartMs, 22, 720 (ms), 11␍␊
+[14:05:11:085] 00051346: Dats got evt 70␍␊
+[14:05:11:085] DM_PHY_UPDATE_IND - RX: 2, TX: 2␍␊
+[14:05:11:085] 00051346: Dats got evt 65␍␊
+[14:05:11:085] @!@ DONE WsfTimerStartMs, 23, 720 (ms), 11␍␊
+[14:05:11:101] 00051376: Dats got evt 22␍␊
+[14:05:11:134] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=BUSY, event=5␍␊
+[14:05:11:134] ### LlEvent ###  LL_READ_REMOTE_FEAT_CNF, handle=0, status=0␍␊
+[14:05:11:134] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:11:134] 00051406: Dats got evt 87␍␊
+[14:05:11:134] @!@ DONE WsfTimerStartMs, 24, 720 (ms), 11␍␊
+[14:05:11:134] connId=1 idleMask=0x0004␍␊
+[14:05:11:155] @!@ DONE WsfTimerStartMs, 25, 15000 (ms), 21␍␊
+[14:05:11:155] @!@ DONE WsfTimerStartMs, 26, 720 (ms), 11␍␊
+[14:05:11:171] @!@ DONE WsfTimerStartMs, 27, 720 (ms), 11␍␊
+[14:05:11:214] @!@ DONE WsfTimerStartMs, 28, 720 (ms), 11␍␊
+[14:05:11:214] connId=1 idleMask=0x0004␍␊
+[14:05:11:214] @!@ DONE WsfTimerStartMs, 29, 15000 (ms), 21␍␊
+[14:05:11:230] @!@ DONE WsfTimerStartMs, 30, 720 (ms), 11␍␊
+[14:05:11:262] @!@ DONE WsfTimerStartMs, 31, 720 (ms), 11␍␊
+[14:05:11:294] @!@ DONE WsfTimerStartMs, 32, 720 (ms), 11␍␊
+[14:05:11:334] @!@ DONE WsfTimerStartMs, 33, 720 (ms), 11␍␊
+[14:05:11:334] connId=1 idleMask=0x0004␍␊
+[14:05:11:334] @!@ DONE WsfTimerStartMs, 34, 15000 (ms), 21␍␊
+[14:05:11:350] @!@ DONE WsfTimerStartMs, 35, 720 (ms), 11␍␊
+[14:05:11:382] @!@ DONE WsfTimerStartMs, 36, 720 (ms), 11␍␊
+[14:05:11:414] @!@ DONE WsfTimerStartMs, 37, 720 (ms), 11␍␊
+[14:05:11:446] @!@ DONE WsfTimerStartMs, 38, 720 (ms), 11␍␊
+[14:05:11:478] @!@ DONE WsfTimerStartMs, 39, 720 (ms), 11␍␊
+[14:05:11:494] @!@ DONE WsfTimerStartMs, 40, 720 (ms), 11␍␊
+[14:05:11:526] @!@ DONE WsfTimerStartMs, 41, 720 (ms), 11␍␊
+[14:05:11:558] @!@ DONE WsfTimerStartMs, 42, 720 (ms), 11␍␊
+[14:05:11:590] @!@ DONE WsfTimerStartMs, 43, 720 (ms), 11␍␊
+[14:05:11:622] @!@ DONE WsfTimerStartMs, 44, 720 (ms), 11␍␊
+[14:05:11:654] @!@ DONE WsfTimerStartMs, 45, 720 (ms), 11␍␊
+[14:05:11:687] @!@ DONE WsfTimerStartMs, 46, 720 (ms), 11␍␊
+[14:05:11:719] @!@ DONE WsfTimerStartMs, 47, 720 (ms), 11␍␊
+[14:05:11:735] @!@ DONE WsfTimerStartMs, 48, 720 (ms), 11␍␊
+[14:05:11:767] @!@ DONE WsfTimerStartMs, 49, 720 (ms), 11␍␊
+[14:05:11:799] @!@ DONE WsfTimerStartMs, 50, 720 (ms), 11␍␊
+[14:05:11:831] @!@ DONE WsfTimerStartMs, 51, 720 (ms), 11␍␊
+[14:05:11:863] @!@ DONE WsfTimerStartMs, 52, 720 (ms), 11␍␊
+[14:05:11:895] @!@ DONE WsfTimerStartMs, 53, 720 (ms), 11␍␊
+[14:05:11:927] @!@ DONE WsfTimerStartMs, 54, 720 (ms), 11␍␊
+[14:05:11:959] @!@ DONE WsfTimerStartMs, 55, 720 (ms), 11␍␊
+[14:05:11:975] @!@ DONE WsfTimerStartMs, 56, 720 (ms), 11␍␊
+[14:05:12:007] @!@ DONE WsfTimerStartMs, 57, 720 (ms), 11␍␊
+[14:05:12:039] @!@ DONE WsfTimerStartMs, 58, 720 (ms), 11␍␊
+[14:05:12:071] @!@ DONE WsfTimerStartMs, 59, 720 (ms), 11␍␊
+[14:05:12:103] @!@ DONE WsfTimerStartMs, 60, 720 (ms), 11␍␊
+[14:05:12:135] @!@ DONE WsfTimerStartMs, 61, 720 (ms), 11␍␊
+[14:05:12:167] @!@ DONE WsfTimerStartMs, 62, 720 (ms), 11␍␊
+[14:05:12:183] @!@ DONE WsfTimerStartMs, 63, 720 (ms), 11␍␊
+[14:05:12:215] @!@ DONE WsfTimerStartMs, 64, 720 (ms), 11␍␊
+[14:05:12:247] @!@ DONE WsfTimerStartMs, 65, 720 (ms), 11␍␊
+[14:05:12:279] @!@ DONE WsfTimerStartMs, 66, 720 (ms), 11␍␊
+[14:05:12:311] @!@ DONE WsfTimerStartMs, 67, 720 (ms), 11␍␊
+[14:05:12:343] @!@ DONE WsfTimerStartMs, 68, 720 (ms), 11␍␊
+[14:05:12:375] @!@ DONE WsfTimerStartMs, 69, 720 (ms), 11␍␊
+[14:05:12:407] @!@ DONE WsfTimerStartMs, 70, 720 (ms), 11␍␊
+[14:05:12:423] @!@ DONE WsfTimerStartMs, 71, 720 (ms), 11␍␊
+[14:05:12:455] @!@ DONE WsfTimerStartMs, 72, 720 (ms), 11␍␊
+[14:05:12:487] @!@ DONE WsfTimerStartMs, 73, 720 (ms), 11␍␊
+[14:05:12:520] @!@ DONE WsfTimerStartMs, 74, 720 (ms), 11␍␊
+[14:05:12:552] @!@ DONE WsfTimerStartMs, 75, 720 (ms), 11␍␊
+[14:05:12:584] @!@ DONE WsfTimerStartMs, 76, 720 (ms), 11␍␊
+[14:05:12:616] @!@ DONE WsfTimerStartMs, 77, 720 (ms), 11␍␊
+[14:05:12:648] @!@ DONE WsfTimerStartMs, 78, 720 (ms), 11␍␊
+[14:05:12:664] @!@ DONE WsfTimerStartMs, 79, 720 (ms), 11␍␊
+[14:05:12:696] @!@ DONE WsfTimerStartMs, 80, 720 (ms), 11␍␊
+[14:05:12:728] @!@ DONE WsfTimerStartMs, 81, 720 (ms), 11␍␊
+[14:05:12:760] @!@ DONE WsfTimerStartMs, 82, 720 (ms), 11␍␊
+[14:05:12:792] @!@ DONE WsfTimerStartMs, 83, 720 (ms), 11␍␊
+[14:05:12:824] @!@ DONE WsfTimerStartMs, 84, 720 (ms), 11␍␊
+[14:05:12:856] @!@ DONE WsfTimerStartMs, 85, 720 (ms), 11␍␊
+[14:05:12:888] @!@ DONE WsfTimerStartMs, 86, 720 (ms), 11␍␊
+[14:05:12:904] @!@ DONE WsfTimerStartMs, 87, 720 (ms), 11␍␊
+[14:05:12:936] @!@ DONE WsfTimerStartMs, 88, 720 (ms), 11␍␊
+[14:05:12:968] @!@ DONE WsfTimerStartMs, 89, 720 (ms), 11␍␊
+[14:05:13:000] @!@ DONE WsfTimerStartMs, 90, 720 (ms), 11␍␊
+[14:05:13:032] @!@ DONE WsfTimerStartMs, 91, 720 (ms), 11␍␊
+[14:05:13:064] @!@ DONE WsfTimerStartMs, 92, 720 (ms), 11␍␊
+[14:05:13:096] @!@ DONE WsfTimerStartMs, 93, 720 (ms), 11␍␊
+[14:05:13:128] @!@ DONE WsfTimerStartMs, 94, 720 (ms), 11␍␊
+[14:05:13:144] @!@ DONE WsfTimerStartMs, 95, 720 (ms), 11␍␊
+[14:05:13:176] @!@ DONE WsfTimerStartMs, 96, 720 (ms), 11␍␊
+[14:05:13:208] @!@ DONE WsfTimerStartMs, 97, 720 (ms), 11␍␊
+[14:05:13:240] @!@ DONE WsfTimerStartMs, 98, 720 (ms), 11␍␊
+[14:05:13:273] @!@ DONE WsfTimerStartMs, 99, 720 (ms), 11␍␊
+[14:05:13:305] @!@ DONE WsfTimerStartMs, 100, 720 (ms), 11␍␊
+[14:05:13:337] @!@ DONE WsfTimerStartMs, 101, 720 (ms), 11␍␊
+[14:05:13:369] @!@ DONE WsfTimerStartMs, 102, 720 (ms), 11␍␊
+[14:05:13:385] @!@ DONE WsfTimerStartMs, 103, 720 (ms), 11␍␊
+[14:05:13:417] @!@ DONE WsfTimerStartMs, 104, 720 (ms), 11␍␊
+[14:05:13:449] @!@ DONE WsfTimerStartMs, 105, 720 (ms), 11␍␊
+[14:05:13:481] @!@ DONE WsfTimerStartMs, 106, 720 (ms), 11␍␊
+[14:05:13:513] @!@ DONE WsfTimerStartMs, 107, 720 (ms), 11␍␊
+[14:05:13:545] @!@ DONE WsfTimerStartMs, 108, 720 (ms), 11␍␊
+[14:05:13:577] @!@ DONE WsfTimerStartMs, 109, 720 (ms), 11␍␊
+[14:05:13:593] @!@ DONE WsfTimerStartMs, 110, 720 (ms), 11␍␊
+[14:05:13:625] @!@ DONE WsfTimerStartMs, 111, 720 (ms), 11␍␊
+[14:05:13:657] @!@ DONE WsfTimerStartMs, 112, 720 (ms), 11␍␊
+[14:05:13:689] @!@ DONE WsfTimerStartMs, 113, 720 (ms), 11␍␊
+[14:05:13:721] @!@ DONE WsfTimerStartMs, 114, 720 (ms), 11␍␊
+[14:05:13:753] @!@ DONE WsfTimerStartMs, 115, 720 (ms), 11␍␊
+[14:05:13:785] @!@ DONE WsfTimerStartMs, 116, 720 (ms), 11␍␊
+[14:05:13:817] @!@ DONE WsfTimerStartMs, 117, 720 (ms), 11␍␊
+[14:05:13:833] @!@ DONE WsfTimerStartMs, 118, 720 (ms), 11␍␊
+[14:05:13:865] @!@ DONE WsfTimerStartMs, 119, 720 (ms), 11␍␊
+[14:05:13:897] @!@ DONE WsfTimerStartMs, 120, 720 (ms), 11␍␊
+[14:05:13:929] @!@ DONE WsfTimerStartMs, 121, 720 (ms), 11␍␊
+[14:05:13:961] @!@ DONE WsfTimerStartMs, 122, 720 (ms), 11␍␊
+[14:05:13:993] @!@ DONE WsfTimerStartMs, 123, 720 (ms), 11␍␊
+[14:05:14:025] @!@ DONE WsfTimerStartMs, 124, 720 (ms), 11␍␊
+[14:05:14:057] @!@ DONE WsfTimerStartMs, 125, 720 (ms), 11␍␊
+[14:05:14:073] @!@ DONE WsfTimerStartMs, 126, 720 (ms), 11␍␊
+[14:05:14:105] @!@ DONE WsfTimerStartMs, 127, 720 (ms), 11␍␊
+[14:05:14:138] @!@ DONE WsfTimerStartMs, 128, 720 (ms), 11␍␊
+[14:05:14:170] @!@ DONE WsfTimerStartMs, 129, 720 (ms), 11␍␊
+[14:05:14:202] @!@ DONE WsfTimerStartMs, 130, 720 (ms), 11␍␊
+[14:05:14:234] @!@ DONE WsfTimerStartMs, 131, 720 (ms), 11␍␊
+[14:05:14:266] @!@ DONE WsfTimerStartMs, 132, 720 (ms), 11␍␊
+[14:05:14:298] @!@ DONE WsfTimerStartMs, 133, 720 (ms), 11␍␊
+[14:05:14:314] @!@ DONE WsfTimerStartMs, 134, 720 (ms), 11␍␊
+[14:05:14:346] @!@ DONE WsfTimerStartMs, 135, 720 (ms), 11␍␊
+[14:05:14:378] @!@ DONE WsfTimerStartMs, 136, 720 (ms), 11␍␊
+[14:05:14:410] @!@ DONE WsfTimerStartMs, 137, 720 (ms), 11␍␊
+[14:05:14:442] @!@ DONE WsfTimerStartMs, 138, 720 (ms), 11␍␊
+[14:05:14:474] @!@ DONE WsfTimerStartMs, 139, 720 (ms), 11␍␊
+[14:05:14:506] @!@ DONE WsfTimerStartMs, 140, 720 (ms), 11␍␊
+[14:05:14:538] @!@ DONE WsfTimerStartMs, 141, 720 (ms), 11␍␊
+[14:05:14:554] @!@ DONE WsfTimerStartMs, 142, 720 (ms), 11␍␊
+[14:05:14:586] @!@ DONE WsfTimerStartMs, 143, 720 (ms), 11␍␊
+[14:05:14:618] @!@ DONE WsfTimerStartMs, 144, 720 (ms), 11␍␊
+[14:05:14:650] @!@ DONE WsfTimerStartMs, 145, 720 (ms), 11␍␊
+[14:05:14:682] @!@ DONE WsfTimerStartMs, 146, 720 (ms), 11␍␊
+[14:05:14:714] @!@ DONE WsfTimerStartMs, 147, 720 (ms), 11␍␊
+[14:05:14:746] @!@ DONE WsfTimerStartMs, 148, 720 (ms), 11␍␊
+[14:05:14:778] @!@ DONE WsfTimerStartMs, 149, 720 (ms), 11␍␊
+[14:05:14:794] @!@ DONE WsfTimerStartMs, 150, 720 (ms), 11␍␊
+[14:05:14:826] @!@ DONE WsfTimerStartMs, 151, 720 (ms), 11␍␊
+[14:05:14:858] @!@ DONE WsfTimerStartMs, 152, 720 (ms), 11␍␊
+[14:05:14:890] @!@ DONE WsfTimerStartMs, 153, 720 (ms), 11␍␊
+[14:05:14:922] @!@ DONE WsfTimerStartMs, 154, 720 (ms), 11␍␊
+[14:05:14:954] @!@ DONE WsfTimerStartMs, 155, 720 (ms), 11␍␊
+[14:05:14:987] @!@ DONE WsfTimerStartMs, 156, 720 (ms), 11␍␊
+[14:05:15:019] @!@ DONE WsfTimerStartMs, 157, 720 (ms), 11␍␊
+[14:05:15:035] @!@ DONE WsfTimerStartMs, 158, 720 (ms), 11␍␊
+[14:05:15:067] @!@ DONE WsfTimerStartMs, 159, 720 (ms), 11␍␊
+[14:05:15:099] @!@ DONE WsfTimerStartMs, 160, 720 (ms), 11␍␊
+[14:05:15:131] @!@ DONE WsfTimerStartMs, 161, 720 (ms), 11␍␊
+[14:05:15:163] @!@ DONE WsfTimerStartMs, 162, 720 (ms), 11␍␊
+[14:05:15:195] @!@ DONE WsfTimerStartMs, 163, 720 (ms), 11␍␊
+[14:05:15:227] @!@ DONE WsfTimerStartMs, 164, 720 (ms), 11␍␊
+[14:05:15:259] @!@ DONE WsfTimerStartMs, 165, 720 (ms), 11␍␊
+[14:05:15:275] @!@ DONE WsfTimerStartMs, 166, 720 (ms), 11␍␊
+[14:05:15:307] @!@ DONE WsfTimerStartMs, 167, 720 (ms), 11␍␊
+[14:05:15:339] @!@ DONE WsfTimerStartMs, 168, 720 (ms), 11␍␊
+[14:05:15:371] @!@ DONE WsfTimerStartMs, 169, 720 (ms), 11␍␊
+[14:05:15:403] @!@ DONE WsfTimerStartMs, 170, 720 (ms), 11␍␊
+[14:05:15:435] @!@ DONE WsfTimerStartMs, 171, 720 (ms), 11␍␊
+[14:05:15:467] @!@ DONE WsfTimerStartMs, 172, 720 (ms), 11␍␊
+[14:05:15:499] @!@ DONE WsfTimerStartMs, 173, 720 (ms), 11␍␊
+[14:05:15:515] @!@ DONE WsfTimerStartMs, 174, 720 (ms), 11␍␊
+[14:05:15:547] @!@ DONE WsfTimerStartMs, 175, 720 (ms), 11␍␊
+[14:05:15:569] App got evt 16␍␊
+[14:05:15:569] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
+[14:05:15:569] ␍␊
+[14:05:15:569] @!@ DONE WsfTimerStartMs, 176, 5000 (ms), 1␍␊
+[14:05:15:585] @!@ DONE WsfTimerStartMs, 177, 720 (ms), 11␍␊
+[14:05:15:617] @!@ DONE WsfTimerStartMs, 178, 720 (ms), 11␍␊
+[14:05:15:633] @!@ DONE WsfTimerStartMs, 179, 720 (ms), 11␍␊
+[14:05:15:665] @!@ DONE WsfTimerStartMs, 180, 720 (ms), 11␍␊
+[14:05:15:697] @!@ DONE WsfTimerStartMs, 181, 720 (ms), 11␍␊
+[14:05:15:730] @!@ DONE WsfTimerStartMs, 182, 720 (ms), 11␍␊
+[14:05:15:762] @!@ DONE WsfTimerStartMs, 183, 720 (ms), 11␍␊
+[14:05:15:794] @!@ DONE WsfTimerStartMs, 184, 720 (ms), 11␍␊
+[14:05:15:826] @!@ DONE WsfTimerStartMs, 185, 720 (ms), 11␍␊
+[14:05:15:858] @!@ DONE WsfTimerStartMs, 186, 720 (ms), 11␍␊
+[14:05:15:874] @!@ DONE WsfTimerStartMs, 187, 720 (ms), 11␍␊
+[14:05:15:906] @!@ DONE WsfTimerStartMs, 188, 720 (ms), 11␍␊
+[14:05:15:938] @!@ DONE WsfTimerStartMs, 189, 720 (ms), 11␍␊
+[14:05:15:970] @!@ DONE WsfTimerStartMs, 190, 720 (ms), 11␍␊
+[14:05:16:002] @!@ DONE WsfTimerStartMs, 191, 720 (ms), 11␍␊
+[14:05:16:034] @!@ DONE WsfTimerStartMs, 192, 720 (ms), 11␍␊
+[14:05:16:066] @!@ DONE WsfTimerStartMs, 193, 720 (ms), 11␍␊
+[14:05:16:098] @!@ DONE WsfTimerStartMs, 194, 720 (ms), 11␍␊
+[14:05:16:114] @!@ DONE WsfTimerStartMs, 195, 720 (ms), 11␍␊
+[14:05:16:146] @!@ DONE WsfTimerStartMs, 196, 720 (ms), 11␍␊
+[14:05:16:178] @!@ DONE WsfTimerStartMs, 197, 720 (ms), 11␍␊
+[14:05:16:210] @!@ DONE WsfTimerStartMs, 198, 720 (ms), 11␍␊
+[14:05:16:242] @!@ DONE WsfTimerStartMs, 199, 720 (ms), 11␍␊
+[14:05:16:274] @!@ DONE WsfTimerStartMs, 200, 720 (ms), 11␍␊
+[14:05:16:306] @!@ DONE WsfTimerStartMs, 201, 720 (ms), 11␍␊
+[14:05:16:338] @!@ DONE WsfTimerStartMs, 202, 720 (ms), 11␍␊
+[14:05:16:354] @!@ DONE WsfTimerStartMs, 203, 720 (ms), 11␍␊
+[14:05:16:386] @!@ DONE WsfTimerStartMs, 204, 720 (ms), 11␍␊
+[14:05:16:418] @!@ DONE WsfTimerStartMs, 205, 720 (ms), 11␍␊
+[14:05:16:450] @!@ DONE WsfTimerStartMs, 206, 720 (ms), 11␍␊
+[14:05:16:482] @!@ DONE WsfTimerStartMs, 207, 720 (ms), 11␍␊
+[14:05:16:515] @!@ DONE WsfTimerStartMs, 208, 720 (ms), 11␍␊
+[14:05:16:547] @!@ DONE WsfTimerStartMs, 209, 720 (ms), 11␍␊
+[14:05:16:579] @!@ DONE WsfTimerStartMs, 210, 720 (ms), 11␍␊
+[14:05:16:595] @!@ DONE WsfTimerStartMs, 211, 720 (ms), 11␍␊
+[14:05:16:627] @!@ DONE WsfTimerStartMs, 212, 720 (ms), 11␍␊
+[14:05:16:659] @!@ DONE WsfTimerStartMs, 213, 720 (ms), 11␍␊
+[14:05:16:691] @!@ DONE WsfTimerStartMs, 214, 720 (ms), 11␍␊
+[14:05:16:723] @!@ DONE WsfTimerStartMs, 215, 720 (ms), 11␍␊
+[14:05:16:755] @!@ DONE WsfTimerStartMs, 216, 720 (ms), 11␍␊
+[14:05:16:787] @!@ DONE WsfTimerStartMs, 217, 720 (ms), 11␍␊
+[14:05:16:803] @!@ DONE WsfTimerStartMs, 218, 720 (ms), 11␍␊
+[14:05:16:835] @!@ DONE WsfTimerStartMs, 219, 720 (ms), 11␍␊
+[14:05:16:867] @!@ DONE WsfTimerStartMs, 220, 720 (ms), 11␍␊
+[14:05:16:899] @!@ DONE WsfTimerStartMs, 221, 720 (ms), 11␍␊
+[14:05:16:931] @!@ DONE WsfTimerStartMs, 222, 720 (ms), 11␍␊
+[14:05:16:963] @!@ DONE WsfTimerStartMs, 223, 720 (ms), 11␍␊
+[14:05:16:995] @!@ DONE WsfTimerStartMs, 224, 720 (ms), 11␍␊
+[14:05:17:027] @!@ DONE WsfTimerStartMs, 225, 720 (ms), 11␍␊
+[14:05:17:043] @!@ DONE WsfTimerStartMs, 226, 720 (ms), 11␍␊
+[14:05:17:075] @!@ DONE WsfTimerStartMs, 227, 720 (ms), 11␍␊
+[14:05:17:107] @!@ DONE WsfTimerStartMs, 228, 720 (ms), 11␍␊
+[14:05:17:139] @!@ DONE WsfTimerStartMs, 229, 720 (ms), 11␍␊
+[14:05:17:172] @!@ DONE WsfTimerStartMs, 230, 720 (ms), 11␍␊
+[14:05:17:203] @!@ DONE WsfTimerStartMs, 231, 720 (ms), 11␍␊
+[14:05:17:236] @!@ DONE WsfTimerStartMs, 232, 720 (ms), 11␍␊
+[14:05:17:268] @!@ DONE WsfTimerStartMs, 233, 720 (ms), 11␍␊
+[14:05:17:283] @!@ DONE WsfTimerStartMs, 234, 720 (ms), 11␍␊
+[14:05:17:316] @!@ DONE WsfTimerStartMs, 235, 720 (ms), 11␍␊
+[14:05:17:348] @!@ DONE WsfTimerStartMs, 236, 720 (ms), 11␍␊
+[14:05:17:380] @!@ DONE WsfTimerStartMs, 237, 720 (ms), 11␍␊
+[14:05:17:412] @!@ DONE WsfTimerStartMs, 238, 720 (ms), 11␍␊
+[14:05:17:444] @!@ DONE WsfTimerStartMs, 239, 720 (ms), 11␍␊
+[14:05:17:476] @!@ DONE WsfTimerStartMs, 240, 720 (ms), 11␍␊
+[14:05:17:508] @!@ DONE WsfTimerStartMs, 241, 720 (ms), 11␍␊
+[14:05:17:524] @!@ DONE WsfTimerStartMs, 242, 720 (ms), 11␍␊
+[14:05:17:556] @!@ DONE WsfTimerStartMs, 243, 720 (ms), 11␍␊
+[14:05:17:588] @!@ DONE WsfTimerStartMs, 244, 720 (ms), 11␍␊
+[14:05:17:620] @!@ DONE WsfTimerStartMs, 245, 720 (ms), 11␍␊
+[14:05:17:652] @!@ DONE WsfTimerStartMs, 246, 720 (ms), 11␍␊
+[14:05:17:684] @!@ DONE WsfTimerStartMs, 247, 720 (ms), 11␍␊
+[14:05:17:716] @!@ DONE WsfTimerStartMs, 248, 720 (ms), 11␍␊
+[14:05:17:748] @!@ DONE WsfTimerStartMs, 249, 720 (ms), 11␍␊
+[14:05:17:764] @!@ DONE WsfTimerStartMs, 250, 720 (ms), 11␍␊
+[14:05:17:796] @!@ DONE WsfTimerStartMs, 251, 720 (ms), 11␍␊
+[14:05:17:828] @!@ DONE WsfTimerStartMs, 252, 720 (ms), 11␍␊
+[14:05:17:873] lctrSlvConnRxCompletion: BB failed with status=CRC_FAILED, handle=0, bleChan=20, eventCounter=242␍␊
+[14:05:17:889] @!@ DONE WsfTimerStartMs, 253, 720 (ms), 11␍␊
+[14:05:17:921] @!@ DONE WsfTimerStartMs, 254, 720 (ms), 11␍␊
+[14:05:17:953] @!@ DONE WsfTimerStartMs, 255, 720 (ms), 11␍␊
+[14:05:17:986] @!@ DONE WsfTimerStartMs, 256, 720 (ms), 11␍␊
+[14:05:18:018] @!@ DONE WsfTimerStartMs, 257, 720 (ms), 11␍␊
+[14:05:18:034] @!@ DONE WsfTimerStartMs, 258, 720 (ms), 11␍␊
+[14:05:18:066] @!@ DONE WsfTimerStartMs, 259, 720 (ms), 11␍␊
+[14:05:18:098] @!@ DONE WsfTimerStartMs, 260, 720 (ms), 11␍␊
+[14:05:18:130] @!@ DONE WsfTimerStartMs, 261, 720 (ms), 11␍␊
+[14:05:18:162] @!@ DONE WsfTimerStartMs, 262, 720 (ms), 11␍␊
+[14:05:18:194] @!@ DONE WsfTimerStartMs, 263, 720 (ms), 11␍␊
+[14:05:18:226] @!@ DONE WsfTimerStartMs, 264, 720 (ms), 11␍␊
+[14:05:18:258] @!@ DONE WsfTimerStartMs, 265, 720 (ms), 11␍␊
+[14:05:18:274] @!@ DONE WsfTimerStartMs, 266, 720 (ms), 11␍␊
+[14:05:18:306] @!@ DONE WsfTimerStartMs, 267, 720 (ms), 11␍␊
+[14:05:18:338] @!@ DONE WsfTimerStartMs, 268, 720 (ms), 11␍␊
+[14:05:18:370] @!@ DONE WsfTimerStartMs, 269, 720 (ms), 11␍␊
+[14:05:18:402] @!@ DONE WsfTimerStartMs, 270, 720 (ms), 11␍␊
+[14:05:18:434] @!@ DONE WsfTimerStartMs, 271, 720 (ms), 11␍␊
+[14:05:18:466] @!@ DONE WsfTimerStartMs, 272, 720 (ms), 11␍␊
+[14:05:18:498] @!@ DONE WsfTimerStartMs, 273, 720 (ms), 11␍␊
+[14:05:18:514] @!@ DONE WsfTimerStartMs, 274, 720 (ms), 11␍␊
+[14:05:18:546] @!@ DONE WsfTimerStartMs, 275, 720 (ms), 11␍␊
+[14:05:18:578] @!@ DONE WsfTimerStartMs, 276, 720 (ms), 11␍␊
+[14:05:18:623] @!@ DONE WsfTimerStartMs, 277, 720 (ms), 11␍␊
+[14:05:18:623] connId=1 idleMask=0x0004␍␊
+[14:05:18:623] @!@ DONE WsfTimerStartMs, 278, 15000 (ms), 21␍␊
+[14:05:18:639] @!@ DONE WsfTimerStartMs, 279, 720 (ms), 11␍␊
+[14:05:18:684] connId=1 idleMask=0x0004␍␊
+[14:05:18:684] @!@ DONE WsfTimerStartMs, 280, 15000 (ms), 21␍␊
+[14:05:18:684] @!@ DONE WsfTimerStartMs, 281, 720 (ms), 11␍␊
+[14:05:18:699] @!@ DONE WsfTimerStartMs, 282, 720 (ms), 11␍␊
+[14:05:18:732] @!@ DONE WsfTimerStartMs, 283, 720 (ms), 11␍␊
+[14:05:18:732] 00059055: Dats got evt 18␍␊
+[14:05:18:779] @!@ DONE WsfTimerStartMs, 284, 720 (ms), 11␍␊
+[14:05:18:779] 00059086: Dats got evt 18␍␊
+[14:05:18:809] @!@ DONE WsfTimerStartMs, 285, 720 (ms), 11␍␊
+[14:05:18:809] 00059117: Dats got evt 18␍␊
+[14:05:18:840] @!@ DONE WsfTimerStartMs, 286, 720 (ms), 11␍␊
+[14:05:18:840] 00059148: Dats got evt 18␍␊
+[14:05:18:871] @!@ DONE WsfTimerStartMs, 287, 720 (ms), 11␍␊
+[14:05:18:871] 00059179: Dats got evt 18␍␊
+[14:05:18:902] @!@ DONE WsfTimerStartMs, 288, 720 (ms), 11␍␊
+[14:05:18:902] 00059210: Dats got evt 18␍␊
+[14:05:18:933] @!@ DONE WsfTimerStartMs, 289, 720 (ms), 11␍␊
+[14:05:18:933] 00059241: Dats got evt 18␍␊
+[14:05:18:964] @!@ DONE WsfTimerStartMs, 290, 720 (ms), 11␍␊
+[14:05:18:964] 00059272: Dats got evt 18␍␊
+[14:05:18:995] @!@ DONE WsfTimerStartMs, 291, 720 (ms), 11␍␊
+[14:05:18:995] 00059303: Dats got evt 18␍␊
+[14:05:18:995] @!@ DONE WsfTimerStartMs, 292, 720 (ms), 11␍␊
+[14:05:19:011] 00059334: Dats got evt 18␍␊
+[14:05:19:027] @!@ DONE WsfTimerStartMs, 293, 720 (ms), 11␍␊
+[14:05:19:043] 00059365: Dats got evt 18␍␊
+[14:05:19:059] @!@ DONE WsfTimerStartMs, 294, 720 (ms), 11␍␊
+[14:05:19:075] 00059396: Dats got evt 18␍␊
+[14:05:19:091] @!@ DONE WsfTimerStartMs, 295, 720 (ms), 11␍␊
+[14:05:19:107] 00059427: Dats got evt 18␍␊
+[14:05:19:123] @!@ DONE WsfTimerStartMs, 296, 720 (ms), 11␍␊
+[14:05:19:139] 00059458: Dats got evt 18␍␊
+[14:05:19:155] @!@ DONE WsfTimerStartMs, 297, 720 (ms), 11␍␊
+[14:05:19:171] 00059489: Dats got evt 18␍␊
+[14:05:19:187] @!@ DONE WsfTimerStartMs, 298, 720 (ms), 11␍␊
+[14:05:19:203] 00059520: Dats got evt 18␍␊
+[14:05:19:219] @!@ DONE WsfTimerStartMs, 299, 720 (ms), 11␍␊
+[14:05:19:235] 00059551: Dats got evt 18␍␊
+[14:05:19:235] @!@ DONE WsfTimerStartMs, 300, 720 (ms), 11␍␊
+[14:05:19:282] 00059582: Dats got evt 18␍␊
+[14:05:19:282] @!@ DONE WsfTimerStartMs, 301, 720 (ms), 11␍␊
+[14:05:19:312] 00059613: Dats got evt 18␍␊
+[14:05:19:312] @!@ DONE WsfTimerStartMs, 302, 720 (ms), 11␍␊
+[14:05:19:342] 00059644: Dats got evt 18␍␊
+[14:05:19:342] @!@ DONE WsfTimerStartMs, 303, 720 (ms), 11␍␊
+[14:05:19:372] 00059675: Dats got evt 18␍␊
+[14:05:19:372] @!@ DONE WsfTimerStartMs, 304, 720 (ms), 11␍␊
+[14:05:19:402] 00059706: Dats got evt 18␍␊
+[14:05:19:402] @!@ DONE WsfTimerStartMs, 305, 720 (ms), 11␍␊
+[14:05:19:432] 00059737: Dats got evt 18␍␊
+[14:05:19:432] @!@ DONE WsfTimerStartMs, 306, 720 (ms), 11␍␊
+[14:05:19:463] 00059768: Dats got evt 18␍␊
+[14:05:19:463] @!@ DONE WsfTimerStartMs, 307, 720 (ms), 11␍␊
+[14:05:19:493] 00059799: Dats got evt 18␍␊
+[14:05:19:493] @!@ DONE WsfTimerStartMs, 308, 720 (ms), 11␍␊
+[14:05:19:523] @!@ DONE WsfTimerStartMs, 309, 720 (ms), 11␍␊
+[14:05:19:523] 00059830: Dats got evt 18␍␊
+[14:05:19:555] @!@ DONE WsfTimerStartMs, 310, 720 (ms), 11␍␊
+[14:05:19:555] 00059861: Dats got evt 18␍␊
+[14:05:19:585] @!@ DONE WsfTimerStartMs, 311, 720 (ms), 11␍␊
+[14:05:19:585] 00059892: Dats got evt 18␍␊
+[14:05:19:615] @!@ DONE WsfTimerStartMs, 312, 720 (ms), 11␍␊
+[14:05:19:615] 00059923: Dats got evt 18␍␊
+[14:05:19:645] @!@ DONE WsfTimerStartMs, 313, 720 (ms), 11␍␊
+[14:05:19:645] 00059954: Dats got evt 18␍␊
+[14:05:19:675] @!@ DONE WsfTimerStartMs, 314, 720 (ms), 11␍␊
+[14:05:19:675] 00059985: Dats got evt 18␍␊
+[14:05:19:675] 00060001: Dats got evt 153␍␊
+[14:05:19:706] @!@ DONE WsfTimerStartMs, 315, 60000 (ms), 1␍␊
+[14:05:19:706] @!@ DONE WsfTimerStartMs, 316, 720 (ms), 11␍␊
+[14:05:19:706] 00060016: Dats got evt 18␍␊
+[14:05:19:737] @!@ DONE WsfTimerStartMs, 317, 720 (ms), 11␍␊
+[14:05:19:737] 00060047: Dats got evt 18␍␊
+[14:05:19:768] @!@ DONE WsfTimerStartMs, 318, 720 (ms), 11␍␊
+[14:05:19:768] 00060078: Dats got evt 18␍␊
+[14:05:19:799] @!@ DONE WsfTimerStartMs, 319, 720 (ms), 11␍␊
+[14:05:19:799] 00060109: Dats got evt 18␍␊
+[14:05:19:830] @!@ DONE WsfTimerStartMs, 320, 720 (ms), 11␍␊
+[14:05:19:830] 00060140: Dats got evt 18␍␊
+[14:05:19:860] @!@ DONE WsfTimerStartMs, 321, 720 (ms), 11␍␊
+[14:05:19:860] 00060171: Dats got evt 18␍␊
+[14:05:19:891] @!@ DONE WsfTimerStartMs, 322, 720 (ms), 11␍␊
+[14:05:19:891] 00060202: Dats got evt 18␍␊
+[14:05:19:922] @!@ DONE WsfTimerStartMs, 323, 720 (ms), 11␍␊
+[14:05:19:922] 00060233: Dats got evt 18␍␊
+[14:05:19:945] 32kHz trimmed to 0xF␍␊
+[14:05:19:945] @!@ DONE WsfTimerStartMs, 324, 720 (ms), 11␍␊
+[14:05:19:945] 00060264: Dats got evt 18␍␊
+[14:05:19:961] @!@ DONE WsfTimerStartMs, 325, 720 (ms), 11␍␊
+[14:05:19:977] 00060295: Dats got evt 18␍␊
+[14:05:19:993] @!@ DONE WsfTimerStartMs, 326, 720 (ms), 11␍␊
+[14:05:20:009] 00060326: Dats got evt 18␍␊
+[14:05:20:025] @!@ DONE WsfTimerStartMs, 327, 720 (ms), 11␍␊
+[14:05:20:041] 00060357: Dats got evt 18␍␊
+[14:05:20:057] @!@ DONE WsfTimerStartMs, 328, 720 (ms), 11␍␊
+[14:05:20:073] 00060388: Dats got evt 18␍␊
+[14:05:20:089] @!@ DONE WsfTimerStartMs, 329, 720 (ms), 11␍␊
+[14:05:20:105] 00060419: Dats got evt 18␍␊
+[14:05:20:105] @!@ DONE WsfTimerStartMs, 330, 720 (ms), 11␍␊
+[14:05:20:152] 00060450: Dats got evt 18␍␊
+[14:05:20:152] @!@ DONE WsfTimerStartMs, 331, 720 (ms), 11␍␊
+[14:05:20:182] 00060481: Dats got evt 18␍␊
+[14:05:20:182] @!@ DONE WsfTimerStartMs, 332, 720 (ms), 11␍␊
+[14:05:20:212] 00060512: Dats got evt 18␍␊
+[14:05:20:212] @!@ DONE WsfTimerStartMs, 333, 720 (ms), 11␍␊
+[14:05:20:242] 00060543: Dats got evt 18␍␊
+[14:05:20:242] @!@ DONE WsfTimerStartMs, 334, 720 (ms), 11␍␊
+[14:05:20:272] 00060574: Dats got evt 18␍␊
+[14:05:20:272] @!@ DONE WsfTimerStartMs, 335, 720 (ms), 11␍␊
+[14:05:20:302] 00060605: Dats got evt 18␍␊
+[14:05:20:302] @!@ DONE WsfTimerStartMs, 336, 720 (ms), 11␍␊
+[14:05:20:332] 00060636: Dats got evt 18␍␊
+[14:05:20:332] @!@ DONE WsfTimerStartMs, 337, 720 (ms), 11␍␊
+[14:05:20:363] 00060667: Dats got evt 18␍␊
+[14:05:20:363] @!@ DONE WsfTimerStartMs, 338, 720 (ms), 11␍␊
+[14:05:20:393] 00060698: Dats got evt 18␍␊
+[14:05:20:393] @!@ DONE WsfTimerStartMs, 339, 720 (ms), 11␍␊
+[14:05:20:423] 00060729: Dats got evt 18␍␊
+[14:05:20:423] @!@ DONE WsfTimerStartMs, 340, 720 (ms), 11␍␊
+[14:05:20:452] 00060760: Dats got evt 18␍␊
+[14:05:20:452] @!@ DONE WsfTimerStartMs, 341, 720 (ms), 11␍␊
+[14:05:20:483] 00060791: Dats got evt 18␍␊
+[14:05:20:483] @!@ DONE WsfTimerStartMs, 342, 720 (ms), 11␍␊
+[14:05:20:514] 00060822: Dats got evt 18␍␊
+[14:05:20:514] @!@ DONE WsfTimerStartMs, 343, 720 (ms), 11␍␊
+[14:05:20:575] 00060853: Dats got evt 18␍␊
+[14:05:20:575] @!@ DONE WsfTimerStartMs, 344, 720 (ms), 11␍␊
+[14:05:20:575] App got evt 16␍␊
+[14:05:20:575] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
+[14:05:20:575] ␍␊
+[14:05:20:575] @!@ DONE WsfTimerStartMs, 345, 5000 (ms), 1␍␊
+[14:05:20:575] @!@ DONE WsfTimerStartMs, 346, 720 (ms), 11␍␊
+[14:05:20:575] 00060884: Dats got evt 18␍␊
+[14:05:20:605] @!@ DONE WsfTimerStartMs, 347, 720 (ms), 11␍␊
+[14:05:20:605] 00060915: Dats got evt 18␍␊
+[14:05:20:635] @!@ DONE WsfTimerStartMs, 348, 720 (ms), 11␍␊
+[14:05:20:635] 00060946: Dats got evt 18␍␊
+[14:05:20:665] @!@ DONE WsfTimerStartMs, 349, 720 (ms), 11␍␊
+[14:05:20:665] 00060977: Dats got evt 18␍␊
+[14:05:20:695] @!@ DONE WsfTimerStartMs, 350, 720 (ms), 11␍␊
+[14:05:20:695] 00061008: Dats got evt 18␍␊
+[14:05:20:726] @!@ DONE WsfTimerStartMs, 351, 720 (ms), 11␍␊
+[14:05:20:726] 00061039: Dats got evt 18␍␊
+[14:05:20:757] @!@ DONE WsfTimerStartMs, 352, 720 (ms), 11␍␊
+[14:05:20:757] 00061070: Dats got evt 18␍␊
+[14:05:20:788] @!@ DONE WsfTimerStartMs, 353, 720 (ms), 11␍␊
+[14:05:20:788] 00061101: Dats got evt 18␍␊
+[14:05:20:818] @!@ DONE WsfTimerStartMs, 354, 720 (ms), 11␍␊
+[14:05:20:818] 00061132: Dats got evt 18␍␊
+[14:05:20:849] @!@ DONE WsfTimerStartMs, 355, 720 (ms), 11␍␊
+[14:05:20:849] 00061163: Dats got evt 18␍␊
+[14:05:20:880] @!@ DONE WsfTimerStartMs, 356, 720 (ms), 11␍␊
+[14:05:20:880] 00061194: Dats got evt 18␍␊
+[14:05:20:911] @!@ DONE WsfTimerStartMs, 357, 720 (ms), 11␍␊
+[14:05:20:911] 00061225: Dats got evt 18␍␊
+[14:05:20:942] @!@ DONE WsfTimerStartMs, 358, 720 (ms), 11␍␊
+[14:05:20:942] 00061256: Dats got evt 18␍␊
+[14:05:20:973] @!@ DONE WsfTimerStartMs, 359, 720 (ms), 11␍␊
+[14:05:20:973] 00061287: Dats got evt 18␍␊
+[14:05:21:004] @!@ DONE WsfTimerStartMs, 360, 720 (ms), 11␍␊
+[14:05:21:004] 00061318: Dats got evt 18␍␊
+[14:05:21:004] @!@ DONE WsfTimerStartMs, 361, 720 (ms), 11␍␊
+[14:05:21:035] 00061349: Dats got evt 18␍␊
+[14:05:21:035] @!@ DONE WsfTimerStartMs, 362, 720 (ms), 11␍␊
+[14:05:21:066] 00061380: Dats got evt 18␍␊
+[14:05:21:066] @!@ DONE WsfTimerStartMs, 363, 720 (ms), 11␍␊
+[14:05:21:083] 00061411: Dats got evt 18␍␊
+[14:05:21:099] @!@ DONE WsfTimerStartMs, 364, 720 (ms), 11␍␊
+[14:05:21:114] 00061442: Dats got evt 18␍␊
+[14:05:21:131] @!@ DONE WsfTimerStartMs, 365, 720 (ms), 11␍␊
+[14:05:21:147] 00061473: Dats got evt 18␍␊
+[14:05:21:163] @!@ DONE WsfTimerStartMs, 366, 720 (ms), 11␍␊
+[14:05:21:179] 00061504: Dats got evt 18␍␊
+[14:05:21:195] @!@ DONE WsfTimerStartMs, 367, 720 (ms), 11␍␊
+[14:05:21:211] 00061535: Dats got evt 18␍␊
+[14:05:21:227] @!@ DONE WsfTimerStartMs, 368, 720 (ms), 11␍␊
+[14:05:21:243] 00061566: Dats got evt 18␍␊
+[14:05:21:259] @!@ DONE WsfTimerStartMs, 369, 720 (ms), 11␍␊
+[14:05:21:275] 00061597: Dats got evt 18␍␊
+[14:05:21:275] @!@ DONE WsfTimerStartMs, 370, 720 (ms), 11␍␊
+[14:05:21:307] 00061628: Dats got evt 18␍␊
+[14:05:21:307] @!@ DONE WsfTimerStartMs, 371, 720 (ms), 11␍␊
+[14:05:21:353] 00061659: Dats got evt 18␍␊
+[14:05:21:353] @!@ DONE WsfTimerStartMs, 372, 720 (ms), 11␍␊
+[14:05:21:383] 00061690: Dats got evt 18␍␊
+[14:05:21:383] @!@ DONE WsfTimerStartMs, 373, 720 (ms), 11␍␊
+[14:05:21:413] 00061721: Dats got evt 18␍␊
+[14:05:21:413] @!@ DONE WsfTimerStartMs, 374, 720 (ms), 11␍␊
+[14:05:21:443] 00061752: Dats got evt 18␍␊
+[14:05:21:443] @!@ DONE WsfTimerStartMs, 375, 720 (ms), 11␍␊
+[14:05:21:472] 00061783: Dats got evt 18␍␊
+[14:05:21:472] @!@ DONE WsfTimerStartMs, 376, 720 (ms), 11␍␊
+[14:05:21:503] 00061814: Dats got evt 18␍␊
+[14:05:21:503] @!@ DONE WsfTimerStartMs, 377, 720 (ms), 11␍␊
+[14:05:21:533] @!@ DONE WsfTimerStartMs, 378, 720 (ms), 11␍␊
+[14:05:21:533] 00061845: Dats got evt 18␍␊
+[14:05:21:564] @!@ DONE WsfTimerStartMs, 379, 720 (ms), 11␍␊
+[14:05:21:564] 00061876: Dats got evt 18␍␊
+[14:05:21:594] @!@ DONE WsfTimerStartMs, 380, 720 (ms), 11␍␊
+[14:05:21:594] 00061907: Dats got evt 18␍␊
+[14:05:21:624] @!@ DONE WsfTimerStartMs, 381, 720 (ms), 11␍␊
+[14:05:21:624] 00061938: Dats got evt 18␍␊
+[14:05:21:655] @!@ DONE WsfTimerStartMs, 382, 720 (ms), 11␍␊
+[14:05:21:655] 00061969: Dats got evt 18␍␊
+[14:05:21:685] @!@ DONE WsfTimerStartMs, 383, 720 (ms), 11␍␊
+[14:05:21:685] 00062000: Dats got evt 18␍␊
+[14:05:21:715] @!@ DONE WsfTimerStartMs, 384, 720 (ms), 11␍␊
+[14:05:21:715] 00062031: Dats got evt 18␍␊
+[14:05:21:746] @!@ DONE WsfTimerStartMs, 385, 720 (ms), 11␍␊
+[14:05:21:746] 00062062: Dats got evt 18␍␊
+[14:05:21:777] @!@ DONE WsfTimerStartMs, 386, 720 (ms), 11␍␊
+[14:05:21:777] 00062093: Dats got evt 18␍␊
+[14:05:21:807] @!@ DONE WsfTimerStartMs, 387, 720 (ms), 11␍␊
+[14:05:21:807] 00062124: Dats got evt 18␍␊
+[14:05:21:838] @!@ DONE WsfTimerStartMs, 388, 720 (ms), 11␍␊
+[14:05:21:838] 00062155: Dats got evt 18␍␊
+[14:05:21:869] @!@ DONE WsfTimerStartMs, 389, 720 (ms), 11␍␊
+[14:05:21:869] 00062186: Dats got evt 18␍␊
+[14:05:21:901] @!@ DONE WsfTimerStartMs, 390, 720 (ms), 11␍␊
+[14:05:21:901] 00062217: Dats got evt 18␍␊
+[14:05:21:932] @!@ DONE WsfTimerStartMs, 391, 720 (ms), 11␍␊
+[14:05:21:932] 00062248: Dats got evt 18␍␊
+[14:05:21:963] @!@ DONE WsfTimerStartMs, 392, 720 (ms), 11␍␊
+[14:05:21:963] 00062279: Dats got evt 18␍␊
+[14:05:21:994] @!@ DONE WsfTimerStartMs, 393, 720 (ms), 11␍␊
+[14:05:21:994] 00062310: Dats got evt 18␍␊
+[14:05:22:025] @!@ DONE WsfTimerStartMs, 394, 720 (ms), 11␍␊
+[14:05:22:025] 00062341: Dats got evt 18␍␊
+[14:05:22:025] @!@ DONE WsfTimerStartMs, 395, 720 (ms), 11␍␊
+[14:05:22:056] 00062372: Dats got evt 18␍␊
+[14:05:22:056] @!@ DONE WsfTimerStartMs, 396, 720 (ms), 11␍␊
+[14:05:22:072] 00062403: Dats got evt 18␍␊
+[14:05:22:088] @!@ DONE WsfTimerStartMs, 397, 720 (ms), 11␍␊
+[14:05:22:104] 00062434: Dats got evt 18␍␊
+[14:05:22:120] @!@ DONE WsfTimerStartMs, 398, 720 (ms), 11␍␊
+[14:05:22:136] 00062465: Dats got evt 18␍␊
+[14:05:22:152] @!@ DONE WsfTimerStartMs, 399, 720 (ms), 11␍␊
+[14:05:22:168] 00062496: Dats got evt 18␍␊
+[14:05:22:184] @!@ DONE WsfTimerStartMs, 400, 720 (ms), 11␍␊
+[14:05:22:200] 00062527: Dats got evt 18␍␊
+[14:05:22:216] @!@ DONE WsfTimerStartMs, 401, 720 (ms), 11␍␊
+[14:05:22:232] 00062558: Dats got evt 18␍␊
+[14:05:22:248] @!@ DONE WsfTimerStartMs, 402, 720 (ms), 11␍␊
+[14:05:22:264] 00062589: Dats got evt 18␍␊
+[14:05:22:264] @!@ DONE WsfTimerStartMs, 403, 720 (ms), 11␍␊
+[14:05:22:296] 00062620: Dats got evt 18␍␊
+[14:05:22:296] @!@ DONE WsfTimerStartMs, 404, 720 (ms), 11␍␊
+[14:05:22:342] 00062651: Dats got evt 18␍␊
+[14:05:22:342] @!@ DONE WsfTimerStartMs, 405, 720 (ms), 11␍␊
+[14:05:22:373] 00062682: Dats got evt 18␍␊
+[14:05:22:373] @!@ DONE WsfTimerStartMs, 406, 720 (ms), 11␍␊
+[14:05:22:403] 00062713: Dats got evt 18␍␊
+[14:05:22:403] @!@ DONE WsfTimerStartMs, 407, 720 (ms), 11␍␊
+[14:05:22:432] 00062744: Dats got evt 18␍␊
+[14:05:22:432] @!@ DONE WsfTimerStartMs, 408, 720 (ms), 11␍␊
+[14:05:22:462] 00062775: Dats got evt 18␍␊
+[14:05:22:462] @!@ DONE WsfTimerStartMs, 409, 720 (ms), 11␍␊
+[14:05:22:492] 00062806: Dats got evt 18␍␊
+[14:05:22:492] @!@ DONE WsfTimerStartMs, 410, 720 (ms), 11␍␊
+[14:05:22:523] 00062837: Dats got evt 18␍␊
+[14:05:22:523] @!@ DONE WsfTimerStartMs, 411, 720 (ms), 11␍␊
+[14:05:22:553] @!@ DONE WsfTimerStartMs, 412, 720 (ms), 11␍␊
+[14:05:22:553] 00062868: Dats got evt 18␍␊
+[14:05:22:585] @!@ DONE WsfTimerStartMs, 413, 720 (ms), 11␍␊
+[14:05:22:585] 00062899: Dats got evt 18␍␊
+[14:05:22:615] @!@ DONE WsfTimerStartMs, 414, 720 (ms), 11␍␊
+[14:05:22:615] 00062930: Dats got evt 18␍␊
+[14:05:22:645] @!@ DONE WsfTimerStartMs, 415, 720 (ms), 11␍␊
+[14:05:22:645] 00062961: Dats got evt 18␍␊
+[14:05:22:675] @!@ DONE WsfTimerStartMs, 416, 720 (ms), 11␍␊
+[14:05:22:675] 00062992: Dats got evt 18␍␊
+[14:05:22:705] @!@ DONE WsfTimerStartMs, 417, 720 (ms), 11␍␊
+[14:05:22:705] 00063023: Dats got evt 18␍␊
+[14:05:22:736] @!@ DONE WsfTimerStartMs, 418, 720 (ms), 11␍␊
+[14:05:22:736] 00063054: Dats got evt 18␍␊
+[14:05:22:767] @!@ DONE WsfTimerStartMs, 419, 720 (ms), 11␍␊
+[14:05:22:767] 00063085: Dats got evt 18␍␊
+[14:05:22:797] @!@ DONE WsfTimerStartMs, 420, 720 (ms), 11␍␊
+[14:05:22:797] 00063116: Dats got evt 18␍␊
+[14:05:22:828] @!@ DONE WsfTimerStartMs, 421, 720 (ms), 11␍␊
+[14:05:22:828] 00063147: Dats got evt 18␍␊
+[14:05:22:859] @!@ DONE WsfTimerStartMs, 422, 720 (ms), 11␍␊
+[14:05:22:859] 00063178: Dats got evt 18␍␊
+[14:05:22:890] @!@ DONE WsfTimerStartMs, 423, 720 (ms), 11␍␊
+[14:05:22:890] 00063209: Dats got evt 18␍␊
+[14:05:22:921] @!@ DONE WsfTimerStartMs, 424, 720 (ms), 11␍␊
+[14:05:22:921] 00063240: Dats got evt 18␍␊
+[14:05:22:952] @!@ DONE WsfTimerStartMs, 425, 720 (ms), 11␍␊
+[14:05:22:952] 00063271: Dats got evt 18␍␊
+[14:05:22:983] @!@ DONE WsfTimerStartMs, 426, 720 (ms), 11␍␊
+[14:05:22:983] 00063302: Dats got evt 18␍␊
+[14:05:23:014] @!@ DONE WsfTimerStartMs, 427, 720 (ms), 11␍␊
+[14:05:23:014] 00063333: Dats got evt 18␍␊
+[14:05:23:014] @!@ DONE WsfTimerStartMs, 428, 720 (ms), 11␍␊
+[14:05:23:045] 00063364: Dats got evt 18␍␊
+[14:05:23:045] @!@ DONE WsfTimerStartMs, 429, 720 (ms), 11␍␊
+[14:05:23:061] 00063395: Dats got evt 18␍␊
+[14:05:23:077] @!@ DONE WsfTimerStartMs, 430, 720 (ms), 11␍␊
+[14:05:23:093] 00063426: Dats got evt 18␍␊
+[14:05:23:109] @!@ DONE WsfTimerStartMs, 431, 720 (ms), 11␍␊
+[14:05:23:125] 00063457: Dats got evt 18␍␊
+[14:05:23:141] @!@ DONE WsfTimerStartMs, 432, 720 (ms), 11␍␊
+[14:05:23:157] 00063488: Dats got evt 18␍␊
+[14:05:23:173] @!@ DONE WsfTimerStartMs, 433, 720 (ms), 11␍␊
+[14:05:23:189] 00063519: Dats got evt 18␍␊
+[14:05:23:205] @!@ DONE WsfTimerStartMs, 434, 720 (ms), 11␍␊
+[14:05:23:221] 00063550: Dats got evt 18␍␊
+[14:05:23:237] @!@ DONE WsfTimerStartMs, 435, 720 (ms), 11␍␊
+[14:05:23:253] 00063581: Dats got evt 18␍␊
+[14:05:23:269] @!@ DONE WsfTimerStartMs, 436, 720 (ms), 11␍␊
+[14:05:23:285] 00063612: Dats got evt 18␍␊
+[14:05:23:285] @!@ DONE WsfTimerStartMs, 437, 720 (ms), 11␍␊
+[14:05:23:332] 00063643: Dats got evt 18␍␊
+[14:05:23:332] @!@ DONE WsfTimerStartMs, 438, 720 (ms), 11␍␊
+[14:05:23:362] 00063674: Dats got evt 18␍␊
+[14:05:23:362] @!@ DONE WsfTimerStartMs, 439, 720 (ms), 11␍␊
+[14:05:23:393] 00063705: Dats got evt 18␍␊
+[14:05:23:393] @!@ DONE WsfTimerStartMs, 440, 720 (ms), 11␍␊
+[14:05:23:422] 00063736: Dats got evt 18␍␊
+[14:05:23:422] @!@ DONE WsfTimerStartMs, 441, 720 (ms), 11␍␊
+[14:05:23:453] 00063767: Dats got evt 18␍␊
+[14:05:23:453] @!@ DONE WsfTimerStartMs, 442, 720 (ms), 11␍␊
+[14:05:23:483] 00063798: Dats got evt 18␍␊
+[14:05:23:483] @!@ DONE WsfTimerStartMs, 443, 720 (ms), 11␍␊
+[14:05:23:513] 00063829: Dats got evt 18␍␊
+[14:05:23:513] @!@ DONE WsfTimerStartMs, 444, 720 (ms), 11␍␊
+[14:05:23:543] 00063860: Dats got evt 18␍␊
+[14:05:23:543] @!@ DONE WsfTimerStartMs, 445, 720 (ms), 11␍␊
+[14:05:23:574] @!@ DONE WsfTimerStartMs, 446, 720 (ms), 11␍␊
+[14:05:23:574] 00063891: Dats got evt 18␍␊
+[14:05:23:605] @!@ DONE WsfTimerStartMs, 447, 720 (ms), 11␍␊
+[14:05:23:605] 00063922: Dats got evt 18␍␊
+[14:05:23:635] @!@ DONE WsfTimerStartMs, 448, 720 (ms), 11␍␊
+[14:05:23:635] 00063953: Dats got evt 18␍␊
+[14:05:23:665] @!@ DONE WsfTimerStartMs, 449, 720 (ms), 11␍␊
+[14:05:23:665] 00063984: Dats got evt 18␍␊
+[14:05:23:695] @!@ DONE WsfTimerStartMs, 450, 720 (ms), 11␍␊
+[14:05:23:695] 00064015: Dats got evt 18␍␊
+[14:05:23:725] @!@ DONE WsfTimerStartMs, 451, 720 (ms), 11␍␊
+[14:05:23:725] 00064046: Dats got evt 18␍␊
+[14:05:23:756] @!@ DONE WsfTimerStartMs, 452, 720 (ms), 11␍␊
+[14:05:23:756] 00064077: Dats got evt 18␍␊
+[14:05:23:786] @!@ DONE WsfTimerStartMs, 453, 720 (ms), 11␍␊
+[14:05:23:786] 00064108: Dats got evt 18␍␊
+[14:05:23:817] @!@ DONE WsfTimerStartMs, 454, 720 (ms), 11␍␊
+[14:05:23:817] 00064139: Dats got evt 18␍␊
+[14:05:23:848] @!@ DONE WsfTimerStartMs, 455, 720 (ms), 11␍␊
+[14:05:23:848] 00064170: Dats got evt 18␍␊
+[14:05:23:879] @!@ DONE WsfTimerStartMs, 456, 720 (ms), 11␍␊
+[14:05:23:879] 00064201: Dats got evt 18␍␊
+[14:05:23:910] @!@ DONE WsfTimerStartMs, 457, 720 (ms), 11␍␊
+[14:05:23:910] 00064232: Dats got evt 18␍␊
+[14:05:23:941] @!@ DONE WsfTimerStartMs, 458, 720 (ms), 11␍␊
+[14:05:23:941] 00064263: Dats got evt 18␍␊
+[14:05:23:972] @!@ DONE WsfTimerStartMs, 459, 720 (ms), 11␍␊
+[14:05:23:972] 00064294: Dats got evt 18␍␊
+[14:05:24:003] @!@ DONE WsfTimerStartMs, 460, 720 (ms), 11␍␊
+[14:05:24:003] 00064325: Dats got evt 18␍␊
+[14:05:24:033] @!@ DONE WsfTimerStartMs, 461, 720 (ms), 11␍␊
+[14:05:24:033] 00064356: Dats got evt 18␍␊
+[14:05:24:064] @!@ DONE WsfTimerStartMs, 462, 720 (ms), 11␍␊
+[14:05:24:064] 00064387: Dats got evt 18␍␊
+[14:05:24:064] @!@ DONE WsfTimerStartMs, 463, 720 (ms), 11␍␊
+[14:05:24:080] 00064418: Dats got evt 18␍␊
+[14:05:24:096] @!@ DONE WsfTimerStartMs, 464, 720 (ms), 11␍␊
+[14:05:24:112] 00064449: Dats got evt 18␍␊
+[14:05:24:128] @!@ DONE WsfTimerStartMs, 465, 720 (ms), 11␍␊
+[14:05:24:144] 00064480: Dats got evt 18␍␊
+[14:05:24:160] @!@ DONE WsfTimerStartMs, 466, 720 (ms), 11␍␊
+[14:05:24:176] 00064511: Dats got evt 18␍␊
+[14:05:24:193] @!@ DONE WsfTimerStartMs, 467, 720 (ms), 11␍␊
+[14:05:24:209] 00064542: Dats got evt 18␍␊
+[14:05:24:225] @!@ DONE WsfTimerStartMs, 468, 720 (ms), 11␍␊
+[14:05:24:241] 00064573: Dats got evt 18␍␊
+[14:05:24:257] @!@ DONE WsfTimerStartMs, 469, 720 (ms), 11␍␊
+[14:05:24:273] 00064604: Dats got evt 18␍␊
+[14:05:24:289] @!@ DONE WsfTimerStartMs, 470, 720 (ms), 11␍␊
+[14:05:24:305] 00064635: Dats got evt 18␍␊
+[14:05:24:305] @!@ DONE WsfTimerStartMs, 471, 720 (ms), 11␍␊
+[14:05:24:337] 00064666: Dats got evt 18␍␊
+[14:05:24:337] @!@ DONE WsfTimerStartMs, 472, 720 (ms), 11␍␊
+[14:05:24:383] 00064697: Dats got evt 18␍␊
+[14:05:24:383] @!@ DONE WsfTimerStartMs, 473, 720 (ms), 11␍␊
+[14:05:24:412] 00064728: Dats got evt 18␍␊
+[14:05:24:412] @!@ DONE WsfTimerStartMs, 474, 720 (ms), 11␍␊
+[14:05:24:442] 00064759: Dats got evt 18␍␊
+[14:05:24:442] @!@ DONE WsfTimerStartMs, 475, 720 (ms), 11␍␊
+[14:05:24:472] 00064790: Dats got evt 18␍␊
+[14:05:24:472] @!@ DONE WsfTimerStartMs, 476, 720 (ms), 11␍␊
+[14:05:24:502] 00064821: Dats got evt 18␍␊
+[14:05:24:502] @!@ DONE WsfTimerStartMs, 477, 720 (ms), 11␍␊
+[14:05:24:533] 00064852: Dats got evt 18␍␊
+[14:05:24:533] @!@ DONE WsfTimerStartMs, 478, 720 (ms), 11␍␊
+[14:05:24:563] 00064883: Dats got evt 18␍␊
+[14:05:24:563] @!@ DONE WsfTimerStartMs, 479, 720 (ms), 11␍␊
+[14:05:24:594] @!@ DONE WsfTimerStartMs, 480, 720 (ms), 11␍␊
+[14:05:24:594] 00064914: Dats got evt 18␍␊
+[14:05:24:625] @!@ DONE WsfTimerStartMs, 481, 720 (ms), 11␍␊
+[14:05:24:625] 00064945: Dats got evt 18␍␊
+[14:05:24:655] @!@ DONE WsfTimerStartMs, 482, 720 (ms), 11␍␊
+[14:05:24:655] 00064976: Dats got evt 18␍␊
+[14:05:24:685] @!@ DONE WsfTimerStartMs, 483, 720 (ms), 11␍␊
+[14:05:24:685] 00065007: Dats got evt 18␍␊
+[14:05:24:714] @!@ DONE WsfTimerStartMs, 484, 720 (ms), 11␍␊
+[14:05:24:714] 00065038: Dats got evt 18␍␊
+[14:05:24:745] @!@ DONE WsfTimerStartMs, 485, 720 (ms), 11␍␊
+[14:05:24:745] 00065069: Dats got evt 18␍␊
+[14:05:24:775] @!@ DONE WsfTimerStartMs, 486, 720 (ms), 11␍␊
+[14:05:24:775] 00065100: Dats got evt 18␍␊
+[14:05:24:806] @!@ DONE WsfTimerStartMs, 487, 720 (ms), 11␍␊
+[14:05:24:806] 00065131: Dats got evt 18␍␊
+[14:05:24:837] @!@ DONE WsfTimerStartMs, 488, 720 (ms), 11␍␊
+[14:05:24:837] 00065162: Dats got evt 18␍␊
+[14:05:24:868] @!@ DONE WsfTimerStartMs, 489, 720 (ms), 11␍␊
+[14:05:24:868] 00065193: Dats got evt 18␍␊
+[14:05:24:900] @!@ DONE WsfTimerStartMs, 490, 720 (ms), 11␍␊
+[14:05:24:900] 00065224: Dats got evt 18␍␊
+[14:05:24:931] @!@ DONE WsfTimerStartMs, 491, 720 (ms), 11␍␊
+[14:05:24:931] 00065255: Dats got evt 18␍␊
+[14:05:24:962] @!@ DONE WsfTimerStartMs, 492, 720 (ms), 11␍␊
+[14:05:24:962] 00065286: Dats got evt 18␍␊
+[14:05:24:993] @!@ DONE WsfTimerStartMs, 493, 720 (ms), 11␍␊
+[14:05:24:993] 00065317: Dats got evt 18␍␊
+[14:05:25:023] @!@ DONE WsfTimerStartMs, 494, 720 (ms), 11␍␊
+[14:05:25:023] 00065348: Dats got evt 18␍␊
+[14:05:25:054] @!@ DONE WsfTimerStartMs, 495, 720 (ms), 11␍␊
+[14:05:25:054] 00065379: Dats got evt 18␍␊
+[14:05:25:085] @!@ DONE WsfTimerStartMs, 496, 720 (ms), 11␍␊
+[14:05:25:085] 00065410: Dats got evt 18␍␊
+[14:05:25:085] @!@ DONE WsfTimerStartMs, 497, 720 (ms), 11␍␊
+[14:05:25:101] 00065441: Dats got evt 18␍␊
+[14:05:25:117] @!@ DONE WsfTimerStartMs, 498, 720 (ms), 11␍␊
+[14:05:25:133] 00065472: Dats got evt 18␍␊
+[14:05:25:149] @!@ DONE WsfTimerStartMs, 499, 720 (ms), 11␍␊
+[14:05:25:165] 00065503: Dats got evt 18␍␊
+[14:05:25:181] @!@ DONE WsfTimerStartMs, 500, 720 (ms), 11␍␊
+[14:05:25:197] 00065534: Dats got evt 18␍␊
+[14:05:25:213] @!@ DONE WsfTimerStartMs, 501, 720 (ms), 11␍␊
+[14:05:25:229] 00065565: Dats got evt 18␍␊
+[14:05:25:245] @!@ DONE WsfTimerStartMs, 502, 720 (ms), 11␍␊
+[14:05:25:261] 00065596: Dats got evt 18␍␊
+[14:05:25:277] @!@ DONE WsfTimerStartMs, 503, 720 (ms), 11␍␊
+[14:05:25:293] 00065627: Dats got evt 18␍␊
+[14:05:25:309] @!@ DONE WsfTimerStartMs, 504, 720 (ms), 11␍␊
+[14:05:25:325] 00065658: Dats got evt 18␍␊
+[14:05:25:325] @!@ DONE WsfTimerStartMs, 505, 720 (ms), 11␍␊
+[14:05:25:373] 00065689: Dats got evt 18␍␊
+[14:05:25:373] @!@ DONE WsfTimerStartMs, 506, 720 (ms), 11␍␊
+[14:05:25:402] 00065720: Dats got evt 18␍␊
+[14:05:25:402] @!@ DONE WsfTimerStartMs, 507, 720 (ms), 11␍␊
+[14:05:25:432] 00065751: Dats got evt 18␍␊
+[14:05:25:432] @!@ DONE WsfTimerStartMs, 508, 720 (ms), 11␍␊
+[14:05:25:462] 00065782: Dats got evt 18␍␊
+[14:05:25:462] @!@ DONE WsfTimerStartMs, 509, 720 (ms), 11␍␊
+[14:05:25:492] 00065813: Dats got evt 18␍␊
+[14:05:25:492] @!@ DONE WsfTimerStartMs, 510, 720 (ms), 11␍␊
+[14:05:25:522] 00065844: Dats got evt 18␍␊
+[14:05:25:522] @!@ DONE WsfTimerStartMs, 511, 720 (ms), 11␍␊
+[14:05:25:522] App got evt 16␍␊
+[14:05:25:522] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
+[14:05:25:549] ␍␊
+[14:05:25:549] @!@ DONE WsfTimerStartMs, 512, 5000 (ms), 1␍␊
+[14:05:25:549] 00065875: Dats got evt 18␍␊
+[14:05:25:549] @!@ DONE WsfTimerStartMs, 513, 720 (ms), 11␍␊
+[14:05:25:565] 00065906: Dats got evt 18␍␊
+[14:05:25:565] @!@ DONE WsfTimerStartMs, 514, 720 (ms), 11␍␊
+[14:05:25:597] 00065937: Dats got evt 18␍␊
+[14:05:25:597] @!@ DONE WsfTimerStartMs, 515, 720 (ms), 11␍␊
+[14:05:25:629] @!@ DONE WsfTimerStartMs, 516, 720 (ms), 11␍␊
+[14:05:25:629] 00065968: Dats got evt 18␍␊
+[14:05:25:676] @!@ DONE WsfTimerStartMs, 517, 720 (ms), 11␍␊
+[14:05:25:676] 00065999: Dats got evt 18␍␊
+[14:05:25:705] @!@ DONE WsfTimerStartMs, 518, 720 (ms), 11␍␊
+[14:05:25:705] 00066030: Dats got evt 18␍␊
+[14:05:25:735] @!@ DONE WsfTimerStartMs, 519, 720 (ms), 11␍␊
+[14:05:25:735] 00066061: Dats got evt 18␍␊
+[14:05:25:765] @!@ DONE WsfTimerStartMs, 520, 720 (ms), 11␍␊
+[14:05:25:765] 00066092: Dats got evt 18␍␊
+[14:05:25:796] @!@ DONE WsfTimerStartMs, 521, 720 (ms), 11␍␊
+[14:05:25:796] 00066123: Dats got evt 18␍␊
+[14:05:25:827] @!@ DONE WsfTimerStartMs, 522, 720 (ms), 11␍␊
+[14:05:25:827] 00066154: Dats got evt 18␍␊
+[14:05:25:858] @!@ DONE WsfTimerStartMs, 523, 720 (ms), 11␍␊
+[14:05:25:858] 00066185: Dats got evt 18␍␊
+[14:05:25:889] @!@ DONE WsfTimerStartMs, 524, 720 (ms), 11␍␊
+[14:05:25:889] 00066216: Dats got evt 18␍␊
+[14:05:25:920] @!@ DONE WsfTimerStartMs, 525, 720 (ms), 11␍␊
+[14:05:25:920] 00066247: Dats got evt 18␍␊
+[14:05:25:951] @!@ DONE WsfTimerStartMs, 526, 720 (ms), 11␍␊
+[14:05:25:951] 00066278: Dats got evt 18␍␊
+[14:05:25:981] @!@ DONE WsfTimerStartMs, 527, 720 (ms), 11␍␊
+[14:05:25:981] 00066309: Dats got evt 18␍␊
+[14:05:26:012] @!@ DONE WsfTimerStartMs, 528, 720 (ms), 11␍␊
+[14:05:26:012] 00066340: Dats got evt 18␍␊
+[14:05:26:043] @!@ DONE WsfTimerStartMs, 529, 720 (ms), 11␍␊
+[14:05:26:043] 00066371: Dats got evt 18␍␊
+[14:05:26:074] @!@ DONE WsfTimerStartMs, 530, 720 (ms), 11␍␊
+[14:05:26:074] 00066402: Dats got evt 18␍␊
+[14:05:26:105] @!@ DONE WsfTimerStartMs, 531, 720 (ms), 11␍␊
+[14:05:26:105] 00066433: Dats got evt 18␍␊
+[14:05:26:105] @!@ DONE WsfTimerStartMs, 532, 720 (ms), 11␍␊
+[14:05:26:121] 00066464: Dats got evt 18␍␊
+[14:05:26:137] @!@ DONE WsfTimerStartMs, 533, 720 (ms), 11␍␊
+[14:05:26:153] 00066495: Dats got evt 18␍␊
+[14:05:26:169] @!@ DONE WsfTimerStartMs, 534, 720 (ms), 11␍␊
+[14:05:26:185] 00066526: Dats got evt 18␍␊
+[14:05:26:201] @!@ DONE WsfTimerStartMs, 535, 720 (ms), 11␍␊
+[14:05:26:217] 00066557: Dats got evt 18␍␊
+[14:05:26:233] @!@ DONE WsfTimerStartMs, 536, 720 (ms), 11␍␊
+[14:05:26:249] 00066588: Dats got evt 18␍␊
+[14:05:26:265] @!@ DONE WsfTimerStartMs, 537, 720 (ms), 11␍␊
+[14:05:26:281] 00066619: Dats got evt 18␍␊
+[14:05:26:297] @!@ DONE WsfTimerStartMs, 538, 720 (ms), 11␍␊
+[14:05:26:313] 00066650: Dats got evt 18␍␊
+[14:05:26:329] @!@ DONE WsfTimerStartMs, 539, 720 (ms), 11␍␊
+[14:05:26:345] 00066681: Dats got evt 18␍␊
+[14:05:26:345] @!@ DONE WsfTimerStartMs, 540, 720 (ms), 11␍␊
+[14:05:26:392] 00066712: Dats got evt 18␍␊
+[14:05:26:392] @!@ DONE WsfTimerStartMs, 541, 720 (ms), 11␍␊
+[14:05:26:422] 00066743: Dats got evt 18␍␊
+[14:05:26:422] @!@ DONE WsfTimerStartMs, 542, 720 (ms), 11␍␊
+[14:05:26:452] 00066774: Dats got evt 18␍␊
+[14:05:26:452] @!@ DONE WsfTimerStartMs, 543, 720 (ms), 11␍␊
+[14:05:26:482] 00066805: Dats got evt 18␍␊
+[14:05:26:482] @!@ DONE WsfTimerStartMs, 544, 720 (ms), 11␍␊
+[14:05:26:512] 00066836: Dats got evt 18␍␊
+[14:05:26:512] @!@ DONE WsfTimerStartMs, 545, 720 (ms), 11␍␊
+[14:05:26:542] 00066867: Dats got evt 18␍␊
+[14:05:26:542] @!@ DONE WsfTimerStartMs, 546, 720 (ms), 11␍␊
+[14:05:26:573] 00066898: Dats got evt 18␍␊
+[14:05:26:573] @!@ DONE WsfTimerStartMs, 547, 720 (ms), 11␍␊
+[14:05:26:604] @!@ DONE WsfTimerStartMs, 548, 720 (ms), 11␍␊
+[14:05:26:604] 00066929: Dats got evt 18␍␊
+[14:05:26:635] @!@ DONE WsfTimerStartMs, 549, 720 (ms), 11␍␊
+[14:05:26:635] 00066960: Dats got evt 18␍␊
+[14:05:26:665] @!@ DONE WsfTimerStartMs, 550, 720 (ms), 11␍␊
+[14:05:26:665] 00066991: Dats got evt 18␍␊
+[14:05:26:696] @!@ DONE WsfTimerStartMs, 551, 720 (ms), 11␍␊
+[14:05:26:696] 00067022: Dats got evt 18␍␊
+[14:05:26:725] @!@ DONE WsfTimerStartMs, 552, 720 (ms), 11␍␊
+[14:05:26:725] 00067053: Dats got evt 18␍␊
+[14:05:26:755] @!@ DONE WsfTimerStartMs, 553, 720 (ms), 11␍␊
+[14:05:26:755] 00067084: Dats got evt 18␍␊
+[14:05:26:785] @!@ DONE WsfTimerStartMs, 554, 720 (ms), 11␍␊
+[14:05:26:785] 00067115: Dats got evt 18␍␊
+[14:05:26:816] @!@ DONE WsfTimerStartMs, 555, 720 (ms), 11␍␊
+[14:05:26:816] 00067146: Dats got evt 18␍␊
+[14:05:26:847] @!@ DONE WsfTimerStartMs, 556, 720 (ms), 11␍␊
+[14:05:26:847] 00067177: Dats got evt 18␍␊
+[14:05:26:878] @!@ DONE WsfTimerStartMs, 557, 720 (ms), 11␍␊
+[14:05:26:878] 00067208: Dats got evt 18␍␊
+[14:05:26:909] @!@ DONE WsfTimerStartMs, 558, 720 (ms), 11␍␊
+[14:05:26:909] 00067239: Dats got evt 18␍␊
+[14:05:26:940] @!@ DONE WsfTimerStartMs, 559, 720 (ms), 11␍␊
+[14:05:26:940] 00067270: Dats got evt 18␍␊
+[14:05:26:971] @!@ DONE WsfTimerStartMs, 560, 720 (ms), 11␍␊
+[14:05:26:971] 00067301: Dats got evt 18␍␊
+[14:05:27:002] @!@ DONE WsfTimerStartMs, 561, 720 (ms), 11␍␊
+[14:05:27:002] 00067332: Dats got evt 18␍␊
+[14:05:27:032] @!@ DONE WsfTimerStartMs, 562, 720 (ms), 11␍␊
+[14:05:27:032] 00067363: Dats got evt 18␍␊
+[14:05:27:063] @!@ DONE WsfTimerStartMs, 563, 720 (ms), 11␍␊
+[14:05:27:063] 00067394: Dats got evt 18␍␊
+[14:05:27:094] @!@ DONE WsfTimerStartMs, 564, 720 (ms), 11␍␊
+[14:05:27:094] 00067425: Dats got evt 18␍␊
+[14:05:27:125] @!@ DONE WsfTimerStartMs, 565, 720 (ms), 11␍␊
+[14:05:27:125] 00067456: Dats got evt 18␍␊
+[14:05:27:125] @!@ DONE WsfTimerStartMs, 566, 720 (ms), 11␍␊
+[14:05:27:141] 00067487: Dats got evt 18␍␊
+[14:05:27:157] @!@ DONE WsfTimerStartMs, 567, 720 (ms), 11␍␊
+[14:05:27:173] 00067518: Dats got evt 18␍␊
+[14:05:27:189] @!@ DONE WsfTimerStartMs, 568, 720 (ms), 11␍␊
+[14:05:27:205] 00067549: Dats got evt 18␍␊
+[14:05:27:221] @!@ DONE WsfTimerStartMs, 569, 720 (ms), 11␍␊
+[14:05:27:237] 00067580: Dats got evt 18␍␊
+[14:05:27:253] @!@ DONE WsfTimerStartMs, 570, 720 (ms), 11␍␊
+[14:05:27:269] 00067611: Dats got evt 18␍␊
+[14:05:27:285] @!@ DONE WsfTimerStartMs, 571, 720 (ms), 11␍␊
+[14:05:27:301] 00067642: Dats got evt 18␍␊
+[14:05:27:317] @!@ DONE WsfTimerStartMs, 572, 720 (ms), 11␍␊
+[14:05:27:333] 00067673: Dats got evt 18␍␊
+[14:05:27:350] @!@ DONE WsfTimerStartMs, 573, 720 (ms), 11␍␊
+[14:05:27:365] 00067704: Dats got evt 18␍␊
+[14:05:27:365] @!@ DONE WsfTimerStartMs, 574, 720 (ms), 11␍␊
+[14:05:27:413] 00067735: Dats got evt 18␍␊
+[14:05:27:413] @!@ DONE WsfTimerStartMs, 575, 720 (ms), 11␍␊
+[14:05:27:443] 00067766: Dats got evt 18␍␊
+[14:05:27:443] @!@ DONE WsfTimerStartMs, 576, 720 (ms), 11␍␊
+[14:05:27:473] 00067797: Dats got evt 18␍␊
+[14:05:27:473] @!@ DONE WsfTimerStartMs, 577, 720 (ms), 11␍␊
+[14:05:27:503] 00067828: Dats got evt 18␍␊
+[14:05:27:503] @!@ DONE WsfTimerStartMs, 578, 720 (ms), 11␍␊
+[14:05:27:533] 00067859: Dats got evt 18␍␊
+[14:05:27:533] @!@ DONE WsfTimerStartMs, 579, 720 (ms), 11␍␊
+[14:05:27:563] 00067890: Dats got evt 18␍␊
+[14:05:27:563] @!@ DONE WsfTimerStartMs, 580, 720 (ms), 11␍␊
+[14:05:27:593] 00067921: Dats got evt 18␍␊
+[14:05:27:593] @!@ DONE WsfTimerStartMs, 581, 720 (ms), 11␍␊
+[14:05:27:624] @!@ DONE WsfTimerStartMs, 582, 720 (ms), 11␍␊
+[14:05:27:624] 00067952: Dats got evt 18␍␊
+[14:05:27:655] @!@ DONE WsfTimerStartMs, 583, 720 (ms), 11␍␊
+[14:05:27:655] 00067983: Dats got evt 18␍␊
+[14:05:27:685] @!@ DONE WsfTimerStartMs, 584, 720 (ms), 11␍␊
+[14:05:27:685] 00068014: Dats got evt 18␍␊
+[14:05:27:714] @!@ DONE WsfTimerStartMs, 585, 720 (ms), 11␍␊
+[14:05:27:714] 00068045: Dats got evt 18␍␊
+[14:05:27:744] @!@ DONE WsfTimerStartMs, 586, 720 (ms), 11␍␊
+[14:05:27:744] 00068076: Dats got evt 18␍␊
+[14:05:27:775] @!@ DONE WsfTimerStartMs, 587, 720 (ms), 11␍␊
+[14:05:27:775] 00068107: Dats got evt 18␍␊
+[14:05:27:805] @!@ DONE WsfTimerStartMs, 588, 720 (ms), 11␍␊
+[14:05:27:805] 00068138: Dats got evt 18␍␊
+[14:05:27:836] @!@ DONE WsfTimerStartMs, 589, 720 (ms), 11␍␊
+[14:05:27:836] 00068169: Dats got evt 18␍␊
+[14:05:27:867] @!@ DONE WsfTimerStartMs, 590, 720 (ms), 11␍␊
+[14:05:27:867] 00068200: Dats got evt 18␍␊
+[14:05:27:898] @!@ DONE WsfTimerStartMs, 591, 720 (ms), 11␍␊
+[14:05:27:898] 00068231: Dats got evt 18␍␊
+[14:05:27:929] @!@ DONE WsfTimerStartMs, 592, 720 (ms), 11␍␊
+[14:05:27:929] 00068262: Dats got evt 18␍␊
+[14:05:27:960] @!@ DONE WsfTimerStartMs, 593, 720 (ms), 11␍␊
+[14:05:27:960] 00068293: Dats got evt 18␍␊
+[14:05:27:991] @!@ DONE WsfTimerStartMs, 594, 720 (ms), 11␍␊
+[14:05:27:991] 00068324: Dats got evt 18␍␊
+[14:05:28:021] @!@ DONE WsfTimerStartMs, 595, 720 (ms), 11␍␊
+[14:05:28:021] 00068355: Dats got evt 18␍␊
+[14:05:28:052] @!@ DONE WsfTimerStartMs, 596, 720 (ms), 11␍␊
+[14:05:28:052] 00068386: Dats got evt 18␍␊
+[14:05:28:083] @!@ DONE WsfTimerStartMs, 597, 720 (ms), 11␍␊
+[14:05:28:083] 00068417: Dats got evt 18␍␊
+[14:05:28:114] @!@ DONE WsfTimerStartMs, 598, 720 (ms), 11␍␊
+[14:05:28:114] 00068448: Dats got evt 18␍␊
+[14:05:28:146] @!@ DONE WsfTimerStartMs, 599, 720 (ms), 11␍␊
+[14:05:28:146] 00068479: Dats got evt 18␍␊
+[14:05:28:146] @!@ DONE WsfTimerStartMs, 600, 720 (ms), 11␍␊
+[14:05:28:161] 00068510: Dats got evt 18␍␊
+[14:05:28:178] @!@ DONE WsfTimerStartMs, 601, 720 (ms), 11␍␊
+[14:05:28:193] 00068541: Dats got evt 18␍␊
+[14:05:28:209] @!@ DONE WsfTimerStartMs, 602, 720 (ms), 11␍␊
+[14:05:28:226] 00068572: Dats got evt 18␍␊
+[14:05:28:269] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
+[14:05:28:269] @!@ DONE WsfTimerStartMs, 603, 720 (ms), 11␍␊
+[14:05:28:269] 00068603: Dats got evt 18␍␊
+[14:05:28:269] @!@ DONE WsfTimerStartMs, 604, 720 (ms), 11␍␊
+[14:05:28:285] 00068634: Dats got evt 18␍␊
+[14:05:28:301] @!@ DONE WsfTimerStartMs, 605, 720 (ms), 11␍␊
+[14:05:28:317] 00068665: Dats got evt 18␍␊
+[14:05:28:333] @!@ DONE WsfTimerStartMs, 606, 720 (ms), 11␍␊
+[14:05:28:349] 00068696: Dats got evt 18␍␊
+[14:05:28:365] @!@ DONE WsfTimerStartMs, 607, 720 (ms), 11␍␊
+[14:05:28:381] 00068727: Dats got evt 18␍␊
+[14:05:28:397] @!@ DONE WsfTimerStartMs, 608, 720 (ms), 11␍␊
+[14:05:28:413] 00068758: Dats got evt 18␍␊
+[14:05:28:429] @!@ DONE WsfTimerStartMs, 609, 720 (ms), 11␍␊
+[14:05:28:445] 00068789: Dats got evt 18␍␊
+[14:05:28:445] @!@ DONE WsfTimerStartMs, 610, 720 (ms), 11␍␊
+[14:05:28:466]     >>> Channel map updated, handle=0, eventCounter=596 <<<␍␊
+[14:05:28:497] 00068820: Dats got evt 18␍␊
+[14:05:28:497] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=BUSY, event=6␍␊
+[14:05:28:497] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:28:497] @!@ DONE WsfTimerStartMs, 611, 720 (ms), 11␍␊
+[14:05:28:523] 00068851: Dats got evt 18␍␊
+[14:05:28:523] @!@ DONE WsfTimerStartMs, 612, 720 (ms), 11␍␊
+[14:05:28:553] 00068882: Dats got evt 18␍␊
+[14:05:28:553] @!@ DONE WsfTimerStartMs, 613, 720 (ms), 11␍␊
+[14:05:28:583] 00068913: Dats got evt 18␍␊
+[14:05:28:583] @!@ DONE WsfTimerStartMs, 614, 720 (ms), 11␍␊
+[14:05:28:613] 00068944: Dats got evt 18␍␊
+[14:05:28:613] @!@ DONE WsfTimerStartMs, 615, 720 (ms), 11␍␊
+[14:05:28:644] @!@ DONE WsfTimerStartMs, 616, 720 (ms), 11␍␊
+[14:05:28:644] 00068975: Dats got evt 18␍␊
+[14:05:28:675] @!@ DONE WsfTimerStartMs, 617, 720 (ms), 11␍␊
+[14:05:28:675] 00069006: Dats got evt 18␍␊
+[14:05:28:704] @!@ DONE WsfTimerStartMs, 618, 720 (ms), 11␍␊
+[14:05:28:704] 00069037: Dats got evt 18␍␊
+[14:05:28:734] @!@ DONE WsfTimerStartMs, 619, 720 (ms), 11␍␊
+[14:05:28:734] 00069068: Dats got evt 18␍␊
+[14:05:28:764] @!@ DONE WsfTimerStartMs, 620, 720 (ms), 11␍␊
+[14:05:28:764] 00069099: Dats got evt 18␍␊
+[14:05:28:794] @!@ DONE WsfTimerStartMs, 621, 720 (ms), 11␍␊
+[14:05:28:794] 00069130: Dats got evt 18␍␊
+[14:05:28:825] @!@ DONE WsfTimerStartMs, 622, 720 (ms), 11␍␊
+[14:05:28:825] 00069161: Dats got evt 18␍␊
+[14:05:28:856] @!@ DONE WsfTimerStartMs, 623, 720 (ms), 11␍␊
+[14:05:28:856] 00069192: Dats got evt 18␍␊
+[14:05:28:887] @!@ DONE WsfTimerStartMs, 624, 720 (ms), 11␍␊
+[14:05:28:887] 00069223: Dats got evt 18␍␊
+[14:05:28:918] @!@ DONE WsfTimerStartMs, 625, 720 (ms), 11␍␊
+[14:05:28:918] 00069254: Dats got evt 18␍␊
+[14:05:28:949] @!@ DONE WsfTimerStartMs, 626, 720 (ms), 11␍␊
+[14:05:28:949] 00069285: Dats got evt 18␍␊
+[14:05:28:981] @!@ DONE WsfTimerStartMs, 627, 720 (ms), 11␍␊
+[14:05:28:981] 00069316: Dats got evt 18␍␊
+[14:05:29:011] @!@ DONE WsfTimerStartMs, 628, 720 (ms), 11␍␊
+[14:05:29:011] 00069347: Dats got evt 18␍␊
+[14:05:29:042] @!@ DONE WsfTimerStartMs, 629, 720 (ms), 11␍␊
+[14:05:29:042] 00069378: Dats got evt 18␍␊
+[14:05:29:073] @!@ DONE WsfTimerStartMs, 630, 720 (ms), 11␍␊
+[14:05:29:073] 00069409: Dats got evt 18␍␊
+[14:05:29:104] @!@ DONE WsfTimerStartMs, 631, 720 (ms), 11␍␊
+[14:05:29:104] 00069440: Dats got evt 18␍␊
+[14:05:29:135] @!@ DONE WsfTimerStartMs, 632, 720 (ms), 11␍␊
+[14:05:29:135] 00069471: Dats got evt 18␍␊
+[14:05:29:135] @!@ DONE WsfTimerStartMs, 633, 720 (ms), 11␍␊
+[14:05:29:151] 00069502: Dats got evt 18␍␊
+[14:05:29:167] @!@ DONE WsfTimerStartMs, 634, 720 (ms), 11␍␊
+[14:05:29:183] 00069533: Dats got evt 18␍␊
+[14:05:29:199] @!@ DONE WsfTimerStartMs, 635, 720 (ms), 11␍␊
+[14:05:29:215] 00069564: Dats got evt 18␍␊
+[14:05:29:231] @!@ DONE WsfTimerStartMs, 636, 720 (ms), 11␍␊
+[14:05:29:247] 00069595: Dats got evt 18␍␊
+[14:05:29:263] @!@ DONE WsfTimerStartMs, 637, 720 (ms), 11␍␊
+[14:05:29:279] 00069626: Dats got evt 18␍␊
+[14:05:29:295] @!@ DONE WsfTimerStartMs, 638, 720 (ms), 11␍␊
+[14:05:29:311] 00069657: Dats got evt 18␍␊
+[14:05:29:327] @!@ DONE WsfTimerStartMs, 639, 720 (ms), 11␍␊
+[14:05:29:343] 00069688: Dats got evt 18␍␊
+[14:05:29:359] @!@ DONE WsfTimerStartMs, 640, 720 (ms), 11␍␊
+[14:05:29:375] 00069719: Dats got evt 18␍␊
+[14:05:29:375] @!@ DONE WsfTimerStartMs, 641, 720 (ms), 11␍␊
+[14:05:29:422] 00069750: Dats got evt 18␍␊
+[14:05:29:422] @!@ DONE WsfTimerStartMs, 642, 720 (ms), 11␍␊
+[14:05:29:452] 00069781: Dats got evt 18␍␊
+[14:05:29:452] @!@ DONE WsfTimerStartMs, 643, 720 (ms), 11␍␊
+[14:05:29:482] 00069812: Dats got evt 18␍␊
+[14:05:29:482] @!@ DONE WsfTimerStartMs, 644, 720 (ms), 11␍␊
+[14:05:29:512] 00069843: Dats got evt 18␍␊
+[14:05:29:512] @!@ DONE WsfTimerStartMs, 645, 720 (ms), 11␍␊
+[14:05:29:542] 00069874: Dats got evt 18␍␊
+[14:05:29:542] @!@ DONE WsfTimerStartMs, 646, 720 (ms), 11␍␊
+[14:05:29:573] 00069905: Dats got evt 18␍␊
+[14:05:29:573] @!@ DONE WsfTimerStartMs, 647, 720 (ms), 11␍␊
+[14:05:29:602] 00069936: Dats got evt 18␍␊
+[14:05:29:602] @!@ DONE WsfTimerStartMs, 648, 720 (ms), 11␍␊
+[14:05:29:633] 00069967: Dats got evt 18␍␊
+[14:05:29:633] @!@ DONE WsfTimerStartMs, 649, 720 (ms), 11␍␊
+[14:05:29:664] @!@ DONE WsfTimerStartMs, 650, 720 (ms), 11␍␊
+[14:05:29:664] 00069998: Dats got evt 18␍␊
+[14:05:29:695] @!@ DONE WsfTimerStartMs, 651, 720 (ms), 11␍␊
+[14:05:29:695] 00070029: Dats got evt 18␍␊
+[14:05:29:725] @!@ DONE WsfTimerStartMs, 652, 720 (ms), 11␍␊
+[14:05:29:725] 00070060: Dats got evt 18␍␊
+[14:05:29:755] @!@ DONE WsfTimerStartMs, 653, 720 (ms), 11␍␊
+[14:05:29:755] 00070091: Dats got evt 18␍␊
+[14:05:29:785] @!@ DONE WsfTimerStartMs, 654, 720 (ms), 11␍␊
+[14:05:29:785] 00070122: Dats got evt 18␍␊
+[14:05:29:815] @!@ DONE WsfTimerStartMs, 655, 720 (ms), 11␍␊
+[14:05:29:815] 00070153: Dats got evt 18␍␊
+[14:05:29:846] @!@ DONE WsfTimerStartMs, 656, 720 (ms), 11␍␊
+[14:05:29:846] 00070184: Dats got evt 18␍␊
+[14:05:29:877] @!@ DONE WsfTimerStartMs, 657, 720 (ms), 11␍␊
+[14:05:29:877] 00070215: Dats got evt 18␍␊
+[14:05:29:908] @!@ DONE WsfTimerStartMs, 658, 720 (ms), 11␍␊
+[14:05:29:908] 00070246: Dats got evt 18␍␊
+[14:05:29:939] @!@ DONE WsfTimerStartMs, 659, 720 (ms), 11␍␊
+[14:05:29:939] 00070277: Dats got evt 18␍␊
+[14:05:29:969] @!@ DONE WsfTimerStartMs, 660, 720 (ms), 11␍␊
+[14:05:29:969] 00070308: Dats got evt 18␍␊
+[14:05:30:000] @!@ DONE WsfTimerStartMs, 661, 720 (ms), 11␍␊
+[14:05:30:000] 00070339: Dats got evt 18␍␊
+[14:05:30:031] @!@ DONE WsfTimerStartMs, 662, 720 (ms), 11␍␊
+[14:05:30:031] 00070370: Dats got evt 18␍␊
+[14:05:30:062] @!@ DONE WsfTimerStartMs, 663, 720 (ms), 11␍␊
+[14:05:30:062] 00070401: Dats got evt 18␍␊
+[14:05:30:093] @!@ DONE WsfTimerStartMs, 664, 720 (ms), 11␍␊
+[14:05:30:093] 00070432: Dats got evt 18␍␊
+[14:05:30:124] @!@ DONE WsfTimerStartMs, 665, 720 (ms), 11␍␊
+[14:05:30:124] 00070463: Dats got evt 18␍␊
+[14:05:30:124] @!@ DONE WsfTimerStartMs, 666, 720 (ms), 11␍␊
+[14:05:30:155] 00070494: Dats got evt 18␍␊
+[14:05:30:155] @!@ DONE WsfTimerStartMs, 667, 720 (ms), 11␍␊
+[14:05:30:171] 00070525: Dats got evt 18␍␊
+[14:05:30:187] @!@ DONE WsfTimerStartMs, 668, 720 (ms), 11␍␊
+[14:05:30:203] 00070556: Dats got evt 18␍␊
+[14:05:30:219] @!@ DONE WsfTimerStartMs, 669, 720 (ms), 11␍␊
+[14:05:30:235] 00070587: Dats got evt 18␍␊
+[14:05:30:251] @!@ DONE WsfTimerStartMs, 670, 720 (ms), 11␍␊
+[14:05:30:267] 00070618: Dats got evt 18␍␊
+[14:05:30:283] @!@ DONE WsfTimerStartMs, 671, 720 (ms), 11␍␊
+[14:05:30:299] 00070649: Dats got evt 18␍␊
+[14:05:30:315] @!@ DONE WsfTimerStartMs, 672, 720 (ms), 11␍␊
+[14:05:30:331] 00070680: Dats got evt 18␍␊
+[14:05:30:347] @!@ DONE WsfTimerStartMs, 673, 720 (ms), 11␍␊
+[14:05:30:363] 00070711: Dats got evt 18␍␊
+[14:05:30:379] @!@ DONE WsfTimerStartMs, 674, 720 (ms), 11␍␊
+[14:05:30:395] 00070742: Dats got evt 18␍␊
+[14:05:30:395] @!@ DONE WsfTimerStartMs, 675, 720 (ms), 11␍␊
+[14:05:30:443] 00070773: Dats got evt 18␍␊
+[14:05:30:443] @!@ DONE WsfTimerStartMs, 676, 720 (ms), 11␍␊
+[14:05:30:473] 00070804: Dats got evt 18␍␊
+[14:05:30:473] @!@ DONE WsfTimerStartMs, 677, 720 (ms), 11␍␊
+[14:05:30:503] 00070835: Dats got evt 18␍␊
+[14:05:30:503] @!@ DONE WsfTimerStartMs, 678, 720 (ms), 11␍␊
+[14:05:30:538] App got evt 16␍␊
+[14:05:30:538] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
+[14:05:30:538] ␍␊
+[14:05:30:538] @!@ DONE WsfTimerStartMs, 679, 5000 (ms), 1␍␊
+[14:05:30:538] 00070866: Dats got evt 18␍␊
+[14:05:30:538] @!@ DONE WsfTimerStartMs, 680, 720 (ms), 11␍␊
+[14:05:30:562] 00070897: Dats got evt 18␍␊
+[14:05:30:562] @!@ DONE WsfTimerStartMs, 681, 720 (ms), 11␍␊
+[14:05:30:592] 00070928: Dats got evt 18␍␊
+[14:05:30:592] @!@ DONE WsfTimerStartMs, 682, 720 (ms), 11␍␊
+[14:05:30:623] 00070959: Dats got evt 18␍␊
+[14:05:30:623] @!@ DONE WsfTimerStartMs, 683, 720 (ms), 11␍␊
+[14:05:30:653] 00070990: Dats got evt 18␍␊
+[14:05:30:653] @!@ DONE WsfTimerStartMs, 684, 720 (ms), 11␍␊
+[14:05:30:684] @!@ DONE WsfTimerStartMs, 685, 720 (ms), 11␍␊
+[14:05:30:684] 00071021: Dats got evt 18␍␊
+[14:05:30:715] @!@ DONE WsfTimerStartMs, 686, 720 (ms), 11␍␊
+[14:05:30:715] 00071052: Dats got evt 18␍␊
+[14:05:30:745] @!@ DONE WsfTimerStartMs, 687, 720 (ms), 11␍␊
+[14:05:30:745] 00071083: Dats got evt 18␍␊
+[14:05:30:775] @!@ DONE WsfTimerStartMs, 688, 720 (ms), 11␍␊
+[14:05:30:775] 00071114: Dats got evt 18␍␊
+[14:05:30:805] @!@ DONE WsfTimerStartMs, 689, 720 (ms), 11␍␊
+[14:05:30:805] 00071145: Dats got evt 18␍␊
+[14:05:30:835] @!@ DONE WsfTimerStartMs, 690, 720 (ms), 11␍␊
+[14:05:30:835] 00071176: Dats got evt 18␍␊
+[14:05:30:866] @!@ DONE WsfTimerStartMs, 691, 720 (ms), 11␍␊
+[14:05:30:866] 00071207: Dats got evt 18␍␊
+[14:05:30:897] @!@ DONE WsfTimerStartMs, 692, 720 (ms), 11␍␊
+[14:05:30:897] 00071238: Dats got evt 18␍␊
+[14:05:30:928] @!@ DONE WsfTimerStartMs, 693, 720 (ms), 11␍␊
+[14:05:30:928] 00071269: Dats got evt 18␍␊
+[14:05:30:958] @!@ DONE WsfTimerStartMs, 694, 720 (ms), 11␍␊
+[14:05:30:958] 00071300: Dats got evt 18␍␊
+[14:05:30:989] @!@ DONE WsfTimerStartMs, 695, 720 (ms), 11␍␊
+[14:05:30:989] 00071331: Dats got evt 18␍␊
+[14:05:31:020] @!@ DONE WsfTimerStartMs, 696, 720 (ms), 11␍␊
+[14:05:31:020] 00071362: Dats got evt 18␍␊
+[14:05:31:051] @!@ DONE WsfTimerStartMs, 697, 720 (ms), 11␍␊
+[14:05:31:051] 00071393: Dats got evt 18␍␊
+[14:05:31:082] @!@ DONE WsfTimerStartMs, 698, 720 (ms), 11␍␊
+[14:05:31:082] 00071424: Dats got evt 18␍␊
+[14:05:31:113] @!@ DONE WsfTimerStartMs, 699, 720 (ms), 11␍␊
+[14:05:31:113] 00071455: Dats got evt 18␍␊
+[14:05:31:144] @!@ DONE WsfTimerStartMs, 700, 720 (ms), 11␍␊
+[14:05:31:144] 00071486: Dats got evt 18␍␊
+[14:05:31:144] @!@ DONE WsfTimerStartMs, 701, 720 (ms), 11␍␊
+[14:05:31:176] 00071517: Dats got evt 18␍␊
+[14:05:31:176] @!@ DONE WsfTimerStartMs, 702, 720 (ms), 11␍␊
+[14:05:31:191] 00071548: Dats got evt 18␍␊
+[14:05:31:208] @!@ DONE WsfTimerStartMs, 703, 720 (ms), 11␍␊
+[14:05:31:223] 00071579: Dats got evt 18␍␊
+[14:05:31:239] @!@ DONE WsfTimerStartMs, 704, 720 (ms), 11␍␊
+[14:05:31:255] 00071610: Dats got evt 18␍␊
+[14:05:31:272] @!@ DONE WsfTimerStartMs, 705, 720 (ms), 11␍␊
+[14:05:31:288] 00071641: Dats got evt 18␍␊
+[14:05:31:304] @!@ DONE WsfTimerStartMs, 706, 720 (ms), 11␍␊
+[14:05:31:320] 00071672: Dats got evt 18␍␊
+[14:05:31:336] @!@ DONE WsfTimerStartMs, 707, 720 (ms), 11␍␊
+[14:05:31:352] 00071703: Dats got evt 18␍␊
+[14:05:31:368] @!@ DONE WsfTimerStartMs, 708, 720 (ms), 11␍␊
+[14:05:31:384] 00071734: Dats got evt 18␍␊
+[14:05:31:400] @!@ DONE WsfTimerStartMs, 709, 720 (ms), 11␍␊
+[14:05:31:416] 00071765: Dats got evt 18␍␊
+[14:05:31:416] @!@ DONE WsfTimerStartMs, 710, 720 (ms), 11␍␊
+[14:05:31:463] 00071796: Dats got evt 18␍␊
+[14:05:31:463] @!@ DONE WsfTimerStartMs, 711, 720 (ms), 11␍␊
+[14:05:31:493] 00071827: Dats got evt 18␍␊
+[14:05:31:493] @!@ DONE WsfTimerStartMs, 712, 720 (ms), 11␍␊
+[14:05:31:523] 00071858: Dats got evt 18␍␊
+[14:05:31:523] @!@ DONE WsfTimerStartMs, 713, 720 (ms), 11␍␊
+[14:05:31:553] 00071889: Dats got evt 18␍␊
+[14:05:31:553] @!@ DONE WsfTimerStartMs, 714, 720 (ms), 11␍␊
+[14:05:31:582] 00071920: Dats got evt 18␍␊
+[14:05:31:582] @!@ DONE WsfTimerStartMs, 715, 720 (ms), 11␍␊
+[14:05:31:612] 00071951: Dats got evt 18␍␊
+[14:05:31:612] @!@ DONE WsfTimerStartMs, 716, 720 (ms), 11␍␊
+[14:05:31:643] 00071982: Dats got evt 18␍␊
+[14:05:31:643] @!@ DONE WsfTimerStartMs, 717, 720 (ms), 11␍␊
+[14:05:31:674] 00072013: Dats got evt 18␍␊
+[14:05:31:674] @!@ DONE WsfTimerStartMs, 718, 720 (ms), 11␍␊
+[14:05:31:704] @!@ DONE WsfTimerStartMs, 719, 720 (ms), 11␍␊
+[14:05:31:704] 00072044: Dats got evt 18␍␊
+[14:05:31:735] @!@ DONE WsfTimerStartMs, 720, 720 (ms), 11␍␊
+[14:05:31:735] 00072075: Dats got evt 18␍␊
+[14:05:31:765] @!@ DONE WsfTimerStartMs, 721, 720 (ms), 11␍␊
+[14:05:31:765] 00072106: Dats got evt 18␍␊
+[14:05:31:795] @!@ DONE WsfTimerStartMs, 722, 720 (ms), 11␍␊
+[14:05:31:795] 00072137: Dats got evt 18␍␊
+[14:05:31:825] @!@ DONE WsfTimerStartMs, 723, 720 (ms), 11␍␊
+[14:05:31:825] 00072168: Dats got evt 18␍␊
+[14:05:31:855] @!@ DONE WsfTimerStartMs, 724, 720 (ms), 11␍␊
+[14:05:31:855] 00072199: Dats got evt 18␍␊
+[14:05:31:886] @!@ DONE WsfTimerStartMs, 725, 720 (ms), 11␍␊
+[14:05:31:886] 00072230: Dats got evt 18␍␊
+[14:05:31:917] @!@ DONE WsfTimerStartMs, 726, 720 (ms), 11␍␊
+[14:05:31:917] 00072261: Dats got evt 18␍␊
+[14:05:31:948] @!@ DONE WsfTimerStartMs, 727, 720 (ms), 11␍␊
+[14:05:31:948] 00072292: Dats got evt 18␍␊
+[14:05:31:979] @!@ DONE WsfTimerStartMs, 728, 720 (ms), 11␍␊
+[14:05:31:979] 00072323: Dats got evt 18␍␊
+[14:05:32:010] @!@ DONE WsfTimerStartMs, 729, 720 (ms), 11␍␊
+[14:05:32:010] 00072354: Dats got evt 18␍␊
+[14:05:32:040] @!@ DONE WsfTimerStartMs, 730, 720 (ms), 11␍␊
+[14:05:32:040] 00072385: Dats got evt 18␍␊
+[14:05:32:072] @!@ DONE WsfTimerStartMs, 731, 720 (ms), 11␍␊
+[14:05:32:072] 00072416: Dats got evt 18␍␊
+[14:05:32:103] @!@ DONE WsfTimerStartMs, 732, 720 (ms), 11␍␊
+[14:05:32:103] 00072447: Dats got evt 18␍␊
+[14:05:32:134] @!@ DONE WsfTimerStartMs, 733, 720 (ms), 11␍␊
+[14:05:32:134] 00072478: Dats got evt 18␍␊
+[14:05:32:165] @!@ DONE WsfTimerStartMs, 734, 720 (ms), 11␍␊
+[14:05:32:165] 00072509: Dats got evt 18␍␊
+[14:05:32:165] @!@ DONE WsfTimerStartMs, 735, 720 (ms), 11␍␊
+[14:05:32:196] 00072540: Dats got evt 18␍␊
+[14:05:32:196] @!@ DONE WsfTimerStartMs, 736, 720 (ms), 11␍␊
+[14:05:32:212] 00072571: Dats got evt 18␍␊
+[14:05:32:228] @!@ DONE WsfTimerStartMs, 737, 720 (ms), 11␍␊
+[14:05:32:244] 00072602: Dats got evt 18␍␊
+[14:05:32:260] @!@ DONE WsfTimerStartMs, 738, 720 (ms), 11␍␊
+[14:05:32:276] 00072633: Dats got evt 18␍␊
+[14:05:32:292] @!@ DONE WsfTimerStartMs, 739, 720 (ms), 11␍␊
+[14:05:32:308] 00072664: Dats got evt 18␍␊
+[14:05:32:324] @!@ DONE WsfTimerStartMs, 740, 720 (ms), 11␍␊
+[14:05:32:340] 00072695: Dats got evt 18␍␊
+[14:05:32:356] @!@ DONE WsfTimerStartMs, 741, 720 (ms), 11␍␊
+[14:05:32:372] 00072726: Dats got evt 18␍␊
+[14:05:32:388] @!@ DONE WsfTimerStartMs, 742, 720 (ms), 11␍␊
+[14:05:32:404] 00072757: Dats got evt 18␍␊
+[14:05:32:404] @!@ DONE WsfTimerStartMs, 743, 720 (ms), 11␍␊
+[14:05:32:436] 00072788: Dats got evt 18␍␊
+[14:05:32:436] @!@ DONE WsfTimerStartMs, 744, 720 (ms), 11␍␊
+[14:05:32:483] 00072819: Dats got evt 18␍␊
+[14:05:32:483] @!@ DONE WsfTimerStartMs, 745, 720 (ms), 11␍␊
+[14:05:32:513] 00072850: Dats got evt 18␍␊
+[14:05:32:513] @!@ DONE WsfTimerStartMs, 746, 720 (ms), 11␍␊
+[14:05:32:543] 00072881: Dats got evt 18␍␊
+[14:05:32:543] @!@ DONE WsfTimerStartMs, 747, 720 (ms), 11␍␊
+[14:05:32:573] 00072912: Dats got evt 18␍␊
+[14:05:32:573] @!@ DONE WsfTimerStartMs, 748, 720 (ms), 11␍␊
+[14:05:32:602] 00072943: Dats got evt 18␍␊
+[14:05:32:602] @!@ DONE WsfTimerStartMs, 749, 720 (ms), 11␍␊
+[14:05:32:632] 00072974: Dats got evt 18␍␊
+[14:05:32:632] @!@ DONE WsfTimerStartMs, 750, 720 (ms), 11␍␊
+[14:05:32:662] 00073005: Dats got evt 18␍␊
+[14:05:32:662] @!@ DONE WsfTimerStartMs, 751, 720 (ms), 11␍␊
+[14:05:32:693] @!@ DONE WsfTimerStartMs, 752, 720 (ms), 11␍␊
+[14:05:32:693] 00073036: Dats got evt 18␍␊
+[14:05:32:724] @!@ DONE WsfTimerStartMs, 753, 720 (ms), 11␍␊
+[14:05:32:724] 00073067: Dats got evt 18␍␊
+[14:05:32:754] @!@ DONE WsfTimerStartMs, 754, 720 (ms), 11␍␊
+[14:05:32:754] 00073098: Dats got evt 18␍␊
+[14:05:32:785] @!@ DONE WsfTimerStartMs, 755, 720 (ms), 11␍␊
+[14:05:32:785] 00073129: Dats got evt 18␍␊
+[14:05:32:816] @!@ DONE WsfTimerStartMs, 756, 720 (ms), 11␍␊
+[14:05:32:816] 00073160: Dats got evt 18␍␊
+[14:05:32:846] @!@ DONE WsfTimerStartMs, 757, 720 (ms), 11␍␊
+[14:05:32:846] 00073191: Dats got evt 18␍␊
+[14:05:32:876] @!@ DONE WsfTimerStartMs, 758, 720 (ms), 11␍␊
+[14:05:32:876] 00073222: Dats got evt 18␍␊
+[14:05:32:907] @!@ DONE WsfTimerStartMs, 759, 720 (ms), 11␍␊
+[14:05:32:907] 00073253: Dats got evt 18␍␊
+[14:05:32:938] @!@ DONE WsfTimerStartMs, 760, 720 (ms), 11␍␊
+[14:05:32:938] 00073284: Dats got evt 18␍␊
+[14:05:32:968] @!@ DONE WsfTimerStartMs, 761, 720 (ms), 11␍␊
+[14:05:32:968] 00073315: Dats got evt 18␍␊
+[14:05:32:999] @!@ DONE WsfTimerStartMs, 762, 720 (ms), 11␍␊
+[14:05:32:999] 00073346: Dats got evt 18␍␊
+[14:05:33:030] @!@ DONE WsfTimerStartMs, 763, 720 (ms), 11␍␊
+[14:05:33:030] 00073377: Dats got evt 18␍␊
+[14:05:33:061] @!@ DONE WsfTimerStartMs, 764, 720 (ms), 11␍␊
+[14:05:33:061] 00073408: Dats got evt 18␍␊
+[14:05:33:092] @!@ DONE WsfTimerStartMs, 765, 720 (ms), 11␍␊
+[14:05:33:092] 00073439: Dats got evt 18␍␊
+[14:05:33:123] @!@ DONE WsfTimerStartMs, 766, 720 (ms), 11␍␊
+[14:05:33:123] 00073470: Dats got evt 18␍␊
+[14:05:33:154] @!@ DONE WsfTimerStartMs, 767, 720 (ms), 11␍␊
+[14:05:33:154] 00073501: Dats got evt 18␍␊
+[14:05:33:154] @!@ DONE WsfTimerStartMs, 768, 720 (ms), 11␍␊
+[14:05:33:185] 00073532: Dats got evt 18␍␊
+[14:05:33:185] @!@ DONE WsfTimerStartMs, 769, 720 (ms), 11␍␊
+[14:05:33:216] 00073563: Dats got evt 18␍␊
+[14:05:33:216] @!@ DONE WsfTimerStartMs, 770, 720 (ms), 11␍␊
+[14:05:33:232] 00073594: Dats got evt 18␍␊
+[14:05:33:248] @!@ DONE WsfTimerStartMs, 771, 720 (ms), 11␍␊
+[14:05:33:264] 00073625: Dats got evt 18␍␊
+[14:05:33:280] @!@ DONE WsfTimerStartMs, 772, 720 (ms), 11␍␊
+[14:05:33:296] 00073656: Dats got evt 18␍␊
+[14:05:33:312] @!@ DONE WsfTimerStartMs, 773, 720 (ms), 11␍␊
+[14:05:33:328] 00073687: Dats got evt 18␍␊
+[14:05:33:344] @!@ DONE WsfTimerStartMs, 774, 720 (ms), 11␍␊
+[14:05:33:360] 00073718: Dats got evt 18␍␊
+[14:05:33:376] @!@ DONE WsfTimerStartMs, 775, 720 (ms), 11␍␊
+[14:05:33:392] 00073749: Dats got evt 18␍␊
+[14:05:33:408] @!@ DONE WsfTimerStartMs, 776, 720 (ms), 11␍␊
+[14:05:33:424] 00073780: Dats got evt 18␍␊
+[14:05:33:424] @!@ DONE WsfTimerStartMs, 777, 720 (ms), 11␍␊
+[14:05:33:456] 00073811: Dats got evt 18␍␊
+[14:05:33:456] @!@ DONE WsfTimerStartMs, 778, 720 (ms), 11␍␊
+[14:05:33:502] 00073842: Dats got evt 18␍␊
+[14:05:33:502] @!@ DONE WsfTimerStartMs, 779, 720 (ms), 11␍␊
+[14:05:33:532] 00073873: Dats got evt 18␍␊
+[14:05:33:532] @!@ DONE WsfTimerStartMs, 780, 720 (ms), 11␍␊
+[14:05:33:563] 00073904: Dats got evt 18␍␊
+[14:05:33:563] @!@ DONE WsfTimerStartMs, 781, 720 (ms), 11␍␊
+[14:05:33:592] 00073935: Dats got evt 18␍␊
+[14:05:33:592] @!@ DONE WsfTimerStartMs, 782, 720 (ms), 11␍␊
+[14:05:33:623] 00073966: Dats got evt 18␍␊
+[14:05:33:623] @!@ DONE WsfTimerStartMs, 783, 720 (ms), 11␍␊
+[14:05:33:653] 00073997: Dats got evt 18␍␊
+[14:05:33:653] @!@ DONE WsfTimerStartMs, 784, 720 (ms), 11␍␊
+[14:05:33:684] 00074028: Dats got evt 18␍␊
+[14:05:33:684] @!@ DONE WsfTimerStartMs, 785, 720 (ms), 11␍␊
+[14:05:33:714] @!@ DONE WsfTimerStartMs, 786, 720 (ms), 11␍␊
+[14:05:33:714] 00074059: Dats got evt 18␍␊
+[14:05:33:745] @!@ DONE WsfTimerStartMs, 787, 720 (ms), 11␍␊
+[14:05:33:745] 00074090: Dats got evt 18␍␊
+[14:05:33:775] @!@ DONE WsfTimerStartMs, 788, 720 (ms), 11␍␊
+[14:05:33:775] 00074121: Dats got evt 18␍␊
+[14:05:33:805] @!@ DONE WsfTimerStartMs, 789, 720 (ms), 11␍␊
+[14:05:33:805] 00074152: Dats got evt 18␍␊
+[14:05:33:835] @!@ DONE WsfTimerStartMs, 790, 720 (ms), 11␍␊
+[14:05:33:835] 00074183: Dats got evt 18␍␊
+[14:05:33:865] @!@ DONE WsfTimerStartMs, 791, 720 (ms), 11␍␊
+[14:05:33:865] 00074214: Dats got evt 18␍␊
+[14:05:33:896] @!@ DONE WsfTimerStartMs, 792, 720 (ms), 11␍␊
+[14:05:33:896] 00074245: Dats got evt 18␍␊
+[14:05:33:927] @!@ DONE WsfTimerStartMs, 793, 720 (ms), 11␍␊
+[14:05:33:927] 00074276: Dats got evt 18␍␊
+[14:05:33:958] @!@ DONE WsfTimerStartMs, 794, 720 (ms), 11␍␊
+[14:05:33:958] 00074307: Dats got evt 18␍␊
+[14:05:33:988] @!@ DONE WsfTimerStartMs, 795, 720 (ms), 11␍␊
+[14:05:33:988] 00074338: Dats got evt 18␍␊
+[14:05:34:019] @!@ DONE WsfTimerStartMs, 796, 720 (ms), 11␍␊
+[14:05:34:019] 00074369: Dats got evt 18␍␊
+[14:05:34:050] @!@ DONE WsfTimerStartMs, 797, 720 (ms), 11␍␊
+[14:05:34:050] 00074400: Dats got evt 18␍␊
+[14:05:34:081] @!@ DONE WsfTimerStartMs, 798, 720 (ms), 11␍␊
+[14:05:34:081] 00074431: Dats got evt 18␍␊
+[14:05:34:112] @!@ DONE WsfTimerStartMs, 799, 720 (ms), 11␍␊
+[14:05:34:112] 00074462: Dats got evt 18␍␊
+[14:05:34:143] @!@ DONE WsfTimerStartMs, 800, 720 (ms), 11␍␊
+[14:05:34:143] 00074493: Dats got evt 18␍␊
+[14:05:34:174] @!@ DONE WsfTimerStartMs, 801, 720 (ms), 11␍␊
+[14:05:34:174] 00074524: Dats got evt 18␍␊
+[14:05:34:174] @!@ DONE WsfTimerStartMs, 802, 720 (ms), 11␍␊
+[14:05:34:205] 00074555: Dats got evt 18␍␊
+[14:05:34:205] @!@ DONE WsfTimerStartMs, 803, 720 (ms), 11␍␊
+[14:05:34:221] 00074586: Dats got evt 18␍␊
+[14:05:34:237] @!@ DONE WsfTimerStartMs, 804, 720 (ms), 11␍␊
+[14:05:34:253] 00074617: Dats got evt 18␍␊
+[14:05:34:269] @!@ DONE WsfTimerStartMs, 805, 720 (ms), 11␍␊
+[14:05:34:285] 00074648: Dats got evt 18␍␊
+[14:05:34:301] @!@ DONE WsfTimerStartMs, 806, 720 (ms), 11␍␊
+[14:05:34:317] 00074679: Dats got evt 18␍␊
+[14:05:34:333] @!@ DONE WsfTimerStartMs, 807, 720 (ms), 11␍␊
+[14:05:34:349] 00074710: Dats got evt 18␍␊
+[14:05:34:365] @!@ DONE WsfTimerStartMs, 808, 720 (ms), 11␍␊
+[14:05:34:381] 00074741: Dats got evt 18␍␊
+[14:05:34:397] @!@ DONE WsfTimerStartMs, 809, 720 (ms), 11␍␊
+[14:05:34:413] 00074772: Dats got evt 18␍␊
+[14:05:34:429] @!@ DONE WsfTimerStartMs, 810, 720 (ms), 11␍␊
+[14:05:34:445] 00074803: Dats got evt 18␍␊
+[14:05:34:445] @!@ DONE WsfTimerStartMs, 811, 720 (ms), 11␍␊
+[14:05:34:493] 00074834: Dats got evt 18␍␊
+[14:05:34:493] @!@ DONE WsfTimerStartMs, 812, 720 (ms), 11␍␊
+[14:05:34:523] 00074865: Dats got evt 18␍␊
+[14:05:34:523] @!@ DONE WsfTimerStartMs, 813, 720 (ms), 11␍␊
+[14:05:34:553] 00074896: Dats got evt 18␍␊
+[14:05:34:553] @!@ DONE WsfTimerStartMs, 814, 720 (ms), 11␍␊
+[14:05:34:583] 00074927: Dats got evt 18␍␊
+[14:05:34:583] @!@ DONE WsfTimerStartMs, 815, 720 (ms), 11␍␊
+[14:05:34:612] 00074958: Dats got evt 18␍␊
+[14:05:34:612] @!@ DONE WsfTimerStartMs, 816, 720 (ms), 11␍␊
+[14:05:34:643] 00074989: Dats got evt 18␍␊
+[14:05:34:643] @!@ DONE WsfTimerStartMs, 817, 720 (ms), 11␍␊
+[14:05:34:673] 00075020: Dats got evt 18␍␊
+[14:05:34:673] @!@ DONE WsfTimerStartMs, 818, 720 (ms), 11␍␊
+[14:05:34:703] 00075051: Dats got evt 18␍␊
+[14:05:34:703] @!@ DONE WsfTimerStartMs, 819, 720 (ms), 11␍␊
+[14:05:34:734] @!@ DONE WsfTimerStartMs, 820, 720 (ms), 11␍␊
+[14:05:34:734] 00075082: Dats got evt 18␍␊
+[14:05:34:765] @!@ DONE WsfTimerStartMs, 821, 720 (ms), 11␍␊
+[14:05:34:765] 00075113: Dats got evt 18␍␊
+[14:05:34:795] @!@ DONE WsfTimerStartMs, 822, 720 (ms), 11␍␊
+[14:05:34:795] 00075144: Dats got evt 18␍␊
+[14:05:34:825] @!@ DONE WsfTimerStartMs, 823, 720 (ms), 11␍␊
+[14:05:34:825] 00075175: Dats got evt 18␍␊
+[14:05:34:855] @!@ DONE WsfTimerStartMs, 824, 720 (ms), 11␍␊
+[14:05:34:855] 00075206: Dats got evt 18␍␊
+[14:05:34:885] @!@ DONE WsfTimerStartMs, 825, 720 (ms), 11␍␊
+[14:05:34:885] 00075237: Dats got evt 18␍␊
+[14:05:34:916] @!@ DONE WsfTimerStartMs, 826, 720 (ms), 11␍␊
+[14:05:34:916] 00075268: Dats got evt 18␍␊
+[14:05:34:947] @!@ DONE WsfTimerStartMs, 827, 720 (ms), 11␍␊
+[14:05:34:947] 00075299: Dats got evt 18␍␊
+[14:05:34:977] @!@ DONE WsfTimerStartMs, 828, 720 (ms), 11␍␊
+[14:05:34:977] 00075330: Dats got evt 18␍␊
+[14:05:35:008] @!@ DONE WsfTimerStartMs, 829, 720 (ms), 11␍␊
+[14:05:35:008] 00075361: Dats got evt 18␍␊
+[14:05:35:039] @!@ DONE WsfTimerStartMs, 830, 720 (ms), 11␍␊
+[14:05:35:039] 00075392: Dats got evt 18␍␊
+[14:05:35:070] @!@ DONE WsfTimerStartMs, 831, 720 (ms), 11␍␊
+[14:05:35:070] 00075423: Dats got evt 18␍␊
+[14:05:35:101] @!@ DONE WsfTimerStartMs, 832, 720 (ms), 11␍␊
+[14:05:35:101] 00075454: Dats got evt 18␍␊
+[14:05:35:132] @!@ DONE WsfTimerStartMs, 833, 720 (ms), 11␍␊
+[14:05:35:132] 00075485: Dats got evt 18␍␊
+[14:05:35:163] @!@ DONE WsfTimerStartMs, 834, 720 (ms), 11␍␊
+[14:05:35:163] 00075516: Dats got evt 18␍␊
+[14:05:35:194] @!@ DONE WsfTimerStartMs, 835, 720 (ms), 11␍␊
+[14:05:35:194] 00075547: Dats got evt 18␍␊
+[14:05:35:194] @!@ DONE WsfTimerStartMs, 836, 720 (ms), 11␍␊
+[14:05:35:226] 00075578: Dats got evt 18␍␊
+[14:05:35:226] @!@ DONE WsfTimerStartMs, 837, 720 (ms), 11␍␊
+[14:05:35:242] 00075609: Dats got evt 18␍␊
+[14:05:35:258] @!@ DONE WsfTimerStartMs, 838, 720 (ms), 11␍␊
+[14:05:35:273] 00075640: Dats got evt 18␍␊
+[14:05:35:290] @!@ DONE WsfTimerStartMs, 839, 720 (ms), 11␍␊
+[14:05:35:306] 00075671: Dats got evt 18␍␊
+[14:05:35:322] @!@ DONE WsfTimerStartMs, 840, 720 (ms), 11␍␊
+[14:05:35:338] 00075702: Dats got evt 18␍␊
+[14:05:35:354] @!@ DONE WsfTimerStartMs, 841, 720 (ms), 11␍␊
+[14:05:35:370] 00075733: Dats got evt 18␍␊
+[14:05:35:386] @!@ DONE WsfTimerStartMs, 842, 720 (ms), 11␍␊
+[14:05:35:402] 00075764: Dats got evt 18␍␊
+[14:05:35:418] @!@ DONE WsfTimerStartMs, 843, 720 (ms), 11␍␊
+[14:05:35:434] 00075795: Dats got evt 18␍␊
+[14:05:35:450] @!@ DONE WsfTimerStartMs, 844, 720 (ms), 11␍␊
+[14:05:35:466] 00075826: Dats got evt 18␍␊
+[14:05:35:466] @!@ DONE WsfTimerStartMs, 845, 720 (ms), 11␍␊
+[14:05:35:522] 00075857: Dats got evt 18␍␊
+[14:05:35:522] App got evt 16␍␊
+[14:05:35:522] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
+[14:05:35:522] ␍␊
+[14:05:35:522] @!@ DONE WsfTimerStartMs, 846, 5000 (ms), 1␍␊
+[14:05:35:522] @!@ DONE WsfTimerStartMs, 847, 720 (ms), 11␍␊
+[14:05:35:522] 00075888: Dats got evt 18␍␊
+[14:05:35:538] @!@ DONE WsfTimerStartMs, 848, 720 (ms), 11␍␊
+[14:05:35:554] 00075919: Dats got evt 18␍␊
+[14:05:35:570] @!@ DONE WsfTimerStartMs, 849, 720 (ms), 11␍␊
+[14:05:35:586] 00075950: Dats got evt 18␍␊
+[14:05:35:586] @!@ DONE WsfTimerStartMs, 850, 720 (ms), 11␍␊
+[14:05:35:632] 00075981: Dats got evt 18␍␊
+[14:05:35:632] @!@ DONE WsfTimerStartMs, 851, 720 (ms), 11␍␊
+[14:05:35:662] 00076012: Dats got evt 18␍␊
+[14:05:35:662] @!@ DONE WsfTimerStartMs, 852, 720 (ms), 11␍␊
+[14:05:35:693] 00076043: Dats got evt 18␍␊
+[14:05:35:693] @!@ DONE WsfTimerStartMs, 853, 720 (ms), 11␍␊
+[14:05:35:723] 00076074: Dats got evt 18␍␊
+[14:05:35:723] @!@ DONE WsfTimerStartMs, 854, 720 (ms), 11␍␊
+[14:05:35:754] 00076105: Dats got evt 18␍␊
+[14:05:35:754] @!@ DONE WsfTimerStartMs, 855, 720 (ms), 11␍␊
+[14:05:35:785] @!@ DONE WsfTimerStartMs, 856, 720 (ms), 11␍␊
+[14:05:35:785] 00076136: Dats got evt 18␍␊
+[14:05:35:815] @!@ DONE WsfTimerStartMs, 857, 720 (ms), 11␍␊
+[14:05:35:815] 00076167: Dats got evt 18␍␊
+[14:05:35:845] @!@ DONE WsfTimerStartMs, 858, 720 (ms), 11␍␊
+[14:05:35:845] 00076198: Dats got evt 18␍␊
+[14:05:35:875] @!@ DONE WsfTimerStartMs, 859, 720 (ms), 11␍␊
+[14:05:35:875] 00076229: Dats got evt 18␍␊
+[14:05:35:905] @!@ DONE WsfTimerStartMs, 860, 720 (ms), 11␍␊
+[14:05:35:905] 00076260: Dats got evt 18␍␊
+[14:05:35:936] @!@ DONE WsfTimerStartMs, 861, 720 (ms), 11␍␊
+[14:05:35:936] 00076291: Dats got evt 18␍␊
+[14:05:35:967] @!@ DONE WsfTimerStartMs, 862, 720 (ms), 11␍␊
+[14:05:35:967] 00076322: Dats got evt 18␍␊
+[14:05:35:998] @!@ DONE WsfTimerStartMs, 863, 720 (ms), 11␍␊
+[14:05:35:998] 00076353: Dats got evt 18␍␊
+[14:05:36:029] @!@ DONE WsfTimerStartMs, 864, 720 (ms), 11␍␊
+[14:05:36:029] 00076384: Dats got evt 18␍␊
+[14:05:36:060] @!@ DONE WsfTimerStartMs, 865, 720 (ms), 11␍␊
+[14:05:36:060] 00076415: Dats got evt 18␍␊
+[14:05:36:091] @!@ DONE WsfTimerStartMs, 866, 720 (ms), 11␍␊
+[14:05:36:091] 00076446: Dats got evt 18␍␊
+[14:05:36:122] @!@ DONE WsfTimerStartMs, 867, 720 (ms), 11␍␊
+[14:05:36:122] 00076477: Dats got evt 18␍␊
+[14:05:36:153] @!@ DONE WsfTimerStartMs, 868, 720 (ms), 11␍␊
+[14:05:36:153] 00076508: Dats got evt 18␍␊
+[14:05:36:184] @!@ DONE WsfTimerStartMs, 869, 720 (ms), 11␍␊
+[14:05:36:184] 00076539: Dats got evt 18␍␊
+[14:05:36:215] @!@ DONE WsfTimerStartMs, 870, 720 (ms), 11␍␊
+[14:05:36:215] 00076570: Dats got evt 18␍␊
+[14:05:36:215] @!@ DONE WsfTimerStartMs, 871, 720 (ms), 11␍␊
+[14:05:36:246] 00076601: Dats got evt 18␍␊
+[14:05:36:246] @!@ DONE WsfTimerStartMs, 872, 720 (ms), 11␍␊
+[14:05:36:262] 00076632: Dats got evt 18␍␊
+[14:05:36:278] @!@ DONE WsfTimerStartMs, 873, 720 (ms), 11␍␊
+[14:05:36:294] 00076663: Dats got evt 18␍␊
+[14:05:36:310] @!@ DONE WsfTimerStartMs, 874, 720 (ms), 11␍␊
+[14:05:36:326] 00076694: Dats got evt 18␍␊
+[14:05:36:342] @!@ DONE WsfTimerStartMs, 875, 720 (ms), 11␍␊
+[14:05:36:358] 00076725: Dats got evt 18␍␊
+[14:05:36:374] @!@ DONE WsfTimerStartMs, 876, 720 (ms), 11␍␊
+[14:05:36:390] 00076756: Dats got evt 18␍␊
+[14:05:36:406] @!@ DONE WsfTimerStartMs, 877, 720 (ms), 11␍␊
+[14:05:36:422] 00076787: Dats got evt 18␍␊
+[14:05:36:438] @!@ DONE WsfTimerStartMs, 878, 720 (ms), 11␍␊
+[14:05:36:454] 00076818: Dats got evt 18␍␊
+[14:05:36:454] @!@ DONE WsfTimerStartMs, 879, 720 (ms), 11␍␊
+[14:05:36:486] 00076849: Dats got evt 18␍␊
+[14:05:36:486] @!@ DONE WsfTimerStartMs, 880, 720 (ms), 11␍␊
+[14:05:36:533] 00076880: Dats got evt 18␍␊
+[14:05:36:533] @!@ DONE WsfTimerStartMs, 881, 720 (ms), 11␍␊
+[14:05:36:563] 00076911: Dats got evt 18␍␊
+[14:05:36:563] @!@ DONE WsfTimerStartMs, 882, 720 (ms), 11␍␊
+[14:05:36:592] 00076942: Dats got evt 18␍␊
+[14:05:36:592] @!@ DONE WsfTimerStartMs, 883, 720 (ms), 11␍␊
+[14:05:36:622] 00076973: Dats got evt 18␍␊
+[14:05:36:622] @!@ DONE WsfTimerStartMs, 884, 720 (ms), 11␍␊
+[14:05:36:652] 00077004: Dats got evt 18␍␊
+[14:05:36:652] @!@ DONE WsfTimerStartMs, 885, 720 (ms), 11␍␊
+[14:05:36:683] 00077035: Dats got evt 18␍␊
+[14:05:36:683] @!@ DONE WsfTimerStartMs, 886, 720 (ms), 11␍␊
+[14:05:36:712] 00077066: Dats got evt 18␍␊
+[14:05:36:712] @!@ DONE WsfTimerStartMs, 887, 720 (ms), 11␍␊
+[14:05:36:743] @!@ DONE WsfTimerStartMs, 888, 720 (ms), 11␍␊
+[14:05:36:743] 00077097: Dats got evt 18␍␊
+[14:05:36:775] @!@ DONE WsfTimerStartMs, 889, 720 (ms), 11␍␊
+[14:05:36:775] 00077128: Dats got evt 18␍␊
+[14:05:36:805] @!@ DONE WsfTimerStartMs, 890, 720 (ms), 11␍␊
+[14:05:36:805] 00077159: Dats got evt 18␍␊
+[14:05:36:835] @!@ DONE WsfTimerStartMs, 891, 720 (ms), 11␍␊
+[14:05:36:835] 00077190: Dats got evt 18␍␊
+[14:05:36:866] @!@ DONE WsfTimerStartMs, 892, 720 (ms), 11␍␊
+[14:05:36:866] 00077221: Dats got evt 18␍␊
+[14:05:36:896] @!@ DONE WsfTimerStartMs, 893, 720 (ms), 11␍␊
+[14:05:36:896] 00077252: Dats got evt 18␍␊
+[14:05:36:926] @!@ DONE WsfTimerStartMs, 894, 720 (ms), 11␍␊
+[14:05:36:926] 00077283: Dats got evt 18␍␊
+[14:05:36:957] @!@ DONE WsfTimerStartMs, 895, 720 (ms), 11␍␊
+[14:05:36:957] 00077314: Dats got evt 18␍␊
+[14:05:36:987] @!@ DONE WsfTimerStartMs, 896, 720 (ms), 11␍␊
+[14:05:36:987] 00077345: Dats got evt 18␍␊
+[14:05:37:018] @!@ DONE WsfTimerStartMs, 897, 720 (ms), 11␍␊
+[14:05:37:018] 00077376: Dats got evt 18␍␊
+[14:05:37:049] @!@ DONE WsfTimerStartMs, 898, 720 (ms), 11␍␊
+[14:05:37:049] 00077407: Dats got evt 18␍␊
+[14:05:37:080] @!@ DONE WsfTimerStartMs, 899, 720 (ms), 11␍␊
+[14:05:37:080] 00077438: Dats got evt 18␍␊
+[14:05:37:111] @!@ DONE WsfTimerStartMs, 900, 720 (ms), 11␍␊
+[14:05:37:111] 00077469: Dats got evt 18␍␊
+[14:05:37:142] @!@ DONE WsfTimerStartMs, 901, 720 (ms), 11␍␊
+[14:05:37:142] 00077500: Dats got evt 18␍␊
+[14:05:37:173] @!@ DONE WsfTimerStartMs, 902, 720 (ms), 11␍␊
+[14:05:37:173] 00077531: Dats got evt 18␍␊
+[14:05:37:204] @!@ DONE WsfTimerStartMs, 903, 720 (ms), 11␍␊
+[14:05:37:204] 00077562: Dats got evt 18␍␊
+[14:05:37:234] @!@ DONE WsfTimerStartMs, 904, 720 (ms), 11␍␊
+[14:05:37:234] 00077593: Dats got evt 18␍␊
+[14:05:37:265] @!@ DONE WsfTimerStartMs, 905, 720 (ms), 11␍␊
+[14:05:37:265] 00077624: Dats got evt 18␍␊
+[14:05:37:265] @!@ DONE WsfTimerStartMs, 906, 720 (ms), 11␍␊
+[14:05:37:281] 00077655: Dats got evt 18␍␊
+[14:05:37:297] @!@ DONE WsfTimerStartMs, 907, 720 (ms), 11␍␊
+[14:05:37:313] 00077686: Dats got evt 18␍␊
+[14:05:37:329] @!@ DONE WsfTimerStartMs, 908, 720 (ms), 11␍␊
+[14:05:37:345] 00077717: Dats got evt 18␍␊
+[14:05:37:361] @!@ DONE WsfTimerStartMs, 909, 720 (ms), 11␍␊
+[14:05:37:377] 00077748: Dats got evt 18␍␊
+[14:05:37:393] @!@ DONE WsfTimerStartMs, 910, 720 (ms), 11␍␊
+[14:05:37:409] 00077779: Dats got evt 18␍␊
+[14:05:37:425] @!@ DONE WsfTimerStartMs, 911, 720 (ms), 11␍␊
+[14:05:37:442] 00077810: Dats got evt 18␍␊
+[14:05:37:458] @!@ DONE WsfTimerStartMs, 912, 720 (ms), 11␍␊
+[14:05:37:474] 00077841: Dats got evt 18␍␊
+[14:05:37:490] @!@ DONE WsfTimerStartMs, 913, 720 (ms), 11␍␊
+[14:05:37:506] 00077872: Dats got evt 18␍␊
+[14:05:37:506] @!@ DONE WsfTimerStartMs, 914, 720 (ms), 11␍␊
+[14:05:37:553] 00077903: Dats got evt 18␍␊
+[14:05:37:553] @!@ DONE WsfTimerStartMs, 915, 720 (ms), 11␍␊
+[14:05:37:583] 00077934: Dats got evt 18␍␊
+[14:05:37:583] @!@ DONE WsfTimerStartMs, 916, 720 (ms), 11␍␊
+[14:05:37:613] 00077965: Dats got evt 18␍␊
+[14:05:37:613] @!@ DONE WsfTimerStartMs, 917, 720 (ms), 11␍␊
+[14:05:37:643] 00077996: Dats got evt 18␍␊
+[14:05:37:643] @!@ DONE WsfTimerStartMs, 918, 720 (ms), 11␍␊
+[14:05:37:673] 00078027: Dats got evt 18␍␊
+[14:05:37:673] @!@ DONE WsfTimerStartMs, 919, 720 (ms), 11␍␊
+[14:05:37:703] 00078058: Dats got evt 18␍␊
+[14:05:37:703] @!@ DONE WsfTimerStartMs, 920, 720 (ms), 11␍␊
+[14:05:37:733] 00078089: Dats got evt 18␍␊
+[14:05:37:733] @!@ DONE WsfTimerStartMs, 921, 720 (ms), 11␍␊
+[14:05:37:764] @!@ DONE WsfTimerStartMs, 922, 720 (ms), 11␍␊
+[14:05:37:764] 00078120: Dats got evt 18␍␊
+[14:05:37:795] @!@ DONE WsfTimerStartMs, 923, 720 (ms), 11␍␊
+[14:05:37:795] 00078151: Dats got evt 18␍␊
+[14:05:37:825] @!@ DONE WsfTimerStartMs, 924, 720 (ms), 11␍␊
+[14:05:37:825] 00078182: Dats got evt 18␍␊
+[14:05:37:855] @!@ DONE WsfTimerStartMs, 925, 720 (ms), 11␍␊
+[14:05:37:855] 00078213: Dats got evt 18␍␊
+[14:05:37:885] @!@ DONE WsfTimerStartMs, 926, 720 (ms), 11␍␊
+[14:05:37:885] 00078244: Dats got evt 18␍␊
+[14:05:37:915] @!@ DONE WsfTimerStartMs, 927, 720 (ms), 11␍␊
+[14:05:37:915] 00078275: Dats got evt 18␍␊
+[14:05:37:946] @!@ DONE WsfTimerStartMs, 928, 720 (ms), 11␍␊
+[14:05:37:946] 00078306: Dats got evt 18␍␊
+[14:05:37:976] @!@ DONE WsfTimerStartMs, 929, 720 (ms), 11␍␊
+[14:05:37:976] 00078337: Dats got evt 18␍␊
+[14:05:38:007] @!@ DONE WsfTimerStartMs, 930, 720 (ms), 11␍␊
+[14:05:38:007] 00078368: Dats got evt 18␍␊
+[14:05:38:038] @!@ DONE WsfTimerStartMs, 931, 720 (ms), 11␍␊
+[14:05:38:038] 00078399: Dats got evt 18␍␊
+[14:05:38:069] @!@ DONE WsfTimerStartMs, 932, 720 (ms), 11␍␊
+[14:05:38:069] 00078430: Dats got evt 18␍␊
+[14:05:38:100] @!@ DONE WsfTimerStartMs, 933, 720 (ms), 11␍␊
+[14:05:38:100] 00078461: Dats got evt 18␍␊
+[14:05:38:131] @!@ DONE WsfTimerStartMs, 934, 720 (ms), 11␍␊
+[14:05:38:131] 00078492: Dats got evt 18␍␊
+[14:05:38:163] @!@ DONE WsfTimerStartMs, 935, 720 (ms), 11␍␊
+[14:05:38:163] 00078523: Dats got evt 18␍␊
+[14:05:38:193] @!@ DONE WsfTimerStartMs, 936, 720 (ms), 11␍␊
+[14:05:38:193] 00078554: Dats got evt 18␍␊
+[14:05:38:224] @!@ DONE WsfTimerStartMs, 937, 720 (ms), 11␍␊
+[14:05:38:224] 00078585: Dats got evt 18␍␊
+[14:05:38:255] @!@ DONE WsfTimerStartMs, 938, 720 (ms), 11␍␊
+[14:05:38:255] 00078616: Dats got evt 18␍␊
+[14:05:38:255] @!@ DONE WsfTimerStartMs, 939, 720 (ms), 11␍␊
+[14:05:38:271] 00078647: Dats got evt 18␍␊
+[14:05:38:287] @!@ DONE WsfTimerStartMs, 940, 720 (ms), 11␍␊
+[14:05:38:303] 00078678: Dats got evt 18␍␊
+[14:05:38:319] @!@ DONE WsfTimerStartMs, 941, 720 (ms), 11␍␊
+[14:05:38:335] 00078709: Dats got evt 18␍␊
+[14:05:38:351] @!@ DONE WsfTimerStartMs, 942, 720 (ms), 11␍␊
+[14:05:38:367] 00078740: Dats got evt 18␍␊
+[14:05:38:383] @!@ DONE WsfTimerStartMs, 943, 720 (ms), 11␍␊
+[14:05:38:399] 00078771: Dats got evt 18␍␊
+[14:05:38:415] @!@ DONE WsfTimerStartMs, 944, 720 (ms), 11␍␊
+[14:05:38:431] 00078802: Dats got evt 18␍␊
+[14:05:38:447] @!@ DONE WsfTimerStartMs, 945, 720 (ms), 11␍␊
+[14:05:38:463] 00078833: Dats got evt 18␍␊
+[14:05:38:479] @!@ DONE WsfTimerStartMs, 946, 720 (ms), 11␍␊
+[14:05:38:495] 00078864: Dats got evt 18␍␊
+[14:05:38:495] @!@ DONE WsfTimerStartMs, 947, 720 (ms), 11␍␊
+[14:05:38:527] 00078895: Dats got evt 18␍␊
+[14:05:38:527] @!@ DONE WsfTimerStartMs, 948, 720 (ms), 11␍␊
+[14:05:38:573] 00078926: Dats got evt 18␍␊
+[14:05:38:573] @!@ DONE WsfTimerStartMs, 949, 720 (ms), 11␍␊
+[14:05:38:602] 00078957: Dats got evt 18␍␊
+[14:05:38:602] @!@ DONE WsfTimerStartMs, 950, 720 (ms), 11␍␊
+[14:05:38:632] 00078988: Dats got evt 18␍␊
+[14:05:38:632] @!@ DONE WsfTimerStartMs, 951, 720 (ms), 11␍␊
+[14:05:38:662] 00079019: Dats got evt 18␍␊
+[14:05:38:662] @!@ DONE WsfTimerStartMs, 952, 720 (ms), 11␍␊
+[14:05:38:692] 00079050: Dats got evt 18␍␊
+[14:05:38:692] @!@ DONE WsfTimerStartMs, 953, 720 (ms), 11␍␊
+[14:05:38:722] 00079081: Dats got evt 18␍␊
+[14:05:38:722] @!@ DONE WsfTimerStartMs, 954, 720 (ms), 11␍␊
+[14:05:38:753] 00079112: Dats got evt 18␍␊
+[14:05:38:753] @!@ DONE WsfTimerStartMs, 955, 720 (ms), 11␍␊
+[14:05:38:784] @!@ DONE WsfTimerStartMs, 956, 720 (ms), 11␍␊
+[14:05:38:784] 00079143: Dats got evt 18␍␊
+[14:05:38:815] @!@ DONE WsfTimerStartMs, 957, 720 (ms), 11␍␊
+[14:05:38:815] 00079174: Dats got evt 18␍␊
+[14:05:38:845] @!@ DONE WsfTimerStartMs, 958, 720 (ms), 11␍␊
+[14:05:38:845] 00079205: Dats got evt 18␍␊
+[14:05:38:876] @!@ DONE WsfTimerStartMs, 959, 720 (ms), 11␍␊
+[14:05:38:876] 00079236: Dats got evt 18␍␊
+[14:05:38:906] @!@ DONE WsfTimerStartMs, 960, 720 (ms), 11␍␊
+[14:05:38:906] 00079267: Dats got evt 18␍␊
+[14:05:38:935] @!@ DONE WsfTimerStartMs, 961, 720 (ms), 11␍␊
+[14:05:38:935] 00079298: Dats got evt 18␍␊
+[14:05:38:967] @!@ DONE WsfTimerStartMs, 962, 720 (ms), 11␍␊
+[14:05:38:967] 00079329: Dats got evt 18␍␊
+[14:05:38:997] @!@ DONE WsfTimerStartMs, 963, 720 (ms), 11␍␊
+[14:05:38:997] 00079360: Dats got evt 18␍␊
+[14:05:39:028] @!@ DONE WsfTimerStartMs, 964, 720 (ms), 11␍␊
+[14:05:39:028] 00079391: Dats got evt 18␍␊
+[14:05:39:059] @!@ DONE WsfTimerStartMs, 965, 720 (ms), 11␍␊
+[14:05:39:059] 00079422: Dats got evt 18␍␊
+[14:05:39:090] @!@ DONE WsfTimerStartMs, 966, 720 (ms), 11␍␊
+[14:05:39:090] 00079453: Dats got evt 18␍␊
+[14:05:39:121] @!@ DONE WsfTimerStartMs, 967, 720 (ms), 11␍␊
+[14:05:39:121] 00079484: Dats got evt 18␍␊
+[14:05:39:152] @!@ DONE WsfTimerStartMs, 968, 720 (ms), 11␍␊
+[14:05:39:152] 00079515: Dats got evt 18␍␊
+[14:05:39:183] @!@ DONE WsfTimerStartMs, 969, 720 (ms), 11␍␊
+[14:05:39:183] 00079546: Dats got evt 18␍␊
+[14:05:39:214] @!@ DONE WsfTimerStartMs, 970, 720 (ms), 11␍␊
+[14:05:39:214] 00079577: Dats got evt 18␍␊
+[14:05:39:244] @!@ DONE WsfTimerStartMs, 971, 720 (ms), 11␍␊
+[14:05:39:244] 00079608: Dats got evt 18␍␊
+[14:05:39:275] @!@ DONE WsfTimerStartMs, 972, 720 (ms), 11␍␊
+[14:05:39:275] 00079639: Dats got evt 18␍␊
+[14:05:39:275] @!@ DONE WsfTimerStartMs, 973, 720 (ms), 11␍␊
+[14:05:39:291] 00079670: Dats got evt 18␍␊
+[14:05:39:307] @!@ DONE WsfTimerStartMs, 974, 720 (ms), 11␍␊
+[14:05:39:323] 00079701: Dats got evt 18␍␊
+[14:05:39:339] @!@ DONE WsfTimerStartMs, 975, 720 (ms), 11␍␊
+[14:05:39:355] 00079732: Dats got evt 18␍␊
+[14:05:39:371] @!@ DONE WsfTimerStartMs, 976, 720 (ms), 11␍␊
+[14:05:39:387] 00079763: Dats got evt 18␍␊
+[14:05:39:403] @!@ DONE WsfTimerStartMs, 977, 720 (ms), 11␍␊
+[14:05:39:419] 00079794: Dats got evt 18␍␊
+[14:05:39:435] @!@ DONE WsfTimerStartMs, 978, 720 (ms), 11␍␊
+[14:05:39:451] 00079825: Dats got evt 18␍␊
+[14:05:39:467] @!@ DONE WsfTimerStartMs, 979, 720 (ms), 11␍␊
+[14:05:39:483] 00079856: Dats got evt 18␍␊
+[14:05:39:499] @!@ DONE WsfTimerStartMs, 980, 720 (ms), 11␍␊
+[14:05:39:515] 00079887: Dats got evt 18␍␊
+[14:05:39:515] @!@ DONE WsfTimerStartMs, 981, 720 (ms), 11␍␊
+[14:05:39:547] 00079918: Dats got evt 18␍␊
+[14:05:39:547] @!@ DONE WsfTimerStartMs, 982, 720 (ms), 11␍␊
+[14:05:39:593] 00079949: Dats got evt 18␍␊
+[14:05:39:593] @!@ DONE WsfTimerStartMs, 983, 720 (ms), 11␍␊
+[14:05:39:622] 00079980: Dats got evt 18␍␊
+[14:05:39:622] @!@ DONE WsfTimerStartMs, 984, 720 (ms), 11␍␊
+[14:05:39:653] 00080011: Dats got evt 18␍␊
+[14:05:39:653] @!@ DONE WsfTimerStartMs, 985, 720 (ms), 11␍␊
+[14:05:39:683] 00080042: Dats got evt 18␍␊
+[14:05:39:683] @!@ DONE WsfTimerStartMs, 986, 720 (ms), 11␍␊
+[14:05:39:712] 00080073: Dats got evt 18␍␊
+[14:05:39:712] @!@ DONE WsfTimerStartMs, 987, 720 (ms), 11␍␊
+[14:05:39:742] 00080104: Dats got evt 18␍␊
+[14:05:39:742] @!@ DONE WsfTimerStartMs, 988, 720 (ms), 11␍␊
+[14:05:39:774] @!@ DONE WsfTimerStartMs, 989, 720 (ms), 11␍␊
+[14:05:39:774] 00080135: Dats got evt 18␍␊
+[14:05:39:805] @!@ DONE WsfTimerStartMs, 990, 720 (ms), 11␍␊
+[14:05:39:805] 00080166: Dats got evt 18␍␊
+[14:05:39:835] @!@ DONE WsfTimerStartMs, 991, 720 (ms), 11␍␊
+[14:05:39:835] 00080197: Dats got evt 18␍␊
+[14:05:39:866] @!@ DONE WsfTimerStartMs, 992, 720 (ms), 11␍␊
+[14:05:39:866] 00080228: Dats got evt 18␍␊
+[14:05:39:896] @!@ DONE WsfTimerStartMs, 993, 720 (ms), 11␍␊
+[14:05:39:896] 00080259: Dats got evt 18␍␊
+[14:05:39:925] @!@ DONE WsfTimerStartMs, 994, 720 (ms), 11␍␊
+[14:05:39:925] 00080290: Dats got evt 18␍␊
+[14:05:39:956] @!@ DONE WsfTimerStartMs, 995, 720 (ms), 11␍␊
+[14:05:39:956] 00080321: Dats got evt 18␍␊
+[14:05:39:986] @!@ DONE WsfTimerStartMs, 996, 720 (ms), 11␍␊
+[14:05:39:986] 00080352: Dats got evt 18␍␊
+[14:05:40:017] @!@ DONE WsfTimerStartMs, 997, 720 (ms), 11␍␊
+[14:05:40:017] 00080383: Dats got evt 18␍␊
+[14:05:40:048] @!@ DONE WsfTimerStartMs, 998, 720 (ms), 11␍␊
+[14:05:40:048] 00080414: Dats got evt 18␍␊
+[14:05:40:079] @!@ DONE WsfTimerStartMs, 999, 720 (ms), 11␍␊
+[14:05:40:079] 00080445: Dats got evt 18␍␊
+[14:05:40:110] @!@ DONE WsfTimerStartMs, 1000, 720 (ms), 11␍␊
+[14:05:40:110] 00080476: Dats got evt 18␍␊
+[14:05:40:141] @!@ DONE WsfTimerStartMs, 1001, 720 (ms), 11␍␊
+[14:05:40:141] 00080507: Dats got evt 18␍␊
+[14:05:40:172] @!@ DONE WsfTimerStartMs, 1002, 720 (ms), 11␍␊
+[14:05:40:172] 00080538: Dats got evt 18␍␊
+[14:05:40:202] @!@ DONE WsfTimerStartMs, 1003, 720 (ms), 11␍␊
+[14:05:40:202] 00080569: Dats got evt 18␍␊
+[14:05:40:233] @!@ DONE WsfTimerStartMs, 1004, 720 (ms), 11␍␊
+[14:05:40:233] 00080600: Dats got evt 18␍␊
+[14:05:40:264] @!@ DONE WsfTimerStartMs, 1005, 720 (ms), 11␍␊
+[14:05:40:264] 00080631: Dats got evt 18␍␊
+[14:05:40:295] @!@ DONE WsfTimerStartMs, 1006, 720 (ms), 11␍␊
+[14:05:40:295] 00080662: Dats got evt 18␍␊
+[14:05:40:295] @!@ DONE WsfTimerStartMs, 1007, 720 (ms), 11␍␊
+[14:05:40:311] 00080693: Dats got evt 18␍␊
+[14:05:40:327] @!@ DONE WsfTimerStartMs, 1008, 720 (ms), 11␍␊
+[14:05:40:343] 00080724: Dats got evt 18␍␊
+[14:05:40:359] @!@ DONE WsfTimerStartMs, 1009, 720 (ms), 11␍␊
+[14:05:40:375] 00080755: Dats got evt 18␍␊
+[14:05:40:391] @!@ DONE WsfTimerStartMs, 1010, 720 (ms), 11␍␊
+[14:05:40:407] 00080786: Dats got evt 18␍␊
+[14:05:40:424] @!@ DONE WsfTimerStartMs, 1011, 720 (ms), 11␍␊
+[14:05:40:440] 00080817: Dats got evt 18␍␊
+[14:05:40:455] @!@ DONE WsfTimerStartMs, 1012, 720 (ms), 11␍␊
+[14:05:40:472] 00080848: Dats got evt 18␍␊
+[14:05:40:513] @!@ DONE WsfTimerStartMs, 1013, 720 (ms), 11␍␊
+[14:05:40:513] App got evt 16␍␊
+[14:05:40:513] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
+[14:05:40:513] ␍␊
+[14:05:40:513] @!@ DONE WsfTimerStartMs, 1014, 5000 (ms), 1␍␊
+[14:05:40:513] 00080879: Dats got evt 18␍␊
+[14:05:40:513] @!@ DONE WsfTimerStartMs, 1015, 720 (ms), 11␍␊
+[14:05:40:529] 00080910: Dats got evt 18␍␊
+[14:05:40:545] @!@ DONE WsfTimerStartMs, 1016, 720 (ms), 11␍␊
+[14:05:40:561] 00080941: Dats got evt 18␍␊
+[14:05:40:577] @!@ DONE WsfTimerStartMs, 1017, 720 (ms), 11␍␊
+[14:05:40:593] 00080972: Dats got evt 18␍␊
+[14:05:40:609] @!@ DONE WsfTimerStartMs, 1018, 720 (ms), 11␍␊
+[14:05:40:625] 00081003: Dats got evt 18␍␊
+[14:05:40:625] @!@ DONE WsfTimerStartMs, 1019, 720 (ms), 11␍␊
+[14:05:40:657] 00081034: Dats got evt 18␍␊
+[14:05:40:657] @!@ DONE WsfTimerStartMs, 1020, 720 (ms), 11␍␊
+[14:05:40:703] 00081065: Dats got evt 18␍␊
+[14:05:40:703] @!@ DONE WsfTimerStartMs, 1021, 720 (ms), 11␍␊
+[14:05:40:733] 00081096: Dats got evt 18␍␊
+[14:05:40:733] @!@ DONE WsfTimerStartMs, 1022, 720 (ms), 11␍␊
+[14:05:40:763] 00081127: Dats got evt 18␍␊
+[14:05:40:763] @!@ DONE WsfTimerStartMs, 1023, 720 (ms), 11␍␊
+[14:05:40:794] @!@ DONE WsfTimerStartMs, 1024, 720 (ms), 11␍␊
+[14:05:40:794] 00081158: Dats got evt 18␍␊
+[14:05:40:825] @!@ DONE WsfTimerStartMs, 1025, 720 (ms), 11␍␊
+[14:05:40:825] 00081189: Dats got evt 18␍␊
+[14:05:40:855] @!@ DONE WsfTimerStartMs, 1026, 720 (ms), 11␍␊
+[14:05:40:855] 00081220: Dats got evt 18␍␊
+[14:05:40:885] @!@ DONE WsfTimerStartMs, 1027, 720 (ms), 11␍␊
+[14:05:40:885] 00081251: Dats got evt 18␍␊
+[14:05:40:914] @!@ DONE WsfTimerStartMs, 1028, 720 (ms), 11␍␊
+[14:05:40:914] 00081282: Dats got evt 18␍␊
+[14:05:40:944] @!@ DONE WsfTimerStartMs, 1029, 720 (ms), 11␍␊
+[14:05:40:944] 00081313: Dats got evt 18␍␊
+[14:05:40:975] @!@ DONE WsfTimerStartMs, 1030, 720 (ms), 11␍␊
+[14:05:40:975] 00081344: Dats got evt 18␍␊
+[14:05:41:006] @!@ DONE WsfTimerStartMs, 1031, 720 (ms), 11␍␊
+[14:05:41:006] 00081375: Dats got evt 18␍␊
+[14:05:41:037] @!@ DONE WsfTimerStartMs, 1032, 720 (ms), 11␍␊
+[14:05:41:037] 00081406: Dats got evt 18␍␊
+[14:05:41:068] @!@ DONE WsfTimerStartMs, 1033, 720 (ms), 11␍␊
+[14:05:41:068] 00081437: Dats got evt 18␍␊
+[14:05:41:100] @!@ DONE WsfTimerStartMs, 1034, 720 (ms), 11␍␊
+[14:05:41:100] 00081468: Dats got evt 18␍␊
+[14:05:41:131] @!@ DONE WsfTimerStartMs, 1035, 720 (ms), 11␍␊
+[14:05:41:131] 00081499: Dats got evt 18␍␊
+[14:05:41:162] @!@ DONE WsfTimerStartMs, 1036, 720 (ms), 11␍␊
+[14:05:41:162] 00081530: Dats got evt 18␍␊
+[14:05:41:192] @!@ DONE WsfTimerStartMs, 1037, 720 (ms), 11␍␊
+[14:05:41:192] 00081561: Dats got evt 18␍␊
+[14:05:41:223] @!@ DONE WsfTimerStartMs, 1038, 720 (ms), 11␍␊
+[14:05:41:223] 00081592: Dats got evt 18␍␊
+[14:05:41:254] @!@ DONE WsfTimerStartMs, 1039, 720 (ms), 11␍␊
+[14:05:41:254] 00081623: Dats got evt 18␍␊
+[14:05:41:285] @!@ DONE WsfTimerStartMs, 1040, 720 (ms), 11␍␊
+[14:05:41:285] 00081654: Dats got evt 18␍␊
+[14:05:41:285] @!@ DONE WsfTimerStartMs, 1041, 720 (ms), 11␍␊
+[14:05:41:301] 00081685: Dats got evt 18␍␊
+[14:05:41:317] @!@ DONE WsfTimerStartMs, 1042, 720 (ms), 11␍␊
+[14:05:41:333] 00081716: Dats got evt 18␍␊
+[14:05:41:349] @!@ DONE WsfTimerStartMs, 1043, 720 (ms), 11␍␊
+[14:05:41:365] 00081747: Dats got evt 18␍␊
+[14:05:41:381] @!@ DONE WsfTimerStartMs, 1044, 720 (ms), 11␍␊
+[14:05:41:397] 00081778: Dats got evt 18␍␊
+[14:05:41:413] @!@ DONE WsfTimerStartMs, 1045, 720 (ms), 11␍␊
+[14:05:41:429] 00081809: Dats got evt 18␍␊
+[14:05:41:445] @!@ DONE WsfTimerStartMs, 1046, 720 (ms), 11␍␊
+[14:05:41:461] 00081840: Dats got evt 18␍␊
+[14:05:41:477] @!@ DONE WsfTimerStartMs, 1047, 720 (ms), 11␍␊
+[14:05:41:493] 00081871: Dats got evt 18␍␊
+[14:05:41:509] @!@ DONE WsfTimerStartMs, 1048, 720 (ms), 11␍␊
+[14:05:41:525] 00081902: Dats got evt 18␍␊
+[14:05:41:525] @!@ DONE WsfTimerStartMs, 1049, 720 (ms), 11␍␊
+[14:05:41:572] 00081933: Dats got evt 18␍␊
+[14:05:41:572] @!@ DONE WsfTimerStartMs, 1050, 720 (ms), 11␍␊
+[14:05:41:602] 00081964: Dats got evt 18␍␊
+[14:05:41:602] @!@ DONE WsfTimerStartMs, 1051, 720 (ms), 11␍␊
+[14:05:41:632] 00081995: Dats got evt 18␍␊
+[14:05:41:632] @!@ DONE WsfTimerStartMs, 1052, 720 (ms), 11␍␊
+[14:05:41:662] 00082026: Dats got evt 18␍␊
+[14:05:41:662] @!@ DONE WsfTimerStartMs, 1053, 720 (ms), 11␍␊
+[14:05:41:693] 00082057: Dats got evt 18␍␊
+[14:05:41:693] @!@ DONE WsfTimerStartMs, 1054, 720 (ms), 11␍␊
+[14:05:41:723] 00082088: Dats got evt 18␍␊
+[14:05:41:723] @!@ DONE WsfTimerStartMs, 1055, 720 (ms), 11␍␊
+[14:05:41:753] 00082119: Dats got evt 18␍␊
+[14:05:41:753] @!@ DONE WsfTimerStartMs, 1056, 720 (ms), 11␍␊
+[14:05:41:783] 00082150: Dats got evt 18␍␊
+[14:05:41:783] @!@ DONE WsfTimerStartMs, 1057, 720 (ms), 11␍␊
+[14:05:41:814] @!@ DONE WsfTimerStartMs, 1058, 720 (ms), 11␍␊
+[14:05:41:814] 00082181: Dats got evt 18␍␊
+[14:05:41:845] @!@ DONE WsfTimerStartMs, 1059, 720 (ms), 11␍␊
+[14:05:41:845] 00082212: Dats got evt 18␍␊
+[14:05:41:875] @!@ DONE WsfTimerStartMs, 1060, 720 (ms), 11␍␊
+[14:05:41:875] 00082243: Dats got evt 18␍␊
+[14:05:41:904] @!@ DONE WsfTimerStartMs, 1061, 720 (ms), 11␍␊
+[14:05:41:904] 00082274: Dats got evt 18␍␊
+[14:05:41:934] @!@ DONE WsfTimerStartMs, 1062, 720 (ms), 11␍␊
+[14:05:41:934] 00082305: Dats got evt 18␍␊
+[14:05:41:965] @!@ DONE WsfTimerStartMs, 1063, 720 (ms), 11␍␊
+[14:05:41:965] 00082336: Dats got evt 18␍␊
+[14:05:41:996] @!@ DONE WsfTimerStartMs, 1064, 720 (ms), 11␍␊
+[14:05:41:996] 00082367: Dats got evt 18␍␊
+[14:05:42:027] @!@ DONE WsfTimerStartMs, 1065, 720 (ms), 11␍␊
+[14:05:42:027] 00082398: Dats got evt 18␍␊
+[14:05:42:058] @!@ DONE WsfTimerStartMs, 1066, 720 (ms), 11␍␊
+[14:05:42:058] 00082429: Dats got evt 18␍␊
+[14:05:42:089] @!@ DONE WsfTimerStartMs, 1067, 720 (ms), 11␍␊
+[14:05:42:089] 00082460: Dats got evt 18␍␊
+[14:05:42:120] @!@ DONE WsfTimerStartMs, 1068, 720 (ms), 11␍␊
+[14:05:42:120] 00082491: Dats got evt 18␍␊
+[14:05:42:150] @!@ DONE WsfTimerStartMs, 1069, 720 (ms), 11␍␊
+[14:05:42:150] 00082522: Dats got evt 18␍␊
+[14:05:42:181] @!@ DONE WsfTimerStartMs, 1070, 720 (ms), 11␍␊
+[14:05:42:181] 00082553: Dats got evt 18␍␊
+[14:05:42:212] @!@ DONE WsfTimerStartMs, 1071, 720 (ms), 11␍␊
+[14:05:42:212] 00082584: Dats got evt 18␍␊
+[14:05:42:243] @!@ DONE WsfTimerStartMs, 1072, 720 (ms), 11␍␊
+[14:05:42:243] 00082615: Dats got evt 18␍␊
+[14:05:42:274] @!@ DONE WsfTimerStartMs, 1073, 720 (ms), 11␍␊
+[14:05:42:274] 00082646: Dats got evt 18␍␊
+[14:05:42:305] @!@ DONE WsfTimerStartMs, 1074, 720 (ms), 11␍␊
+[14:05:42:305] 00082677: Dats got evt 18␍␊
+[14:05:42:305] @!@ DONE WsfTimerStartMs, 1075, 720 (ms), 11␍␊
+[14:05:42:321] 00082708: Dats got evt 18␍␊
+[14:05:42:337] @!@ DONE WsfTimerStartMs, 1076, 720 (ms), 11␍␊
+[14:05:42:353] 00082739: Dats got evt 18␍␊
+[14:05:42:369] @!@ DONE WsfTimerStartMs, 1077, 720 (ms), 11␍␊
+[14:05:42:385] 00082770: Dats got evt 18␍␊
+[14:05:42:401] @!@ DONE WsfTimerStartMs, 1078, 720 (ms), 11␍␊
+[14:05:42:417] 00082801: Dats got evt 18␍␊
+[14:05:42:433] @!@ DONE WsfTimerStartMs, 1079, 720 (ms), 11␍␊
+[14:05:42:449] 00082832: Dats got evt 18␍␊
+[14:05:42:465] @!@ DONE WsfTimerStartMs, 1080, 720 (ms), 11␍␊
+[14:05:42:481] 00082863: Dats got evt 18␍␊
+[14:05:42:497] @!@ DONE WsfTimerStartMs, 1081, 720 (ms), 11␍␊
+[14:05:42:513] 00082894: Dats got evt 18␍␊
+[14:05:42:529] @!@ DONE WsfTimerStartMs, 1082, 720 (ms), 11␍␊
+[14:05:42:545] 00082925: Dats got evt 18␍␊
+[14:05:42:545] @!@ DONE WsfTimerStartMs, 1083, 720 (ms), 11␍␊
+[14:05:42:592] 00082956: Dats got evt 18␍␊
+[14:05:42:592] @!@ DONE WsfTimerStartMs, 1084, 720 (ms), 11␍␊
+[14:05:42:622] 00082987: Dats got evt 18␍␊
+[14:05:42:622] @!@ DONE WsfTimerStartMs, 1085, 720 (ms), 11␍␊
+[14:05:42:652] 00083018: Dats got evt 18␍␊
+[14:05:42:652] @!@ DONE WsfTimerStartMs, 1086, 720 (ms), 11␍␊
+[14:05:42:682] 00083049: Dats got evt 18␍␊
+[14:05:42:682] @!@ DONE WsfTimerStartMs, 1087, 720 (ms), 11␍␊
+[14:05:42:713] 00083080: Dats got evt 18␍␊
+[14:05:42:713] @!@ DONE WsfTimerStartMs, 1088, 720 (ms), 11␍␊
+[14:05:42:743] 00083111: Dats got evt 18␍␊
+[14:05:42:743] @!@ DONE WsfTimerStartMs, 1089, 720 (ms), 11␍␊
+[14:05:42:774] 00083142: Dats got evt 18␍␊
+[14:05:42:774] @!@ DONE WsfTimerStartMs, 1090, 720 (ms), 11␍␊
+[14:05:42:804] 00083173: Dats got evt 18␍␊
+[14:05:42:804] @!@ DONE WsfTimerStartMs, 1091, 720 (ms), 11␍␊
+[14:05:42:835] @!@ DONE WsfTimerStartMs, 1092, 720 (ms), 11␍␊
+[14:05:42:835] 00083204: Dats got evt 18␍␊
+[14:05:42:866] @!@ DONE WsfTimerStartMs, 1093, 720 (ms), 11␍␊
+[14:05:42:866] 00083235: Dats got evt 18␍␊
+[14:05:42:895] @!@ DONE WsfTimerStartMs, 1094, 720 (ms), 11␍␊
+[14:05:42:895] 00083266: Dats got evt 18␍␊
+[14:05:42:925] @!@ DONE WsfTimerStartMs, 1095, 720 (ms), 11␍␊
+[14:05:42:925] 00083297: Dats got evt 18␍␊
+[14:05:42:955] @!@ DONE WsfTimerStartMs, 1096, 720 (ms), 11␍␊
+[14:05:42:955] 00083328: Dats got evt 18␍␊
+[14:05:42:985] @!@ DONE WsfTimerStartMs, 1097, 720 (ms), 11␍␊
+[14:05:42:985] 00083359: Dats got evt 18␍␊
+[14:05:43:016] @!@ DONE WsfTimerStartMs, 1098, 720 (ms), 11␍␊
+[14:05:43:016] 00083390: Dats got evt 18␍␊
+[14:05:43:047] @!@ DONE WsfTimerStartMs, 1099, 720 (ms), 11␍␊
+[14:05:43:047] 00083421: Dats got evt 18␍␊
+[14:05:43:078] @!@ DONE WsfTimerStartMs, 1100, 720 (ms), 11␍␊
+[14:05:43:078] 00083452: Dats got evt 18␍␊
+[14:05:43:109] @!@ DONE WsfTimerStartMs, 1101, 720 (ms), 11␍␊
+[14:05:43:109] 00083483: Dats got evt 18␍␊
+[14:05:43:140] @!@ DONE WsfTimerStartMs, 1102, 720 (ms), 11␍␊
+[14:05:43:140] 00083514: Dats got evt 18␍␊
+[14:05:43:170] @!@ DONE WsfTimerStartMs, 1103, 720 (ms), 11␍␊
+[14:05:43:170] 00083545: Dats got evt 18␍␊
+[14:05:43:201] @!@ DONE WsfTimerStartMs, 1104, 720 (ms), 11␍␊
+[14:05:43:201] 00083576: Dats got evt 18␍␊
+[14:05:43:232] @!@ DONE WsfTimerStartMs, 1105, 720 (ms), 11␍␊
+[14:05:43:232] 00083607: Dats got evt 18␍␊
+[14:05:43:263] @!@ DONE WsfTimerStartMs, 1106, 720 (ms), 11␍␊
+[14:05:43:263] 00083638: Dats got evt 18␍␊
+[14:05:43:294] @!@ DONE WsfTimerStartMs, 1107, 720 (ms), 11␍␊
+[14:05:43:294] 00083669: Dats got evt 18␍␊
+[14:05:43:325] @!@ DONE WsfTimerStartMs, 1108, 720 (ms), 11␍␊
+[14:05:43:325] 00083700: Dats got evt 18␍␊
+[14:05:43:325] @!@ DONE WsfTimerStartMs, 1109, 720 (ms), 11␍␊
+[14:05:43:341] 00083731: Dats got evt 18␍␊
+[14:05:43:357] @!@ DONE WsfTimerStartMs, 1110, 720 (ms), 11␍␊
+[14:05:43:373] 00083762: Dats got evt 18␍␊
+[14:05:43:389] @!@ DONE WsfTimerStartMs, 1111, 720 (ms), 11␍␊
+[14:05:43:405] 00083793: Dats got evt 18␍␊
+[14:05:43:421] @!@ DONE WsfTimerStartMs, 1112, 720 (ms), 11␍␊
+[14:05:43:437] 00083824: Dats got evt 18␍␊
+[14:05:43:453] @!@ DONE WsfTimerStartMs, 1113, 720 (ms), 11␍␊
+[14:05:43:469] 00083855: Dats got evt 18␍␊
+[14:05:43:485] @!@ DONE WsfTimerStartMs, 1114, 720 (ms), 11␍␊
+[14:05:43:501] 00083886: Dats got evt 18␍␊
+[14:05:43:517] @!@ DONE WsfTimerStartMs, 1115, 720 (ms), 11␍␊
+[14:05:43:533] 00083917: Dats got evt 18␍␊
+[14:05:43:549] @!@ DONE WsfTimerStartMs, 1116, 720 (ms), 11␍␊
+[14:05:43:565] 00083948: Dats got evt 18␍␊
+[14:05:43:565] @!@ DONE WsfTimerStartMs, 1117, 720 (ms), 11␍␊
+[14:05:43:613] 00083979: Dats got evt 18␍␊
+[14:05:43:613] @!@ DONE WsfTimerStartMs, 1118, 720 (ms), 11␍␊
+[14:05:43:643] 00084010: Dats got evt 18␍␊
+[14:05:43:643] @!@ DONE WsfTimerStartMs, 1119, 720 (ms), 11␍␊
+[14:05:43:673] 00084041: Dats got evt 18␍␊
+[14:05:43:673] @!@ DONE WsfTimerStartMs, 1120, 720 (ms), 11␍␊
+[14:05:43:703] 00084072: Dats got evt 18␍␊
+[14:05:43:703] @!@ DONE WsfTimerStartMs, 1121, 720 (ms), 11␍␊
+[14:05:43:733] 00084103: Dats got evt 18␍␊
+[14:05:43:733] @!@ DONE WsfTimerStartMs, 1122, 720 (ms), 11␍␊
+[14:05:43:763] 00084134: Dats got evt 18␍␊
+[14:05:43:763] @!@ DONE WsfTimerStartMs, 1123, 720 (ms), 11␍␊
+[14:05:43:793] 00084165: Dats got evt 18␍␊
+[14:05:43:793] @!@ DONE WsfTimerStartMs, 1124, 720 (ms), 11␍␊
+[14:05:43:824] 00084196: Dats got evt 18␍␊
+[14:05:43:824] @!@ DONE WsfTimerStartMs, 1125, 720 (ms), 11␍␊
+[14:05:43:855] 00084227: Dats got evt 18␍␊
+[14:05:43:855] @!@ DONE WsfTimerStartMs, 1126, 720 (ms), 11␍␊
+[14:05:43:886] @!@ DONE WsfTimerStartMs, 1127, 720 (ms), 11␍␊
+[14:05:43:886] 00084258: Dats got evt 18␍␊
+[14:05:43:915] @!@ DONE WsfTimerStartMs, 1128, 720 (ms), 11␍␊
+[14:05:43:915] 00084289: Dats got evt 18␍␊
+[14:05:43:945] @!@ DONE WsfTimerStartMs, 1129, 720 (ms), 11␍␊
+[14:05:43:945] 00084320: Dats got evt 18␍␊
+[14:05:43:975] @!@ DONE WsfTimerStartMs, 1130, 720 (ms), 11␍␊
+[14:05:43:975] 00084351: Dats got evt 18␍␊
+[14:05:44:005] @!@ DONE WsfTimerStartMs, 1131, 720 (ms), 11␍␊
+[14:05:44:005] 00084382: Dats got evt 18␍␊
+[14:05:44:036] @!@ DONE WsfTimerStartMs, 1132, 720 (ms), 11␍␊
+[14:05:44:036] 00084413: Dats got evt 18␍␊
+[14:05:44:067] @!@ DONE WsfTimerStartMs, 1133, 720 (ms), 11␍␊
+[14:05:44:067] 00084444: Dats got evt 18␍␊
+[14:05:44:098] @!@ DONE WsfTimerStartMs, 1134, 720 (ms), 11␍␊
+[14:05:44:098] 00084475: Dats got evt 18␍␊
+[14:05:44:129] @!@ DONE WsfTimerStartMs, 1135, 720 (ms), 11␍␊
+[14:05:44:129] 00084506: Dats got evt 18␍␊
+[14:05:44:160] @!@ DONE WsfTimerStartMs, 1136, 720 (ms), 11␍␊
+[14:05:44:160] 00084537: Dats got evt 18␍␊
+[14:05:44:190] @!@ DONE WsfTimerStartMs, 1137, 720 (ms), 11␍␊
+[14:05:44:190] 00084568: Dats got evt 18␍␊
+[14:05:44:221] @!@ DONE WsfTimerStartMs, 1138, 720 (ms), 11␍␊
+[14:05:44:221] 00084599: Dats got evt 18␍␊
+[14:05:44:252] @!@ DONE WsfTimerStartMs, 1139, 720 (ms), 11␍␊
+[14:05:44:252] 00084630: Dats got evt 18␍␊
+[14:05:44:283] @!@ DONE WsfTimerStartMs, 1140, 720 (ms), 11␍␊
+[14:05:44:283] 00084661: Dats got evt 18␍␊
+[14:05:44:314] @!@ DONE WsfTimerStartMs, 1141, 720 (ms), 11␍␊
+[14:05:44:314] 00084692: Dats got evt 18␍␊
+[14:05:44:345] @!@ DONE WsfTimerStartMs, 1142, 720 (ms), 11␍␊
+[14:05:44:345] 00084723: Dats got evt 18␍␊
+[14:05:44:345] @!@ DONE WsfTimerStartMs, 1143, 720 (ms), 11␍␊
+[14:05:44:362] 00084754: Dats got evt 18␍␊
+[14:05:44:378] @!@ DONE WsfTimerStartMs, 1144, 720 (ms), 11␍␊
+[14:05:44:394] 00084785: Dats got evt 18␍␊
+[14:05:44:410] @!@ DONE WsfTimerStartMs, 1145, 720 (ms), 11␍␊
+[14:05:44:426] 00084816: Dats got evt 18␍␊
+[14:05:44:442] @!@ DONE WsfTimerStartMs, 1146, 720 (ms), 11␍␊
+[14:05:44:458] 00084847: Dats got evt 18␍␊
+[14:05:44:474] @!@ DONE WsfTimerStartMs, 1147, 720 (ms), 11␍␊
+[14:05:44:490] 00084878: Dats got evt 18␍␊
+[14:05:44:506] @!@ DONE WsfTimerStartMs, 1148, 720 (ms), 11␍␊
+[14:05:44:522] 00084909: Dats got evt 18␍␊
+[14:05:44:538] @!@ DONE WsfTimerStartMs, 1149, 720 (ms), 11␍␊
+[14:05:44:554] 00084940: Dats got evt 18␍␊
+[14:05:44:570] @!@ DONE WsfTimerStartMs, 1150, 720 (ms), 11␍␊
+[14:05:44:586] 00084971: Dats got evt 18␍␊
+[14:05:44:586] @!@ DONE WsfTimerStartMs, 1151, 720 (ms), 11␍␊
+[14:05:44:633] 00085002: Dats got evt 18␍␊
+[14:05:44:633] @!@ DONE WsfTimerStartMs, 1152, 720 (ms), 11␍␊
+[14:05:44:663] 00085033: Dats got evt 18␍␊
+[14:05:44:663] @!@ DONE WsfTimerStartMs, 1153, 720 (ms), 11␍␊
+[14:05:44:693] 00085064: Dats got evt 18␍␊
+[14:05:44:693] @!@ DONE WsfTimerStartMs, 1154, 720 (ms), 11␍␊
+[14:05:44:723] 00085095: Dats got evt 18␍␊
+[14:05:44:723] @!@ DONE WsfTimerStartMs, 1155, 720 (ms), 11␍␊
+[14:05:44:753] 00085126: Dats got evt 18␍␊
+[14:05:44:753] @!@ DONE WsfTimerStartMs, 1156, 720 (ms), 11␍␊
+[14:05:44:783] 00085157: Dats got evt 18␍␊
+[14:05:44:783] @!@ DONE WsfTimerStartMs, 1157, 720 (ms), 11␍␊
+[14:05:44:813] 00085188: Dats got evt 18␍␊
+[14:05:44:813] @!@ DONE WsfTimerStartMs, 1158, 720 (ms), 11␍␊
+[14:05:44:844] @!@ DONE WsfTimerStartMs, 1159, 720 (ms), 11␍␊
+[14:05:44:844] 00085219: Dats got evt 18␍␊
+[14:05:44:875] @!@ DONE WsfTimerStartMs, 1160, 720 (ms), 11␍␊
+[14:05:44:875] 00085250: Dats got evt 18␍␊
+[14:05:44:905] @!@ DONE WsfTimerStartMs, 1161, 720 (ms), 11␍␊
+[14:05:44:905] 00085281: Dats got evt 18␍␊
+[14:05:44:934] @!@ DONE WsfTimerStartMs, 1162, 720 (ms), 11␍␊
+[14:05:44:934] 00085312: Dats got evt 18␍␊
+[14:05:44:964] @!@ DONE WsfTimerStartMs, 1163, 720 (ms), 11␍␊
+[14:05:44:964] 00085343: Dats got evt 18␍␊
+[14:05:44:995] @!@ DONE WsfTimerStartMs, 1164, 720 (ms), 11␍␊
+[14:05:44:995] 00085374: Dats got evt 18␍␊
+[14:05:45:025] @!@ DONE WsfTimerStartMs, 1165, 720 (ms), 11␍␊
+[14:05:45:025] 00085405: Dats got evt 18␍␊
+[14:05:45:057] @!@ DONE WsfTimerStartMs, 1166, 720 (ms), 11␍␊
+[14:05:45:057] 00085436: Dats got evt 18␍␊
+[14:05:45:087] @!@ DONE WsfTimerStartMs, 1167, 720 (ms), 11␍␊
+[14:05:45:087] 00085467: Dats got evt 18␍␊
+[14:05:45:118] @!@ DONE WsfTimerStartMs, 1168, 720 (ms), 11␍␊
+[14:05:45:118] 00085498: Dats got evt 18␍␊
+[14:05:45:150] @!@ DONE WsfTimerStartMs, 1169, 720 (ms), 11␍␊
+[14:05:45:150] 00085529: Dats got evt 18␍␊
+[14:05:45:181] @!@ DONE WsfTimerStartMs, 1170, 720 (ms), 11␍␊
+[14:05:45:181] 00085560: Dats got evt 18␍␊
+[14:05:45:211] @!@ DONE WsfTimerStartMs, 1171, 720 (ms), 11␍␊
+[14:05:45:211] 00085591: Dats got evt 18␍␊
+[14:05:45:242] @!@ DONE WsfTimerStartMs, 1172, 720 (ms), 11␍␊
+[14:05:45:242] 00085622: Dats got evt 18␍␊
+[14:05:45:273] @!@ DONE WsfTimerStartMs, 1173, 720 (ms), 11␍␊
+[14:05:45:273] 00085653: Dats got evt 18␍␊
+[14:05:45:304] @!@ DONE WsfTimerStartMs, 1174, 720 (ms), 11␍␊
+[14:05:45:304] 00085684: Dats got evt 18␍␊
+[14:05:45:335] @!@ DONE WsfTimerStartMs, 1175, 720 (ms), 11␍␊
+[14:05:45:335] 00085715: Dats got evt 18␍␊
+[14:05:45:335] @!@ DONE WsfTimerStartMs, 1176, 720 (ms), 11␍␊
+[14:05:45:351] 00085746: Dats got evt 18␍␊
+[14:05:45:367] @!@ DONE WsfTimerStartMs, 1177, 720 (ms), 11␍␊
+[14:05:45:383] 00085777: Dats got evt 18␍␊
+[14:05:45:399] @!@ DONE WsfTimerStartMs, 1178, 720 (ms), 11␍␊
+[14:05:45:415] 00085808: Dats got evt 18␍␊
+[14:05:45:431] @!@ DONE WsfTimerStartMs, 1179, 720 (ms), 11␍␊
+[14:05:45:447] 00085839: Dats got evt 18␍␊
+[14:05:45:463] @!@ DONE WsfTimerStartMs, 1180, 720 (ms), 11␍␊
+[14:05:45:504] App got evt 16␍␊
+[14:05:45:504] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
+[14:05:45:504] ␍␊
+[14:05:45:504] @!@ DONE WsfTimerStartMs, 1181, 5000 (ms), 1␍␊
+[14:05:45:504] 00085870: Dats got evt 18␍␊
+[14:05:45:504] @!@ DONE WsfTimerStartMs, 1182, 720 (ms), 11␍␊
+[14:05:45:504] 00085901: Dats got evt 18␍␊
+[14:05:45:533] @!@ DONE WsfTimerStartMs, 1183, 720 (ms), 11␍␊
+[14:05:45:563] 00085932: Dats got evt 18␍␊
+[14:05:45:563] @!@ DONE WsfTimerStartMs, 1184, 720 (ms), 11␍␊
+[14:05:45:593] 00085963: Dats got evt 18␍␊
+[14:05:45:593] @!@ DONE WsfTimerStartMs, 1185, 720 (ms), 11␍␊
+[14:05:45:622] 00085994: Dats got evt 18␍␊
+[14:05:45:622] @!@ DONE WsfTimerStartMs, 1186, 720 (ms), 11␍␊
+[14:05:45:652] 00086025: Dats got evt 18␍␊
+[14:05:45:652] @!@ DONE WsfTimerStartMs, 1187, 720 (ms), 11␍␊
+[14:05:45:682] 00086056: Dats got evt 18␍␊
+[14:05:45:682] @!@ DONE WsfTimerStartMs, 1188, 720 (ms), 11␍␊
+[14:05:45:712] 00086087: Dats got evt 18␍␊
+[14:05:45:712] @!@ DONE WsfTimerStartMs, 1189, 720 (ms), 11␍␊
+[14:05:45:742] 00086118: Dats got evt 18␍␊
+[14:05:45:742] @!@ DONE WsfTimerStartMs, 1190, 720 (ms), 11␍␊
+[14:05:45:777] 00086149: Dats got evt 18␍␊
+[14:05:45:777] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
+[14:05:45:777] @!@ DONE WsfTimerStartMs, 1191, 720 (ms), 11␍␊
+[14:05:45:803] 00086180: Dats got evt 18␍␊
+[14:05:45:803] @!@ DONE WsfTimerStartMs, 1192, 720 (ms), 11␍␊
+[14:05:45:833] 00086211: Dats got evt 18␍␊
+[14:05:45:833] @!@ DONE WsfTimerStartMs, 1193, 720 (ms), 11␍␊
+[14:05:45:865] @!@ DONE WsfTimerStartMs, 1194, 720 (ms), 11␍␊
+[14:05:45:865] 00086242: Dats got evt 18␍␊
+[14:05:45:896] @!@ DONE WsfTimerStartMs, 1195, 720 (ms), 11␍␊
+[14:05:45:896] 00086273: Dats got evt 18␍␊
+[14:05:45:926] @!@ DONE WsfTimerStartMs, 1196, 720 (ms), 11␍␊
+[14:05:45:926] 00086304: Dats got evt 18␍␊
+[14:05:45:955] @!@ DONE WsfTimerStartMs, 1197, 720 (ms), 11␍␊
+[14:05:45:955] 00086335: Dats got evt 18␍␊
+[14:05:45:991] @!@ DONE WsfTimerStartMs, 1198, 720 (ms), 11␍␊
+[14:05:45:991]     >>> Channel map updated, handle=0, eventCounter=1180 <<<␍␊
+[14:05:45:991] 00086366: Dats got evt 18␍␊
+[14:05:46:020] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=BUSY, event=6␍␊
+[14:05:46:020] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:46:020] @!@ DONE WsfTimerStartMs, 1199, 720 (ms), 11␍␊
+[14:05:46:020] 00086397: Dats got evt 18␍␊
+[14:05:46:046] @!@ DONE WsfTimerStartMs, 1200, 720 (ms), 11␍␊
+[14:05:46:046] 00086428: Dats got evt 18␍␊
+[14:05:46:077] @!@ DONE WsfTimerStartMs, 1201, 720 (ms), 11␍␊
+[14:05:46:077] 00086459: Dats got evt 18␍␊
+[14:05:46:108] @!@ DONE WsfTimerStartMs, 1202, 720 (ms), 11␍␊
+[14:05:46:108] 00086490: Dats got evt 18␍␊
+[14:05:46:139] @!@ DONE WsfTimerStartMs, 1203, 720 (ms), 11␍␊
+[14:05:46:139] 00086521: Dats got evt 18␍␊
+[14:05:46:170] @!@ DONE WsfTimerStartMs, 1204, 720 (ms), 11␍␊
+[14:05:46:170] 00086552: Dats got evt 18␍␊
+[14:05:46:201] @!@ DONE WsfTimerStartMs, 1205, 720 (ms), 11␍␊
+[14:05:46:201] 00086583: Dats got evt 18␍␊
+[14:05:46:231] @!@ DONE WsfTimerStartMs, 1206, 720 (ms), 11␍␊
+[14:05:46:231] 00086614: Dats got evt 18␍␊
+[14:05:46:262] @!@ DONE WsfTimerStartMs, 1207, 720 (ms), 11␍␊
+[14:05:46:262] 00086645: Dats got evt 18␍␊
+[14:05:46:293] @!@ DONE WsfTimerStartMs, 1208, 720 (ms), 11␍␊
+[14:05:46:293] 00086676: Dats got evt 18␍␊
+[14:05:46:324] @!@ DONE WsfTimerStartMs, 1209, 720 (ms), 11␍␊
+[14:05:46:324] 00086707: Dats got evt 18␍␊
+[14:05:46:355] @!@ DONE WsfTimerStartMs, 1210, 720 (ms), 11␍␊
+[14:05:46:355] 00086738: Dats got evt 18␍␊
+[14:05:46:355] @!@ DONE WsfTimerStartMs, 1211, 720 (ms), 11␍␊
+[14:05:46:371] 00086769: Dats got evt 18␍␊
+[14:05:46:387] @!@ DONE WsfTimerStartMs, 1212, 720 (ms), 11␍␊
+[14:05:46:403] 00086800: Dats got evt 18␍␊
+[14:05:46:419] @!@ DONE WsfTimerStartMs, 1213, 720 (ms), 11␍␊
+[14:05:46:435] 00086831: Dats got evt 18␍␊
+[14:05:46:451] @!@ DONE WsfTimerStartMs, 1214, 720 (ms), 11␍␊
+[14:05:46:467] 00086862: Dats got evt 18␍␊
+[14:05:46:483] @!@ DONE WsfTimerStartMs, 1215, 720 (ms), 11␍␊
+[14:05:46:499] 00086893: Dats got evt 18␍␊
+[14:05:46:515] @!@ DONE WsfTimerStartMs, 1216, 720 (ms), 11␍␊
+[14:05:46:531] 00086924: Dats got evt 18␍␊
+[14:05:46:547] @!@ DONE WsfTimerStartMs, 1217, 720 (ms), 11␍␊
+[14:05:46:563] 00086955: Dats got evt 18␍␊
+[14:05:46:579] @!@ DONE WsfTimerStartMs, 1218, 720 (ms), 11␍␊
+[14:05:46:595] 00086986: Dats got evt 18␍␊
+[14:05:46:595] @!@ DONE WsfTimerStartMs, 1219, 720 (ms), 11␍␊
+[14:05:46:643] 00087017: Dats got evt 18␍␊
+[14:05:46:643] @!@ DONE WsfTimerStartMs, 1220, 720 (ms), 11␍␊
+[14:05:46:672] 00087048: Dats got evt 18␍␊
+[14:05:46:672] @!@ DONE WsfTimerStartMs, 1221, 720 (ms), 11␍␊
+[14:05:46:703] 00087079: Dats got evt 18␍␊
+[14:05:46:703] @!@ DONE WsfTimerStartMs, 1222, 720 (ms), 11␍␊
+[14:05:46:733] 00087110: Dats got evt 18␍␊
+[14:05:46:733] @!@ DONE WsfTimerStartMs, 1223, 720 (ms), 11␍␊
+[14:05:46:763] 00087141: Dats got evt 18␍␊
+[14:05:46:763] @!@ DONE WsfTimerStartMs, 1224, 720 (ms), 11␍␊
+[14:05:46:793] 00087172: Dats got evt 18␍␊
+[14:05:46:793] @!@ DONE WsfTimerStartMs, 1225, 720 (ms), 11␍␊
+[14:05:46:823] 00087203: Dats got evt 18␍␊
+[14:05:46:823] @!@ DONE WsfTimerStartMs, 1226, 720 (ms), 11␍␊
+[14:05:46:854] 00087234: Dats got evt 18␍␊
+[14:05:46:854] @!@ DONE WsfTimerStartMs, 1227, 720 (ms), 11␍␊
+[14:05:46:885] 00087265: Dats got evt 18␍␊
+[14:05:46:885] @!@ DONE WsfTimerStartMs, 1228, 720 (ms), 11␍␊
+[14:05:46:916] @!@ DONE WsfTimerStartMs, 1229, 720 (ms), 11␍␊
+[14:05:46:916] 00087296: Dats got evt 18␍␊
+[14:05:46:945] @!@ DONE WsfTimerStartMs, 1230, 720 (ms), 11␍␊
+[14:05:46:945] 00087327: Dats got evt 18␍␊
+[14:05:46:975] @!@ DONE WsfTimerStartMs, 1231, 720 (ms), 11␍␊
+[14:05:46:975] 00087358: Dats got evt 18␍␊
+[14:05:47:005] @!@ DONE WsfTimerStartMs, 1232, 720 (ms), 11␍␊
+[14:05:47:005] 00087389: Dats got evt 18␍␊
+[14:05:47:035] @!@ DONE WsfTimerStartMs, 1233, 720 (ms), 11␍␊
+[14:05:47:035] 00087420: Dats got evt 18␍␊
+[14:05:47:066] @!@ DONE WsfTimerStartMs, 1234, 720 (ms), 11␍␊
+[14:05:47:066] 00087451: Dats got evt 18␍␊
+[14:05:47:097] @!@ DONE WsfTimerStartMs, 1235, 720 (ms), 11␍␊
+[14:05:47:097] 00087482: Dats got evt 18␍␊
+[14:05:47:128] @!@ DONE WsfTimerStartMs, 1236, 720 (ms), 11␍␊
+[14:05:47:128] 00087513: Dats got evt 18␍␊
+[14:05:47:159] @!@ DONE WsfTimerStartMs, 1237, 720 (ms), 11␍␊
+[14:05:47:159] 00087544: Dats got evt 18␍␊
+[14:05:47:190] @!@ DONE WsfTimerStartMs, 1238, 720 (ms), 11␍␊
+[14:05:47:190] 00087575: Dats got evt 18␍␊
+[14:05:47:221] @!@ DONE WsfTimerStartMs, 1239, 720 (ms), 11␍␊
+[14:05:47:221] 00087606: Dats got evt 18␍␊
+[14:05:47:251] @!@ DONE WsfTimerStartMs, 1240, 720 (ms), 11␍␊
+[14:05:47:251] 00087637: Dats got evt 18␍␊
+[14:05:47:282] @!@ DONE WsfTimerStartMs, 1241, 720 (ms), 11␍␊
+[14:05:47:282] 00087668: Dats got evt 18␍␊
+[14:05:47:313] @!@ DONE WsfTimerStartMs, 1242, 720 (ms), 11␍␊
+[14:05:47:313] 00087699: Dats got evt 18␍␊
+[14:05:47:344] @!@ DONE WsfTimerStartMs, 1243, 720 (ms), 11␍␊
+[14:05:47:344] 00087730: Dats got evt 18␍␊
+[14:05:47:375] @!@ DONE WsfTimerStartMs, 1244, 720 (ms), 11␍␊
+[14:05:47:375] 00087761: Dats got evt 18␍␊
+[14:05:47:375] @!@ DONE WsfTimerStartMs, 1245, 720 (ms), 11␍␊
+[14:05:47:391] 00087792: Dats got evt 18␍␊
+[14:05:47:407] @!@ DONE WsfTimerStartMs, 1246, 720 (ms), 11␍␊
+[14:05:47:424] 00087823: Dats got evt 18␍␊
+[14:05:47:439] @!@ DONE WsfTimerStartMs, 1247, 720 (ms), 11␍␊
+[14:05:47:455] 00087854: Dats got evt 18␍␊
+[14:05:47:471] @!@ DONE WsfTimerStartMs, 1248, 720 (ms), 11␍␊
+[14:05:47:487] 00087885: Dats got evt 18␍␊
+[14:05:47:503] @!@ DONE WsfTimerStartMs, 1249, 720 (ms), 11␍␊
+[14:05:47:519] 00087916: Dats got evt 18␍␊
+[14:05:47:535] @!@ DONE WsfTimerStartMs, 1250, 720 (ms), 11␍␊
+[14:05:47:552] 00087947: Dats got evt 18␍␊
+[14:05:47:568] @!@ DONE WsfTimerStartMs, 1251, 720 (ms), 11␍␊
+[14:05:47:584] 00087978: Dats got evt 18␍␊
+[14:05:47:600] @!@ DONE WsfTimerStartMs, 1252, 720 (ms), 11␍␊
+[14:05:47:616] 00088009: Dats got evt 18␍␊
+[14:05:47:616] @!@ DONE WsfTimerStartMs, 1253, 720 (ms), 11␍␊
+[14:05:47:663] 00088040: Dats got evt 18␍␊
+[14:05:47:663] @!@ DONE WsfTimerStartMs, 1254, 720 (ms), 11␍␊
+[14:05:47:693] 00088071: Dats got evt 18␍␊
+[14:05:47:693] @!@ DONE WsfTimerStartMs, 1255, 720 (ms), 11␍␊
+[14:05:47:723] 00088102: Dats got evt 18␍␊
+[14:05:47:723] @!@ DONE WsfTimerStartMs, 1256, 720 (ms), 11␍␊
+[14:05:47:753] 00088133: Dats got evt 18␍␊
+[14:05:47:753] @!@ DONE WsfTimerStartMs, 1257, 720 (ms), 11␍␊
+[14:05:47:783] 00088164: Dats got evt 18␍␊
+[14:05:47:783] @!@ DONE WsfTimerStartMs, 1258, 720 (ms), 11␍␊
+[14:05:47:813] 00088195: Dats got evt 18␍␊
+[14:05:47:813] @!@ DONE WsfTimerStartMs, 1259, 720 (ms), 11␍␊
+[14:05:47:843] 00088226: Dats got evt 18␍␊
+[14:05:47:843] @!@ DONE WsfTimerStartMs, 1260, 720 (ms), 11␍␊
+[14:05:47:874] @!@ DONE WsfTimerStartMs, 1261, 720 (ms), 11␍␊
+[14:05:47:874] 00088257: Dats got evt 18␍␊
+[14:05:47:905] @!@ DONE WsfTimerStartMs, 1262, 720 (ms), 11␍␊
+[14:05:47:905] 00088288: Dats got evt 18␍␊
+[14:05:47:935] @!@ DONE WsfTimerStartMs, 1263, 720 (ms), 11␍␊
+[14:05:47:935] 00088319: Dats got evt 18␍␊
+[14:05:47:965] @!@ DONE WsfTimerStartMs, 1264, 720 (ms), 11␍␊
+[14:05:47:965] 00088350: Dats got evt 18␍␊
+[14:05:47:995] @!@ DONE WsfTimerStartMs, 1265, 720 (ms), 11␍␊
+[14:05:47:995] 00088381: Dats got evt 18␍␊
+[14:05:48:025] @!@ DONE WsfTimerStartMs, 1266, 720 (ms), 11␍␊
+[14:05:48:025] 00088412: Dats got evt 18␍␊
+[14:05:48:055] @!@ DONE WsfTimerStartMs, 1267, 720 (ms), 11␍␊
+[14:05:48:055] 00088443: Dats got evt 18␍␊
+[14:05:48:086] @!@ DONE WsfTimerStartMs, 1268, 720 (ms), 11␍␊
+[14:05:48:086] 00088474: Dats got evt 18␍␊
+[14:05:48:117] @!@ DONE WsfTimerStartMs, 1269, 720 (ms), 11␍␊
+[14:05:48:117] 00088505: Dats got evt 18␍␊
+[14:05:48:148] @!@ DONE WsfTimerStartMs, 1270, 720 (ms), 11␍␊
+[14:05:48:148] 00088536: Dats got evt 18␍␊
+[14:05:48:179] @!@ DONE WsfTimerStartMs, 1271, 720 (ms), 11␍␊
+[14:05:48:179] 00088567: Dats got evt 18␍␊
+[14:05:48:210] @!@ DONE WsfTimerStartMs, 1272, 720 (ms), 11␍␊
+[14:05:48:210] 00088598: Dats got evt 18␍␊
+[14:05:48:241] @!@ DONE WsfTimerStartMs, 1273, 720 (ms), 11␍␊
+[14:05:48:241] 00088629: Dats got evt 18␍␊
+[14:05:48:272] @!@ DONE WsfTimerStartMs, 1274, 720 (ms), 11␍␊
+[14:05:48:272] 00088660: Dats got evt 18␍␊
+[14:05:48:303] @!@ DONE WsfTimerStartMs, 1275, 720 (ms), 11␍␊
+[14:05:48:303] 00088691: Dats got evt 18␍␊
+[14:05:48:333] @!@ DONE WsfTimerStartMs, 1276, 720 (ms), 11␍␊
+[14:05:48:333] 00088722: Dats got evt 18␍␊
+[14:05:48:365] @!@ DONE WsfTimerStartMs, 1277, 720 (ms), 11␍␊
+[14:05:48:365] 00088753: Dats got evt 18␍␊
+[14:05:48:396] @!@ DONE WsfTimerStartMs, 1278, 720 (ms), 11␍␊
+[14:05:48:396] 00088784: Dats got evt 18␍␊
+[14:05:48:396] @!@ DONE WsfTimerStartMs, 1279, 720 (ms), 11␍␊
+[14:05:48:412] 00088815: Dats got evt 18␍␊
+[14:05:48:428] @!@ DONE WsfTimerStartMs, 1280, 720 (ms), 11␍␊
+[14:05:48:445] 00088846: Dats got evt 18␍␊
+[14:05:48:460] @!@ DONE WsfTimerStartMs, 1281, 720 (ms), 11␍␊
+[14:05:48:476] 00088877: Dats got evt 18␍␊
+[14:05:48:492] @!@ DONE WsfTimerStartMs, 1282, 720 (ms), 11␍␊
+[14:05:48:508] 00088908: Dats got evt 18␍␊
+[14:05:48:524] @!@ DONE WsfTimerStartMs, 1283, 720 (ms), 11␍␊
+[14:05:48:540] 00088939: Dats got evt 18␍␊
+[14:05:48:556] @!@ DONE WsfTimerStartMs, 1284, 720 (ms), 11␍␊
+[14:05:48:572] 00088970: Dats got evt 18␍␊
+[14:05:48:588] @!@ DONE WsfTimerStartMs, 1285, 720 (ms), 11␍␊
+[14:05:48:604] 00089001: Dats got evt 18␍␊
+[14:05:48:620] @!@ DONE WsfTimerStartMs, 1286, 720 (ms), 11␍␊
+[14:05:48:636] 00089032: Dats got evt 18␍␊
+[14:05:48:636] @!@ DONE WsfTimerStartMs, 1287, 720 (ms), 11␍␊
+[14:05:48:683] 00089063: Dats got evt 18␍␊
+[14:05:48:683] @!@ DONE WsfTimerStartMs, 1288, 720 (ms), 11␍␊
+[14:05:48:712] 00089094: Dats got evt 18␍␊
+[14:05:48:712] @!@ DONE WsfTimerStartMs, 1289, 720 (ms), 11␍␊
+[14:05:48:743] 00089125: Dats got evt 18␍␊
+[14:05:48:743] @!@ DONE WsfTimerStartMs, 1290, 720 (ms), 11␍␊
+[14:05:48:773] 00089156: Dats got evt 18␍␊
+[14:05:48:773] @!@ DONE WsfTimerStartMs, 1291, 720 (ms), 11␍␊
+[14:05:48:803] 00089187: Dats got evt 18␍␊
+[14:05:48:803] @!@ DONE WsfTimerStartMs, 1292, 720 (ms), 11␍␊
+[14:05:48:833] 00089218: Dats got evt 18␍␊
+[14:05:48:833] @!@ DONE WsfTimerStartMs, 1293, 720 (ms), 11␍␊
+[14:05:48:863] 00089249: Dats got evt 18␍␊
+[14:05:48:863] @!@ DONE WsfTimerStartMs, 1294, 720 (ms), 11␍␊
+[14:05:48:894] @!@ DONE WsfTimerStartMs, 1295, 720 (ms), 11␍␊
+[14:05:48:894] 00089280: Dats got evt 18␍␊
+[14:05:48:925] @!@ DONE WsfTimerStartMs, 1296, 720 (ms), 11␍␊
+[14:05:48:925] 00089311: Dats got evt 18␍␊
+[14:05:48:955] @!@ DONE WsfTimerStartMs, 1297, 720 (ms), 11␍␊
+[14:05:48:955] 00089342: Dats got evt 18␍␊
+[14:05:48:985] @!@ DONE WsfTimerStartMs, 1298, 720 (ms), 11␍␊
+[14:05:48:985] 00089373: Dats got evt 18␍␊
+[14:05:49:015] @!@ DONE WsfTimerStartMs, 1299, 720 (ms), 11␍␊
+[14:05:49:015] 00089404: Dats got evt 18␍␊
+[14:05:49:045] @!@ DONE WsfTimerStartMs, 1300, 720 (ms), 11␍␊
+[14:05:49:045] 00089435: Dats got evt 18␍␊
+[14:05:49:075] @!@ DONE WsfTimerStartMs, 1301, 720 (ms), 11␍␊
+[14:05:49:075] 00089466: Dats got evt 18␍␊
+[14:05:49:107] @!@ DONE WsfTimerStartMs, 1302, 720 (ms), 11␍␊
+[14:05:49:107] 00089497: Dats got evt 18␍␊
+[14:05:49:138] @!@ DONE WsfTimerStartMs, 1303, 720 (ms), 11␍␊
+[14:05:49:138] 00089528: Dats got evt 18␍␊
+[14:05:49:169] @!@ DONE WsfTimerStartMs, 1304, 720 (ms), 11␍␊
+[14:05:49:169] 00089559: Dats got evt 18␍␊
+[14:05:49:200] @!@ DONE WsfTimerStartMs, 1305, 720 (ms), 11␍␊
+[14:05:49:200] 00089590: Dats got evt 18␍␊
+[14:05:49:231] @!@ DONE WsfTimerStartMs, 1306, 720 (ms), 11␍␊
+[14:05:49:231] 00089621: Dats got evt 18␍␊
+[14:05:49:262] @!@ DONE WsfTimerStartMs, 1307, 720 (ms), 11␍␊
+[14:05:49:262] 00089652: Dats got evt 18␍␊
+[14:05:49:293] @!@ DONE WsfTimerStartMs, 1308, 720 (ms), 11␍␊
+[14:05:49:293] 00089683: Dats got evt 18␍␊
+[14:05:49:323] @!@ DONE WsfTimerStartMs, 1309, 720 (ms), 11␍␊
+[14:05:49:323] 00089714: Dats got evt 18␍␊
+[14:05:49:354] @!@ DONE WsfTimerStartMs, 1310, 720 (ms), 11␍␊
+[14:05:49:354] 00089745: Dats got evt 18␍␊
+[14:05:49:385] @!@ DONE WsfTimerStartMs, 1311, 720 (ms), 11␍␊
+[14:05:49:385] 00089776: Dats got evt 18␍␊
+[14:05:49:385] @!@ DONE WsfTimerStartMs, 1312, 720 (ms), 11␍␊
+[14:05:49:401] 00089807: Dats got evt 18␍␊
+[14:05:49:417] @!@ DONE WsfTimerStartMs, 1313, 720 (ms), 11␍␊
+[14:05:49:433] 00089838: Dats got evt 18␍␊
+[14:05:49:449] @!@ DONE WsfTimerStartMs, 1314, 720 (ms), 11␍␊
+[14:05:49:465] 00089869: Dats got evt 18␍␊
+[14:05:49:481] @!@ DONE WsfTimerStartMs, 1315, 720 (ms), 11␍␊
+[14:05:49:497] 00089900: Dats got evt 18␍␊
+[14:05:49:513] @!@ DONE WsfTimerStartMs, 1316, 720 (ms), 11␍␊
+[14:05:49:529] 00089931: Dats got evt 18␍␊
+[14:05:49:545] @!@ DONE WsfTimerStartMs, 1317, 720 (ms), 11␍␊
+[14:05:49:561] 00089962: Dats got evt 18␍␊
+[14:05:49:577] @!@ DONE WsfTimerStartMs, 1318, 720 (ms), 11␍␊
+[14:05:49:593] 00089993: Dats got evt 18␍␊
+[14:05:49:609] @!@ DONE WsfTimerStartMs, 1319, 720 (ms), 11␍␊
+[14:05:49:625] 00090024: Dats got evt 18␍␊
+[14:05:49:625] @!@ DONE WsfTimerStartMs, 1320, 720 (ms), 11␍␊
+[14:05:49:657] 00090055: Dats got evt 18␍␊
+[14:05:49:657] @!@ DONE WsfTimerStartMs, 1321, 720 (ms), 11␍␊
+[14:05:49:703] 00090086: Dats got evt 18␍␊
+[14:05:49:703] @!@ DONE WsfTimerStartMs, 1322, 720 (ms), 11␍␊
+[14:05:49:732] 00090117: Dats got evt 18␍␊
+[14:05:49:732] @!@ DONE WsfTimerStartMs, 1323, 720 (ms), 11␍␊
+[14:05:49:762] 00090148: Dats got evt 18␍␊
+[14:05:49:762] @!@ DONE WsfTimerStartMs, 1324, 720 (ms), 11␍␊
+[14:05:49:792] 00090179: Dats got evt 18␍␊
+[14:05:49:792] @!@ DONE WsfTimerStartMs, 1325, 720 (ms), 11␍␊
+[14:05:49:822] 00090210: Dats got evt 18␍␊
+[14:05:49:822] @!@ DONE WsfTimerStartMs, 1326, 720 (ms), 11␍␊
+[14:05:49:853] 00090241: Dats got evt 18␍␊
+[14:05:49:853] @!@ DONE WsfTimerStartMs, 1327, 720 (ms), 11␍␊
+[14:05:49:883] 00090272: Dats got evt 18␍␊
+[14:05:49:883] @!@ DONE WsfTimerStartMs, 1328, 720 (ms), 11␍␊
+[14:05:49:914] @!@ DONE WsfTimerStartMs, 1329, 720 (ms), 11␍␊
+[14:05:49:914] 00090303: Dats got evt 18␍␊
+[14:05:49:946] @!@ DONE WsfTimerStartMs, 1330, 720 (ms), 11␍␊
+[14:05:49:946] 00090334: Dats got evt 18␍␊
+[14:05:49:976] @!@ DONE WsfTimerStartMs, 1331, 720 (ms), 11␍␊
+[14:05:49:976] 00090365: Dats got evt 18␍␊
+[14:05:50:006] @!@ DONE WsfTimerStartMs, 1332, 720 (ms), 11␍␊
+[14:05:50:006] 00090396: Dats got evt 18␍␊
+[14:05:50:036] @!@ DONE WsfTimerStartMs, 1333, 720 (ms), 11␍␊
+[14:05:50:036] 00090427: Dats got evt 18␍␊
+[14:05:50:066] @!@ DONE WsfTimerStartMs, 1334, 720 (ms), 11␍␊
+[14:05:50:066] 00090458: Dats got evt 18␍␊
+[14:05:50:096] @!@ DONE WsfTimerStartMs, 1335, 720 (ms), 11␍␊
+[14:05:50:096] 00090489: Dats got evt 18␍␊
+[14:05:50:127] @!@ DONE WsfTimerStartMs, 1336, 720 (ms), 11␍␊
+[14:05:50:127] 00090520: Dats got evt 18␍␊
+[14:05:50:158] @!@ DONE WsfTimerStartMs, 1337, 720 (ms), 11␍␊
+[14:05:50:158] 00090551: Dats got evt 18␍␊
+[14:05:50:189] @!@ DONE WsfTimerStartMs, 1338, 720 (ms), 11␍␊
+[14:05:50:189] 00090582: Dats got evt 18␍␊
+[14:05:50:220] @!@ DONE WsfTimerStartMs, 1339, 720 (ms), 11␍␊
+[14:05:50:220] 00090613: Dats got evt 18␍␊
+[14:05:50:251] @!@ DONE WsfTimerStartMs, 1340, 720 (ms), 11␍␊
+[14:05:50:251] 00090644: Dats got evt 18␍␊
+[14:05:50:282] @!@ DONE WsfTimerStartMs, 1341, 720 (ms), 11␍␊
+[14:05:50:282] 00090675: Dats got evt 18␍␊
+[14:05:50:313] @!@ DONE WsfTimerStartMs, 1342, 720 (ms), 11␍␊
+[14:05:50:313] 00090706: Dats got evt 18␍␊
+[14:05:50:343] @!@ DONE WsfTimerStartMs, 1343, 720 (ms), 11␍␊
+[14:05:50:343] 00090737: Dats got evt 18␍␊
+[14:05:50:374] @!@ DONE WsfTimerStartMs, 1344, 720 (ms), 11␍␊
+[14:05:50:374] 00090768: Dats got evt 18␍␊
+[14:05:50:405] @!@ DONE WsfTimerStartMs, 1345, 720 (ms), 11␍␊
+[14:05:50:405] 00090799: Dats got evt 18␍␊
+[14:05:50:405] @!@ DONE WsfTimerStartMs, 1346, 720 (ms), 11␍␊
+[14:05:50:421] 00090830: Dats got evt 18␍␊
+[14:05:50:437] @!@ DONE WsfTimerStartMs, 1347, 720 (ms), 11␍␊
+[14:05:50:453] 00090861: Dats got evt 18␍␊
+[14:05:50:480] App got evt 16␍␊
+[14:05:50:480] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
+[14:05:50:480] ␍␊
+[14:05:50:480] @!@ DONE WsfTimerStartMs, 1348, 5000 (ms), 1␍␊
+[14:05:50:480] @!@ DONE WsfTimerStartMs, 1349, 720 (ms), 11␍␊
+[14:05:50:496] 00090892: Dats got evt 18␍␊
+[14:05:50:496] @!@ DONE WsfTimerStartMs, 1350, 720 (ms), 11␍␊
+[14:05:50:512] 00090923: Dats got evt 18␍␊
+[14:05:50:542] @!@ DONE WsfTimerStartMs, 1351, 720 (ms), 11␍␊
+[14:05:50:572] 00090954: Dats got evt 18␍␊
+[14:05:50:572] @!@ DONE WsfTimerStartMs, 1352, 720 (ms), 11␍␊
+[14:05:50:603] 00090985: Dats got evt 18␍␊
+[14:05:50:603] @!@ DONE WsfTimerStartMs, 1353, 720 (ms), 11␍␊
+[14:05:50:634] 00091016: Dats got evt 18␍␊
+[14:05:50:634] @!@ DONE WsfTimerStartMs, 1354, 720 (ms), 11␍␊
+[14:05:50:663] 00091047: Dats got evt 18␍␊
+[14:05:50:663] @!@ DONE WsfTimerStartMs, 1355, 720 (ms), 11␍␊
+[14:05:50:693] 00091078: Dats got evt 18␍␊
+[14:05:50:693] @!@ DONE WsfTimerStartMs, 1356, 720 (ms), 11␍␊
+[14:05:50:723] 00091109: Dats got evt 18␍␊
+[14:05:50:723] @!@ DONE WsfTimerStartMs, 1357, 720 (ms), 11␍␊
+[14:05:50:753] 00091140: Dats got evt 18␍␊
+[14:05:50:753] @!@ DONE WsfTimerStartMs, 1358, 720 (ms), 11␍␊
+[14:05:50:783] 00091171: Dats got evt 18␍␊
+[14:05:50:783] @!@ DONE WsfTimerStartMs, 1359, 720 (ms), 11␍␊
+[14:05:50:813] 00091202: Dats got evt 18␍␊
+[14:05:50:813] @!@ DONE WsfTimerStartMs, 1360, 720 (ms), 11␍␊
+[14:05:50:843] 00091233: Dats got evt 18␍␊
+[14:05:50:843] @!@ DONE WsfTimerStartMs, 1361, 720 (ms), 11␍␊
+[14:05:50:873] 00091264: Dats got evt 18␍␊
+[14:05:50:873] @!@ DONE WsfTimerStartMs, 1362, 720 (ms), 11␍␊
+[14:05:50:904] 00091295: Dats got evt 18␍␊
+[14:05:50:904] @!@ DONE WsfTimerStartMs, 1363, 720 (ms), 11␍␊
+[14:05:50:935] @!@ DONE WsfTimerStartMs, 1364, 720 (ms), 11␍␊
+[14:05:50:935] 00091326: Dats got evt 18␍␊
+[14:05:50:966] @!@ DONE WsfTimerStartMs, 1365, 720 (ms), 11␍␊
+[14:05:50:966] 00091357: Dats got evt 18␍␊
+[14:05:50:996] @!@ DONE WsfTimerStartMs, 1366, 720 (ms), 11␍␊
+[14:05:50:996] 00091388: Dats got evt 18␍␊
+[14:05:51:026] @!@ DONE WsfTimerStartMs, 1367, 720 (ms), 11␍␊
+[14:05:51:026] 00091419: Dats got evt 18␍␊
+[14:05:51:056] @!@ DONE WsfTimerStartMs, 1368, 720 (ms), 11␍␊
+[14:05:51:056] 00091450: Dats got evt 18␍␊
+[14:05:51:086] @!@ DONE WsfTimerStartMs, 1369, 720 (ms), 11␍␊
+[14:05:51:086] 00091481: Dats got evt 18␍␊
+[14:05:51:116] @!@ DONE WsfTimerStartMs, 1370, 720 (ms), 11␍␊
+[14:05:51:116] 00091512: Dats got evt 18␍␊
+[14:05:51:147] @!@ DONE WsfTimerStartMs, 1371, 720 (ms), 11␍␊
+[14:05:51:147] 00091543: Dats got evt 18␍␊
+[14:05:51:178] @!@ DONE WsfTimerStartMs, 1372, 720 (ms), 11␍␊
+[14:05:51:178] 00091574: Dats got evt 18␍␊
+[14:05:51:209] @!@ DONE WsfTimerStartMs, 1373, 720 (ms), 11␍␊
+[14:05:51:209] 00091605: Dats got evt 18␍␊
+[14:05:51:240] @!@ DONE WsfTimerStartMs, 1374, 720 (ms), 11␍␊
+[14:05:51:240] 00091636: Dats got evt 18␍␊
+[14:05:51:271] @!@ DONE WsfTimerStartMs, 1375, 720 (ms), 11␍␊
+[14:05:51:271] 00091667: Dats got evt 18␍␊
+[14:05:51:302] @!@ DONE WsfTimerStartMs, 1376, 720 (ms), 11␍␊
+[14:05:51:302] 00091698: Dats got evt 18␍␊
+[14:05:51:333] @!@ DONE WsfTimerStartMs, 1377, 720 (ms), 11␍␊
+[14:05:51:333] 00091729: Dats got evt 18␍␊
+[14:05:51:363] @!@ DONE WsfTimerStartMs, 1378, 720 (ms), 11␍␊
+[14:05:51:363] 00091760: Dats got evt 18␍␊
+[14:05:51:394] @!@ DONE WsfTimerStartMs, 1379, 720 (ms), 11␍␊
+[14:05:51:394] 00091791: Dats got evt 18␍␊
+[14:05:51:425] @!@ DONE WsfTimerStartMs, 1380, 720 (ms), 11␍␊
+[14:05:51:425] 00091822: Dats got evt 18␍␊
+[14:05:51:425] @!@ DONE WsfTimerStartMs, 1381, 720 (ms), 11␍␊
+[14:05:51:441] 00091853: Dats got evt 18␍␊
+[14:05:51:457] @!@ DONE WsfTimerStartMs, 1382, 720 (ms), 11␍␊
+[14:05:51:473] 00091884: Dats got evt 18␍␊
+[14:05:51:489] @!@ DONE WsfTimerStartMs, 1383, 720 (ms), 11␍␊
+[14:05:51:505] 00091915: Dats got evt 18␍␊
+[14:05:51:521] @!@ DONE WsfTimerStartMs, 1384, 720 (ms), 11␍␊
+[14:05:51:537] 00091946: Dats got evt 18␍␊
+[14:05:51:554] @!@ DONE WsfTimerStartMs, 1385, 720 (ms), 11␍␊
+[14:05:51:570] 00091977: Dats got evt 18␍␊
+[14:05:51:586] @!@ DONE WsfTimerStartMs, 1386, 720 (ms), 11␍␊
+[14:05:51:602] 00092008: Dats got evt 18␍␊
+[14:05:51:618] @!@ DONE WsfTimerStartMs, 1387, 720 (ms), 11␍␊
+[14:05:51:634] 00092039: Dats got evt 18␍␊
+[14:05:51:650] @!@ DONE WsfTimerStartMs, 1388, 720 (ms), 11␍␊
+[14:05:51:666] 00092070: Dats got evt 18␍␊
+[14:05:51:666] @!@ DONE WsfTimerStartMs, 1389, 720 (ms), 11␍␊
+[14:05:51:698] 00092101: Dats got evt 18␍␊
+[14:05:51:698] @!@ DONE WsfTimerStartMs, 1390, 720 (ms), 11␍␊
+[14:05:51:743] 00092132: Dats got evt 18␍␊
+[14:05:51:743] @!@ DONE WsfTimerStartMs, 1391, 720 (ms), 11␍␊
+[14:05:51:773] 00092163: Dats got evt 18␍␊
+[14:05:51:773] @!@ DONE WsfTimerStartMs, 1392, 720 (ms), 11␍␊
+[14:05:51:803] 00092194: Dats got evt 18␍␊
+[14:05:51:803] @!@ DONE WsfTimerStartMs, 1393, 720 (ms), 11␍␊
+[14:05:51:833] 00092225: Dats got evt 18␍␊
+[14:05:51:833] @!@ DONE WsfTimerStartMs, 1394, 720 (ms), 11␍␊
+[14:05:51:863] 00092256: Dats got evt 18␍␊
+[14:05:51:863] @!@ DONE WsfTimerStartMs, 1395, 720 (ms), 11␍␊
+[14:05:51:893] 00092287: Dats got evt 18␍␊
+[14:05:51:893] @!@ DONE WsfTimerStartMs, 1396, 720 (ms), 11␍␊
+[14:05:51:924] @!@ DONE WsfTimerStartMs, 1397, 720 (ms), 11␍␊
+[14:05:51:924] 00092318: Dats got evt 18␍␊
+[14:05:51:955] @!@ DONE WsfTimerStartMs, 1398, 720 (ms), 11␍␊
+[14:05:51:955] 00092349: Dats got evt 18␍␊
+[14:05:51:989] lctrSlvConnRxCompletion: BB failed with status=CRC_FAILED, handle=0, bleChan=14, eventCounter=1379␍␊
+[14:05:51:989] 00092380: Dats got evt 18␍␊
+[14:05:52:017] @!@ DONE WsfTimerStartMs, 1399, 720 (ms), 11␍␊
+[14:05:52:017] 00092411: Dats got evt 18␍␊
+[14:05:52:044] @!@ DONE WsfTimerStartMs, 1400, 720 (ms), 11␍␊
+[14:05:52:044] 00092442: Dats got evt 18␍␊
+[14:05:52:079] lctrSlvConnRxCompletion: BB failed with status=CRC_FAILED, handle=0, bleChan=12, eventCounter=1382␍␊
+[14:05:52:079] 00092473: Dats got evt 18␍␊
+[14:05:52:106] @!@ DONE WsfTimerStartMs, 1401, 720 (ms), 11␍␊
+[14:05:52:106] 00092504: Dats got evt 18␍␊
+[14:05:52:136] @!@ DONE WsfTimerStartMs, 1402, 720 (ms), 11␍␊
+[14:05:52:136] 00092535: Dats got evt 18␍␊
+[14:05:52:168] @!@ DONE WsfTimerStartMs, 1403, 720 (ms), 11␍␊
+[14:05:52:168] 00092566: Dats got evt 18␍␊
+[14:05:52:198] @!@ DONE WsfTimerStartMs, 1404, 720 (ms), 11␍␊
+[14:05:52:198] 00092597: Dats got evt 18␍␊
+[14:05:52:229] @!@ DONE WsfTimerStartMs, 1405, 720 (ms), 11␍␊
+[14:05:52:229] 00092628: Dats got evt 18␍␊
+[14:05:52:261] @!@ DONE WsfTimerStartMs, 1406, 720 (ms), 11␍␊
+[14:05:52:261] 00092659: Dats got evt 18␍␊
+[14:05:52:292] @!@ DONE WsfTimerStartMs, 1407, 720 (ms), 11␍␊
+[14:05:52:292] 00092690: Dats got evt 18␍␊
+[14:05:52:322] @!@ DONE WsfTimerStartMs, 1408, 720 (ms), 11␍␊
+[14:05:52:322] 00092721: Dats got evt 18␍␊
+[14:05:52:353] @!@ DONE WsfTimerStartMs, 1409, 720 (ms), 11␍␊
+[14:05:52:353] 00092752: Dats got evt 18␍␊
+[14:05:52:384] @!@ DONE WsfTimerStartMs, 1410, 720 (ms), 11␍␊
+[14:05:52:384] 00092783: Dats got evt 18␍␊
+[14:05:52:415] @!@ DONE WsfTimerStartMs, 1411, 720 (ms), 11␍␊
+[14:05:52:415] 00092814: Dats got evt 18␍␊
+[14:05:52:446] @!@ DONE WsfTimerStartMs, 1412, 720 (ms), 11␍␊
+[14:05:52:446] 00092845: Dats got evt 18␍␊
+[14:05:52:446] @!@ DONE WsfTimerStartMs, 1413, 720 (ms), 11␍␊
+[14:05:52:462] 00092876: Dats got evt 18␍␊
+[14:05:52:478] @!@ DONE WsfTimerStartMs, 1414, 720 (ms), 11␍␊
+[14:05:52:494] 00092907: Dats got evt 18␍␊
+[14:05:52:510] @!@ DONE WsfTimerStartMs, 1415, 720 (ms), 11␍␊
+[14:05:52:526] 00092938: Dats got evt 18␍␊
+[14:05:52:542] @!@ DONE WsfTimerStartMs, 1416, 720 (ms), 11␍␊
+[14:05:52:558] 00092969: Dats got evt 18␍␊
+[14:05:52:574] @!@ DONE WsfTimerStartMs, 1417, 720 (ms), 11␍␊
+[14:05:52:590] 00093000: Dats got evt 18␍␊
+[14:05:52:606] @!@ DONE WsfTimerStartMs, 1418, 720 (ms), 11␍␊
+[14:05:52:622] 00093031: Dats got evt 18␍␊
+[14:05:52:638] @!@ DONE WsfTimerStartMs, 1419, 720 (ms), 11␍␊
+[14:05:52:654] 00093062: Dats got evt 18␍␊
+[14:05:52:670] @!@ DONE WsfTimerStartMs, 1420, 720 (ms), 11␍␊
+[14:05:52:686] 00093093: Dats got evt 18␍␊
+[14:05:52:686] @!@ DONE WsfTimerStartMs, 1421, 720 (ms), 11␍␊
+[14:05:52:732] 00093124: Dats got evt 18␍␊
+[14:05:52:732] @!@ DONE WsfTimerStartMs, 1422, 720 (ms), 11␍␊
+[14:05:52:762] 00093155: Dats got evt 18␍␊
+[14:05:52:762] @!@ DONE WsfTimerStartMs, 1423, 720 (ms), 11␍␊
+[14:05:52:793] 00093186: Dats got evt 18␍␊
+[14:05:52:793] @!@ DONE WsfTimerStartMs, 1424, 720 (ms), 11␍␊
+[14:05:52:823] 00093217: Dats got evt 18␍␊
+[14:05:52:823] @!@ DONE WsfTimerStartMs, 1425, 720 (ms), 11␍␊
+[14:05:52:853] 00093248: Dats got evt 18␍␊
+[14:05:52:853] @!@ DONE WsfTimerStartMs, 1426, 720 (ms), 11␍␊
+[14:05:52:883] 00093279: Dats got evt 18␍␊
+[14:05:52:883] @!@ DONE WsfTimerStartMs, 1427, 720 (ms), 11␍␊
+[14:05:52:913] 00093310: Dats got evt 18␍␊
+[14:05:52:913] @!@ DONE WsfTimerStartMs, 1428, 720 (ms), 11␍␊
+[14:05:52:944] @!@ DONE WsfTimerStartMs, 1429, 720 (ms), 11␍␊
+[14:05:52:944] 00093341: Dats got evt 18␍␊
+[14:05:52:975] @!@ DONE WsfTimerStartMs, 1430, 720 (ms), 11␍␊
+[14:05:52:975] 00093372: Dats got evt 18␍␊
+[14:05:53:006] @!@ DONE WsfTimerStartMs, 1431, 720 (ms), 11␍␊
+[14:05:53:006] 00093403: Dats got evt 18␍␊
+[14:05:53:035] @!@ DONE WsfTimerStartMs, 1432, 720 (ms), 11␍␊
+[14:05:53:035] 00093434: Dats got evt 18␍␊
+[14:05:53:065] @!@ DONE WsfTimerStartMs, 1433, 720 (ms), 11␍␊
+[14:05:53:065] 00093465: Dats got evt 18␍␊
+[14:05:53:095] @!@ DONE WsfTimerStartMs, 1434, 720 (ms), 11␍␊
+[14:05:53:095] 00093496: Dats got evt 18␍␊
+[14:05:53:126] @!@ DONE WsfTimerStartMs, 1435, 720 (ms), 11␍␊
+[14:05:53:126] 00093527: Dats got evt 18␍␊
+[14:05:53:157] @!@ DONE WsfTimerStartMs, 1436, 720 (ms), 11␍␊
+[14:05:53:157] 00093558: Dats got evt 18␍␊
+[14:05:53:188] @!@ DONE WsfTimerStartMs, 1437, 720 (ms), 11␍␊
+[14:05:53:188] 00093589: Dats got evt 18␍␊
+[14:05:53:219] @!@ DONE WsfTimerStartMs, 1438, 720 (ms), 11␍␊
+[14:05:53:219] 00093620: Dats got evt 18␍␊
+[14:05:53:250] @!@ DONE WsfTimerStartMs, 1439, 720 (ms), 11␍␊
+[14:05:53:250] 00093651: Dats got evt 18␍␊
+[14:05:53:281] @!@ DONE WsfTimerStartMs, 1440, 720 (ms), 11␍␊
+[14:05:53:281] 00093682: Dats got evt 18␍␊
+[14:05:53:311] @!@ DONE WsfTimerStartMs, 1441, 720 (ms), 11␍␊
+[14:05:53:311] 00093713: Dats got evt 18␍␊
+[14:05:53:342] @!@ DONE WsfTimerStartMs, 1442, 720 (ms), 11␍␊
+[14:05:53:342] 00093744: Dats got evt 18␍␊
+[14:05:53:373] @!@ DONE WsfTimerStartMs, 1443, 720 (ms), 11␍␊
+[14:05:53:373] 00093775: Dats got evt 18␍␊
+[14:05:53:404] @!@ DONE WsfTimerStartMs, 1444, 720 (ms), 11␍␊
+[14:05:53:404] 00093806: Dats got evt 18␍␊
+[14:05:53:435] @!@ DONE WsfTimerStartMs, 1445, 720 (ms), 11␍␊
+[14:05:53:435] 00093837: Dats got evt 18␍␊
+[14:05:53:435] @!@ DONE WsfTimerStartMs, 1446, 720 (ms), 11␍␊
+[14:05:53:451] 00093868: Dats got evt 18␍␊
+[14:05:53:467] @!@ DONE WsfTimerStartMs, 1447, 720 (ms), 11␍␊
+[14:05:53:483] 00093899: Dats got evt 18␍␊
+[14:05:53:499] @!@ DONE WsfTimerStartMs, 1448, 720 (ms), 11␍␊
+[14:05:53:515] 00093930: Dats got evt 18␍␊
+[14:05:53:531] @!@ DONE WsfTimerStartMs, 1449, 720 (ms), 11␍␊
+[14:05:53:547] 00093961: Dats got evt 18␍␊
+[14:05:53:563] @!@ DONE WsfTimerStartMs, 1450, 720 (ms), 11␍␊
+[14:05:53:579] 00093992: Dats got evt 18␍␊
+[14:05:53:595] @!@ DONE WsfTimerStartMs, 1451, 720 (ms), 11␍␊
+[14:05:53:611] 00094023: Dats got evt 18␍␊
+[14:05:53:627] @!@ DONE WsfTimerStartMs, 1452, 720 (ms), 11␍␊
+[14:05:53:643] 00094054: Dats got evt 18␍␊
+[14:05:53:659] @!@ DONE WsfTimerStartMs, 1453, 720 (ms), 11␍␊
+[14:05:53:675] 00094085: Dats got evt 18␍␊
+[14:05:53:675] @!@ DONE WsfTimerStartMs, 1454, 720 (ms), 11␍␊
+[14:05:53:722] 00094116: Dats got evt 18␍␊
+[14:05:53:722] @!@ DONE WsfTimerStartMs, 1455, 720 (ms), 11␍␊
+[14:05:53:752] 00094147: Dats got evt 18␍␊
+[14:05:53:752] @!@ DONE WsfTimerStartMs, 1456, 720 (ms), 11␍␊
+[14:05:53:782] 00094178: Dats got evt 18␍␊
+[14:05:53:782] @!@ DONE WsfTimerStartMs, 1457, 720 (ms), 11␍␊
+[14:05:53:812] 00094209: Dats got evt 18␍␊
+[14:05:53:812] @!@ DONE WsfTimerStartMs, 1458, 720 (ms), 11␍␊
+[14:05:53:843] 00094240: Dats got evt 18␍␊
+[14:05:53:843] @!@ DONE WsfTimerStartMs, 1459, 720 (ms), 11␍␊
+[14:05:53:873] 00094271: Dats got evt 18␍␊
+[14:05:53:873] @!@ DONE WsfTimerStartMs, 1460, 720 (ms), 11␍␊
+[14:05:53:904] 00094302: Dats got evt 18␍␊
+[14:05:53:904] @!@ DONE WsfTimerStartMs, 1461, 720 (ms), 11␍␊
+[14:05:53:934] 00094333: Dats got evt 18␍␊
+[14:05:53:934] @!@ DONE WsfTimerStartMs, 1462, 720 (ms), 11␍␊
+[14:05:53:965] @!@ DONE WsfTimerStartMs, 1463, 720 (ms), 11␍␊
+[14:05:53:965] 00094364: Dats got evt 18␍␊
+[14:05:53:996] @!@ DONE WsfTimerStartMs, 1464, 720 (ms), 11␍␊
+[14:05:53:996] 00094395: Dats got evt 18␍␊
+[14:05:54:026] @!@ DONE WsfTimerStartMs, 1465, 720 (ms), 11␍␊
+[14:05:54:026] 00094426: Dats got evt 18␍␊
+[14:05:54:055] @!@ DONE WsfTimerStartMs, 1466, 720 (ms), 11␍␊
+[14:05:54:055] 00094457: Dats got evt 18␍␊
+[14:05:54:085] @!@ DONE WsfTimerStartMs, 1467, 720 (ms), 11␍␊
+[14:05:54:085] 00094488: Dats got evt 18␍␊
+[14:05:54:115] @!@ DONE WsfTimerStartMs, 1468, 720 (ms), 11␍␊
+[14:05:54:115] 00094519: Dats got evt 18␍␊
+[14:05:54:146] @!@ DONE WsfTimerStartMs, 1469, 720 (ms), 11␍␊
+[14:05:54:146] 00094550: Dats got evt 18␍␊
+[14:05:54:177] @!@ DONE WsfTimerStartMs, 1470, 720 (ms), 11␍␊
+[14:05:54:177] 00094581: Dats got evt 18␍␊
+[14:05:54:208] @!@ DONE WsfTimerStartMs, 1471, 720 (ms), 11␍␊
+[14:05:54:208] 00094612: Dats got evt 18␍␊
+[14:05:54:239] @!@ DONE WsfTimerStartMs, 1472, 720 (ms), 11␍␊
+[14:05:54:239] 00094643: Dats got evt 18␍␊
+[14:05:54:270] @!@ DONE WsfTimerStartMs, 1473, 720 (ms), 11␍␊
+[14:05:54:270] 00094674: Dats got evt 18␍␊
+[14:05:54:301] @!@ DONE WsfTimerStartMs, 1474, 720 (ms), 11␍␊
+[14:05:54:301] 00094705: Dats got evt 18␍␊
+[14:05:54:331] @!@ DONE WsfTimerStartMs, 1475, 720 (ms), 11␍␊
+[14:05:54:331] 00094736: Dats got evt 18␍␊
+[14:05:54:362] @!@ DONE WsfTimerStartMs, 1476, 720 (ms), 11␍␊
+[14:05:54:362] 00094767: Dats got evt 18␍␊
+[14:05:54:393] @!@ DONE WsfTimerStartMs, 1477, 720 (ms), 11␍␊
+[14:05:54:393] 00094798: Dats got evt 18␍␊
+[14:05:54:424] @!@ DONE WsfTimerStartMs, 1478, 720 (ms), 11␍␊
+[14:05:54:424] 00094829: Dats got evt 18␍␊
+[14:05:54:455] @!@ DONE WsfTimerStartMs, 1479, 720 (ms), 11␍␊
+[14:05:54:455] 00094860: Dats got evt 18␍␊
+[14:05:54:455] @!@ DONE WsfTimerStartMs, 1480, 720 (ms), 11␍␊
+[14:05:54:471] 00094891: Dats got evt 18␍␊
+[14:05:54:487] @!@ DONE WsfTimerStartMs, 1481, 720 (ms), 11␍␊
+[14:05:54:503] 00094922: Dats got evt 18␍␊
+[14:05:54:519] @!@ DONE WsfTimerStartMs, 1482, 720 (ms), 11␍␊
+[14:05:54:535] 00094953: Dats got evt 18␍␊
+[14:05:54:551] @!@ DONE WsfTimerStartMs, 1483, 720 (ms), 11␍␊
+[14:05:54:567] 00094984: Dats got evt 18␍␊
+[14:05:54:583] @!@ DONE WsfTimerStartMs, 1484, 720 (ms), 11␍␊
+[14:05:54:599] 00095015: Dats got evt 18␍␊
+[14:05:54:615] @!@ DONE WsfTimerStartMs, 1485, 720 (ms), 11␍␊
+[14:05:54:631] 00095046: Dats got evt 18␍␊
+[14:05:54:647] @!@ DONE WsfTimerStartMs, 1486, 720 (ms), 11␍␊
+[14:05:54:663] 00095077: Dats got evt 18␍␊
+[14:05:54:679] @!@ DONE WsfTimerStartMs, 1487, 720 (ms), 11␍␊
+[14:05:54:695] 00095108: Dats got evt 18␍␊
+[14:05:54:695] @!@ DONE WsfTimerStartMs, 1488, 720 (ms), 11␍␊
+[14:05:54:743] 00095139: Dats got evt 18␍␊
+[14:05:54:743] @!@ DONE WsfTimerStartMs, 1489, 720 (ms), 11␍␊
+[14:05:54:773] 00095170: Dats got evt 18␍␊
+[14:05:54:773] @!@ DONE WsfTimerStartMs, 1490, 720 (ms), 11␍␊
+[14:05:54:803] 00095201: Dats got evt 18␍␊
+[14:05:54:803] @!@ DONE WsfTimerStartMs, 1491, 720 (ms), 11␍␊
+[14:05:54:833] 00095232: Dats got evt 18␍␊
+[14:05:54:833] @!@ DONE WsfTimerStartMs, 1492, 720 (ms), 11␍␊
+[14:05:54:863] 00095263: Dats got evt 18␍␊
+[14:05:54:863] @!@ DONE WsfTimerStartMs, 1493, 720 (ms), 11␍␊
+[14:05:54:893] 00095294: Dats got evt 18␍␊
+[14:05:54:893] @!@ DONE WsfTimerStartMs, 1494, 720 (ms), 11␍␊
+[14:05:54:923] 00095325: Dats got evt 18␍␊
+[14:05:54:923] @!@ DONE WsfTimerStartMs, 1495, 720 (ms), 11␍␊
+[14:05:54:954] 00095356: Dats got evt 18␍␊
+[14:05:54:954] @!@ DONE WsfTimerStartMs, 1496, 720 (ms), 11␍␊
+[14:05:54:985] @!@ DONE WsfTimerStartMs, 1497, 720 (ms), 11␍␊
+[14:05:54:985] 00095387: Dats got evt 18␍␊
+[14:05:55:015] @!@ DONE WsfTimerStartMs, 1498, 720 (ms), 11␍␊
+[14:05:55:015] 00095418: Dats got evt 18␍␊
+[14:05:55:045] @!@ DONE WsfTimerStartMs, 1499, 720 (ms), 11␍␊
+[14:05:55:045] 00095449: Dats got evt 18␍␊
+[14:05:55:075] @!@ DONE WsfTimerStartMs, 1500, 720 (ms), 11␍␊
+[14:05:55:075] 00095480: Dats got evt 18␍␊
+[14:05:55:105] @!@ DONE WsfTimerStartMs, 1501, 720 (ms), 11␍␊
+[14:05:55:105] 00095511: Dats got evt 18␍␊
+[14:05:55:135] @!@ DONE WsfTimerStartMs, 1502, 720 (ms), 11␍␊
+[14:05:55:135] 00095542: Dats got evt 18␍␊
+[14:05:55:166] @!@ DONE WsfTimerStartMs, 1503, 720 (ms), 11␍␊
+[14:05:55:166] 00095573: Dats got evt 18␍␊
+[14:05:55:197] @!@ DONE WsfTimerStartMs, 1504, 720 (ms), 11␍␊
+[14:05:55:197] 00095604: Dats got evt 18␍␊
+[14:05:55:228] @!@ DONE WsfTimerStartMs, 1505, 720 (ms), 11␍␊
+[14:05:55:228] 00095635: Dats got evt 18␍␊
+[14:05:55:259] @!@ DONE WsfTimerStartMs, 1506, 720 (ms), 11␍␊
+[14:05:55:259] 00095666: Dats got evt 18␍␊
+[14:05:55:290] @!@ DONE WsfTimerStartMs, 1507, 720 (ms), 11␍␊
+[14:05:55:290] 00095697: Dats got evt 18␍␊
+[14:05:55:320] @!@ DONE WsfTimerStartMs, 1508, 720 (ms), 11␍␊
+[14:05:55:320] 00095728: Dats got evt 18␍␊
+[14:05:55:351] @!@ DONE WsfTimerStartMs, 1509, 720 (ms), 11␍␊
+[14:05:55:351] 00095759: Dats got evt 18␍␊
+[14:05:55:382] @!@ DONE WsfTimerStartMs, 1510, 720 (ms), 11␍␊
+[14:05:55:382] 00095790: Dats got evt 18␍␊
+[14:05:55:413] @!@ DONE WsfTimerStartMs, 1511, 720 (ms), 11␍␊
+[14:05:55:413] 00095821: Dats got evt 18␍␊
+[14:05:55:476] @!@ DONE WsfTimerStartMs, 1512, 720 (ms), 11␍␊
+[14:05:55:476] 00095852: Dats got evt 18␍␊
+[14:05:55:476] App got evt 16␍␊
+[14:05:55:476] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
+[14:05:55:476] ␍␊
+[14:05:55:476] @!@ DONE WsfTimerStartMs, 1513, 5000 (ms), 1␍␊
+[14:05:55:476] @!@ DONE WsfTimerStartMs, 1514, 720 (ms), 11␍␊
+[14:05:55:476] 00095883: Dats got evt 18␍␊
+[14:05:55:476] @!@ DONE WsfTimerStartMs, 1515, 720 (ms), 11␍␊
+[14:05:55:492] 00095914: Dats got evt 18␍␊
+[14:05:55:508] @!@ DONE WsfTimerStartMs, 1516, 720 (ms), 11␍␊
+[14:05:55:524] 00095945: Dats got evt 18␍␊
+[14:05:55:540] @!@ DONE WsfTimerStartMs, 1517, 720 (ms), 11␍␊
+[14:05:55:556] 00095976: Dats got evt 18␍␊
+[14:05:55:572] @!@ DONE WsfTimerStartMs, 1518, 720 (ms), 11␍␊
+[14:05:55:588] 00096007: Dats got evt 18␍␊
+[14:05:55:604] @!@ DONE WsfTimerStartMs, 1519, 720 (ms), 11␍␊
+[14:05:55:620] 00096038: Dats got evt 18␍␊
+[14:05:55:636] @!@ DONE WsfTimerStartMs, 1520, 720 (ms), 11␍␊
+[14:05:55:652] 00096069: Dats got evt 18␍␊
+[14:05:55:668] @!@ DONE WsfTimerStartMs, 1521, 720 (ms), 11␍␊
+[14:05:55:684] 00096100: Dats got evt 18␍␊
+[14:05:55:700] @!@ DONE WsfTimerStartMs, 1522, 720 (ms), 11␍␊
+[14:05:55:716] 00096131: Dats got evt 18␍␊
+[14:05:55:716] @!@ DONE WsfTimerStartMs, 1523, 720 (ms), 11␍␊
+[14:05:55:763] 00096162: Dats got evt 18␍␊
+[14:05:55:763] @!@ DONE WsfTimerStartMs, 1524, 720 (ms), 11␍␊
+[14:05:55:793] 00096193: Dats got evt 18␍␊
+[14:05:55:793] @!@ DONE WsfTimerStartMs, 1525, 720 (ms), 11␍␊
+[14:05:55:823] 00096224: Dats got evt 18␍␊
+[14:05:55:823] @!@ DONE WsfTimerStartMs, 1526, 720 (ms), 11␍␊
+[14:05:55:853] 00096255: Dats got evt 18␍␊
+[14:05:55:853] @!@ DONE WsfTimerStartMs, 1527, 720 (ms), 11␍␊
+[14:05:55:883] 00096286: Dats got evt 18␍␊
+[14:05:55:883] @!@ DONE WsfTimerStartMs, 1528, 720 (ms), 11␍␊
+[14:05:55:913] 00096317: Dats got evt 18␍␊
+[14:05:55:913] @!@ DONE WsfTimerStartMs, 1529, 720 (ms), 11␍␊
+[14:05:55:943] 00096348: Dats got evt 18␍␊
+[14:05:55:943] @!@ DONE WsfTimerStartMs, 1530, 720 (ms), 11␍␊
+[14:05:55:974] @!@ DONE WsfTimerStartMs, 1531, 720 (ms), 11␍␊
+[14:05:55:974] 00096379: Dats got evt 18␍␊
+[14:05:55:990] @!@ DONE WsfTimerStartMs, 1532, 720 (ms), 11␍␊
+[14:05:56:022] @!@ DONE WsfTimerStartMs, 1533, 720 (ms), 11␍␊
+[14:05:56:054] @!@ DONE WsfTimerStartMs, 1534, 720 (ms), 11␍␊
+[14:05:56:086] @!@ DONE WsfTimerStartMs, 1535, 720 (ms), 11␍␊
+[14:05:56:118] @!@ DONE WsfTimerStartMs, 1536, 720 (ms), 11␍␊
+[14:05:56:134] @!@ DONE WsfTimerStartMs, 1537, 720 (ms), 11␍␊
+[14:05:56:166] @!@ DONE WsfTimerStartMs, 1538, 720 (ms), 11␍␊
+[14:05:56:198] @!@ DONE WsfTimerStartMs, 1539, 720 (ms), 11␍␊
+[14:05:56:230] @!@ DONE WsfTimerStartMs, 1540, 720 (ms), 11␍␊
+[14:05:56:262] @!@ DONE WsfTimerStartMs, 1541, 720 (ms), 11␍␊
+[14:05:56:294] @!@ DONE WsfTimerStartMs, 1542, 720 (ms), 11␍␊
+[14:05:56:326] @!@ DONE WsfTimerStartMs, 1543, 720 (ms), 11␍␊
+[14:05:56:359] @!@ DONE WsfTimerStartMs, 1544, 720 (ms), 11␍␊
+[14:05:56:375] @!@ DONE WsfTimerStartMs, 1545, 720 (ms), 11␍␊
+[14:05:56:407] @!@ DONE WsfTimerStartMs, 1546, 720 (ms), 11␍␊
+[14:05:56:439] @!@ DONE WsfTimerStartMs, 1547, 720 (ms), 11␍␊
+[14:05:56:471] @!@ DONE WsfTimerStartMs, 1548, 720 (ms), 11␍␊
+[14:05:56:503] @!@ DONE WsfTimerStartMs, 1549, 720 (ms), 11␍␊
+[14:05:56:535] @!@ DONE WsfTimerStartMs, 1550, 720 (ms), 11␍␊
+[14:05:56:567] @!@ DONE WsfTimerStartMs, 1551, 720 (ms), 11␍␊
+[14:05:56:599] @!@ DONE WsfTimerStartMs, 1552, 720 (ms), 11␍␊
+[14:05:56:615] @!@ DONE WsfTimerStartMs, 1553, 720 (ms), 11␍␊
+[14:05:56:647] @!@ DONE WsfTimerStartMs, 1554, 720 (ms), 11␍␊
+[14:05:56:679] @!@ DONE WsfTimerStartMs, 1555, 720 (ms), 11␍␊
+[14:05:56:711] @!@ DONE WsfTimerStartMs, 1556, 720 (ms), 11␍␊
+[14:05:56:743] @!@ DONE WsfTimerStartMs, 1557, 720 (ms), 11␍␊
+[14:05:56:775] @!@ DONE WsfTimerStartMs, 1558, 720 (ms), 11␍␊
+[14:05:56:807] @!@ DONE WsfTimerStartMs, 1559, 720 (ms), 11␍␊
+[14:05:56:839] @!@ DONE WsfTimerStartMs, 1560, 720 (ms), 11␍␊
+[14:05:56:855] @!@ DONE WsfTimerStartMs, 1561, 720 (ms), 11␍␊
+[14:05:56:887] @!@ DONE WsfTimerStartMs, 1562, 720 (ms), 11␍␊
+[14:05:56:919] @!@ DONE WsfTimerStartMs, 1563, 720 (ms), 11␍␊
+[14:05:56:951] @!@ DONE WsfTimerStartMs, 1564, 720 (ms), 11␍␊
+[14:05:56:983] @!@ DONE WsfTimerStartMs, 1565, 720 (ms), 11␍␊
+[14:05:57:015] @!@ DONE WsfTimerStartMs, 1566, 720 (ms), 11␍␊
+[14:05:57:047] @!@ DONE WsfTimerStartMs, 1567, 720 (ms), 11␍␊
+[14:05:57:079] @!@ DONE WsfTimerStartMs, 1568, 720 (ms), 11␍␊
+[14:05:57:095] @!@ DONE WsfTimerStartMs, 1569, 720 (ms), 11␍␊
+[14:05:57:128] @!@ DONE WsfTimerStartMs, 1570, 720 (ms), 11␍␊
+[14:05:57:160] @!@ DONE WsfTimerStartMs, 1571, 720 (ms), 11␍␊
+[14:05:57:192] @!@ DONE WsfTimerStartMs, 1572, 720 (ms), 11␍␊
+[14:05:57:224] @!@ DONE WsfTimerStartMs, 1573, 720 (ms), 11␍␊
+[14:05:57:256] @!@ DONE WsfTimerStartMs, 1574, 720 (ms), 11␍␊
+[14:05:57:288] @!@ DONE WsfTimerStartMs, 1575, 720 (ms), 11␍␊
+[14:05:57:304] @!@ DONE WsfTimerStartMs, 1576, 720 (ms), 11␍␊
+[14:05:57:336] @!@ DONE WsfTimerStartMs, 1577, 720 (ms), 11␍␊
+[14:05:57:368] @!@ DONE WsfTimerStartMs, 1578, 720 (ms), 11␍␊
+[14:05:57:400] @!@ DONE WsfTimerStartMs, 1579, 720 (ms), 11␍␊
+[14:05:57:432] @!@ DONE WsfTimerStartMs, 1580, 720 (ms), 11␍␊
+[14:05:57:464] @!@ DONE WsfTimerStartMs, 1581, 720 (ms), 11␍␊
+[14:05:57:496] @!@ DONE WsfTimerStartMs, 1582, 720 (ms), 11␍␊
+[14:05:57:528] @!@ DONE WsfTimerStartMs, 1583, 720 (ms), 11␍␊
+[14:05:57:544] @!@ DONE WsfTimerStartMs, 1584, 720 (ms), 11␍␊
+[14:05:57:576] @!@ DONE WsfTimerStartMs, 1585, 720 (ms), 11␍␊
+[14:05:57:608] @!@ DONE WsfTimerStartMs, 1586, 720 (ms), 11␍␊
+[14:05:57:640] @!@ DONE WsfTimerStartMs, 1587, 720 (ms), 11␍␊
+[14:05:57:672] @!@ DONE WsfTimerStartMs, 1588, 720 (ms), 11␍␊
+[14:05:57:704] @!@ DONE WsfTimerStartMs, 1589, 720 (ms), 11␍␊
+[14:05:57:736] @!@ DONE WsfTimerStartMs, 1590, 720 (ms), 11␍␊
+[14:05:57:795] lctrLlcpExecuteCommonSm: handle=0, proc=0, state=IDLE, event=3␍␊
+[14:05:57:795] @!@ DONE WsfTimerStartMs, 1591, 720 (ms), 11␍␊
+[14:05:57:795] lctrConnStatelessEventHandler: handle=0, state=3, event=TERMINATED␍␊
+[14:05:57:795] Topology Remove, handle=0␍␊
+[14:05:57:795] ### LlEvent ###  LL_DISCONNECT_IND, handle=0, status=LL_SUCCESS, reason=19␍␊
+[14:05:57:795] @!@ DONE WsfTimerStop, branch: 111␍␊
+[14:05:57:795] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:57:795] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:57:795] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:57:795]     >>> Connection terminated, handle=0 <<<␍␊
+[14:05:57:795] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:57:837] dmConnSmExecute event=29 state=3␍␊
+[14:05:57:837] dmConnCcbDealloc 1␍␊
+[14:05:57:837] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:57:837] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:57:837] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:57:837] smpDbGetRecord: connId: 1 type: 1␍␊
+[14:05:57:837] smpDbAddDevice␍␊
+[14:05:57:837] SmpDbSetFailureCount: connId: 1 count: 0␍␊
+[14:05:57:837] smpSmExecute event=10 state=0␍␊
+[14:05:57:837] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:57:837] @!@ DONE WsfTimerStop, branch: 2␍␊
+[14:05:57:837] 00098185: Dats got evt 40␍␊
+[14:05:57:837] @!@ DONE WsfTimerStop, branch: 11␍␊
+[14:05:57:837] @!@ DONE WsfTimerStop, branch: 12␍␊
+[14:05:57:837] Connection closed status 0x0, reason 0x13␍␊
+[14:05:57:837]  REMOTE TERM␍␊
+[14:05:57:880] >>> Connection closed <<<␍␊
+[14:05:57:880] dmAdvActConfig: state: 0␍␊
+[14:05:57:880] ### LlApi ###  LlSetAdvParam, advType=0␍␊
+[14:05:57:880] dmAdvActStart: state: 0␍␊
+[14:05:57:880] ### LlApi ###  LlAdvEnable: enable=1␍␊
+[14:05:57:880] lctrSlvAdvExecuteSm: state=0, event=5␍␊
+[14:05:57:880] lctrSlvAdvExecuteSm: state=0, event=1␍␊
+[14:05:57:880] ### AdvEvent ###  Advertising enabled, dueUsec=514␍␊
+[14:05:57:880] ### LlEvent ###  LL_ADV_ENABLE_CNF, status=0␍␊
+[14:05:57:880] HCI_LE_ADV_ENABLE_CMD_CMPL_CBACK_EVT: state: 3␍␊
+[14:05:57:880] dmDevPassEvtToDevPriv: event: 12, param: 33, advHandle: 0␍␊
+[14:05:57:880] 00098185: Dats got evt 33␍␊
+[14:05:57:880] @!@ DONE WsfTimerStartMs, 1592, 60000 (ms), 22␍␊
+[14:05:57:895] >>> Advertising started <<<␍␊

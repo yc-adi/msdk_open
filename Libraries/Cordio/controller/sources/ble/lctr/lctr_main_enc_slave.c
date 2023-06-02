@@ -153,8 +153,8 @@ bool_t LctrSetAuthPayloadTimeout(uint16_t handle, uint32_t timeoutMs)
   if (pCtx->bleData.chan.enc.enaDecrypt)
   {
     /* Reset authentication payload timer. */
-    WsfTimerStartMs(&pCtx->tmrAuthTimeout, pCtx->authTimeoutMs);
-    WsfTimerStartMs(&pCtx->tmrPingTimeout, pCtx->pingPeriodMs);
+    WsfTimerStartMs(&pCtx->tmrAuthTimeout, pCtx->authTimeoutMs, 42);
+    WsfTimerStartMs(&pCtx->tmrPingTimeout, pCtx->pingPeriodMs, 43);
   }
 
   return TRUE;

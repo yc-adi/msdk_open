@@ -84,7 +84,7 @@ static void gyroUpdateTimer(void)
     if (!gyroCb.measTimerStarted)
     {
       gyroCb.measTimerStarted = TRUE;
-      WsfTimerStartMs(&gyroCb.measTimer, period * 10u);
+      WsfTimerStartMs(&gyroCb.measTimer, period * 10u, 16);
     }
   }
   else

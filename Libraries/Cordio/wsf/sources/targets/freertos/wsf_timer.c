@@ -47,6 +47,7 @@ typedef struct TimerStruct {
   struct TimerStruct *prev;
   wsfTimer_t *wsfTimerStruct;
   TimerHandle_t tmr;
+  uint8_t id; //! indicate the usage of the timer
 } TimerStruct_t;
 
 typedef struct TimerList {
@@ -84,8 +85,11 @@ void WsfTimerInit(void)
   s_queue = xQueueCreate(configTIMER_QUEUE_LENGTH, sizeof(wsfTimer_t*));
 }
 
-void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms)
+void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms, uint8_t src)
 {
+  static uint32_t cnt = 0;
+  uint8_t branch = 0;
+  
   WsfCsEnter();
   /* Look if there is existing timer */
   TimerStruct_t *existingTimer = NULL;
@@ -98,13 +102,16 @@ void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms)
 
   uint32_t ticks = pdMS_TO_TICKS(ms);
   if (existingTimer) {
+    branch = 1;
     if (ticks != pTimer->ticks) {
       /* Update timer interval */
       xTimerChangePeriod(existingTimer->tmr, ticks, 0);
+      branch = 11;
     }
     /* Restart the existing timer */
     pTimer->isStarted = xTimerReset(existingTimer->tmr, 0);
   } else {
+    branch = 2;
     TimerHandle_t tmr = xTimerCreate(NULL, ticks,
                                      pdFALSE,
                                      NULL, prvTimerCallback);
@@ -117,27 +124,32 @@ void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms)
     ts->tmr = tmr;
     ts->wsfTimerStruct->ticks = ticks;
     if (s_timers.tail) {
+      branch = 21;
       /* Append to the list end */
       TimerStruct_t *prev = s_timers.tail;
       prev->next = ts;
       ts->prev = prev;
       s_timers.tail = ts;
     } else {
+      branch = 22;
       /* Create first element */
       s_timers.head = ts;
       s_timers.tail = ts;
     }
   }
   WsfCsExit();
+
+  APP_TRACE_INFO4("@!@ DONE WsfTimerStartMs, %d, %d (ms), %d, src: %d", ++cnt, ms, branch, src);
 }
 
 void WsfTimerStartSec(wsfTimer_t *pTimer, wsfTimerTicks_t sec)
 {
-  WsfTimerStartMs(pTimer, sec * 1000);
+  WsfTimerStartMs(pTimer, sec * 1000, 44);
 }
 
 void WsfTimerStop(wsfTimer_t *pTimer)
 {
+  int branch = 0;
   WsfCsEnter();
   TimerStruct_t *itemToRemove = NULL;
   for (TimerStruct_t *ts = s_timers.head; ts != NULL; ts = ts->next) {
@@ -147,26 +159,44 @@ void WsfTimerStop(wsfTimer_t *pTimer)
     }
   }
   if (itemToRemove) {
+    branch = 1;
     /* Delete the timer and its list item */
     xTimerStop(itemToRemove->tmr, portMAX_DELAY);
     xTimerDelete(itemToRemove->tmr, portMAX_DELAY);
     TimerStruct_t *prev = itemToRemove->prev;
     TimerStruct_t *next = itemToRemove->next;
     if (prev) {
+      branch = 11;
       prev->next = next;
     } else {
+      branch = 12;
       s_timers.head = NULL;
       s_timers.tail = NULL;
     }
     if (next) {
+      branch += 100;
       next->prev = prev;
     }
+
+    /* Update tail if removing tail */
+    if(s_timers.tail == itemToRemove) {
+      branch += 1000;
+      if (prev)
+      {
+        branch += 1000;
+        s_timers.tail = prev;
+      }
+    }
+    
     itemToRemove->wsfTimerStruct->isStarted = FALSE;
     WsfBufFree(itemToRemove);
   } else {
     /* Timer not found; */
+    branch = 2;
   }
   WsfCsExit();
+
+  APP_TRACE_INFO1("@!@ DONE WsfTimerStop, branch: %d", branch);
 }
 
 wsfTimer_t* WsfTimerServiceExpired(wsfTaskId_t taskId)

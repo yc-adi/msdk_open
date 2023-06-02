@@ -1408,7 +1408,7 @@ void lctrStartLlcpTimer(lctrConnCtx_t *pCtx)
   {
     if (pCtx->llcpNotifyMask & (1 << LCTR_PROC_CMN_TERM))
     {
-      WsfTimerStartMs(&pCtx->tmrProcRsp, pCtx->supTimeoutMs);
+      WsfTimerStartMs(&pCtx->tmrProcRsp, pCtx->supTimeoutMs, 24);
     }
     else
     {

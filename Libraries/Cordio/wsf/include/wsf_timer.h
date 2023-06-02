@@ -91,7 +91,7 @@ void WsfTimerStartSec(wsfTimer_t *pTimer, wsfTimerTicks_t sec);
  *  \param  ms      Milliseconds until expiration.
  */
 /*************************************************************************************************/
-void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms);
+void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms, uint8_t src);
 
 /*************************************************************************************************/
 /*!

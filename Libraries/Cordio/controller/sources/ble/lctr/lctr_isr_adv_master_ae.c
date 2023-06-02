@@ -2082,7 +2082,7 @@ void lctrMstPerScanEndOp(BbOpDesc_t *pOp)
     lctrMstPerScanIsr.syncWithSlave = FALSE;
     pPerScanCtx->lastActiveEvent = pPerScanCtx->eventCounter;
     /* Reset supervision timer. */
-    WsfTimerStartMs(&pPerScanCtx->tmrSupTimeout, pPerScanCtx->syncTimeOutMs);
+    WsfTimerStartMs(&pPerScanCtx->tmrSupTimeout, pPerScanCtx->syncTimeOutMs, 26);
 
     if (pPerScanCtx->skipInterUsec &&
         pPerScanCtx->skipInterUsec < pPerScanCtx->syncTimeOutMs * 1000)
@@ -2276,7 +2276,7 @@ bool_t lctrMstPerScanRxPerAdvPktPostHandler(BbOpDesc_t *pOp, const uint8_t *pAdv
 
   if (pPerScanCtx->state == LCTR_PER_SCAN_STATE_SYNC_ESTD)
   {
-    WsfTimerStartMs(&pPerScanCtx->tmrSupTimeout, pPerScanCtx->syncTimeOutMs);
+    WsfTimerStartMs(&pPerScanCtx->tmrSupTimeout, pPerScanCtx->syncTimeOutMs, 27);
   }
 
   /* BB_STATUS_RX_TIMEOUT or BB_STATUS_CRC_FAILED with pAdvBuf NULL. */

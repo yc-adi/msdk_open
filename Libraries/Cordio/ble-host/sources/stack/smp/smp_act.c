@@ -724,7 +724,7 @@ void smpActMaxAttempts(smpCcb_t *pCcb, smpMsg_t *pMsg)
 
   /* start wait interval timer */
   pCcb->waitTimer.msg.event = SMP_MSG_INT_WI_TIMEOUT;
-  WsfTimerStartMs(&pCcb->waitTimer, timeout);
+  WsfTimerStartMs(&pCcb->waitTimer, timeout, 18);
 
   /* clear attempts count */
   pCcb->attempts = 0;

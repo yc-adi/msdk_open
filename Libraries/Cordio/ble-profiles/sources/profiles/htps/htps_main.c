@@ -126,7 +126,7 @@ void HtpsMeasStart(dmConnId_t connId, uint8_t timerEvt, uint8_t itCccIdx)
   htpsCb.measTimer.msg.status = itCccIdx;
 
   /* start timer */
-  WsfTimerStartMs(&htpsCb.measTimer, htpsCb.cfg.period);
+  WsfTimerStartMs(&htpsCb.measTimer, htpsCb.cfg.period, 10);
 }
 
 /*************************************************************************************************/
@@ -209,7 +209,7 @@ void HtpsProcMsg(wsfMsgHdr_t *pMsg)
     AttsHandleValueNtf((dmConnId_t) pMsg->param, HTS_IT_HDL, len, buf);
 
     /* restart timer */
-    WsfTimerStartMs(&htpsCb.measTimer, htpsCb.cfg.period);
+    WsfTimerStartMs(&htpsCb.measTimer, htpsCb.cfg.period, 11);
   }
 }
 

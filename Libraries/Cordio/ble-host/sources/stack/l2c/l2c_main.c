@@ -207,7 +207,7 @@ static void l2cHciFlowCback(uint16_t handle, bool_t flowDisabled)
 {
   wsfMsgHdr_t hdr;
 
-  L2C_TRACE_INFO2("flowDisabled=%u handle=%u", flowDisabled, handle);
+  L2C_TRACE_INFO2("l2cHciFlowCback() flowDisabled=%u handle=%u", flowDisabled, handle);
 
   /* get conn ID for handle */
   if ((hdr.param = DmConnIdByHandle(handle)) != DM_CONN_ID_NONE)
@@ -221,6 +221,10 @@ static void l2cHciFlowCback(uint16_t handle, bool_t flowDisabled)
     /* execute connection oriented channel flow control callback */
     hdr.event = flowDisabled;
     (*l2cCb.l2cCocCtrlCback)(&hdr);
+  }
+  else
+  {
+    L2C_TRACE_INFO0("@!@ DM_CONN_ID_NONE");
   }
 }
 

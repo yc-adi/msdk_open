@@ -192,7 +192,7 @@ static void smpResumeAttemptsState(dmConnId_t connId)
 
     /* Start smp timer indicating the time to prevent pairing in the attempts state */
     pCcb->waitTimer.msg.event = SMP_MSG_INT_WI_TIMEOUT;
-    WsfTimerStartMs(&pCcb->waitTimer, timeMs);
+    WsfTimerStartMs(&pCcb->waitTimer, timeMs, 20);
   }
 }
 

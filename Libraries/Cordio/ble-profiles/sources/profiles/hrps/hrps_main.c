@@ -326,7 +326,7 @@ void hrpsMeasTimerExp(wsfMsgHdr_t *pMsg)
     }
 
     /* restart timer */
-    WsfTimerStartMs(&hrpsCb.measTimer, hrpsCb.cfg.period);
+    WsfTimerStartMs(&hrpsCb.measTimer, hrpsCb.cfg.period, 12);
 
     /* increment energy expended for test/demonstration purposes */
     hrpsCb.hrm.energyExp++;
@@ -371,7 +371,7 @@ void HrpsMeasStart(dmConnId_t connId, uint8_t timerEvt, uint8_t hrmCccIdx)
     hrpsCb.measTimer.msg.status = hrmCccIdx;
 
     /* start timer */
-    WsfTimerStartMs(&hrpsCb.measTimer, hrpsCb.cfg.period);
+    WsfTimerStartMs(&hrpsCb.measTimer, hrpsCb.cfg.period, 13);
   }
 
   /* set conn id */

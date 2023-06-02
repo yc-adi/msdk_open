@@ -509,7 +509,7 @@ void plxpsMeasTimerExp(wsfMsgHdr_t *pMsg)
   }
 
   /* restart timer */
-  WsfTimerStartMs(&plxpsCb.measTimer, plxpsCb.pCfg->period);
+  WsfTimerStartMs(&plxpsCb.measTimer, plxpsCb.pCfg->period, 14);
 }
 
 /*************************************************************************************************/
@@ -768,7 +768,7 @@ void PlxpsMeasStart(dmConnId_t connId, uint8_t timerEvt, uint8_t plxmCccIdx)
   plxpsCb.measTimer.msg.status = plxmCccIdx;
 
   /* start timer */
-  WsfTimerStartMs(&plxpsCb.measTimer, plxpsCb.pCfg->period);
+  WsfTimerStartMs(&plxpsCb.measTimer, plxpsCb.pCfg->period, 15);
 }
 
 /*************************************************************************************************/

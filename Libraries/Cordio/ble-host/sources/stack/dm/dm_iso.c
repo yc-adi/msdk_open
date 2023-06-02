@@ -730,7 +730,7 @@ static void dmIsoHciIsoCback(uint8_t *pPacket)
 /*************************************************************************************************/
 static void dmIsoHciFlowCback(uint16_t handle, bool_t flowDisabled)
 {
-  DM_TRACE_INFO2("flowDisabled=%u handle=%u", flowDisabled, handle);
+  DM_TRACE_INFO2("dmIsoHciFlowCback() flowDisabled=%u handle=%u", flowDisabled, handle);
 }
 
 /*************************************************************************************************/

@@ -126,7 +126,7 @@ void lctrExtAdvActStart(lctrAdvSet_t *pAdvSet)
 
   if (pLctrSlvExtAdvMsg->enable.durMs)
   {
-    WsfTimerStartMs(&pAdvSet->tmrAdvDur, pLctrSlvExtAdvMsg->enable.durMs);
+    WsfTimerStartMs(&pAdvSet->tmrAdvDur, pLctrSlvExtAdvMsg->enable.durMs, 21);
   }
 
   LmgrSendExtAdvEnableCnf(pAdvSet->handle, LL_SUCCESS);
@@ -163,7 +163,7 @@ void lctrExtAdvActSelfStart(lctrAdvSet_t *pAdvSet)
 
   if (pLctrSlvExtAdvMsg->enable.durMs)
   {
-    WsfTimerStartMs(&pAdvSet->tmrAdvDur, pLctrSlvExtAdvMsg->enable.durMs);
+    WsfTimerStartMs(&pAdvSet->tmrAdvDur, pLctrSlvExtAdvMsg->enable.durMs, 22);
   }
 }
 
@@ -180,7 +180,7 @@ void lctrExtAdvActRestart(lctrAdvSet_t *pAdvSet)
 
   if (pLctrSlvExtAdvMsg->enable.durMs)
   {
-    WsfTimerStartMs(&pAdvSet->tmrAdvDur, pLctrSlvExtAdvMsg->enable.durMs);
+    WsfTimerStartMs(&pAdvSet->tmrAdvDur, pLctrSlvExtAdvMsg->enable.durMs, 23);
   }
 
   pAdvSet->maxEvents = pLctrSlvExtAdvMsg->enable.maxEvents;

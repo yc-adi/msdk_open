@@ -526,7 +526,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_ADV_START_IND:
-        WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
+        WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS, 1);
 
         uiEvent = APP_UI_ADV_START;
         break;
@@ -631,7 +631,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
 
     case TRIM_TIMER_EVT:
         trimStart();
-        WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
+        WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS, 2);
         break;
 
     default:

@@ -93,7 +93,7 @@ static void lctrMstConnUpdateOp(lctrConnCtx_t *pCtx)
 
   /* Unconditionally reset supervision timer with transitional value.
    *     connIntervalOld + supervisionTimeoutNew */
-  WsfTimerStartMs(&pCtx->tmrSupTimeout, LCTR_CONN_IND_MS(connIntervalOld) + pCtx->supTimeoutMs);
+  WsfTimerStartMs(&pCtx->tmrSupTimeout, LCTR_CONN_IND_MS(connIntervalOld) + pCtx->supTimeoutMs, 28);
 
   /*** Notifications ***/
 
@@ -294,14 +294,14 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
   if (!pCtx->connEst && (lctrMstConnIsr.rxFromSlave || (lctrMstConnIsr.consCrcFailed > 0)))
   {
     lctrStoreConnTimeoutTerminateReason(pCtx);
-    WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs);
+    WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs, 29);
 
     pCtx->connEst = TRUE;
   }
   else if (lctrMstConnIsr.rxFromSlave)
   {
     /* Reset supervision timer. */
-    WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs);
+    WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs, 30);
   }
 
   pCtx->rssi = pConn->rssi;

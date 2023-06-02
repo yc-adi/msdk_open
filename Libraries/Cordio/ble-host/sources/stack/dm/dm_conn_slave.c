@@ -75,14 +75,18 @@ static void dmConnUpdateCback(dmConnCcb_t *pCcb, uint8_t status)
 /*************************************************************************************************/
 void dmConnUpdActUpdateSlave(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
 {
+  int branch = 0;
+
   if ((pCcb->features & HCI_LE_SUP_FEAT_CONN_PARAM_REQ_PROC) &&
       (HciGetLeSupFeat() & HCI_LE_SUP_FEAT_CONN_PARAM_REQ_PROC))
   {
+    branch = 1;
     HciLeConnUpdateCmd(pCcb->handle, &pMsg->apiUpdate.connSpec);
   }
   /* else if L2CAP connection update not already in progress */
   else if (!pCcb->updating)
   {
+    branch = 2;
     pCcb->updating = TRUE;
 
     /* send request via L2CAP */
@@ -91,9 +95,12 @@ void dmConnUpdActUpdateSlave(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
   /* else L2CAP connection update pending */
   else
   {
+    branch = 3;
     /* call callback */
     dmConnUpdateCback(pCcb, (uint8_t) HCI_ERR_CMD_DISALLOWED);
   }
+
+  APP_TRACE_INFO1("@!@ EXIT dmConnUpdActUpdateSlave, branch: %d", branch);
 }
 
 /*************************************************************************************************/
@@ -108,6 +115,8 @@ void dmConnUpdActUpdateSlave(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
 /*************************************************************************************************/
 void dmConnUpdActL2cUpdateCnf(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
 {
+  APP_TRACE_INFO0("@!@ dmConnUpdActL2cUpdateCnf");
+
   /* if connection update in progress */
   if (pCcb->updating)
   {

@@ -243,7 +243,7 @@ void dmScanHciHandler(hciEvt_t *pEvent)
         if (dmScanCb.scanDuration > 0)
         {
           dmScanCb.scanTimer.msg.event = DM_SCAN_MSG_TIMEOUT;
-          WsfTimerStartMs(&dmScanCb.scanTimer, dmScanCb.scanDuration);
+          WsfTimerStartMs(&dmScanCb.scanTimer, dmScanCb.scanDuration, 5);
         }
 
         dmScanCb.scanState = DM_SCAN_STATE_SCANNING;

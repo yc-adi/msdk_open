@@ -699,7 +699,7 @@ void EattEstablishChannels(dmConnId_t connId)
         pCcb->backoffTimer.msg.event = EATT_BACKOFF_EVT;
         pCcb->backoffTimer.msg.param = connId;
         pCcb->backoffTimer.handlerId = attCb.handlerId;
-        WsfTimerStartMs(&pCcb->backoffTimer, eattBackoffPeriod(pCcb->connInterval));
+        WsfTimerStartMs(&pCcb->backoffTimer, eattBackoffPeriod(pCcb->connInterval), 3);
       }
     }
   }

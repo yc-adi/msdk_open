@@ -298,7 +298,7 @@ static void appConnUpdateTimerStart(dmConnId_t connId)
   pCb->updateTimer.handlerId = appHandlerId;
   pCb->updateTimer.msg.event = APP_CONN_UPDATE_TIMEOUT_IND;
   pCb->updateTimer.msg.param = connId;
-  WsfTimerStartMs(&pCb->updateTimer, pAppUpdateCfg->idlePeriod);
+  WsfTimerStartMs(&pCb->updateTimer, pAppUpdateCfg->idlePeriod, 6);
 }
 
 /*************************************************************************************************/
@@ -957,6 +957,8 @@ static void appSlaveConnUpdateTimeout(wsfMsgHdr_t *pMsg, appConnCb_t *pCb)
 
   /* check if connection is idle */
   idle = (DmConnCheckIdle(pCb->connId) == 0);
+
+  APP_TRACE_INFO2("@!@ appSlaveConnUpdateTimeout, idle: %d, WasIdle: %d\n", idle, pCb->connWasIdle);
 
   /* if connection is idle and was also idle on last check */
   if (idle && pCb->connWasIdle)

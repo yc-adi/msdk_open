@@ -338,7 +338,7 @@ void dmAdvHciHandler(hciEvt_t *pEvent)
           if (dmAdvCb.advDuration[DM_ADV_HANDLE_DEFAULT] > 0)
           {
             dmAdvCb.advTimer.msg.event = DM_ADV_MSG_TIMEOUT;
-            WsfTimerStartMs(&dmAdvCb.advTimer, dmAdvCb.advDuration[DM_ADV_HANDLE_DEFAULT]);
+            WsfTimerStartMs(&dmAdvCb.advTimer, dmAdvCb.advDuration[DM_ADV_HANDLE_DEFAULT], 4);
           }
 
           /* Application callbacks only sent in undirected state */

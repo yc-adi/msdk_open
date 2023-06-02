@@ -166,7 +166,7 @@ void UiTimerStart(uint8_t event, uint32_t ms)
 
   if (pTimer)
   {
-    WsfTimerStartMs(pTimer, ms);
+    WsfTimerStartMs(pTimer, ms, 7);
   }
 }
 

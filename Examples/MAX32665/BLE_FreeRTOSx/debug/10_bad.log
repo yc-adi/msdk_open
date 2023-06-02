@@ -1,0 +1,222 @@
+[14:39:36:762] ␍␊
+[14:39:36:762] -=- 32665 BLE FreeRTOS (V10.2.0) Demo -=- c866ec457 no tail = prev ␍␊
+[14:39:36:762] SystemCoreClock = 96000000␍␊
+[14:39:37:451] terminal: init␍␊
+[14:39:37:862]     RAM: 1 x 752 bytes -- connection context␍␊
+[14:39:37:862]     RAM: 4 x 386 bytes -- Tx buffer descriptors␍␊
+[14:39:37:862]     RAM: 1 x 2296 bytes -- advertising set context␍␊
+[14:39:37:862] LlHandlerInit: LL initialization completed␍␊
+[14:39:37:862]     opModeFlags = 0x005F5C40␍␊
+[14:39:37:862] ### LlApi ###  LlSetBdAddr␍␊
+[14:39:37:862] Static BDA[5:3]=00:18:80␍␊
+[14:39:37:862]        BDA[2:0]=10:44:B1␍␊
+[14:39:38:117] 32kHz trimmed to 0xF␍␊
+[14:39:38:117] ### LlApi ###  LlGetAclTxBufs, numBufs=4␍␊
+[14:39:38:117] ### LlApi ###  LlGetAclTxBufs, numBufs=4␍␊
+[14:39:38:117] ### LlApi ###  LlGetAclMaxSize, maxBufSize=256␍␊
+[14:39:38:117] DatsHandlerInit␍␊
+[14:39:38:117] ### LlApi ###  LlReset␍␊
+[14:39:38:117] lctrSlvAdvExecuteSm: state=0, event=0␍␊
+[14:39:38:117] lctrSlvAcadDisp: handle=1, event=0␍␊
+[14:39:38:117] ### LlEvent ###  LL_RESET_CNF, status=LL_SUCCESS␍␊
+[14:39:38:117] ### LlApi ###  LlGetBdAddr␍␊
+[14:39:38:117] ### LlApi ###  LlGetFeatures␍␊
+[14:39:38:117] ### LlApi ###  LlReadResolvingListSize␍␊
+[14:39:38:117] ### LlApi ###  LlGetFeatures␍␊
+[14:39:38:117] ### LlApi ###  LlReadMaximumDataLen␍␊
+[14:39:38:117] ### LlApi ###  LlWriteDefaultDataLen␍␊
+[14:39:38:159] ### LlApi ###  LlGetVersion␍␊
+[14:39:38:159] ### LlApi ###  LlGetRandNum␍␊
+[14:39:38:159] ### LlApi ###  LlGetRandNum␍␊
+[14:39:38:159] ### LlApi ###  LlGetRandNum␍␊
+[14:39:38:159] ### LlApi ###  LlEncrypt␍␊
+[14:39:38:159] ### LlApi ###  LlSetAdvTxPower, advTxPwr=0␍␊
+[14:39:38:159] >>> Reset complete <<<␍␊
+[14:39:38:159] dmAdvActConfig: state: 0␍␊
+[14:39:38:159] ### LlApi ###  LlSetAdvParam, advType=0␍␊
+[14:39:38:159] dmAdvActSetData: state: 0␍␊
+[14:39:38:159] ### LlApi ###  LlSetAdvData, len=7␍␊
+[14:39:38:159] dmAdvActSetData: state: 0␍␊
+[14:39:38:159] ### LlApi ###  LlSetScanRespData, len=6␍␊
+[14:39:38:159] dmAdvActStart: state: 0␍␊
+[14:39:38:159] ### LlApi ###  LlAdvEnable: enable=1␍␊
+[14:39:38:202] lctrSlvAdvExecuteSm: state=0, event=5␍␊
+[14:39:38:202] lctrSlvAdvExecuteSm: state=0, event=1␍␊
+[14:39:38:202] ### AdvEvent ###  Advertising enabled, dueUsec=500␍␊
+[14:39:38:202] ### LlEvent ###  LL_ADV_ENABLE_CNF, status=0␍␊
+[14:39:38:202] ### LlApi ###  LlEncrypt␍␊
+[14:39:38:202] HCI_LE_ADV_ENABLE_CMD_CMPL_CBACK_EVT: state: 3␍␊
+[14:39:38:202] dmDevPassEvtToDevPriv: event: 12, param: 33, advHandle: 0␍␊
+[14:39:38:202] @!@- insert 1, 60000 (ms), tail 536887840, src: 1␍␊
+[14:39:38:202] @!@- 7840->␍␊
+[14:39:38:202] >>> Advertising started <<<␍␊
+[14:39:38:202] ### LlApi ###  LlEncrypt␍␊
+[14:39:38:202] ### LlApi ###  LlEncrypt␍␊
+[14:39:38:202] ### LlApi ###  LlEncrypt␍␊
+[14:39:38:202] ### LlApi ###  LlEncrypt␍␊
+[14:39:38:233] ### LlApi ###  LlEncrypt␍␊
+[14:39:38:233] ### LlApi ###  LlEncrypt␍␊
+[14:39:38:233] ### LlApi ###  LlEncrypt␍␊
+[14:39:38:233] Database hash updated␍␊
+[14:39:38:233] ### LlEvent ###  LL_READ_LOCAL_P256_PUB_KEY_CMPL_IND, status=LL_SUCCESS␍␊
+[14:39:42:174] lctrSlvAdvExecuteSm: state=1, event=4␍␊
+[14:39:42:174] lctrSlvConnExecuteSm: handle=0, state=INITIALIZED, event=RX_CONNECT_IND␍␊
+[14:39:42:174] @!@- insert 2, 208 (ms), tail 536887824, src: 41␍␊
+[14:39:42:174] @!@- 7840->7824->␍␊
+[14:39:42:174]     >>> Connection established, handle=0 <<<␍␊
+[14:39:42:174]                                 connIntervalUsec=30000␍␊
+[14:39:42:174]                                 dueUsec=4078854␍␊
+[14:39:42:174]                                 minDurUsec=4572␍␊
+[14:39:42:174] Topology Add, handle=0, interval_ms=30␍␊
+[14:39:42:174] Topology Add,            durUsec=806␍␊
+[14:39:42:174] lctrLlcpExecuteCommonSm: handle=0, proc=4, state=IDLE, event=1␍␊
+[14:39:42:216] @!@- insert 3, 40000 (ms), tail 536887808, src: 117␍␊
+[14:39:42:216] @!@- 7840->7824->7808->␍␊
+[14:39:42:216] ### LlEvent ###  LL_CONN_IND, handle=0, status=0␍␊
+[14:39:42:216] ### LlEvent ###  LL_CH_SEL_ALGO_IND, handle=0, status=0, usedChSel=0␍␊
+[14:39:42:216] dmConnIdByBdAddr not found␍␊
+[14:39:42:216] dmConnCcbAlloc 1␍␊
+[14:39:42:216] dmConnSmExecute event=28 state=0␍␊
+[14:39:42:216] dmAdvConnected: state: 1␍␊
+[14:39:42:216] dmDevPassEvtToDevPriv: event: 13, param: 34, advHandle: 0␍␊
+[14:39:42:216] smpDbGetRecord: connId: 1 type: 1␍␊
+[14:39:42:216] smpDbAddDevice␍␊
+[14:39:42:216] SmpDbGetFailureCount: connId: 1 count: 0␍␊
+[14:39:42:216] smpDbGetRecord: connId: 1 type: 1␍␊
+[14:39:42:258] smpDbAddDevice␍␊
+[14:39:42:258] SmpDbGetPairingDisabledTime: connId: 1 period: 0 attemptMult: 0␍␊
+[14:39:42:258] @!@- insert 4, 5000 (ms), tail 536887888, src: 6␍␊
+[14:39:42:258] @!@- 7840->7824->7808->7888->␍␊
+[14:39:42:258] ### LlApi ###  LlReadRemoteFeat, handle=0␍␊
+[14:39:42:258] >>> Connection opened <<<␍␊
+[14:39:42:258] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=BUSY, event=0␍␊
+[14:39:42:258] Pending procedure in progress: activeProc=4␍␊
+[14:39:42:258] lctrLlcpExecuteCommonSm: handle=0, proc=3, state=BUSY, event=3␍␊
+[14:39:42:258] Procedure collision; pending incomplete request, activeProc=4␍␊
+[14:39:42:258] lctrLlcpExecuteCommonSm: handle=0, proc=4, state=BUSY, event=5␍␊
+[14:39:42:306] ### LlEvent ###  LL_DATA_LEN_CHANGE_IND, handle=0, status=0␍␊
+[14:39:42:306] Effective data lengths maxTxLen=251, maxRxLen=251␍␊
+[14:39:42:306] Effective data times maxTxTime=2120, maxRxTime=2120␍␊
+[14:39:42:306] @!@- delete 3, tail 536887888, removed 536887888␍␊
+[14:39:42:306] @!@- 7840->7824->7888->␍␊
+[14:39:42:306] lctrLlcpExecuteCommonSm: handle=0, proc=3, state=IDLE, event=2␍␊
+[14:39:42:306] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=IDLE, event=4␍␊
+[14:39:42:354] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=IDLE, phyUpdState=0, event=2␍␊
+[14:39:42:354]     >>> Data Path Tx Paused, handle=0 <<<␍␊
+[14:39:42:354] Unhandled LLCP SM event, handle=0, event=42␍␊
+[14:39:42:354] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=BUSY, phyUpdState=3, event=6␍␊
+[14:39:42:354]     >>> Data Path Tx Unpaused/Resumed, handle=0 <<<␍␊
+[14:39:42:354] @!@- insert 4, 40000 (ms), tail 536887856, src: 117␍␊
+[14:39:42:354] @!@- 7840->7824->7888->7856->␍␊
+[14:39:42:370] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=BUSY, phyUpdState=4, event=1␍␊
+[14:39:42:391] @!@- delete 3, tail 536887888, removed 0␍␊
+[14:39:42:391] @!@- 7840->7824->7888->␍␊
+[14:39:42:597]     >>> PHY updated, handle=0, eventCounter=15 <<<␍␊
+[14:39:42:597]         txPhy=2, rxPhy=2␍␊
+[14:39:42:653] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=BUSY, phyUpdState=5, event=4␍␊
+[14:39:42:653] ### LlEvent ###  LL_PHY_UPDATE_IND, phy=2, handle=0, status=0␍␊
+[14:39:42:653] ### LlEvent ###  LL_DATA_LEN_CHANGE_IND, handle=0, status=0␍␊
+[14:39:42:653] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=IDLE, event=1␍␊
+[14:39:42:653] @!@- insert 4, 40000 (ms), tail 536887856, src: 117␍␊
+[14:39:42:653] @!@- 7840->7824->7888->7856->␍␊
+[14:39:42:653] DM_PHY_UPDATE_IND - RX: 2, TX: 2␍␊
+[14:39:42:669] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=BUSY, event=5␍␊
+[14:39:42:695] ### LlEvent ###  LL_READ_REMOTE_FEAT_CNF, handle=0, status=0␍␊
+[14:39:42:695] @!@- delete 3, tail 536887888, removed 0␍␊
+[14:39:42:695] @!@- 7840->7824->7888->␍␊
+[14:39:42:717] connId=1 idleMask=0x0004␍␊
+[14:39:42:717] @!@- insert 4, 15000 (ms), tail 536887856, src: 108␍␊
+[14:39:42:717] @!@- 7840->7824->7888->7856->␍␊
+[14:39:42:765] connId=1 idleMask=0x0004␍␊
+[14:39:42:878] connId=1 idleMask=0x0004␍␊
+[14:39:43:557] lctrSlvConnRxCompletion: BB failed with status=CRC_FAILED, handle=0, bleChan=35, eventCounter=46␍␊
+[14:39:44:516] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=2, eventCounter=78␍␊
+[14:39:45:589] connId=1 idleMask=0x0004␍␊
+[14:39:45:637] connId=1 idleMask=0x0004␍␊
+[14:39:47:138] App got evt 16␍␊
+[14:39:47:138] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
+[14:39:47:138] ␍␊
+[14:39:47:337] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
+[14:39:47:529]     >>> Channel map updated, handle=0, eventCounter=180 <<<␍␊
+[14:39:47:576] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=BUSY, event=6␍␊
+[14:39:52:124] App got evt 16␍␊
+[14:39:52:124] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
+[14:39:52:124] ␍␊
+[14:39:57:091] App got evt 16␍␊
+[14:39:57:091] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
+[14:39:57:107] ␍␊
+[14:39:59:487] lctrSlvConnRxCompletion: BB failed with status=CRC_FAILED, handle=0, bleChan=26, eventCounter=577␍␊
+[14:39:59:816] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
+[14:40:00:009]     >>> Channel map updated, handle=0, eventCounter=596 <<<␍␊
+[14:40:00:040] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=BUSY, event=6␍␊
+[14:40:00:601] connId=1 idleMask=0x0000␍␊
+[14:40:02:096] App got evt 16␍␊
+[14:40:02:096] @!@ appSlaveConnUpdateTimeout, idle: 1, WasIdle: 0␊
+[14:40:02:096] ␍␊
+[14:40:04:827] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
+[14:40:05:020]     >>> Channel map updated, handle=0, eventCounter=763 <<<␍␊
+[14:40:05:051] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=BUSY, event=6␍␊
+[14:40:07:108] App got evt 16␍␊
+[14:40:07:108] @!@ appSlaveConnUpdateTimeout, idle: 1, WasIdle: 1␊
+[14:40:07:108] ␍␊
+[14:40:07:108] dmConnUpdExecute event=113 state=3␍␊
+[14:40:07:108] ### LlApi ###  LlGetFeatures␍␊
+[14:40:07:108] ### LlApi ###  LlConnUpdate, handle=0␍␊
+[14:40:07:108] @!@ EXIT dmConnUpdActUpdateSlave, branch: 1␍␊
+[14:40:07:108] lctrSlvLlcpExecuteConnUpdSm: handle=0, llcpState=IDLE, connUpdState=0, event=0␍␊
+[14:40:07:108] @!@- insert 5, 40000 (ms), tail 536887904, src: 117␍␊
+[14:40:07:108] @!@- 7840->7824->7888->7856->7904->␍␊
+[14:40:07:137] lctrSlvConnRxCompletion: BB failed with status=CRC_FAILED, handle=0, bleChan=7, eventCounter=832␍␊
+[14:40:07:172] lctrSlvLlcpExecuteConnUpdSm: handle=0, llcpState=BUSY, connUpdState=2, event=4␍␊
+[14:40:07:172] @!@- delete 4, tail 536887856, removed 0␍␊
+[14:40:07:172] @!@- 7840->7824->7888->7856->␍␊
+[14:40:07:348]     >>> Connection updated, handle=0, eventCounter=840 <<<␍␊
+[14:40:07:348]                             connIntervalUsec=100000␍␊
+[14:40:07:364] lctrSlvLlcpExecuteConnUpdSm: handle=0, llcpState=BUSY, connUpdState=3, event=6␍␊
+[14:40:07:395] ### LlEvent ###  LL_CONN_UPDATE_IND, handle=0, status=0␍␊
+[14:40:07:395] dmConnSmExecute event=30 state=3␍␊
+[14:40:07:395] @!@- delete 3, tail 536887856, removed 536887856␍␊
+[14:40:07:395] @!@- 7840->7824->7856->␍␊
+[14:40:07:584] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=36, eventCounter=842␍␊
+[14:40:07:632] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
+[14:40:07:680] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
+[14:40:07:760] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
+[14:40:07:776] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
+[14:40:08:065] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
+[14:40:08:081] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
+[14:40:08:465] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
+[14:40:08:481] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
+[14:40:08:682] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=7, eventCounter=853␍␊
+[14:40:09:882] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
+[14:40:10:203] lctrLlcpExecuteCommonSm: handle=0, proc=0, state=BUSY, event=3␍␊
+[14:40:10:203] Procedure collision; pending incomplete request, activeProc=1␍␊
+[14:40:10:203] lctrConnStatelessEventHandler: handle=0, state=3, event=TERMINATED␍␊
+[14:40:10:203] Topology Remove, handle=0␍␊
+[14:40:10:203] ### LlEvent ###  LL_DISCONNECT_IND, handle=0, status=LL_SUCCESS, reason=19␍␊
+[14:40:10:203] @!@- delete 2, tail 536887856, removed 536887856␍␊
+[14:40:10:203] @!@- 7840->7856->␍␊
+[14:40:10:203]     >>> Connection terminated, handle=0 <<<␍␊
+[14:40:10:203] dmConnSmExecute event=29 state=3␍␊
+[14:40:10:203] dmConnCcbDealloc 1␍␊
+[14:40:10:203] smpDbGetRecord: connId: 1 type: 1␍␊
+[14:40:10:245] smpDbAddDevice␍␊
+[14:40:10:245] SmpDbSetFailureCount: connId: 1 count: 0␍␊
+[14:40:10:245] smpSmExecute event=10 state=0␍␊
+[14:40:10:245] @!@- delete 1, tail 0, removed 536887840␍␊
+[14:40:10:245] @!@- 7840->7856->␍␊
+[14:40:10:245] Connection closed status 0x0, reason 0x13␍␊
+[14:40:10:245]  REMOTE TERM␍␊
+[14:40:10:245] >>> Connection closed <<<␍␊
+[14:40:10:245] dmAdvActConfig: state: 0␍␊
+[14:40:10:245] ### LlApi ###  LlSetAdvParam, advType=0␍␊
+[14:40:10:245] dmAdvActStart: state: 0␍␊
+[14:40:10:245] ### LlApi ###  LlAdvEnable: enable=1␍␊
+[14:40:10:245] lctrSlvAdvExecuteSm: state=0, event=5␍␊
+[14:40:10:245] lctrSlvAdvExecuteSm: state=0, event=1␍␊
+[14:40:10:245] ### AdvEvent ###  Advertising enabled, dueUsec=516␍␊
+[14:40:10:282] ### LlEvent ###  LL_ADV_ENABLE_CNF, status=0␍␊
+[14:40:10:282] HCI_LE_ADV_ENABLE_CMD_CMPL_CBACK_EVT: state: 3␍␊
+[14:40:10:282] dmDevPassEvtToDevPriv: event: 12, param: 33, advHandle: 0␍␊
+[14:40:10:282] @!@- insert 2, 60000 (ms), tail 536887888, src: 1␍␊
+[14:40:10:282] @!@- 7888->␍␊
+[14:40:10:282] >>> Advertising started <<<␍␊

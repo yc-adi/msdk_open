@@ -214,7 +214,7 @@ static void attsSetupMsg(attsCcb_t *pCcb, dmConnId_t connId, uint8_t slot, attsP
     pCcb->outIndTimer.msg.event = ATTS_MSG_IND_TIMEOUT;
     pCcb->outIndTimer.msg.param = attMsgParam(pCcb->connId, pCcb->slot);
 
-    WsfTimerStartSec(&pCcb->outIndTimer, pAttCfg->transTimeout);
+    WsfTimerStartSec(&pCcb->outIndTimer, pAttCfg->transTimeout, 107);
   }
   /* else if a notification and flow not disabled call callback now */
   else if (!(pCcb->pMainCcb->sccb[slot].control & ATT_CCB_STATUS_FLOW_DISABLED))

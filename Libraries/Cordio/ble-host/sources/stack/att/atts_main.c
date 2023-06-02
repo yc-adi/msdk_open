@@ -392,7 +392,7 @@ void attsDiscBusy(attsCcb_t *pCcb)
     pCcb->idleTimer.handlerId = attCb.handlerId;
     pCcb->idleTimer.msg.event = ATTS_MSG_IDLE_TIMEOUT;
     pCcb->idleTimer.msg.param = pCcb->pMainCcb->connId;
-    WsfTimerStartSec(&pCcb->idleTimer, pAttCfg->discIdleTimeout);
+    WsfTimerStartSec(&pCcb->idleTimer, pAttCfg->discIdleTimeout, 108);
   }
 }
 

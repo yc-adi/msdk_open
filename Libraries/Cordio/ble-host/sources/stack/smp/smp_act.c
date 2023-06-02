@@ -51,7 +51,7 @@ void smpStartRspTimer(smpCcb_t *pCcb)
   /* start smp response timer */
   pCcb->rspTimer.msg.event = SMP_MSG_INT_RSP_TIMEOUT;
   pCcb->rspTimer.msg.status = SMP_ERR_TIMEOUT;
-  WsfTimerStartSec(&pCcb->rspTimer, SMP_TIMEOUT);
+  WsfTimerStartSec(&pCcb->rspTimer, SMP_TIMEOUT, 116);
 }
 
 /*************************************************************************************************/

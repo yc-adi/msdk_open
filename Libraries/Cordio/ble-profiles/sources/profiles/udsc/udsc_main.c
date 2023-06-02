@@ -276,7 +276,7 @@ void UdscWriteDatabaseChangeIncrement(dmConnId_t connId, uint16_t handle, uint32
 static void udscWriteControlPoint(dmConnId_t connId, uint16_t handle, uint16_t valueLen, uint8_t *pValue)
 {
   /* Start timer waiting for response */
-  WsfTimerStartSec(&UdscCb.rspTimer, UDSC_RESPONSE_TIMEOUT);
+  WsfTimerStartSec(&UdscCb.rspTimer, UDSC_RESPONSE_TIMEOUT, 103);
 
   /* Send write request */
   AttcWriteReq(connId, handle, valueLen, pValue);

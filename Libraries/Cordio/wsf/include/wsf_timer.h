@@ -81,7 +81,7 @@ void WsfTimerInit(void);
  *  \param  sec     Seconds until expiration.
  */
 /*************************************************************************************************/
-void WsfTimerStartSec(wsfTimer_t *pTimer, wsfTimerTicks_t sec);
+void WsfTimerStartSec(wsfTimer_t *pTimer, wsfTimerTicks_t sec, int src);
 
 /*************************************************************************************************/
 /*!

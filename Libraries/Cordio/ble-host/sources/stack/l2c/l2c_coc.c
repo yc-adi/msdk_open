@@ -788,7 +788,7 @@ void l2cSendConnectReq(uint16_t handle, uint16_t psm, l2cChanCb_t *pChanCb)
     L2cDataReq(L2C_CID_LE_SIGNALING, handle, (L2C_SIG_HDR_LEN + L2C_SIG_LE_CONN_REQ_LEN), pPacket);
 
     /* start timer */
-    WsfTimerStartSec(&pChanCb->reqTimer, pL2cCfg->reqTimeout);
+    WsfTimerStartSec(&pChanCb->reqTimer, pL2cCfg->reqTimeout, 110);
   }
 }
 
@@ -873,7 +873,7 @@ void l2cSendDisconnectReq(uint16_t handle, uint16_t destCid, uint16_t sourceCid,
     L2cDataReq(L2C_CID_LE_SIGNALING, handle, (L2C_SIG_HDR_LEN + L2C_SIG_DISCONN_REQ_LEN), pPacket);
 
     /* start timer */
-    WsfTimerStartSec(&pChanCb->reqTimer, pL2cCfg->reqTimeout);
+    WsfTimerStartSec(&pChanCb->reqTimer, pL2cCfg->reqTimeout, 111);
   }
 }
 
@@ -973,7 +973,7 @@ static void l2cSendEnConnectReq(uint16_t handle, uint16_t psm, uint16_t mtu, uin
 
     /* start timer */
     pChanCb = l2cChanCbByCid(pCidList[0]);
-    WsfTimerStartSec(&pChanCb->reqTimer, pL2cCfg->reqTimeout);
+    WsfTimerStartSec(&pChanCb->reqTimer, pL2cCfg->reqTimeout, 112);
   }
 }
 
@@ -1098,7 +1098,7 @@ static void l2cSendEnReconfigReq(uint16_t handle, uint16_t mtu, uint16_t mps, ui
 
     /* start timer */
     pChanCb = l2cChanCbByCid(pCidList[0]);
-    WsfTimerStartSec(&pChanCb->reqTimer, pL2cCfg->reqTimeout);
+    WsfTimerStartSec(&pChanCb->reqTimer, pL2cCfg->reqTimeout, 113);
   }
 }
 

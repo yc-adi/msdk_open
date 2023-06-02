@@ -211,7 +211,7 @@ void L2cDmSigReq(uint16_t handle, uint8_t code, uint16_t len, uint8_t *pParam)
   l2cSlaveCb.lastCode[connId-1] = code;
 
   /* Start signaling request timer and store handle */
-  WsfTimerStartSec(&l2cSlaveCb.reqTimer, L2C_SIG_REQ_TIMEOUT);
+  WsfTimerStartSec(&l2cSlaveCb.reqTimer, L2C_SIG_REQ_TIMEOUT, 114);
   l2cSlaveCb.reqTimer.msg.param = handle;
 
   /* allocate msg buffer */
@@ -256,7 +256,7 @@ void L2cDmConnUpdateReq(uint16_t handle, hciConnSpec_t *pConnSpec)
   l2cSlaveCb.lastCode[connId-1] = L2C_SIG_CONN_UPDATE_REQ;
 
   /* Start signaling request timer and store handle */
-  WsfTimerStartSec(&l2cSlaveCb.reqTimer, L2C_SIG_REQ_TIMEOUT);
+  WsfTimerStartSec(&l2cSlaveCb.reqTimer, L2C_SIG_REQ_TIMEOUT, 115);
   l2cSlaveCb.reqTimer.msg.param = handle;
 
   /* allocate msg buffer */

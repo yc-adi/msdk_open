@@ -50,7 +50,7 @@ lctrPrivCtx_t lctrPriv;
 static void lctrRestartResPrivAddrTimer(void)
 {
   lctrPriv.tmrResPrivAddrTimeout.handlerId = lmgrPersistCb.handlerId;
-  WsfTimerStartSec(&lctrPriv.tmrResPrivAddrTimeout, lmgrPrivCb.resPrivAddrTimeout);
+  WsfTimerStartSec(&lctrPriv.tmrResPrivAddrTimeout, lmgrPrivCb.resPrivAddrTimeout, 118);
 }
 
 /*************************************************************************************************/

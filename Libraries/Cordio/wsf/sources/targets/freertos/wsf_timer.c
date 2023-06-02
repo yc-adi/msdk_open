@@ -37,6 +37,7 @@
 #include "queue.h"
 
 #include <string.h>
+#include <stdio.h>
 
 #if ( configUSE_TIMERS != 1 )
 #error Enable timers in FreeRTOSConfig.h by definiing configUSE_TIMERS as 1
@@ -44,7 +45,6 @@
 
 typedef struct TimerStruct {
   struct TimerStruct *next;
-  struct TimerStruct *prev;
   wsfTimer_t *wsfTimerStruct;
   TimerHandle_t tmr;
   uint8_t id; //! indicate the usage of the timer
@@ -57,6 +57,10 @@ typedef struct TimerList {
 
 static TimerList_t s_timers = { NULL, NULL };
 static QueueHandle_t s_queue = NULL;
+
+char TimerLogBuf[512];  // remove me !!!
+uint32_t TimerLogBufNdx = 0;
+void PrintTimerList(void);
 
 void prvTimerCallback(TimerHandle_t xTimer)
 {
@@ -85,9 +89,9 @@ void WsfTimerInit(void)
   s_queue = xQueueCreate(configTIMER_QUEUE_LENGTH, sizeof(wsfTimer_t*));
 }
 
+uint32_t timer_cnt = 0;
 void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms, uint8_t src)
 {
-  static uint32_t cnt = 0;
   uint8_t branch = 0;
   
   WsfCsEnter();
@@ -111,6 +115,8 @@ void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms, uint8_t src)
     /* Restart the existing timer */
     pTimer->isStarted = xTimerReset(existingTimer->tmr, 0);
   } else {
+    timer_cnt++;
+
     branch = 2;
     TimerHandle_t tmr = xTimerCreate(NULL, ticks,
                                      pdFALSE,
@@ -126,9 +132,7 @@ void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms, uint8_t src)
     if (s_timers.tail) {
       branch = 21;
       /* Append to the list end */
-      TimerStruct_t *prev = s_timers.tail;
-      prev->next = ts;
-      ts->prev = prev;
+      s_timers.tail->next = ts;
       s_timers.tail = ts;
     } else {
       branch = 22;
@@ -136,58 +140,66 @@ void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms, uint8_t src)
       s_timers.head = ts;
       s_timers.tail = ts;
     }
+    APP_TRACE_INFO4("@!@- insert %d, %d (ms), tail %ld, src: %d", timer_cnt, ms, s_timers.tail, src);
+    PrintTimerList();
+    APP_TRACE_INFO1("@!@- %s", TimerLogBuf);
+    TimerLogBufNdx = 0;
   }
   WsfCsExit();
 
-  APP_TRACE_INFO4("@!@ DONE WsfTimerStartMs, %d, %d (ms), %d, src: %d", ++cnt, ms, branch, src);
+  //APP_TRACE_INFO4("@!@ DONE WsfTimerStartMs, %d, %d (ms), %d, src: %d", ++cnt, ms, branch, src);
 }
 
-void WsfTimerStartSec(wsfTimer_t *pTimer, wsfTimerTicks_t sec)
+void WsfTimerStartSec(wsfTimer_t *pTimer, wsfTimerTicks_t sec, int src)
 {
-  WsfTimerStartMs(pTimer, sec * 1000, 44);
+  WsfTimerStartMs(pTimer, sec * 1000, src);
 }
 
 void WsfTimerStop(wsfTimer_t *pTimer)
 {
+  if (s_timers.head == NULL) return;
+
   int branch = 0;
   WsfCsEnter();
   TimerStruct_t *itemToRemove = NULL;
-  for (TimerStruct_t *ts = s_timers.head; ts != NULL; ts = ts->next) {
-    if (ts->wsfTimerStruct == pTimer) {
-      itemToRemove = ts;
+  TimerStruct_t Dummy;
+  Dummy.next = s_timers.head;
+  TimerStruct_t *header = &Dummy;
+  
+  for (; header != NULL; header = header->next) {
+    if (header->next->wsfTimerStruct == pTimer) {
+      itemToRemove = header->next;
       break;
     }
   }
+
   if (itemToRemove) {
     branch = 1;
     /* Delete the timer and its list item */
     xTimerStop(itemToRemove->tmr, portMAX_DELAY);
     xTimerDelete(itemToRemove->tmr, portMAX_DELAY);
-    TimerStruct_t *prev = itemToRemove->prev;
-    TimerStruct_t *next = itemToRemove->next;
-    if (prev) {
-      branch = 11;
-      prev->next = next;
-    } else {
-      branch = 12;
+
+    timer_cnt--;
+
+    if (itemToRemove == s_timers.head)
+    {
       s_timers.head = NULL;
       s_timers.tail = NULL;
     }
-    if (next) {
-      branch += 100;
-      next->prev = prev;
-    }
-
-    /* Update tail if removing tail */
-    if(s_timers.tail == itemToRemove) {
-      branch += 1000;
-      if (prev)
+    else
+    {
+      if (header->next == s_timers.tail)
       {
-        branch += 1000;
-        s_timers.tail = prev;
+        s_timers.tail = header;
       }
+      header->next = itemToRemove->next;
     }
     
+    APP_TRACE_INFO3("@!@- delete %d, tail %ld, removed %ld", timer_cnt, s_timers.tail, header->next);
+    PrintTimerList();
+    APP_TRACE_INFO1("@!@- %s", TimerLogBuf);
+    TimerLogBufNdx = 0;
+
     itemToRemove->wsfTimerStruct->isStarted = FALSE;
     WsfBufFree(itemToRemove);
   } else {
@@ -196,7 +208,7 @@ void WsfTimerStop(wsfTimer_t *pTimer)
   }
   WsfCsExit();
 
-  APP_TRACE_INFO1("@!@ DONE WsfTimerStop, branch: %d", branch);
+  //APP_TRACE_INFO1("@!@ DONE WsfTimerStop, branch: %d", branch);
 }
 
 wsfTimer_t* WsfTimerServiceExpired(wsfTaskId_t taskId)
@@ -206,4 +218,13 @@ wsfTimer_t* WsfTimerServiceExpired(wsfTaskId_t taskId)
     return tmr;
   }
   return NULL;
+}
+
+void PrintTimerList()
+{
+  for (TimerStruct_t *ts = s_timers.head; ts != NULL; ts = ts->next)
+  {
+    int i = sprintf(TimerLogBuf + TimerLogBufNdx, "%d->", (uint32_t)ts%10000);
+    TimerLogBufNdx += i;
+  }
 }

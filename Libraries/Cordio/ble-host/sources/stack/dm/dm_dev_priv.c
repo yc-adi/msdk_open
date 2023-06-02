@@ -138,7 +138,7 @@ static void dmDevPrivTimerStart(void)
     /* start address generation timer */
     dmDevPrivCb.addrTimerStarted = TRUE;
     dmDevPrivCb.addrTimer.msg.event = DM_DEV_PRIV_MSG_TIMEOUT;
-    WsfTimerStartSec(&dmDevPrivCb.addrTimer, dmDevPrivCb.changeInterval);
+    WsfTimerStartSec(&dmDevPrivCb.addrTimer, dmDevPrivCb.changeInterval, 109);
   }
 }
 

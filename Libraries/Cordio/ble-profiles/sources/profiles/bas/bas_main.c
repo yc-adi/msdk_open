@@ -231,7 +231,7 @@ void basMeasTimerExp(wsfMsgHdr_t *pMsg)
     }
 
     /* restart timer */
-    WsfTimerStartSec(&basCb.measTimer, basCb.cfg.period);
+    WsfTimerStartSec(&basCb.measTimer, basCb.cfg.period, 101);
   }
 }
 
@@ -275,7 +275,7 @@ void BasMeasBattStart(dmConnId_t connId, uint8_t timerEvt, uint8_t battCccIdx)
     basCb.currCount = basCb.cfg.count;
 
     /* start timer */
-    WsfTimerStartSec(&basCb.measTimer, basCb.cfg.period);
+    WsfTimerStartSec(&basCb.measTimer, basCb.cfg.period, 102);
   }
 
   /* set conn id and last sent battery level */

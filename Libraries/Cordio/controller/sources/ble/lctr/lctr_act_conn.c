@@ -1412,7 +1412,7 @@ void lctrStartLlcpTimer(lctrConnCtx_t *pCtx)
     }
     else
     {
-      WsfTimerStartSec(&pCtx->tmrProcRsp, LL_T_PRT_SEC);
+      WsfTimerStartSec(&pCtx->tmrProcRsp, LL_T_PRT_SEC, 117);
     }
   }
 }

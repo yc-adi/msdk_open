@@ -216,7 +216,7 @@ static void attcSendSimpleReq(attcCcb_t *pCcb)
   if (pCcb->outReq.hdr.event != ATTC_MSG_API_WRITE_CMD)
   {
     pCcb->outReqTimer.msg.event = ATTC_MSG_REQ_TIMEOUT;
-    WsfTimerStartSec(&pCcb->outReqTimer, pAttCfg->transTimeout);
+    WsfTimerStartSec(&pCcb->outReqTimer, pAttCfg->transTimeout, 104);
   }
 
   /* send packet to L2CAP */
@@ -284,7 +284,7 @@ static void attcSendContinuingReq(attcCcb_t *pCcb)
 
   /* start request timer */
   pCcb->outReqTimer.msg.event = ATTC_MSG_REQ_TIMEOUT;
-  WsfTimerStartSec(&pCcb->outReqTimer, pAttCfg->transTimeout);
+  WsfTimerStartSec(&pCcb->outReqTimer, pAttCfg->transTimeout, 105);
 
   /* send packet to L2CAP */
   attL2cDataReq(pCcb->pMainCcb, pCcb->outReq.slot, pPkt->len, (uint8_t *) pPkt);
@@ -424,7 +424,7 @@ static void attcSendPrepWriteReq(attcCcb_t *pCcb)
 
   /* start request timer */
   pCcb->outReqTimer.msg.event = ATTC_MSG_REQ_TIMEOUT;
-  WsfTimerStartSec(&pCcb->outReqTimer, pAttCfg->transTimeout);
+  WsfTimerStartSec(&pCcb->outReqTimer, pAttCfg->transTimeout, 106);
 
   /* send packet to L2CAP */
   attL2cDataReq(pCcb->pMainCcb, pCcb->outReq.slot, dataLen + ATT_PREP_WRITE_REQ_LEN, (uint8_t *) pPkt);

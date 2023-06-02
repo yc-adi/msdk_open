@@ -140,7 +140,7 @@ void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms, uint8_t src)
       s_timers.head = ts;
       s_timers.tail = ts;
     }
-    APP_TRACE_INFO4("@!@- insert %d, %d (ms), tail %ld, src: %d", timer_cnt, ms, s_timers.tail, src);
+    APP_TRACE_INFO4("@!@- insert %d (ms), %ld, tail %ld, src: %d", ms, ts, s_timers.tail, src);
     PrintTimerList();
     APP_TRACE_INFO1("@!@- %s", TimerLogBuf);
     TimerLogBufNdx = 0;
@@ -195,7 +195,7 @@ void WsfTimerStop(wsfTimer_t *pTimer)
       header->next = itemToRemove->next;
     }
     
-    APP_TRACE_INFO3("@!@- delete %d, tail %ld, removed %ld", timer_cnt, s_timers.tail, header->next);
+    APP_TRACE_INFO3("@!@- delete %ld, tail: %ld, cnt: %d", itemToRemove, s_timers.tail, timer_cnt);
     PrintTimerList();
     APP_TRACE_INFO1("@!@- %s", TimerLogBuf);
     TimerLogBufNdx = 0;

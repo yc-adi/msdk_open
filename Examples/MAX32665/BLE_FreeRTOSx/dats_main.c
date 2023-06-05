@@ -945,17 +945,17 @@ static void runPeriodic( void * pvParameters )
 			enabled_counter = loop_counter;
 			enabled = TRUE;
 			started = FALSE;
-            DmConnSetIdle(1, DM_IDLE_USER_1, DM_CONN_IDLE);
+			DmConnSetIdle(1, DM_IDLE_USER_1, DM_CONN_IDLE);
 		}
 		if (enabled && !started && ((loop_counter - enabled_counter) > 2000)) {
 			// ~ 2s hold off to let BLE settle
 			started = TRUE;
-            DmConnSetIdle(1, DM_IDLE_USER_1, DM_CONN_BUSY);
+			DmConnSetIdle(1, DM_IDLE_USER_1, DM_CONN_BUSY);
 		}
 		if (enabled && !DatsIsConnected()) {
 			enabled = FALSE;
 			started = FALSE;
-            DmConnSetIdle(1, DM_IDLE_USER_1, DM_CONN_IDLE);
+			DmConnSetIdle(1, DM_IDLE_USER_1, DM_CONN_IDLE);
 		}
 		if (started && DatsIsIdle()) {
 			sendBlock();

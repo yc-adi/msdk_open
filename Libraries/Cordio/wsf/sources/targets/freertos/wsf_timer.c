@@ -75,6 +75,7 @@ void prvTimerCallback(TimerHandle_t xTimer)
   if (firedTimer) {
     /* Get the timer handler */
     wsfHandlerId_t handler = firedTimer->wsfTimerStruct->handlerId;
+    APP_TRACE_INFO2("@!@ timer triggered hdl:%d evt:%d", firedTimer->wsfTimerStruct->handlerId, firedTimer->wsfTimerStruct->msg.event);
     if (!xQueueSend(s_queue, &firedTimer->wsfTimerStruct, portMAX_DELAY)) {
       WSF_ASSERT(0);
     }
@@ -114,6 +115,7 @@ void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms, uint8_t src)
     }
     /* Restart the existing timer */
     pTimer->isStarted = xTimerReset(existingTimer->tmr, 0);
+    APP_TRACE_INFO0("@!@ restart existing timer");
   } else {
     timer_cnt++;
 
@@ -140,14 +142,12 @@ void WsfTimerStartMs(wsfTimer_t *pTimer, wsfTimerTicks_t ms, uint8_t src)
       s_timers.head = ts;
       s_timers.tail = ts;
     }
-    APP_TRACE_INFO4("@!@- insert %d (ms), %ld, tail %ld, src: %d", ms, ts, s_timers.tail, src);
+    APP_TRACE_INFO5("@!@- insert %d (ms), %ld(%ld), tail %ld, src: %d", ms, ts, ts->wsfTimerStruct, s_timers.tail, src);
     PrintTimerList();
     APP_TRACE_INFO1("@!@- %s", TimerLogBuf);
     TimerLogBufNdx = 0;
   }
   WsfCsExit();
-
-  //APP_TRACE_INFO4("@!@ DONE WsfTimerStartMs, %d, %d (ms), %d, src: %d", ++cnt, ms, branch, src);
 }
 
 void WsfTimerStartSec(wsfTimer_t *pTimer, wsfTimerTicks_t sec, int src)
@@ -208,7 +208,7 @@ void WsfTimerStop(wsfTimer_t *pTimer)
   }
   WsfCsExit();
 
-  //APP_TRACE_INFO1("@!@ DONE WsfTimerStop, branch: %d", branch);
+  APP_TRACE_INFO1("@!@ DONE WsfTimerStop, branch: %d", branch);
 }
 
 wsfTimer_t* WsfTimerServiceExpired(wsfTaskId_t taskId)
@@ -224,7 +224,7 @@ void PrintTimerList()
 {
   for (TimerStruct_t *ts = s_timers.head; ts != NULL; ts = ts->next)
   {
-    int i = sprintf(TimerLogBuf + TimerLogBufNdx, "%d->", (uint32_t)ts%10000);
+    int i = sprintf(TimerLogBuf + TimerLogBufNdx, "%d(%d)->", (uint32_t)ts%10000, (uint32_t)ts->wsfTimerStruct%10000);
     TimerLogBufNdx += i;
   }
 }

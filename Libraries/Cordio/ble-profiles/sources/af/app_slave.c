@@ -298,6 +298,9 @@ static void appConnUpdateTimerStart(dmConnId_t connId)
   pCb->updateTimer.handlerId = appHandlerId;
   pCb->updateTimer.msg.event = APP_CONN_UPDATE_TIMEOUT_IND;
   pCb->updateTimer.msg.param = connId;
+
+  APP_TRACE_INFO2("@!@ appConnUpdateTimerStart timer: %d, period: %d", (uint32_t)(&pCb->updateTimer), pAppUpdateCfg->idlePeriod);
+
   WsfTimerStartMs(&pCb->updateTimer, pAppUpdateCfg->idlePeriod, 6);
 }
 
@@ -452,6 +455,7 @@ static void appSlaveConnClose(dmEvt_t *pMsg, appConnCb_t *pCb)
 /*************************************************************************************************/
 static void appSlaveProcConnOpen(dmEvt_t *pMsg, appConnCb_t *pCb)
 {
+  APP_TRACE_INFO0("@!@ appSlaveProcConnOpen");
   /* store connection ID */
   pCb->connId = (dmConnId_t) pMsg->hdr.param;
 
@@ -521,6 +525,7 @@ static void appSlaveProcConnClose(dmEvt_t *pMsg, appConnCb_t *pCb)
 /*************************************************************************************************/
 static void appSlaveConnUpdate(dmEvt_t *pMsg, appConnCb_t *pCb)
 {
+  APP_TRACE_INFO2("@!@ appSlaveConnUpdate st:%d, attemps", pMsg->hdr.status, pCb->attempts);
   if (pAppUpdateCfg->idlePeriod != 0)
   {
     /* if successful */
@@ -958,7 +963,7 @@ static void appSlaveConnUpdateTimeout(wsfMsgHdr_t *pMsg, appConnCb_t *pCb)
   /* check if connection is idle */
   idle = (DmConnCheckIdle(pCb->connId) == 0);
 
-  APP_TRACE_INFO2("@!@ appSlaveConnUpdateTimeout, idle: %d, WasIdle: %d\n", idle, pCb->connWasIdle);
+  APP_TRACE_INFO3("@!@ appSlaveConnUpdateTimeout, connId:%d,idle:%d,WasIdle:%d\n", pCb->connId, idle, pCb->connWasIdle);
 
   /* if connection is idle and was also idle on last check */
   if (idle && pCb->connWasIdle)
@@ -992,6 +997,8 @@ static void appSlaveConnUpdateTimeout(wsfMsgHdr_t *pMsg, appConnCb_t *pCb)
 /*************************************************************************************************/
 void appSlaveProcMsg(wsfMsgHdr_t *pMsg)
 {
+  APP_TRACE_INFO1("@!@ appSlaveProcMsg pMsg->event:%d\n", pMsg->event);
+
   appConnCb_t *pCb;
 
   /* look up app connection control block from DM connection ID */
@@ -1069,6 +1076,7 @@ void AppSlaveInit(void)
 /*************************************************************************************************/
 void AppSlaveProcDmMsg(dmEvt_t *pMsg)
 {
+  APP_TRACE_INFO1("@!@ AppSlaveProcDmMsg pMsg->hdr.event: %d\n", pMsg->hdr.event);
   appConnCb_t *pCb = NULL;
 
   /* look up app connection control block from DM connection ID */

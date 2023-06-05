@@ -154,6 +154,7 @@ void smpActPairingFailed(smpCcb_t *pCcb, smpMsg_t *pMsg)
   smpCleanup(pCcb);
 
   /* set connection idle */
+  APP_TRACE_INFO0("@!@ smpActPairingFailed");
   DmConnSetIdle(pCcb->connId, DM_IDLE_SMP_PAIR, DM_CONN_IDLE);
 
   /* notify DM of pairing failure */
@@ -824,6 +825,7 @@ void smpActPairingCmpl(smpCcb_t *pCcb, smpMsg_t *pMsg)
   smpCleanup(pCcb);
 
   /* set connection idle */
+  APP_TRACE_INFO0("@!@ smpActPairingCmpl");
   DmConnSetIdle(pCcb->connId, DM_IDLE_SMP_PAIR, DM_CONN_IDLE);
 
   pairCmpl.auth = pCcb->auth;

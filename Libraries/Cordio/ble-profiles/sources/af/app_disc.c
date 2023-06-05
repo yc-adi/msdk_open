@@ -688,6 +688,7 @@ void AppDiscComplete(dmConnId_t connId, uint8_t status)
   appDbHdl_t hdl;
 
   /* set connection as idle */
+  APP_TRACE_INFO0("@!@ AppDiscComplete");
   DmConnSetIdle(connId, DM_IDLE_APP_DISC, DM_CONN_IDLE);
 
   /* store status if not doing connection setup configuration */

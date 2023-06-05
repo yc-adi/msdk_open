@@ -1,256 +1,1054 @@
-[14:56:13:615] ␍␊
-[14:56:13:615] -=- 32665 BLE FreeRTOS (V10.2.0) Demo -=- c866ec457 no tail = prev ␍␊
-[14:56:13:636] SystemCoreClock = 96000000␍␊
-[14:56:14:325] terminal: init␍␊
-[14:56:14:733]     RAM: 1 x 752 bytes -- connection context␍␊
-[14:56:14:733]     RAM: 4 x 386 bytes -- Tx buffer descriptors␍␊
-[14:56:14:733]     RAM: 1 x 2296 bytes -- advertising set context␍␊
-[14:56:14:733] LlHandlerInit: LL initialization completed␍␊
-[14:56:14:733]     opModeFlags = 0x005F5C40␍␊
-[14:56:14:733] ### LlApi ###  LlSetBdAddr␍␊
-[14:56:14:733] Static BDA[5:3]=00:18:80␍␊
-[14:56:14:733]        BDA[2:0]=10:44:B1␍␊
-[14:56:14:989] 32kHz trimmed to 0xE␍␊
-[14:56:14:989] ### LlApi ###  LlGetAclTxBufs, numBufs=4␍␊
-[14:56:14:989] ### LlApi ###  LlGetAclTxBufs, numBufs=4␍␊
-[14:56:14:989] ### LlApi ###  LlGetAclMaxSize, maxBufSize=256␍␊
-[14:56:14:989] DatsHandlerInit␍␊
-[14:56:14:989] ### LlApi ###  LlReset␍␊
-[14:56:14:989] lctrSlvAdvExecuteSm: state=0, event=0␍␊
-[14:56:14:989] lctrSlvAcadDisp: handle=1, event=0␍␊
-[14:56:14:989] ### LlEvent ###  LL_RESET_CNF, status=LL_SUCCESS␍␊
-[14:56:14:989] ### LlApi ###  LlGetBdAddr␍␊
-[14:56:14:989] ### LlApi ###  LlGetFeatures␍␊
-[14:56:14:989] ### LlApi ###  LlReadResolvingListSize␍␊
-[14:56:14:989] ### LlApi ###  LlGetFeatures␍␊
-[14:56:14:989] ### LlApi ###  LlReadMaximumDataLen␍␊
-[14:56:14:989] ### LlApi ###  LlWriteDefaultDataLen␍␊
-[14:56:15:031] ### LlApi ###  LlGetVersion␍␊
-[14:56:15:031] ### LlApi ###  LlGetRandNum␍␊
-[14:56:15:031] ### LlApi ###  LlGetRandNum␍␊
-[14:56:15:031] ### LlApi ###  LlGetRandNum␍␊
-[14:56:15:031] ### LlApi ###  LlEncrypt␍␊
-[14:56:15:031] ### LlApi ###  LlSetAdvTxPower, advTxPwr=0␍␊
-[14:56:15:031] >>> Reset complete <<<␍␊
-[14:56:15:031] dmAdvActConfig: state: 0␍␊
-[14:56:15:031] ### LlApi ###  LlSetAdvParam, advType=0␍␊
-[14:56:15:031] dmAdvActSetData: state: 0␍␊
-[14:56:15:031] ### LlApi ###  LlSetAdvData, len=7␍␊
-[14:56:15:031] dmAdvActSetData: state: 0␍␊
-[14:56:15:031] ### LlApi ###  LlSetScanRespData, len=6␍␊
-[14:56:15:031] dmAdvActStart: state: 0␍␊
-[14:56:15:031] ### LlApi ###  LlAdvEnable: enable=1␍␊
-[14:56:15:073] lctrSlvAdvExecuteSm: state=0, event=5␍␊
-[14:56:15:073] lctrSlvAdvExecuteSm: state=0, event=1␍␊
-[14:56:15:073] ### AdvEvent ###  Advertising enabled, dueUsec=500␍␊
-[14:56:15:073] ### LlEvent ###  LL_ADV_ENABLE_CNF, status=0␍␊
-[14:56:15:073] ### LlApi ###  LlEncrypt␍␊
-[14:56:15:073] HCI_LE_ADV_ENABLE_CMD_CMPL_CBACK_EVT: state: 3␍␊
-[14:56:15:073] dmDevPassEvtToDevPriv: event: 12, param: 33, advHandle: 0␍␊
-[14:56:15:073] @!@- insert 60000 (ms), 536887840, tail 536887840, src: 1␍␊
-[14:56:15:073] @!@- 7840->␍␊
-[14:56:15:073] >>> Advertising started <<<␍␊
-[14:56:15:073] ### LlApi ###  LlEncrypt␍␊
-[14:56:15:073] ### LlApi ###  LlEncrypt␍␊
-[14:56:15:073] ### LlApi ###  LlEncrypt␍␊
-[14:56:15:073] ### LlApi ###  LlEncrypt␍␊
-[14:56:15:104] ### LlApi ###  LlEncrypt␍␊
-[14:56:15:104] ### LlApi ###  LlEncrypt␍␊
-[14:56:15:104] ### LlApi ###  LlEncrypt␍␊
-[14:56:15:104] Database hash updated␍␊
-[14:56:15:104] ### LlEvent ###  LL_READ_LOCAL_P256_PUB_KEY_CMPL_IND, status=LL_SUCCESS␍␊
-[14:56:32:328] lctrSlvAdvExecuteSm: state=1, event=4␍␊
-[14:56:32:370] lctrSlvConnExecuteSm: handle=0, state=INITIALIZED, event=RX_CONNECT_IND␍␊
-[14:56:32:370] @!@- insert 195 (ms), 536887824, tail 536887824, src: 41␍␊
-[14:56:32:370] @!@- 7840->7824->␍␊
-[14:56:32:370]     >>> Connection established, handle=0 <<<␍␊
-[14:56:32:370]                                 connIntervalUsec=30000␍␊
-[14:56:32:370]                                 dueUsec=17388953␍␊
-[14:56:32:370]                                 minDurUsec=4566␍␊
-[14:56:32:370] Topology Add, handle=0, interval_ms=30␍␊
-[14:56:32:370] Topology Add,            durUsec=806␍␊
-[14:56:32:370] lctrLlcpExecuteCommonSm: handle=0, proc=4, state=IDLE, event=1␍␊
-[14:56:32:412] @!@- insert 40000 (ms), 536887808, tail 536887808, src: 117␍␊
-[14:56:32:412] @!@- 7840->7824->7808->␍␊
-[14:56:32:412] ### LlEvent ###  LL_CONN_IND, handle=0, status=0␍␊
-[14:56:32:412] ### LlEvent ###  LL_CH_SEL_ALGO_IND, handle=0, status=0, usedChSel=0␍␊
-[14:56:32:412] dmConnIdByBdAddr not found␍␊
-[14:56:32:412] dmConnCcbAlloc 1␍␊
-[14:56:32:412] dmConnSmExecute event=28 state=0␍␊
-[14:56:32:412] dmAdvConnected: state: 1␍␊
-[14:56:32:412] dmDevPassEvtToDevPriv: event: 13, param: 34, advHandle: 0␍␊
-[14:56:32:412] smpDbGetRecord: connId: 1 type: 1␍␊
-[14:56:32:412] smpDbAddDevice␍␊
-[14:56:32:412] SmpDbGetFailureCount: connId: 1 count: 0␍␊
-[14:56:32:412] smpDbGetRecord: connId: 1 type: 1␍␊
-[14:56:32:454] smpDbAddDevice␍␊
-[14:56:32:454] SmpDbGetPairingDisabledTime: connId: 1 period: 0 attemptMult: 0␍␊
-[14:56:32:454] @!@- insert 5000 (ms), 536887888, tail 536887888, src: 6␍␊
-[14:56:32:454] @!@- 7840->7824->7808->7888->␍␊
-[14:56:32:454] ### LlApi ###  LlReadRemoteFeat, handle=0␍␊
-[14:56:32:454] >>> Connection opened <<<␍␊
-[14:56:32:454] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=BUSY, event=0␍␊
-[14:56:32:454] Pending procedure in progress: activeProc=4␍␊
-[14:56:32:454] lctrLlcpExecuteCommonSm: handle=0, proc=3, state=BUSY, event=3␍␊
-[14:56:32:454] Procedure collision; pending incomplete request, activeProc=4␍␊
-[14:56:32:454] lctrLlcpExecuteCommonSm: handle=0, proc=4, state=BUSY, event=5␍␊
-[14:56:32:497] ### LlEvent ###  LL_DATA_LEN_CHANGE_IND, handle=0, status=0␍␊
-[14:56:32:497] Effective data lengths maxTxLen=251, maxRxLen=251␍␊
-[14:56:32:497] Effective data times maxTxTime=2120, maxRxTime=2120␍␊
-[14:56:32:497] @!@- delete 536887808, tail: 536887888, cnt: 3␍␊
-[14:56:32:497] @!@- 7840->7824->7888->␍␊
-[14:56:32:497] lctrLlcpExecuteCommonSm: handle=0, proc=3, state=IDLE, event=2␍␊
-[14:56:32:497] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=IDLE, event=4␍␊
-[14:56:32:497] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=IDLE, phyUpdState=0, event=2␍␊
-[14:56:32:538]     >>> Data Path Tx Paused, handle=0 <<<␍␊
-[14:56:32:538] Unhandled LLCP SM event, handle=0, event=42␍␊
-[14:56:32:538] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=BUSY, phyUpdState=3, event=6␍␊
-[14:56:32:538]     >>> Data Path Tx Unpaused/Resumed, handle=0 <<<␍␊
-[14:56:32:538] @!@- insert 40000 (ms), 536887856, tail 536887856, src: 117␍␊
-[14:56:32:538] @!@- 7840->7824->7888->7856->␍␊
-[14:56:32:574] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=BUSY, phyUpdState=4, event=1␍␊
-[14:56:32:574] @!@- delete 536887856, tail: 536887888, cnt: 3␍␊
-[14:56:32:574] @!@- 7840->7824->7888->␍␊
-[14:56:32:779]     >>> PHY updated, handle=0, eventCounter=15 <<<␍␊
-[14:56:32:779]         txPhy=2, rxPhy=2␍␊
-[14:56:32:835] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=BUSY, phyUpdState=5, event=4␍␊
-[14:56:32:835] ### LlEvent ###  LL_PHY_UPDATE_IND, phy=2, handle=0, status=0␍␊
-[14:56:32:835] ### LlEvent ###  LL_DATA_LEN_CHANGE_IND, handle=0, status=0␍␊
-[14:56:32:835] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=IDLE, event=1␍␊
-[14:56:32:835] @!@- insert 40000 (ms), 536887856, tail 536887856, src: 117␍␊
-[14:56:32:835] @!@- 7840->7824->7888->7856->␍␊
-[14:56:32:835] DM_PHY_UPDATE_IND - RX: 2, TX: 2␍␊
-[14:56:32:851] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=BUSY, event=5␍␊
-[14:56:32:877] ### LlEvent ###  LL_READ_REMOTE_FEAT_CNF, handle=0, status=0␍␊
-[14:56:32:877] @!@- delete 536887856, tail: 536887888, cnt: 3␍␊
-[14:56:32:877] @!@- 7840->7824->7888->␍␊
-[14:56:32:900] connId=1 idleMask=0x0004␍␊
-[14:56:32:900] @!@- insert 15000 (ms), 536887856, tail 536887856, src: 108␍␊
-[14:56:32:900] @!@- 7840->7824->7888->7856->␍␊
-[14:56:32:948] connId=1 idleMask=0x0004␍␊
-[14:56:33:060] connId=1 idleMask=0x0004␍␊
-[14:56:33:258] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=35, eventCounter=30␍␊
-[14:56:34:309] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=2, eventCounter=65␍␊
-[14:56:35:358] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=36, eventCounter=100␍␊
-[14:56:35:958] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=30, eventCounter=120␍␊
-[14:56:36:006] connId=1 idleMask=0x0004␍␊
-[14:56:36:070] connId=1 idleMask=0x0004␍␊
-[14:56:36:391] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=3, eventCounter=135␍␊
-[14:56:37:333] App got evt 16␍␊
-[14:56:37:333] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
-[14:56:37:333] ␍␊
-[14:56:37:458] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=0, eventCounter=170␍␊
-[14:56:38:508] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=4, eventCounter=205␍␊
-[14:56:40:008] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
-[14:56:40:200]     >>> Channel map updated, handle=0, eventCounter=263 <<<␍␊
-[14:56:40:233] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=BUSY, event=6␍␊
-[14:56:40:441] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
-[14:56:40:649]     >>> Channel map updated, handle=0, eventCounter=278 <<<␍␊
-[14:56:40:681] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=BUSY, event=6␍␊
-[14:56:42:299] App got evt 16␍␊
-[14:56:42:299] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
-[14:56:42:315] ␍␊
-[14:56:42:979] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
-[14:56:43:171]     >>> Channel map updated, handle=0, eventCounter=362 <<<␍␊
-[14:56:43:203] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=BUSY, event=6␍␊
-[14:56:45:469] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
-[14:56:45:662]     >>> Channel map updated, handle=0, eventCounter=445 <<<␍␊
-[14:56:45:693] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=BUSY, event=6␍␊
-[14:56:46:248] lctrSlvConnRxCompletion: BB failed with status=CRC_FAILED, handle=0, bleChan=0, eventCounter=463␍␊
-[14:56:47:304] App got evt 16␍␊
-[14:56:47:304] @!@ appSlaveConnUpdateTimeout, idle: 0, WasIdle: 0␊
-[14:56:47:304] ␍␊
-[14:56:47:989] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
-[14:56:48:182]     >>> Channel map updated, handle=0, eventCounter=529 <<<␍␊
-[14:56:48:229] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=BUSY, event=6␍␊
-[14:56:49:249] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=7, eventCounter=563␍␊
-[14:56:50:130] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=18, eventCounter=593␍␊
-[14:56:50:480] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
-[14:56:50:672]     >>> Channel map updated, handle=0, eventCounter=612 <<<␍␊
-[14:56:50:704] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=BUSY, event=6␍␊
-[14:56:51:024] connId=1 idleMask=0x0000␍␊
-[14:56:51:259] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=18, eventCounter=630␍␊
-[14:56:52:289] App got evt 16␍␊
-[14:56:52:289] @!@ appSlaveConnUpdateTimeout, idle: 1, WasIdle: 0␊
-[14:56:52:289] ␍␊
-[14:56:52:353] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=18, eventCounter=667␍␊
-[14:56:53:359] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=19, eventCounter=700␍␊
-[14:56:53:583] lctrSlvConnRxCompletion: BB failed with status=CRC_FAILED, handle=0, bleChan=19, eventCounter=708␍␊
-[14:56:54:449] lctrSlvConnRxCompletion: BB failed with status=CRC_FAILED, handle=0, bleChan=19, eventCounter=737␍␊
-[14:56:54:709] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=19, eventCounter=745␍␊
-[14:56:56:240] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=32, eventCounter=796␍␊
-[14:56:57:301] App got evt 16␍␊
-[14:56:57:301] @!@ appSlaveConnUpdateTimeout, idle: 1, WasIdle: 1␊
-[14:56:57:301] ␍␊
-[14:56:57:301] dmConnUpdExecute event=113 state=3␍␊
-[14:56:57:301] ### LlApi ###  LlGetFeatures␍␊
-[14:56:57:301] ### LlApi ###  LlConnUpdate, handle=0␍␊
-[14:56:57:301] @!@ EXIT dmConnUpdActUpdateSlave, branch: 1␍␊
-[14:56:57:301] lctrSlvLlcpExecuteConnUpdSm: handle=0, llcpState=IDLE, connUpdState=0, event=0␍␊
-[14:56:57:301] @!@- insert 40000 (ms), 536887808, tail 536887808, src: 117␍␊
-[14:56:57:301] @!@- 7840->7824->7888->7856->7808->␍␊
-[14:56:57:301] lctrSlvLlcpExecuteConnUpdSm: handle=0, llcpState=BUSY, connUpdState=2, event=4␍␊
-[14:56:57:326] @!@- delete 536887808, tail: 536887856, cnt: 4␍␊
-[14:56:57:326] @!@- 7840->7824->7888->7856->␍␊
-[14:56:57:531]     >>> Connection updated, handle=0, eventCounter=840 <<<␍␊
-[14:56:57:531]                             connIntervalUsec=100000␍␊
-[14:56:57:615] lctrSlvLlcpExecuteConnUpdSm: handle=0, llcpState=BUSY, connUpdState=3, event=6␍␊
-[14:56:57:615] ### LlEvent ###  LL_CONN_UPDATE_IND, handle=0, status=0␍␊
-[14:56:57:615] dmConnSmExecute event=30 state=3␍␊
-[14:56:57:615] @!@- delete 536887888, tail: 536887856, cnt: 3␍␊
-[14:56:57:615] @!@- 7840->7824->7856->␍␊
-[14:56:57:887] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
-[14:56:57:887] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
-[14:56:58:004] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
-[14:56:58:307] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=10, eventCounter=847␍␊
-[14:56:58:405] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
-[14:56:58:405] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=19, eventCounter=848␍␊
-[14:56:58:501] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
-[14:56:58:565] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
-[14:56:58:597] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
-[14:56:58:710] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=9, eventCounter=851␍␊
-[14:56:58:710]     >>> Channel map updated, handle=0, eventCounter=852 <<<␍␊
-[14:56:58:727] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
-[14:56:58:810] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=BUSY, event=6␍␊
-[14:56:58:810] lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=0, bleChan=18, eventCounter=852␍␊
-[14:56:58:890] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
-[14:56:58:970] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
-[14:56:59:002] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
-[14:56:59:204] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
-[14:56:59:204] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
-[14:56:59:604] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
-[14:56:59:604] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
-[14:57:00:485] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
-[14:57:01:110] lctrLlcpExecuteCommonSm: handle=0, proc=0, state=BUSY, event=3␍␊
-[14:57:01:110] Procedure collision; pending incomplete request, activeProc=1␍␊
-[14:57:01:224] !!! BOD terminated on startup, pBod=0x20005F4C␍␊
-[14:57:01:224] lctrConnStatelessEventHandler: handle=0, state=3, event=TERMINATED␍␊
-[14:57:01:224] Topology Remove, handle=0␍␊
-[14:57:01:224] ### LlEvent ###  LL_DISCONNECT_IND, handle=0, status=LL_SUCCESS, reason=19␍␊
-[14:57:01:224] @!@- delete 536887824, tail: 536887856, cnt: 2␍␊
-[14:57:01:224] @!@- 7840->7856->␍␊
-[14:57:01:224]     >>> Connection terminated, handle=0 <<<␍␊
-[14:57:01:224] dmConnSmExecute event=29 state=3␍␊
-[14:57:01:224] dmConnCcbDealloc 1␍␊
-[14:57:01:224] smpDbGetRecord: connId: 1 type: 1␍␊
-[14:57:01:224] smpDbAddDevice␍␊
-[14:57:01:224] SmpDbSetFailureCount: connId: 1 count: 0␍␊
-[14:57:01:224] smpSmExecute event=10 state=0␍␊
-[14:57:01:267] @!@- delete 536887840, tail: 0, cnt: 1␍␊
-[14:57:01:267] @!@- 7840->7856->␍␊
-[14:57:01:267] Connection closed status 0x0, reason 0x13␍␊
-[14:57:01:267]  REMOTE TERM␍␊
-[14:57:01:267] >>> Connection closed <<<␍␊
-[14:57:01:267] dmAdvActConfig: state: 0␍␊
-[14:57:01:267] ### LlApi ###  LlSetAdvParam, advType=0␍␊
-[14:57:01:267] dmAdvActStart: state: 0␍␊
-[14:57:01:267] ### LlApi ###  LlAdvEnable: enable=1␍␊
-[14:57:01:267] lctrSlvAdvExecuteSm: state=0, event=5␍␊
-[14:57:01:267] lctrSlvAdvExecuteSm: state=0, event=1␍␊
-[14:57:01:267] ### AdvEvent ###  Advertising enabled, dueUsec=516␍␊
-[14:57:01:267] ### LlEvent ###  LL_ADV_ENABLE_CNF, status=0␍␊
-[14:57:01:267] HCI_LE_ADV_ENABLE_CMD_CMPL_CBACK_EVT: state: 3␍␊
-[14:57:01:293] dmDevPassEvtToDevPriv: event: 12, param: 33, advHandle: 0␍␊
-[14:57:01:293] @!@- insert 60000 (ms), 536887904, tail 536887904, src: 1␍␊
-[14:57:01:293] @!@- 7904->␍␊
-[14:57:01:293] >>> Advertising started <<<␍␊
+[15:14:51:008] ␍␊
+[15:14:51:008] -=- 32665 BLE FreeRTOS (V10.2.0) Demo -=- c866ec457 no tail = prev ␍␊
+[15:14:51:029] SystemCoreClock = 96000000␍␊
+[15:14:51:718] terminal: init␍␊
+[15:14:52:127]     RAM: 1 x 752 bytes -- connection context␍␊
+[15:14:52:127]     RAM: 4 x 386 bytes -- Tx buffer descriptors␍␊
+[15:14:52:127]     RAM: 1 x 2296 bytes -- advertising set context␍␊
+[15:14:52:127] LlHandlerInit: LL initialization completed␍␊
+[15:14:52:127]     opModeFlags = 0x005F5C40␍␊
+[15:14:52:127] ### LlApi ###  LlSetBdAddr␍␊
+[15:14:52:127] Static BDA[5:3]=00:18:80␍␊
+[15:14:52:127]        BDA[2:0]=10:44:B1␍␊
+[15:14:52:382] 32kHz trimmed to 0xE␍␊
+[15:14:52:382] ### LlApi ###  LlGetAclTxBufs, numBufs=4␍␊
+[15:14:52:382] ### LlApi ###  LlGetAclTxBufs, numBufs=4␍␊
+[15:14:52:382] ### LlApi ###  LlGetAclMaxSize, maxBufSize=256␍␊
+[15:14:52:382] DatsHandlerInit␍␊
+[15:14:52:382] ### LlApi ###  LlReset␍␊
+[15:14:52:382] lctrSlvAdvExecuteSm: state=0, event=0␍␊
+[15:14:52:382] lctrSlvAcadDisp: handle=1, event=0␍␊
+[15:14:52:382] ### LlEvent ###  LL_RESET_CNF, status=LL_SUCCESS␍␊
+[15:14:52:382] ### LlApi ###  LlGetBdAddr␍␊
+[15:14:52:382] ### LlApi ###  LlGetFeatures␍␊
+[15:14:52:382] ### LlApi ###  LlReadResolvingListSize␍␊
+[15:14:52:382] ### LlApi ###  LlGetFeatures␍␊
+[15:14:52:382] ### LlApi ###  LlReadMaximumDataLen␍␊
+[15:14:52:382] ### LlApi ###  LlWriteDefaultDataLen␍␊
+[15:14:52:425] ### LlApi ###  LlGetVersion␍␊
+[15:14:52:425] ### LlApi ###  LlGetRandNum␍␊
+[15:14:52:425] ### LlApi ###  LlGetRandNum␍␊
+[15:14:52:425] ### LlApi ###  LlGetRandNum␍␊
+[15:14:52:425] 00000000: Dats got evt 32␍␊
+[15:14:52:425] @!@ AppSlaveProcDmMsg pMsg->hdr.event: 32␊
+[15:14:52:425] ␍␊
+[15:14:52:425] ### LlApi ###  LlEncrypt␍␊
+[15:14:52:425] ### LlApi ###  LlSetAdvTxPower, advTxPwr=0␍␊
+[15:14:52:425] >>> Reset complete <<<␍␊
+[15:14:52:425] ### LlApi ###  LlAddDeviceToResolvingList␍␊
+[15:14:52:425] ### LlApi ###  LlEncrypt␍␊
+[15:14:52:425] 00000001: Dats got evt 58␍␊
+[15:14:52:425] @!@ AppSlaveProcDmMsg pMsg->hdr.event: 58␊
+[15:14:52:425] ␍␊
+[15:14:52:425] ### LlApi ###  LlSetPrivacyMode␍␊
+[15:14:52:425] ### LlApi ###  LlSetAddrResolutionEnable␍␊
+[15:14:52:467] dmAdvActConfig: state: 0␍␊
+[15:14:52:467] ### LlApi ###  LlSetAdvParam, advType=0␍␊
+[15:14:52:467] dmAdvActSetData: state: 0␍␊
+[15:14:52:467] ### LlApi ###  LlSetAdvData, len=7␍␊
+[15:14:52:467] dmAdvActSetData: state: 0␍␊
+[15:14:52:467] ### LlApi ###  LlSetScanRespData, len=6␍␊
+[15:14:52:467] dmAdvActStart: state: 0␍␊
+[15:14:52:467] ### LlApi ###  LlAdvEnable: enable=1␍␊
+[15:14:52:467] lctrSlvAdvExecuteSm: state=0, event=5␍␊
+[15:14:52:467] lctrSlvAdvExecuteSm: state=0, event=1␍␊
+[15:14:52:467] ### AdvEvent ###  Advertising enabled, dueUsec=500␍␊
+[15:14:52:467] ### LlEvent ###  LL_ADV_ENABLE_CNF, status=0␍␊
+[15:14:52:467] ### LlApi ###  LlEncrypt␍␊
+[15:14:52:467] dmDevPassEvtToDevPriv: event: 13, param: 1, advHandle: 0␍␊
+[15:14:52:509] 00000001: Dats got evt 63␍␊
+[15:14:52:509] @!@ AppSlaveProcDmMsg pMsg->hdr.event: 63␊
+[15:14:52:509] ␍␊
+[15:14:52:509] HCI_LE_ADV_ENABLE_CMD_CMPL_CBACK_EVT: state: 3␍␊
+[15:14:52:509] dmDevPassEvtToDevPriv: event: 12, param: 33, advHandle: 0␍␊
+[15:14:52:509] 00000001: Dats got evt 33␍␊
+[15:14:52:509] @!@ AppSlaveProcDmMsg pMsg->hdr.event: 33␊
+[15:14:52:509] ␍␊
+[15:14:52:509] @!@- insert 60000 (ms), 536887808(536877468), tail 536887808, src: 1␍␊
+[15:14:52:509] @!@- 7808(7468)->␍␊
+[15:14:52:509] >>> Advertising started <<<␍␊
+[15:14:52:509] ### LlApi ###  LlEncrypt␍␊
+[15:14:52:509] ### LlApi ###  LlEncrypt␍␊
+[15:14:52:509] ### LlApi ###  LlEncrypt␍␊
+[15:14:52:540] ### LlApi ###  LlEncrypt␍␊
+[15:14:52:540] ### LlApi ###  LlEncrypt␍␊
+[15:14:52:540] ### LlApi ###  LlEncrypt␍␊
+[15:14:52:540] >>> Trace buffer overflowed; 2 message(s) lost <<<␍␊
+[15:14:52:540] ### LlEvent ###  LL_READ_LOCAL_P256_PUB_KEY_CMPL_IND, status=LL_SUCCESS␍␊
+[15:15:04:103] lctrSlvAdvExecuteSm: state=1, event=4␍␊
+[15:15:04:103] lctrSlvConnExecuteSm: handle=0, state=INITIALIZED, event=RX_CONNECT_IND␍␊
+[15:15:04:103] @!@- insert 189 (ms), 536887856(536895688), tail 536887856, src: 41␍␊
+[15:15:04:103] @!@- 7808(7468)->7856(5688)->␍␊
+[15:15:04:103]     >>> Connection established, handle=0 <<<␍␊
+[15:15:04:103]                                 connIntervalUsec=30000␍␊
+[15:15:04:103]                                 dueUsec=11722788␍␊
+[15:15:04:103]                                 minDurUsec=4562␍␊
+[15:15:04:103] Topology Add, handle=0, interval_ms=30␍␊
+[15:15:04:103] Topology Add,            durUsec=806␍␊
+[15:15:04:103] lctrLlcpExecuteCommonSm: handle=0, proc=4, state=IDLE, event=1␍␊
+[15:15:04:145] @!@- insert 40000 (ms), 536887824(536895992), tail 536887824, src: 117␍␊
+[15:15:04:145] @!@- 7808(7468)->7856(5688)->7824(5992)->␍␊
+[15:15:04:145] ### LlEvent ###  LL_CONN_IND, handle=0, status=0␍␊
+[15:15:04:145] ### LlEvent ###  LL_CH_SEL_ALGO_IND, handle=0, status=0, usedChSel=0␍␊
+[15:15:04:145] dmConnIdByBdAddr not found␍␊
+[15:15:04:145] dmConnCcbAlloc 1␍␊
+[15:15:04:145] dmConnSmExecute event=28 state=0␍␊
+[15:15:04:145] dmAdvConnected: state: 1␍␊
+[15:15:04:145] @!@ DONE WsfTimerStop, branch: 2␍␊
+[15:15:04:145] dmDevPassEvtToDevPriv: event: 13, param: 34, advHandle: 0␍␊
+[15:15:04:145] smpDbGetRecord: connId: 1 type: 1␍␊
+[15:15:04:187] smpDbAddDevice␍␊
+[15:15:04:187] SmpDbGetFailureCount: connId: 1 count: 0␍␊
+[15:15:04:187] smpDbGetRecord: connId: 1 type: 1␍␊
+[15:15:04:187] smpDbAddDevice␍␊
+[15:15:04:187] SmpDbGetPairingDisabledTime: connId: 1 period: 0 attemptMult: 0␍␊
+[15:15:04:187] 00011757: Dats got evt 39␍␊
+[15:15:04:187] @!@ AppSlaveProcDmMsg pMsg->hdr.event: 39␊
+[15:15:04:187] ␍␊
+[15:15:04:187] @!@ appSlaveProcConnOpen␍␊
+[15:15:04:187] @!@ appConnUpdateTimerStart timer: 536877528, period: 5000␍␊
+[15:15:04:187] @!@- insert 5000 (ms), 536887888(536877528), tail 536887888, src: 6␍␊
+[15:15:04:187] @!@- 7808(7468)->7856(5688)->7824(5992)->7888(7528)->␍␊
+[15:15:04:187] ### LlApi ###  LlReadRemoteFeat, handle=0␍␊
+[15:15:04:229] >>> Connection opened <<<␍␊
+[15:15:04:229] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=BUSY, event=0␍␊
+[15:15:04:229] Pending procedure in progress: activeProc=4␍␊
+[15:15:04:229] ### LlApi ###  LlEncrypt␍␊
+[15:15:04:229] 00011758: Dats got evt 55␍␊
+[15:15:04:229] @!@ AppSlaveProcDmMsg pMsg->hdr.event: 55␊
+[15:15:04:229] ␍␊
+[15:15:04:229] lctrLlcpExecuteCommonSm: handle=0, proc=3, state=BUSY, event=3␍␊
+[15:15:04:229] Procedure collision; pending incomplete request, activeProc=4␍␊
+[15:15:04:229] lctrLlcpExecuteCommonSm: handle=0, proc=4, state=BUSY, event=5␍␊
+[15:15:04:229] ### LlEvent ###  LL_DATA_LEN_CHANGE_IND, handle=0, status=0␍␊
+[15:15:04:272] Effective data lengths maxTxLen=251, maxRxLen=251␍␊
+[15:15:04:272] Effective data times maxTxTime=2120, maxRxTime=2120␍␊
+[15:15:04:272] @!@- delete 536887824, tail: 536887888, cnt: 3␍␊
+[15:15:04:272] @!@- 7808(7468)->7856(5688)->7888(7528)->␍␊
+[15:15:04:272] @!@ DONE WsfTimerStop, branch: 1␍␊
+[15:15:04:272] lctrLlcpExecuteCommonSm: handle=0, proc=3, state=IDLE, event=2␍␊
+[15:15:04:272] 00011793: Dats got evt 65␍␊
+[15:15:04:272] >>> Trace buffer overflowed; 1 message(s) lost <<<␍␊
+[15:15:04:272] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=IDLE, event=4␍␊
+[15:15:04:272] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=IDLE, phyUpdState=0, event=2␍␊
+[15:15:04:314]     >>> Data Path Tx Paused, handle=0 <<<␍␊
+[15:15:04:314] Unhandled LLCP SM event, handle=0, event=42␍␊
+[15:15:04:314] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=BUSY, phyUpdState=3, event=6␍␊
+[15:15:04:314]     >>> Data Path Tx Unpaused/Resumed, handle=0 <<<␍␊
+[15:15:04:314] @!@- insert 40000 (ms), 536887840(536895992), tail 536887840, src: 117␍␊
+[15:15:04:314] @!@- 7808(7468)->7856(5688)->7888(7528)->7840(5992)->␍␊
+[15:15:04:314] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=BUSY, phyUpdState=4, event=1␍␊
+[15:15:04:314] @!@- delete 536887840, tail: 536887888, cnt: 3␍␊
+[15:15:04:335] @!@- 7808(7468)->7856(5688)->7888(7528)->␍␊
+[15:15:04:335] @!@ DONE WsfTimerStop, branch: 1␍␊
+[15:15:04:507]     >>> PHY updated, handle=0, eventCounter=15 <<<␍␊
+[15:15:04:507]         txPhy=2, rxPhy=2␍␊
+[15:15:04:558] lctrSlvLlcpExecutePhyUpdateSm: handle=0, llcpState=BUSY, phyUpdState=5, event=4␍␊
+[15:15:04:558] ### LlEvent ###  LL_PHY_UPDATE_IND, phy=2, handle=0, status=0␍␊
+[15:15:04:558] ### LlEvent ###  LL_DATA_LEN_CHANGE_IND, handle=0, status=0␍␊
+[15:15:04:558] @!@ DONE WsfTimerStop, branch: 2␍␊
+[15:15:04:558] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=IDLE, event=1␍␊
+[15:15:04:558] @!@- insert 40000 (ms), 536887840(536895992), tail 536887840, src: 117␍␊
+[15:15:04:558] @!@- 7808(7468)->7856(5688)->7888(7528)->7840(5992)->␍␊
+[15:15:04:558] 00012214: Dats got evt 70␍␊
+[15:15:04:558] @!@ AppSlaveProcDmMsg pMsg->hdr.event: 70␊
+[15:15:04:609] ␍␊
+[15:15:04:609] DM_PHY_UPDATE_IND - RX: 2, TX: 2␍␊
+[15:15:04:609] 00012214: Dats got evt 65␍␊
+[15:15:04:609] @!@ AppSlaveProcDmMsg pMsg->hdr.event: 65␊
+[15:15:04:609] ␍␊
+[15:15:04:609] 00012244: Dats got evt 22␍␊
+[15:15:04:609] lctrLlcpExecuteCommonSm: handle=0, proc=2, state=BUSY, event=5␍␊
+[15:15:04:609] ### LlEvent ###  LL_READ_REMOTE_FEAT_CNF, handle=0, status=0␍␊
+[15:15:04:609] @!@- delete 536887840, tail: 536887888, cnt: 3␍␊
+[15:15:04:609] @!@- 7808(7468)->7856(5688)->7888(7528)->␍␊
+[15:15:04:609] @!@ DONE WsfTimerStop, branch: 1␍␊
+[15:15:04:609] 00012274: Dats got evt 87␍␊
+[15:15:04:609] @!@ AppSlaveProcDmMsg pMsg->hdr.event: 87␊
+[15:15:04:609] ␍␊
+[15:15:04:609] @!@ attsProcReadGroupTypeReq␍␊
+[15:15:04:609] connId=1 idleMask=0x0004␍␊
+[15:15:04:635] @!@- insert 15000 (ms), 536887840(536878548), tail 536887840, src: 108␍␊
+[15:15:04:635] @!@- 7808(7468)->7856(5688)->7888(7528)->7840(8548)->␍␊
+[15:15:04:667] @!@ attsProcReadGroupTypeReq␍␊
+[15:15:04:683] connId=1 idleMask=0x0004␍␊
+[15:15:04:795] @!@ attsProcFindInfoReq␍␊
+[15:15:04:795] connId=1 idleMask=0x0004␍␊
+[15:15:06:621] @!@ param 16, status 0␍␊
+[15:15:07:470] @!@ attsProcFindInfoReq␍␊
+[15:15:07:470] connId=1 idleMask=0x0004␍␊
+[15:15:07:518] @!@ attsProcFindInfoReq␍␊
+[15:15:07:518] connId=1 idleMask=0x0004␍␊
+[15:15:07:582] 00015283: Dats got evt 18␍␊
+[15:15:07:614] 00015314: Dats got evt 18␍␊
+[15:15:07:647] 00015345: Dats got evt 18␍␊
+[15:15:07:679] 00015376: Dats got evt 18␍␊
+[15:15:07:711] 00015407: Dats got evt 18␍␊
+[15:15:07:743] 00015438: Dats got evt 18␍␊
+[15:15:07:775] 00015469: Dats got evt 18␍␊
+[15:15:07:807] 00015500: Dats got evt 18␍␊
+[15:15:07:839] 00015531: Dats got evt 18␍␊
+[15:15:07:855] 00015562: Dats got evt 18␍␊
+[15:15:07:887] 00015593: Dats got evt 18␍␊
+[15:15:07:919] 00015624: Dats got evt 18␍␊
+[15:15:07:951] 00015655: Dats got evt 18␍␊
+[15:15:07:983] 00015686: Dats got evt 18␍␊
+[15:15:08:015] 00015717: Dats got evt 18␍␊
+[15:15:08:047] 00015748: Dats got evt 18␍␊
+[15:15:08:079] 00015779: Dats got evt 18␍␊
+[15:15:08:111] 00015810: Dats got evt 18␍␊
+[15:15:08:143] 00015841: Dats got evt 18␍␊
+[15:15:08:175] 00015872: Dats got evt 18␍␊
+[15:15:08:207] 00015903: Dats got evt 18␍␊
+[15:15:08:239] 00015934: Dats got evt 18␍␊
+[15:15:08:271] 00015965: Dats got evt 18␍␊
+[15:15:08:287] 00015996: Dats got evt 18␍␊
+[15:15:08:319] 00016027: Dats got evt 18␍␊
+[15:15:08:351] 00016058: Dats got evt 18␍␊
+[15:15:08:383] 00016089: Dats got evt 18␍␊
+[15:15:08:415] 00016120: Dats got evt 18␍␊
+[15:15:08:447] 00016151: Dats got evt 18␍␊
+[15:15:08:479] 00016182: Dats got evt 18␍␊
+[15:15:08:511] 00016213: Dats got evt 18␍␊
+[15:15:08:543] 00016244: Dats got evt 18␍␊
+[15:15:08:576] 00016275: Dats got evt 18␍␊
+[15:15:08:608] 00016306: Dats got evt 18␍␊
+[15:15:08:640] 00016337: Dats got evt 18␍␊
+[15:15:08:672] 00016368: Dats got evt 18␍␊
+[15:15:08:704] 00016399: Dats got evt 18␍␊
+[15:15:08:720] 00016430: Dats got evt 18␍␊
+[15:15:08:752] 00016461: Dats got evt 18␍␊
+[15:15:08:784] 00016492: Dats got evt 18␍␊
+[15:15:08:816] 00016523: Dats got evt 18␍␊
+[15:15:08:848] 00016554: Dats got evt 18␍␊
+[15:15:08:880] 00016585: Dats got evt 18␍␊
+[15:15:08:912] 00016616: Dats got evt 18␍␊
+[15:15:08:944] 00016647: Dats got evt 18␍␊
+[15:15:08:976] 00016678: Dats got evt 18␍␊
+[15:15:09:008] 00016709: Dats got evt 18␍␊
+[15:15:09:040] 00016740: Dats got evt 18␍␊
+[15:15:09:077] @!@ timer triggered hdl:8 evt:16␍␊
+[15:15:09:077] App got evt 16␍␊
+[15:15:09:077] @!@ appSlaveProcMsg pMsg->event:16␊
+[15:15:09:077] ␍␊
+[15:15:09:077] @!@ appSlaveConnUpdateTimeout, connId:1,idle:0,WasIdle:0␊
+[15:15:09:077] ␍␊
+[15:15:09:077] @!@ appConnUpdateTimerStart timer: 536877528, period: 5000␍␊
+[15:15:09:077] 00016771: Dats got evt 18␍␊
+[15:15:09:093] 00016802: Dats got evt 18␍␊
+[15:15:09:125] 00016833: Dats got evt 18␍␊
+[15:15:09:157] 00016864: Dats got evt 18␍␊
+[15:15:09:189] 00016895: Dats got evt 18␍␊
+[15:15:09:221] 00016926: Dats got evt 18␍␊
+[15:15:09:253] 00016957: Dats got evt 18␍␊
+[15:15:09:285] 00016988: Dats got evt 18␍␊
+[15:15:09:317] 00017019: Dats got evt 18␍␊
+[15:15:09:349] 00017050: Dats got evt 18␍␊
+[15:15:09:381] 00017081: Dats got evt 18␍␊
+[15:15:09:413] 00017112: Dats got evt 18␍␊
+[15:15:09:445] 00017143: Dats got evt 18␍␊
+[15:15:09:461] 00017174: Dats got evt 18␍␊
+[15:15:09:493] 00017205: Dats got evt 18␍␊
+[15:15:09:526] 00017236: Dats got evt 18␍␊
+[15:15:09:558] 00017267: Dats got evt 18␍␊
+[15:15:09:590] 00017298: Dats got evt 18␍␊
+[15:15:09:622] 00017329: Dats got evt 18␍␊
+[15:15:09:654] 00017360: Dats got evt 18␍␊
+[15:15:09:686] 00017391: Dats got evt 18␍␊
+[15:15:09:718] 00017422: Dats got evt 18␍␊
+[15:15:09:750] 00017453: Dats got evt 18␍␊
+[15:15:09:782] 00017484: Dats got evt 18␍␊
+[15:15:09:814] 00017515: Dats got evt 18␍␊
+[15:15:09:846] 00017546: Dats got evt 18␍␊
+[15:15:09:878] 00017577: Dats got evt 18␍␊
+[15:15:09:894] 00017608: Dats got evt 18␍␊
+[15:15:09:926] 00017639: Dats got evt 18␍␊
+[15:15:09:958] 00017670: Dats got evt 18␍␊
+[15:15:09:990] 00017701: Dats got evt 18␍␊
+[15:15:10:022] 00017732: Dats got evt 18␍␊
+[15:15:10:054] 00017763: Dats got evt 18␍␊
+[15:15:10:086] 00017794: Dats got evt 18␍␊
+[15:15:10:118] 00017825: Dats got evt 18␍␊
+[15:15:10:150] 00017856: Dats got evt 18␍␊
+[15:15:10:182] 00017887: Dats got evt 18␍␊
+[15:15:10:214] 00017918: Dats got evt 18␍␊
+[15:15:10:246] 00017949: Dats got evt 18␍␊
+[15:15:10:278] 00017980: Dats got evt 18␍␊
+[15:15:10:310] 00018011: Dats got evt 18␍␊
+[15:15:10:326] 00018042: Dats got evt 18␍␊
+[15:15:10:358] 00018073: Dats got evt 18␍␊
+[15:15:10:390] 00018104: Dats got evt 18␍␊
+[15:15:10:423] 00018135: Dats got evt 18␍␊
+[15:15:10:455] 00018166: Dats got evt 18␍␊
+[15:15:10:487] 00018197: Dats got evt 18␍␊
+[15:15:10:519] 00018228: Dats got evt 18␍␊
+[15:15:10:551] 00018259: Dats got evt 18␍␊
+[15:15:10:583] 00018290: Dats got evt 18␍␊
+[15:15:10:615] 00018321: Dats got evt 18␍␊
+[15:15:10:647] 00018352: Dats got evt 18␍␊
+[15:15:10:679] 00018383: Dats got evt 18␍␊
+[15:15:10:711] 00018414: Dats got evt 18␍␊
+[15:15:10:743] 00018445: Dats got evt 18␍␊
+[15:15:10:775] 00018476: Dats got evt 18␍␊
+[15:15:10:791] 00018507: Dats got evt 18␍␊
+[15:15:10:823] 00018538: Dats got evt 18␍␊
+[15:15:10:855] 00018569: Dats got evt 18␍␊
+[15:15:10:887] 00018600: Dats got evt 18␍␊
+[15:15:10:919] 00018631: Dats got evt 18␍␊
+[15:15:10:951] 00018662: Dats got evt 18␍␊
+[15:15:10:983] 00018693: Dats got evt 18␍␊
+[15:15:11:015] 00018724: Dats got evt 18␍␊
+[15:15:11:047] 00018755: Dats got evt 18␍␊
+[15:15:11:079] 00018786: Dats got evt 18␍␊
+[15:15:11:111] 00018817: Dats got evt 18␍␊
+[15:15:11:143] 00018848: Dats got evt 18␍␊
+[15:15:11:175] 00018879: Dats got evt 18␍␊
+[15:15:11:207] 00018910: Dats got evt 18␍␊
+[15:15:11:223] 00018941: Dats got evt 18␍␊
+[15:15:11:255] 00018972: Dats got evt 18␍␊
+[15:15:11:288] 00019003: Dats got evt 18␍␊
+[15:15:11:320] 00019034: Dats got evt 18␍␊
+[15:15:11:352] 00019065: Dats got evt 18␍␊
+[15:15:11:384] 00019096: Dats got evt 18␍␊
+[15:15:11:416] 00019127: Dats got evt 18␍␊
+[15:15:11:448] 00019158: Dats got evt 18␍␊
+[15:15:11:480] 00019189: Dats got evt 18␍␊
+[15:15:11:512] 00019220: Dats got evt 18␍␊
+[15:15:11:544] 00019251: Dats got evt 18␍␊
+[15:15:11:576] 00019282: Dats got evt 18␍␊
+[15:15:11:608] 00019313: Dats got evt 18␍␊
+[15:15:11:640] 00019344: Dats got evt 18␍␊
+[15:15:11:656] 00019375: Dats got evt 18␍␊
+[15:15:11:688] 00019406: Dats got evt 18␍␊
+[15:15:11:720] 00019437: Dats got evt 18␍␊
+[15:15:11:752] 00019468: Dats got evt 18␍␊
+[15:15:11:784] 00019499: Dats got evt 18␍␊
+[15:15:11:816] 00019530: Dats got evt 18␍␊
+[15:15:11:848] 00019561: Dats got evt 18␍␊
+[15:15:11:880] 00019592: Dats got evt 18␍␊
+[15:15:11:912] 00019623: Dats got evt 18␍␊
+[15:15:11:944] 00019654: Dats got evt 18␍␊
+[15:15:11:976] 00019685: Dats got evt 18␍␊
+[15:15:12:008] 00019716: Dats got evt 18␍␊
+[15:15:12:040] 00019747: Dats got evt 18␍␊
+[15:15:12:073] 00019778: Dats got evt 18␍␊
+[15:15:12:088] 00019809: Dats got evt 18␍␊
+[15:15:12:121] 00019840: Dats got evt 18␍␊
+[15:15:12:153] 00019871: Dats got evt 18␍␊
+[15:15:12:185] 00019902: Dats got evt 18␍␊
+[15:15:12:217] 00019933: Dats got evt 18␍␊
+[15:15:12:249] 00019964: Dats got evt 18␍␊
+[15:15:12:281] 00019995: Dats got evt 18␍␊
+[15:15:12:313] 00020026: Dats got evt 18␍␊
+[15:15:12:345] 00020057: Dats got evt 18␍␊
+[15:15:12:377] 00020088: Dats got evt 18␍␊
+[15:15:12:409] 00020119: Dats got evt 18␍␊
+[15:15:12:441] 00020150: Dats got evt 18␍␊
+[15:15:12:473] 00020181: Dats got evt 18␍␊
+[15:15:12:505] 00020212: Dats got evt 18␍␊
+[15:15:12:521] 00020243: Dats got evt 18␍␊
+[15:15:12:553] 00020274: Dats got evt 18␍␊
+[15:15:12:585] 00020305: Dats got evt 18␍␊
+[15:15:12:617] 00020336: Dats got evt 18␍␊
+[15:15:12:649] 00020367: Dats got evt 18␍␊
+[15:15:12:681] 00020398: Dats got evt 18␍␊
+[15:15:12:713] 00020429: Dats got evt 18␍␊
+[15:15:12:745] 00020460: Dats got evt 18␍␊
+[15:15:12:777] 00020491: Dats got evt 18␍␊
+[15:15:12:809] 00020522: Dats got evt 18␍␊
+[15:15:12:841] 00020553: Dats got evt 18␍␊
+[15:15:12:873] 00020584: Dats got evt 18␍␊
+[15:15:12:905] 00020615: Dats got evt 18␍␊
+[15:15:12:937] 00020646: Dats got evt 18␍␊
+[15:15:12:953] 00020677: Dats got evt 18␍␊
+[15:15:12:985] 00020708: Dats got evt 18␍␊
+[15:15:13:017] 00020739: Dats got evt 18␍␊
+[15:15:13:050] 00020770: Dats got evt 18␍␊
+[15:15:13:082] 00020801: Dats got evt 18␍␊
+[15:15:13:114] 00020832: Dats got evt 18␍␊
+[15:15:13:146] 00020863: Dats got evt 18␍␊
+[15:15:13:178] 00020894: Dats got evt 18␍␊
+[15:15:13:210] 00020925: Dats got evt 18␍␊
+[15:15:13:242] 00020956: Dats got evt 18␍␊
+[15:15:13:274] 00020987: Dats got evt 18␍␊
+[15:15:13:306] 00021018: Dats got evt 18␍␊
+[15:15:13:338] 00021049: Dats got evt 18␍␊
+[15:15:13:370] 00021080: Dats got evt 18␍␊
+[15:15:13:402] 00021111: Dats got evt 18␍␊
+[15:15:13:418] 00021142: Dats got evt 18␍␊
+[15:15:13:450] 00021173: Dats got evt 18␍␊
+[15:15:13:482] 00021204: Dats got evt 18␍␊
+[15:15:13:514] 00021235: Dats got evt 18␍␊
+[15:15:13:546] 00021266: Dats got evt 18␍␊
+[15:15:13:578] 00021297: Dats got evt 18␍␊
+[15:15:13:610] 00021328: Dats got evt 18␍␊
+[15:15:13:642] 00021359: Dats got evt 18␍␊
+[15:15:13:674] 00021390: Dats got evt 18␍␊
+[15:15:13:706] 00021421: Dats got evt 18␍␊
+[15:15:13:738] 00021452: Dats got evt 18␍␊
+[15:15:13:770] 00021483: Dats got evt 18␍␊
+[15:15:13:802] 00021514: Dats got evt 18␍␊
+[15:15:13:834] 00021545: Dats got evt 18␍␊
+[15:15:13:850] 00021576: Dats got evt 18␍␊
+[15:15:13:882] 00021607: Dats got evt 18␍␊
+[15:15:13:914] 00021638: Dats got evt 18␍␊
+[15:15:13:946] 00021669: Dats got evt 18␍␊
+[15:15:13:979] 00021700: Dats got evt 18␍␊
+[15:15:14:011] 00021731: Dats got evt 18␍␊
+[15:15:14:063] @!@ timer triggered hdl:8 evt:16␍␊
+[15:15:14:063] App got evt 16␍␊
+[15:15:14:063] @!@ appSlaveProcMsg pMsg->event:16␊
+[15:15:14:063] ␍␊
+[15:15:14:063] @!@ appSlaveConnUpdateTimeout, connId:1,idle:0,WasIdle:0␊
+[15:15:14:063] ␍␊
+[15:15:14:063] @!@ appConnUpdateTimerStart timer: 536877528, period: 5000␍␊
+[15:15:14:063] 00021762: Dats got evt 18␍␊
+[15:15:14:079] 00021793: Dats got evt 18␍␊
+[15:15:14:111] 00021824: Dats got evt 18␍␊
+[15:15:14:143] 00021855: Dats got evt 18␍␊
+[15:15:14:159] 00021886: Dats got evt 18␍␊
+[15:15:14:191] 00021917: Dats got evt 18␍␊
+[15:15:14:207] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=IDLE, event=4␍␊
+[15:15:14:236] 00021948: Dats got evt 18␍␊
+[15:15:14:252] 00021979: Dats got evt 18␍␊
+[15:15:14:284] 00022010: Dats got evt 18␍␊
+[15:15:14:316] 00022041: Dats got evt 18␍␊
+[15:15:14:348] 00022072: Dats got evt 18␍␊
+[15:15:14:380] 00022103: Dats got evt 18␍␊
+[15:15:14:412] 00022134: Dats got evt 18␍␊
+[15:15:14:428]     >>> Channel map updated, handle=0, eventCounter=346 <<<␍␊
+[15:15:14:444] 00022165: Dats got evt 18␍␊
+[15:15:14:467] lctrLlcpExecuteCommonSm: handle=0, proc=1, state=BUSY, event=6␍␊
+[15:15:14:467] @!@ DONE WsfTimerStop, branch: 2␍␊
+[15:15:14:483] 00022196: Dats got evt 18␍␊
+[15:15:14:499] 00022227: Dats got evt 18␍␊
+[15:15:14:531] 00022258: Dats got evt 18␍␊
+[15:15:14:563] 00022289: Dats got evt 18␍␊
+[15:15:14:595] 00022320: Dats got evt 18␍␊
+[15:15:14:627] 00022351: Dats got evt 18␍␊
+[15:15:14:659] 00022382: Dats got evt 18␍␊
+[15:15:14:691] 00022413: Dats got evt 18␍␊
+[15:15:14:723] 00022444: Dats got evt 18␍␊
+[15:15:14:755] 00022475: Dats got evt 18␍␊
+[15:15:14:787] 00022506: Dats got evt 18␍␊
+[15:15:14:819] 00022537: Dats got evt 18␍␊
+[15:15:14:852] 00022568: Dats got evt 18␍␊
+[15:15:14:884] 00022599: Dats got evt 18␍␊
+[15:15:14:916] 00022630: Dats got evt 18␍␊
+[15:15:14:932] 00022661: Dats got evt 18␍␊
+[15:15:14:964] 00022692: Dats got evt 18␍␊
+[15:15:14:996] 00022723: Dats got evt 18␍␊
+[15:15:15:028] 00022754: Dats got evt 18␍␊
+[15:15:15:060] 00022785: Dats got evt 18␍␊
+[15:15:15:092] 00022816: Dats got evt 18␍␊
+[15:15:15:124] 00022847: Dats got evt 18␍␊
+[15:15:15:156] 00022878: Dats got evt 18␍␊
+[15:15:15:188] 00022909: Dats got evt 18␍␊
+[15:15:15:220] 00022940: Dats got evt 18␍␊
+[15:15:15:252] 00022971: Dats got evt 18␍␊
+[15:15:15:284] 00023002: Dats got evt 18␍␊
+[15:15:15:316] 00023033: Dats got evt 18␍␊
+[15:15:15:348] 00023064: Dats got evt 18␍␊
+[15:15:15:364] 00023095: Dats got evt 18␍␊
+[15:15:15:396] 00023126: Dats got evt 18␍␊
+[15:15:15:428] 00023157: Dats got evt 18␍␊
+[15:15:15:460] 00023188: Dats got evt 18␍␊
+[15:15:15:492] 00023219: Dats got evt 18␍␊
+[15:15:15:524] 00023250: Dats got evt 18␍␊
+[15:15:15:556] 00023281: Dats got evt 18␍␊
+[15:15:15:588] 00023312: Dats got evt 18␍␊
+[15:15:15:620] 00023343: Dats got evt 18␍␊
+[15:15:15:653] 00023374: Dats got evt 18␍␊
+[15:15:15:685] 00023405: Dats got evt 18␍␊
+[15:15:15:717] 00023436: Dats got evt 18␍␊
+[15:15:15:749] 00023467: Dats got evt 18␍␊
+[15:15:15:781] 00023498: Dats got evt 18␍␊
+[15:15:15:797] 00023529: Dats got evt 18␍␊
+[15:15:15:829] 00023560: Dats got evt 18␍␊
+[15:15:15:861] 00023591: Dats got evt 18␍␊
+[15:15:15:893] 00023622: Dats got evt 18␍␊
+[15:15:15:925] 00023653: Dats got evt 18␍␊
+[15:15:15:957] 00023684: Dats got evt 18␍␊
+[15:15:15:989] 00023715: Dats got evt 18␍␊
+[15:15:16:021] 00023746: Dats got evt 18␍␊
+[15:15:16:053] 00023777: Dats got evt 18␍␊
+[15:15:16:085] 00023808: Dats got evt 18␍␊
+[15:15:16:117] 00023839: Dats got evt 18␍␊
+[15:15:16:149] 00023870: Dats got evt 18␍␊
+[15:15:16:181] 00023901: Dats got evt 18␍␊
+[15:15:16:213] 00023932: Dats got evt 18␍␊
+[15:15:16:229] 00023963: Dats got evt 18␍␊
+[15:15:16:261] 00023994: Dats got evt 18␍␊
+[15:15:16:293] 00024025: Dats got evt 18␍␊
+[15:15:16:325] 00024056: Dats got evt 18␍␊
+[15:15:16:357] 00024087: Dats got evt 18␍␊
+[15:15:16:389] 00024118: Dats got evt 18␍␊
+[15:15:16:421] 00024149: Dats got evt 18␍␊
+[15:15:16:453] 00024180: Dats got evt 18␍␊
+[15:15:16:485] 00024211: Dats got evt 18␍␊
+[15:15:16:517] 00024242: Dats got evt 18␍␊
+[15:15:16:549] 00024273: Dats got evt 18␍␊
+[15:15:16:582] 00024304: Dats got evt 18␍␊
+[15:15:16:614] 00024335: Dats got evt 18␍␊
+[15:15:16:646] 00024366: Dats got evt 18␍␊
+[15:15:16:678] 00024397: Dats got evt 18␍␊
+[15:15:16:694] 00024428: Dats got evt 18␍␊
+[15:15:16:726] 00024459: Dats got evt 18␍␊
+[15:15:16:758] 00024490: Dats got evt 18␍␊
+[15:15:16:790] 00024521: Dats got evt 18␍␊
+[15:15:16:822] 00024552: Dats got evt 18␍␊
+[15:15:16:854] 00024583: Dats got evt 18␍␊
+[15:15:16:886] 00024614: Dats got evt 18␍␊
+[15:15:16:918] 00024645: Dats got evt 18␍␊
+[15:15:16:950] 00024676: Dats got evt 18␍␊
+[15:15:16:982] 00024707: Dats got evt 18␍␊
+[15:15:17:014] 00024738: Dats got evt 18␍␊
+[15:15:17:046] 00024769: Dats got evt 18␍␊
+[15:15:17:078] 00024800: Dats got evt 18␍␊
+[15:15:17:110] 00024831: Dats got evt 18␍␊
+[15:15:17:126] 00024862: Dats got evt 18␍␊
+[15:15:17:158] 00024893: Dats got evt 18␍␊
+[15:15:17:190] 00024924: Dats got evt 18␍␊
+[15:15:17:222] 00024955: Dats got evt 18␍␊
+[15:15:17:254] 00024986: Dats got evt 18␍␊
+[15:15:17:286] 00025017: Dats got evt 18␍␊
+[15:15:17:318] 00025048: Dats got evt 18␍␊
+[15:15:17:350] 00025079: Dats got evt 18␍␊
+[15:15:17:383] 00025110: Dats got evt 18␍␊
+[15:15:17:415] 00025141: Dats got evt 18␍␊
+[15:15:17:446] 00025172: Dats got evt 18␍␊
+[15:15:17:479] 00025203: Dats got evt 18␍␊
+[15:15:17:511] 00025234: Dats got evt 18␍␊
+[15:15:17:543] 00025265: Dats got evt 18␍␊
+[15:15:17:559] 00025296: Dats got evt 18␍␊
+[15:15:17:591] 00025327: Dats got evt 18␍␊
+[15:15:17:623] 00025358: Dats got evt 18␍␊
+[15:15:17:655] 00025389: Dats got evt 18␍␊
+[15:15:17:687] 00025420: Dats got evt 18␍␊
+[15:15:17:719] 00025451: Dats got evt 18␍␊
+[15:15:17:751] 00025482: Dats got evt 18␍␊
+[15:15:17:783] 00025513: Dats got evt 18␍␊
+[15:15:17:815] 00025544: Dats got evt 18␍␊
+[15:15:17:847] 00025575: Dats got evt 18␍␊
+[15:15:17:879] 00025606: Dats got evt 18␍␊
+[15:15:17:911] 00025637: Dats got evt 18␍␊
+[15:15:17:943] 00025668: Dats got evt 18␍␊
+[15:15:17:975] 00025699: Dats got evt 18␍␊
+[15:15:17:991] 00025730: Dats got evt 18␍␊
+[15:15:18:023] 00025761: Dats got evt 18␍␊
+[15:15:18:055] 00025792: Dats got evt 18␍␊
+[15:15:18:087] 00025823: Dats got evt 18␍␊
+[15:15:18:119] 00025854: Dats got evt 18␍␊
+[15:15:18:151] 00025885: Dats got evt 18␍␊
+[15:15:18:183] 00025916: Dats got evt 18␍␊
+[15:15:18:215] 00025947: Dats got evt 18␍␊
+[15:15:18:247] 00025978: Dats got evt 18␍␊
+[15:15:18:279] 00026009: Dats got evt 18␍␊
+[15:15:18:311] 00026040: Dats got evt 18␍␊
+[15:15:18:343] 00026071: Dats got evt 18␍␊
+[15:15:18:375] 00026102: Dats got evt 18␍␊
+[15:15:18:408] 00026133: Dats got evt 18␍␊
+[15:15:18:424] 00026164: Dats got evt 18␍␊
+[15:15:18:456] 00026195: Dats got evt 18␍␊
+[15:15:18:488] 00026226: Dats got evt 18␍␊
+[15:15:18:520] 00026257: Dats got evt 18␍␊
+[15:15:18:552] 00026288: Dats got evt 18␍␊
+[15:15:18:584] 00026319: Dats got evt 18␍␊
+[15:15:18:616] 00026350: Dats got evt 18␍␊
+[15:15:18:648] 00026381: Dats got evt 18␍␊
+[15:15:18:680] 00026412: Dats got evt 18␍␊
+[15:15:18:712] 00026443: Dats got evt 18␍␊
+[15:15:18:744] 00026474: Dats got evt 18␍␊
+[15:15:18:776] 00026505: Dats got evt 18␍␊
+[15:15:18:808] 00026536: Dats got evt 18␍␊
+[15:15:18:840] 00026567: Dats got evt 18␍␊
+[15:15:18:856] 00026598: Dats got evt 18␍␊
+[15:15:18:888] 00026629: Dats got evt 18␍␊
+[15:15:18:920] 00026660: Dats got evt 18␍␊
+[15:15:18:952] 00026691: Dats got evt 18␍␊
+[15:15:18:984] 00026722: Dats got evt 18␍␊
+[15:15:19:016] 00026753: Dats got evt 18␍␊
+[15:15:19:016] @!@ timer triggered hdl:8 evt:16␍␊
+[15:15:19:047] App got evt 16␍␊
+[15:15:19:047] @!@ appSlaveProcMsg pMsg->event:16␊
+[15:15:19:047] ␍␊
+[15:15:19:047] @!@ appSlaveConnUpdateTimeout, connId:1,idle:0,WasIdle:0␊
+[15:15:19:047] ␍␊
+[15:15:19:047] @!@ appConnUpdateTimerStart timer: 536877528, period: 5000␍␊
+[15:15:19:047] 00026784: Dats got evt 18␍␊
+[15:15:19:079] 00026815: Dats got evt 18␍␊
+[15:15:19:111] 00026846: Dats got evt 18␍␊
+[15:15:19:143] 00026877: Dats got evt 18␍␊
+[15:15:19:175] 00026908: Dats got evt 18␍␊
+[15:15:19:208] 00026939: Dats got evt 18␍␊
+[15:15:19:240] 00026970: Dats got evt 18␍␊
+[15:15:19:271] 00027001: Dats got evt 18␍␊
+[15:15:19:304] 00027032: Dats got evt 18␍␊
+[15:15:19:320] 00027063: Dats got evt 18␍␊
+[15:15:19:352] 00027094: Dats got evt 18␍␊
+[15:15:19:384] 00027125: Dats got evt 18␍␊
+[15:15:19:416] 00027156: Dats got evt 18␍␊
+[15:15:19:448] 00027187: Dats got evt 18␍␊
+[15:15:19:480] 00027218: Dats got evt 18␍␊
+[15:15:19:512] 00027249: Dats got evt 18␍␊
+[15:15:19:544] 00027280: Dats got evt 18␍␊
+[15:15:19:576] 00027311: Dats got evt 18␍␊
+[15:15:19:608] 00027342: Dats got evt 18␍␊
+[15:15:19:640] 00027373: Dats got evt 18␍␊
+[15:15:19:672] 00027404: Dats got evt 18␍␊
+[15:15:19:704] 00027435: Dats got evt 18␍␊
+[15:15:19:736] 00027466: Dats got evt 18␍␊
+[15:15:19:752] 00027497: Dats got evt 18␍␊
+[15:15:19:784] 00027528: Dats got evt 18␍␊
+[15:15:19:816] 00027559: Dats got evt 18␍␊
+[15:15:19:848] 00027590: Dats got evt 18␍␊
+[15:15:19:880] 00027621: Dats got evt 18␍␊
+[15:15:19:912] 00027652: Dats got evt 18␍␊
+[15:15:19:944] 00027683: Dats got evt 18␍␊
+[15:15:19:976] 00027714: Dats got evt 18␍␊
+[15:15:20:008] 00027745: Dats got evt 18␍␊
+[15:15:20:040] 00027776: Dats got evt 18␍␊
+[15:15:20:073] 00027807: Dats got evt 18␍␊
+[15:15:20:105] 00027838: Dats got evt 18␍␊
+[15:15:20:137] 00027869: Dats got evt 18␍␊
+[15:15:20:169] 00027900: Dats got evt 18␍␊
+[15:15:20:185] 00027931: Dats got evt 18␍␊
+[15:15:20:217] 00027962: Dats got evt 18␍␊
+[15:15:20:249] 00027993: Dats got evt 18␍␊
+[15:15:20:281] 00028024: Dats got evt 18␍␊
+[15:15:20:313] 00028055: Dats got evt 18␍␊
+[15:15:20:345] 00028086: Dats got evt 18␍␊
+[15:15:20:377] 00028117: Dats got evt 18␍␊
+[15:15:20:409] 00028148: Dats got evt 18␍␊
+[15:15:20:441] 00028179: Dats got evt 18␍␊
+[15:15:20:473] 00028210: Dats got evt 18␍␊
+[15:15:20:505] 00028241: Dats got evt 18␍␊
+[15:15:20:537] 00028272: Dats got evt 18␍␊
+[15:15:20:569] 00028303: Dats got evt 18␍␊
+[15:15:20:601] 00028334: Dats got evt 18␍␊
+[15:15:20:633] 00028365: Dats got evt 18␍␊
+[15:15:20:649] 00028396: Dats got evt 18␍␊
+[15:15:20:681] 00028427: Dats got evt 18␍␊
+[15:15:20:713] 00028458: Dats got evt 18␍␊
+[15:15:20:745] 00028489: Dats got evt 18␍␊
+[15:15:20:777] 00028520: Dats got evt 18␍␊
+[15:15:20:809] 00028551: Dats got evt 18␍␊
+[15:15:20:841] 00028582: Dats got evt 18␍␊
+[15:15:20:873] 00028613: Dats got evt 18␍␊
+[15:15:20:905] 00028644: Dats got evt 18␍␊
+[15:15:20:937] 00028675: Dats got evt 18␍␊
+[15:15:20:969] 00028706: Dats got evt 18␍␊
+[15:15:21:001] 00028737: Dats got evt 18␍␊
+[15:15:21:033] 00028768: Dats got evt 18␍␊
+[15:15:21:065] 00028799: Dats got evt 18␍␊
+[15:15:21:081] 00028830: Dats got evt 18␍␊
+[15:15:21:113] 00028861: Dats got evt 18␍␊
+[15:15:21:145] 00028892: Dats got evt 18␍␊
+[15:15:21:177] 00028923: Dats got evt 18␍␊
+[15:15:21:209] 00028954: Dats got evt 18␍␊
+[15:15:21:241] 00028985: Dats got evt 18␍␊
+[15:15:21:274] 00029016: Dats got evt 18␍␊
+[15:15:21:306] 00029047: Dats got evt 18␍␊
+[15:15:21:338] 00029078: Dats got evt 18␍␊
+[15:15:21:370] 00029109: Dats got evt 18␍␊
+[15:15:21:402] 00029140: Dats got evt 18␍␊
+[15:15:21:434] 00029171: Dats got evt 18␍␊
+[15:15:21:466] 00029202: Dats got evt 18␍␊
+[15:15:21:498] 00029233: Dats got evt 18␍␊
+[15:15:21:514] 00029264: Dats got evt 18␍␊
+[15:15:21:546] 00029295: Dats got evt 18␍␊
+[15:15:21:578] 00029326: Dats got evt 18␍␊
+[15:15:21:610] 00029357: Dats got evt 18␍␊
+[15:15:21:642] 00029388: Dats got evt 18␍␊
+[15:15:21:674] 00029419: Dats got evt 18␍␊
+[15:15:21:706] 00029450: Dats got evt 18␍␊
+[15:15:21:738] 00029481: Dats got evt 18␍␊
+[15:15:21:770] 00029512: Dats got evt 18␍␊
+[15:15:21:802] 00029543: Dats got evt 18␍␊
+[15:15:21:834] 00029574: Dats got evt 18␍␊
+[15:15:21:866] 00029605: Dats got evt 18␍␊
+[15:15:21:898] 00029636: Dats got evt 18␍␊
+[15:15:21:930] 00029667: Dats got evt 18␍␊
+[15:15:21:962] 00029698: Dats got evt 18␍␊
+[15:15:21:978] 00029729: Dats got evt 18␍␊
+[15:15:22:010] 00029760: Dats got evt 18␍␊
+[15:15:22:042] 00029791: Dats got evt 18␍␊
+[15:15:22:074] 00029822: Dats got evt 18␍␊
+[15:15:22:106] 00029853: Dats got evt 18␍␊
+[15:15:22:138] 00029884: Dats got evt 18␍␊
+[15:15:22:170] 00029915: Dats got evt 18␍␊
+[15:15:22:202] 00029946: Dats got evt 18␍␊
+[15:15:22:234] 00029977: Dats got evt 18␍␊
+[15:15:22:266] 00030008: Dats got evt 18␍␊
+[15:15:22:298] 00030039: Dats got evt 18␍␊
+[15:15:22:330] 00030070: Dats got evt 18␍␊
+[15:15:22:362] 00030101: Dats got evt 18␍␊
+[15:15:22:394] 00030132: Dats got evt 18␍␊
+[15:15:22:410] 00030163: Dats got evt 18␍␊
+[15:15:22:442] 00030194: Dats got evt 18␍␊
+[15:15:22:474] @!@ timer triggered hdl:6 evt:32␍␊
+[15:15:22:474] @!@ attsMsgCback ATTS_MSG_IDLE_TIMEOUT 32␍␊
+[15:15:22:495] connId=1 idleMask=0x0000␍␊
+[15:15:22:495] 00030225: Dats got evt 18␍␊
+[15:15:22:511] 00030256: Dats got evt 18␍␊
+[15:15:22:543] 00030287: Dats got evt 18␍␊
+[15:15:22:575] 00030318: Dats got evt 18␍␊
+[15:15:22:607] 00030349: Dats got evt 18␍␊
+[15:15:22:639] 00030380: Dats got evt 18␍␊
+[15:15:22:671] 00030411: Dats got evt 18␍␊
+[15:15:22:704] 00030442: Dats got evt 18␍␊
+[15:15:22:720] 00030473: Dats got evt 18␍␊
+[15:15:22:752] 00030504: Dats got evt 18␍␊
+[15:15:22:784] 00030535: Dats got evt 18␍␊
+[15:15:22:816] 00030566: Dats got evt 18␍␊
+[15:15:22:848] 00030597: Dats got evt 18␍␊
+[15:15:22:880] 00030628: Dats got evt 18␍␊
+[15:15:22:912] 00030659: Dats got evt 18␍␊
+[15:15:22:944] 00030690: Dats got evt 18␍␊
+[15:15:22:976] 00030721: Dats got evt 18␍␊
+[15:15:23:008] 00030752: Dats got evt 18␍␊
+[15:15:23:040] 00030783: Dats got evt 18␍␊
+[15:15:23:072] 00030814: Dats got evt 18␍␊
+[15:15:23:104] 00030845: Dats got evt 18␍␊
+[15:15:23:136] 00030876: Dats got evt 18␍␊
+[15:15:23:152] 00030907: Dats got evt 18␍␊
+[15:15:23:184] 00030938: Dats got evt 18␍␊
+[15:15:23:216] 00030969: Dats got evt 18␍␊
+[15:15:23:248] 00031000: Dats got evt 18␍␊
+[15:15:23:280] 00031031: Dats got evt 18␍␊
+[15:15:23:312] 00031062: Dats got evt 18␍␊
+[15:15:23:344] 00031093: Dats got evt 18␍␊
+[15:15:23:376] 00031124: Dats got evt 18␍␊
+[15:15:23:408] 00031155: Dats got evt 18␍␊
+[15:15:23:440] 00031186: Dats got evt 18␍␊
+[15:15:23:472] 00031217: Dats got evt 18␍␊
+[15:15:23:504] 00031248: Dats got evt 18␍␊
+[15:15:23:536] 00031279: Dats got evt 18␍␊
+[15:15:23:568] 00031310: Dats got evt 18␍␊
+[15:15:23:584] 00031341: Dats got evt 18␍␊
+[15:15:23:616] 00031372: Dats got evt 18␍␊
+[15:15:23:648] 00031403: Dats got evt 18␍␊
+[15:15:23:680] 00031434: Dats got evt 18␍␊
+[15:15:23:712] 00031465: Dats got evt 18␍␊
+[15:15:23:744] 00031496: Dats got evt 18␍␊
+[15:15:23:776] 00031527: Dats got evt 18␍␊
+[15:15:23:808] 00031558: Dats got evt 18␍␊
+[15:15:23:841] 00031589: Dats got evt 18␍␊
+[15:15:23:873] 00031620: Dats got evt 18␍␊
+[15:15:23:905] 00031651: Dats got evt 18␍␊
+[15:15:23:937] 00031682: Dats got evt 18␍␊
+[15:15:23:969] 00031713: Dats got evt 18␍␊
+[15:15:24:001] 00031744: Dats got evt 18␍␊
+[15:15:24:001] @!@ timer triggered hdl:8 evt:16␍␊
+[15:15:24:032] App got evt 16␍␊
+[15:15:24:032] @!@ appSlaveProcMsg pMsg->event:16␊
+[15:15:24:032] ␍␊
+[15:15:24:032] @!@ appSlaveConnUpdateTimeout, connId:1,idle:1,WasIdle:0␊
+[15:15:24:032] ␍␊
+[15:15:24:032] @!@ appConnUpdateTimerStart timer: 536877528, period: 5000␍␊
+[15:15:24:032] 00031775: Dats got evt 18␍␊
+[15:15:24:048] 00031806: Dats got evt 18␍␊
+[15:15:24:080] 00031837: Dats got evt 18␍␊
+[15:15:24:111] 00031868: Dats got evt 18␍␊
+[15:15:24:144] 00031899: Dats got evt 18␍␊
+[15:15:24:176] 00031930: Dats got evt 18␍␊
+[15:15:24:208] 00031961: Dats got evt 18␍␊
+[15:15:24:240] 00031992: Dats got evt 18␍␊
+[15:15:24:272] 00032023: Dats got evt 18␍␊
+[15:15:24:304] 00032054: Dats got evt 18␍␊
+[15:15:24:336] 00032085: Dats got evt 18␍␊
+[15:15:24:368] 00032116: Dats got evt 18␍␊
+[15:15:24:400] 00032147: Dats got evt 18␍␊
+[15:15:24:432] 00032178: Dats got evt 18␍␊
+[15:15:24:464] 00032209: Dats got evt 18␍␊
+[15:15:24:496] 00032240: Dats got evt 18␍␊
+[15:15:24:512] 00032271: Dats got evt 18␍␊
+[15:15:24:544] 00032302: Dats got evt 18␍␊
+[15:15:24:576] 00032333: Dats got evt 18␍␊
+[15:15:24:608] 00032364: Dats got evt 18␍␊
+[15:15:24:640] 00032395: Dats got evt 18␍␊
+[15:15:24:672] 00032426: Dats got evt 18␍␊
+[15:15:24:704] 00032457: Dats got evt 18␍␊
+[15:15:24:736] 00032488: Dats got evt 18␍␊
+[15:15:24:768] 00032519: Dats got evt 18␍␊
+[15:15:24:800] 00032550: Dats got evt 18␍␊
+[15:15:24:832] 00032581: Dats got evt 18␍␊
+[15:15:24:864] 00032612: Dats got evt 18␍␊
+[15:15:24:896] 00032643: Dats got evt 18␍␊
+[15:15:24:928] 00032674: Dats got evt 18␍␊
+[15:15:24:944] 00032705: Dats got evt 18␍␊
+[15:15:24:976] 00032736: Dats got evt 18␍␊
+[15:15:25:008] 00032767: Dats got evt 18␍␊
+[15:15:25:041] 00032798: Dats got evt 18␍␊
+[15:15:25:073] 00032829: Dats got evt 18␍␊
+[15:15:25:104] 00032860: Dats got evt 18␍␊
+[15:15:25:136] 00032891: Dats got evt 18␍␊
+[15:15:25:169] 00032922: Dats got evt 18␍␊
+[15:15:25:201] 00032953: Dats got evt 18␍␊
+[15:15:25:233] 00032984: Dats got evt 18␍␊
+[15:15:25:265] 00033015: Dats got evt 18␍␊
+[15:15:25:297] 00033046: Dats got evt 18␍␊
+[15:15:25:329] 00033077: Dats got evt 18␍␊
+[15:15:25:361] 00033108: Dats got evt 18␍␊
+[15:15:25:377] 00033139: Dats got evt 18␍␊
+[15:15:25:409] 00033170: Dats got evt 18␍␊
+[15:15:25:441] 00033201: Dats got evt 18␍␊
+[15:15:25:473] 00033232: Dats got evt 18␍␊
+[15:15:25:505] 00033263: Dats got evt 18␍␊
+[15:15:25:537] 00033294: Dats got evt 18␍␊
+[15:15:25:569] 00033325: Dats got evt 18␍␊
+[15:15:25:601] 00033356: Dats got evt 18␍␊
+[15:15:25:633] 00033387: Dats got evt 18␍␊
+[15:15:25:665] 00033418: Dats got evt 18␍␊
+[15:15:25:697] 00033449: Dats got evt 18␍␊
+[15:15:25:729] 00033480: Dats got evt 18␍␊
+[15:15:25:761] 00033511: Dats got evt 18␍␊
+[15:15:25:793] 00033542: Dats got evt 18␍␊
+[15:15:25:809] 00033573: Dats got evt 18␍␊
+[15:15:25:841] 00033604: Dats got evt 18␍␊
+[15:15:25:873] 00033635: Dats got evt 18␍␊
+[15:15:25:905] 00033666: Dats got evt 18␍␊
+[15:15:25:937] 00033697: Dats got evt 18␍␊
+[15:15:25:969] 00033728: Dats got evt 18␍␊
+[15:15:26:001] 00033759: Dats got evt 18␍␊
+[15:15:26:033] 00033790: Dats got evt 18␍␊
+[15:15:26:065] 00033821: Dats got evt 18␍␊
+[15:15:26:097] 00033852: Dats got evt 18␍␊
+[15:15:26:129] 00033883: Dats got evt 18␍␊
+[15:15:26:161] 00033914: Dats got evt 18␍␊
+[15:15:26:193] 00033945: Dats got evt 18␍␊
+[15:15:26:225] 00033976: Dats got evt 18␍␊
+[15:15:26:257] 00034007: Dats got evt 18␍␊
+[15:15:26:273] 00034038: Dats got evt 18␍␊
+[15:15:26:306] 00034069: Dats got evt 18␍␊
+[15:15:26:338] 00034100: Dats got evt 18␍␊
+[15:15:26:370] 00034131: Dats got evt 18␍␊
+[15:15:26:402] 00034162: Dats got evt 18␍␊
+[15:15:26:434] 00034193: Dats got evt 18␍␊
+[15:15:26:466] 00034224: Dats got evt 18␍␊
+[15:15:26:498] 00034255: Dats got evt 18␍␊
+[15:15:26:530] 00034286: Dats got evt 18␍␊
+[15:15:26:562] 00034317: Dats got evt 18␍␊
+[15:15:26:594] 00034348: Dats got evt 18␍␊
+[15:15:26:626] 00034379: Dats got evt 18␍␊
+[15:15:26:658] 00034410: Dats got evt 18␍␊
+[15:15:26:690] 00034441: Dats got evt 18␍␊
+[15:15:26:706] 00034472: Dats got evt 18␍␊
+[15:15:26:738] 00034503: Dats got evt 18␍␊
+[15:15:26:770] 00034534: Dats got evt 18␍␊
+[15:15:26:802] 00034565: Dats got evt 18␍␊
+[15:15:26:834] 00034596: Dats got evt 18␍␊
+[15:15:26:866] 00034627: Dats got evt 18␍␊
+[15:15:26:898] 00034658: Dats got evt 18␍␊
+[15:15:26:930] 00034689: Dats got evt 18␍␊
+[15:15:26:962] 00034720: Dats got evt 18␍␊
+[15:15:26:994] 00034751: Dats got evt 18␍␊
+[15:15:27:026] 00034782: Dats got evt 18␍␊
+[15:15:27:058] 00034813: Dats got evt 18␍␊
+[15:15:27:090] 00034844: Dats got evt 18␍␊
+[15:15:27:122] 00034875: Dats got evt 18␍␊
+[15:15:27:138] 00034906: Dats got evt 18␍␊
+[15:15:27:170] 00034937: Dats got evt 18␍␊
+[15:15:27:202] 00034968: Dats got evt 18␍␊
+[15:15:27:234] 00034999: Dats got evt 18␍␊
+[15:15:27:267] 00035030: Dats got evt 18␍␊
+[15:15:27:299] 00035061: Dats got evt 18␍␊
+[15:15:27:331] 00035092: Dats got evt 18␍␊
+[15:15:27:363] 00035123: Dats got evt 18␍␊
+[15:15:27:395] 00035154: Dats got evt 18␍␊
+[15:15:27:427] 00035185: Dats got evt 18␍␊
+[15:15:27:459] 00035216: Dats got evt 18␍␊
+[15:15:27:491] 00035247: Dats got evt 18␍␊
+[15:15:27:523] 00035278: Dats got evt 18␍␊
+[15:15:27:555] 00035309: Dats got evt 18␍␊
+[15:15:27:571] 00035340: Dats got evt 18␍␊
+[15:15:27:603] 00035371: Dats got evt 18␍␊
+[15:15:27:635] 00035402: Dats got evt 18␍␊
+[15:15:27:667] 00035433: Dats got evt 18␍␊
+[15:15:27:699] 00035464: Dats got evt 18␍␊
+[15:15:27:731] 00035495: Dats got evt 18␍␊
+[15:15:27:763] 00035526: Dats got evt 18␍␊
+[15:15:27:795] 00035557: Dats got evt 18␍␊
+[15:15:27:827] 00035588: Dats got evt 18␍␊
+[15:15:27:859] 00035619: Dats got evt 18␍␊
+[15:15:27:891] 00035650: Dats got evt 18␍␊
+[15:15:27:923] 00035681: Dats got evt 18␍␊
+[15:15:27:955] 00035712: Dats got evt 18␍␊
+[15:15:27:987] 00035743: Dats got evt 18␍␊
+[15:15:28:019] 00035774: Dats got evt 18␍␊
+[15:15:28:035] 00035805: Dats got evt 18␍␊
+[15:15:28:067] 00035836: Dats got evt 18␍␊
+[15:15:28:100] 00035867: Dats got evt 18␍␊
+[15:15:28:132] 00035898: Dats got evt 18␍␊
+[15:15:28:164] 00035929: Dats got evt 18␍␊
+[15:15:28:196] 00035960: Dats got evt 18␍␊
+[15:15:28:228] 00035991: Dats got evt 18␍␊
+[15:15:28:260] 00036022: Dats got evt 18␍␊
+[15:15:28:292] 00036053: Dats got evt 18␍␊
+[15:15:28:324] 00036084: Dats got evt 18␍␊
+[15:15:28:356] 00036115: Dats got evt 18␍␊
+[15:15:28:388] 00036146: Dats got evt 18␍␊
+[15:15:28:420] 00036177: Dats got evt 18␍␊
+[15:15:28:452] 00036208: Dats got evt 18␍␊
+[15:15:28:468] 00036239: Dats got evt 18␍␊
+[15:15:28:500] 00036270: Dats got evt 18␍␊
+[15:15:28:532] 00036301: Dats got evt 18␍␊
+[15:15:28:564] 00036332: Dats got evt 18␍␊
+[15:15:28:596] 00036363: Dats got evt 18␍␊
+[15:15:28:628] 00036394: Dats got evt 18␍␊
+[15:15:28:660] 00036425: Dats got evt 18␍␊
+[15:15:28:692] 00036456: Dats got evt 18␍␊
+[15:15:28:724] 00036487: Dats got evt 18␍␊
+[15:15:28:756] 00036518: Dats got evt 18␍␊
+[15:15:28:788] 00036549: Dats got evt 18␍␊
+[15:15:28:820] 00036580: Dats got evt 18␍␊
+[15:15:28:852] 00036611: Dats got evt 18␍␊
+[15:15:28:884] 00036642: Dats got evt 18␍␊
+[15:15:28:900] 00036673: Dats got evt 18␍␊
+[15:15:28:932] 00036704: Dats got evt 18␍␊
+[15:15:28:964] 00036735: Dats got evt 18␍␊
+[15:15:29:027] @!@ timer triggered hdl:8 evt:16␍␊
+[15:15:29:027] App got evt 16␍␊
+[15:15:29:027] @!@ appSlaveProcMsg pMsg->event:16␊
+[15:15:29:027] ␍␊
+[15:15:29:027] @!@ appSlaveConnUpdateTimeout, connId:1,idle:1,WasIdle:1␊
+[15:15:29:027] ␍␊
+[15:15:29:027] dmConnUpdExecute event=113 state=3␍␊
+[15:15:29:027] ### LlApi ###  LlGetFeatures␍␊
+[15:15:29:027] ### LlApi ###  LlConnUpdate, handle=0␍␊
+[15:15:29:027] @!@ EXIT dmConnUpdActUpdateSlave, branch: 1␍␊
+[15:15:29:027] lctrSlvLlcpExecuteConnUpdSm: handle=0, llcpState=IDLE, connUpdState=0, event=0␍␊
+[15:15:29:027] @!@- insert 40000 (ms), 536887904(536895992), tail 536887904, src: 117␍␊
+[15:15:29:027] @!@- 7808(7468)->7856(5688)->7888(7528)->7840(8548)->7904(5992)->␍␊
+[15:15:29:072] 00036766: Dats got evt 18␍␊
+[15:15:29:072] 00036797: Dats got evt 18␍␊
+[15:15:29:072] lctrSlvLlcpExecuteConnUpdSm: handle=0, llcpState=BUSY, connUpdState=2, event=4␍␊
+[15:15:29:072] @!@- delete 536887904, tail: 536887840, cnt: 4␍␊
+[15:15:29:072] @!@- 7808(7468)->7856(5688)->7888(7528)->7840(8548)->␍␊
+[15:15:29:072] @!@ DONE WsfTimerStop, branch: 1␍␊
+[15:15:29:072] 00036828: Dats got evt 18␍␊
+[15:15:29:087] 00036859: Dats got evt 18␍␊
+[15:15:29:120] 00036890: Dats got evt 18␍␊
+[15:15:29:152] 00036921: Dats got evt 18␍␊
+[15:15:29:184] 00036952: Dats got evt 18␍␊
+[15:15:29:216] 00036983: Dats got evt 18␍␊
+[15:15:29:264]     >>> Connection updated, handle=0, eventCounter=840 <<<␍␊
+[15:15:29:264]                             connIntervalUsec=100000␍␊
+[15:15:29:264] 00037014: Dats got evt 18␍␊
+[15:15:29:280] 00037045: Dats got evt 18␍␊
+[15:15:29:296] lctrSlvLlcpExecuteConnUpdSm: handle=0, llcpState=BUSY, connUpdState=3, event=6␍␊
+[15:15:29:350] ### LlEvent ###  LL_CONN_UPDATE_IND, handle=0, status=0␍␊
+[15:15:29:350] @!@ DONE WsfTimerStop, branch: 2␍␊
+[15:15:29:350] dmConnSmExecute event=30 state=3␍␊
+[15:15:29:350] 00037066: Dats got evt 41␍␊
+[15:15:29:350] @!@ AppSlaveProcDmMsg pMsg->hdr.event: 41␊
+[15:15:29:350] ␍␊
+[15:15:29:350] @!@ appSlaveConnUpdate st:0, attemps␍␊
+[15:15:29:350] @!@- delete 536887888, tail: 536887840, cnt: 3␍␊
+[15:15:29:350] @!@- 7808(7468)->7856(5688)->7840(8548)->␍␊
+[15:15:29:350] @!@ DONE WsfTimerStop, branch: 1␍␊
+[15:15:29:350] 00037076: Dats got evt 18␍␊
+[15:15:29:350] 00037107: Dats got evt 18␍␊
+[15:15:29:366] 00037138: Dats got evt 18␍␊
+[15:15:29:398] 00037169: Dats got evt 18␍␊
+[15:15:29:430] 00037200: Dats got evt 18␍␊
+[15:15:29:462] 00037231: Dats got evt 18␍␊
+[15:15:29:494] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
+[15:15:29:515] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
+[15:15:29:515] 00037270: Dats got evt 18␍␊
+[15:15:29:531] 00037293: Dats got evt 18␍␊
+[15:15:29:563] 00037324: Dats got evt 18␍␊
+[15:15:29:595] 00037355: Dats got evt 18␍␊
+[15:15:29:611] 00037386: Dats got evt 18␍␊
+[15:15:29:643] 00037417: Dats got evt 18␍␊
+[15:15:29:675] 00037448: Dats got evt 18␍␊
+[15:15:29:707] 00037479: Dats got evt 18␍␊
+[15:15:29:739] 00037510: Dats got evt 18␍␊
+[15:15:29:771] 00037541: Dats got evt 18␍␊
+[15:15:29:803] 00037572: Dats got evt 18␍␊
+[15:15:29:835] 00037603: Dats got evt 18␍␊
+[15:15:29:868] 00037634: Dats got evt 18␍␊
+[15:15:29:913] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
+[15:15:29:913] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
+[15:15:29:913] 00037672: Dats got evt 18␍␊
+[15:15:29:929] 00037696: Dats got evt 18␍␊
+[15:15:29:961] 00037727: Dats got evt 18␍␊
+[15:15:29:993] 00037758: Dats got evt 18␍␊
+[15:15:30:025] 00037789: Dats got evt 18␍␊
+[15:15:30:057] 00037820: Dats got evt 18␍␊
+[15:15:30:089] 00037851: Dats got evt 18␍␊
+[15:15:30:121] 00037882: Dats got evt 18␍␊
+[15:15:30:137] 00037913: Dats got evt 18␍␊
+[15:15:30:169] 00037944: Dats got evt 18␍␊
+[15:15:30:201] 00037975: Dats got evt 18␍␊
+[15:15:30:233] 00038006: Dats got evt 18␍␊
+[15:15:30:265] 00038037: Dats got evt 18␍␊
+[15:15:30:312] l2cHciFlowCback() flowDisabled=1 handle=0␍␊
+[15:15:30:312] l2cHciFlowCback() flowDisabled=0 handle=0␍␊
+[15:15:30:312] 00038073: Dats got evt 18␍␊
+[15:15:30:328] 00038099: Dats got evt 18␍␊
+[15:15:30:360] 00038130: Dats got evt 18␍␊
+[15:15:30:392] 00038161: Dats got evt 18␍␊
+[15:15:30:424] 00038192: Dats got evt 18␍␊
+[15:15:30:456] 00038223: Dats got evt 18␍␊
+[15:15:30:488] 00038254: Dats got evt 18␍␊
+[15:15:30:520] 00038285: Dats got evt 18␍␊
+[15:15:30:552] 00038316: Dats got evt 18␍␊
+[15:15:30:584] 00038347: Dats got evt 18␍␊
+[15:15:30:600] 00038378: Dats got evt 18␍␊
+[15:15:30:633] 00038409: Dats got evt 18␍␊
+[15:15:30:665] 00038440: Dats got evt 18␍␊
+[15:15:30:697] 00038471: Dats got evt 18␍␊
+[15:15:30:729] 00038502: Dats got evt 18␍␊
+[15:15:30:761] 00038533: Dats got evt 18␍␊
+[15:15:30:793] 00038564: Dats got evt 18␍␊
+[15:15:30:825] 00038595: Dats got evt 18␍␊
+[15:15:30:857] 00038626: Dats got evt 18␍␊
+[15:15:30:889] 00038657: Dats got evt 18␍␊
+[15:15:32:513] lctrLlcpExecuteCommonSm: handle=0, proc=0, state=IDLE, event=3␍␊
+[15:15:32:593] !!! BOD terminated on startup, pBod=0x20005F4C␍␊
+[15:15:32:635] lctrConnStatelessEventHandler: handle=0, state=3, event=TERMINATED␍␊
+[15:15:32:635] Topology Remove, handle=0␍␊
+[15:15:32:635] ### LlEvent ###  LL_DISCONNECT_IND, handle=0, status=LL_SUCCESS, reason=19␍␊
+[15:15:32:635] @!@- delete 536887856, tail: 536887840, cnt: 2␍␊
+[15:15:32:635] @!@- 7808(7468)->7840(8548)->␍␊
+[15:15:32:635] @!@ DONE WsfTimerStop, branch: 1␍␊
+[15:15:32:635] @!@ DONE WsfTimerStop, branch: 2␍␊
+[15:15:32:635] @!@ DONE WsfTimerStop, branch: 2␍␊
+[15:15:32:635] @!@ DONE WsfTimerStop, branch: 2␍␊
+[15:15:32:635]     >>> Connection terminated, handle=0 <<<␍␊
+[15:15:32:635] @!@ DONE WsfTimerStop, branch: 2␍␊
+[15:15:32:635] dmConnSmExecute event=29 state=3␍␊
+[15:15:32:677] dmConnCcbDealloc 1␍␊
+[15:15:32:677] smpDbGetRecord: connId: 1 type: 1␍␊
+[15:15:32:677] smpDbAddDevice␍␊
+[15:15:32:677] SmpDbSetFailureCount: connId: 1 count: 0␍␊
+[15:15:32:677] smpSmExecute event=10 state=0␍␊
+[15:15:32:677] @!@ DONE WsfTimerStop, branch: 2␍␊
+[15:15:32:677] @!@ DONE WsfTimerStop, branch: 2␍␊
+[15:15:32:677] 00040375: Dats got evt 40␍␊
+[15:15:32:677] @!@ AppSlaveProcDmMsg pMsg->hdr.event: 40␊
+[15:15:32:677] ␍␊
+[15:15:32:677] @!@ DONE WsfTimerStop, branch: 2␍␊
+[15:15:32:677] @!@- delete 536887808, tail: 0, cnt: 1␍␊
+[15:15:32:677] @!@- 7808(7468)->7840(8548)->␍␊
+[15:15:32:677] @!@ DONE WsfTimerStop, branch: 1␍␊
+[15:15:32:677] Connection closed status 0x0, reason 0x13␍␊
+[15:15:32:677]  REMOTE TERM␍␊
+[15:15:32:719] >>> Connection closed <<<␍␊
+[15:15:32:719] dmAdvActConfig: state: 0␍␊
+[15:15:32:719] ### LlApi ###  LlSetAdvParam, advType=0␍␊
+[15:15:32:719] dmAdvActStart: state: 0␍␊
+[15:15:32:719] ### LlApi ###  LlAdvEnable: enable=1␍␊
+[15:15:32:719] lctrSlvAdvExecuteSm: state=0, event=5␍␊
+[15:15:32:719] lctrSlvAdvExecuteSm: state=0, event=1␍␊
+[15:15:32:719] ### AdvEvent ###  Advertising enabled, dueUsec=537␍␊
+[15:15:32:719] ### LlEvent ###  LL_ADV_ENABLE_CNF, status=0␍␊
+[15:15:32:719] HCI_LE_ADV_ENABLE_CMD_CMPL_CBACK_EVT: state: 3␍␊
+[15:15:32:719] dmDevPassEvtToDevPriv: event: 12, param: 33, advHandle: 0␍␊
+[15:15:32:719] 00040376: Dats got evt 33␍␊
+[15:15:32:719] @!@ AppSlaveProcDmMsg pMsg->hdr.event: 33␊
+[15:15:32:746] ␍␊
+[15:15:32:746] @!@- insert 60000 (ms), 536887888(536877468), tail 536887888, src: 1␍␊
+[15:15:32:746] @!@- 7888(7468)->␍␊
+[15:15:32:746] >>> Advertising started <<<␍␊

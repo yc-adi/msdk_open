@@ -143,6 +143,7 @@ void dmSecHciHandler(hciEvt_t *pEvent)
              pEvent->hdr.event == HCI_ENC_CHANGE_CBACK_EVT)
     {
       /* set connection idle */
+      APP_TRACE_INFO1("@!@ dmSecHciHandler %d", pEvent->hdr.event);
       DmConnSetIdle(pCcb->connId, DM_IDLE_DM_ENC, DM_CONN_IDLE);
 
       encryptInd.hdr.param = pCcb->connId;
@@ -221,6 +222,7 @@ void dmSecMsgHandler(dmSecMsg_t *pMsg)
       else
       {
         /* key not found; set connection idle */
+        APP_TRACE_INFO0("@!@ dmSecMsgHandler DM_SEC_MSG_API_LTK_RSP key not found");
         DmConnSetIdle(pCcb->connId, DM_IDLE_DM_ENC, DM_CONN_IDLE);
 
         HciLeLtkReqNegReplCmd(pCcb->handle);

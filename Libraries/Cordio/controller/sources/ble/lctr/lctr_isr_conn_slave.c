@@ -694,7 +694,7 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
   {
     if (status == BB_STATUS_RX_TIMEOUT)
     {
-      LL_TRACE_WARN3("lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=%u, bleChan=%u, eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pBle->chan.chanIdx, pCtx->eventCounter);
+      // remove me !!! LL_TRACE_WARN3("lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=%u, bleChan=%u, eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pBle->chan.chanIdx, pCtx->eventCounter);
     }
 
     if (status == BB_STATUS_FAILED)

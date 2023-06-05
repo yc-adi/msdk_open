@@ -361,6 +361,7 @@ void attsProcFindTypeReq(attsCcb_t *pCcb, uint16_t len, uint8_t *pPacket)
   }
 
   /* set channel as busy for service discovery */
+  APP_TRACE_INFO0("@!@ attsProcFindTypeReq");
   attsDiscBusy(pCcb);
 
   /* if no error send response, else send error */
@@ -824,6 +825,7 @@ void attsProcReadGroupTypeReq(attsCcb_t *pCcb, uint16_t len, uint8_t *pPacket)
   }
 
   /* set channel as busy for service discovery */
+  APP_TRACE_INFO0("@!@ attsProcReadGroupTypeReq");
   attsDiscBusy(pCcb);
 
   /* if no error send response, else send error */

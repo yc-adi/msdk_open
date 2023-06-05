@@ -96,6 +96,9 @@
     ],
     "C_Cpp.default.defines": [
         "${config:board}"
-    ]
+    ],
+    "files.associations": {
+        "wsf_trace.h": "c"
+    }
 }
 

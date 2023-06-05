@@ -124,6 +124,13 @@ void WsfMsgEnq(wsfQueue_t *pQueue, wsfHandlerId_t handlerId, void *pMsg)
 
   WSF_ASSERT(pMsg != NULL);
 
+  // remove me !!!
+  wsfMsgHdr_t *temp = pMsg;
+  if (temp->event == 16)
+  {
+    APP_TRACE_INFO2("@!@ param %d, status %d", temp->param, temp->status);
+  }
+  
   /* get message header */
   p = ((wsfMsg_t *) pMsg) - 1;
 

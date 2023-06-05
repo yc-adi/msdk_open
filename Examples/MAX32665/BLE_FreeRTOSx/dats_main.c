@@ -224,6 +224,8 @@ wsfTimer_t trimTimer;
 
 extern void setAdvTxPower(void);
 
+extern void DmConnSetIdle(dmConnId_t connId, uint16_t idleMask, uint8_t idle);
+
 /*************************************************************************************************/
 /*!
  *  \brief  Send notification containing data.
@@ -885,7 +887,7 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
 void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
-        //APP_TRACE_INFO2("%08lu: Dats got evt %d", xTaskGetTickCount(), pMsg->event);
+        APP_TRACE_INFO2("%08lu: Dats got evt %d", xTaskGetTickCount(), pMsg->event);
 
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {
@@ -943,14 +945,17 @@ static void runPeriodic( void * pvParameters )
 			enabled_counter = loop_counter;
 			enabled = TRUE;
 			started = FALSE;
+            DmConnSetIdle(1, DM_IDLE_USER_1, DM_CONN_IDLE);
 		}
 		if (enabled && !started && ((loop_counter - enabled_counter) > 2000)) {
 			// ~ 2s hold off to let BLE settle
 			started = TRUE;
+            DmConnSetIdle(1, DM_IDLE_USER_1, DM_CONN_BUSY);
 		}
 		if (enabled && !DatsIsConnected()) {
 			enabled = FALSE;
 			started = FALSE;
+            DmConnSetIdle(1, DM_IDLE_USER_1, DM_CONN_IDLE);
 		}
 		if (started && DatsIsIdle()) {
 			sendBlock();

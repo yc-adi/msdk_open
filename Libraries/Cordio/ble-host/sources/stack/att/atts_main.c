@@ -289,6 +289,7 @@ void attsMsgCback(wsfMsgHdr_t *pMsg)
   if (pMsg->event == ATTS_MSG_IDLE_TIMEOUT)
   {
     /* set channel as idle */
+    APP_TRACE_INFO1("@!@ attsMsgCback ATTS_MSG_IDLE_TIMEOUT %d", pMsg->event);
     DmConnSetIdle((dmConnId_t) pMsg->param, DM_IDLE_ATTS_DISC, DM_CONN_IDLE);
   }
   /* pass event to indication interface */

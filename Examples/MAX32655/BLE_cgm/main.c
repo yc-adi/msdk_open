@@ -50,6 +50,7 @@
 #include "rtc.h"
 #include "trimsir_regs.h"
 #include "mxc_delay.h"
+#include "nvic_table.h"
 
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)
 #include "ll_init_api.h"
@@ -69,6 +70,7 @@
 #include "pal_uart.h"
 #include "pal_timer.h"
 #include "led.h"
+#include "spi.h"
 
 /**************************************************************************************************
   Macros
@@ -77,8 +79,14 @@
 /*! \brief UART TX buffer size */
 #define PLATFORM_UART_TERMINAL_BUFFER_SIZE 2048U
 
-/*! \brief SPI RX buffer size */
+/*! \brief SPI */
 #define PLATFORM_SPI_BUF_SIZE   (2)
+#define DATA_LEN        2
+#define DATA_SIZE       16
+#define SPI_SPEED       100000 // Bit Rate
+
+#define SPI             MXC_SPI0
+#define SPI_IRQ         SPI0_IRQn
 
 #define DEFAULT_TX_POWER 0 /* dBm */
 
@@ -94,6 +102,11 @@ static LlRtCfg_t mainLlRtCfg;
 #endif
 
 volatile int wutTrimComplete;
+
+mxc_spi_pins_t spi_pins;
+mxc_spi_req_t slave_spi_req;
+uint16_t SpiRxBuf[DATA_LEN];
+bool spi_rx_new_data = false;
 
 #ifdef DEEP_SLEEP
 /**
@@ -348,6 +361,15 @@ EXIT_SLEEP_FUNC:
 /*! \brief  Stack initialization for app. */
 extern void StackInitDats(void);
 
+void SPI_IRQHandler(void)
+{
+    MXC_SPI_AsyncHandler(SPI);
+
+    //wsfSpiRxHandler();
+
+    spi_rx_new_data = 1;
+}
+
 /*************************************************************************************************/
 /*!
  *  \brief  Initialize WSF.
@@ -355,7 +377,7 @@ extern void StackInitDats(void);
  *  \return None.
  */
 /*************************************************************************************************/
-static void mainWsfInit(void)
+static int mainWsfInit(void)
 {
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)
     /* +12 for message headroom, + 2 event header, +255 maximum parameter length. */
@@ -396,7 +418,7 @@ static void mainWsfInit(void)
     AppTerminalInit();
     //MXC_Delay(100000);
 #endif
-
+    /*
     /// SPI init: WSF OS level and app levl
     //WsfCsEnter();
     memUsed = WsfSpiInit(WsfHeapGetFreeStartAddress(), PLATFORM_SPI_BUF_SIZE * 2);  // for both TX and RX
@@ -404,6 +426,76 @@ static void mainWsfInit(void)
     //WsfCsExit();
 
     AppSpiInit();
+    */
+    
+    int retVal;
+
+    spi_pins.clock = true;
+    spi_pins.miso = true;
+    spi_pins.mosi = true;
+    spi_pins.ss0 = true;
+    spi_pins.ss1 = false;
+    spi_pins.ss2 = false;
+    spi_pins.sdio2 = false;
+    spi_pins.sdio3 = false;
+    spi_pins.vddioh = false;
+
+    MXC_Delay(10000);  // without this delay, MXC_SPI_SetDataSize will fail
+
+    retVal = MXC_SPI_Init(SPI, // spi regiseter
+                    0, // master mode
+                    0, // quad mode
+                    1, // num slaves
+                    1, // ss polarity
+                    SPI_SPEED,
+                    spi_pins);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI INITIALIZATION ERROR\n");
+        return -1;
+    }
+    else
+    {
+        printf("SPI Init: done\n");
+    }
+
+    MXC_Delay(100000);  // without this delay, MXC_SPI_SetDataSize will fail
+
+    retVal = MXC_SPI_SetDataSize(SPI, DATA_SIZE);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI SET DATASIZE ERROR: %d\n", retVal);
+        return -2;
+    }
+    else
+    {
+        printf("SPI set data size: done.\n");
+    }
+
+    retVal = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI SET WIDTH ERROR: %d\n", retVal);
+        return -3;
+    }
+
+    // SPI Request
+    slave_spi_req.spi = SPI;
+    slave_spi_req.txData = NULL;
+    slave_spi_req.rxData = (uint8_t *)SpiRxBuf;
+    slave_spi_req.txLen = 0;
+    slave_spi_req.rxLen = DATA_LEN;
+    slave_spi_req.ssIdx = 0;
+    slave_spi_req.ssDeassert = 1;
+    slave_spi_req.txCnt = 0;
+    slave_spi_req.rxCnt = 0;
+    slave_spi_req.completeCB = NULL;
+
+    MXC_NVIC_SetVector(SPI_IRQ, SPI_IRQHandler);
+    NVIC_EnableIRQ(SPI_IRQ);
+
+    /* Start SPI RX. */
+    //spi_flag = 0;
+    MXC_SPI_SlaveTransactionAsync(&slave_spi_req);
+
+    return 0;
 }
 
 /*************************************************************************************************/
@@ -475,7 +567,7 @@ int main(void)
     printf("\n\n***** MAX32665 BLE CGM, Non Deep Sleep Version *****\n");
 #endif
     printf("SystemCoreClock = %d MHz\n\n", SystemCoreClock/1000000);
-    //MXC_Delay(10000);
+    MXC_Delay(10000);
 
     uint32_t memUsed;
 
@@ -583,6 +675,13 @@ int main(void)
 #else
             WsfTimerSleep();
 #endif
+        }
+        
+        if (spi_rx_new_data)
+        {
+            spi_rx_new_data = false;
+            printf("SPI RX: 0x%04X 0x%04X\n", SpiRxBuf[0], SpiRxBuf[1]);
+            MXC_SPI_SlaveTransactionAsync(&slave_spi_req);
         }
     }
 

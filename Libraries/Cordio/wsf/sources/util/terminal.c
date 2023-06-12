@@ -96,7 +96,7 @@ static terminalCommand_t terminalCommandEcho = { NULL, "echo", "echo <on|off>", 
 /*************************************************************************************************/
 void TerminalInit(wsfHandlerId_t handlerId)
 {
-  APP_TRACE_INFO0("terminal: init");
+  APP_TRACE_INFO0("TerminalInit\n");
 
   terminalCb.handlerId     = handlerId;
   terminalCb.pFirstCommand = NULL;

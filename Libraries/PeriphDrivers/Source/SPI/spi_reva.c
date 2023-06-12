@@ -266,6 +266,38 @@ int MXC_SPI_RevA_SetDataSize(mxc_spi_reva_regs_t *spi, int dataSize)
     MXC_ASSERT(spi_num >= 0);
 
     // Setup the character size
+    if (states[spi_num].ssDeassert != 1)
+    {
+        return E_BAD_STATE;
+    }
+
+    int retry = 0;
+    while (retry < 1000)
+    {
+        if (!(spi->stat & MXC_F_SPI_REVA_STAT_BUSY))
+        {
+            //disable spi to change transfer size
+            spi->ctrl0 &= ~(MXC_F_SPI_REVA_CTRL0_EN);
+            // set bit size
+            states[spi_num].last_size = dataSize;
+
+            if (dataSize < 16) {
+                MXC_SETFIELD(spi->ctrl2, MXC_F_SPI_REVA_CTRL2_NUMBITS,
+                            dataSize << MXC_F_SPI_REVA_CTRL2_NUMBITS_POS);
+            } else {
+                MXC_SETFIELD(spi->ctrl2, MXC_F_SPI_REVA_CTRL2_NUMBITS,
+                            0 << MXC_F_SPI_REVA_CTRL2_NUMBITS_POS); //may not be neccessary
+            }
+
+            //enable spi to change transfer size
+            spi->ctrl0 |= (MXC_F_SPI_REVA_CTRL0_EN);
+
+            return E_NO_ERROR;
+        }
+    }
+    return E_BUSY;
+
+    /*
     if (!(spi->stat & MXC_F_SPI_REVA_STAT_BUSY) && states[spi_num].ssDeassert == 1) {
         //disable spi to change transfer size
         spi->ctrl0 &= ~(MXC_F_SPI_REVA_CTRL0_EN);
@@ -283,10 +315,18 @@ int MXC_SPI_RevA_SetDataSize(mxc_spi_reva_regs_t *spi, int dataSize)
         //enable spi to change transfer size
         spi->ctrl0 |= (MXC_F_SPI_REVA_CTRL0_EN);
     } else {
-        return E_BAD_STATE;
+        if (spi->stat & MXC_F_SPI_REVA_STAT_BUSY)
+        {
+            return E_BUSY;
+        }
+        else
+        {
+            return E_BAD_STATE;
+        }
     }
-
+    
     return E_NO_ERROR;
+    */
 }
 
 int MXC_SPI_RevA_GetDataSize(mxc_spi_reva_regs_t *spi)
@@ -855,7 +895,8 @@ uint32_t MXC_SPI_RevA_TransHandler(mxc_spi_reva_regs_t *spi, mxc_spi_reva_req_t 
     uint32_t tx_length = 0, rx_length = 0;
     uint8_t bits;
     spi_num = MXC_SPI_GET_IDX((mxc_spi_regs_t *)spi);
-
+    MXC_ASSERT(spi_num >= 0);
+    
     bits = MXC_SPI_GetDataSize((mxc_spi_regs_t *)req->spi);
 
     //MXC_F_SPI_REVA_CTRL2_NUMBITS data bits

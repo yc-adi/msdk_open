@@ -49,6 +49,7 @@
 #include "wut.h"
 #include "rtc.h"
 #include "trimsir_regs.h"
+#include "mxc_delay.h"
 
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)
 #include "ll_init_api.h"
@@ -75,6 +76,10 @@
 
 /*! \brief UART TX buffer size */
 #define PLATFORM_UART_TERMINAL_BUFFER_SIZE 2048U
+
+/*! \brief SPI RX buffer size */
+#define PLATFORM_SPI_BUF_SIZE   (2)
+
 #define DEFAULT_TX_POWER 0 /* dBm */
 
 /**************************************************************************************************
@@ -138,7 +143,6 @@ uint32_t debugBufTail = 0;
 uint32_t debugMax = 0;
 uint32_t debugMin = 0xFFFFFFFF;
 
-
 /**************************************************************************************************
   Functions
 **************************************************************************************************/
@@ -149,6 +153,9 @@ extern void MXC_LP_EnableWUTAlarmWakeup(void);
 extern bool_t PalSysIsBusy(void);
 extern void MXC_LP_EnterStandbyMode(void);
 #endif  
+
+extern int32_t WsfSpiInit(void *pBuf, uint32_t size);
+extern void AppSpiInit(void);
 
 #ifdef DEEP_SLEEP
 /*************************************************************************************************/
@@ -387,8 +394,16 @@ static void mainWsfInit(void)
     WsfTraceEnable(TRUE);
 
     AppTerminalInit();
-
+    //MXC_Delay(100000);
 #endif
+
+    /// SPI init: WSF OS level and app levl
+    //WsfCsEnter();
+    memUsed = WsfSpiInit(WsfHeapGetFreeStartAddress(), PLATFORM_SPI_BUF_SIZE * 2);  // for both TX and RX
+    WsfHeapAlloc(memUsed);
+    //WsfCsExit();
+
+    AppSpiInit();
 }
 
 /*************************************************************************************************/
@@ -459,7 +474,9 @@ int main(void)
 #else
     printf("\n\n***** MAX32665 BLE CGM, Non Deep Sleep Version *****\n");
 #endif
-    printf("SystemCoreClock = %d MHz\n", SystemCoreClock/1000000);
+    printf("SystemCoreClock = %d MHz\n\n", SystemCoreClock/1000000);
+    //MXC_Delay(10000);
+
     uint32_t memUsed;
 
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)

@@ -34,6 +34,7 @@ C_FILES += \
 	$(ROOT_DIR)/ble-profiles/sources/af/app_slave.c \
 	$(ROOT_DIR)/ble-profiles/sources/af/app_slave_ae.c \
 	$(ROOT_DIR)/ble-profiles/sources/af/app_slave_leg.c \
+	$(ROOT_DIR)/ble-profiles/sources/af/app_spi.c \
 	$(ROOT_DIR)/ble-profiles/sources/af/app_terminal.c \
 	$(ROOT_DIR)/ble-profiles/sources/af/common/app_db.c \
 	$(ROOT_DIR)/ble-profiles/sources/af/common/app_hw.c \

@@ -72,13 +72,13 @@ void SPI_IRQHandler(void)
 {
     MXC_SPI_AsyncHandler(SPI);
 
-    SPI_FLAG = 0;
+    SPI_FLAG = 0; // let the main loop run
 }
 
 
 int main(void)
 {
-    int cnt, retVal;
+    int cnt = 0, retVal;
     mxc_spi_req_t req;
     mxc_spi_pins_t spi_pins;
 
@@ -118,6 +118,8 @@ int main(void)
         return retVal;
     }
 
+    memset(rx_data, 0x0, DATA_LEN * sizeof(uint16_t));
+
     // SPI Request
     req.spi = SPI;
     req.txData = NULL;
@@ -133,8 +135,6 @@ int main(void)
     MXC_NVIC_SetVector(SPI_IRQ, SPI_IRQHandler);
     NVIC_EnableIRQ(SPI_IRQ);
 
-    memset(rx_data, 0x0, DATA_LEN * sizeof(uint16_t));
-
     while (1)
     {
         SPI_FLAG = 1;
@@ -143,7 +143,7 @@ int main(void)
         
         printf("\n%d rx: 0x%04X 0x%04X", ++cnt, rx_data[0], rx_data[1]);
 
-        MXC_Delay(10000);
+        MXC_Delay(100000);
     }
 
     return E_NO_ERROR;

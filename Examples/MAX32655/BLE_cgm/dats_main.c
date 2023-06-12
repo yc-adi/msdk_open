@@ -357,6 +357,7 @@ static void datsCccCback(attsCccEvt_t *pEvt)
  *  \return  None.
  */
 /*************************************************************************************************/
+#ifndef DEEP_SLEEP
 static void trimStart(void)
 {
     int err;
@@ -368,6 +369,7 @@ static void trimStart(void)
         APP_TRACE_INFO1("Error starting 32kHz crystal trim %d", err);
     }
 }
+#endif
 
 /*************************************************************************************************/
 /*!

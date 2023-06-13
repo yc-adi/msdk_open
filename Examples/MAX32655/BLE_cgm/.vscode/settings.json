@@ -93,6 +93,10 @@
         "TARGET=${config:target}",
         "TARGET_REV=0x4131",
         "__GNUC__"
-    ]
+    ],
+    "files.associations": {
+        "spixf_reva.h": "c",
+        "spi_regs.h": "c"
+    }
 }
 

@@ -53,7 +53,8 @@
 #include "dma.h"
 
 /***** Preprocessors *****/
-#define MASTERSYNC // 1. MASTERSYNC
+#define MASTERSYNC 
+// 1. MASTERSYNC
 // 2. MASTERASYNC
 // 3. MASTERDMA
 

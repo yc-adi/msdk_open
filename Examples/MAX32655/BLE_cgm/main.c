@@ -680,7 +680,7 @@ int main(void)
         if (spi_rx_new_data)
         {
             spi_rx_new_data = false;
-            printf("SPI RX: 0x%04X 0x%04X\n", SpiRxBuf[0], SpiRxBuf[1]);
+            APP_TRACE_INFO2("SPI RX: 0x%04X 0x%04X\n", SpiRxBuf[0], SpiRxBuf[1]);
             MXC_SPI_SlaveTransactionAsync(&slave_spi_req);
         }
     }

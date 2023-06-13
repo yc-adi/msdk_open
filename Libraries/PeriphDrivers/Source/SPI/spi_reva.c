@@ -266,7 +266,8 @@ int MXC_SPI_RevA_SetDataSize(mxc_spi_reva_regs_t *spi, int dataSize)
     MXC_ASSERT(spi_num >= 0);
 
     // Setup the character size
-    if (!(spi->stat & MXC_F_SPI_REVA_STAT_BUSY) && states[spi_num].ssDeassert == 1) {
+    //if (!(spi->stat & MXC_F_SPI_REVA_STAT_BUSY) && states[spi_num].ssDeassert == 1) {
+    if (states[spi_num].ssDeassert == 1) {
         //disable spi to change transfer size
         spi->ctrl0 &= ~(MXC_F_SPI_REVA_CTRL0_EN);
         // set bit size

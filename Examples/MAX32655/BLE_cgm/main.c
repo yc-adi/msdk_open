@@ -61,13 +61,16 @@
 #include "app_ui.h"
 
 #include "board.h"
+#include "led.h"
 #include "max32655.h"
+#include "mxc_delay.h"
+#include "nvic_table.h"
 #include "pal_btn.h"
 #include "pal_i2s.h"
 #include "pal_led.h"
 #include "pal_uart.h"
 #include "pal_timer.h"
-#include "led.h"
+#include "spi.h"
 
 /**************************************************************************************************
   Macros
@@ -76,6 +79,13 @@
 /*! \brief UART TX buffer size */
 #define PLATFORM_UART_TERMINAL_BUFFER_SIZE 2048U
 #define DEFAULT_TX_POWER 0 /* dBm */
+
+#define SPI_BUF_LEN     2
+#define SPI_DATA_SIZE   16
+#define SPI_SPEED       100000 // Bit Rate
+
+#define SPI             MXC_SPI0
+#define SPI_IRQ         SPI0_IRQn
 
 /**************************************************************************************************
   Global Variables
@@ -138,10 +148,25 @@ uint32_t debugBufTail = 0;
 uint32_t debugMax = 0;
 uint32_t debugMin = 0xFFFFFFFF;
 
+uint16_t spi_rx_data[SPI_BUF_LEN];
+mxc_spi_req_t spi_req;
+/** @brief spi rx state
+ * 0: idle
+ * 1: after calling async to receive
+ * 2: after receiving desired data
+ */
+int spiRxReady = 0;
 
 /**************************************************************************************************
   Functions
 **************************************************************************************************/
+void SPI_IRQHandler(void)
+{
+    MXC_SPI_AsyncHandler(SPI);
+
+    spiRxReady = 2;
+}
+
 #if DEEP_SLEEP == 1
 extern wsfTimerTicks_t wsfTimerNextExpiration(void);
 extern uint32_t wsfTimerTicksToRtc(wsfTimerTicks_t wsfTicks);
@@ -462,6 +487,63 @@ int main(void)
     printf("SystemCoreClock = %d MHz\n", SystemCoreClock/1000000);
     uint32_t memUsed;
 
+    int retVal;
+
+    /// Init SPI Slave
+    mxc_spi_pins_t spi_pins;
+
+    spi_pins.clock = true;
+    spi_pins.miso = true;
+    spi_pins.mosi = true;
+    spi_pins.ss0 = true;
+    spi_pins.ss1 = false;
+    spi_pins.ss2 = false;
+    spi_pins.sdio2 = false;
+    spi_pins.sdio3 = false;
+    spi_pins.vddioh = false;
+
+    printf("\n**************************** SPI SLAVE RX TEST *************************\n");
+    retVal = MXC_SPI_Init(SPI, // spi regiseter
+                          0, // master mode
+                          0, // quad mode
+                          1, // num slaves
+                          1, // ss polarity
+                          SPI_SPEED,
+                          spi_pins);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI INITIALIZATION ERROR\n");
+        //return retVal;
+    }
+
+    retVal = MXC_SPI_SetDataSize(SPI, SPI_DATA_SIZE);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI SET DATASIZE ERROR: %d\n", retVal);
+        //return retVal;
+    }
+
+    retVal = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
+    if (retVal != E_NO_ERROR) {
+        printf("\nSPI SET WIDTH ERROR: %d\n", retVal);
+        //return retVal;
+    }
+
+    // SPI Request
+    spi_req.spi = SPI;
+    spi_req.txData = NULL;
+    spi_req.rxData = (uint8_t *)spi_rx_data;
+    spi_req.txLen = 0;
+    spi_req.rxLen = SPI_BUF_LEN;
+    spi_req.ssIdx = 0;
+    spi_req.ssDeassert = 1;
+    spi_req.txCnt = 0;
+    spi_req.rxCnt = 0;
+    spi_req.completeCB = NULL;
+
+    MXC_NVIC_SetVector(SPI_IRQ, SPI_IRQHandler);
+    NVIC_EnableIRQ(SPI_IRQ);
+
+    memset(spi_rx_data, 0x0, SPI_BUF_LEN * sizeof(uint16_t));
+
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)
     /* Configurations must be persistent. */
     static BbRtCfg_t mainBbRtCfg;
@@ -492,7 +574,7 @@ int main(void)
     /* Set the default connection power level */
     mainLlRtCfg.defTxPwrLvl = DEFAULT_TX_POWER;
 #endif
-
+    
     mainWsfInit();
 
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)
@@ -566,6 +648,17 @@ int main(void)
 #else
             WsfTimerSleep();
 #endif
+        }
+
+        if (spiRxReady == 0)
+        {
+            MXC_SPI_SlaveTransactionAsync(&spi_req);
+            spiRxReady = 1;
+        }
+        else if (spiRxReady == 2)
+        {
+            printf("spi rx: 0x%04X 0x%04X\n", spi_rx_data[0], spi_rx_data[1]);
+            spiRxReady = 0;
         }
     }
 

@@ -66,6 +66,7 @@ uint16_t rx_data[DATA_LEN];
 //uint16_t tx_data[DATA_LEN];
 volatile int SPI_FLAG;
 
+volatile uint8_t DMA_FLAG = 0;
 
 /***** Functions *****/
 void SPI_IRQHandler(void)
@@ -75,10 +76,21 @@ void SPI_IRQHandler(void)
     SPI_FLAG = 0;
 }
 
+void DMA0_IRQHandler(void)
+{
+    MXC_DMA_Handler();
+}
+
+void DMA1_IRQHandler(void)
+{
+    MXC_DMA_Handler();
+    DMA_FLAG = 1;
+}
+
 
 int main(void)
 {
-    int cnt, retVal;
+    int cnt = 0, retVal;
     mxc_spi_req_t req;
     mxc_spi_pins_t spi_pins;
 
@@ -93,7 +105,6 @@ int main(void)
     spi_pins.vddioh = false;
 
     printf("\n**************************** SPI SLAVE RX TEST *************************\n");
-    
     retVal = MXC_SPI_Init(SPI, // spi regiseter
                             0, // master mode
                             0, // quad mode
@@ -137,13 +148,28 @@ int main(void)
 
     while (1)
     {
+        // SYNC
+        //MXC_SPI_SlaveTransaction(&req);
+        
+        // ASYNC
         SPI_FLAG = 1;
         MXC_SPI_SlaveTransactionAsync(&req);
         while (SPI_FLAG) {}
-        
-        printf("\n%d rx: 0x%04X 0x%04X", ++cnt, rx_data[0], rx_data[1]);
 
-        MXC_Delay(10000);
+        // DMA
+        /*
+        MXC_DMA_ReleaseChannel(0);
+        MXC_DMA_ReleaseChannel(1);
+
+        NVIC_EnableIRQ(DMA0_IRQn);
+        NVIC_EnableIRQ(DMA1_IRQn);
+        MXC_SPI_MasterTransactionDMA(&req);
+
+        while (DMA_FLAG == 0) {}
+        DMA_FLAG = 0;
+        */
+        printf("%d rx: 0x%04X 0x%04X\n", ++cnt, rx_data[0], rx_data[1]);
+        MXC_Delay(100000);
     }
 
     return E_NO_ERROR;

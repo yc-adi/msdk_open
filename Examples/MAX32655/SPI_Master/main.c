@@ -133,7 +133,7 @@ int main(void)
         }
 
         printf("\nsend: 0x%04X 0x%04X", tx_data[0], tx_data[1]);
-        MXC_Delay(2000000);
+        MXC_Delay(1000000);
     }
 
     return E_NO_ERROR;

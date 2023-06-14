@@ -53,6 +53,7 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include "mxc_delay.h"
 #include "mxc_device.h"
 #include "mxc_errors.h"
 #include "pb.h"
@@ -69,11 +70,11 @@
 #define USE_BUTTON 1
 #define USE_ALARM 0
 
-#define DO_SLEEP 1
-#define DO_LPM 1
+#define DO_SLEEP 0
+#define DO_LPM 0
 #define DO_UPM 0
 #define DO_BACKUP 0
-#define DO_STANDBY 0
+#define DO_STANDBY 1
 
 #if (!(USE_BUTTON || USE_ALARM))
 #error "You must set either USE_BUTTON or USE_ALARM to 1."
@@ -171,6 +172,7 @@ void setTrigger(int waitForTrigger)
 int main(void)
 {
     PRINT("****Low Power Mode Example****\n\n");
+    __NOP();
 
 #if USE_ALARM
     PRINT("This code cycles through the MAX32655 power modes, using the RTC alarm to exit from "
@@ -186,6 +188,7 @@ int main(void)
 #endif // USE_BUTTON
 
     PRINT("Running in ACTIVE mode.\n");
+    __NOP();
 #if !USE_CONSOLE
     MXC_SYS_ClockDisable(MXC_SYS_PERIPH_CLOCK_UART0);
 #endif // !USE_CONSOLE
@@ -206,14 +209,16 @@ int main(void)
         PRINT("Entering SLEEP mode.\n");
         setTrigger(0);
         MXC_LP_EnterSleepMode();
-        PRINT("Waking up from SLEEP mode.\n");
+        PRINT("Waking up from SLEEP mode.\n\n");
+        MXC_Delay(10000000);  // delay 10 secs, observe the normal power level on the meter
 #endif // DO_SLEEP
 
 #if DO_LPM
         PRINT("Entering LPM mode.\n");
         setTrigger(0);
         MXC_LP_EnterLowPowerMode();
-        PRINT("Waking up from LPM mode.\n");
+        PRINT("Waking up from LPM mode.\n\n");
+        MXC_Delay(10000000);  // delay 10 secs, observe the normal power level on the meter
 #endif // DO_LPM
 
 #if DO_UPM
@@ -221,18 +226,23 @@ int main(void)
         setTrigger(0);
         MXC_LP_EnterMicroPowerMode();
         PRINT("Waking up from UPM mode.\n");
+        MXC_Delay(10000000);  // delay 10 secs, observe the normal power level on the meter
 #endif // DO_UPM
 
 #if DO_BACKUP
         PRINT("Entering BACKUP mode.\n");
         setTrigger(0);
         MXC_LP_EnterBackupMode();
+        PRINT("Waking up from BACKUP mode.\n\n");
+        MXC_Delay(10000000);  // delay 10 secs, observe the normal power level on the meter
 #endif // DO_BACKUP
 
 #if DO_STANDBY
         PRINT("Entering STANDBY mode.\n");
         setTrigger(0);
         MXC_LP_EnterStandbyMode();
+        PRINT("Waking up from STANDBY mode.\n\n");
+        MXC_Delay(10000000);  // delay 10 secs, observe the normal power level on the meter
 #endif // DO_STANDBY
     }
 }

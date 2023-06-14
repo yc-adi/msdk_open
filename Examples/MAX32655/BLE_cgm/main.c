@@ -75,6 +75,7 @@
 /**************************************************************************************************
   Macros
 **************************************************************************************************/
+#define SPI_SLAVE_RX    0
 
 /*! \brief UART TX buffer size */
 #define PLATFORM_UART_TERMINAL_BUFFER_SIZE 2048U
@@ -156,6 +157,8 @@ mxc_spi_req_t spi_req;
  * 2: after receiving desired data
  */
 int spiRxReady = 0;
+
+extern bool_t ChciTrService(void);
 
 /**************************************************************************************************
   Functions
@@ -325,6 +328,8 @@ void DeepSleep(void)
         LED_Off(SLEEP_LED);
         LED_Off(DEEPSLEEP_LED);
 
+        // @!@ ??? GPIO_PrepForSleep();
+
         MXC_LP_EnterStandbyMode();
 
         LED_On(DEEPSLEEP_LED);
@@ -487,7 +492,8 @@ int main(void)
     printf("SystemCoreClock = %d MHz\n", SystemCoreClock/1000000);
     uint32_t memUsed;
 
-    int retVal;
+#if SPI_SLAVE_RX == 1
+    int spiInitRet;
 
     /// Init SPI Slave
     mxc_spi_pins_t spi_pins;
@@ -502,47 +508,58 @@ int main(void)
     spi_pins.sdio3 = false;
     spi_pins.vddioh = false;
 
-    printf("\n**************************** SPI SLAVE RX TEST *************************\n");
-    retVal = MXC_SPI_Init(SPI, // spi regiseter
+    printf("SPI slave rx init\n");
+    spiInitRet = MXC_SPI_Init(SPI, // spi regiseter
                           0, // master mode
                           0, // quad mode
                           1, // num slaves
                           1, // ss polarity
                           SPI_SPEED,
                           spi_pins);
-    if (retVal != E_NO_ERROR) {
-        printf("\nSPI INITIALIZATION ERROR\n");
-        //return retVal;
+    if (spiInitRet != E_NO_ERROR) {
+        printf("SPI INITIALIZATION ERROR\n");
     }
 
-    retVal = MXC_SPI_SetDataSize(SPI, SPI_DATA_SIZE);
-    if (retVal != E_NO_ERROR) {
-        printf("\nSPI SET DATASIZE ERROR: %d\n", retVal);
-        //return retVal;
+    if (spiInitRet == E_NO_ERROR)
+    {
+        spiInitRet = MXC_SPI_SetDataSize(SPI, SPI_DATA_SIZE);
+        if (spiInitRet != E_NO_ERROR) {
+            MXC_SPI_Shutdown(SPI);
+            
+            printf("SPI SET DATASIZE ERROR: %d\n", spiInitRet);
+            MXC_Delay(10000);
+        }
     }
 
-    retVal = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
-    if (retVal != E_NO_ERROR) {
-        printf("\nSPI SET WIDTH ERROR: %d\n", retVal);
-        //return retVal;
+    if (spiInitRet == E_NO_ERROR)
+    {
+        spiInitRet = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
+        if (spiInitRet != E_NO_ERROR) {
+            printf("\nSPI SET WIDTH ERROR: %d\n", spiInitRet);
+            //return spiInitRet;
+        }
     }
 
-    // SPI Request
-    spi_req.spi = SPI;
-    spi_req.txData = NULL;
-    spi_req.rxData = (uint8_t *)spi_rx_data;
-    spi_req.txLen = 0;
-    spi_req.rxLen = SPI_BUF_LEN;
-    spi_req.ssIdx = 0;
-    spi_req.ssDeassert = 1;
-    spi_req.txCnt = 0;
-    spi_req.rxCnt = 0;
-    spi_req.completeCB = NULL;
+    if (spiInitRet == E_NO_ERROR)
+    {
+        // SPI Request
+        spi_req.spi = SPI;
+        spi_req.txData = NULL;
+        spi_req.rxData = (uint8_t *)spi_rx_data;
+        spi_req.txLen = 0;
+        spi_req.rxLen = SPI_BUF_LEN;
+        spi_req.ssIdx = 0;
+        spi_req.ssDeassert = 1;
+        spi_req.txCnt = 0;
+        spi_req.rxCnt = 0;
+        spi_req.completeCB = NULL;
 
-    MXC_NVIC_SetVector(SPI_IRQ, SPI_IRQHandler);
-    NVIC_EnableIRQ(SPI_IRQ);
+        MXC_NVIC_SetVector(SPI_IRQ, SPI_IRQHandler);
+        NVIC_EnableIRQ(SPI_IRQ);
 
-    memset(spi_rx_data, 0x0, SPI_BUF_LEN * sizeof(uint16_t));
+        memset(spi_rx_data, 0x0, SPI_BUF_LEN * sizeof(uint16_t));
+    }
+#endif
 
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)
     /* Configurations must be persistent. */
@@ -626,6 +643,10 @@ int main(void)
     //PalUartDeInit(PAL_UART_ID_CHCI);
     //PalUartDeInit(PAL_UART_ID_TERMINAL);
 #endif
+    
+    /// @!@ ???
+    //WsfOsRegisterSleepCheckFunc(mainCheckServiceTokens);
+    //WsfOsRegisterSleepCheckFunc(ChciTrService);
 
     // WsfOsEnterMainLoop();
     while(TRUE)
@@ -650,7 +671,8 @@ int main(void)
 #endif
         }
 
-        if (spiRxReady == 0)
+#if SPI_SLAVE_RX == 1
+        if (spiRxReady == 0 && (spiInitRet == E_NO_ERROR))
         {
             MXC_SPI_SlaveTransactionAsync(&spi_req);
             spiRxReady = 1;
@@ -660,6 +682,7 @@ int main(void)
             printf("spi rx: 0x%04X 0x%04X\n", spi_rx_data[0], spi_rx_data[1]);
             spiRxReady = 0;
         }
+#endif
     }
 
     /* Does not return. Should never be reached here. */

@@ -75,7 +75,7 @@
 /**************************************************************************************************
   Macros
 **************************************************************************************************/
-#define SPI_SLAVE_RX    0
+#define SPI_SLAVE_RX    1
 
 /*! \brief UART TX buffer size */
 #define PLATFORM_UART_TERMINAL_BUFFER_SIZE 2048U
@@ -101,7 +101,7 @@ static LlRtCfg_t mainLlRtCfg;
 
 volatile int wutTrimComplete;
 
-#ifdef DEEP_SLEEP
+#if DEEP_SLEEP == 1
 /**
  * @brief global variable to keep the minimal time for the next job (task). 
  * After each job, task, action, or response, need to update this variable.
@@ -178,7 +178,7 @@ extern bool_t PalSysIsBusy(void);
 extern void MXC_LP_EnterStandbyMode(void);
 #endif  
 
-#ifdef DEEP_SLEEP
+#if DEEP_SLEEP == 1
 /*************************************************************************************************/
 /* Get the time delay expected on powerup */
 uint32_t get_powerup_delay(uint32_t wait_ticks)
@@ -189,10 +189,8 @@ uint32_t get_powerup_delay(uint32_t wait_ticks)
 
     return ret;
 }
-#endif  // DEEP_SLEEP
 
 /*************************************************************************************************/
-#ifdef DEEP_SLEEP
 void DeepSleep(void)
 {
     uint32_t preCaptureInWutCnt, schUsec;
@@ -327,8 +325,6 @@ void DeepSleep(void)
 
         LED_Off(SLEEP_LED);
         LED_Off(DEEPSLEEP_LED);
-
-        // @!@ ??? GPIO_PrepForSleep();
 
         MXC_LP_EnterStandbyMode();
 
@@ -486,6 +482,8 @@ int main(void)
 {
 #if DEEP_SLEEP == 1
     printf("\n\n***** MAX32665 BLE CGM, Deep Sleep Version *****\n");
+
+    GPIO_PrepForSleep();  // without this SPI won't work with deep sleep
 #else
     printf("\n\n***** MAX32665 BLE CGM, Non Deep Sleep Version *****\n");
 #endif
@@ -635,7 +633,7 @@ int main(void)
 
     DatsStart();
 
-#ifdef DEEP_SLEEP
+#if DEEP_SLEEP == 1
     //PalBtnDeInit();
     //PalLedDeInit();
     //PalI2sDeInit();
@@ -660,6 +658,7 @@ int main(void)
 #if  DEEP_SLEEP == 1
             if (conn_opened)
             {
+                //DeepSleep();
                 WsfTimerSleep();
             }
             else

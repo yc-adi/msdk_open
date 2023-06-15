@@ -61,6 +61,7 @@
 #include "lp.h"
 #include "icc.h"
 #include "rtc.h"
+#include "spi.h"
 #include "uart.h"
 #include "nvic_table.h"
 
@@ -92,6 +93,13 @@
 #else
 #define PRINT(...)
 #endif
+
+#define SPI_BUF_LEN     2
+#define SPI_DATA_SIZE   16
+#define SPI_SPEED       100000 // Bit Rate
+
+#define SPI             MXC_SPI0
+#define SPI_IRQ         SPI0_IRQn
 
 // *****************************************************************************
 
@@ -169,6 +177,45 @@ void setTrigger(int waitForTrigger)
 }
 #endif // USE_BUTTON
 
+/**
+ * @brief init the SPI slave RX
+ * 
+ */
+void Init_SPI_Slave(void)
+{
+int spiInitRet;
+
+    /// Init SPI Slave
+    mxc_spi_pins_t spi_pins;
+
+    spi_pins.clock = true;
+    spi_pins.miso = true;
+    spi_pins.mosi = true;
+    spi_pins.ss0 = true;
+    spi_pins.ss1 = false;
+    spi_pins.ss2 = false;
+    spi_pins.sdio2 = false;
+    spi_pins.sdio3 = false;
+    spi_pins.vddioh = false;
+
+    printf("SPI slave rx init\n");
+    spiInitRet = MXC_SPI_Init(SPI, // spi regiseter
+                          0, // master mode
+                          0, // quad mode
+                          1, // num slaves
+                          1, // ss polarity
+                          SPI_SPEED,
+                          spi_pins);
+    if (spiInitRet != E_NO_ERROR) 
+    {
+        printf("SPI INITIALIZATION ERROR\n");
+    }
+    else
+    {
+        printf("MXC_SPI_Init: done\n");
+    }
+}
+
 int main(void)
 {
     PRINT("****Low Power Mode Example****\n\n");
@@ -203,6 +250,8 @@ int main(void)
 #endif // USE_ALARM
 
     GPIO_PrepForSleep();
+
+    Init_SPI_Slave();
 
     while (1) {
 #if DO_SLEEP
@@ -240,7 +289,9 @@ int main(void)
 #if DO_STANDBY
         PRINT("Entering STANDBY mode.\n");
         setTrigger(0);
+
         MXC_LP_EnterStandbyMode();
+        
         PRINT("Waking up from STANDBY mode.\n\n");
         MXC_Delay(10000000);  // delay 10 secs, observe the normal power level on the meter
 #endif // DO_STANDBY

@@ -567,6 +567,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
     case DM_CONN_OPEN_IND:
         uiEvent = APP_UI_CONN_OPEN;
         conn_opened = 1;
+        APP_TRACE_INFO0("@!@ Disable deep sleep");
         break;
 
     case DM_CONN_CLOSE_IND:
@@ -593,6 +594,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
         }
         uiEvent = APP_UI_CONN_CLOSE;
         conn_opened = 0;
+        APP_TRACE_INFO0("@!@ Enable deep sleep");
         break;
 
     case DM_SEC_PAIR_CMPL_IND:
@@ -660,7 +662,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
 #endif /* BT_VER */
 
     case TRIM_TIMER_EVT:
-#ifndef DEEP_SLEEP
+#if DEEP_SLEEP == 0
         trimStart();
 #endif
         WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);

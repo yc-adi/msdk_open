@@ -53,6 +53,7 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 #include "mxc_delay.h"
 #include "mxc_device.h"
 #include "mxc_errors.h"
@@ -72,10 +73,10 @@
 #define USE_ALARM 0
 
 #define DO_SLEEP 0
-#define DO_LPM 0
+#define DO_LPM 1
 #define DO_UPM 0
 #define DO_BACKUP 0
-#define DO_STANDBY 1
+#define DO_STANDBY 0
 
 #if (!(USE_BUTTON || USE_ALARM))
 #error "You must set either USE_BUTTON or USE_ALARM to 1."
@@ -100,6 +101,16 @@
 
 #define SPI             MXC_SPI0
 #define SPI_IRQ         SPI0_IRQn
+
+uint16_t spi_rx_data[SPI_BUF_LEN];
+mxc_spi_req_t spi_req;
+
+/** @brief spi rx state
+ * 0: idle
+ * 1: after call async to receive and before receive all data
+ * 2: after receive desired data
+ */
+int spiRxReady = 0;
 
 // *****************************************************************************
 
@@ -177,13 +188,20 @@ void setTrigger(int waitForTrigger)
 }
 #endif // USE_BUTTON
 
+void SPI_IRQHandler(void)
+{
+    MXC_SPI_AsyncHandler(SPI);
+
+    spiRxReady = 2;
+}
+
 /**
  * @brief init the SPI slave RX
  * 
  */
 void Init_SPI_Slave(void)
 {
-int spiInitRet;
+    int spiInitRet;
 
     /// Init SPI Slave
     mxc_spi_pins_t spi_pins;
@@ -206,18 +224,61 @@ int spiInitRet;
                           1, // ss polarity
                           SPI_SPEED,
                           spi_pins);
-    if (spiInitRet != E_NO_ERROR) 
-    {
+    if (spiInitRet != E_NO_ERROR) {
         printf("SPI INITIALIZATION ERROR\n");
     }
-    else
+
+    if (spiInitRet == E_NO_ERROR)
     {
-        printf("MXC_SPI_Init: done\n");
+        spiInitRet = MXC_SPI_SetDataSize(SPI, SPI_DATA_SIZE);
+        if (spiInitRet != E_NO_ERROR) {
+            MXC_SPI_Shutdown(SPI);
+            
+            printf("SPI SET DATASIZE ERROR: %d\n", spiInitRet);
+        }
     }
+
+    if (spiInitRet == E_NO_ERROR)
+    {
+        spiInitRet = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
+        if (spiInitRet != E_NO_ERROR) {
+            printf("\nSPI SET WIDTH ERROR: %d\n", spiInitRet);
+        }
+    }
+
+    if (spiInitRet == E_NO_ERROR)
+    {
+        // SPI Request
+        spi_req.spi = SPI;
+        spi_req.txData = NULL;
+        spi_req.rxData = (uint8_t *)spi_rx_data;
+        spi_req.txLen = 0;
+        spi_req.rxLen = SPI_BUF_LEN;
+        spi_req.ssIdx = 0;
+        spi_req.ssDeassert = 1;
+        spi_req.txCnt = 0;
+        spi_req.rxCnt = 0;
+        spi_req.completeCB = NULL;
+
+        MXC_NVIC_SetVector(SPI_IRQ, SPI_IRQHandler);
+        NVIC_EnableIRQ(SPI_IRQ);
+
+        memset(spi_rx_data, 0x0, SPI_BUF_LEN * sizeof(uint16_t));
+    }
+
+    if (spiInitRet == E_NO_ERROR)
+    {
+        //MXC_SPI_EnableWakeup(SPI);
+    }
+
+    printf("\nSPI SLAVE RX INIT: done\n");
+    MXC_Delay(10000);
 }
 
 int main(void)
 {
+    volatile mxc_spi_regs_t *spi_reg = SPI;
+
     PRINT("****Low Power Mode Example****\n\n");
     __NOP();
 
@@ -241,15 +302,27 @@ int main(void)
 #endif // !USE_CONSOLE
     setTrigger(1);
 
+    /**
+     * @brief different wakup source
+     *  MXC_LP_EnableGPIOWakeup
+     *  MXC_LP_EnableRTCAlarmWakeup
+     *  MXC_LP_EnableTimerWakeup
+     *  MXC_LP_EnableUSBWakeup
+     *  MXC_LP_EnableWUTAlarmWakeup
+     *  MXC_LP_EnableLPCMPWakeup
+     *  MXC_LP_EnableHA0Wakeup
+     *  MXC_LP_EnableHA1Wakeup
+     */
 #if USE_BUTTON
     MXC_LP_EnableGPIOWakeup((mxc_gpio_cfg_t *)&pb_pin[0]);
     MXC_GPIO_SetWakeEn(pb_pin[0].port, pb_pin[0].mask);
 #endif // USE_BUTTON
+
 #if USE_ALARM
     MXC_LP_EnableRTCAlarmWakeup();
 #endif // USE_ALARM
 
-    GPIO_PrepForSleep();
+    //GPIO_PrepForSleep();
 
     Init_SPI_Slave();
 
@@ -265,9 +338,15 @@ int main(void)
 #if DO_LPM
         PRINT("Entering LPM mode.\n");
         setTrigger(0);
-        MXC_LP_EnterLowPowerMode();
-        PRINT("Waking up from LPM mode.\n\n");
-        MXC_Delay(10000000);  // delay 10 secs, observe the normal power level on the meter
+
+        spiRxReady = 0;
+        MXC_SPI_SlaveTransactionAsync(&spi_req);
+
+        //MXC_LP_EnterLowPowerMode();
+        while (spiRxReady != 2) {}
+        PRINT("Waking up from LPM mode, %x %04X %04X.\n\n", spi_reg->wkfl, spi_rx_data[0], spi_rx_data[1]);
+        spiRxReady = 0;
+        //MXC_Delay(10000000);  // delay 10 secs, observe the normal power level on the meter
 #endif // DO_LPM
 
 #if DO_UPM
@@ -289,6 +368,9 @@ int main(void)
 #if DO_STANDBY
         PRINT("Entering STANDBY mode.\n");
         setTrigger(0);
+
+        MXC_SPI_SlaveTransactionAsync(&spi_req);
+
 
         MXC_LP_EnterStandbyMode();
         

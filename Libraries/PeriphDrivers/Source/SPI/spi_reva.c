@@ -303,6 +303,16 @@ int MXC_SPI_RevA_GetDataSize(mxc_spi_reva_regs_t *spi)
     return (spi->ctrl2 & MXC_F_SPI_REVA_CTRL2_NUMBITS) >> MXC_F_SPI_REVA_CTRL2_NUMBITS_POS;
 }
 
+int MXC_SPI_RevA_EnableWakeup(mxc_spi_reva_regs_t *spi)
+{
+    spi->wken |= MXC_F_SPI_WKEN_RX_FULL;
+}
+
+int MXC_SPI_RevA_DisableWakeup(mxc_spi_reva_regs_t *spi)
+{
+    spi->wken &= ~MXC_F_SPI_WKEN_RX_FULL;
+}
+
 int MXC_SPI_RevA_SetMTMode(mxc_spi_reva_regs_t *spi, int mtMode)
 {
     int spi_num;

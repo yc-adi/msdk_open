@@ -43,6 +43,7 @@
 #include <stdint.h>
 #include <string.h>
 #include "board.h"
+#include "led.h"
 #include "mxc_device.h"
 #include "mxc_delay.h"
 #include "mxc_pins.h"
@@ -55,7 +56,7 @@
 /***** Definitions *****/
 #define DATA_LEN        2
 #define DATA_SIZE       16
-#define SPI_SPEED       100000 // Bit Rate
+#define SPI_SPEED       40000000 // Bit Rate
 
 #define SPI             MXC_SPI0
 #define SPI_IRQ         SPI0_IRQn
@@ -116,6 +117,10 @@ int main(void)
         printf("\nSPI INITIALIZATION ERROR\n");
         return retVal;
     }
+    else
+    {
+        printf("\nSPI INITIALIZATION: Done\n");
+    }
 
     retVal = MXC_SPI_SetDataSize(SPI, DATA_SIZE);
     if (retVal != E_NO_ERROR) {
@@ -152,9 +157,18 @@ int main(void)
         //MXC_SPI_SlaveTransaction(&req);
         
         // ASYNC
+        LED_On(LED_RED);
         SPI_FLAG = 1;
         MXC_SPI_SlaveTransactionAsync(&req);
         while (SPI_FLAG) {}
+        LED_Off(LED_RED);
+
+        MXC_Delay(50000);
+
+        LED_On(LED_GREEN);
+        MXC_Delay(50000);
+        LED_Off(LED_GREEN);
+
 
         // DMA
         /*

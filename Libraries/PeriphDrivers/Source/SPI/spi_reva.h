@@ -122,6 +122,7 @@ int MXC_SPI_RevA_MasterTransactionAsync(mxc_spi_reva_req_t *req);
 int MXC_SPI_RevA_MasterTransactionDMA(mxc_spi_reva_req_t *req, int reqselTx, int reqselRx,
                                       mxc_dma_regs_t *dma);
 int MXC_SPI_RevA_SlaveTransaction(mxc_spi_reva_req_t *req);
+int MXC_SPI_RevA_SlaveRx(mxc_spi_reva_req_t *req);
 int MXC_SPI_RevA_SlaveTransactionAsync(mxc_spi_reva_req_t *req);
 int MXC_SPI_RevA_SlaveTransactionDMA(mxc_spi_reva_req_t *req, int reqselTx, int reqselRx,
                                      mxc_dma_regs_t *dma);

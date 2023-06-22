@@ -475,6 +475,11 @@ int MXC_SPI_SlaveTransaction(mxc_spi_req_t *req)
     return MXC_SPI_RevA_SlaveTransaction((mxc_spi_reva_req_t *)req);
 }
 
+int MXC_SPI_SlaveRx(mxc_spi_req_t *req)
+{
+    return MXC_SPI_RevA_SlaveRx((mxc_spi_reva_req_t *)req);
+}
+
 int MXC_SPI_SlaveTransactionAsync(mxc_spi_req_t *req)
 {
     return MXC_SPI_RevA_SlaveTransactionAsync((mxc_spi_reva_req_t *)req);

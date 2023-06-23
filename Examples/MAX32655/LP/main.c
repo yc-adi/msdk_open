@@ -97,6 +97,19 @@
 #define PRINT(...)
 #endif
 
+#define SPI_BUF_LEN     2
+#define SPI_DATA_SIZE   16
+#define SPI_SPEED       40000000 // Bit Rate
+#define SPI             MXC_SPI0
+#define SPI_IRQ         SPI0_IRQn
+
+uint16_t spi_rx_data[SPI_BUF_LEN];
+volatile mxc_spi_regs_t *spi_reg = SPI;
+mxc_spi_req_t spi_req;
+int spiRxReady = 0;
+
+bool wakeupByTimer = false;
+
 // *****************************************************************************
 
 #if USE_ALARM
@@ -218,6 +231,8 @@ void tmrHandler(void)
     if ((flags & MXC_F_RTC_CTRL_TOD_ALARM) >> MXC_F_RTC_CTRL_TOD_ALARM_POS) {
         MXC_RTC->ctrl &= ~(MXC_F_RTC_CTRL_TOD_ALARM);
     }
+
+    wakeupByTimer = true;
 }
 
 void timer_wakeup(void)
@@ -266,17 +281,52 @@ void timer_wakeup(void)
     }
 }
 
-#define SPI_BUF_LEN     2
-#define SPI_DATA_SIZE   16
-#define SPI_SPEED       40000000 // Bit Rate
+void button_and_timer_wakeup(void)
+{
+    PRINT("\n******\nButtion and timer wake up example. VER 1.\n******\n\n");
+    PRINT("Wait 5 secs.\n");
+    LED_On(LED_GREEN);
+    MXC_Delay(5000000);  // avoid brick
+    LED_Off(LED_GREEN);
 
-#define SPI             MXC_SPI0
-#define SPI_IRQ         SPI0_IRQn
+    // Configure and enable interrupt for button
+    unsigned int pb = 0;
+    MXC_GPIO_IntConfig(&pb_pin[pb], MXC_GPIO_INT_FALLING);
+    MXC_GPIO_EnableInt(pb_pin[pb].port, pb_pin[pb].mask);
+    NVIC_EnableIRQ(MXC_GPIO_GET_IRQ(MXC_GPIO_GET_IDX(pb_pin[pb].port)));
 
-uint16_t spi_rx_data[SPI_BUF_LEN];
-volatile mxc_spi_regs_t *spi_reg = SPI;
-mxc_spi_req_t spi_req;
-int spiRxReady = 0;
+    /// enable button wakeup
+    MXC_LP_EnableGPIOWakeup((mxc_gpio_cfg_t *)&pb_pin[0]);
+    MXC_GPIO_SetWakeEn(pb_pin[0].port, pb_pin[0].mask);
+
+    // Configure Timer
+    MXC_NVIC_SetVector(RTC_IRQn, tmrHandler);
+    
+    // enable RTC wakeup
+    MXC_GCR->pm |= MXC_F_GCR_PM_RTC_WE;
+    
+    MXC_RTC_SetTimeofdayAlarm(DELAY_IN_SEC * 4);
+    
+    while (1)
+    {
+        PRINT("Running in ACTIVE mode for 5 secs.\n");
+        MXC_Delay(5000000);
+
+        PRINT("Set the timer then enter STANDBY mode for %d secs if no button press.\n", DELAY_IN_SEC * 4);
+        wakeupByTimer = false;
+        MXC_Delay(1000);
+
+        // set the timer
+        MXC_RTC_Init(0, 0);
+        MXC_RTC_EnableInt(MXC_F_RTC_CTRL_TOD_ALARM_IE);
+        MXC_RTC_Start();
+
+        MXC_LP_EnterStandbyMode();
+
+        PRINT("Wake up by %s from STANDBY mode.\n\n", wakeupByTimer ? "Timer" : "Button");
+        MXC_Delay(1000);
+    }
+}
 
 void SPI_IRQHandler(void)
 {
@@ -390,9 +440,11 @@ void spi_wakeup(void)
 
 int main(void)
 {
-    button_wakeup();
+    //button_wakeup();
 
     //timer_wakeup();
+
+    button_and_timer_wakeup();
 
     //spi_wakeup();
 

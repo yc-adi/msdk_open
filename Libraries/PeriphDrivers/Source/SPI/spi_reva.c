@@ -786,13 +786,14 @@ void MXC_SPI_RevA_DisableInt(mxc_spi_reva_regs_t *spi, unsigned int intDis)
 
 int MXC_SPI_RevA_SlaveRxSetup(mxc_spi_reva_req_t *req)
 {
-    int spi_num = MXC_SPI_GET_IDX((mxc_spi_regs_t *)(req->spi));
-    MXC_ASSERT(spi_num >= 0);
-    MXC_ASSERT(req->ssIdx < MXC_SPI_SS_INSTANCES);
-
+    int spi_num;
     if ((!req) || (req->rxData == NULL)) {
         return E_BAD_PARAM;
     }
+
+    spi_num = MXC_SPI_GET_IDX((mxc_spi_regs_t *)(req->spi));
+    MXC_ASSERT(spi_num >= 0);
+    MXC_ASSERT(req->ssIdx < MXC_SPI_SS_INSTANCES);
 
     req->rxCnt = 0;
 
@@ -945,8 +946,9 @@ uint32_t MXC_SPI_RevA_SlaveRxHandler(mxc_spi_reva_req_t *req)
 {
     int remain, spi_num;
     uint32_t int_en = 0;
-    uint32_t tx_length = 0, rx_length = 0;
+    uint32_t rx_length = 0;
     uint8_t bits;
+
     spi_num = MXC_SPI_GET_IDX((mxc_spi_regs_t *)req->spi);
 
     bits = MXC_SPI_GetDataSize((mxc_spi_regs_t *)req->spi);
@@ -956,18 +958,6 @@ uint32_t MXC_SPI_RevA_SlaveRxHandler(mxc_spi_reva_req_t *req)
         rx_length = req->rxLen * 2;
     } else {
         rx_length = req->rxLen;
-    }
-
-    // Break out if we've transmitted all the bytes and not receiving
-    if ((req->rxData == NULL) && (req->txCnt == tx_length)) {
-        req->spi->inten = 0;
-        int_en = 0;
-        MXC_FreeLock((uint32_t *)&states[spi_num].req);
-
-        // Callback if not NULL
-        if (states[spi_num].async && req->completeCB != NULL) {
-            req->completeCB(req, E_NO_ERROR);
-        }
     }
 
     // Read the RX FIFO
@@ -988,7 +978,7 @@ uint32_t MXC_SPI_RevA_SlaveRxHandler(mxc_spi_reva_req_t *req)
         }
 
         // Break out if we've received all the bytes and we're not transmitting
-        if ((req->txData == NULL) && (req->rxCnt == rx_length)) {
+        if (req->rxCnt == rx_length) {
             req->spi->inten = 0;
             int_en = 0;
             MXC_FreeLock((uint32_t *)&states[spi_num].req);
@@ -997,17 +987,6 @@ uint32_t MXC_SPI_RevA_SlaveRxHandler(mxc_spi_reva_req_t *req)
             if (states[spi_num].async && req->completeCB != NULL) {
                 req->completeCB(req, E_NO_ERROR);
             }
-        }
-    }
-    // Break out once we've transmitted and received all of the data
-    if ((req->rxCnt == rx_length) && (req->txCnt == tx_length)) {
-        req->spi->inten = 0;
-        int_en = 0;
-        MXC_FreeLock((uint32_t *)&states[spi_num].req);
-
-        // Callback if not NULL
-        if (states[spi_num].async && req->completeCB != NULL) {
-            req->completeCB(req, E_NO_ERROR);
         }
     }
 

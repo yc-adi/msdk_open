@@ -306,11 +306,13 @@ int MXC_SPI_RevA_GetDataSize(mxc_spi_reva_regs_t *spi)
 int MXC_SPI_RevA_EnableWakeup(mxc_spi_reva_regs_t *spi)
 {
     spi->wken |= MXC_F_SPI_WKEN_RX_FULL;
+    return E_NO_ERROR;
 }
 
 int MXC_SPI_RevA_DisableWakeup(mxc_spi_reva_regs_t *spi)
 {
     spi->wken &= ~MXC_F_SPI_WKEN_RX_FULL;
+    return E_NO_ERROR;
 }
 
 int MXC_SPI_RevA_SetMTMode(mxc_spi_reva_regs_t *spi, int mtMode)
@@ -744,10 +746,7 @@ void MXC_SPI_RevA_DisableInt(mxc_spi_reva_regs_t *spi, unsigned int intDis)
 
 int MXC_SPI_RevA_SlaveRxSetup(mxc_spi_reva_req_t *req)
 {
-    int spi_num;
-    uint8_t bits;
-
-    spi_num = MXC_SPI_GET_IDX((mxc_spi_regs_t *)(req->spi));
+    int spi_num = MXC_SPI_GET_IDX((mxc_spi_regs_t *)(req->spi));
     MXC_ASSERT(spi_num >= 0);
     MXC_ASSERT(req->ssIdx < MXC_SPI_SS_INSTANCES);
 
@@ -755,7 +754,6 @@ int MXC_SPI_RevA_SlaveRxSetup(mxc_spi_reva_req_t *req)
         return E_BAD_PARAM;
     }
 
-    bits = MXC_SPI_GetDataSize((mxc_spi_regs_t *)req->spi);
     req->rxCnt = 0;
 
     states[spi_num].req = req;
@@ -909,7 +907,7 @@ uint32_t MXC_SPI_RevA_SlaveRxHandler(mxc_spi_reva_req_t *req)
     uint32_t int_en = 0;
     uint32_t tx_length = 0, rx_length = 0;
     uint8_t bits;
-    spi_num = MXC_SPI_GET_IDX((mxc_spi_regs_t *)spi);
+    spi_num = MXC_SPI_GET_IDX((mxc_spi_regs_t *)req->spi);
 
     bits = MXC_SPI_GetDataSize((mxc_spi_regs_t *)req->spi);
 
@@ -922,7 +920,7 @@ uint32_t MXC_SPI_RevA_SlaveRxHandler(mxc_spi_reva_req_t *req)
 
     // Break out if we've transmitted all the bytes and not receiving
     if ((req->rxData == NULL) && (req->txCnt == tx_length)) {
-        spi->inten = 0;
+        req->spi->inten = 0;
         int_en = 0;
         MXC_FreeLock((uint32_t *)&states[spi_num].req);
 
@@ -934,16 +932,16 @@ uint32_t MXC_SPI_RevA_SlaveRxHandler(mxc_spi_reva_req_t *req)
 
     // Read the RX FIFO
     if (req->rxData != NULL) {
-        req->rxCnt += MXC_SPI_ReadRXFIFO((mxc_spi_regs_t *)spi, &(req->rxData[req->rxCnt]),
+        req->rxCnt += MXC_SPI_ReadRXFIFO((mxc_spi_regs_t *)req->spi, &(req->rxData[req->rxCnt]),
                                          rx_length - req->rxCnt);
 
         remain = rx_length - req->rxCnt;
 
         if (remain) {
             if (remain >= MXC_SPI_FIFO_DEPTH) {
-                MXC_SPI_SetRXThreshold((mxc_spi_regs_t *)spi, 2);
+                MXC_SPI_SetRXThreshold((mxc_spi_regs_t *)req->spi, 2);
             } else {
-                MXC_SPI_SetRXThreshold((mxc_spi_regs_t *)spi, remain - 1);
+                MXC_SPI_SetRXThreshold((mxc_spi_regs_t *)req->spi, remain - 1);
             }
 
             int_en |= MXC_F_SPI_REVA_INTEN_RX_THD;
@@ -951,7 +949,7 @@ uint32_t MXC_SPI_RevA_SlaveRxHandler(mxc_spi_reva_req_t *req)
 
         // Break out if we've received all the bytes and we're not transmitting
         if ((req->txData == NULL) && (req->rxCnt == rx_length)) {
-            spi->inten = 0;
+            req->spi->inten = 0;
             int_en = 0;
             MXC_FreeLock((uint32_t *)&states[spi_num].req);
 
@@ -963,7 +961,7 @@ uint32_t MXC_SPI_RevA_SlaveRxHandler(mxc_spi_reva_req_t *req)
     }
     // Break out once we've transmitted and received all of the data
     if ((req->rxCnt == rx_length) && (req->txCnt == tx_length)) {
-        spi->inten = 0;
+        req->spi->inten = 0;
         int_en = 0;
         MXC_FreeLock((uint32_t *)&states[spi_num].req);
 

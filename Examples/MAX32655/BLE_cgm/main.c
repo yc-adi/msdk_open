@@ -153,8 +153,8 @@ uint16_t spi_rx_data[SPI_BUF_LEN];
 mxc_spi_req_t spi_req;
 /** @brief spi rx state
  * 0: idle
- * 1: after calling async to receive
- * 2: after receiving desired data
+ * 1: after call async to receive and before receive all data
+ * 2: after receive desired data
  */
 int spiRxReady = 0;
 
@@ -482,8 +482,6 @@ int main(void)
 {
 #if DEEP_SLEEP == 1
     printf("\n\n***** MAX32665 BLE CGM, Deep Sleep Version *****\n");
-
-    GPIO_PrepForSleep();  // without this SPI won't work with deep sleep
 #else
     printf("\n\n***** MAX32665 BLE CGM, Non Deep Sleep Version *****\n");
 #endif
@@ -525,7 +523,6 @@ int main(void)
             MXC_SPI_Shutdown(SPI);
             
             printf("SPI SET DATASIZE ERROR: %d\n", spiInitRet);
-            MXC_Delay(10000);
         }
     }
 
@@ -534,7 +531,6 @@ int main(void)
         spiInitRet = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
         if (spiInitRet != E_NO_ERROR) {
             printf("\nSPI SET WIDTH ERROR: %d\n", spiInitRet);
-            //return spiInitRet;
         }
     }
 
@@ -557,6 +553,8 @@ int main(void)
 
         memset(spi_rx_data, 0x0, SPI_BUF_LEN * sizeof(uint16_t));
     }
+
+    MXC_Delay(1000);
 #endif
 
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)
@@ -669,19 +667,6 @@ int main(void)
             WsfTimerSleep();
 #endif
         }
-
-#if SPI_SLAVE_RX == 1
-        if (spiRxReady == 0 && (spiInitRet == E_NO_ERROR))
-        {
-            MXC_SPI_SlaveTransactionAsync(&spi_req);
-            spiRxReady = 1;
-        }
-        else if (spiRxReady == 2)
-        {
-            printf("spi rx: 0x%04X 0x%04X\n", spi_rx_data[0], spi_rx_data[1]);
-            spiRxReady = 0;
-        }
-#endif
     }
 
     /* Does not return. Should never be reached here. */

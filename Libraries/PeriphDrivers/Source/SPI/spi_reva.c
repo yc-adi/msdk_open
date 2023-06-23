@@ -343,6 +343,18 @@ int MXC_SPI_RevA_GetDataSize(mxc_spi_reva_regs_t *spi)
     return (spi->ctrl2 & MXC_F_SPI_REVA_CTRL2_NUMBITS) >> MXC_F_SPI_REVA_CTRL2_NUMBITS_POS;
 }
 
+int MXC_SPI_RevA_EnableWakeup(mxc_spi_reva_regs_t *spi)
+{
+    spi->wken |= MXC_F_SPI_WKEN_RX_FULL;
+    return E_NO_ERROR;
+}
+
+int MXC_SPI_RevA_DisableWakeup(mxc_spi_reva_regs_t *spi)
+{
+    spi->wken &= ~MXC_F_SPI_WKEN_RX_FULL;
+    return E_NO_ERROR;
+}
+
 int MXC_SPI_RevA_SetMTMode(mxc_spi_reva_regs_t *spi, int mtMode)
 {
     int spi_num;
@@ -772,6 +784,52 @@ void MXC_SPI_RevA_DisableInt(mxc_spi_reva_regs_t *spi, unsigned int intDis)
     spi->inten &= ~(intDis);
 }
 
+int MXC_SPI_RevA_SlaveRxSetup(mxc_spi_reva_req_t *req)
+{
+    int spi_num = MXC_SPI_GET_IDX((mxc_spi_regs_t *)(req->spi));
+    MXC_ASSERT(spi_num >= 0);
+    MXC_ASSERT(req->ssIdx < MXC_SPI_SS_INSTANCES);
+
+    if ((!req) || (req->rxData == NULL)) {
+        return E_BAD_PARAM;
+    }
+
+    req->rxCnt = 0;
+
+    states[spi_num].req = req;
+    states[spi_num].started = 0;
+    states[spi_num].req_done = 0;
+
+    // HW requires disabling/renabling SPI block at end of each transaction (when SS is inactive).
+    if (states[spi_num].ssDeassert == 1) {
+        (req->spi)->ctrl0 &= ~(MXC_F_SPI_REVA_CTRL0_EN);
+    }
+
+    if (req->rxData != NULL && req->rxLen > 0) {
+        MXC_SETFIELD((req->spi)->ctrl1, MXC_F_SPI_REVA_CTRL1_RX_NUM_CHAR,
+                     req->rxLen << MXC_F_SPI_REVA_CTRL1_RX_NUM_CHAR_POS);
+        (req->spi)->dma |= MXC_F_SPI_REVA_DMA_RX_FIFO_EN;
+    } else {
+        (req->spi)->ctrl1 &= ~(MXC_F_SPI_REVA_CTRL1_RX_NUM_CHAR);
+        (req->spi)->dma &= ~(MXC_F_SPI_REVA_DMA_RX_FIFO_EN);
+    }
+
+    (req->spi)->ctrl1 &= ~(MXC_F_SPI_REVA_CTRL1_TX_NUM_CHAR);
+    (req->spi)->dma &= ~(MXC_F_SPI_REVA_DMA_TX_FIFO_EN);
+
+    states[spi_num].txrx_req = false;
+
+    (req->spi)->dma |= (MXC_F_SPI_REVA_DMA_TX_FLUSH | MXC_F_SPI_REVA_DMA_RX_FLUSH);
+    (req->spi)->ctrl0 |= (MXC_F_SPI_REVA_CTRL0_EN);
+
+    states[spi_num].ssDeassert = req->ssDeassert;
+
+    // Clear master done flag
+    (req->spi)->intfl = MXC_F_SPI_REVA_INTFL_MST_DONE;
+
+    return E_NO_ERROR;
+}
+
 int MXC_SPI_RevA_TransSetup(mxc_spi_reva_req_t *req)
 {
     int spi_num;
@@ -881,6 +939,79 @@ uint32_t MXC_SPI_RevA_MasterTransHandler(mxc_spi_reva_regs_t *spi, mxc_spi_reva_
     }
 
     return retval;
+}
+
+uint32_t MXC_SPI_RevA_SlaveRxHandler(mxc_spi_reva_req_t *req)
+{
+    int remain, spi_num;
+    uint32_t int_en = 0;
+    uint32_t tx_length = 0, rx_length = 0;
+    uint8_t bits;
+    spi_num = MXC_SPI_GET_IDX((mxc_spi_regs_t *)req->spi);
+
+    bits = MXC_SPI_GetDataSize((mxc_spi_regs_t *)req->spi);
+
+    // Read/write 2x number of bytes if larger character size
+    if (bits > 8) {
+        rx_length = req->rxLen * 2;
+    } else {
+        rx_length = req->rxLen;
+    }
+
+    // Break out if we've transmitted all the bytes and not receiving
+    if ((req->rxData == NULL) && (req->txCnt == tx_length)) {
+        req->spi->inten = 0;
+        int_en = 0;
+        MXC_FreeLock((uint32_t *)&states[spi_num].req);
+
+        // Callback if not NULL
+        if (states[spi_num].async && req->completeCB != NULL) {
+            req->completeCB(req, E_NO_ERROR);
+        }
+    }
+
+    // Read the RX FIFO
+    if (req->rxData != NULL) {
+        req->rxCnt += MXC_SPI_ReadRXFIFO((mxc_spi_regs_t *)req->spi, &(req->rxData[req->rxCnt]),
+                                         rx_length - req->rxCnt);
+
+        remain = rx_length - req->rxCnt;
+
+        if (remain) {
+            if (remain >= MXC_SPI_FIFO_DEPTH) {
+                MXC_SPI_SetRXThreshold((mxc_spi_regs_t *)req->spi, 2);
+            } else {
+                MXC_SPI_SetRXThreshold((mxc_spi_regs_t *)req->spi, remain - 1);
+            }
+
+            int_en |= MXC_F_SPI_REVA_INTEN_RX_THD;
+        }
+
+        // Break out if we've received all the bytes and we're not transmitting
+        if ((req->txData == NULL) && (req->rxCnt == rx_length)) {
+            req->spi->inten = 0;
+            int_en = 0;
+            MXC_FreeLock((uint32_t *)&states[spi_num].req);
+
+            // Callback if not NULL
+            if (states[spi_num].async && req->completeCB != NULL) {
+                req->completeCB(req, E_NO_ERROR);
+            }
+        }
+    }
+    // Break out once we've transmitted and received all of the data
+    if ((req->rxCnt == rx_length) && (req->txCnt == tx_length)) {
+        req->spi->inten = 0;
+        int_en = 0;
+        MXC_FreeLock((uint32_t *)&states[spi_num].req);
+
+        // Callback if not NULL
+        if (states[spi_num].async && req->completeCB != NULL) {
+            req->completeCB(req, E_NO_ERROR);
+        }
+    }
+
+    return int_en;
 }
 
 uint32_t MXC_SPI_RevA_SlaveTransHandler(mxc_spi_reva_req_t *req)
@@ -1162,6 +1293,21 @@ int MXC_SPI_RevA_MasterTransactionDMA(mxc_spi_reva_req_t *req, int reqselTx, int
         MXC_SPI_StartTransmission((mxc_spi_regs_t *)req->spi);
         states[spi_num].started = 1;
     }
+
+    return E_NO_ERROR;
+}
+
+int MXC_SPI_RevA_SlaveRx(mxc_spi_reva_req_t *req)
+{
+    int error;
+
+    if ((error = MXC_SPI_RevA_SlaveRxSetup(req)) != E_NO_ERROR) {
+        return error;
+    }
+
+    states[MXC_SPI_GET_IDX((mxc_spi_regs_t *)req->spi)].async = 0;
+
+    MXC_SPI_RevA_SlaveRxHandler(req);
 
     return E_NO_ERROR;
 }

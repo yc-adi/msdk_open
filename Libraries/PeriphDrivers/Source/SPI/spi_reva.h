@@ -88,6 +88,8 @@ int MXC_SPI_RevA_SetFrequency(mxc_spi_reva_regs_t *spi, unsigned int hz);
 unsigned int MXC_SPI_RevA_GetFrequency(mxc_spi_reva_regs_t *spi);
 int MXC_SPI_RevA_SetDataSize(mxc_spi_reva_regs_t *spi, int dataSize);
 int MXC_SPI_RevA_GetDataSize(mxc_spi_reva_regs_t *spi);
+int MXC_SPI_RevA_EnableWakeup(mxc_spi_reva_regs_t *spi);
+int MXC_SPI_RevA_DisableWakeup(mxc_spi_reva_regs_t *spi);
 int MXC_SPI_RevA_SetMTMode(mxc_spi_reva_regs_t *spi, int mtMode);
 int MXC_SPI_RevA_GetMTMode(mxc_spi_reva_regs_t *spi);
 int MXC_SPI_RevA_SetSlave(mxc_spi_reva_regs_t *spi, int ssIdx);
@@ -120,6 +122,7 @@ int MXC_SPI_RevA_MasterTransactionAsync(mxc_spi_reva_req_t *req);
 int MXC_SPI_RevA_MasterTransactionDMA(mxc_spi_reva_req_t *req, int reqselTx, int reqselRx,
                                       mxc_dma_regs_t *dma);
 int MXC_SPI_RevA_SlaveTransaction(mxc_spi_reva_req_t *req);
+int MXC_SPI_RevA_SlaveRx(mxc_spi_reva_req_t *req);
 int MXC_SPI_RevA_SlaveTransactionAsync(mxc_spi_reva_req_t *req);
 int MXC_SPI_RevA_SlaveTransactionDMA(mxc_spi_reva_req_t *req, int reqselTx, int reqselRx,
                                      mxc_dma_regs_t *dma);

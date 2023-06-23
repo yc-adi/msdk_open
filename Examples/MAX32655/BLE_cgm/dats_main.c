@@ -24,6 +24,7 @@
 
 #include <string.h>
 #include "mxc_device.h"
+#include "mxc_delay.h"
 #include "wsf_types.h"
 #include "util/bstream.h"
 #include "wsf_msg.h"
@@ -73,8 +74,10 @@
 #endif /* BT_VER */
 
 #define TRIM_TIMER_EVT 0x99
+#define CUST_SPEC_TMR_EVT 0x9A
 
 #define TRIM_TIMER_PERIOD_MS 100000
+#define CUST_SPEC_TMR_PERIOD_MS 15000
 
 /*! Button press handling constants */
 #define BTN_SHORT_MS 200
@@ -242,6 +245,9 @@ static dmSecLescOobCfg_t *datsOobCfg;
 /* Timer for trimming of the 32 kHz crystal */
 wsfTimer_t trimTimer;
 
+/* Timer for customer specified app */
+wsfTimer_t custSpecAppTimer;
+
 /**************************************************************************************************
   global Variables
 **************************************************************************************************/
@@ -357,7 +363,7 @@ static void datsCccCback(attsCccEvt_t *pEvt)
  *  \return  None.
  */
 /*************************************************************************************************/
-#ifndef DEEP_SLEEP
+#if DEEP_SLEEP == 0
 static void trimStart(void)
 {
     int err;
@@ -567,6 +573,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
     case DM_CONN_OPEN_IND:
         uiEvent = APP_UI_CONN_OPEN;
         conn_opened = 1;
+        APP_TRACE_INFO0("Disable deep sleep");
         break;
 
     case DM_CONN_CLOSE_IND:
@@ -593,6 +600,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
         }
         uiEvent = APP_UI_CONN_CLOSE;
         conn_opened = 0;
+        APP_TRACE_INFO0("Enable deep sleep");
         break;
 
     case DM_SEC_PAIR_CMPL_IND:
@@ -660,10 +668,19 @@ static void datsProcMsg(dmEvt_t *pMsg)
 #endif /* BT_VER */
 
     case TRIM_TIMER_EVT:
-#ifndef DEEP_SLEEP
+#if DEEP_SLEEP == 0
         trimStart();
 #endif
         WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
+        break;
+
+    case CUST_SPEC_TMR_EVT:
+        LED_Off(LED_RED);
+        APP_TRACE_INFO0("TODO: CUSTOMER SPECIFIED APP");
+        MXC_Delay(1000);
+
+        WsfTimerStartMs(&custSpecAppTimer, CUST_SPEC_TMR_PERIOD_MS); // start next
+        LED_On(LED_RED);
         break;
 
     default:
@@ -709,6 +726,14 @@ void DatsHandlerInit(wsfHandlerId_t handlerId)
     /* Setup 32 kHz crystal trim timer */
     trimTimer.handlerId = handlerId;
     trimTimer.msg.event = TRIM_TIMER_EVT;
+
+    /* Set customer specified application timer */
+    custSpecAppTimer.handlerId = handlerId;
+    custSpecAppTimer.msg.event = CUST_SPEC_TMR_EVT;
+
+    APP_TRACE_INFO0("start customer specified app timer");
+    MXC_Delay(1000);
+    WsfTimerStartMs(&custSpecAppTimer, CUST_SPEC_TMR_PERIOD_MS); // first start
 }
 
 /*************************************************************************************************/

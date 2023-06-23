@@ -55,7 +55,7 @@
 /***** Definitions *****/
 #define DATA_LEN        2
 #define DATA_SIZE       16
-#define SPI_SPEED       100000 // Bit Rate
+#define SPI_SPEED       40000000 // Bit Rate
 
 #define SPI             MXC_SPI0
 
@@ -124,16 +124,16 @@ int main(void)
         tx_data[1] = cnt + 1;
         cnt++;
 
+        printf("\nsend: 0x%04X 0x%04X", tx_data[0], tx_data[1]);
+        MXC_Delay(2000000);
+        
         MXC_SPI_MasterTransaction(&req);
 
         retVal = MXC_SPI_Shutdown(SPI);
         if (retVal != E_NO_ERROR) {
             printf("\n-->SPI SHUTDOWN ERROR: %d\n", retVal);
             return retVal;
-        }
-
-        printf("\nsend: 0x%04X 0x%04X", tx_data[0], tx_data[1]);
-        MXC_Delay(2000000);
+        }        
     }
 
     return E_NO_ERROR;

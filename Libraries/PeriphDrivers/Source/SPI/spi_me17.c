@@ -281,6 +281,16 @@ int MXC_SPI_GetDataSize(mxc_spi_regs_t *spi)
     return MXC_SPI_RevA_GetDataSize((mxc_spi_reva_regs_t *)spi);
 }
 
+int MXC_SPI_EnableWakeup(mxc_spi_regs_t *spi)  // MXC_LP_EnableSPIWakeup
+{
+    return MXC_SPI_RevA_EnableWakeup((mxc_spi_reva_regs_t *)spi);
+}
+
+int MXC_SPI_DisableWakeup(mxc_spi_regs_t *spi)  // MXC_LP_DisableSPIWakeup
+{
+    return MXC_SPI_RevA_DisableWakeup((mxc_spi_reva_regs_t *)spi);
+}
+
 int MXC_SPI_SetSlave(mxc_spi_regs_t *spi, int ssIdx)
 {
     return MXC_SPI_RevA_SetSlave((mxc_spi_reva_regs_t *)spi, ssIdx);
@@ -463,6 +473,11 @@ int MXC_SPI_MasterTransactionDMA(mxc_spi_req_t *req)
 int MXC_SPI_SlaveTransaction(mxc_spi_req_t *req)
 {
     return MXC_SPI_RevA_SlaveTransaction((mxc_spi_reva_req_t *)req);
+}
+
+int MXC_SPI_SlaveRx(mxc_spi_req_t *req)
+{
+    return MXC_SPI_RevA_SlaveRx((mxc_spi_reva_req_t *)req);
 }
 
 int MXC_SPI_SlaveTransactionAsync(mxc_spi_req_t *req)

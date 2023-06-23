@@ -30,7 +30,7 @@ SRCS += stack_dats.c
 SRCS += dats_main.c
 SRCS += main.c
 
-USE_INTERNAL_FLASH ?=0
+USE_INTERNAL_FLASH ?=1
 ifeq ($(USE_INTERNAL_FLASH), 1)
 PROJ_CFLAGS += -DOTA_INTERNAL=1
 LINKERFILE = ota_internal_mem.ld
@@ -66,4 +66,4 @@ ${BOOTLOADER_OBJ}: bl_build.S ${BOOTLOADER_BIN}
 	${CC} ${AFLAGS} -o ${@} -c bl_build.S
 endif
 
-DEEP_SLEEP = 0
+DEEP_SLEEP = 1

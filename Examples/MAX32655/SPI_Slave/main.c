@@ -43,6 +43,7 @@
 #include <stdint.h>
 #include <string.h>
 #include "board.h"
+#include "led.h"
 #include "mxc_device.h"
 #include "mxc_delay.h"
 #include "mxc_pins.h"
@@ -55,7 +56,7 @@
 /***** Definitions *****/
 #define DATA_LEN        2
 #define DATA_SIZE       16
-#define SPI_SPEED       100000 // Bit Rate
+#define SPI_SPEED       40000000 // Bit Rate
 
 #define SPI             MXC_SPI0
 #define SPI_IRQ         SPI0_IRQn
@@ -66,6 +67,7 @@ uint16_t rx_data[DATA_LEN];
 //uint16_t tx_data[DATA_LEN];
 volatile int SPI_FLAG;
 
+volatile uint8_t DMA_FLAG = 0;
 
 /***** Functions *****/
 void SPI_IRQHandler(void)
@@ -73,6 +75,17 @@ void SPI_IRQHandler(void)
     MXC_SPI_AsyncHandler(SPI);
 
     SPI_FLAG = 0; // let the main loop run
+}
+
+void DMA0_IRQHandler(void)
+{
+    MXC_DMA_Handler();
+}
+
+void DMA1_IRQHandler(void)
+{
+    MXC_DMA_Handler();
+    DMA_FLAG = 1;
 }
 
 
@@ -93,7 +106,6 @@ int main(void)
     spi_pins.vddioh = false;
 
     printf("\n**************************** SPI SLAVE RX TEST *************************\n");
-    
     retVal = MXC_SPI_Init(SPI, // spi regiseter
                             0, // master mode
                             0, // quad mode
@@ -104,6 +116,10 @@ int main(void)
     if (retVal != E_NO_ERROR) {
         printf("\nSPI INITIALIZATION ERROR\n");
         return retVal;
+    }
+    else
+    {
+        printf("\nSPI INITIALIZATION: Done\n");
     }
 
     retVal = MXC_SPI_SetDataSize(SPI, DATA_SIZE);
@@ -137,12 +153,36 @@ int main(void)
 
     while (1)
     {
+        // SYNC
+        //MXC_SPI_SlaveTransaction(&req);
+        
+        // ASYNC
+        LED_On(LED_RED);
         SPI_FLAG = 1;
         MXC_SPI_SlaveTransactionAsync(&req);
         while (SPI_FLAG) {}
-        
-        printf("\n%d rx: 0x%04X 0x%04X", ++cnt, rx_data[0], rx_data[1]);
+        LED_Off(LED_RED);
 
+        MXC_Delay(50000);
+
+        LED_On(LED_GREEN);
+        MXC_Delay(50000);
+        LED_Off(LED_GREEN);
+
+
+        // DMA
+        /*
+        MXC_DMA_ReleaseChannel(0);
+        MXC_DMA_ReleaseChannel(1);
+
+        NVIC_EnableIRQ(DMA0_IRQn);
+        NVIC_EnableIRQ(DMA1_IRQn);
+        MXC_SPI_MasterTransactionDMA(&req);
+
+        while (DMA_FLAG == 0) {}
+        DMA_FLAG = 0;
+        */
+        printf("%d rx: 0x%04X 0x%04X\n", ++cnt, rx_data[0], rx_data[1]);
         MXC_Delay(100000);
     }
 

@@ -63,7 +63,10 @@
 #include "app_ui.h"
 
 #include "board.h"
+#include "led.h"
 #include "max32655.h"
+#include "mxc_delay.h"
+#include "nvic_table.h"
 #include "pal_btn.h"
 #include "pal_i2s.h"
 #include "pal_led.h"
@@ -75,6 +78,7 @@
 /**************************************************************************************************
   Macros
 **************************************************************************************************/
+#define SPI_SLAVE_RX    1
 
 /*! \brief UART TX buffer size */
 #define PLATFORM_UART_TERMINAL_BUFFER_SIZE 2048U
@@ -90,6 +94,13 @@
 
 #define DEFAULT_TX_POWER 0 /* dBm */
 
+#define SPI_BUF_LEN     2
+#define SPI_DATA_SIZE   16
+#define SPI_SPEED       100000 // Bit Rate
+
+#define SPI             MXC_SPI0
+#define SPI_IRQ         SPI0_IRQn
+
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
@@ -103,12 +114,7 @@ static LlRtCfg_t mainLlRtCfg;
 
 volatile int wutTrimComplete;
 
-mxc_spi_pins_t spi_pins;
-mxc_spi_req_t slave_spi_req;
-uint16_t SpiRxBuf[DATA_LEN];
-bool spi_rx_new_data = false;
-
-#ifdef DEEP_SLEEP
+#if DEEP_SLEEP == 1
 /**
  * @brief global variable to keep the minimal time for the next job (task). 
  * After each job, task, action, or response, need to update this variable.
@@ -156,9 +162,27 @@ uint32_t debugBufTail = 0;
 uint32_t debugMax = 0;
 uint32_t debugMin = 0xFFFFFFFF;
 
+uint16_t spi_rx_data[SPI_BUF_LEN];
+mxc_spi_req_t spi_req;
+/** @brief spi rx state
+ * 0: idle
+ * 1: after call async to receive and before receive all data
+ * 2: after receive desired data
+ */
+int spiRxReady = 0;
+
+extern bool_t ChciTrService(void);
+
 /**************************************************************************************************
   Functions
 **************************************************************************************************/
+void SPI_IRQHandler(void)
+{
+    MXC_SPI_AsyncHandler(SPI);
+
+    spiRxReady = 2;
+}
+
 #if DEEP_SLEEP == 1
 extern wsfTimerTicks_t wsfTimerNextExpiration(void);
 extern uint32_t wsfTimerTicksToRtc(wsfTimerTicks_t wsfTicks);
@@ -167,10 +191,7 @@ extern bool_t PalSysIsBusy(void);
 extern void MXC_LP_EnterStandbyMode(void);
 #endif  
 
-extern int32_t WsfSpiInit(void *pBuf, uint32_t size);
-extern void AppSpiInit(void);
-
-#ifdef DEEP_SLEEP
+#if DEEP_SLEEP == 1
 /*************************************************************************************************/
 /* Get the time delay expected on powerup */
 uint32_t get_powerup_delay(uint32_t wait_ticks)
@@ -181,10 +202,8 @@ uint32_t get_powerup_delay(uint32_t wait_ticks)
 
     return ret;
 }
-#endif  // DEEP_SLEEP
 
 /*************************************************************************************************/
-#ifdef DEEP_SLEEP
 void DeepSleep(void)
 {
     uint32_t preCaptureInWutCnt, schUsec;
@@ -361,15 +380,6 @@ EXIT_SLEEP_FUNC:
 /*! \brief  Stack initialization for app. */
 extern void StackInitDats(void);
 
-void SPI_IRQHandler(void)
-{
-    MXC_SPI_AsyncHandler(SPI);
-
-    //wsfSpiRxHandler();
-
-    spi_rx_new_data = 1;
-}
-
 /*************************************************************************************************/
 /*!
  *  \brief  Initialize WSF.
@@ -418,83 +428,6 @@ static int mainWsfInit(void)
     AppTerminalInit();
     //MXC_Delay(100000);
 #endif
-    /*
-    /// SPI init: WSF OS level and app levl
-    //WsfCsEnter();
-    memUsed = WsfSpiInit(WsfHeapGetFreeStartAddress(), PLATFORM_SPI_BUF_SIZE * 2);  // for both TX and RX
-    WsfHeapAlloc(memUsed);
-    //WsfCsExit();
-
-    AppSpiInit();
-    */
-    
-    int retVal;
-
-    spi_pins.clock = true;
-    spi_pins.miso = true;
-    spi_pins.mosi = true;
-    spi_pins.ss0 = true;
-    spi_pins.ss1 = false;
-    spi_pins.ss2 = false;
-    spi_pins.sdio2 = false;
-    spi_pins.sdio3 = false;
-    spi_pins.vddioh = false;
-
-    MXC_Delay(10000);  // without this delay, MXC_SPI_SetDataSize will fail
-
-    retVal = MXC_SPI_Init(SPI, // spi regiseter
-                    0, // master mode
-                    0, // quad mode
-                    1, // num slaves
-                    1, // ss polarity
-                    SPI_SPEED,
-                    spi_pins);
-    if (retVal != E_NO_ERROR) {
-        printf("\nSPI INITIALIZATION ERROR\n");
-        return -1;
-    }
-    else
-    {
-        printf("SPI Init: done\n");
-    }
-
-    MXC_Delay(100000);  // without this delay, MXC_SPI_SetDataSize will fail
-
-    retVal = MXC_SPI_SetDataSize(SPI, DATA_SIZE);
-    if (retVal != E_NO_ERROR) {
-        printf("\nSPI SET DATASIZE ERROR: %d\n", retVal);
-        return -2;
-    }
-    else
-    {
-        printf("SPI set data size: done.\n");
-    }
-
-    retVal = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
-    if (retVal != E_NO_ERROR) {
-        printf("\nSPI SET WIDTH ERROR: %d\n", retVal);
-        return -3;
-    }
-
-    // SPI Request
-    slave_spi_req.spi = SPI;
-    slave_spi_req.txData = NULL;
-    slave_spi_req.rxData = (uint8_t *)SpiRxBuf;
-    slave_spi_req.txLen = 0;
-    slave_spi_req.rxLen = DATA_LEN;
-    slave_spi_req.ssIdx = 0;
-    slave_spi_req.ssDeassert = 1;
-    slave_spi_req.txCnt = 0;
-    slave_spi_req.rxCnt = 0;
-    slave_spi_req.completeCB = NULL;
-
-    MXC_NVIC_SetVector(SPI_IRQ, SPI_IRQHandler);
-    NVIC_EnableIRQ(SPI_IRQ);
-
-    /* Start SPI RX. */
-    //spi_flag = 0;
-    MXC_SPI_SlaveTransactionAsync(&slave_spi_req);
-
     return 0;
 }
 
@@ -571,6 +504,75 @@ int main(void)
 
     uint32_t memUsed;
 
+#if SPI_SLAVE_RX == 1
+    int spiInitRet;
+
+    /// Init SPI Slave
+    mxc_spi_pins_t spi_pins;
+
+    spi_pins.clock = true;
+    spi_pins.miso = true;
+    spi_pins.mosi = true;
+    spi_pins.ss0 = true;
+    spi_pins.ss1 = false;
+    spi_pins.ss2 = false;
+    spi_pins.sdio2 = false;
+    spi_pins.sdio3 = false;
+    spi_pins.vddioh = false;
+
+    printf("SPI slave rx init\n");
+    spiInitRet = MXC_SPI_Init(SPI, // spi regiseter
+                          0, // master mode
+                          0, // quad mode
+                          1, // num slaves
+                          1, // ss polarity
+                          SPI_SPEED,
+                          spi_pins);
+    if (spiInitRet != E_NO_ERROR) {
+        printf("SPI INITIALIZATION ERROR\n");
+    }
+
+    if (spiInitRet == E_NO_ERROR)
+    {
+        spiInitRet = MXC_SPI_SetDataSize(SPI, SPI_DATA_SIZE);
+        if (spiInitRet != E_NO_ERROR) {
+            MXC_SPI_Shutdown(SPI);
+            
+            printf("SPI SET DATASIZE ERROR: %d\n", spiInitRet);
+        }
+    }
+
+    if (spiInitRet == E_NO_ERROR)
+    {
+        spiInitRet = MXC_SPI_SetWidth(SPI, SPI_WIDTH_STANDARD);
+        if (spiInitRet != E_NO_ERROR) {
+            printf("\nSPI SET WIDTH ERROR: %d\n", spiInitRet);
+        }
+    }
+
+    if (spiInitRet == E_NO_ERROR)
+    {
+        // SPI Request
+        spi_req.spi = SPI;
+        spi_req.txData = NULL;
+        spi_req.rxData = (uint8_t *)spi_rx_data;
+        spi_req.txLen = 0;
+        spi_req.rxLen = SPI_BUF_LEN;
+        spi_req.ssIdx = 0;
+        spi_req.ssDeassert = 1;
+        spi_req.txCnt = 0;
+        spi_req.rxCnt = 0;
+        spi_req.completeCB = NULL;
+
+        MXC_NVIC_SetVector(SPI_IRQ, SPI_IRQHandler);
+        NVIC_EnableIRQ(SPI_IRQ);
+
+        memset(spi_rx_data, 0x0, SPI_BUF_LEN * sizeof(uint16_t));
+    }
+
+    MXC_Delay(1000);
+#endif
+
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)
     /* Configurations must be persistent. */
     static BbRtCfg_t mainBbRtCfg;
@@ -601,7 +603,7 @@ int main(void)
     /* Set the default connection power level */
     mainLlRtCfg.defTxPwrLvl = DEFAULT_TX_POWER;
 #endif
-
+    
     mainWsfInit();
 
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)
@@ -645,15 +647,6 @@ int main(void)
 
     DatsStart();
 
-#ifdef DEEP_SLEEP
-    //PalBtnDeInit();
-    //PalLedDeInit();
-    //PalI2sDeInit();
-    //PalUartDeInit(PAL_UART_ID_USER);
-    //PalUartDeInit(PAL_UART_ID_CHCI);
-    //PalUartDeInit(PAL_UART_ID_TERMINAL);
-#endif
-
     // WsfOsEnterMainLoop();
     while(TRUE)
     {
@@ -666,6 +659,7 @@ int main(void)
 #if  DEEP_SLEEP == 1
             if (conn_opened)
             {
+                //DeepSleep();
                 WsfTimerSleep();
             }
             else
@@ -675,13 +669,6 @@ int main(void)
 #else
             WsfTimerSleep();
 #endif
-        }
-        
-        if (spi_rx_new_data)
-        {
-            spi_rx_new_data = false;
-            APP_TRACE_INFO2("SPI RX: 0x%04X 0x%04X\n", SpiRxBuf[0], SpiRxBuf[1]);
-            MXC_SPI_SlaveTransactionAsync(&slave_spi_req);
         }
     }
 

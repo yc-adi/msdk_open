@@ -258,6 +258,16 @@ void MXC_LP_DisableLPCMPWakeup(mxc_lpcmp_cmpsel_t cmp)
     }
 }
 
+void MXC_LP_EnableSPIWakeup(void)
+{
+    MXC_GCR->pm |= MXC_F_GCR_PM_GPIO_WE;
+}
+
+void MXC_LP_DisableSPIWakeup(void)
+{
+    MXC_GCR->pm &= ~MXC_F_GCR_PM_RTC_WE;
+}
+
 int MXC_LP_ConfigDeepSleepClocks(uint32_t mask)
 {
     if (!(mask & (MXC_F_GCR_PM_IBRO_PD | MXC_F_GCR_PM_IPO_PD))) {
@@ -267,3 +277,4 @@ int MXC_LP_ConfigDeepSleepClocks(uint32_t mask)
     MXC_GCR->pm |= mask;
     return E_NO_ERROR;
 }
+

@@ -23,6 +23,7 @@
 /*************************************************************************************************/
 
 #include <string.h>
+#include "led.h"
 #include "mxc_device.h"
 #include "mxc_delay.h"
 #include "wsf_types.h"
@@ -254,6 +255,7 @@ wsfTimer_t custSpecAppTimer;
 uint8_t conn_opened = 0; /// 0: connection is not opened
 
 extern void setAdvTxPower(void);
+extern void printTime(void);
 
 /*************************************************************************************************/
 /*!
@@ -676,10 +678,14 @@ static void datsProcMsg(dmEvt_t *pMsg)
 
     case CUST_SPEC_TMR_EVT:
         LED_Off(LED_RED);
-        APP_TRACE_INFO0("TODO: CUSTOMER SPECIFIED APP");
-        MXC_Delay(1000);
 
         WsfTimerStartMs(&custSpecAppTimer, CUST_SPEC_TMR_PERIOD_MS); // start next
+
+        APP_TRACE_INFO0("TODO: CUSTOMER SPECIFIED APP");
+        printTime();
+
+        MXC_Delay(1000); // workload
+
         LED_On(LED_RED);
         break;
 

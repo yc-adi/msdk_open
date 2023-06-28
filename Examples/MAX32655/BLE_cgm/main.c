@@ -101,6 +101,10 @@
 #define SPI             MXC_SPI0
 #define SPI_IRQ         SPI0_IRQn
 
+#define SECS_PER_MIN 60
+#define SECS_PER_HR (60 * SECS_PER_MIN)
+#define SECS_PER_DAY (24 * SECS_PER_HR)
+
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
@@ -176,6 +180,56 @@ extern bool_t ChciTrService(void);
 /**************************************************************************************************
   Functions
 **************************************************************************************************/
+void printTime(void)
+{
+    int day, hr, min, err;
+    uint32_t sec, rtc_readout;
+    double subsec;
+
+    do {
+        err = MXC_RTC_GetSubSeconds(&rtc_readout);
+    } while (err != E_NO_ERROR);
+    subsec = rtc_readout / 4096.0;
+
+    do {
+        err = MXC_RTC_GetSeconds(&rtc_readout);
+    } while (err != E_NO_ERROR);
+    sec = rtc_readout;
+
+    day = sec / SECS_PER_DAY;
+    sec -= day * SECS_PER_DAY;
+
+    hr = sec / SECS_PER_HR;
+    sec -= hr * SECS_PER_HR;
+
+    min = sec / SECS_PER_MIN;
+    sec -= min * SECS_PER_MIN;
+
+    subsec += sec;
+
+    APP_TRACE_INFO4("Uptime: DAY %d, %02d:%02d:%02d\n", day, hr, min, (uint32_t)subsec);
+}
+
+void InitRtc(void)
+{
+    if (MXC_RTC_Init(0, 0) != E_NO_ERROR) {
+        printf("Failed RTC Initialization\n");
+        printf("Example Failed\n");
+
+        while (1) {}
+    }
+
+    if (MXC_RTC_Start() != E_NO_ERROR) {
+        printf("Failed RTC_Start\n");
+        printf("Example Failed\n");
+
+        while (1) {}
+    }
+
+    printf("RTC started\n");
+    printTime();
+}
+
 void SPI_IRQHandler(void)
 {
     MXC_SPI_AsyncHandler(SPI);
@@ -503,6 +557,8 @@ int main(void)
     MXC_Delay(10000);
 
     uint32_t memUsed;
+
+    InitRtc();
 
 #if SPI_SLAVE_RX == 1
     int spiInitRet;

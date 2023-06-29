@@ -58,9 +58,48 @@
 #define MSEC_TO_RSSA(x) \
     (0 - ((x * 4096) /  1000)) /* Converts a time in milleseconds to the equivalent RSSA register value. */
 
+#define SECS_PER_MIN 60
+#define SECS_PER_HR (60 * SECS_PER_MIN)
+#define SECS_PER_DAY (24 * SECS_PER_HR)
+
 /***** Globals *****/
 
 /***** Functions *****/
+volatile int buttonPressed = 0;
+void buttonHandler()
+{
+    buttonPressed = 1;
+}
+
+void printTime()
+{
+    int day, hr, min, err;
+    uint32_t sec, rtc_readout;
+    double subsec;
+
+    do {
+        err = MXC_RTC_GetSubSeconds(&rtc_readout);
+    } while (err != E_NO_ERROR);
+    subsec = rtc_readout / 4096.0;
+
+    do {
+        err = MXC_RTC_GetSeconds(&rtc_readout);
+    } while (err != E_NO_ERROR);
+    sec = rtc_readout;
+
+    day = sec / SECS_PER_DAY;
+    sec -= day * SECS_PER_DAY;
+
+    hr = sec / SECS_PER_HR;
+    sec -= hr * SECS_PER_HR;
+
+    min = sec / SECS_PER_MIN;
+    sec -= min * SECS_PER_MIN;
+
+    subsec += sec;
+
+    printf("Current Time (DAY d hh:mm:ss): DAY %d %02d:%02d:%06.3f\n", day, hr, min, subsec);
+}
 
 void RTC_IRQHandler(void)
 {
@@ -116,14 +155,14 @@ uint32_t measureINRO(void)
     /* Start the timers */
     MXC_TMR_Start(MXC_TMR3);
     MXC_TMR_Start(MXC_TMR4);
-    elapsedWUT = MXC_WUT_GetCount();
+    elapsedWUT = MXC_WUT_GetCount(MXC_WUT);
 
     MXC_Delay(200000);
 
     /* Capture the TMR count and adjust for processing delay */
     elapsedERFO = MXC_TMR_GetCount(MXC_TMR3);
     elapsedINRO = MXC_TMR_GetCount(MXC_TMR4);
-    elapsedWUT = MXC_WUT_GetCount() - elapsedWUT;
+    elapsedWUT = MXC_WUT_GetCount(MXC_WUT) - elapsedWUT;
 
     /* Stop the timers */
     MXC_TMR_Stop(MXC_TMR3);
@@ -155,6 +194,9 @@ int main(void)
     /* Delay to prevent bricks */
     volatile int i;
     for(i = 0; i < 0xFFFFFF; i++) {}
+
+    /* Setup callback to receive notification of when button is pressed. */
+    PB_RegisterCallback(0, (pb_callback)buttonHandler);
 
     /* Set the system clock to the 32 MHz clock for the INRO measurement */
     /* Enable 32 MHz clock if not already enabled */
@@ -193,11 +235,13 @@ int main(void)
 
     MXC_MCR->ctrl |= (0x1 << 2);
 
+    #if 0
     error = MXC_RTC_SetClock(MXC_RTC_CLK_ALT);
     if (error != E_NO_ERROR) {
         printf("Failed RTC Set Clock: %d\n", error);
         while (1) {}
     }
+    #endif
 
     printf("RTC running from INRO\n");
 
@@ -208,10 +252,10 @@ int main(void)
     cfg.mode = MXC_WUT_MODE_COMPARE;
     cfg.cmp_cnt = 0xFFFFFFFF;
 
-    MXC_WUT_Init(MXC_WUT_PRES_1);
-    MXC_WUT_Config(&cfg);
-    MXC_WUT_SetCount(0);
-    MXC_WUT_Enable();
+    MXC_WUT_Init(MXC_WUT, MXC_WUT_PRES_1);
+    MXC_WUT_Config(MXC_WUT, &cfg); 
+    MXC_WUT_SetCount(MXC_WUT, 0);
+    MXC_WUT_Enable(MXC_WUT);
 
     uint32_t inroFreq = measureINRO();
 #if 0
@@ -275,6 +319,16 @@ int main(void)
 
         while (1) {}
     }
-
-    while(1) {}
+    printTime();
+    
+    while (1) {
+        if (buttonPressed) {
+            /* Show the time elapsed. */
+            printTime();
+            /* Delay for switch debouncing. */
+            MXC_Delay(MXC_DELAY_MSEC(100));
+            /* Re-arm switch detection. */
+            buttonPressed = 0;
+        }
+    }
 }

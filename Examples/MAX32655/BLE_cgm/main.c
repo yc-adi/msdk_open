@@ -74,6 +74,7 @@
 #include "pal_timer.h"
 #include "led.h"
 #include "spi.h"
+#include "uart.h"
 
 /**************************************************************************************************
   Macros
@@ -258,7 +259,10 @@ uint32_t get_powerup_delay(uint32_t wait_ticks)
 }
 
 /*************************************************************************************************/
-void DeepSleep(void)
+extern void *AsyncTxRequests[MXC_UART_INSTANCES];
+extern void *AsyncRxRequests[MXC_UART_INSTANCES];
+
+int DeepSleep(void)
 {
     uint32_t preCaptureInWutCnt, schUsec;
     uint32_t dsInWutCnt, dsWutTicks;
@@ -268,9 +272,20 @@ void DeepSleep(void)
     /* If PAL system is busy, no need to sleep. */
     if (PalSysIsBusy())
     {
-        return;
+        return 1;
     }
 
+    if (!wsfOsReadyToSleep())
+    {
+        return 2;
+    }
+
+    // MXC_UART_ReadyForSleep(MXC_UART_GET_UART(CONSOLE_UART)) == E_NO_ERROR
+    if (AsyncTxRequests[CONSOLE_UART] != NULL) {
+        return 3;
+    }
+    // 
+    
     uint32_t wsfTicksToNextExpiration = wsfTimerNextExpiration();
     if (wsfTicksToNextExpiration > 0)
     {
@@ -287,7 +302,7 @@ void DeepSleep(void)
 
     /* Check to see if we meet the minimum requirements for deep sleep */
     if (idleInWutCnt < (MIN_WUT_TICKS + WAKEUP_US)) {
-        return;
+        return 4;
     }
 
     WsfTaskLock();
@@ -296,13 +311,6 @@ void DeepSleep(void)
      */
     __asm volatile("cpsid i");
 
-    if (!wsfOsReadyToSleep()
-        // TODO: && UART_PrepForSleep(MXC_UART_GET_UART(CONSOLE_UART)) == E_NO_ERROR)
-    )
-    {
-        goto EXIT_SLEEP_FUNC;
-    }
-    
     /* Determine if the Bluetooth scheduler is running */
     if (PalTimerGetState() == PAL_TIMER_STATE_BUSY)
     {
@@ -428,6 +436,8 @@ EXIT_SLEEP_FUNC:
     __asm volatile("cpsie i");
 
     WsfTaskUnlock();
+
+    return 0;
 }
 #endif /* DEEP_SLEEP */
 

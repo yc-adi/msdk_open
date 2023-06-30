@@ -284,7 +284,6 @@ int DeepSleep(void)
     if (AsyncTxRequests[CONSOLE_UART] != NULL) {
         return 3;
     }
-    // 
     
     uint32_t wsfTicksToNextExpiration = wsfTimerNextExpiration();
     if (wsfTicksToNextExpiration > 0)
@@ -338,11 +337,11 @@ int DeepSleep(void)
     MXC_LP_EnableWUTAlarmWakeup();
 
     /* Determine if we need to snapshot the PalBb clock */
+    /* Snapshot the current WUT value with the PalBb clock */
+    MXC_WUT_Store(MXC_WUT);
+    preCaptureInWutCnt = MXC_WUT_GetCount(MXC_WUT);
     if (schTimerActive) 
     {
-        /* Snapshot the current WUT value with the PalBb clock */
-        MXC_WUT_Store(MXC_WUT);
-        preCaptureInWutCnt = MXC_WUT_GetCount(MXC_WUT);
         schUsec = PalTimerGetExpTime();  // old way: bool_t SchBleGetNextDueTime(uint32_t *pDueTime)
 
         /* Adjust idleTicks for the time it takes to restart the BLE hardware */
@@ -361,16 +360,12 @@ int DeepSleep(void)
     } 
     else
     {
-        /* Snapshot the current WUT value */
-        MXC_WUT_Edge(MXC_WUT);
-        preCaptureInWutCnt = MXC_WUT_GetCount(MXC_WUT);
-        bleSleepTicks = 0;
         schUsec = 0;
+        bleSleepTicks = 0;
     }
 
     /* Sleep for the shortest tick duration */
-    if ((schTimerActive) 
-        && (bleSleepTicks < idleInWutCnt))
+    if (schTimerActive && (bleSleepTicks < idleInWutCnt))
     {
         dsInWutCnt = bleSleepTicks;
     } 
@@ -645,11 +640,14 @@ int main(void)
 
     PalBbLoadCfg((PalBbCfg_t *)&mainBbRtCfg);
     LlGetDefaultRunTimeCfg(&mainLlRtCfg);
+
 #if (BT_VER >= LL_VER_BT_CORE_SPEC_5_0)
     /* Set 5.0 requirements. */
     mainLlRtCfg.btVer = LL_VER_BT_CORE_SPEC_5_0;
 #endif
+
     PalCfgLoadData(PAL_CFG_ID_LL_PARAM, &mainLlRtCfg.maxAdvSets, sizeof(LlRtCfg_t) - 9);
+
 #if (BT_VER >= LL_VER_BT_CORE_SPEC_5_0)
     PalCfgLoadData(PAL_CFG_ID_BLE_PHY, &mainLlRtCfg.phy2mSup, 4);
 #endif
@@ -725,8 +723,8 @@ int main(void)
 #if  DEEP_SLEEP == 1
             if (conn_opened)
             {
-                //DeepSleep();
-                WsfTimerSleep();
+                DeepSleep();
+                //WsfTimerSleep();
             }
             else
             {

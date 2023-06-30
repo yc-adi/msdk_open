@@ -78,7 +78,7 @@
 #define CUST_SPEC_TMR_EVT 0x9A
 
 #define TRIM_TIMER_PERIOD_MS 100000
-#define CUST_SPEC_TMR_PERIOD_MS 15000
+#define CUST_SPEC_TMR_PERIOD_MS 60000
 
 /*! Button press handling constants */
 #define BTN_SHORT_MS 200
@@ -681,10 +681,12 @@ static void datsProcMsg(dmEvt_t *pMsg)
 
         WsfTimerStartMs(&custSpecAppTimer, CUST_SPEC_TMR_PERIOD_MS); // start next
 
-        APP_TRACE_INFO0("TODO: CUSTOMER SPECIFIED APP");
-        printTime();
+        if (conn_opened == 0) {
+            APP_TRACE_INFO0("TODO: CUSTOMER SPECIFIED APP");
+            printTime();
 
-        MXC_Delay(1000); // workload
+            MXC_Delay(1000); // workload
+        }
 
         LED_On(LED_RED);
         break;
@@ -739,7 +741,7 @@ void DatsHandlerInit(wsfHandlerId_t handlerId)
 
     APP_TRACE_INFO0("start customer specified app timer");
     MXC_Delay(1000);
-    WsfTimerStartMs(&custSpecAppTimer, CUST_SPEC_TMR_PERIOD_MS); // first start
+    //WsfTimerStartMs(&custSpecAppTimer, CUST_SPEC_TMR_PERIOD_MS); // first start
 }
 
 /*************************************************************************************************/

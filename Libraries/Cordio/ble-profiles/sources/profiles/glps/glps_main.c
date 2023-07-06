@@ -38,10 +38,19 @@
 /**************************************************************************************************
   Local Variables
 **************************************************************************************************/
+/*! \brief Connection control block */
+typedef struct
+{
+  dmConnId_t    connId;               /*! \brief Connection ID */
+  bool_t        glmToSend;            /*! \brief glucose measurement ready to be sent on this channel */
+} glpsConn_t;
 
 /* Control block */
 static struct
 {
+  glpsConn_t    conn[DM_CONN_MAX];          /* \brief connection control block */
+  wsfTimer_t    measTimer;                  /* \brief periodic measurement timer */
+  uint16_t      cgmPeriodSec;               /* CGM period in second*/
   uint8_t       operand[GLPS_OPERAND_MAX];  /* Stored operand filter data */
   glpsRec_t     *pCurrRec;                  /* Pointer to current measurement record */
   bool_t        inProgress;                 /* TRUE if RACP procedure in progress */
@@ -599,8 +608,9 @@ static void glpsToggleBondingFlag(void)
  *  \return None.
  */
 /*************************************************************************************************/
-void GlpsInit(void)
+void GlpsInit(uint16_t cgm_period_sec)
 {
+  glpsCb.cgmPeriodSec = cgm_period_sec;
   glpsDbInit();
 }
 
@@ -616,22 +626,14 @@ void GlpsInit(void)
 /*************************************************************************************************/
 void GlpsProcMsg(wsfMsgHdr_t *pMsg)
 {
-  switch(pMsg->event)
-  {
-    case DM_CONN_OPEN_IND:
+  if (pMsg->event == DM_CONN_OPEN_IND) {
       glpsConnOpen((dmEvt_t *) pMsg);
-      break;
-
-    case DM_CONN_CLOSE_IND:
+  } else if (pMsg->event == DM_CONN_CLOSE_IND) {
       glpsConnClose((dmEvt_t *) pMsg);
-      break;
-
-    case ATTS_HANDLE_VALUE_CNF:
+  } else if (pMsg->event == ATTS_HANDLE_VALUE_CNF) {
       glpsHandleValueCnf((attEvt_t *) pMsg);
-      break;
-
-    default:
-      break;
+  } else if (pMsg->event == glpsCb.measTimer.msg.event) {
+      GlpsMeasTimerExp(pMsg);
   }
 }
 
@@ -818,3 +820,141 @@ void GlpsSetCccIdx(uint8_t glmCccIdx, uint8_t glmcCccIdx, uint8_t racpCccIdx)
   glpsCb.racpCccIdx = racpCccIdx;
 }
 
+/*************************************************************************************************/
+/*!
+ *  \brief  Return TRUE if no connections with active measurements.
+ *
+ *  \return TRUE if no connections active.
+ */
+/*************************************************************************************************/
+static bool_t glpsNoConnActive(void)
+{
+  glpsConn_t *pConn = glpsCb.conn;
+  uint8_t i;
+
+  for (i = 0; i < DM_CONN_MAX; i++, pConn++)
+  {
+    if (pConn->connId != DM_CONN_ID_NONE)
+    {
+      return FALSE;
+    }
+  }
+  return TRUE;
+}
+
+/*************************************************************************************************/
+/*!
+ *  \brief  Start periodic glucose measurement.  This function starts a timer to perform
+ *          periodic measurements.
+ *
+ *  \param  connId      DM connection identifier.
+ *  \param  timerEvt    WSF event designated by the application for the timer.
+ *  \param  glsGlmCccIdx   Index of glucose measurement CCC descriptor in CCC descriptor handle table.
+ *
+ *  \return None.
+ */
+/*************************************************************************************************/
+void GlpsMeasStart(dmConnId_t connId, uint8_t timerEvt, uint8_t glsGlmCccIdx)
+{
+  /* if this is first connection */
+  if (glpsNoConnActive())
+  {
+    /* initialize control block */
+    glpsCb.measTimer.msg.event = timerEvt;
+    glpsCb.measTimer.msg.status = glsGlmCccIdx;
+
+    /* start timer */
+    WsfTimerStartMs(&glpsCb.measTimer, glpsCb.cgmPeriodSec * 1000);
+  }
+
+  /* set conn id */
+  glpsCb.conn[connId - 1].connId = connId;
+}
+
+/*************************************************************************************************/
+/*!
+ *  \brief  Stop periodic glucose measurement.
+ *
+ *  \param  connId      DM connection identifier.
+ *
+ *  \return None.
+ */
+/*************************************************************************************************/
+void GlpsMeasStop(dmConnId_t connId)
+{
+  /* clear connection */
+  glpsCb.conn[connId - 1].connId = DM_CONN_ID_NONE;
+  glpsCb.conn[connId - 1].glmToSend = FALSE;
+
+  /* if no remaining connections */
+  if (glpsNoConnActive())
+  {
+    /* stop timer */
+    WsfTimerStop(&glpsCb.measTimer);
+  }
+}
+
+/*************************************************************************************************/
+/*!
+ *  \brief  Find next connection with measurement to send.
+ *
+ *  \param  cccIdx  glucose measurement CCC descriptor index.
+ *
+ *  \return Connection control block.
+ */
+/*************************************************************************************************/
+static glpsConn_t *glpsFindNextToSend(uint8_t cccIdx)
+{
+  glpsConn_t *pConn = glpsCb.conn;
+  uint8_t i;
+
+  for (i = 0; i < DM_CONN_MAX; i++, pConn++)
+  {
+    if (pConn->connId != DM_CONN_ID_NONE && pConn->glmToSend)
+    {
+      if (AttsCccEnabled(pConn->connId, cccIdx))
+      {
+        return pConn;
+      }
+    }
+  }
+  return NULL;
+}
+
+/*************************************************************************************************/
+/*!
+ *  \brief  This function is called by the application when the periodic measurement
+ *          timer expires.
+ *
+ *  \param  pMsg     Event message.
+ *
+ *  \return None.
+ */
+/*************************************************************************************************/
+void GlpsMeasTimerExp(wsfMsgHdr_t *pMsg)
+{
+  glpsConn_t  *pConn;
+
+  /* if there are active connections */
+  if (glpsNoConnActive() == FALSE)
+  {
+    /* read heart rate measurement sensor data */
+    APP_TRACE_INFO0("TODO: retrieve/setup glucose measurement data."); // TODO, @?@, remove me !!!
+
+    /* if ready to send measurements */
+    if (glpsCb.txReady)
+    {
+      /* find next connection to send (note ccc idx is stored in timer status) */
+      if ((pConn = glpsFindNextToSend(pMsg->status)) != NULL)
+      {
+        //glpsSendHrmNtf(pConn->connId);
+        APP_TRACE_INFO0("TODO: send glucose measurement notification");
+        glpsCb.txReady = FALSE;
+        pConn->glmToSend = FALSE;
+      }
+    }
+
+    /* restart timer */
+    WsfTimerStartMs(&glpsCb.measTimer, glpsCb.cgmPeriodSec * 1000);
+  }
+}

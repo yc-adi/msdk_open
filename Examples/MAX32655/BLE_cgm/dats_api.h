@@ -30,6 +30,12 @@
 extern "C" {
 #endif
 
+#ifndef CGM_CONN_MAX
+#define CGM_CONN_MAX 1
+#endif
+
+#define CGM_PERIOD_SEC 5
+
 /**************************************************************************************************
   Function Declarations
 **************************************************************************************************/
@@ -40,7 +46,7 @@ extern "C" {
  *  \return None.
  */
 /*************************************************************************************************/
-void DatsStart(void);
+void CgmStart(void);
 
 /*************************************************************************************************/
 /*!
@@ -51,7 +57,7 @@ void DatsStart(void);
  *  \return None.
  */
 /*************************************************************************************************/
-void DatsHandlerInit(wsfHandlerId_t handlerId);
+void CgmHandlerInit(wsfHandlerId_t handlerId);
 
 /*************************************************************************************************/
 /*!
@@ -63,7 +69,7 @@ void DatsHandlerInit(wsfHandlerId_t handlerId);
  *  \return None.
  */
 /*************************************************************************************************/
-void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg);
+void CgmHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg);
 
 #ifdef __cplusplus
 };

@@ -51,7 +51,7 @@
  *  \return     None.
  */
 /*************************************************************************************************/
-void StackInitDats(void)
+void StackInitDatsCgm(void)
 {
     wsfHandlerId_t handlerId;
 
@@ -92,8 +92,8 @@ void StackInitDats(void)
     handlerId = WsfOsSetNextHandler(AppHandler);
     AppHandlerInit(handlerId);
 
-    handlerId = WsfOsSetNextHandler(DatsHandler);
-    DatsHandlerInit(handlerId);
+    handlerId = WsfOsSetNextHandler(CgmHandler);
+    CgmHandlerInit(handlerId);
 
     handlerId = WsfOsSetNextHandler(WdxsHandler);
     WdxsHandlerInit(handlerId);

@@ -437,7 +437,7 @@ EXIT_SLEEP_FUNC:
 #endif /* DEEP_SLEEP */
 
 /*! \brief  Stack initialization for app. */
-extern void StackInitDats(void);
+extern void StackInitDatsCgm(void);
 
 /*************************************************************************************************/
 /*!
@@ -707,9 +707,9 @@ int main(void)
     PalBbDisable();
 #endif
 
-    StackInitDats();
+    StackInitDatsCgm();
 
-    DatsStart();
+    CgmStart();
 
     // WsfOsEnterMainLoop();
     while(TRUE)
@@ -728,7 +728,7 @@ int main(void)
             }
             else
             {
-                DeepSleep();
+                i = DeepSleep();
             }
 #else
             WsfTimerSleep();

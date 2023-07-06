@@ -23,6 +23,8 @@
 /*************************************************************************************************/
 
 #include <string.h>
+#include "bas/bas_api.h"
+#include "glps/glps_api.h"
 #include "led.h"
 #include "mxc_device.h"
 #include "mxc_delay.h"
@@ -42,8 +44,10 @@
 #include "app_main.h"
 #include "app_db.h"
 #include "app_ui.h"
+#include "svc_batt.h"
 #include "svc_ch.h"
 #include "svc_core.h"
+#include "svc_gls.h"
 #include "svc_wp.h"
 #include "util/calc128.h"
 #include "gatt/gatt_api.h"
@@ -92,16 +96,26 @@
 #define OTA_INTERNAL 0
 #endif
 
-/*! Enumeration of client characteristic configuration descriptors */
+/*! WSF message event starting value */
+#define CGM_MSG_START 0xA0
+
+/*! WSF message event enumeration */
 enum {
-    WDXS_DC_CH_CCC_IDX, /*! WDXS DC service, service changed characteristic */
-    WDXS_FTC_CH_CCC_IDX, /*! WDXS FTC  service, service changed characteristic */
-    WDXS_FTD_CH_CCC_IDX, /*! WDXS FTD service, service changed characteristic */
-    WDXS_AU_CH_CCC_IDX, /*! WDXS AU service, service changed characteristic */
-    DATS_GATT_SC_CCC_IDX, /*! GATT service, service changed characteristic */
-    DATS_WP_DAT_CCC_IDX, /*! Arm Ltd. proprietary service, data transfer characteristic */
-    DATS_NUM_CCC_IDX
+    CGM_GLM_TIMER_IND = CGM_MSG_START, /*! glucose measurement timer expired */
+    CGM_BATT_TIMER_IND /*! Battery measurement timer expired */
 };
+
+/**************************************************************************************************
+  Data Types
+**************************************************************************************************/
+
+/*! Application message type */
+typedef union {
+    wsfMsgHdr_t hdr;
+    dmEvt_t dm;
+    attsCccEvt_t ccc;
+    attEvt_t att;
+} cgmMsg_t;
 
 /**************************************************************************************************
   Configurable Parameters
@@ -115,7 +129,7 @@ static const appAdvCfg_t datsAdvCfg = {
 
 /*! configurable parameters for slave */
 static const appSlaveCfg_t datsSlaveCfg = {
-    1, /*! Maximum connections */
+    CGM_CONN_MAX, /*! Maximum connections */
 };
 
 /*! configurable parameters for security */
@@ -129,6 +143,13 @@ static const appSecCfg_t datsSecCfg = {
 
 /*! TRUE if Out-of-band pairing data is to be sent */
 static const bool_t datsSendOobData = FALSE;
+
+/*! battery measurement configuration */
+static const basCfg_t cgmBasCfg = {
+    30, /*! Battery measurement timer expiration period in seconds */
+    1, /*! Perform battery measurement after this many timer periods */
+    100 /*! Send battery level notification to peer when below this level. */
+};
 
 /*! SMP security parameter configuration */
 static const smpCfg_t datsSmpCfg = {
@@ -197,6 +218,17 @@ static const uint8_t datsAdvDataDisc[] = {
     DM_FLAG_LE_GENERAL_DISC | /*! flags */
         DM_FLAG_LE_BREDR_NOT_SUP,
 
+    /*! tx power */
+    2, /*! length */
+    DM_ADV_TYPE_TX_POWER, /*! AD type */
+    0, /*! tx power */
+
+    /*! service UUID list */
+    5, /*! length */
+    DM_ADV_TYPE_16_UUID, /*! AD type */
+    UINT16_TO_BYTES(ATT_UUID_GLUCOSE_SERVICE), 
+    UINT16_TO_BYTES(ATT_UUID_BATTERY_SERVICE),
+
     /*! manufacturer specific data */
     3, /*! length */
     DM_ADV_TYPE_MANUFACTURER, /*! AD type */
@@ -214,23 +246,37 @@ static const uint8_t datsScanDataDisc[] = {
 /**************************************************************************************************
   Client Characteristic Configuration Descriptors
 **************************************************************************************************/
+/*! Enumeration of client characteristic configuration descriptors */
+enum {
+    WDXS_DC_CH_CCC_IDX, /*! WDXS DC service, service changed characteristic */
+    WDXS_FTC_CH_CCC_IDX, /*! WDXS FTC service, service changed characteristic */
+    WDXS_FTD_CH_CCC_IDX, /*! WDXS FTD service, service changed characteristic */
+    WDXS_AU_CH_CCC_IDX, /*! WDXS AU service, service changed characteristic */
+    CGM_GATT_SC_CCC_IDX, /*! GATT service, service changed characteristic */
+    CGM_WP_DAT_CCC_IDX, /*! Arm Ltd. proprietary service, data transfer characteristic */
+    CGM_BATT_LVL_CCC_IDX, /*! Battery service, battery level characteristic */
+    GLS_GLM_CCC_IDX, /*! glucose measurement service, glucose measurement characteristic */
+    CGM_NUM_CCC_IDX
+};
 
 /*! client characteristic configuration descriptors settings, indexed by above enumeration */
-static const attsCccSet_t datsCccSet[DATS_NUM_CCC_IDX] = {
+static const attsCccSet_t cgmCccSet[CGM_NUM_CCC_IDX] = {
     /* cccd handle          value range               security level */
     { WDXS_DC_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY, DM_SEC_LEVEL_NONE }, /* WDXS_DC_CH_CCC_IDX */
     { WDXS_FTC_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY, DM_SEC_LEVEL_NONE }, /* WDXS_FTC_CH_CCC_IDX */
     { WDXS_FTD_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY, DM_SEC_LEVEL_NONE }, /* WDXS_FTD_CH_CCC_IDX */
     { WDXS_AU_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY, DM_SEC_LEVEL_NONE }, /* WDXS_AU_CH_CCC_IDX */
-    { GATT_SC_CH_CCC_HDL, ATT_CLIENT_CFG_INDICATE, DM_SEC_LEVEL_NONE }, /* DATS_GATT_SC_CCC_IDX */
-    { WP_DAT_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY, DM_SEC_LEVEL_NONE } /* DATS_WP_DAT_CCC_IDX */
+    { GATT_SC_CH_CCC_HDL, ATT_CLIENT_CFG_INDICATE, DM_SEC_LEVEL_NONE }, /* CGM_GATT_SC_CCC_IDX */
+    { WP_DAT_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY, DM_SEC_LEVEL_NONE }, /* CGM_WP_DAT_CCC_IDX */
+    { BATT_LVL_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY, DM_SEC_LEVEL_NONE }, /* CGM_BATT_LVL_CCC_IDX */
+    { GLS_GLM_CH_HDL, ATT_CLIENT_CFG_NOTIFY, DM_SEC_LEVEL_NONE }, /* GLS_GLM_CCC_IDX */
 };
 
 /**************************************************************************************************
   Local Variables
 **************************************************************************************************/
 
-/*! application control block */
+/*! CGM application control block */
 static struct {
     wsfHandlerId_t handlerId; /* WSF handler ID */
 #if (BT_VER > 8)
@@ -238,7 +284,7 @@ static struct {
 #endif /* BT_VER */
     appDbHdl_t resListRestoreHdl; /*! Resolving List last restored handle */
     bool_t restoringResList; /*! Restoring resolving list from NVM */
-} datsCb;
+} cgmCb;
 
 /* LESC OOB configuration */
 static dmSecLescOobCfg_t *datsOobCfg;
@@ -269,7 +315,7 @@ extern void printTime(void);
 /*************************************************************************************************/
 static void datsSendData(dmConnId_t connId, uint8_t size, uint8_t *msg)
 {
-    if (AttsCccEnabled(connId, DATS_WP_DAT_CCC_IDX)) {
+    if (AttsCccEnabled(connId, CGM_WP_DAT_CCC_IDX)) {
         /* send notification */
         AttsHandleValueNtf(connId, WP_DAT_HDL, size, msg);
     }
@@ -284,7 +330,7 @@ static void datsSendData(dmConnId_t connId, uint8_t size, uint8_t *msg)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsDmCback(dmEvt_t *pDmEvt)
+static void cgmDmCback(dmEvt_t *pDmEvt)
 {
     dmEvt_t *pMsg;
     uint16_t len;
@@ -312,7 +358,7 @@ static void datsDmCback(dmEvt_t *pDmEvt)
 
         if ((pMsg = WsfMsgAlloc(len)) != NULL) {
             memcpy(pMsg, pDmEvt, len);
-            WsfMsgSend(datsCb.handlerId, pMsg);
+            WsfMsgSend(cgmCb.handlerId, pMsg);
         }
     }
 }
@@ -326,9 +372,18 @@ static void datsDmCback(dmEvt_t *pDmEvt)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsAttCback(attEvt_t *pEvt)
+static void cgmAttCback(attEvt_t *pEvt)
 {
-    WdxsAttCback(pEvt);
+    attEvt_t *pMsg;
+
+    if (!WdxsAttCback(pEvt)) {
+        if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen)) != NULL) {
+            memcpy(pMsg, pEvt, sizeof(attEvt_t));
+            pMsg->pValue = (uint8_t *)(pMsg + 1);
+            memcpy(pMsg->pValue, pEvt->pValue, pEvt->valueLen);
+            WsfMsgSend(cgmCb.handlerId, pMsg);
+        }
+    }
 }
 
 /*************************************************************************************************/
@@ -340,8 +395,9 @@ static void datsAttCback(attEvt_t *pEvt)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsCccCback(attsCccEvt_t *pEvt)
+static void cgmCccCback(attsCccEvt_t *pEvt)
 {
+    attsCccEvt_t *pMsg;
     appDbHdl_t dbHdl;
 
     /* If CCC not set from initialization and there's a device record and currently bonded */
@@ -351,6 +407,11 @@ static void datsCccCback(attsCccEvt_t *pEvt)
         /* Store value in device database. */
         AppDbSetCccTblValue(dbHdl, pEvt->idx, pEvt->value);
         AppDbNvmStoreCccTbl(dbHdl);
+    }
+
+    if ((pMsg = WsfMsgAlloc(sizeof(attsCccEvt_t))) != NULL) {
+        memcpy(pMsg, pEvt, sizeof(attsCccEvt_t));
+        WsfMsgSend(cgmCb.handlerId, pMsg);
     }
 }
 
@@ -433,7 +494,7 @@ static void datsPrivAddDevToResList(appDbHdl_t dbHdl)
 *  \return None.
 */
 /*************************************************************************************************/
-static void datsPrivRemDevFromResListInd(dmEvt_t *pMsg)
+static void datsPrivRemDevFromResListInd(cgmMsg_t *pMsg)
 {
     if (pMsg->hdr.status == HCI_SUCCESS) {
         if (AppDbGetHdl((dmConnId_t)pMsg->hdr.param) != APP_DB_HDL_NONE) {
@@ -462,6 +523,60 @@ void datsDisplayStackVersion(const char *pVersion)
 
 /*************************************************************************************************/
 /*!
+ *  \brief  Process CCC state change.
+ *
+ *  \param  pMsg    Pointer to message.
+ *
+ *  \return None.
+ */
+/*************************************************************************************************/
+static void cgmProcCccState(cgmMsg_t *pMsg)
+{
+    APP_TRACE_INFO3("ccc state ind value:%d handle:%d idx:%d", pMsg->ccc.value, pMsg->ccc.handle,
+                    pMsg->ccc.idx);
+
+    /* handle glucose measurement CCC */
+    if (pMsg->ccc.idx == GLS_GLM_CCC_IDX) {
+        if (pMsg->ccc.value == ATT_CLIENT_CFG_NOTIFY) {
+            GlpsMeasStart((dmConnId_t)pMsg->ccc.hdr.param, CGM_GLM_TIMER_IND, GLS_GLM_CCC_IDX);
+        } else {
+            GlpsMeasStop((dmConnId_t)pMsg->ccc.hdr.param);
+        }
+        return;
+    }
+
+    /* handle battery level CCC */
+    if (pMsg->ccc.idx == CGM_BATT_LVL_CCC_IDX) {
+        if (pMsg->ccc.value == ATT_CLIENT_CFG_NOTIFY) {
+            BasMeasBattStart((dmConnId_t)pMsg->ccc.hdr.param, CGM_BATT_TIMER_IND,
+                             CGM_BATT_LVL_CCC_IDX);
+        } else {
+            BasMeasBattStop((dmConnId_t)pMsg->ccc.hdr.param);
+        }
+        return;
+    }
+}
+
+/*************************************************************************************************/
+/*!
+ *  \brief  Perform UI actions on connection close.
+ *
+ *  \param  pMsg    Pointer to message.
+ *
+ *  \return None.
+ */
+/*************************************************************************************************/
+static void cgmClose(cgmMsg_t *pMsg)
+{
+    /* stop glucose measurement */
+    GlpsMeasStop((dmConnId_t)pMsg->hdr.param);
+
+    /* stop battery measurement */
+    BasMeasBattStop((dmConnId_t)pMsg->hdr.param);
+}
+
+/*************************************************************************************************/
+/*!
  *  \brief  Set up advertising and other procedures that need to be performed after
  *          device reset.
  *
@@ -470,15 +585,14 @@ void datsDisplayStackVersion(const char *pVersion)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsSetup(dmEvt_t *pMsg)
+static void cgmSetup(cgmMsg_t *pMsg)
 {
     /* Initialize control information */
-    datsCb.restoringResList = FALSE;
+    cgmCb.restoringResList = FALSE;
 
     /* set advertising and scan response data for discoverable mode */
     AppAdvSetData(APP_ADV_DATA_DISCOVERABLE, sizeof(datsAdvDataDisc), (uint8_t *)datsAdvDataDisc);
-    AppAdvSetData(APP_SCAN_DATA_DISCOVERABLE, sizeof(datsScanDataDisc),
-                  (uint8_t *)datsScanDataDisc);
+    AppAdvSetData(APP_SCAN_DATA_DISCOVERABLE, sizeof(datsScanDataDisc), (uint8_t *)datsScanDataDisc);
 
     /* set advertising and scan response data for connectable mode */
     AppAdvSetData(APP_ADV_DATA_CONNECTABLE, sizeof(datsAdvDataDisc), (uint8_t *)datsAdvDataDisc);
@@ -497,16 +611,16 @@ static void datsSetup(dmEvt_t *pMsg)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsRestoreResolvingList(dmEvt_t *pMsg)
+static void datsRestoreResolvingList(cgmMsg_t *pMsg)
 {
     /* Restore first device to resolving list in Controller. */
-    datsCb.resListRestoreHdl = AppAddNextDevToResList(APP_DB_HDL_NONE);
+    cgmCb.resListRestoreHdl = AppAddNextDevToResList(APP_DB_HDL_NONE);
 
-    if (datsCb.resListRestoreHdl == APP_DB_HDL_NONE) {
+    if (cgmCb.resListRestoreHdl == APP_DB_HDL_NONE) {
         /* No device to restore.  Setup application. */
-        datsSetup(pMsg);
+        cgmSetup(pMsg);
     } else {
-        datsCb.restoringResList = TRUE;
+        cgmCb.restoringResList = TRUE;
     }
 }
 
@@ -519,19 +633,19 @@ static void datsRestoreResolvingList(dmEvt_t *pMsg)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsPrivAddDevToResListInd(dmEvt_t *pMsg)
+static void datsPrivAddDevToResListInd(cgmMsg_t *pMsg)
 {
     /* Check if in the process of restoring the Device List from NV */
-    if (datsCb.restoringResList) {
+    if (cgmCb.restoringResList) {
         /* Set the advertising peer address. */
-        datsPrivAddDevToResList(datsCb.resListRestoreHdl);
+        datsPrivAddDevToResList(cgmCb.resListRestoreHdl);
 
         /* Retore next device to resolving list in Controller. */
-        datsCb.resListRestoreHdl = AppAddNextDevToResList(datsCb.resListRestoreHdl);
+        cgmCb.resListRestoreHdl = AppAddNextDevToResList(cgmCb.resListRestoreHdl);
 
-        if (datsCb.resListRestoreHdl == APP_DB_HDL_NONE) {
+        if (cgmCb.resListRestoreHdl == APP_DB_HDL_NONE) {
             /* No additional device to restore. Setup application. */
-            datsSetup(pMsg);
+            cgmSetup(pMsg);
         }
     } else {
         datsPrivAddDevToResList(AppDbGetHdl((dmConnId_t)pMsg->hdr.param));
@@ -547,104 +661,26 @@ static void datsPrivAddDevToResListInd(dmEvt_t *pMsg)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsProcMsg(dmEvt_t *pMsg)
+static void cgmProcMsg(cgmMsg_t *pMsg)
 {
     uint8_t uiEvent = APP_UI_NONE;
 
     switch (pMsg->hdr.event) {
-    case DM_RESET_CMPL_IND:
-        AttsCalculateDbHash();
-        DmSecGenerateEccKeyReq();
-        AppDbNvmReadAll();
-        datsRestoreResolvingList(pMsg);
-        setAdvTxPower();
-        uiEvent = APP_UI_RESET_CMPL;
+    case CGM_GLM_TIMER_IND:
+        GlpsProcMsg(&pMsg->hdr);
         break;
 
-    case DM_ADV_START_IND:
-        WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
-
-        uiEvent = APP_UI_ADV_START;
+    case CGM_BATT_TIMER_IND:
+        BasProcMsg(&pMsg->hdr);
         break;
 
-    case DM_ADV_STOP_IND:
-        WsfTimerStop(&trimTimer);
-        uiEvent = APP_UI_ADV_STOP;
+    case ATTS_HANDLE_VALUE_CNF:
+        GlpsProcMsg(&pMsg->hdr);
+        BasProcMsg(&pMsg->hdr);
         break;
-
-    case DM_CONN_OPEN_IND:
-        uiEvent = APP_UI_CONN_OPEN;
-        conn_opened = 1;
-        APP_TRACE_INFO0("Disable deep sleep");
-        break;
-
-    case DM_CONN_CLOSE_IND:
-        WsfTimerStop(&trimTimer);
-
-        APP_TRACE_INFO2("Connection closed status 0x%x, reason 0x%x", pMsg->connClose.status,
-                        pMsg->connClose.reason);
-        switch (pMsg->connClose.reason) {
-        case HCI_ERR_CONN_TIMEOUT:
-            APP_TRACE_INFO0(" TIMEOUT");
-            break;
-        case HCI_ERR_LOCAL_TERMINATED:
-            APP_TRACE_INFO0(" LOCAL TERM");
-            break;
-        case HCI_ERR_REMOTE_TERMINATED:
-            APP_TRACE_INFO0(" REMOTE TERM");
-            break;
-        case HCI_ERR_CONN_FAIL:
-            APP_TRACE_INFO0(" FAIL ESTABLISH");
-            break;
-        case HCI_ERR_MIC_FAILURE:
-            APP_TRACE_INFO0(" MIC FAILURE");
-            break;
-        }
-        uiEvent = APP_UI_CONN_CLOSE;
-        conn_opened = 0;
-        APP_TRACE_INFO0("Enable deep sleep");
-        break;
-
-    case DM_SEC_PAIR_CMPL_IND:
-        DmSecGenerateEccKeyReq();
-        AppDbNvmStoreBond(AppDbGetHdl((dmConnId_t)pMsg->hdr.param));
-        uiEvent = APP_UI_SEC_PAIR_CMPL;
-        break;
-
-    case DM_SEC_PAIR_FAIL_IND:
-        DmSecGenerateEccKeyReq();
-        uiEvent = APP_UI_SEC_PAIR_FAIL;
-        break;
-
-    case DM_SEC_ENCRYPT_IND:
-        uiEvent = APP_UI_SEC_ENCRYPT;
-        break;
-
-    case DM_SEC_ENCRYPT_FAIL_IND:
-        uiEvent = APP_UI_SEC_ENCRYPT_FAIL;
-        break;
-
-    case DM_SEC_AUTH_REQ_IND:
-
-        if (pMsg->authReq.oob) {
-            dmConnId_t connId = (dmConnId_t)pMsg->hdr.param;
-
-            /* TODO: Perform OOB Exchange with the peer. */
-
-            /* TODO: Fill datsOobCfg peerConfirm and peerRandom with value passed out of band */
-
-            if (datsOobCfg != NULL) {
-                DmSecSetOob(connId, datsOobCfg);
-            }
-
-            DmSecAuthRsp(connId, 0, NULL);
-        } else {
-            AppHandlePasskey(&pMsg->authReq);
-        }
-        break;
-
-    case DM_SEC_COMPARE_IND:
-        AppHandleNumericComparison(&pMsg->cnfInd);
+        
+    case ATTS_CCC_STATE_IND:
+        cgmProcCccState(pMsg);
         break;
 
     case DM_PRIV_ADD_DEV_TO_RES_LIST_IND:
@@ -658,14 +694,143 @@ static void datsProcMsg(dmEvt_t *pMsg)
     case DM_ADV_NEW_ADDR_IND:
         break;
 
+    case DM_RESET_CMPL_IND:
+        AttsCalculateDbHash();
+        DmSecGenerateEccKeyReq();
+        AppDbNvmReadAll();
+        datsRestoreResolvingList(pMsg);
+        setAdvTxPower();
+
+        cgmSetup(pMsg);
+
+        uiEvent = APP_UI_RESET_CMPL;
+        break;
+
+    case DM_ADV_SET_START_IND:
+        uiEvent = APP_UI_ADV_SET_START_IND;
+        break;
+
+    case DM_ADV_SET_STOP_IND:
+        uiEvent = APP_UI_ADV_SET_STOP_IND;
+        break;
+
+    case DM_ADV_START_IND:
+#if DEEP_SLEEP == 0
+        WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
+#endif
+        uiEvent = APP_UI_ADV_START;
+        break;
+
+    case DM_ADV_STOP_IND:
+#if DEEP_SLEEP == 0
+        WsfTimerStop(&trimTimer);
+#endif
+        uiEvent = APP_UI_ADV_STOP;
+        break;
+
+    case DM_CONN_OPEN_IND:
+        GlpsProcMsg(&pMsg->hdr);
+        BasProcMsg(&pMsg->hdr);
+
+        uiEvent = APP_UI_CONN_OPEN;
+        conn_opened = 1;
+        break;
+
+    case DM_CONN_CLOSE_IND:
+        WsfTimerStop(&trimTimer);
+
+        APP_TRACE_INFO2("Connection closed status 0x%x, reason 0x%x", ((dmEvt_t *)pMsg)->connClose.status,
+                        ((dmEvt_t *)pMsg)->connClose.reason);
+
+        switch (((dmEvt_t *)pMsg)->connClose.reason) {
+            case HCI_ERR_CONN_TIMEOUT:
+                APP_TRACE_INFO0(" TIMEOUT");
+            break;
+        
+            case HCI_ERR_LOCAL_TERMINATED:
+                APP_TRACE_INFO0(" LOCAL TERM");
+            break;
+
+            case HCI_ERR_REMOTE_TERMINATED:
+                APP_TRACE_INFO0(" REMOTE TERM");
+            break;
+
+            case HCI_ERR_CONN_FAIL:
+                APP_TRACE_INFO0(" FAIL ESTABLISH");
+            break;
+
+            case HCI_ERR_MIC_FAILURE:
+                APP_TRACE_INFO0(" MIC FAILURE");
+            break;
+        }
+
+        uiEvent = APP_UI_CONN_CLOSE;
+        
+        cgmClose(pMsg);
+
+        conn_opened = 0;
+        
+        break;
+    
+    case DM_SEC_PAIR_CMPL_IND:
+        DmSecGenerateEccKeyReq();
+        AppDbNvmStoreBond(AppDbGetHdl((dmConnId_t)pMsg->hdr.param));
+        uiEvent = APP_UI_SEC_PAIR_CMPL;
+        break;
+    
+    case DM_SEC_PAIR_FAIL_IND:
+        DmSecGenerateEccKeyReq();
+        uiEvent = APP_UI_SEC_PAIR_FAIL;
+        break;
+    
+    case DM_SEC_ENCRYPT_IND:
+        uiEvent = APP_UI_SEC_ENCRYPT;
+        break;
+    
+    case DM_SEC_ENCRYPT_FAIL_IND:
+        uiEvent = APP_UI_SEC_ENCRYPT_FAIL;
+        break;
+    
+    case DM_SEC_AUTH_REQ_IND:
+        if (((dmEvt_t *)pMsg)->authReq.oob) {
+            dmConnId_t connId = (dmConnId_t)pMsg->hdr.param;
+
+            /* TODO: Perform OOB Exchange with the peer. */
+
+            /* TODO: Fill datsOobCfg peerConfirm and peerRandom with value passed out of band */
+
+            if (datsOobCfg != NULL) {
+                DmSecSetOob(connId, datsOobCfg);
+            }
+
+            DmSecAuthRsp(connId, 0, NULL);
+        } else {
+            AppHandlePasskey(&((dmEvt_t *)pMsg)->authReq);
+        }
+        break;
+    
+    /*
+    case DM_SEC_ECC_KEY_IND:
+        DmSecSetEccKey(&pMsg->dm.eccMsg.data.key);
+        break;
+    */
+
+    case DM_SEC_COMPARE_IND:
+        AppHandleNumericComparison(&((dmEvt_t *)pMsg)->cnfInd);
+        break;
+    
     case DM_PRIV_CLEAR_RES_LIST_IND:
         APP_TRACE_INFO1("Clear resolving list status 0x%02x", pMsg->hdr.status);
         break;
 
+    case DM_HW_ERROR_IND:
+        uiEvent = APP_UI_HW_ERROR;
+        break;
+
 #if (BT_VER > 8)
     case DM_PHY_UPDATE_IND:
-        APP_TRACE_INFO2("DM_PHY_UPDATE_IND - RX: %d, TX: %d", pMsg->phyUpdate.rxPhy,
-                        pMsg->phyUpdate.txPhy);
+        APP_TRACE_INFO2("DM_PHY_UPDATE_IND - RX: %d, TX: %d", ((dmEvt_t *)pMsg)->phyUpdate.rxPhy,
+                        ((dmEvt_t *)pMsg)->phyUpdate.txPhy);
         break;
 #endif /* BT_VER */
 
@@ -709,16 +874,16 @@ static void datsProcMsg(dmEvt_t *pMsg)
  *  \return None.
  */
 /*************************************************************************************************/
-void DatsHandlerInit(wsfHandlerId_t handlerId)
+void CgmHandlerInit(wsfHandlerId_t handlerId)
 {
-    APP_TRACE_INFO0("DatsHandlerInit");
+    APP_TRACE_INFO1("CmgHandlerInit, handlerId: %d", handlerId);
 
     /* store handler ID */
-    datsCb.handlerId = handlerId;
+    cgmCb.handlerId = handlerId;
 
     /* Set configuration pointers */
-    pAppSlaveCfg = (appSlaveCfg_t *)&datsSlaveCfg;
     pAppAdvCfg = (appAdvCfg_t *)&datsAdvCfg;
+    pAppSlaveCfg = (appSlaveCfg_t *)&datsSlaveCfg;
     pAppSecCfg = (appSecCfg_t *)&datsSecCfg;
     pAppUpdateCfg = (appUpdateCfg_t *)&datsUpdateCfg;
     pSmpCfg = (smpCfg_t *)&datsSmpCfg;
@@ -727,6 +892,11 @@ void DatsHandlerInit(wsfHandlerId_t handlerId)
     /* Initialize application framework */
     AppSlaveInit();
     AppServerInit();
+
+    GlpsInit(CGM_PERIOD_SEC);
+
+    /* initialize battery service server */
+    BasInit(handlerId, (basCfg_t *)&cgmBasCfg);
 
     /* Set IRK for the local device */
     DmSecSetLocalIrk(localIrk);
@@ -932,10 +1102,10 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
  *  \return None.
  */
 /*************************************************************************************************/
-void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
+void CgmHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
-        APP_TRACE_INFO1("Dats got evt %d", pMsg->event);
+        APP_TRACE_INFO1("CGM got evt %d", pMsg->event);
 
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {
@@ -954,7 +1124,7 @@ void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
         }
 
         /* perform profile and user interface-related operations */
-        datsProcMsg((dmEvt_t *)pMsg);
+        cgmProcMsg((cgmMsg_t *)pMsg);
     }
 }
 
@@ -981,14 +1151,15 @@ void WdxsResetSystem(void)
  *  \return None.
  */
 /*************************************************************************************************/
-void DatsStart(void)
+void CgmStart(void)
 {
     /* Register for stack callbacks */
-    DmRegister(datsDmCback);
-    DmConnRegister(DM_CLIENT_ID_APP, datsDmCback);
-    AttRegister(datsAttCback);
+    DmRegister(cgmDmCback);
+    DmConnRegister(DM_CLIENT_ID_APP, cgmDmCback);
+
+    AttRegister(cgmAttCback);
     AttConnRegister(AppServerConnCback);
-    AttsCccRegister(DATS_NUM_CCC_IDX, (attsCccSet_t *)datsCccSet, datsCccCback);
+    AttsCccRegister(CGM_NUM_CCC_IDX, (attsCccSet_t *)cgmCccSet, cgmCccCback);
 
     /* Initialize attribute server database */
     SvcCoreGattCbackRegister(GattReadCback, GattWriteCback);
@@ -997,7 +1168,7 @@ void DatsStart(void)
     SvcWpAddGroup();
 
     /* Set Service Changed CCCD index. */
-    GattSetSvcChangedIdx(DATS_GATT_SC_CCC_IDX);
+    GattSetSvcChangedIdx(CGM_GATT_SC_CCC_IDX);
 
     /* Register for app framework button callbacks */
     AppUiBtnRegister(datsBtnCback);

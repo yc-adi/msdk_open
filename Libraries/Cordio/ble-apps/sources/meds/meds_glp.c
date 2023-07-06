@@ -125,7 +125,7 @@ static void medsGlpStart(void)
   GattSetSvcChangedIdx(MEDS_GLS_GATT_SC_CCC_IDX);
 
   /* initialize glucose profile sensor */
-  GlpsInit();
+  GlpsInit(0);
   GlpsSetCccIdx(MEDS_GLS_GLS_GLM_CCC_IDX, MEDS_GLS_GLS_GLMC_CCC_IDX, MEDS_GLS_GLS_RACP_CCC_IDX);
 
   /* TODO: Define glucose features */

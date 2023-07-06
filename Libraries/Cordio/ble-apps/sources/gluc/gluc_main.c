@@ -423,7 +423,7 @@ void GlucHandlerInit(wsfHandlerId_t handlerId)
   AppServerInit();
 
   /* initialize glucose profile sensor */
-  GlpsInit();
+  GlpsInit(0);
   GlpsSetCccIdx(GLUC_GLS_GLM_CCC_IDX, GLUC_GLS_GLMC_CCC_IDX, GLUC_GLS_RACP_CCC_IDX);
 }
 

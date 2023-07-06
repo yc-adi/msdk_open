@@ -45,7 +45,7 @@ extern "C" {
  *  \return None.
  */
 /*************************************************************************************************/
-void GlpsInit(void);
+void GlpsInit(uint16_t cgm_period_sec);
 
 /*************************************************************************************************/
 /*!
@@ -113,6 +113,10 @@ void GlpsSetFeature(uint16_t feature);
  */
 /*************************************************************************************************/
 void GlpsSetCccIdx(uint8_t glmCccIdx, uint8_t glmcCccIdx, uint8_t racpCccIdx);
+
+void GlpsMeasStart(dmConnId_t connId, uint8_t timerEvt, uint8_t glpsGlmCccIdx);
+void GlpsMeasStop(dmConnId_t connId);
+void GlpsMeasTimerExp(wsfMsgHdr_t *pMsg);
 
 /*! \} */    /* GLUCOSE_PROFILE */
 

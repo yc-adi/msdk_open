@@ -530,30 +530,36 @@ static void fitBtnCback(uint8_t btn)
 static void fitProcMsg(fitMsg_t *pMsg)
 {
     uint8_t uiEvent = APP_UI_NONE;
-
+    APP_TRACE_INFO1("@!@ fitProcMsg %d", pMsg->hdr.event);
     switch (pMsg->hdr.event) {
     case FIT_RUNNING_TIMER_IND:
+        APP_TRACE_INFO0("@!@ FIT_RUNNING_TIMER_IND");
         fitSendRunningSpeedMeasurement((dmConnId_t)pMsg->ccc.hdr.param);
         break;
 
     case FIT_HR_TIMER_IND:
+        APP_TRACE_INFO0("@!@ FIT_HR_TIMER_IND");
         HrpsProcMsg(&pMsg->hdr);
         break;
 
     case FIT_BATT_TIMER_IND:
+        APP_TRACE_INFO0("@!@ FIT_BATT_TIMER_IND");
         BasProcMsg(&pMsg->hdr);
         break;
 
     case ATTS_HANDLE_VALUE_CNF:
+        APP_TRACE_INFO0("@!@ ATTS_HANDLE_VALUE_CNF");
         HrpsProcMsg(&pMsg->hdr);
         BasProcMsg(&pMsg->hdr);
         break;
 
     case ATTS_CCC_STATE_IND:
+        APP_TRACE_INFO0("@!@ ATTS_CCC_STATE_IND");
         fitProcCccState(pMsg);
         break;
 
     case DM_RESET_CMPL_IND:
+        APP_TRACE_INFO0("@!@ DM_RESET_CMPL_IND");
         AttsCalculateDbHash();
         DmSecGenerateEccKeyReq();
         fitSetup(pMsg);
@@ -577,22 +583,26 @@ static void fitProcMsg(fitMsg_t *pMsg)
         break;
 
     case DM_CONN_OPEN_IND:
+        APP_TRACE_INFO0("@!@ DM_CONN_OPEN_IND");
         HrpsProcMsg(&pMsg->hdr);
         BasProcMsg(&pMsg->hdr);
         uiEvent = APP_UI_CONN_OPEN;
         break;
 
     case DM_CONN_CLOSE_IND:
+        APP_TRACE_INFO0("@!@ DM_CONN_CLOSE_IND");
         fitClose(pMsg);
         uiEvent = APP_UI_CONN_CLOSE;
         break;
 
     case DM_SEC_PAIR_CMPL_IND:
+        APP_TRACE_INFO0("@!@ DM_SEC_PAIR_CMPL_IND");
         DmSecGenerateEccKeyReq();
         uiEvent = APP_UI_SEC_PAIR_CMPL;
         break;
 
     case DM_SEC_PAIR_FAIL_IND:
+        APP_TRACE_INFO0("@!@ DM_SEC_PAIR_FAIL_IND");
         DmSecGenerateEccKeyReq();
         uiEvent = APP_UI_SEC_PAIR_FAIL;
         break;
@@ -606,19 +616,22 @@ static void fitProcMsg(fitMsg_t *pMsg)
         break;
 
     case DM_SEC_AUTH_REQ_IND:
+        APP_TRACE_INFO0("@!@ DM_SEC_AUTH_REQ_IND");
         AppHandlePasskey(&pMsg->dm.authReq);
         break;
 
     case DM_SEC_ECC_KEY_IND:
+        APP_TRACE_INFO0("@!@ DM_SEC_ECC_KEY_IND");
         DmSecSetEccKey(&pMsg->dm.eccMsg.data.key);
         break;
 
     case DM_SEC_COMPARE_IND:
+        APP_TRACE_INFO0("@!@ DM_SEC_COMPARE_IND");
         AppHandleNumericComparison(&pMsg->dm.cnfInd);
         break;
 
     case DM_PRIV_CLEAR_RES_LIST_IND:
-        APP_TRACE_INFO1("Clear resolving list status 0x%02x", pMsg->hdr.status);
+        APP_TRACE_INFO1("DM_PRIV_CLEAR_RES_LIST_IND 0x%02x", pMsg->hdr.status);
         break;
 
     case DM_HW_ERROR_IND:

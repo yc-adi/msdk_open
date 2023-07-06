@@ -31,6 +31,20 @@ extern "C" {
 #endif
 
 /**************************************************************************************************
+  Macros
+**************************************************************************************************/
+
+/*! enumeration of client characteristic configuration descriptors */
+enum
+{
+  GLUC_GATT_SC_CCC_IDX,                    /*! GATT service, service changed characteristic */
+  GLUC_GLS_GLM_CCC_IDX,                    /*! Glucose service, glucose measurement characteristic */
+  GLUC_GLS_GLMC_CCC_IDX,                   /*! Glucose service, glucose measurement context characteristic */
+  GLUC_GLS_RACP_CCC_IDX,                   /*! Glucose service, record access control point characteristic */
+  GLUC_NUM_CCC_IDX
+};
+
+/**************************************************************************************************
   Function Declarations
 **************************************************************************************************/
 /*************************************************************************************************/

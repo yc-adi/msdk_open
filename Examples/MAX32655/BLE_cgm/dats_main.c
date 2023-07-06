@@ -53,6 +53,10 @@
 #include "pal_btn.h"
 #include "tmr.h"
 #include "wsf_efs.h"
+#include "svc_ch.h"
+#include "svc_core.h"
+#include "svc_gls.h"
+#include "svc_dis.h"
 #include "svc_wdxs.h"
 #include "wdxs/wdxs_api.h"
 #include "wdxs/wdxs_main.h"
@@ -62,6 +66,8 @@
 #include "flc.h"
 #include "wsf_cs.h"
 #include "Ext_Flash.h"
+#include "glps/glps_api.h"
+
 /**************************************************************************************************
   Macros
 **************************************************************************************************/
@@ -101,6 +107,20 @@ enum {
     DATS_GATT_SC_CCC_IDX, /*! GATT service, service changed characteristic */
     DATS_WP_DAT_CCC_IDX, /*! Arm Ltd. proprietary service, data transfer characteristic */
     DATS_NUM_CCC_IDX
+};
+
+/**************************************************************************************************
+  Client Characteristic Configuration Descriptors
+**************************************************************************************************/
+
+/*! client characteristic configuration descriptors settings, indexed by above enumeration */
+static const attsCccSet_t glucCccSet[GLUC_NUM_CCC_IDX] =
+{
+  /* cccd handle          value range               security level */
+  {GATT_SC_CH_CCC_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC},    /* GLUC_GATT_SC_CCC_IDX */
+  {GLS_GLM_CH_CCC_HDL,    ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* GLUC_GLS_GLM_CCC_IDX */
+  {GLS_GLMC_CH_CCC_HDL,   ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* GLUC_GLS_GLMC_CCC_IDX */
+  {GLS_RACP_CH_CCC_HDL,   ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}     /* GLUC_GLS_RACP_CCC_IDX */
 };
 
 /**************************************************************************************************
@@ -159,9 +179,8 @@ static const smpCfg_t datsSmpCfg = {
 
 /*! configurable parameters for connection parameter update */
 static const appUpdateCfg_t datsUpdateCfg = {
-    10,
-    /*! ^ Connection idle period in ms before attempting
-    connection parameter update. set to zero to disable */
+    10,           /*! Connection idle period in ms before attempting
+                      connection parameter update. set to zero to disable */
     (700 / 1.25), /*! Minimum connection interval in 1.25ms units */
     (700 / 1.25), /*! Maximum connection interval in 1.25ms units */
     0, /*! Connection latency */
@@ -191,16 +210,17 @@ static uint8_t localIrk[] = { 0x95, 0xC8, 0xEE, 0x6F, 0xC5, 0x0D, 0xEF, 0x93,
 
 /*! advertising data, discoverable mode */
 static const uint8_t datsAdvDataDisc[] = {
-    /*! flags */
-    2, /*! length */
-    DM_ADV_TYPE_FLAGS, /*! AD type */
-    DM_FLAG_LE_GENERAL_DISC | /*! flags */
-        DM_FLAG_LE_BREDR_NOT_SUP,
+  /*! flags */
+  2,                                      /*! length */
+  DM_ADV_TYPE_FLAGS,                      /*! AD type */
+  DM_FLAG_LE_LIMITED_DISC |               /*! flags */
+  DM_FLAG_LE_BREDR_NOT_SUP,
 
-    /*! manufacturer specific data */
-    3, /*! length */
-    DM_ADV_TYPE_MANUFACTURER, /*! AD type */
-    UINT16_TO_BYTES(HCI_ID_ANALOG) /*! company ID */
+  /*! service UUID list */
+  5,                                      /*! length */
+  DM_ADV_TYPE_16_UUID,                    /*! AD type */
+  UINT16_TO_BYTES(ATT_UUID_GLUCOSE_SERVICE),
+  UINT16_TO_BYTES(ATT_UUID_DEVICE_INFO_SERVICE)
 };
 
 /*! scan data, discoverable mode */
@@ -328,7 +348,18 @@ static void datsDmCback(dmEvt_t *pDmEvt)
 /*************************************************************************************************/
 static void datsAttCback(attEvt_t *pEvt)
 {
-    WdxsAttCback(pEvt);
+    attEvt_t *pMsg;
+
+    if (WdxsAttCback(pEvt)) {
+        return;
+    }
+
+    if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen)) != NULL) {
+        memcpy(pMsg, pEvt, sizeof(attEvt_t));
+        pMsg->pValue = (uint8_t *) (pMsg + 1);
+        memcpy(pMsg->pValue, pEvt->pValue, pEvt->valueLen);
+        WsfMsgSend(datsCb.handlerId, pMsg);
+    }
 }
 
 /*************************************************************************************************/
@@ -540,7 +571,32 @@ static void datsPrivAddDevToResListInd(dmEvt_t *pMsg)
 
 /*************************************************************************************************/
 /*!
+ *  \brief  Set up advertising and other procedures that need to be performed after
+ *          device reset.
+ *
+ *  \param  pMsg    Pointer to message.
+ *
+ *  \return None.
+ */
+/*************************************************************************************************/
+static void glucSetup(dmEvt_t *pMsg)
+{
+    /* set advertising and scan response data for discoverable mode */
+    AppAdvSetData(APP_ADV_DATA_DISCOVERABLE, sizeof(datsAdvDataDisc), (uint8_t *) datsAdvDataDisc);
+    AppAdvSetData(APP_SCAN_DATA_DISCOVERABLE, sizeof(datsScanDataDisc), (uint8_t *) datsScanDataDisc);
+
+    /* set advertising and scan response data for connectable mode */
+    AppAdvSetData(APP_ADV_DATA_CONNECTABLE, 0, NULL);
+    AppAdvSetData(APP_SCAN_DATA_CONNECTABLE, 0, NULL);
+
+    /* start advertising; automatically set connectable/discoverable mode and bondable mode */
+    AppAdvStart(APP_MODE_AUTO_INIT);
+}
+
+/*************************************************************************************************/
+/*!
  *  \brief  Process messages from the event handler.
+ *          Refer to Libraries/Cordio/ble-apps/sources/gluc/gluc_main.c/glucProcMsg()
  *
  *  \param  pMsg    Pointer to message.
  *
@@ -552,35 +608,50 @@ static void datsProcMsg(dmEvt_t *pMsg)
     uint8_t uiEvent = APP_UI_NONE;
 
     switch (pMsg->hdr.event) {
+    case ATTS_HANDLE_VALUE_CNF:
+        GlpsProcMsg(&pMsg->hdr);
+        break;
+
     case DM_RESET_CMPL_IND:
+        APP_TRACE_INFO1("@!@ DM_RESET_CMPL_IND %d", pMsg->hdr.event);
+        
         AttsCalculateDbHash();
         DmSecGenerateEccKeyReq();
         AppDbNvmReadAll();
         datsRestoreResolvingList(pMsg);
         setAdvTxPower();
+
+        glucSetup(pMsg);
+
         uiEvent = APP_UI_RESET_CMPL;
         break;
 
     case DM_ADV_START_IND:
+#if DEEP_SLEEP == 0
         WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
-
+#endif
         uiEvent = APP_UI_ADV_START;
         break;
 
     case DM_ADV_STOP_IND:
+#if DEEP_SLEEP == 0
         WsfTimerStop(&trimTimer);
+#endif
         uiEvent = APP_UI_ADV_STOP;
         break;
 
     case DM_CONN_OPEN_IND:
-        uiEvent = APP_UI_CONN_OPEN;
+        APP_TRACE_INFO0("DM_CONN_OPEN_IND");
         conn_opened = 1;
-        APP_TRACE_INFO0("Disable deep sleep");
+        GlpsProcMsg(&pMsg->hdr);
+
+        uiEvent = APP_UI_CONN_OPEN;
         break;
 
     case DM_CONN_CLOSE_IND:
+#if DEEP_SLEEP == 0
         WsfTimerStop(&trimTimer);
-
+#endif
         APP_TRACE_INFO2("Connection closed status 0x%x, reason 0x%x", pMsg->connClose.status,
                         pMsg->connClose.reason);
         switch (pMsg->connClose.reason) {
@@ -600,9 +671,12 @@ static void datsProcMsg(dmEvt_t *pMsg)
             APP_TRACE_INFO0(" MIC FAILURE");
             break;
         }
-        uiEvent = APP_UI_CONN_CLOSE;
+
+        GlpsProcMsg(&pMsg->hdr);
         conn_opened = 0;
-        APP_TRACE_INFO0("Enable deep sleep");
+        APP_TRACE_INFO0("DM_CONN_CLOSE_IND");
+
+        uiEvent = APP_UI_CONN_CLOSE;
         break;
 
     case DM_SEC_PAIR_CMPL_IND:
@@ -625,7 +699,6 @@ static void datsProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_SEC_AUTH_REQ_IND:
-
         if (pMsg->authReq.oob) {
             dmConnId_t connId = (dmConnId_t)pMsg->hdr.param;
 
@@ -672,8 +745,8 @@ static void datsProcMsg(dmEvt_t *pMsg)
     case TRIM_TIMER_EVT:
 #if DEEP_SLEEP == 0
         trimStart();
-#endif
         WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
+#endif
         break;
 
     case CUST_SPEC_TMR_EVT:
@@ -703,6 +776,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
 /*************************************************************************************************/
 /*!
  *  \brief  Application handler init function called during system initialization.
+ *          Refer to Libraries/Cordio/ble-apps/sources/gluc/gluc_main.c/GlucHandlerInit()
  *
  *  \param  handlerID  WSF handler ID.
  *
@@ -742,6 +816,10 @@ void DatsHandlerInit(wsfHandlerId_t handlerId)
     APP_TRACE_INFO0("start customer specified app timer");
     MXC_Delay(1000);
     //WsfTimerStartMs(&custSpecAppTimer, CUST_SPEC_TMR_PERIOD_MS); // first start
+
+    /* initialize glucose profile sensor */
+    GlpsInit();
+    GlpsSetCccIdx(GLUC_GLS_GLM_CCC_IDX, GLUC_GLS_GLMC_CCC_IDX, GLUC_GLS_RACP_CCC_IDX);
 }
 
 /*************************************************************************************************/
@@ -924,7 +1002,8 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
 
 /*************************************************************************************************/
 /*!
- *  \brief  WSF event handler for application.
+ *  \brief  WSF event handler for application. 
+ *          Refer to Libraries/Cordio/ble-apps/sources/gluc/gluc_main.c/GlucHandler()
  *
  *  \param  event   WSF event mask.
  *  \param  pMsg    WSF message.
@@ -935,7 +1014,7 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
 void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
-        APP_TRACE_INFO1("Dats got evt %d", pMsg->event);
+        APP_TRACE_INFO1("CGM got evt %d", pMsg->event);
 
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {
@@ -976,7 +1055,31 @@ void WdxsResetSystem(void)
 
 /*************************************************************************************************/
 /*!
+ *  \brief  Application ATTS client characteristic configuration callback.
+ *
+ *  \param  pDmEvt  DM callback event
+ *
+ *  \return None.
+ */
+/*************************************************************************************************/
+static void glucCccCback(attsCccEvt_t *pEvt)
+{
+  appDbHdl_t    dbHdl;
+
+  /* If CCC not set from initialization and there's a device record and currently bonded */
+  if ((pEvt->handle != ATT_HANDLE_NONE) &&
+      ((dbHdl = AppDbGetHdl((dmConnId_t) pEvt->hdr.param)) != APP_DB_HDL_NONE) &&
+      AppCheckBonded((dmConnId_t)pEvt->hdr.param))
+  {
+    /* Store value in device database. */
+    AppDbSetCccTblValue(dbHdl, pEvt->idx, pEvt->value);
+  }
+}
+
+/*************************************************************************************************/
+/*!
  *  \brief  Start the application.
+ *          Refer to Libraries/Cordio/ble-apps/sources/gluc/gluc_main.c/GlucStart()
  *
  *  \return None.
  */
@@ -988,7 +1091,8 @@ void DatsStart(void)
     DmConnRegister(DM_CLIENT_ID_APP, datsDmCback);
     AttRegister(datsAttCback);
     AttConnRegister(AppServerConnCback);
-    AttsCccRegister(DATS_NUM_CCC_IDX, (attsCccSet_t *)datsCccSet, datsCccCback);
+    //AttsCccRegister(DATS_NUM_CCC_IDX, (attsCccSet_t *)datsCccSet, datsCccCback);
+    AttsCccRegister(GLUC_NUM_CCC_IDX, (attsCccSet_t *) glucCccSet, glucCccCback);
 
     /* Initialize attribute server database */
     SvcCoreGattCbackRegister(GattReadCback, GattWriteCback);
@@ -996,8 +1100,19 @@ void DatsStart(void)
     SvcWpCbackRegister(NULL, datsWpWriteCback);
     SvcWpAddGroup();
 
+    SvcGlsAddGroup();
+    SvcGlsCbackRegister(NULL, GlpsRacpWriteCback);
+
+    SvcDisAddGroup();
+
     /* Set Service Changed CCCD index. */
-    GattSetSvcChangedIdx(DATS_GATT_SC_CCC_IDX);
+    //GattSetSvcChangedIdx(DATS_GATT_SC_CCC_IDX);
+    GattSetSvcChangedIdx(GLUC_GATT_SC_CCC_IDX);
+
+    /* Set supported features after starting database */
+    GlpsSetFeature(CH_GLF_LOW_BATT | CH_GLF_MALFUNC | CH_GLF_SAMPLE_SIZE | CH_GLF_INSERT_ERR |
+                    CH_GLF_TYPE_ERR | CH_GLF_RES_HIGH_LOW | CH_GLF_TEMP_HIGH_LOW | CH_GLF_READ_INT |
+                    CH_GLF_GENERAL_FAULT);
 
     /* Register for app framework button callbacks */
     AppUiBtnRegister(datsBtnCback);

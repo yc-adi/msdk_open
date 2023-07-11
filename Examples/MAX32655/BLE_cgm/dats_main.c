@@ -306,10 +306,12 @@ static void datsSendData(dmConnId_t connId, uint8_t size, uint8_t *msg)
 /*************************************************************************************************/
 static void datsDmCback(dmEvt_t *pDmEvt)
 {
+#if 0  // remove me !!!
     dmEvt_t *pMsg;
     uint16_t len;
 
     if (pDmEvt->hdr.event == DM_SEC_ECC_KEY_IND) {
+        APP_TRACE_INFO0("@!@ DM_SEC_ECC_KEY_IND");
         DmSecSetEccKey(&pDmEvt->eccMsg.data.key);
 
         /* If the local device sends OOB data. */
@@ -335,6 +337,18 @@ static void datsDmCback(dmEvt_t *pDmEvt)
             WsfMsgSend(datsCb.handlerId, pMsg);
         }
     }
+#else
+  dmEvt_t *pMsg;
+  uint16_t len;
+
+  len = DmSizeOfEvt(pDmEvt);
+
+  if ((pMsg = WsfMsgAlloc(len)) != NULL)
+  {
+    memcpy(pMsg, pDmEvt, len);
+    WsfMsgSend(datsCb.handlerId, pMsg);
+  }
+#endif
 }
 
 /*************************************************************************************************/
@@ -617,8 +631,10 @@ static void datsProcMsg(dmEvt_t *pMsg)
         
         AttsCalculateDbHash();
         DmSecGenerateEccKeyReq();
+
         AppDbNvmReadAll();
         datsRestoreResolvingList(pMsg);
+
         setAdvTxPower();
 
         glucSetup(pMsg);
@@ -680,12 +696,14 @@ static void datsProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_SEC_PAIR_CMPL_IND:
+        APP_TRACE_INFO0("@!@ DM_SEC_PAIR_CMPL_IND");
         DmSecGenerateEccKeyReq();
         AppDbNvmStoreBond(AppDbGetHdl((dmConnId_t)pMsg->hdr.param));
         uiEvent = APP_UI_SEC_PAIR_CMPL;
         break;
 
     case DM_SEC_PAIR_FAIL_IND:
+        APP_TRACE_INFO0("@!@ DM_SEC_PAIR_FAIL_IND");
         DmSecGenerateEccKeyReq();
         uiEvent = APP_UI_SEC_PAIR_FAIL;
         break;
@@ -699,6 +717,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_SEC_AUTH_REQ_IND:
+        APP_TRACE_INFO0("@!@ DM_SEC_AUTH_REQ_IND");
         if (pMsg->authReq.oob) {
             dmConnId_t connId = (dmConnId_t)pMsg->hdr.param;
 

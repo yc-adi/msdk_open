@@ -103,7 +103,8 @@ void WsfMsgFree(void *pMsg)
 /*************************************************************************************************/
 void WsfMsgSend(wsfHandlerId_t handlerId, void *pMsg)
 {
-  WSF_TRACE_MSG1("WsfMsgSend handlerId:%u", handlerId);
+  wsfMsgHdr_t *pHdr = (wsfMsgHdr_t *)pMsg;
+  WSF_TRACE_MSG3("WsfMsgSend hdlrId %d, evt %d, st %d", handlerId, pHdr->event, pHdr->status);
 
   /* get queue for this handler and enqueue message */
   WsfMsgEnq(WsfTaskMsgQueue(handlerId), handlerId, pMsg);
@@ -149,11 +150,15 @@ void WsfMsgEnq(wsfQueue_t *pQueue, wsfHandlerId_t handlerId, void *pMsg)
 void *WsfMsgDeq(wsfQueue_t *pQueue, wsfHandlerId_t *pHandlerId)
 {
   wsfMsg_t *pMsg;
+  wsfMsgHdr_t *pHdr;
+
 
   if ((pMsg = WsfQueueDeq(pQueue)) != NULL)
   {
     *pHandlerId = pMsg->handlerId;
 
+    pHdr = (wsfMsgHdr_t *)pMsg;
+    APP_TRACE_INFO3("WsfMsgDeq hdlrId %d, evt %d, st %d", pMsg->handlerId, pHdr->event, pHdr->status);
     /* hide header */
     pMsg++;
   }

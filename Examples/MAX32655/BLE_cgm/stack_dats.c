@@ -24,6 +24,7 @@
 
 #include "wsf_types.h"
 #include "wsf_os.h"
+#include "wsf_trace.h"
 #include "util/bstream.h"
 
 #include "dats_api.h"
@@ -61,9 +62,11 @@ void StackInitDats(void)
     SecEccInit();
 
     handlerId = WsfOsSetNextHandler(HciHandler);
+    APP_TRACE_INFO1("handlerId: %d, HciHandler", handlerId);
     HciHandlerInit(handlerId);
 
     handlerId = WsfOsSetNextHandler(DmHandler);
+    APP_TRACE_INFO1("handlerId: %d, DmHandler", handlerId);
     DmDevVsInit(0);
     DmConnInit();
     DmAdvInit();
@@ -74,27 +77,33 @@ void StackInitDats(void)
     DmHandlerInit(handlerId);
 
     handlerId = WsfOsSetNextHandler(L2cSlaveHandler);
+    APP_TRACE_INFO1("handlerId: %d, L2cSlaveHandler", handlerId);
     L2cSlaveHandlerInit(handlerId);
     L2cInit();
     L2cSlaveInit();
 
     handlerId = WsfOsSetNextHandler(AttHandler);
+    APP_TRACE_INFO1("handlerId: %d, AttHandler", handlerId);
     AttHandlerInit(handlerId);
     AttsInit();
     AttsIndInit();
 
     handlerId = WsfOsSetNextHandler(SmpHandler);
+    APP_TRACE_INFO1("handlerId: %d, SmpHandler", handlerId);
     SmpHandlerInit(handlerId);
     SmprInit();
     SmprScInit();
     HciSetMaxRxAclLen(256);
 
     handlerId = WsfOsSetNextHandler(AppHandler);
+    APP_TRACE_INFO1("handlerId: %d, AppHandler", handlerId);
     AppHandlerInit(handlerId);
 
     handlerId = WsfOsSetNextHandler(DatsHandler);
+    APP_TRACE_INFO1("handlerId: %d, DatsHandler", handlerId);
     DatsHandlerInit(handlerId);
 
     handlerId = WsfOsSetNextHandler(WdxsHandler);
+    APP_TRACE_INFO1("handlerId: %d, WdxsHandler", handlerId);
     WdxsHandlerInit(handlerId);
 }

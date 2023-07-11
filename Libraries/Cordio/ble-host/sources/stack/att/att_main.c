@@ -185,10 +185,10 @@ static void attDmConnCback(dmEvt_t *pDmEvt)
   if (pCcb->connId != DM_CONN_ID_NONE)
   {
     /* pass event to server */
-    (*attCb.pServer->connCback)(pCcb, pDmEvt);
+    (*attCb.pServer->connCback)(pCcb, pDmEvt); // attsConnCback
 
     /* pass event to client */
-    (*attCb.pClient->connCback)(pCcb, pDmEvt);
+    (*attCb.pClient->connCback)(pCcb, pDmEvt); // attEmptyConnCback
 
     /* if connection closed */
     if (pDmEvt->hdr.event == DM_CONN_CLOSE_IND)

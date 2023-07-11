@@ -66,4 +66,5 @@ ${BOOTLOADER_OBJ}: bl_build.S ${BOOTLOADER_BIN}
 	${CC} ${AFLAGS} -o ${@} -c bl_build.S
 endif
 
-DEEP_SLEEP = 1
+# 1 will cause connection failure by TIMEOUT without PalTImerStart msg
+DEEP_SLEEP = 0

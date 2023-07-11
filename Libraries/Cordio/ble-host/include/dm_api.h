@@ -482,15 +482,15 @@ enum
 /*! \brief DM callback events */
 enum
 {
-  DM_RESET_CMPL_IND = DM_CBACK_START,     /*!< \brief Reset complete */
+  DM_RESET_CMPL_IND = DM_CBACK_START,     /*!< \brief Reset complete, 32 */
   DM_ADV_START_IND,                       /*!< \brief Advertising started */
   DM_ADV_STOP_IND,                        /*!< \brief Advertising stopped */
   DM_ADV_NEW_ADDR_IND,                    /*!< \brief New resolvable address has been generated */
   DM_SCAN_START_IND,                      /*!< \brief Scanning started */
   DM_SCAN_STOP_IND,                       /*!< \brief Scanning stopped */
   DM_SCAN_REPORT_IND,                     /*!< \brief Scan data received from peer device */
-  DM_CONN_OPEN_IND,                       /*!< \brief Connection opened */
-  DM_CONN_CLOSE_IND,                      /*!< \brief Connection closed */
+  DM_CONN_OPEN_IND,                       /*!< \brief Connection opened, 39*/
+  DM_CONN_CLOSE_IND,                      /*!< \brief Connection closed, 40 */
   DM_CONN_UPDATE_IND,                     /*!< \brief Connection update complete */
   DM_SEC_PAIR_CMPL_IND,                   /*!< \brief Pairing completed successfully */
   DM_SEC_PAIR_FAIL_IND,                   /*!< \brief Pairing failed or other security failure */
@@ -498,7 +498,7 @@ enum
   DM_SEC_ENCRYPT_FAIL_IND,                /*!< \brief Encryption failed */
   DM_SEC_AUTH_REQ_IND,                    /*!< \brief PIN or OOB data requested for pairing */
   DM_SEC_KEY_IND,                         /*!< \brief Security key indication */
-  DM_SEC_LTK_REQ_IND,                     /*!< \brief LTK requested for encyption */
+  DM_SEC_LTK_REQ_IND,                     /*!< \brief LTK requested for encyption, 48 */
   DM_SEC_PAIR_IND,                        /*!< \brief Incoming pairing request from master */
   DM_SEC_SLAVE_REQ_IND,                   /*!< \brief Incoming security request from slave */
   DM_SEC_CALC_OOB_IND,                    /*!< \brief Result of OOB Confirm Calculation Generation */
@@ -515,7 +515,7 @@ enum
   DM_PRIV_READ_LOCAL_RES_ADDR_IND,        /*!< \brief Local resolving address read */
   DM_PRIV_SET_ADDR_RES_ENABLE_IND,        /*!< \brief Address resolving enable set */
   DM_REM_CONN_PARAM_REQ_IND,              /*!< \brief Remote connection parameter requested */
-  DM_CONN_DATA_LEN_CHANGE_IND,            /*!< \brief Data length changed */
+  DM_CONN_DATA_LEN_CHANGE_IND,            /*!< \brief Data length changed, 65 */
   DM_CONN_WRITE_AUTH_TO_IND,              /*!< \brief Write authenticated payload complete */
   DM_CONN_AUTH_TO_EXPIRED_IND,            /*!< \brief Authenticated payload timeout expired */
   DM_PHY_READ_IND,                        /*!< \brief Read PHY */

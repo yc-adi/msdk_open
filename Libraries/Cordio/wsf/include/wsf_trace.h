@@ -302,7 +302,7 @@ bool_t WsfTokenService(void);
 /*! \brief 2 argument WSF message trace. */
 #define WSF_TRACE_MSG2(msg, var1, var2)
 /*! \brief 3 argument WSF message trace. */
-#define WSF_TRACE_MSG3(msg, var1, var2, var3)
+#define WSF_TRACE_MSG3(msg, var1, var2, var3)       WSF_TRACE3("MSG", "INFO", msg, var1, var2, var3) // remove me !!!
 
 /*! \brief 0 argument HCI info trace. */
 #define HCI_TRACE_INFO0(msg)                        WSF_TRACE0V("HCI", "INFO", msg)

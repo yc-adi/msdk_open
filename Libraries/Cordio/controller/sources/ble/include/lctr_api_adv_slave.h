@@ -51,7 +51,7 @@ enum
   LCTR_ADV_MSG_STOP,                    /*!< Advertising stop API event. */
   LCTR_ADV_MSG_INT_START,               /*!< Advertising start internal event. */
   LCTR_ADV_MSG_TERMINATE,               /*!< Advertising BOD terminated event. */
-  LCTR_ADV_MSG_PARAM_UPD,               /*!< Advertising parameter update event. */
+  LCTR_ADV_MSG_PARAM_UPD,               /*!< Advertising parameter update event. 5 */
   LCTR_ADV_MSG_TOTAL                    /*!< Total number of advertising events. */
 };
 

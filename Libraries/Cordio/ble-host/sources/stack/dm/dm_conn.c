@@ -706,7 +706,8 @@ void dmConnMsgHandler(wsfMsgHdr_t *pMsg)
 void dmConnHciHandler(hciEvt_t *pEvent)
 {
   dmConnCcb_t *pCcb;
-
+  APP_TRACE_INFO1("dmConnHciHandler, evt %d", pEvent->hdr.event);
+  
   /* handle special cases for connection complete event */
   if ((pEvent->hdr.event == HCI_LE_CONN_CMPL_CBACK_EVT) ||
       (pEvent->hdr.event == HCI_LE_ENHANCED_CONN_CMPL_CBACK_EVT))

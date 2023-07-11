@@ -39,9 +39,11 @@ void LlInitLhciHandler(void)
 
 #if (BT_VER >= LL_VER_BT_CORE_SPEC_5_2)
   handlerId = WsfOsSetNextHandler(LhciIsoHandler);
+  APP_TRACE_INFO1("handlerId: %d, LhciIsoHandler", handlerId);
   LhciIsoHandlerInit(handlerId);
 #else
   handlerId = WsfOsSetNextHandler(LhciHandler);
+  APP_TRACE_INFO1("handlerId: %d, LhciHandler", handlerId);
   LhciHandlerInit(handlerId);
 #endif
 }
@@ -57,6 +59,7 @@ void LlInitLhciHandler(void)
 void LlInitChciTrInit(uint16_t maxAclLen, uint16_t maxIsoSduLen)
 {
   wsfHandlerId_t handlerId = WsfOsSetNextHandler(ChciTrHandler);
+  APP_TRACE_INFO1("handlerId: %d, ChciTrHandler", handlerId);
   ChciTrHandlerInit(handlerId, maxAclLen, maxIsoSduLen);
 }
 

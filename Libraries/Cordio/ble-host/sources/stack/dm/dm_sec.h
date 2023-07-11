@@ -39,8 +39,8 @@ extern "C" {
 /* DM sec event handler messages */
 enum
 {
-  DM_SEC_MSG_API_ENCRYPT_REQ = DM_MSG_START(DM_ID_SEC),
-  DM_SEC_MSG_API_LTK_RSP
+  DM_SEC_MSG_API_ENCRYPT_REQ = DM_MSG_START(DM_ID_SEC), // 40
+  DM_SEC_MSG_API_LTK_RSP // 41
 };
 
 /* DM lesc sec event handler messages */

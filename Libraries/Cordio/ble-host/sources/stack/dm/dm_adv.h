@@ -39,7 +39,7 @@ extern "C" {
 /* DM adv event handler messages */
 enum
 {
-  DM_ADV_MSG_API_CONFIG = DM_MSG_START(DM_ID_ADV),
+  DM_ADV_MSG_API_CONFIG = DM_MSG_START(DM_ID_ADV), // 0
   DM_ADV_MSG_API_SET_DATA,
   DM_ADV_MSG_API_START,
   DM_ADV_MSG_API_STOP,

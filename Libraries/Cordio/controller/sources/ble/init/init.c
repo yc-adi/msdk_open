@@ -28,6 +28,7 @@
 #include "pal_radio.h"
 #include "sch_api.h"
 #include "bb_ble_sniffer_api.h"
+#include "wsf_trace.h"
 
 /**************************************************************************************************
   Functions
@@ -104,6 +105,7 @@ void LlInitBbInit(void)
 void LlInitSchInit(void)
 {
   wsfHandlerId_t handlerId = WsfOsSetNextHandler(SchHandler);
+  APP_TRACE_INFO1("handlerId: %d, SchHandler", handlerId);
   SchHandlerInit(handlerId);
 }
 
@@ -192,6 +194,7 @@ void LlInitLlInit(void)
 
   /* Initialize handler after feature bits are set. */
   wsfHandlerId_t handlerId = WsfOsSetNextHandler(LlHandler);
+  APP_TRACE_INFO1("handlerId: %d, LlHandler", handlerId);
   LlHandlerInit(handlerId);
 }
 

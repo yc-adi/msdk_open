@@ -37,7 +37,7 @@ extern "C" {
 /* DM device event handler messages */
 enum
 {
-  DM_DEV_MSG_API_RESET = DM_MSG_START(DM_ID_DEV)
+  DM_DEV_MSG_API_RESET = DM_MSG_START(DM_ID_DEV) // 56
 };
 
 /* DM device privacy event handler messages */

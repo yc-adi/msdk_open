@@ -237,10 +237,12 @@ static uint8_t wdxsFileInitMedia(void)
 
     /* Setup the erase handler */
     eraseHandlerId = WsfOsSetNextHandler(wdxsFileEraseHandler);
+    APP_TRACE_INFO1("handlerId: %d, wdxsFileEraseHandler", eraseHandlerId);
     eraseTimer.handlerId = eraseHandlerId;
 
     /* Setup the write handler */
     writeHandlerId = WsfOsSetNextHandler(wdxsFileWriteHandler);
+    APP_TRACE_INFO1("handlerId: %d, wdxsFileWriteHandler", writeHandlerId);
     WSF_QUEUE_INIT(&writeQueue);
 
     return WSF_EFS_SUCCESS;

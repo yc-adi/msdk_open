@@ -85,6 +85,7 @@ void AppTerminalInit(void)
   WsfBufIoUartRegister(TerminalRx);
   TerminalRegisterUartTxFunc(WsfBufIoWrite);
   handlerId = WsfOsSetNextHandler(TerminalHandler);
+  APP_TRACE_INFO1("handlerId: %d, TerminalHandler", handlerId);
   TerminalInit(handlerId);
 
   /* Register commands. */

@@ -66,6 +66,7 @@ extern "C" {
 #define ATT_UUID_CYCLING_POWER_SERVICE      0x1818    /*!< \brief Cycling Power Service */
 #define ATT_UUID_USER_DATA_SERVICE          0x181C    /*!< \brief User Data Service */
 #define ATT_UUID_WEIGHT_SCALE_SERVICE       0x181D    /*!< \brief Weight Scale Service */
+#define ATT_UUID_CGM_SERVICE                0x181F    /*!< \brief CGM Service */
 #define ATT_UUID_IP_SUPPORT_SERVICE         0x1820    /*!< \brief IP Support Service */
 #define ATT_UUID_PULSE_OXIMITER_SERVICE     0x1822    /*!< \brief Pulse Oximeter Service */
 #define ATT_UUID_MESH_PRV_SERVICE           0x1827    /*!< \brief Mesh Provisioning Service */
@@ -187,6 +188,7 @@ extern "C" {
 #define ATT_UUID_GLUCOSE_FEATURE            0x2A51    /*!< \brief Glucose Feature */
 #define ATT_UUID_RACP                       0x2A52    /*!< \brief Record Access Control Point */
 #define ATT_UUID_CAR                        0x2AA6    /*!< \brief Central Address Resolution */
+#define ATT_UUID_CGM                        0x2AA7    /*!< \brief CGM Measurement */
 #define ATT_UUID_RUNNING_SPEED_FEATURE      0x2A54    /*!< \brief Running Speed Feature */
 #define ATT_UUID_RUNNING_SPEED_MEASUREMENT  0x2A53    /*!< \brief Running Speed Measurement */
 #define ATT_UUID_PULSE_OX_FEATURES          0x2A60    /*!< \brief Pulse Oximeter Features */
@@ -202,6 +204,8 @@ extern "C" {
 #define ATT_UUID_WEIGHT_MEAS                0x2A9D    /*!< \brief Weight Measurement */
 #define ATT_UUID_WEIGHT_SCALE_FEATURE       0x2A9E    /*!< \brief Weight Scale Feature */
 #define ATT_UUID_USER_CONTROL_POINT         0x2A9F    /*!< \brief User Control Point */
+#define ATT_UUID_CGM_MEAS                   0x2AA7    /*!< \brief CGM Measurement */
+#define ATT_UUID_CGM_FEATURE                0x2AA8    /*!< \brief CGM Feature */
 #define ATT_UUID_RPAO                       0x2AC9    /*!< \brief Resolvable Prviate Address Only */
 #define ATT_UUID_MESH_PRV_DATA_IN           0x2ADB    /*!< \brief Mesh Provisioning Data In */
 #define ATT_UUID_MESH_PRV_DATA_OUT          0x2ADC    /*!< \brief Mesh Provisioning Data Out */
@@ -375,6 +379,7 @@ extern const uint8_t attCtsSvcUuid[ATT_16_UUID_LEN];     /*!< \brief Current Tim
 extern const uint8_t attRtusSvcUuid[ATT_16_UUID_LEN];    /*!< \brief Reference Time Update Service */
 extern const uint8_t attNdcsSvcUuid[ATT_16_UUID_LEN];    /*!< \brief Next DST Change Service */
 extern const uint8_t attGlsSvcUuid[ATT_16_UUID_LEN];     /*!< \brief Glucose Service */
+extern const uint8_t attCgmsSvcUuid[ATT_16_UUID_LEN];    /*!< \brief CGM Service */
 extern const uint8_t attHtsSvcUuid[ATT_16_UUID_LEN];     /*!< \brief Health Thermometer Service */
 extern const uint8_t attDisSvcUuid[ATT_16_UUID_LEN];     /*!< \brief Device Information Service */
 extern const uint8_t attNwaSvcUuid[ATT_16_UUID_LEN];     /*!< \brief Network Availability Service */
@@ -449,6 +454,7 @@ extern const uint8_t attTbChUuid[ATT_16_UUID_LEN];       /*!< \brief Time Broadc
 extern const uint8_t attTucpChUuid[ATT_16_UUID_LEN];     /*!< \brief Time Update Control Point */
 extern const uint8_t attTusChUuid[ATT_16_UUID_LEN];      /*!< \brief Time Update State */
 extern const uint8_t attGlmChUuid[ATT_16_UUID_LEN];      /*!< \brief Glucose Measurement */
+extern const uint8_t attCgmmChUuid[ATT_16_UUID_LEN];     /*!< \brief CGM Measurement */
 extern const uint8_t attBlChUuid[ATT_16_UUID_LEN];       /*!< \brief Battery Level */
 extern const uint8_t attBpsChUuid[ATT_16_UUID_LEN];      /*!< \brief Battery Power State */
 extern const uint8_t attBlsChUuid[ATT_16_UUID_LEN];      /*!< \brief Battery Level State */

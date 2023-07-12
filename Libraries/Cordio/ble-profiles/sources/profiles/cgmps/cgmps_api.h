@@ -57,7 +57,7 @@ void CgmpsInit(void);
  *  \return None.
  */
 /*************************************************************************************************/
-void GlpsProcMsg(wsfMsgHdr_t *pMsg);
+void CgmpsProcMsg(wsfMsgHdr_t *pMsg);
 
 /*************************************************************************************************/
 /*!
@@ -69,7 +69,7 @@ void GlpsProcMsg(wsfMsgHdr_t *pMsg);
 *  \return None.
 */
 /*************************************************************************************************/
-void GlpsBtn(dmConnId_t connId, uint8_t btn);
+void CgmpsBtn(dmConnId_t connId, uint8_t btn);
 
 /*************************************************************************************************/
 /*!
@@ -87,7 +87,7 @@ void GlpsBtn(dmConnId_t connId, uint8_t btn);
  *  \return ATT status.
  */
 /*************************************************************************************************/
-uint8_t GlpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation,
+uint8_t CgmpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation,
                            uint16_t offset, uint16_t len, uint8_t *pValue, attsAttr_t *pAttr);
 
 /*************************************************************************************************/
@@ -99,7 +99,7 @@ uint8_t GlpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation
  *  \return None.
  */
 /*************************************************************************************************/
-void GlpsSetFeature(uint16_t feature);
+void CgmpsSetFeature(uint16_t feature);
 
 /*************************************************************************************************/
 /*!

@@ -2,7 +2,7 @@
 /*!
  *  \file
  *
- *  \brief  Example Glucose service implementation.
+ *  \brief  Example CGM service implementation.
  *
  *  Copyright (c) 2012-2019 Arm Ltd. All Rights Reserved.
  *
@@ -27,7 +27,7 @@
 #include "wsf_trace.h"
 #include "util/bstream.h"
 #include "svc_ch.h"
-#include "svc_gls.h"
+#include "svc_cgms.h"
 #include "svc_cfg.h"
 
 /**************************************************************************************************
@@ -49,26 +49,26 @@
  Service variables
 **************************************************************************************************/
 
-/* Glucose service declaration */
-static const uint8_t glsValSvc[] = {UINT16_TO_BYTES(ATT_UUID_GLUCOSE_SERVICE)};
-static const uint16_t glsLenSvc = sizeof(glsValSvc);
+/* CGM service declaration */
+static const uint8_t cgmsValSvc[] = {UINT16_TO_BYTES(ATT_UUID_CGM_SERVICE)};
+static const uint16_t cgmsLenSvc = sizeof(cgmsValSvc);
 
-/* Glucose measurement characteristic */
-static const uint8_t glsValGlmCh[] = {ATT_PROP_NOTIFY, UINT16_TO_BYTES(GLS_GLM_HDL), UINT16_TO_BYTES(ATT_UUID_GLUCOSE_MEAS)};
-static const uint16_t glsLenGlmCh = sizeof(glsValGlmCh);
+/* CGM measurement characteristic */
+static const uint8_t cgmsValCgmmCh[] = {ATT_PROP_NOTIFY, UINT16_TO_BYTES(GLS_GLM_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_MEAS)};
+static const uint16_t cgmsLenCgmmCh = sizeof(cgmsValCgmmCh);
 
 /* Glucose measurement */
 /* Note these are dummy values */
-static const uint8_t glsValGlm[] = {0};
-static const uint16_t glsLenGlm = sizeof(glsValGlm);
+static const uint8_t cgmsValCgmm[] = {0};
+static const uint16_t glsLenGlm = sizeof(cgmsValCgmm);
 
-/* Glucose measurement client characteristic configuration */
-static uint8_t glsValGlmChCcc[] = {UINT16_TO_BYTES(0x0000)};
-static const uint16_t glsLenGlmChCcc = sizeof(glsValGlmChCcc);
+/* CGM measurement client characteristic configuration */
+static uint8_t cgmsValCgmmChCcc[] = {UINT16_TO_BYTES(0x0000)};
+static const uint16_t glsLenGlmChCcc = sizeof(cgmsValCgmmChCcc);
 
-/* Glucose measurement context characteristic */
+/* CGM measurement context characteristic */
 static const uint8_t glsValGlmcCh[] = {ATT_PROP_NOTIFY, UINT16_TO_BYTES(GLS_GLMC_HDL), UINT16_TO_BYTES(ATT_UUID_GLUCOSE_MEAS_CONTEXT)};
-static const uint16_t glsLenGlmcCh = sizeof(glsValGlmcCh);
+static const uint16_t cgmsLenCgmmcCh = sizeof(glsValGlmcCh);
 
 /* Glucose measurement context */
 /* Note these are dummy values */
@@ -79,9 +79,9 @@ static const uint16_t glsLenGlmc = sizeof(glsValGlmc);
 static uint8_t glsValGlmcChCcc[] = {UINT16_TO_BYTES(0x0000)};
 static const uint16_t glsLenGlmcChCcc = sizeof(glsValGlmcChCcc);
 
-/* Glucose feature characteristic */
-static const uint8_t glsValGlfCh[] = {ATT_PROP_READ, UINT16_TO_BYTES(GLS_GLF_HDL), UINT16_TO_BYTES(ATT_UUID_GLUCOSE_FEATURE)};
-static const uint16_t glsLenGlfCh = sizeof(glsValGlfCh);
+/* CGM feature characteristic */
+static const uint8_t cgmsValCgmfCh[] = {ATT_PROP_READ, UINT16_TO_BYTES(GLS_GLF_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_FEATURE)};
+static const uint16_t glsLenGlfCh = sizeof(cgmsValCgmfCh);
 
 /* Glucose feature */
 static uint8_t glsValGlf[] = {UINT16_TO_BYTES(0x0000)};
@@ -101,41 +101,41 @@ static uint8_t glsValRacpChCcc[] = {UINT16_TO_BYTES(0x0000)};
 static const uint16_t glsLenRacpChCcc = sizeof(glsValRacpChCcc);
 
 /* Attribute list for GLS group */
-static const attsAttr_t glsList[] =
+static const attsAttr_t cgmsList[] =
 {
   /* Service declaration */
   {
     attPrimSvcUuid,
-    (uint8_t *) glsValSvc,
-    (uint16_t *) &glsLenSvc,
-    sizeof(glsValSvc),
-    0,
+    (uint8_t *) cgmsValSvc,
+    (uint16_t *) &cgmsLenSvc,
+    sizeof(cgmsValSvc),
+    0, // settings
     ATTS_PERMIT_READ
   },
-  /* Glucose measurement characteristic declaration */
+  /* CGM measurement characteristic declaration */
   {
     attChUuid,
-    (uint8_t *) glsValGlmCh,
-    (uint16_t *) &glsLenGlmCh,
-    sizeof(glsValGlmCh),
+    (uint8_t *) cgmsValCgmmCh,
+    (uint16_t *) &cgmsLenCgmmCh,
+    sizeof(cgmsValCgmmCh),
     0,
     ATTS_PERMIT_READ
   },
   /* Characteristic value */
   {
-    attGlmChUuid,
-    (uint8_t *) glsValGlm,
+    attCgmmChUuid,
+    (uint8_t *) cgmsValCgmm,
     (uint16_t *) &glsLenGlm,
-    sizeof(glsValGlm),
+    sizeof(cgmsValCgmm),
     0,
     0
   },
   /* Client characteristic configuration descriptor */
   {
     attCliChCfgUuid,
-    (uint8_t *) glsValGlmChCcc,
+    (uint8_t *) cgmsValCgmmChCcc,
     (uint16_t *) &glsLenGlmChCcc,
-    sizeof(glsValGlmChCcc),
+    sizeof(cgmsValCgmmChCcc),
     ATTS_SET_CCC,
     (ATTS_PERMIT_READ | GLS_SEC_PERMIT_WRITE)
   },
@@ -143,7 +143,7 @@ static const attsAttr_t glsList[] =
   {
     attChUuid,
     (uint8_t *) glsValGlmcCh,
-    (uint16_t *) &glsLenGlmcCh,
+    (uint16_t *) &cgmsLenCgmmcCh,
     sizeof(glsValGlmcCh),
     0,
     ATTS_PERMIT_READ
@@ -166,12 +166,12 @@ static const attsAttr_t glsList[] =
     ATTS_SET_CCC,
     (ATTS_PERMIT_READ | GLS_SEC_PERMIT_WRITE)
   },
-  /* Glucose feature characteristic declaration */
+  /* CGM feature characteristic declaration */
   {
     attChUuid,
-    (uint8_t *) glsValGlfCh,
+    (uint8_t *) cgmsValCgmfCh,
     (uint16_t *) &glsLenGlfCh,
-    sizeof(glsValGlfCh),
+    sizeof(cgmsValCgmfCh),
     0,
     ATTS_PERMIT_READ
   },
@@ -214,10 +214,10 @@ static const attsAttr_t glsList[] =
 };
 
 /* GLS group structure */
-static attsGroup_t svcGlsGroup =
+static attsGroup_t svcCgmsGroup =
 {
   NULL,
-  (attsAttr_t *) glsList,
+  (attsAttr_t *)cgmsList,
   NULL,
   NULL,
   GLS_START_HDL,
@@ -231,9 +231,9 @@ static attsGroup_t svcGlsGroup =
  *  \return None.
  */
 /*************************************************************************************************/
-void SvcGlsAddGroup(void)
+void SvcCgmsAddGroup(void)
 {
-  AttsAddGroup(&svcGlsGroup);
+  AttsAddGroup(&svcCgmsGroup);
 }
 
 /*************************************************************************************************/
@@ -243,7 +243,7 @@ void SvcGlsAddGroup(void)
  *  \return None.
  */
 /*************************************************************************************************/
-void SvcGlsRemoveGroup(void)
+void SvcCgmsRemoveGroup(void)
 {
   AttsRemoveGroup(GLS_START_HDL);
 }
@@ -258,8 +258,8 @@ void SvcGlsRemoveGroup(void)
  *  \return None.
  */
 /*************************************************************************************************/
-void SvcGlsCbackRegister(attsReadCback_t readCback, attsWriteCback_t writeCback)
+void SvcCgmsCbackRegister(attsReadCback_t readCback, attsWriteCback_t writeCback)
 {
-  svcGlsGroup.readCback = readCback;
-  svcGlsGroup.writeCback = writeCback;
+  svcCgmsGroup.readCback = readCback;
+  svcCgmsGroup.writeCback = writeCback;
 }

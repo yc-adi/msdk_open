@@ -567,15 +567,15 @@ static void cgmpsRacpReportNum(dmConnId_t connId, uint8_t oper, uint8_t *pOperan
 /*************************************************************************************************/
 static void cgmpsToggleBondingFlag(void)
 {
-  uint8_t *pGlpsFlagsValue;
+  uint8_t *pCgmpsFlagsValue;
   uint16_t len;
 
   /* Get flags */
-  if (AttsGetAttr(GLS_GLF_HDL, &len, &pGlpsFlagsValue) == ATT_SUCCESS)
+  if (AttsGetAttr(GLS_GLF_HDL, &len, &pCgmpsFlagsValue) == ATT_SUCCESS)
   {
     uint16_t cgmpsFlags;
 
-    BYTES_TO_UINT16(cgmpsFlags, pGlpsFlagsValue);
+    BYTES_TO_UINT16(cgmpsFlags, pCgmpsFlagsValue);
 
     if (cgmpsFlags & CH_GLF_MULTI_BOND)
     {
@@ -586,7 +586,7 @@ static void cgmpsToggleBondingFlag(void)
       cgmpsFlags |= CH_GLF_MULTI_BOND;
     }
 
-    GlpsSetFeature(cgmpsFlags);
+    CgmpsSetFeature(cgmpsFlags);
   }
 }
 
@@ -614,7 +614,7 @@ void CgmpsInit(void)
  *  \return None.
  */
 /*************************************************************************************************/
-void GlpsProcMsg(wsfMsgHdr_t *pMsg)
+void CgmpsProcMsg(wsfMsgHdr_t *pMsg)
 {
   switch(pMsg->event)
   {
@@ -645,7 +645,7 @@ void GlpsProcMsg(wsfMsgHdr_t *pMsg)
 *  \return None.
 */
 /*************************************************************************************************/
-void GlpsBtn(dmConnId_t connId, uint8_t btn)
+void CgmpsBtn(dmConnId_t connId, uint8_t btn)
 {
   /* button actions when connected */
   if (connId != DM_CONN_ID_NONE)
@@ -705,7 +705,7 @@ void GlpsBtn(dmConnId_t connId, uint8_t btn)
  *  \return ATT status.
  */
 /*************************************************************************************************/
-uint8_t GlpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation,
+uint8_t CgmpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation,
                            uint16_t offset, uint16_t len, uint8_t *pValue, attsAttr_t *pAttr)
 {
   uint8_t opcode;
@@ -793,7 +793,7 @@ uint8_t GlpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation
  *  \return None.
  */
 /*************************************************************************************************/
-void GlpsSetFeature(uint16_t feature)
+void CgmpsSetFeature(uint16_t feature)
 {
   uint8_t buf[2] = {UINT16_TO_BYTES(feature)};
 

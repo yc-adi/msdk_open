@@ -27,6 +27,7 @@ C_FILES += \
 	$(ROOT_DIR)/ble-profiles/sources/services/svc_alert.c \
 	$(ROOT_DIR)/ble-profiles/sources/services/svc_batt.c \
 	$(ROOT_DIR)/ble-profiles/sources/services/svc_bps.c \
+	$(ROOT_DIR)/ble-profiles/sources/services/svc_cgms.c \
 	$(ROOT_DIR)/ble-profiles/sources/services/svc_core.c \
 	$(ROOT_DIR)/ble-profiles/sources/services/svc_cps.c \
 	$(ROOT_DIR)/ble-profiles/sources/services/svc_cscs.c \

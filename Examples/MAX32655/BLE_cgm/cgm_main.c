@@ -204,18 +204,18 @@ static uint8_t localIrk[] = { 0x95, 0xC8, 0xEE, 0x6F, 0xC5, 0x0D, 0xEF, 0x93,
 **************************************************************************************************/
 
 /*! advertising data, discoverable mode */
-static const uint8_t datsAdvDataDisc[] = {
+static const uint8_t cgmAdvDataDisc[] = {
   /*! flags */
   2,                                      /*! length */
   DM_ADV_TYPE_FLAGS,                      /*! AD type */
-  DM_FLAG_LE_LIMITED_DISC |               /*! flags */
-  DM_FLAG_LE_BREDR_NOT_SUP,
+  DM_FLAG_LE_LIMITED_DISC | DM_FLAG_LE_BREDR_NOT_SUP, /*! flags */
 
   /*! service UUID list */
   5,                                      /*! length */
   DM_ADV_TYPE_16_UUID,                    /*! AD type */
-  UINT16_TO_BYTES(ATT_UUID_GLUCOSE_SERVICE),
+  UINT16_TO_BYTES(ATT_UUID_CGM_SERVICE),
   UINT16_TO_BYTES(ATT_UUID_DEVICE_INFO_SERVICE)
+  // UINT16_TO_BYTES(ATT_UUID_BATTERY_SERVICE) // @?@ remove me !!! 7
 };
 
 /*! scan data, discoverable mode */
@@ -238,7 +238,7 @@ static struct {
 #endif /* BT_VER */
     appDbHdl_t resListRestoreHdl; /*! Resolving List last restored handle */
     bool_t restoringResList; /*! Restoring resolving list from NVM */
-} datsCb;
+} cgmCb;
 
 /* LESC OOB configuration */
 static dmSecLescOobCfg_t *datsOobCfg;
@@ -313,7 +313,7 @@ static void cgmDmCback(dmEvt_t *pDmEvt)
 
         if ((pMsg = WsfMsgAlloc(len)) != NULL) {
             memcpy(pMsg, pDmEvt, len);
-            WsfMsgSend(datsCb.handlerId, pMsg);
+            WsfMsgSend(cgmCb.handlerId, pMsg);
         }
     }
 #else
@@ -325,7 +325,7 @@ static void cgmDmCback(dmEvt_t *pDmEvt)
   if ((pMsg = WsfMsgAlloc(len)) != NULL)
   {
     memcpy(pMsg, pDmEvt, len);
-    WsfMsgSend(datsCb.handlerId, pMsg);
+    WsfMsgSend(cgmCb.handlerId, pMsg);
   }
 #endif
 }
@@ -351,7 +351,7 @@ static void datsAttCback(attEvt_t *pEvt)
         memcpy(pMsg, pEvt, sizeof(attEvt_t));
         pMsg->pValue = (uint8_t *) (pMsg + 1);
         memcpy(pMsg->pValue, pEvt->pValue, pEvt->valueLen);
-        WsfMsgSend(datsCb.handlerId, pMsg);
+        WsfMsgSend(cgmCb.handlerId, pMsg);
     }
 }
 
@@ -474,15 +474,15 @@ void datsDisplayStackVersion(const char *pVersion)
 static void datsSetup(dmEvt_t *pMsg)
 {
     /* Initialize control information */
-    datsCb.restoringResList = FALSE;
+    cgmCb.restoringResList = FALSE;
 
     /* set advertising and scan response data for discoverable mode */
-    AppAdvSetData(APP_ADV_DATA_DISCOVERABLE, sizeof(datsAdvDataDisc), (uint8_t *)datsAdvDataDisc);
+    AppAdvSetData(APP_ADV_DATA_DISCOVERABLE, sizeof(cgmAdvDataDisc), (uint8_t *)cgmAdvDataDisc);
     AppAdvSetData(APP_SCAN_DATA_DISCOVERABLE, sizeof(datsScanDataDisc),
                   (uint8_t *)datsScanDataDisc);
 
     /* set advertising and scan response data for connectable mode */
-    AppAdvSetData(APP_ADV_DATA_CONNECTABLE, sizeof(datsAdvDataDisc), (uint8_t *)datsAdvDataDisc);
+    AppAdvSetData(APP_ADV_DATA_CONNECTABLE, sizeof(cgmAdvDataDisc), (uint8_t *)cgmAdvDataDisc);
     AppAdvSetData(APP_SCAN_DATA_CONNECTABLE, sizeof(datsScanDataDisc), (uint8_t *)datsScanDataDisc);
 
     /* start advertising; automatically set connectable/discoverable mode and bondable mode */
@@ -501,13 +501,13 @@ static void datsSetup(dmEvt_t *pMsg)
 static void datsRestoreResolvingList(dmEvt_t *pMsg)
 {
     /* Restore first device to resolving list in Controller. */
-    datsCb.resListRestoreHdl = AppAddNextDevToResList(APP_DB_HDL_NONE);
+    cgmCb.resListRestoreHdl = AppAddNextDevToResList(APP_DB_HDL_NONE);
 
-    if (datsCb.resListRestoreHdl == APP_DB_HDL_NONE) {
+    if (cgmCb.resListRestoreHdl == APP_DB_HDL_NONE) {
         /* No device to restore.  Setup application. */
         datsSetup(pMsg);
     } else {
-        datsCb.restoringResList = TRUE;
+        cgmCb.restoringResList = TRUE;
     }
 }
 
@@ -523,14 +523,14 @@ static void datsRestoreResolvingList(dmEvt_t *pMsg)
 static void datsPrivAddDevToResListInd(dmEvt_t *pMsg)
 {
     /* Check if in the process of restoring the Device List from NV */
-    if (datsCb.restoringResList) {
+    if (cgmCb.restoringResList) {
         /* Set the advertising peer address. */
-        datsPrivAddDevToResList(datsCb.resListRestoreHdl);
+        datsPrivAddDevToResList(cgmCb.resListRestoreHdl);
 
         /* Retore next device to resolving list in Controller. */
-        datsCb.resListRestoreHdl = AppAddNextDevToResList(datsCb.resListRestoreHdl);
+        cgmCb.resListRestoreHdl = AppAddNextDevToResList(cgmCb.resListRestoreHdl);
 
-        if (datsCb.resListRestoreHdl == APP_DB_HDL_NONE) {
+        if (cgmCb.resListRestoreHdl == APP_DB_HDL_NONE) {
             /* No additional device to restore. Setup application. */
             datsSetup(pMsg);
         }
@@ -552,7 +552,7 @@ static void datsPrivAddDevToResListInd(dmEvt_t *pMsg)
 static void glucSetup(dmEvt_t *pMsg)
 {
     /* set advertising and scan response data for discoverable mode */
-    AppAdvSetData(APP_ADV_DATA_DISCOVERABLE, sizeof(datsAdvDataDisc), (uint8_t *) datsAdvDataDisc);
+    AppAdvSetData(APP_ADV_DATA_DISCOVERABLE, sizeof(cgmAdvDataDisc), (uint8_t *) cgmAdvDataDisc);
     AppAdvSetData(APP_SCAN_DATA_DISCOVERABLE, sizeof(datsScanDataDisc), (uint8_t *) datsScanDataDisc);
 
     /* set advertising and scan response data for connectable mode */
@@ -579,7 +579,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
 
     switch (pMsg->hdr.event) {
     case ATTS_HANDLE_VALUE_CNF:
-        GlpsProcMsg(&pMsg->hdr);
+        CgmpsProcMsg(&pMsg->hdr);
         break;
 
     case DM_RESET_CMPL_IND:
@@ -613,7 +613,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
     case DM_CONN_OPEN_IND:
         APP_TRACE_INFO0("DM_CONN_OPEN_IND");
         conn_opened = 1;
-        GlpsProcMsg(&pMsg->hdr);
+        CgmpsProcMsg(&pMsg->hdr);
 
         uiEvent = APP_UI_CONN_OPEN;
         break;
@@ -642,7 +642,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
             break;
         }
 
-        GlpsProcMsg(&pMsg->hdr);
+        CgmpsProcMsg(&pMsg->hdr);
         conn_opened = 0;
         APP_TRACE_INFO0("DM_CONN_CLOSE_IND");
 
@@ -758,7 +758,7 @@ void CgmHandlerInit(wsfHandlerId_t handlerId)
     APP_TRACE_INFO0("CgmHandlerInit");
 
     /* store handler ID */
-    datsCb.handlerId = handlerId;
+    cgmCb.handlerId = handlerId;
 
     /* Set configuration pointers */
     pAppSlaveCfg = (appSlaveCfg_t *)&cgmSlaveCfg;
@@ -787,7 +787,7 @@ void CgmHandlerInit(wsfHandlerId_t handlerId)
     MXC_Delay(1000);
     //WsfTimerStartMs(&custSpecAppTimer, CUST_SPEC_TMR_PERIOD_MS); // first start
 
-    /* initialize glucose profile sensor */
+    /* initialize CGM profile sensor */
     CgmpsInit();
     CgmpsSetCccIdx(GLUC_GLS_GLM_CCC_IDX, GLUC_GLS_GLMC_CCC_IDX, GLUC_GLS_RACP_CCC_IDX);
 }
@@ -801,7 +801,7 @@ void CgmHandlerInit(wsfHandlerId_t handlerId)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsBtnCback(uint8_t btn)
+static void cgmBtnCback(uint8_t btn)
 {
 #if (BT_VER > 8)
     dmConnId_t connId;
@@ -909,10 +909,10 @@ static void datsBtnCback(uint8_t btn)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsWsfBufDiagnostics(WsfBufDiag_t *pInfo)
+static void cgmWsfBufDiagnostics(WsfBufDiag_t *pInfo)
 {
     if (pInfo->type == WSF_BUF_ALLOC_FAILED) {
-        APP_TRACE_INFO2("Dats got WSF Buffer Allocation Failure - Task: %d Len: %d",
+        APP_TRACE_INFO2("CGM got WSF Buffer Allocation Failure - Task: %d Len: %d",
                         pInfo->param.alloc.taskId, pInfo->param.alloc.len);
     }
 }
@@ -1071,8 +1071,8 @@ void CgmStart(void)
     SvcWpCbackRegister(NULL, datsWpWriteCback);
     SvcWpAddGroup();
 
-    SvcGlsAddGroup();
-    SvcGlsCbackRegister(NULL, GlpsRacpWriteCback);
+    SvcCgmsAddGroup();
+    SvcCgmsCbackRegister(NULL, CgmpsRacpWriteCback);
 
     SvcDisAddGroup();
 
@@ -1080,7 +1080,7 @@ void CgmStart(void)
     GattSetSvcChangedIdx(GATT_SC_CCC_IDX);
 
     /* Set supported features after starting database */
-    GlpsSetFeature(CH_GLF_LOW_BATT 
+    CgmpsSetFeature(CH_GLF_LOW_BATT 
         | CH_GLF_MALFUNC
         | CH_GLF_SAMPLE_SIZE
         | CH_GLF_INSERT_ERR
@@ -1091,7 +1091,7 @@ void CgmStart(void)
         | CH_GLF_GENERAL_FAULT);
 
     /* Register for app framework button callbacks */
-    AppUiBtnRegister(datsBtnCback);
+    AppUiBtnRegister(cgmBtnCback);
 
     /* Initialize the WDXS File */
     WdxsFileInit();
@@ -1109,7 +1109,7 @@ void CgmStart(void)
 
     WsfNvmInit();
 
-    WsfBufDiagRegister(datsWsfBufDiagnostics);
+    WsfBufDiagRegister(cgmWsfBufDiagnostics);
 
     /* Initialize with button press handler */
     PalBtnInit(btnPressHandler);

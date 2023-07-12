@@ -47,7 +47,7 @@
 /*! Control block */
 static struct
 {
-  uint8_t     numRec;
+  uint8_t numRec;
 } cgmpsDbCb;
 
 /*! Example record database */

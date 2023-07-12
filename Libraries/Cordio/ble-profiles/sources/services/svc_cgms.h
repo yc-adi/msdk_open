@@ -2,7 +2,7 @@
 /*!
  *  \file
  *
- *  \brief  Example Glucose service implementation.
+ *  \brief  Example CGM service implementation.
  *
  *  Copyright (c) 2012-2018 Arm Ltd. All Rights Reserved.
  *
@@ -22,8 +22,8 @@
  */
 /*************************************************************************************************/
 
-#ifndef SVC_GLS_H
-#define SVC_GLS_H
+#ifndef SVC_CGMS_H
+#define SVC_CGMS_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -89,7 +89,7 @@ enum
  *  \return None.
  */
 /*************************************************************************************************/
-void SvcGlsAddGroup(void);
+void SvcCgmsAddGroup(void);
 
 /*************************************************************************************************/
 /*!
@@ -98,7 +98,7 @@ void SvcGlsAddGroup(void);
  *  \return None.
  */
 /*************************************************************************************************/
-void SvcGlsRemoveGroup(void);
+void SvcCgmsRemoveGroup(void);
 
 /*************************************************************************************************/
 /*!
@@ -110,7 +110,7 @@ void SvcGlsRemoveGroup(void);
  *  \return None.
  */
 /*************************************************************************************************/
-void SvcGlsCbackRegister(attsReadCback_t readCback, attsWriteCback_t writeCback);
+void SvcCgmsCbackRegister(attsReadCback_t readCback, attsWriteCback_t writeCback);
 
 /*! \} */    /* GLUCOSE_SERVICE */
 
@@ -118,4 +118,4 @@ void SvcGlsCbackRegister(attsReadCback_t readCback, attsWriteCback_t writeCback)
 };
 #endif
 
-#endif /* SVC_GLS_H */
+#endif /* SVC_CGMS_H */

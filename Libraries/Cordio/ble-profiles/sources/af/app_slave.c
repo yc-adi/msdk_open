@@ -657,9 +657,9 @@ void appSlaveSecConnOpen(dmEvt_t *pMsg, appConnCb_t *pCb)
     appSlaveResolveAddr(pMsg);
   }
 
-  /* send slave security request if configured to do so */
   if (pAppSecCfg->initiateSec && AppDbCheckBonded())
   {
+    APP_TRACE_INFO0("Send slave security request if configured to do so.");
     DmSecSlaveReq((dmConnId_t) pMsg->hdr.param, pAppSecCfg->auth);
   }
 }
@@ -1557,6 +1557,7 @@ void AppSlaveSecProcDmMsg(dmEvt_t *pMsg)
     pCb = NULL;
   }
 
+  APP_TRACE_INFO1("AppSlaveSecProcDmMsg evt %d", pMsg->hdr.event);
   switch(pMsg->hdr.event)
   {
     case DM_CONN_OPEN_IND:

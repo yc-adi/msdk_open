@@ -26,8 +26,8 @@ BUILD_BOOTLOADER?=1
 
 AUTOSEARCH=0
 VPATH += .
-SRCS += stack_dats.c 
-SRCS += dats_main.c
+SRCS += stack_cgm.c 
+SRCS += cgm_main.c
 SRCS += main.c
 
 USE_INTERNAL_FLASH ?=1
@@ -66,4 +66,4 @@ ${BOOTLOADER_OBJ}: bl_build.S ${BOOTLOADER_BIN}
 	${CC} ${AFLAGS} -o ${@} -c bl_build.S
 endif
 
-DEEP_SLEEP = 1
+DEEP_SLEEP = 0

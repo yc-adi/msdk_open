@@ -59,7 +59,7 @@
 #include "pal_bb.h"
 #include "pal_cfg.h"
 
-#include "dats_api.h"
+#include "cgm_api.h"
 #include "app_ui.h"
 
 #include "board.h"
@@ -437,7 +437,7 @@ EXIT_SLEEP_FUNC:
 #endif /* DEEP_SLEEP */
 
 /*! \brief  Stack initialization for app. */
-extern void StackInitDats(void);
+extern void StackInitCgm(void);
 
 /*************************************************************************************************/
 /*!
@@ -707,9 +707,9 @@ int main(void)
     PalBbDisable();
 #endif
 
-    StackInitDats();
+    StackInitCgm();
 
-    DatsStart();
+    CgmStart();
 
     // WsfOsEnterMainLoop();
     while(TRUE)

@@ -21,8 +21,8 @@
  *  limitations under the License.
  */
 /*************************************************************************************************/
-#ifndef EXAMPLES_MAX32655_BLE_OTAS_DATS_API_H_
-#define EXAMPLES_MAX32655_BLE_OTAS_DATS_API_H_
+#ifndef EXAMPLES_MAX32655_CGM_API_H
+#define EXAMPLES_MAX32655_CGM_API_H
 
 #include "wsf_os.h"
 
@@ -34,14 +34,19 @@ extern "C" {
   Macros
 **************************************************************************************************/
 
-/*! enumeration of client characteristic configuration descriptors */
+/*! enumeration of client characteristic configuration descriptors (CGM CCCD) */
 enum
 {
-  GLUC_GATT_SC_CCC_IDX,                    /*! GATT service, service changed characteristic */
-  GLUC_GLS_GLM_CCC_IDX,                    /*! Glucose service, glucose measurement characteristic */
-  GLUC_GLS_GLMC_CCC_IDX,                   /*! Glucose service, glucose measurement context characteristic */
-  GLUC_GLS_RACP_CCC_IDX,                   /*! Glucose service, record access control point characteristic */
-  GLUC_NUM_CCC_IDX
+  GATT_SC_CCC_IDX,                          /*! GATT service, service changed characteristic */
+  WDXS_DC_CH_CCC_IDX,                       /*! WDXS DC service, service changed characteristic */
+  WDXS_FTC_CH_CCC_IDX,                      /*! WDXS FTC service, service changed characteristic */
+  WDXS_FTD_CH_CCC_IDX,                      /*! WDXS FTD service, service changed characteristic */
+  WDXS_AU_CH_CCC_IDX,                       /*! WDXS AU service, service changed characteristic */
+  DATS_WP_DAT_CCC_IDX,                      /*! Arm Ltd. proprietary service, data transfer characteristic */
+  GLUC_GLS_GLM_CCC_IDX,                     /*! Glucose service, glucose measurement characteristic */
+  GLUC_GLS_GLMC_CCC_IDX,                    /*! Glucose service, glucose measurement context characteristic */
+  GLUC_GLS_RACP_CCC_IDX,                    /*! Glucose service, record access control point characteristic */
+  CGM_CCC_IDX_NUM
 };
 
 /**************************************************************************************************
@@ -54,7 +59,7 @@ enum
  *  \return None.
  */
 /*************************************************************************************************/
-void DatsStart(void);
+void CgmStart(void);
 
 /*************************************************************************************************/
 /*!
@@ -65,7 +70,7 @@ void DatsStart(void);
  *  \return None.
  */
 /*************************************************************************************************/
-void DatsHandlerInit(wsfHandlerId_t handlerId);
+void CgmHandlerInit(wsfHandlerId_t handlerId);
 
 /*************************************************************************************************/
 /*!
@@ -77,10 +82,10 @@ void DatsHandlerInit(wsfHandlerId_t handlerId);
  *  \return None.
  */
 /*************************************************************************************************/
-void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg);
+void CgmHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg);
 
 #ifdef __cplusplus
 };
 #endif
 
-#endif // EXAMPLES_MAX32655_BLE_OTAS_DATS_API_H_
+#endif // EXAMPLES_MAX32655_CGM_API_H

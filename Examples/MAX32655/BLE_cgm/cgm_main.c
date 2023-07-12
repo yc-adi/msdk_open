@@ -47,7 +47,7 @@
 #include "svc_wp.h"
 #include "util/calc128.h"
 #include "gatt/gatt_api.h"
-#include "dats_api.h"
+#include "cgm_api.h"
 #include "wut.h"
 #include "trimsir_regs.h"
 #include "pal_btn.h"
@@ -55,7 +55,7 @@
 #include "wsf_efs.h"
 #include "svc_ch.h"
 #include "svc_core.h"
-#include "svc_gls.h"
+#include "svc_cgms.h"
 #include "svc_dis.h"
 #include "svc_wdxs.h"
 #include "wdxs/wdxs_api.h"
@@ -66,7 +66,7 @@
 #include "flc.h"
 #include "wsf_cs.h"
 #include "Ext_Flash.h"
-#include "glps/glps_api.h"
+#include "cgmps/cgmps_api.h"
 
 /**************************************************************************************************
   Macros
@@ -98,26 +98,21 @@
 #define OTA_INTERNAL 0
 #endif
 
-/*! Enumeration of client characteristic configuration descriptors */
-enum {
-    WDXS_DC_CH_CCC_IDX, /*! WDXS DC service, service changed characteristic */
-    WDXS_FTC_CH_CCC_IDX, /*! WDXS FTC  service, service changed characteristic */
-    WDXS_FTD_CH_CCC_IDX, /*! WDXS FTD service, service changed characteristic */
-    WDXS_AU_CH_CCC_IDX, /*! WDXS AU service, service changed characteristic */
-    DATS_GATT_SC_CCC_IDX, /*! GATT service, service changed characteristic */
-    DATS_WP_DAT_CCC_IDX, /*! Arm Ltd. proprietary service, data transfer characteristic */
-    DATS_NUM_CCC_IDX
-};
-
 /**************************************************************************************************
-  Client Characteristic Configuration Descriptors
+  Client Characteristic Configuration Descriptors (CCCD)
 **************************************************************************************************/
 
 /*! client characteristic configuration descriptors settings, indexed by above enumeration */
-static const attsCccSet_t glucCccSet[GLUC_NUM_CCC_IDX] =
+static const attsCccSet_t cgmCccSet[CGM_CCC_IDX_NUM] =
 {
   /* cccd handle          value range               security level */
-  {GATT_SC_CH_CCC_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC},    /* GLUC_GATT_SC_CCC_IDX */
+  {GATT_SC_CH_CCC_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC},    /* GATT_SC_CCC_IDX */
+//{GATT_SC_CH_CCC_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_NONE },  /* GATT_SC_CCC_IDX, @?@ remove me !!! */
+  {WDXS_DC_CH_CCC_HDL,    ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_DC_CH_CCC_IDX */
+  {WDXS_FTC_CH_CCC_HDL,   ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_FTC_CH_CCC_IDX */
+  {WDXS_FTD_CH_CCC_HDL,   ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_FTD_CH_CCC_IDX */
+  {WDXS_AU_CH_CCC_HDL,    ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_AU_CH_CCC_IDX */
+  {WP_DAT_CH_CCC_HDL,     ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* DATS_WP_DAT_CCC_IDX */
   {GLS_GLM_CH_CCC_HDL,    ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* GLUC_GLS_GLM_CCC_IDX */
   {GLS_GLMC_CH_CCC_HDL,   ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* GLUC_GLS_GLMC_CCC_IDX */
   {GLS_RACP_CH_CCC_HDL,   ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}     /* GLUC_GLS_RACP_CCC_IDX */
@@ -128,30 +123,30 @@ static const attsCccSet_t glucCccSet[GLUC_NUM_CCC_IDX] =
 **************************************************************************************************/
 
 /*! configurable parameters for advertising */
-static const appAdvCfg_t datsAdvCfg = {
+static const appAdvCfg_t cgmAdvCfg = {
     { 0, 0, 0 }, /*! Advertising durations in ms */
     { 1280, 1280, 0 } /*! Advertising intervals in 0.625 ms units */
 };
 
 /*! configurable parameters for slave */
-static const appSlaveCfg_t datsSlaveCfg = {
+static const appSlaveCfg_t cgmSlaveCfg = {
     1, /*! Maximum connections */
 };
 
 /*! configurable parameters for security */
-static const appSecCfg_t datsSecCfg = {
-    DM_AUTH_BOND_FLAG | DM_AUTH_SC_FLAG, /*! Authentication and bonding flags */
-    DM_KEY_DIST_IRK, /*! Initiator key distribution flags */
-    DM_KEY_DIST_LTK | DM_KEY_DIST_IRK, /*! Responder key distribution flags */
-    FALSE, /*! TRUE if Out-of-band pairing data is present */
-    TRUE /*! TRUE to initiate security upon connection */
+static const appSecCfg_t cgmSecCfg = {
+    DM_AUTH_BOND_FLAG | DM_AUTH_SC_FLAG, /*! auth: Authentication and bonding flags */
+    0, // DM_KEY_DIST_IRK, /*! iKeyDist: Initiator key distribution flags */
+    DM_KEY_DIST_LTK | DM_KEY_DIST_IRK, /*! rKeyDist: Responder key distribution flags */
+    FALSE, /*! oob: TRUE if Out-of-band pairing data is present */
+    TRUE /*! initiateSec: TRUE to initiate security upon connection */
 };
 
 /*! TRUE if Out-of-band pairing data is to be sent */
-static const bool_t datsSendOobData = FALSE;
+static const bool_t cgmSendOobData = FALSE;
 
 /*! SMP security parameter configuration */
-static const smpCfg_t datsSmpCfg = {
+static const smpCfg_t cgmSmpCfg = {
     500, /*! 'Repeated attempts' timeout in msec */
     SMP_IO_NO_IN_NO_OUT, /*! I/O Capability */
     7, /*! Minimum encryption key length */
@@ -178,7 +173,7 @@ static const smpCfg_t datsSmpCfg = {
 */
 
 /*! configurable parameters for connection parameter update */
-static const appUpdateCfg_t datsUpdateCfg = {
+static const appUpdateCfg_t cgmUpdateCfg = {
     10,           /*! Connection idle period in ms before attempting
                       connection parameter update. set to zero to disable */
     (700 / 1.25), /*! Minimum connection interval in 1.25ms units */
@@ -189,7 +184,7 @@ static const appUpdateCfg_t datsUpdateCfg = {
 };
 
 /*! ATT configurable parameters (increase MTU) */
-static const attCfg_t datsAttCfg = {
+static const attCfg_t cgmAttCfg = {
     15, /* ATT server service discovery connection idle timeout in seconds */
 #if OTA_INTERNAL
     128, /* desired ATT MTU */
@@ -229,21 +224,6 @@ static const uint8_t datsScanDataDisc[] = {
     4, /*! length */
     DM_ADV_TYPE_LOCAL_NAME, /*! AD type */
     'C','G','M'
-};
-
-/**************************************************************************************************
-  Client Characteristic Configuration Descriptors
-**************************************************************************************************/
-
-/*! client characteristic configuration descriptors settings, indexed by above enumeration */
-static const attsCccSet_t datsCccSet[DATS_NUM_CCC_IDX] = {
-    /* cccd handle          value range               security level */
-    { WDXS_DC_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY, DM_SEC_LEVEL_NONE }, /* WDXS_DC_CH_CCC_IDX */
-    { WDXS_FTC_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY, DM_SEC_LEVEL_NONE }, /* WDXS_FTC_CH_CCC_IDX */
-    { WDXS_FTD_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY, DM_SEC_LEVEL_NONE }, /* WDXS_FTD_CH_CCC_IDX */
-    { WDXS_AU_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY, DM_SEC_LEVEL_NONE }, /* WDXS_AU_CH_CCC_IDX */
-    { GATT_SC_CH_CCC_HDL, ATT_CLIENT_CFG_INDICATE, DM_SEC_LEVEL_NONE }, /* DATS_GATT_SC_CCC_IDX */
-    { WP_DAT_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY, DM_SEC_LEVEL_NONE } /* DATS_WP_DAT_CCC_IDX */
 };
 
 /**************************************************************************************************
@@ -304,8 +284,9 @@ static void datsSendData(dmConnId_t connId, uint8_t size, uint8_t *msg)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsDmCback(dmEvt_t *pDmEvt)
+static void cgmDmCback(dmEvt_t *pDmEvt)
 {
+#if 0 // @?@ remove me !!!
     dmEvt_t *pMsg;
     uint16_t len;
 
@@ -313,7 +294,7 @@ static void datsDmCback(dmEvt_t *pDmEvt)
         DmSecSetEccKey(&pDmEvt->eccMsg.data.key);
 
         /* If the local device sends OOB data. */
-        if (datsSendOobData) {
+        if (cgmSendOobData) {
             uint8_t oobLocalRandom[SMP_RAND_LEN];
             SecRand(oobLocalRandom, SMP_RAND_LEN);
             DmSecCalcOobReq(oobLocalRandom, pDmEvt->eccMsg.data.key.pubKey_x);
@@ -335,6 +316,18 @@ static void datsDmCback(dmEvt_t *pDmEvt)
             WsfMsgSend(datsCb.handlerId, pMsg);
         }
     }
+#else
+  dmEvt_t *pMsg;
+  uint16_t len;
+
+  len = DmSizeOfEvt(pDmEvt);
+
+  if ((pMsg = WsfMsgAlloc(len)) != NULL)
+  {
+    memcpy(pMsg, pDmEvt, len);
+    WsfMsgSend(datsCb.handlerId, pMsg);
+  }
+#endif
 }
 
 /*************************************************************************************************/
@@ -359,29 +352,6 @@ static void datsAttCback(attEvt_t *pEvt)
         pMsg->pValue = (uint8_t *) (pMsg + 1);
         memcpy(pMsg->pValue, pEvt->pValue, pEvt->valueLen);
         WsfMsgSend(datsCb.handlerId, pMsg);
-    }
-}
-
-/*************************************************************************************************/
-/*!
- *  \brief  Application ATTS client characteristic configuration callback.
- *
- *  \param  pDmEvt  DM callback event
- *
- *  \return None.
- */
-/*************************************************************************************************/
-static void datsCccCback(attsCccEvt_t *pEvt)
-{
-    appDbHdl_t dbHdl;
-
-    /* If CCC not set from initialization and there's a device record and currently bonded */
-    if ((pEvt->handle != ATT_HANDLE_NONE) &&
-        ((dbHdl = AppDbGetHdl((dmConnId_t)pEvt->hdr.param)) != APP_DB_HDL_NONE) &&
-        AppCheckBonded((dmConnId_t)pEvt->hdr.param)) {
-        /* Store value in device database. */
-        AppDbSetCccTblValue(dbHdl, pEvt->idx, pEvt->value);
-        AppDbNvmStoreCccTbl(dbHdl);
     }
 }
 
@@ -783,20 +753,20 @@ static void datsProcMsg(dmEvt_t *pMsg)
  *  \return None.
  */
 /*************************************************************************************************/
-void DatsHandlerInit(wsfHandlerId_t handlerId)
+void CgmHandlerInit(wsfHandlerId_t handlerId)
 {
-    APP_TRACE_INFO0("DatsHandlerInit");
+    APP_TRACE_INFO0("CgmHandlerInit");
 
     /* store handler ID */
     datsCb.handlerId = handlerId;
 
     /* Set configuration pointers */
-    pAppSlaveCfg = (appSlaveCfg_t *)&datsSlaveCfg;
-    pAppAdvCfg = (appAdvCfg_t *)&datsAdvCfg;
-    pAppSecCfg = (appSecCfg_t *)&datsSecCfg;
-    pAppUpdateCfg = (appUpdateCfg_t *)&datsUpdateCfg;
-    pSmpCfg = (smpCfg_t *)&datsSmpCfg;
-    pAttCfg = (attCfg_t *)&datsAttCfg;
+    pAppSlaveCfg = (appSlaveCfg_t *)&cgmSlaveCfg;
+    pAppAdvCfg = (appAdvCfg_t *)&cgmAdvCfg;
+    pAppSecCfg = (appSecCfg_t *)&cgmSecCfg;
+    pAppUpdateCfg = (appUpdateCfg_t *)&cgmUpdateCfg;
+    pSmpCfg = (smpCfg_t *)&cgmSmpCfg;
+    pAttCfg = (attCfg_t *)&cgmAttCfg;
 
     /* Initialize application framework */
     AppSlaveInit();
@@ -818,8 +788,8 @@ void DatsHandlerInit(wsfHandlerId_t handlerId)
     //WsfTimerStartMs(&custSpecAppTimer, CUST_SPEC_TMR_PERIOD_MS); // first start
 
     /* initialize glucose profile sensor */
-    GlpsInit();
-    GlpsSetCccIdx(GLUC_GLS_GLM_CCC_IDX, GLUC_GLS_GLMC_CCC_IDX, GLUC_GLS_RACP_CCC_IDX);
+    CgmpsInit();
+    CgmpsSetCccIdx(GLUC_GLS_GLM_CCC_IDX, GLUC_GLS_GLMC_CCC_IDX, GLUC_GLS_RACP_CCC_IDX);
 }
 
 /*************************************************************************************************/
@@ -1011,7 +981,7 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
  *  \return None.
  */
 /*************************************************************************************************/
-void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
+void CgmHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
         APP_TRACE_INFO1("CGM got evt %d", pMsg->event);
@@ -1062,7 +1032,7 @@ void WdxsResetSystem(void)
  *  \return None.
  */
 /*************************************************************************************************/
-static void glucCccCback(attsCccEvt_t *pEvt)
+static void cgmCccCback(attsCccEvt_t *pEvt)
 {
   appDbHdl_t    dbHdl;
 
@@ -1073,6 +1043,7 @@ static void glucCccCback(attsCccEvt_t *pEvt)
   {
     /* Store value in device database. */
     AppDbSetCccTblValue(dbHdl, pEvt->idx, pEvt->value);
+    AppDbNvmStoreCccTbl(dbHdl); // work with iKeyDist = 0
   }
 }
 
@@ -1084,15 +1055,15 @@ static void glucCccCback(attsCccEvt_t *pEvt)
  *  \return None.
  */
 /*************************************************************************************************/
-void DatsStart(void)
+void CgmStart(void)
 {
     /* Register for stack callbacks */
-    DmRegister(datsDmCback);
-    DmConnRegister(DM_CLIENT_ID_APP, datsDmCback);
+    DmRegister(cgmDmCback);
+    DmConnRegister(DM_CLIENT_ID_APP, cgmDmCback);
+
     AttRegister(datsAttCback);
     AttConnRegister(AppServerConnCback);
-    //AttsCccRegister(DATS_NUM_CCC_IDX, (attsCccSet_t *)datsCccSet, datsCccCback);
-    AttsCccRegister(GLUC_NUM_CCC_IDX, (attsCccSet_t *) glucCccSet, glucCccCback);
+    AttsCccRegister(CGM_CCC_IDX_NUM, (attsCccSet_t *)cgmCccSet, cgmCccCback);
 
     /* Initialize attribute server database */
     SvcCoreGattCbackRegister(GattReadCback, GattWriteCback);
@@ -1106,13 +1077,18 @@ void DatsStart(void)
     SvcDisAddGroup();
 
     /* Set Service Changed CCCD index. */
-    //GattSetSvcChangedIdx(DATS_GATT_SC_CCC_IDX);
-    GattSetSvcChangedIdx(GLUC_GATT_SC_CCC_IDX);
+    GattSetSvcChangedIdx(GATT_SC_CCC_IDX);
 
     /* Set supported features after starting database */
-    GlpsSetFeature(CH_GLF_LOW_BATT | CH_GLF_MALFUNC | CH_GLF_SAMPLE_SIZE | CH_GLF_INSERT_ERR |
-                    CH_GLF_TYPE_ERR | CH_GLF_RES_HIGH_LOW | CH_GLF_TEMP_HIGH_LOW | CH_GLF_READ_INT |
-                    CH_GLF_GENERAL_FAULT);
+    GlpsSetFeature(CH_GLF_LOW_BATT 
+        | CH_GLF_MALFUNC
+        | CH_GLF_SAMPLE_SIZE
+        | CH_GLF_INSERT_ERR
+        | CH_GLF_TYPE_ERR
+        | CH_GLF_RES_HIGH_LOW
+        | CH_GLF_TEMP_HIGH_LOW
+        | CH_GLF_READ_INT
+        | CH_GLF_GENERAL_FAULT);
 
     /* Register for app framework button callbacks */
     AppUiBtnRegister(datsBtnCback);

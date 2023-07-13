@@ -217,7 +217,7 @@ void cgmpsSendMeas(dmConnId_t connId, cgmpsRec_t *pRec)
   len = cgmpsBuildGlm(buf, &cgmpsCb.pCurrRec->meas);
 
   /* send notification */
-  AttsHandleValueNtf(connId, GLS_GLM_HDL, len, buf);
+  AttsHandleValueNtf(connId, CGM_MEAS_HDL, len, buf);
   cgmpsCb.txReady = FALSE;
 }
 
@@ -334,12 +334,12 @@ static void cgmpsHandleValueCnf(attEvt_t *pMsg)
     cgmpsCb.inProgress = FALSE;
   }
   /* if this is for measurement or context notification */
-  else if (pMsg->handle == GLS_GLM_HDL || pMsg->handle == GLS_GLMC_HDL)
+  else if (pMsg->handle == CGM_MEAS_HDL || pMsg->handle == GLS_GLMC_HDL)
   {
     if (cgmpsCb.pCurrRec != NULL)
     {
       /* if measurement was sent and there is context to send */
-      if (pMsg->handle == GLS_GLM_HDL && AttsCccEnabled(connId, cgmpsCb.glmcCccIdx) &&
+      if (pMsg->handle == CGM_MEAS_HDL && AttsCccEnabled(connId, cgmpsCb.glmcCccIdx) &&
           (cgmpsCb.pCurrRec->meas.flags & CH_GLM_FLAG_CONTEXT_INFO))
       {
         /* send context */
@@ -805,16 +805,15 @@ void CgmpsSetFeature(uint16_t feature)
  *  \brief  Set the CCCD index used by the application for CGM service characteristics.
  *
  *  \param  cgmCccIdx   CGM measurement CCCD index.
- *  \param  cgmcCccIdx  CGM measurement context CCCD index.
+ *  \param  cgmStatusCccIdx CGM status CCCD index
  *  \param  racpCccIdx  Record access control point CCCD index.
  *
  *  \return None.
  */
 /*************************************************************************************************/
-void CgmpsSetCccIdx(uint8_t glmCccIdx, uint8_t glmcCccIdx, uint8_t racpCccIdx)
+void CgmpsSetCccIdx(uint8_t cgmCccIdx, uint8_t cgmStatusCccIdx, uint8_t racpCccIdx)
 {
-  cgmpsCb.glmCccIdx = glmCccIdx;
-  cgmpsCb.glmcCccIdx = glmCccIdx;
+  cgmpsCb.glmCccIdx = cgmCccIdx;
   cgmpsCb.racpCccIdx = racpCccIdx;
 }
 

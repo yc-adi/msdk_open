@@ -106,13 +106,13 @@ void CgmpsSetFeature(uint16_t feature);
  *  \brief  Set the CCCD index used by the application for CGM service characteristics.
  *
  *  \param  cgmCccIdx   CGM measurement CCCD index.
- *  \param  cgmcCccIdx  CGM measurement context CCCD index.
+ *  \param  cgmStatusCccIdx CGM status CCCD index
  *  \param  racpCccIdx  Record access control point CCCD index.
  *
  *  \return None.
  */
 /*************************************************************************************************/
-void CgmpsSetCccIdx(uint8_t cgmCccIdx, uint8_t cgmcCccIdx, uint8_t racpCccIdx);
+void CgmpsSetCccIdx(uint8_t cgmCccIdx, uint8_t cgmStatusCccIdx, uint8_t racpCccIdx);
 
 /*! \} */    /* GLUCOSE_PROFILE */
 

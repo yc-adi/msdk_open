@@ -269,7 +269,7 @@ static uint8_t attsCccWriteValue(dmConnId_t connId, uint16_t handle, uint8_t *pV
 /*************************************************************************************************/
 static uint8_t attsCccMainCback(dmConnId_t connId, uint8_t method, uint16_t handle, uint8_t *pValue)
 {
-  ATT_TRACE_INFO2("attsCccMainCback connId=%d handle=%d", connId, handle);
+  ATT_TRACE_INFO3("attsCccMainCback connId=%d handle=%d, %s", connId, handle, method == ATT_METHOD_READ ? "R" : "W");
 
   if (method == ATT_METHOD_READ)
   {

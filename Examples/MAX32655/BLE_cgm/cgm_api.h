@@ -34,7 +34,7 @@ extern "C" {
   Macros
 **************************************************************************************************/
 
-/*! enumeration of client characteristic configuration descriptors (CGM CCCD) */
+/*! enumeration of CGM CCCD */
 enum
 {
   GATT_SC_CCC_IDX,                          /*! GATT service, service changed characteristic */
@@ -43,8 +43,8 @@ enum
   WDXS_FTD_CH_CCC_IDX,                      /*! WDXS FTD service, service changed characteristic */
   WDXS_AU_CH_CCC_IDX,                       /*! WDXS AU service, service changed characteristic */
   DATS_WP_DAT_CCC_IDX,                      /*! Arm Ltd. proprietary service, data transfer characteristic */
-  GLUC_GLS_GLM_CCC_IDX,                     /*! Glucose service, glucose measurement characteristic */
-  GLUC_GLS_GLMC_CCC_IDX,                    /*! Glucose service, glucose measurement context characteristic */
+  CGM_MEAS_CCC_IDX,                         /*! CGM service, CGM measurement characteristic: UUID 0x2AA7 */
+  CGM_STATUS_CCC_IDX,                       /*! CGM status: UUID 0x2AA9 */
   GLUC_GLS_RACP_CCC_IDX,                    /*! Glucose service, record access control point characteristic */
   CGM_CCC_IDX_NUM
 };

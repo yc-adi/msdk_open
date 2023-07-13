@@ -64,11 +64,11 @@ enum
 {
   GLS_SVC_HDL = GLS_START_HDL,      /*!< \brief Glucose service declaration */
   GLS_GLM_CH_HDL,                   /*!< \brief Glucose measurement characteristic */
-  GLS_GLM_HDL,                      /*!< \brief Glucose measurement */
-  GLS_GLM_CH_CCC_HDL,               /*!< \brief Glucose measurement client characteristic configuration */
+  CGM_MEAS_HDL,                      /*!< \brief Glucose measurement */
+  CGM_MEAS_CH_CCC_HDL,              /*!< \brief CGM measurement client characteristic configuration */
   GLS_GLMC_CH_HDL,                  /*!< \brief Glucose measurement context characteristic */
   GLS_GLMC_HDL,                     /*!< \brief Glucose measurement context */
-  GLS_GLMC_CH_CCC_HDL,              /*!< \brief Glucose measurement context client characteristic configuration */
+  CGM_STATUS_CH_CCC_HDL,            /*!< \brief CGM status client characteristic configuration */
   GLS_GLF_CH_HDL,                   /*!< \brief Glucose feature characteristic */
   GLS_GLF_HDL,                      /*!< \brief Glucose feature */
   GLS_RACP_CH_HDL,                  /*!< \brief Record access control point characteristic */

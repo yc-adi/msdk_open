@@ -113,8 +113,8 @@ static const attsCccSet_t cgmCccSet[CGM_CCC_IDX_NUM] =
   {WDXS_FTD_CH_CCC_HDL,   ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_FTD_CH_CCC_IDX */
   {WDXS_AU_CH_CCC_HDL,    ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_AU_CH_CCC_IDX */
   {WP_DAT_CH_CCC_HDL,     ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* DATS_WP_DAT_CCC_IDX */
-  {GLS_GLM_CH_CCC_HDL,    ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* GLUC_GLS_GLM_CCC_IDX */
-  {GLS_GLMC_CH_CCC_HDL,   ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* GLUC_GLS_GLMC_CCC_IDX */
+  {CGM_MEAS_CH_CCC_HDL,   ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* CGM_MEAS_CCC_IDX */
+  {CGM_STATUS_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* CGM_STATUS_CCC_IDX */
   {GLS_RACP_CH_CCC_HDL,   ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}     /* GLUC_GLS_RACP_CCC_IDX */
 };
 
@@ -789,7 +789,7 @@ void CgmHandlerInit(wsfHandlerId_t handlerId)
 
     /* initialize CGM profile sensor */
     CgmpsInit();
-    CgmpsSetCccIdx(GLUC_GLS_GLM_CCC_IDX, GLUC_GLS_GLMC_CCC_IDX, GLUC_GLS_RACP_CCC_IDX);
+    CgmpsSetCccIdx(CGM_MEAS_CCC_IDX, CGM_STATUS_CCC_IDX, GLUC_GLS_RACP_CCC_IDX);
 }
 
 /*************************************************************************************************/
@@ -1036,12 +1036,14 @@ static void cgmCccCback(attsCccEvt_t *pEvt)
 {
   appDbHdl_t    dbHdl;
 
+  APP_TRACE_INFO3("cgmCccCback, hdl %d, idx %d, val %d", pEvt->handle, pEvt->idx, pEvt->value);
+
   /* If CCC not set from initialization and there's a device record and currently bonded */
   if ((pEvt->handle != ATT_HANDLE_NONE) &&
       ((dbHdl = AppDbGetHdl((dmConnId_t) pEvt->hdr.param)) != APP_DB_HDL_NONE) &&
       AppCheckBonded((dmConnId_t)pEvt->hdr.param))
   {
-    /* Store value in device database. */
+    APP_TRACE_INFO0("Store value in device database.");
     AppDbSetCccTblValue(dbHdl, pEvt->idx, pEvt->value);
     AppDbNvmStoreCccTbl(dbHdl); // work with iKeyDist = 0
   }

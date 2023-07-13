@@ -54,13 +54,13 @@ static const uint8_t cgmsValSvc[] = {UINT16_TO_BYTES(ATT_UUID_CGM_SERVICE)};
 static const uint16_t cgmsLenSvc = sizeof(cgmsValSvc);
 
 /* CGM measurement characteristic */
-static const uint8_t cgmsValCgmmCh[] = {ATT_PROP_NOTIFY, UINT16_TO_BYTES(GLS_GLM_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_MEAS)};
-static const uint16_t cgmsLenCgmmCh = sizeof(cgmsValCgmmCh);
+static const uint8_t cgmsMeasChVal[] = {ATT_PROP_NOTIFY, UINT16_TO_BYTES(CGM_MEAS_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_MEAS)};
+static const uint16_t cgmsMeasChLen = sizeof(cgmsMeasChVal);
 
-/* Glucose measurement */
+/* CGM measurement */
 /* Note these are dummy values */
-static const uint8_t cgmsValCgmm[] = {0};
-static const uint16_t glsLenGlm = sizeof(cgmsValCgmm);
+static const uint8_t cgmsMeasVal[] = {0};
+static const uint16_t cgmsMeasLen = sizeof(cgmsMeasVal);
 
 /* CGM measurement client characteristic configuration */
 static uint8_t cgmsValCgmmChCcc[] = {UINT16_TO_BYTES(0x0000)};
@@ -114,19 +114,19 @@ static const attsAttr_t cgmsList[] =
   },
   /* CGM measurement characteristic declaration */
   {
-    attChUuid,
-    (uint8_t *) cgmsValCgmmCh,
-    (uint16_t *) &cgmsLenCgmmCh,
-    sizeof(cgmsValCgmmCh),
+    attChUuid, // 0x2803
+    (uint8_t *) cgmsMeasChVal, // notify, hdl, 0x2AA7
+    (uint16_t *) &cgmsMeasChLen,
+    sizeof(cgmsMeasChVal),
     0,
     ATTS_PERMIT_READ
   },
   /* Characteristic value */
   {
-    attCgmmChUuid,
-    (uint8_t *) cgmsValCgmm,
-    (uint16_t *) &glsLenGlm,
-    sizeof(cgmsValCgmm),
+    attCgmmChUuid, // 0x2AA7
+    (uint8_t *) cgmsMeasVal,
+    (uint16_t *) &cgmsMeasLen,
+    cgmsMeasLen,
     0,
     0
   },

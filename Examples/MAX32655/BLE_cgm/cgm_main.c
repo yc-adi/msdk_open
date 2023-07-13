@@ -113,8 +113,7 @@ static const attsCccSet_t cgmCccSet[CGM_CCC_IDX_NUM] =
   {WDXS_FTD_CH_CCC_HDL,   ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_FTD_CH_CCC_IDX */
   {WDXS_AU_CH_CCC_HDL,    ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_AU_CH_CCC_IDX */
   {WP_DAT_CH_CCC_HDL,     ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* DATS_WP_DAT_CCC_IDX */
-  {CGM_MEAS_CH_CCC_HDL,   ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* CGM_MEAS_CCC_IDX */
-  {CGM_STATUS_CH_CCC_HDL, ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* CGM_STATUS_CCC_IDX */
+  {CGMS_MEAS_CH_CCC_HDL,  ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* CGM_MEAS_CCC_IDX */
   {GLS_RACP_CH_CCC_HDL,   ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}     /* GLUC_GLS_RACP_CCC_IDX */
 };
 
@@ -789,7 +788,7 @@ void CgmHandlerInit(wsfHandlerId_t handlerId)
 
     /* initialize CGM profile sensor */
     CgmpsInit();
-    CgmpsSetCccIdx(CGM_MEAS_CCC_IDX, CGM_STATUS_CCC_IDX, GLUC_GLS_RACP_CCC_IDX);
+    CgmpsSetCccIdx(CGM_MEAS_CCC_IDX, 0, GLUC_GLS_RACP_CCC_IDX);
 }
 
 /*************************************************************************************************/

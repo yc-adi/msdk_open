@@ -54,7 +54,7 @@ static const uint8_t cgmsValSvc[] = {UINT16_TO_BYTES(ATT_UUID_CGM_SERVICE)};
 static const uint16_t cgmsLenSvc = sizeof(cgmsValSvc);
 
 /* CGM measurement characteristic */
-static const uint8_t cgmsMeasChVal[] = {ATT_PROP_NOTIFY, UINT16_TO_BYTES(CGM_MEAS_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_MEAS)};
+static const uint8_t cgmsMeasChVal[] = {ATT_PROP_NOTIFY, UINT16_TO_BYTES(CGMS_MEAS_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_MEAS)};
 static const uint16_t cgmsMeasChLen = sizeof(cgmsMeasChVal);
 
 /* CGM measurement */
@@ -105,8 +105,8 @@ static const attsAttr_t cgmsList[] =
 {
   /* Service declaration */
   {
-    attPrimSvcUuid,
-    (uint8_t *) cgmsValSvc,
+    attPrimSvcUuid, // 0x2800, primary service. CGMS_v1.0.1, 2 Service Declaration
+    (uint8_t *) cgmsValSvc, // 0x181F
     (uint16_t *) &cgmsLenSvc,
     sizeof(cgmsValSvc),
     0, // settings
@@ -220,7 +220,7 @@ static attsGroup_t svcCgmsGroup =
   (attsAttr_t *)cgmsList,
   NULL,
   NULL,
-  GLS_START_HDL,
+  CGMS_START_HDL,
   GLS_END_HDL
 };
 
@@ -245,7 +245,7 @@ void SvcCgmsAddGroup(void)
 /*************************************************************************************************/
 void SvcCgmsRemoveGroup(void)
 {
-  AttsRemoveGroup(GLS_START_HDL);
+  AttsRemoveGroup(CGMS_START_HDL);
 }
 
 /*************************************************************************************************/

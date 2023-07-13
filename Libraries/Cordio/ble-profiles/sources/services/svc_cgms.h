@@ -52,23 +52,26 @@ extern "C" {
  *
  */
 /**@{*/
-#define GLS_START_HDL               0xF0              /*!< \brief Start handle. */
+#define CGMS_START_HDL               0xF0              /*!< \brief Start handle. */
 #define GLS_END_HDL                 (GLS_MAX_HDL - 1) /*!< \brief End handle. */
 
 /**************************************************************************************************
  Handles
 **************************************************************************************************/
 
-/*! \brief Glucose Service Handles */
+/*! \brief CGM Service Handles */
 enum
 {
-  GLS_SVC_HDL = GLS_START_HDL,      /*!< \brief Glucose service declaration */
-  GLS_GLM_CH_HDL,                   /*!< \brief Glucose measurement characteristic */
-  CGM_MEAS_HDL,                      /*!< \brief Glucose measurement */
-  CGM_MEAS_CH_CCC_HDL,              /*!< \brief CGM measurement client characteristic configuration */
+  CGMS_SVC_HDL = CGMS_START_HDL,    /*!< \brief CGM service declaration */
+
+  CGMS_MEAS_CH_HDL,                 /*!< \brief CGM measurement characteristic */
+  CGMS_MEAS_HDL,                    /*!< \brief CGM measurement */
+  CGMS_MEAS_CH_CCC_HDL,             /*!< \brief CGM measurement client characteristic configuration */
+  
   GLS_GLMC_CH_HDL,                  /*!< \brief Glucose measurement context characteristic */
   GLS_GLMC_HDL,                     /*!< \brief Glucose measurement context */
-  CGM_STATUS_CH_CCC_HDL,            /*!< \brief CGM status client characteristic configuration */
+  GLS_GLMC_CH_CCC_HDL,              /*!< \brief Glucose measurement context client characteristic configuration */
+  
   GLS_GLF_CH_HDL,                   /*!< \brief Glucose feature characteristic */
   GLS_GLF_HDL,                      /*!< \brief Glucose feature */
   GLS_RACP_CH_HDL,                  /*!< \brief Record access control point characteristic */

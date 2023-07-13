@@ -217,7 +217,7 @@ void cgmpsSendMeas(dmConnId_t connId, cgmpsRec_t *pRec)
   len = cgmpsBuildGlm(buf, &cgmpsCb.pCurrRec->meas);
 
   /* send notification */
-  AttsHandleValueNtf(connId, CGM_MEAS_HDL, len, buf);
+  AttsHandleValueNtf(connId, CGMS_MEAS_HDL, len, buf);
   cgmpsCb.txReady = FALSE;
 }
 
@@ -334,12 +334,12 @@ static void cgmpsHandleValueCnf(attEvt_t *pMsg)
     cgmpsCb.inProgress = FALSE;
   }
   /* if this is for measurement or context notification */
-  else if (pMsg->handle == CGM_MEAS_HDL || pMsg->handle == GLS_GLMC_HDL)
+  else if (pMsg->handle == CGMS_MEAS_HDL || pMsg->handle == GLS_GLMC_HDL)
   {
     if (cgmpsCb.pCurrRec != NULL)
     {
       /* if measurement was sent and there is context to send */
-      if (pMsg->handle == CGM_MEAS_HDL && AttsCccEnabled(connId, cgmpsCb.glmcCccIdx) &&
+      if (pMsg->handle == CGMS_MEAS_HDL && AttsCccEnabled(connId, cgmpsCb.glmcCccIdx) &&
           (cgmpsCb.pCurrRec->meas.flags & CH_GLM_FLAG_CONTEXT_INFO))
       {
         /* send context */

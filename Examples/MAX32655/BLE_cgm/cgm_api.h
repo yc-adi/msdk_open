@@ -44,7 +44,6 @@ enum
   WDXS_AU_CH_CCC_IDX,                       /*! WDXS AU service, service changed characteristic */
   DATS_WP_DAT_CCC_IDX,                      /*! Arm Ltd. proprietary service, data transfer characteristic */
   CGM_MEAS_CCC_IDX,                         /*! CGM service, CGM measurement characteristic: UUID 0x2AA7 */
-  CGM_STATUS_CCC_IDX,                       /*! CGM status: UUID 0x2AA9 */
   GLUC_GLS_RACP_CCC_IDX,                    /*! Glucose service, record access control point characteristic */
   CGM_CCC_IDX_NUM
 };

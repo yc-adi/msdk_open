@@ -35,14 +35,14 @@
 **************************************************************************************************/
 
 /*! Characteristic read permissions */
-#ifndef GLS_SEC_PERMIT_READ
-#define GLS_SEC_PERMIT_READ (ATTS_PERMIT_READ | ATTS_PERMIT_READ_ENC)
+#ifndef CGMS_SEC_PERMIT_READ
+#define CGMS_SEC_PERMIT_READ (ATTS_PERMIT_READ | ATTS_PERMIT_READ_ENC)
 #endif
 
 /*! Characteristic write permissions */
-#ifndef GLS_SEC_PERMIT_WRITE
-#define GLS_SEC_PERMIT_WRITE (ATTS_PERMIT_WRITE | ATTS_PERMIT_WRITE_ENC)
-#define GLS_SEC_PERMIT_WRITE_AUTH (ATTS_PERMIT_WRITE | ATTS_PERMIT_WRITE_ENC | ATTS_PERMIT_WRITE_AUTH)
+#ifndef CGMS_SEC_PERMIT_WRITE
+#define CGMS_SEC_PERMIT_WRITE (ATTS_PERMIT_WRITE | ATTS_PERMIT_WRITE_ENC)
+#define CGMS_SEC_PERMIT_WRITE_AUTH (ATTS_PERMIT_WRITE | ATTS_PERMIT_WRITE_ENC | ATTS_PERMIT_WRITE_AUTH)
 #endif
 
 /**************************************************************************************************
@@ -84,8 +84,8 @@ static const uint8_t cgmsValCgmfCh[] = {ATT_PROP_READ, UINT16_TO_BYTES(GLS_GLF_H
 static const uint16_t glsLenGlfCh = sizeof(cgmsValCgmfCh);
 
 /* Glucose feature */
-static uint8_t glsValGlf[] = {UINT16_TO_BYTES(0x0000)};
-static const uint16_t glsLenGlf = sizeof(glsValGlf);
+static uint8_t cgmsFeatVal[] = {UINT16_TO_BYTES(0x0000)};
+static const uint16_t cgmsFeatLen = sizeof(cgmsFeatVal);
 
 /* Control point characteristic */
 static const uint8_t glsValRacpCh[] = {(ATT_PROP_INDICATE | ATT_PROP_WRITE), UINT16_TO_BYTES(GLS_RACP_HDL), UINT16_TO_BYTES(ATT_UUID_RACP)};
@@ -100,7 +100,7 @@ static const uint16_t glsLenRacp = sizeof(glsValRacp);
 static uint8_t glsValRacpChCcc[] = {UINT16_TO_BYTES(0x0000)};
 static const uint16_t glsLenRacpChCcc = sizeof(glsValRacpChCcc);
 
-/* Attribute list for GLS group */
+/* Attribute list for GLS group, must match cgms_hdl */
 static const attsAttr_t cgmsList[] =
 {
   /* Service declaration */
@@ -112,9 +112,10 @@ static const attsAttr_t cgmsList[] =
     0, // settings
     ATTS_PERMIT_READ
   },
+
   /* CGM measurement characteristic declaration */
   {
-    attChUuid, // 0x2803
+    attChUuid, // 0x2803, NOTE: in attsIsHashableAttr() the next item will be ignored
     (uint8_t *) cgmsMeasChVal, // notify, hdl, 0x2AA7
     (uint16_t *) &cgmsMeasChLen,
     sizeof(cgmsMeasChVal),
@@ -132,44 +133,18 @@ static const attsAttr_t cgmsList[] =
   },
   /* Client characteristic configuration descriptor */
   {
-    attCliChCfgUuid,
+    attCliChCfgUuid, // 0x2902
     (uint8_t *) cgmsValCgmmChCcc,
     (uint16_t *) &glsLenGlmChCcc,
     sizeof(cgmsValCgmmChCcc),
     ATTS_SET_CCC,
-    (ATTS_PERMIT_READ | GLS_SEC_PERMIT_WRITE)
+    (ATTS_PERMIT_READ | ATTS_PERMIT_WRITE)
   },
-  /* Glucose measurement context characteristic declaration */
-  {
-    attChUuid,
-    (uint8_t *) glsValGlmcCh,
-    (uint16_t *) &cgmsLenCgmmcCh,
-    sizeof(glsValGlmcCh),
-    0,
-    ATTS_PERMIT_READ
-  },
-  /* Characteristic value */
-  {
-    attGlmcChUuid,
-    (uint8_t *) glsValGlmc,
-    (uint16_t *) &glsLenGlmc,
-    sizeof(glsValGlmc),
-    0,
-    0
-  },
-  /* Client characteristic configuration descriptor */
-  {
-    attCliChCfgUuid,
-    (uint8_t *) glsValGlmcChCcc,
-    (uint16_t *) &glsLenGlmcChCcc,
-    sizeof(glsValGlmcChCcc),
-    ATTS_SET_CCC,
-    (ATTS_PERMIT_READ | GLS_SEC_PERMIT_WRITE)
-  },
+
   /* CGM feature characteristic declaration */
   {
-    attChUuid,
-    (uint8_t *) cgmsValCgmfCh,
+    attChUuid, // 0x2803
+    (uint8_t *) cgmsValCgmfCh, // READ, hdl, 0x2AA8
     (uint16_t *) &glsLenGlfCh,
     sizeof(cgmsValCgmfCh),
     0,
@@ -177,16 +152,17 @@ static const attsAttr_t cgmsList[] =
   },
   /* Characteristic value */
   {
-    attGlfChUuid,
-    glsValGlf,
-    (uint16_t *) &glsLenGlf,
-    sizeof(glsValGlf),
+    attCgmfChUuid,
+    cgmsFeatVal,
+    (uint16_t *) &cgmsFeatLen,
+    cgmsFeatLen,
     0,
-    GLS_SEC_PERMIT_READ
+    ATTS_PERMIT_READ
   },
+  
   /* Record access control point characteristic delclaration */
   {
-    attChUuid,
+    attChUuid, // 0x2803
     (uint8_t *) glsValRacpCh,
     (uint16_t *) &glsLenRacpCh,
     sizeof(glsValRacpCh),
@@ -200,7 +176,7 @@ static const attsAttr_t cgmsList[] =
     (uint16_t *) &glsLenRacp,
     ATT_DEFAULT_PAYLOAD_LEN,
     (ATTS_SET_VARIABLE_LEN | ATTS_SET_WRITE_CBACK),
-    GLS_SEC_PERMIT_WRITE_AUTH
+    CGMS_SEC_PERMIT_WRITE_AUTH
   },
   /* Client characteristic configuration descriptor */
   {
@@ -209,7 +185,7 @@ static const attsAttr_t cgmsList[] =
     (uint16_t *) &glsLenRacpChCcc,
     sizeof(glsValRacpChCcc),
     ATTS_SET_CCC,
-    (ATTS_PERMIT_READ | GLS_SEC_PERMIT_WRITE)
+    (ATTS_PERMIT_READ | ATTS_PERMIT_WRITE)
   },
 };
 
@@ -220,8 +196,8 @@ static attsGroup_t svcCgmsGroup =
   (attsAttr_t *)cgmsList,
   NULL,
   NULL,
-  CGMS_START_HDL,
-  GLS_END_HDL
+  CGMS_START_HDL, // startHandle
+  GLS_END_HDL // endHandle
 };
 
 /*************************************************************************************************/

@@ -511,6 +511,7 @@ extern const uint8_t attHidPmChUuid[ATT_16_UUID_LEN];    /*!< \brief Protocol Mo
 extern const uint8_t attSiwChUuid[ATT_16_UUID_LEN];      /*!< \brief Scan Interval Window */
 extern const uint8_t attPnpChUuid[ATT_16_UUID_LEN];      /*!< \brief PnP ID */
 extern const uint8_t attGlfChUuid[ATT_16_UUID_LEN];      /*!< \brief Glucose Feature */
+extern const uint8_t attCgmfChUuid[ATT_16_UUID_LEN];     /*!< \brief CGM Feature */
 extern const uint8_t attRacpChUuid[ATT_16_UUID_LEN];     /*!< \brief Record Access Control Point */
 extern const uint8_t attCarChUuid[ATT_16_UUID_LEN];      /*!< \brief Central Address Resolution */
 extern const uint8_t attRsfChUuid[ATT_16_UUID_LEN];      /*!< \brief Running Speed Features */

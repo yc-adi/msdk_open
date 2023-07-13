@@ -35,8 +35,7 @@ extern "C" {
 **************************************************************************************************/
 
 /*! enumeration of CGM CCCD */
-enum
-{
+enum cgm_app_ccc_idx {
   GATT_SC_CCC_IDX,                          /*! GATT service, service changed characteristic */
   WDXS_DC_CH_CCC_IDX,                       /*! WDXS DC service, service changed characteristic */
   WDXS_FTC_CH_CCC_IDX,                      /*! WDXS FTC service, service changed characteristic */

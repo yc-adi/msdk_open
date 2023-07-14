@@ -40,8 +40,8 @@ extern "C" {
  *
  */
 /**@{*/
-#define GLS_ERR_IN_PROGRESS       0x80    /*!< \brief Procedure already in progress */
-#define GLS_ERR_CCCD              0x81    /*!< \brief CCCD improperly configured */
+#define CGMS_ERR_IN_PROGRESS      0x80    /*!< \brief Procedure already in progress */
+#define CGMS_ERR_CCCD             0x81    /*!< \brief CCCD improperly configured */
 /**@}*/
 
 /**************************************************************************************************
@@ -53,7 +53,7 @@ extern "C" {
  */
 /**@{*/
 #define CGMS_START_HDL               0xF0              /*!< \brief Start handle. */
-#define GLS_END_HDL                 (GLS_MAX_HDL - 1) /*!< \brief End handle. */
+#define CGMS_END_HDL                 (CGMS_MAX_HDL - 1) /*!< \brief End handle. */
 
 /**************************************************************************************************
  Handles
@@ -70,8 +70,14 @@ enum cgms_hdl {
   CGMS_FEAT_CH_HDL,                 /*!< \brief CGM feature characteristic */
   CGMS_FEAT_HDL,                    /*!< \brief CGM feature */
 
-  CGMS_ST_CH_HDL,                   /*!< \brief CGM status characteristic */
+  CGMS_ST_CH_HDL,                   /*!< \brief CGM status characteristic: ATT_UUID_CGM_STATUS */
   CGMS_ST_HDL,                      /*!< \brief CGM status */
+
+  CGMS_SESS_START_T_CH_HDL,         /*!< \brief CGM session start time characteristic: ATT_UUID_CGM_SESS_START_T */
+  CGMS_SESS_START_T_HDL,            /*!< \brief CGM session start time */
+
+  CGMS_SESS_RUN_T_CH_HDL,           /*!< \brief CGM session run time characteristic: ATT_UUID_CGM_SESS_RUN_T */
+  CGMS_SESS_RUN_T_HDL,              /*!< \brief CGM session run time */
 
   CGMS_RACP_CH_HDL,                 /*!< \brief Record access control point characteristic */
   CGMS_RACP_HDL,                    /*!< \brief Record access control point */
@@ -83,7 +89,7 @@ enum cgms_hdl {
   CGMS_SOPS_CCCD_HDL,               /*!< \brief CGM Specific Ops Control Point CCCD */
 #endif
 
-  GLS_MAX_HDL                       /*!< \brief Maximum handle. */
+  CGMS_MAX_HDL                       /*!< \brief Maximum handle. */
 };
 
 enum // @?@ remove me !!!

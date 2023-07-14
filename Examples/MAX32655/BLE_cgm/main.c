@@ -458,7 +458,7 @@ static int mainWsfInit(void)
     /* Adjust buffer allocation based on platform configuration. */
     mainPoolDesc[2].len = maxRptBufSize;
     mainPoolDesc[2].num = mainLlRtCfg.maxAdvReports;
-    mainPoolDesc[3].len = 390;  // aclBufSize; // remove me !!!
+    mainPoolDesc[3].len = 400;  // aclBufSize; // remove me !!!
     mainPoolDesc[3].num = mainLlRtCfg.numTxBufs + mainLlRtCfg.numRxBufs;
 #endif
 

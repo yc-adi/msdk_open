@@ -721,7 +721,7 @@ uint8_t CgmpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operatio
   /* if control point not configured for indication */
   if (!AttsCccEnabled(connId, cgmpsCb.racpCccIdx))
   {
-    return GLS_ERR_CCCD;
+    return CGMS_ERR_CCCD;
   }
 
   /* parse opcode and operator and adjust remaining parameter length */
@@ -732,13 +732,13 @@ uint8_t CgmpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operatio
   /* handle a procedure in progress */
   if (opcode != CH_RACP_OPCODE_ABORT && cgmpsCb.inProgress)
   {
-    return GLS_ERR_IN_PROGRESS;
+    return CGMS_ERR_IN_PROGRESS;
   }
 
   /* handle record request when notifications not enabled */
   if (opcode == CH_RACP_OPCODE_REPORT && !AttsCccEnabled(connId, cgmpsCb.glmCccIdx))
   {
-    return GLS_ERR_CCCD;
+    return CGMS_ERR_CCCD;
   }
 
   /* verify operands */

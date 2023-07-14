@@ -64,16 +64,7 @@ static const uint16_t cgmsMeasLen = sizeof(cgmsMeasVal);
 
 /* CGM measurement client characteristic configuration */
 static uint8_t cgmsValCgmmChCcc[] = {UINT16_TO_BYTES(0x0000)};
-static const uint16_t glsLenGlmChCcc = sizeof(cgmsValCgmmChCcc);
-
-/* Glucose measurement context */
-/* Note these are dummy values */
-static const uint8_t glsValGlmc[] = {0};
-static const uint16_t glsLenGlmc = sizeof(glsValGlmc);
-
-/* Glucose measurement context client characteristic configuration */
-static uint8_t glsValGlmcChCcc[] = {UINT16_TO_BYTES(0x0000)};
-static const uint16_t glsLenGlmcChCcc = sizeof(glsValGlmcChCcc);
+static const uint16_t cgmsValCgmmChCccLen = sizeof(cgmsValCgmmChCcc);
 
 /* CGM feature characteristic */
 static const uint8_t cgmsFeatCh[] = {ATT_PROP_READ, UINT16_TO_BYTES(CGMS_FEAT_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_FEATURE)};
@@ -89,18 +80,32 @@ static const uint16_t cgmsStChLen = sizeof(cgmsStCh);
 static uint8_t cgmsStVal[] = {UINT16_TO_BYTES(0x0000)};
 static const uint16_t cgmsStValLen = sizeof(cgmsStVal);
 
+/* CGM session start time characteristic */
+static const uint8_t cgmsSessStartTCh[] = {ATT_PROP_READ | ATT_PROP_WRITE, UINT16_TO_BYTES(CGMS_SESS_START_T_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_SESS_START_T)};
+static const uint16_t cgmsSessStartTChLen = sizeof(cgmsSessStartTCh);
+/* CGM status characteristic value */
+static uint8_t cgmsSessStartTVal[] = {UINT16_TO_BYTES(0x0000)};
+static const uint16_t cgmsSessStartTValLen = sizeof(cgmsSessStartTVal);
+
+/* CGM session run time characteristic */
+static const uint8_t cgmsSessRunTCh[] = {ATT_PROP_READ, UINT16_TO_BYTES(CGMS_SESS_RUN_T_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_SESS_RUN_T)};
+static const uint16_t cgmsSessRunTChLen = sizeof(cgmsSessRunTCh);
+/* CGM status characteristic value */
+static uint8_t cgmsSessRunTVal[] = {UINT16_TO_BYTES(0x0000)};
+static const uint16_t cgmsSessRunTValLen = sizeof(cgmsSessRunTVal);
+
 /* Control point characteristic */
-static const uint8_t glsValRacpCh[] = {(ATT_PROP_INDICATE | ATT_PROP_WRITE), UINT16_TO_BYTES(CGMS_RACP_HDL), UINT16_TO_BYTES(ATT_UUID_RACP)};
-static const uint16_t glsLenRacpCh = sizeof(glsValRacpCh);
+static const uint8_t cgmsRacpCh[] = {(ATT_PROP_INDICATE | ATT_PROP_WRITE), UINT16_TO_BYTES(CGMS_RACP_HDL), UINT16_TO_BYTES(ATT_UUID_RACP)};
+static const uint16_t cgmsRacpChLen = sizeof(cgmsRacpCh);
 
 /* Record access control point */
 /* Note these are dummy values */
-static const uint8_t glsValRacp[] = {0};
-static const uint16_t glsLenRacp = sizeof(glsValRacp);
+static const uint8_t cgmsRacpVal[] = {0};
+static const uint16_t cgmsRacpValLen = sizeof(cgmsRacpVal);
 
 /* Record access control point client characteristic configuration */
-static uint8_t glsValRacpChCcc[] = {UINT16_TO_BYTES(0x0000)};
-static const uint16_t glsLenRacpChCcc = sizeof(glsValRacpChCcc);
+static uint8_t cgmRacpChCcc[] = {UINT16_TO_BYTES(0x0000)};
+static const uint16_t cgmRacpChCccLen = sizeof(cgmRacpChCcc);
 
 /* CGM SOPS characteristic */
 static uint8_t cgmsSops[] = {0};
@@ -115,7 +120,7 @@ static const uint16_t cgmsSopsValLen = sizeof(cgmsSopsVal);
 static uint8_t cgmsSopsCccd[] = {UINT16_TO_BYTES(0x0000)};
 static const uint16_t cgmsSopsCccdLen = sizeof(cgmsSopsCccd);
 
-/* Attribute list for GLS group, must match cgms_hdl */
+/* Attribute list for CGM group, must match cgms_hdl */
 static const attsAttr_t cgmsList[] =
 {
   /* Service declaration */
@@ -131,7 +136,7 @@ static const attsAttr_t cgmsList[] =
   /* CGM measurement characteristic declaration */
   {
     attChUuid, // 0x2803, NOTE: in attsIsHashableAttr() the next item will be ignored
-    (uint8_t *) cgmsMeasChVal, // notify, hdl, 0x2AA7
+    (uint8_t *) cgmsMeasChVal,
     (uint16_t *) &cgmsMeasChLen,
     sizeof(cgmsMeasChVal),
     0,
@@ -150,7 +155,7 @@ static const attsAttr_t cgmsList[] =
   {
     attCliChCfgUuid, // 0x2902
     (uint8_t *) cgmsValCgmmChCcc,
-    (uint16_t *) &glsLenGlmChCcc,
+    (uint16_t *) &cgmsValCgmmChCccLen,
     sizeof(cgmsValCgmmChCcc),
     ATTS_SET_CCC,
     (ATTS_PERMIT_READ | ATTS_PERMIT_WRITE)
@@ -160,7 +165,7 @@ static const attsAttr_t cgmsList[] =
   // characteristic declaration
   {
     attChUuid, // 0x2803
-    (uint8_t *) cgmsFeatCh, // READ, hdl, 0x2AA8
+    (uint8_t *) cgmsFeatCh,
     (uint16_t *) &cgmsFeatChLen,
     sizeof(cgmsFeatCh),
     0,
@@ -181,7 +186,7 @@ static const attsAttr_t cgmsList[] =
   // characteristic declaration
   {
     attChUuid, // 0x2803
-    (uint8_t *) cgmsStCh, // READ, hdl, 0x2AA9
+    (uint8_t *) cgmsStCh,
     (uint16_t *) &cgmsStChLen,
     sizeof(cgmsStChLen),
     0,
@@ -198,20 +203,62 @@ static const attsAttr_t cgmsList[] =
   },
   // --->
 
+  // <--- CGM session start time ATT_UUID_CGM_SESS_START_T
+  // characteristic declaration
+  {
+    attChUuid, // 0x2803
+    (uint8_t *) cgmsSessStartTCh,
+    (uint16_t *) &cgmsSessStartTChLen,
+    sizeof(cgmsSessStartTCh),
+    0,
+    ATTS_PERMIT_READ
+  },
+  // characteristic value
+  {
+    attCgmSessStartTChUuid,
+    cgmsSessStartTVal,
+    (uint16_t *) &cgmsSessStartTValLen,
+    cgmsSessStartTValLen,
+    0,
+    ATTS_PERMIT_READ | ATTS_PERMIT_WRITE
+  },
+  // --->
+
+  // <--- CGM session run time ATT_UUID_CGM_SESS_RUN_T
+  // characteristic declaration
+  {
+    attChUuid, // 0x2803
+    (uint8_t *) cgmsSessRunTCh,
+    (uint16_t *) &cgmsSessRunTChLen,
+    sizeof(cgmsSessRunTCh),
+    0,
+    ATTS_PERMIT_READ
+  },
+  // characteristic value
+  {
+    attCgmSessRunTChUuid,
+    cgmsSessRunTVal,
+    (uint16_t *) &cgmsSessRunTValLen,
+    cgmsSessRunTValLen,
+    0,
+    ATTS_PERMIT_READ | ATTS_PERMIT_WRITE
+  },
+  // --->
+
   /* Record access control point characteristic delclaration */
   {
     attChUuid, // 0x2803
-    (uint8_t *) glsValRacpCh,
-    (uint16_t *) &glsLenRacpCh,
-    sizeof(glsValRacpCh),
+    (uint8_t *) cgmsRacpCh,
+    (uint16_t *) &cgmsRacpChLen,
+    sizeof(cgmsRacpCh),
     0,
     ATTS_PERMIT_READ
   },
   /* Characteristic value */
   {
     attRacpChUuid,
-    (uint8_t *) glsValRacp,
-    (uint16_t *) &glsLenRacp,
+    (uint8_t *) cgmsRacpVal,
+    (uint16_t *) &cgmsRacpValLen,
     ATT_DEFAULT_PAYLOAD_LEN,
     (ATTS_SET_VARIABLE_LEN | ATTS_SET_WRITE_CBACK),
     CGMS_SEC_PERMIT_WRITE_AUTH
@@ -219,9 +266,9 @@ static const attsAttr_t cgmsList[] =
   /* Client characteristic configuration descriptor */
   {
     attCliChCfgUuid,
-    (uint8_t *) glsValRacpChCcc,
-    (uint16_t *) &glsLenRacpChCcc,
-    sizeof(glsValRacpChCcc),
+    (uint8_t *) cgmRacpChCcc,
+    (uint16_t *) &cgmRacpChCccLen,
+    sizeof(cgmRacpChCcc),
     ATTS_SET_CCC,
     (ATTS_PERMIT_READ | ATTS_PERMIT_WRITE)
   },
@@ -256,7 +303,7 @@ static const attsAttr_t cgmsList[] =
 #endif
 };
 
-/* GLS group structure */
+/* CGM group structure */
 static attsGroup_t svcCgmsGroup =
 {
   NULL,
@@ -264,7 +311,7 @@ static attsGroup_t svcCgmsGroup =
   NULL,
   NULL,
   CGMS_START_HDL, // startHandle
-  GLS_END_HDL // endHandle
+  CGMS_END_HDL // endHandle
 };
 
 /*************************************************************************************************/

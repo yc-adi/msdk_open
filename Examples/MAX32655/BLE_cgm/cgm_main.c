@@ -102,19 +102,23 @@
   Client Characteristic Configuration Descriptors (CCCD)
 **************************************************************************************************/
 
-/*! client characteristic configuration descriptors settings, indexed by above enumeration */
-static const attsCccSet_t cgmCccSet[CGM_CCC_IDX_NUM] =
+/*! client characteristic configuration descriptors settings, indexed by cgm_app_ccc_idx */
+static const attsCccSet_t cgmCccSet[CGM_CCC_IDX_MAX] =
 {
   /* cccd handle          value range               security level */
   {GATT_SC_CH_CCC_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC},    /* GATT_SC_CCC_IDX */
 //{GATT_SC_CH_CCC_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_NONE },  /* GATT_SC_CCC_IDX, @?@ remove me !!! */
+
   {WDXS_DC_CH_CCC_HDL,    ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_DC_CH_CCC_IDX */
   {WDXS_FTC_CH_CCC_HDL,   ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_FTC_CH_CCC_IDX */
   {WDXS_FTD_CH_CCC_HDL,   ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_FTD_CH_CCC_IDX */
   {WDXS_AU_CH_CCC_HDL,    ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_AU_CH_CCC_IDX */
+  
   {WP_DAT_CH_CCC_HDL,     ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* DATS_WP_DAT_CCC_IDX */
+
   {CGMS_MEAS_CH_CCC_HDL,  ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* CGM_MEAS_CCC_IDX */
-  {GLS_RACP_CH_CCC_HDL,   ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}     /* GLUC_GLS_RACP_CCC_IDX */
+  {CGMS_RACP_CH_CCC_HDL,  ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}    /* CGM_RACP_CCC_IDX */
+  //{CGMS_SOPS_CCCD_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}     /* CGM_SOPS_CCC_IDX */
 };
 
 /**************************************************************************************************
@@ -788,7 +792,7 @@ void CgmHandlerInit(wsfHandlerId_t handlerId)
 
     /* initialize CGM profile sensor */
     CgmpsInit();
-    CgmpsSetCccIdx(CGM_MEAS_CCC_IDX, 0, GLUC_GLS_RACP_CCC_IDX);
+    CgmpsSetCccIdx(CGM_MEAS_CCC_IDX, 0, CGM_RACP_CCC_IDX);
 }
 
 /*************************************************************************************************/
@@ -1064,7 +1068,7 @@ void CgmStart(void)
 
     AttRegister(datsAttCback);
     AttConnRegister(AppServerConnCback);
-    AttsCccRegister(CGM_CCC_IDX_NUM, (attsCccSet_t *)cgmCccSet, cgmCccCback);
+    AttsCccRegister(CGM_CCC_IDX_MAX, (attsCccSet_t *)cgmCccSet, cgmCccCback);
 
     /* Initialize attribute server database */
     SvcCoreGattCbackRegister(GattReadCback, GattWriteCback);

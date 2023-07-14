@@ -243,7 +243,7 @@ void cgmpsRacpSendRsp(dmConnId_t connId, uint8_t opcode, uint8_t status)
   buf[3] = status;
 
   /* send indication */
-  AttsHandleValueInd(connId, GLS_RACP_HDL, GLPS_RACP_RSP_LEN, buf);
+  AttsHandleValueInd(connId, CGMS_RACP_HDL, GLPS_RACP_RSP_LEN, buf);
   cgmpsCb.txReady = FALSE;
 }
 
@@ -268,7 +268,7 @@ void cgmpsRacpSendNumRecRsp(dmConnId_t connId, uint16_t numRec)
   buf[3] = UINT16_TO_BYTE1(numRec);
 
   /* send indication */
-  AttsHandleValueInd(connId, GLS_RACP_HDL, GLPS_RACP_RSP_LEN, buf);
+  AttsHandleValueInd(connId, CGMS_RACP_HDL, GLPS_RACP_RSP_LEN, buf);
   cgmpsCb.txReady = FALSE;
 }
 
@@ -328,7 +328,7 @@ static void cgmpsHandleValueCnf(attEvt_t *pMsg)
   }
 
   /* if this is for RACP indication */
-  if (pMsg->handle == GLS_RACP_HDL)
+  if (pMsg->handle == CGMS_RACP_HDL)
   {
     /* procedure no longer in progress */
     cgmpsCb.inProgress = FALSE;
@@ -571,7 +571,7 @@ static void cgmpsToggleBondingFlag(void)
   uint16_t len;
 
   /* Get flags */
-  if (AttsGetAttr(GLS_GLF_HDL, &len, &pCgmpsFlagsValue) == ATT_SUCCESS)
+  if (AttsGetAttr(CGMS_FEAT_HDL, &len, &pCgmpsFlagsValue) == ATT_SUCCESS)
   {
     uint16_t cgmpsFlags;
 
@@ -797,7 +797,7 @@ void CgmpsSetFeature(uint16_t feature)
 {
   uint8_t buf[2] = {UINT16_TO_BYTES(feature)};
 
-  AttsSetAttr(GLS_GLF_HDL, sizeof(buf), buf);
+  AttsSetAttr(CGMS_FEAT_HDL, sizeof(buf), buf);
 }
 
 /*************************************************************************************************/

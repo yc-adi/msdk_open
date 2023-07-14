@@ -206,6 +206,8 @@ extern "C" {
 #define ATT_UUID_USER_CONTROL_POINT         0x2A9F    /*!< \brief User Control Point */
 #define ATT_UUID_CGM_MEAS                   0x2AA7    /*!< \brief CGM Measurement */
 #define ATT_UUID_CGM_FEATURE                0x2AA8    /*!< \brief CGM Feature */
+#define ATT_UUID_CGM_STATUS                 0x2AA9    /*!< \brief CGM Status */
+#define ATT_UUID_CGM_SOPS                   0x2AAC    /*!< \brief CGM Specific Ops Control Point (SOPS)*/
 #define ATT_UUID_RPAO                       0x2AC9    /*!< \brief Resolvable Prviate Address Only */
 #define ATT_UUID_MESH_PRV_DATA_IN           0x2ADB    /*!< \brief Mesh Provisioning Data In */
 #define ATT_UUID_MESH_PRV_DATA_OUT          0x2ADC    /*!< \brief Mesh Provisioning Data Out */
@@ -511,7 +513,9 @@ extern const uint8_t attHidPmChUuid[ATT_16_UUID_LEN];    /*!< \brief Protocol Mo
 extern const uint8_t attSiwChUuid[ATT_16_UUID_LEN];      /*!< \brief Scan Interval Window */
 extern const uint8_t attPnpChUuid[ATT_16_UUID_LEN];      /*!< \brief PnP ID */
 extern const uint8_t attGlfChUuid[ATT_16_UUID_LEN];      /*!< \brief Glucose Feature */
-extern const uint8_t attCgmfChUuid[ATT_16_UUID_LEN];     /*!< \brief CGM Feature */
+extern const uint8_t attCgmfChUuid[ATT_16_UUID_LEN];     /*!< \brief CGM Feature ATT_UUID_CGM_FEATURE */
+extern const uint8_t attCgmStChUuid[ATT_16_UUID_LEN];    /*!< \brief CGM Status ATT_UUID_CGM_STATUS */
+extern const uint8_t attCgmSopsChUuid[ATT_16_UUID_LEN];  /*!< \brief CGM SOPS */
 extern const uint8_t attRacpChUuid[ATT_16_UUID_LEN];     /*!< \brief Record Access Control Point */
 extern const uint8_t attCarChUuid[ATT_16_UUID_LEN];      /*!< \brief Central Address Resolution */
 extern const uint8_t attRsfChUuid[ATT_16_UUID_LEN];      /*!< \brief Running Speed Features */

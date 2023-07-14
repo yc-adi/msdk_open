@@ -37,14 +37,19 @@ extern "C" {
 /*! enumeration of CGM CCCD */
 enum cgm_app_ccc_idx {
   GATT_SC_CCC_IDX,                          /*! GATT service, service changed characteristic */
+
   WDXS_DC_CH_CCC_IDX,                       /*! WDXS DC service, service changed characteristic */
   WDXS_FTC_CH_CCC_IDX,                      /*! WDXS FTC service, service changed characteristic */
   WDXS_FTD_CH_CCC_IDX,                      /*! WDXS FTD service, service changed characteristic */
   WDXS_AU_CH_CCC_IDX,                       /*! WDXS AU service, service changed characteristic */
+
   DATS_WP_DAT_CCC_IDX,                      /*! Arm Ltd. proprietary service, data transfer characteristic */
+
   CGM_MEAS_CCC_IDX,                         /*! CGM service, CGM measurement characteristic: UUID 0x2AA7 */
-  GLUC_GLS_RACP_CCC_IDX,                    /*! Glucose service, record access control point characteristic */
-  CGM_CCC_IDX_NUM
+  CGM_RACP_CCC_IDX,                         /*! CGM service, record access control point (RACP) characteristic: UUID 0x2A52 */
+  //CGM_SOPS_CCC_IDX,                         /*! CGM service, specific ops control point (SOPS) characteristic: UUID 0x2AAC */
+  
+  CGM_CCC_IDX_MAX
 };
 
 /**************************************************************************************************

@@ -67,12 +67,21 @@ enum cgms_hdl {
   CGMS_MEAS_HDL,                    /*!< \brief CGM measurement value */
   CGMS_MEAS_CH_CCC_HDL,             /*!< \brief CGM measurement CCCD */
    
-  GLS_GLF_CH_HDL,                   /*!< \brief Glucose feature characteristic */
-  GLS_GLF_HDL,                      /*!< \brief Glucose feature */
+  CGMS_FEAT_CH_HDL,                 /*!< \brief CGM feature characteristic */
+  CGMS_FEAT_HDL,                    /*!< \brief CGM feature */
 
-  GLS_RACP_CH_HDL,                  /*!< \brief Record access control point characteristic */
-  GLS_RACP_HDL,                     /*!< \brief Record access control point */
-  GLS_RACP_CH_CCC_HDL,              /*!< \brief Record access control point client characteristic configuration */
+  CGMS_ST_CH_HDL,                   /*!< \brief CGM status characteristic */
+  CGMS_ST_HDL,                      /*!< \brief CGM status */
+
+  CGMS_RACP_CH_HDL,                 /*!< \brief Record access control point characteristic */
+  CGMS_RACP_HDL,                    /*!< \brief Record access control point */
+  CGMS_RACP_CH_CCC_HDL,             /*!< \brief RACP client characteristic configuration */
+
+#if 0
+  CGMS_SOPS_CH_HDL,                 /*!< \brief CGM Specific Ops Control Point characteristic */
+  CGMS_SOPS_HDL,                    /*!< \brief CGM Specific Ops Control Point */
+  CGMS_SOPS_CCCD_HDL,               /*!< \brief CGM Specific Ops Control Point CCCD */
+#endif
 
   GLS_MAX_HDL                       /*!< \brief Maximum handle. */
 };

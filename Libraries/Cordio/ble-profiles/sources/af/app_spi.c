@@ -72,6 +72,7 @@ void AppSpiInit(void)
 
   handlerSpiId = WsfOsSetNextHandler(SpiHandler);
   APP_TRACE_INFO1("register WSF OS SpiHandler as id: %d, which will be triggered by SpiRx().", handlerSpiId);  // WSF OS level: process event and msg
+  APP_TRACE_INFO1("handlerId: %d, SpiHandler", handlerSpiId);
 
   SpiInit(handlerSpiId);
 }

@@ -607,7 +607,7 @@ void CgmpsInit(void)
 /*************************************************************************************************/
 /*!
  *  \brief  This function is called by the application when a message that requires
- *          processing by the glucose profile sensor is received.
+ *          processing by the CGM profile sensor is received.
  *
  *  \param  pMsg     Event message.
  *
@@ -616,17 +616,24 @@ void CgmpsInit(void)
 /*************************************************************************************************/
 void CgmpsProcMsg(wsfMsgHdr_t *pMsg)
 {
+#if WSF_TRACE_ENABLED == TRUE
+  char *evt_str;
+#endif
+
   switch(pMsg->event)
   {
     case DM_CONN_OPEN_IND:
+      APP_TRACE_INFO1("CgmpsProcMsg DM_CONN_OPEN_IND (%d)", DM_CONN_OPEN_IND);
       cgmpsConnOpen((dmEvt_t *) pMsg);
       break;
 
     case DM_CONN_CLOSE_IND:
+      APP_TRACE_INFO1("CgmpsProcMsg DM_CONN_CLOSE_IND (%d)", DM_CONN_CLOSE_IND);
       cgmpsConnClose((dmEvt_t *) pMsg);
       break;
 
     case ATTS_HANDLE_VALUE_CNF:
+      APP_TRACE_INFO1("CgmpsProcMsg ATTS_HANDLE_VALUE_CNF (%d)", ATTS_HANDLE_VALUE_CNF);
       cgmpsHandleValueCnf((attEvt_t *) pMsg);
       break;
 

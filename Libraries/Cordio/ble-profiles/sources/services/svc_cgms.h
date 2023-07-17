@@ -67,7 +67,7 @@ enum cgms_hdl {
   CGMS_MEAS_HDL,                    /*!< \brief CGM measurement value */
   CGMS_MEAS_CH_CCC_HDL,             /*!< \brief CGM measurement CCCD */
    
-  CGMS_FEAT_CH_HDL,                 /*!< \brief CGM feature characteristic */
+  CGMS_FEAT_CH_HDL,                 /*!< \brief CGM feature characteristic: ATT_UUID_CGM_FEATURE */
   CGMS_FEAT_HDL,                    /*!< \brief CGM feature */
 
   CGMS_ST_CH_HDL,                   /*!< \brief CGM status characteristic: ATT_UUID_CGM_STATUS */

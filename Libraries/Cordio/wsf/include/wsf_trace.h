@@ -303,6 +303,10 @@ bool_t WsfTokenService(void);
 #define WSF_TRACE_MSG2(msg, var1, var2)
 /*! \brief 3 argument WSF message trace. */
 #define WSF_TRACE_MSG3(msg, var1, var2, var3)
+/*! \brief 4 argument WSF message trace. */
+#define WSF_TRACE_MSG4(msg, var1, var2, var3, var4)       WSF_TRACE4("WSF", "INFO", msg, var1, var2, var3, var4)
+/*! \brief 5 argument WSF message trace. */
+#define WSF_TRACE_MSG5(msg, var1, var2, var3, var4, var5) WSF_TRACE5("WSF", "INFO", msg, var1, var2, var3, var4, var5)
 
 /*! \brief 0 argument HCI info trace. */
 #define HCI_TRACE_INFO0(msg)                        WSF_TRACE0V("HCI", "INFO", msg)

@@ -93,6 +93,8 @@ static void attL2cDataCback(uint16_t handle, uint16_t len, uint8_t *pPacket)
   /* parse PDU type */
   pduType = *(pPacket + L2C_PAYLOAD_START);
 
+  APP_TRACE_INFO1("attL2cDataCback, pduType %d", pduType);
+
   /* if from server */
   if ((pduType & ATT_PDU_MASK_SERVER) != 0)
   {
@@ -103,7 +105,7 @@ static void attL2cDataCback(uint16_t handle, uint16_t len, uint8_t *pPacket)
   else
   {
     /* call server data callback */
-    (*attCb.pServer->dataCback)(handle, len, pPacket);
+    (*attCb.pServer->dataCback)(handle, len, pPacket); // attsDataCback
   }
 }
 
@@ -119,6 +121,8 @@ static void attL2cDataCback(uint16_t handle, uint16_t len, uint8_t *pPacket)
 static void attL2cCtrlCback(wsfMsgHdr_t *pMsg)
 {
   attCcb_t      *pCcb;
+
+  APP_TRACE_INFO1("attL2cCtrlCback, evt %d", pMsg->event);
 
   /* get connection control block */
   pCcb = attCcbByConnId((dmConnId_t) pMsg->param);

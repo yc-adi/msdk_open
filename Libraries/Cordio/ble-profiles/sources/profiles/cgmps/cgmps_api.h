@@ -99,7 +99,7 @@ uint8_t CgmpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operatio
  *  \return None.
  */
 /*************************************************************************************************/
-void CgmpsSetFeature(uint16_t feature);
+void CgmpsSetFeature(uint8_t *feature);
 
 /*************************************************************************************************/
 /*!

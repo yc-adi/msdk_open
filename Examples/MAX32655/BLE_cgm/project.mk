@@ -20,7 +20,7 @@ DEBUG = 1
 # Set to 0 to disable
 # Set to 1 to enable serial port trace messages
 # Set to 2 to enable verbose messages
-TRACE = 1
+TRACE = 2
 
 BUILD_BOOTLOADER?=1
 
@@ -67,3 +67,6 @@ ${BOOTLOADER_OBJ}: bl_build.S ${BOOTLOADER_BIN}
 endif
 
 DEEP_SLEEP = 0
+
+# Optimize for size
+MXC_OPTIMIZE_CFLAGS=-Os

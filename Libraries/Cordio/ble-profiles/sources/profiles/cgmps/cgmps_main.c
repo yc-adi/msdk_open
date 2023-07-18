@@ -586,7 +586,7 @@ static void cgmpsToggleBondingFlag(void)
       cgmpsFlags |= CH_GLF_MULTI_BOND;
     }
 
-    CgmpsSetFeature(cgmpsFlags);
+    // @?@ remove me !!! TODO: CgmpsSetFeature(cgmpsFlags);
   }
 }
 
@@ -795,16 +795,14 @@ uint8_t CgmpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operatio
 /*!
  *  \brief  Set the supported features of the glucose sensor.
  *
- *  \param  feature   Feature bitmask.
+ *  \param  pFeature   point to the Feature content.
  *
  *  \return None.
  */
 /*************************************************************************************************/
-void CgmpsSetFeature(uint16_t feature)
+void CgmpsSetFeature(uint8_t *pFeature)
 {
-  uint8_t buf[2] = {UINT16_TO_BYTES(feature)};
-
-  AttsSetAttr(CGMS_FEAT_HDL, sizeof(buf), buf);
+  AttsSetAttr(CGMS_FEAT_HDL, CGMS_FEAT_LEN, pFeature);
 }
 
 /*************************************************************************************************/

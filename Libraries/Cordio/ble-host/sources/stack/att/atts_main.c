@@ -200,7 +200,8 @@ static void attsDataCback(uint16_t handle, uint16_t len, uint8_t *pPacket)
     return;
   }
 #endif
-
+  APP_TRACE_INFO2("attsDataCback, opcode %d, method %d", opcode, method);
+  
   /* if no error process request */
   if (!err)
   {

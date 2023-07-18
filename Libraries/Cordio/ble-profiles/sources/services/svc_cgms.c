@@ -70,15 +70,15 @@ static const uint16_t cgmsValCgmmChCccLen = sizeof(cgmsValCgmmChCcc);
 static const uint8_t cgmsFeatCh[] = {ATT_PROP_READ, UINT16_TO_BYTES(CGMS_FEAT_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_FEATURE)};
 static const uint16_t cgmsFeatChLen = sizeof(cgmsFeatCh);
 /* CGM feature characteristic value */
-static uint8_t cgmsFeatVal[] = {UINT16_TO_BYTES(0x0000)};
-static const uint16_t cgmsFeatLen = sizeof(cgmsFeatVal);
+static uint8_t cgmsFeatVal[CGMS_FEAT_LEN] = {0, 0, 0, 0, 0, 0};
+static const uint16_t cgmsFeatLen = CGMS_FEAT_LEN;
 
 /* CGM status characteristic */
 static const uint8_t cgmsStCh[] = {ATT_PROP_READ, UINT16_TO_BYTES(CGMS_ST_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_STATUS)};
 static const uint16_t cgmsStChLen = sizeof(cgmsStCh);
 /* CGM status characteristic value */
-static uint8_t cgmsStVal[] = {UINT16_TO_BYTES(0x0000)};
-static const uint16_t cgmsStValLen = sizeof(cgmsStVal);
+static uint8_t cgmsStVal[CGMS_ST_LEN] = {1, 2, 3};
+static const uint16_t cgmsStValLen = CGMS_ST_LEN;
 
 /* CGM session start time characteristic */
 static const uint8_t cgmsSessStartTCh[] = {ATT_PROP_READ | ATT_PROP_WRITE, UINT16_TO_BYTES(CGMS_SESS_START_T_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_SESS_START_T)};

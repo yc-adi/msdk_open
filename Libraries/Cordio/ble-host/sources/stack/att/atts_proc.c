@@ -434,6 +434,8 @@ void attsProcReadReq(attsCcb_t *pCcb, uint16_t len, uint8_t *pPacket)
   pPacket += L2C_PAYLOAD_START + ATT_HDR_LEN;
   BSTREAM_TO_UINT16(handle, pPacket);
 
+  APP_TRACE_INFO1("attsProcReadReq, hndl %d", handle);
+
   /* find attribute */
   if ((pAttr = attsFindByHandle(handle, &pGroup)) != NULL)
   {

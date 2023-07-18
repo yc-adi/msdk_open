@@ -68,10 +68,10 @@ enum cgms_hdl {
   CGMS_MEAS_CH_CCC_HDL,             /*!< \brief CGM measurement CCCD */
    
   CGMS_FEAT_CH_HDL,                 /*!< \brief CGM feature characteristic: ATT_UUID_CGM_FEATURE */
-  CGMS_FEAT_HDL,                    /*!< \brief CGM feature */
+  CGMS_FEAT_HDL,                    /*!< \brief CGM feature, 245 */
 
   CGMS_ST_CH_HDL,                   /*!< \brief CGM status characteristic: ATT_UUID_CGM_STATUS */
-  CGMS_ST_HDL,                      /*!< \brief CGM status */
+  CGMS_ST_HDL,                      /*!< \brief CGM status, 247 */
 
   CGMS_SESS_START_T_CH_HDL,         /*!< \brief CGM session start time characteristic: ATT_UUID_CGM_SESS_START_T */
   CGMS_SESS_START_T_HDL,            /*!< \brief CGM session start time */

@@ -129,7 +129,7 @@ void WsfMsgEnq(wsfQueue_t *pQueue, wsfHandlerId_t handlerId, void *pMsg)
   //h->msg_ndx = ++msg_ndx;
 
   //WSF_TRACE_MSG5("MsgSend hndId %u, ndx %03d, p 0x%04X, evt %03d, st %d", handlerId, h->msg_ndx, h->param, h->event, h->status);
-
+  //WSF_TRACE_MSG5("MsgSend hndId %u, ndx %03d, p 0x%04X, evt %03d, st %d", handlerId, 0, h->param, h->event, h->status);
   wsfMsg_t    *p;
 
   WSF_ASSERT(pMsg != NULL);

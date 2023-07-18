@@ -229,6 +229,13 @@ static const uint8_t datsScanDataDisc[] = {
     'C','G','M'
 };
 
+/*! CGM Feature */
+static const uint8_t cgmFeature[CGMS_FEAT_LEN] = {
+    1, 2, 3,    // Feature 3 bytes
+    4,          // Type-Sample Location Field 1 byte,
+    0, 0        // CRC 2 bytes
+};
+
 /**************************************************************************************************
   Local Variables
 **************************************************************************************************/
@@ -1085,15 +1092,7 @@ void CgmStart(void)
     GattSetSvcChangedIdx(GATT_SC_CCC_IDX);
 
     /* Set supported features after starting database */
-    CgmpsSetFeature(CH_GLF_LOW_BATT 
-        | CH_GLF_MALFUNC
-        | CH_GLF_SAMPLE_SIZE
-        | CH_GLF_INSERT_ERR
-        | CH_GLF_TYPE_ERR
-        | CH_GLF_RES_HIGH_LOW
-        | CH_GLF_TEMP_HIGH_LOW
-        | CH_GLF_READ_INT
-        | CH_GLF_GENERAL_FAULT);
+    CgmpsSetFeature(cgmFeature);
 
     /* Register for app framework button callbacks */
     AppUiBtnRegister(cgmBtnCback);

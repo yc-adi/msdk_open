@@ -539,6 +539,10 @@ extern "C" {
 #define CGMS_ST_LEN 3
 /**@}*/
 
+#define CGMS_SESS_START_T_LEN 8
+
+#define CGMS_SESS_RUN_T_LEN 4
+
 /** \name Service Changed Length
  *
  */

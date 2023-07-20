@@ -425,6 +425,7 @@ void *attMsgAlloc(uint16_t len)
 /*************************************************************************************************/
 void attL2cDataReq(attCcb_t *pCcb, uint8_t slot, uint16_t len, uint8_t *pPacket)
 {
+  APP_TRACE_INFO0("attL2cDataReq");
   if (slot == ATT_BEARER_SLOT_ID)
   {
     /* send packet to L2CAP via ATT channel */

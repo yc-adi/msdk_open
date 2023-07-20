@@ -230,7 +230,7 @@ static const uint8_t datsScanDataDisc[] = {
 };
 
 /*! CGM Feature */
-static const uint8_t cgmFeature[CGMS_FEAT_LEN] = {
+static uint8_t cgmFeature[CGMS_FEAT_LEN] = {
     1, 2, 3,    // Feature 3 bytes
     4,          // Type-Sample Location Field 1 byte,
     0, 0        // CRC 2 bytes
@@ -607,7 +607,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_ADV_START_IND:
-#if DEEP_SLEEP == 0
+#if DEEP_SLEEP == 2 // remove me !!!
         WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
 #endif
         uiEvent = APP_UI_ADV_START;
@@ -723,7 +723,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
 #endif /* BT_VER */
 
     case TRIM_TIMER_EVT:
-#if DEEP_SLEEP == 0
+#if DEEP_SLEEP == 2 // remove me !!!
         trimStart();
         WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
 #endif

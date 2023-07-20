@@ -950,6 +950,8 @@ void HciSendAclData(uint8_t *pData)
   BYTES_TO_UINT16(handle, pData);
   BYTES_TO_UINT16(len, &pData[2]);
 
+  APP_TRACE_INFO0("HciSendAclData");
+
   /* look up connection structure */
   if ((pConn = hciCoreConnByHandle(handle)) != NULL)
   {

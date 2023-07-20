@@ -83,15 +83,39 @@ static const uint16_t cgmsStValLen = CGMS_ST_LEN;
 /* CGM session start time characteristic */
 static const uint8_t cgmsSessStartTCh[] = {ATT_PROP_READ | ATT_PROP_WRITE, UINT16_TO_BYTES(CGMS_SESS_START_T_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_SESS_START_T)};
 static const uint16_t cgmsSessStartTChLen = sizeof(cgmsSessStartTCh);
-/* CGM status characteristic value */
-static uint8_t cgmsSessStartTVal[] = {UINT16_TO_BYTES(0x0000)};
+
+/** 
+ * @brief CGM session start characteristic value
+ * The Session Start Time Field defines the time of the initial CGM measurement. The absolute time of the 
+ * first CGM measurement taken is not known, so the Server stores each CGM measurement with a relative 
+ * time stamp (Time Offset), starting with 0 for the first measurement (Session Start).
+ * Upon initial connection, if the device supports an automatic start of the CGM session (e.g., at power on), 
+ * or after the Start Session procedure, the Client shall write its current time to this characteristic and the 
+ * Server shall calculate and store the Session Start Time using the time of the client and its own current 
+ * relative time value.
+ * Byte 0: Time Zone field
+ * Byte 1: DST Offset field for daylight saving setting
+ * Byte 2: days
+ * Byte 3: hour
+ * Byte 4: minutes
+ * Byte 5: seconds
+ * BYte 6-7: CRC
+*/
+static uint8_t cgmsSessStartTVal[CGMS_SESS_START_T_LEN] = {0x80, 255, 0, 1, 2, 3, 0, 0};
 static const uint16_t cgmsSessStartTValLen = sizeof(cgmsSessStartTVal);
 
 /* CGM session run time characteristic */
 static const uint8_t cgmsSessRunTCh[] = {ATT_PROP_READ, UINT16_TO_BYTES(CGMS_SESS_RUN_T_HDL), UINT16_TO_BYTES(ATT_UUID_CGM_SESS_RUN_T)};
 static const uint16_t cgmsSessRunTChLen = sizeof(cgmsSessRunTCh);
-/* CGM status characteristic value */
-static uint8_t cgmsSessRunTVal[] = {UINT16_TO_BYTES(0x0000)};
+
+/**
+ * @brief CGM session run time characteristic value
+ * Sensors have a limited run time which they are approved for. However, this characteristic 
+ * should enable a prediction of the run time depending on physiological effects in future devices.
+ * The CGM Session Run Time is a relative time, based on the CGM Session Start Time. Here the offset
+ * is a uint32_t count in seconds based on the session start time.
+ */
+static uint8_t cgmsSessRunTVal[CGMS_SESS_RUN_T_LEN] = {UINT32_TO_BYTES(0x11223344)};
 static const uint16_t cgmsSessRunTValLen = sizeof(cgmsSessRunTVal);
 
 /* Control point characteristic */

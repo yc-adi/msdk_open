@@ -1044,13 +1044,13 @@ void WdxsResetSystem(void)
 /*************************************************************************************************/
 static void cgmCccCback(attsCccEvt_t *pEvt)
 {
-  appDbHdl_t    dbHdl;
+  appDbHdl_t dbHdl = AppDbGetHdl((dmConnId_t) pEvt->hdr.param);
 
-  APP_TRACE_INFO3("cgmCccCback, hdl %d, idx %d, val %d", pEvt->handle, pEvt->idx, pEvt->value);
+  APP_TRACE_INFO4("cgmCccCback, hdl %d, dbHdl %d, idx %d, val %d", pEvt->handle, dbHdl, pEvt->idx, pEvt->value);
 
   /* If CCC not set from initialization and there's a device record and currently bonded */
   if ((pEvt->handle != ATT_HANDLE_NONE) &&
-      ((dbHdl = AppDbGetHdl((dmConnId_t) pEvt->hdr.param)) != APP_DB_HDL_NONE) &&
+      (dbHdl != APP_DB_HDL_NONE) &&
       AppCheckBonded((dmConnId_t)pEvt->hdr.param))
   {
     APP_TRACE_INFO0("Store value in device database.");

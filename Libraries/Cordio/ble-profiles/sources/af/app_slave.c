@@ -339,6 +339,7 @@ static void appSlaveResolveAddr(dmEvt_t *pMsg)
 
   /* get the first database record */
   hdl = AppDbGetNextRecord(APP_DB_HDL_NONE);
+  APP_TRACE_INFO1("appSlaveResolveAddr, 1st rec 0x%X", hdl);
 
   /* if we have any bond records */
   if ((hdl != APP_DB_HDL_NONE) && ((pPeerKey = AppDbGetKey(hdl, DM_KEY_IRK, NULL)) != NULL))
@@ -561,6 +562,7 @@ static void appSlaveResolvedAddrInd(dmEvt_t *pMsg, appConnCb_t *pCb)
   /* if RPA resolved */
   if (pMsg->hdr.status == HCI_SUCCESS)
   {
+    APP_TRACE_INFO0("appSlaveResolvedAddrInd, RPA resolved");
     /* record found */
     pCb->dbHdl = appSlaveCb.dbHdl;
 
@@ -576,6 +578,7 @@ static void appSlaveResolvedAddrInd(dmEvt_t *pMsg, appConnCb_t *pCb)
   /* if RPA did not resolve and there're more bonded records to go through */
   else if ((pMsg->hdr.status == HCI_ERR_AUTH_FAILURE) && (appSlaveCb.dbHdl != APP_DB_HDL_NONE))
   {
+    APP_TRACE_INFO0("appSlaveResolvedAddrInd, RPA not resolved");
     /* get the next database record */
     appSlaveCb.dbHdl = AppDbGetNextRecord(appSlaveCb.dbHdl);
 
@@ -712,6 +715,7 @@ static void appSecPairInd(dmEvt_t *pMsg, appConnCb_t *pCb)
     if (pCb->bondByPairing && pCb->dbHdl == APP_DB_HDL_NONE)
     {
       /* create a device record if none exists */
+      APP_TRACE_INFO0("appSecPairInd, create a record");
       pCb->dbHdl = AppDbNewRecord(DmConnPeerAddrType(pCb->connId), DmConnPeerAddr(pCb->connId));
     }
 

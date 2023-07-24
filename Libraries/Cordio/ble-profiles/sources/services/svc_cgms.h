@@ -81,7 +81,7 @@ enum cgms_hdl {
 
   CGMS_RACP_CH_HDL,                 /*!< \brief Record access control point characteristic */
   CGMS_RACP_HDL,                    /*!< \brief Record access control point */
-  CGMS_RACP_CH_CCC_HDL,             /*!< \brief RACP client characteristic configuration */
+  CGMS_RACP_CH_CCC_HDL,             /*!< \brief RACP client characteristic configuration, 254 */
 
 #if 0
   CGMS_SOPS_CH_HDL,                 /*!< \brief CGM Specific Ops Control Point characteristic */

@@ -61,11 +61,11 @@ extern "C" {
 
 /*! \brief CGM Service Handles (must match cgmsList[]) */
 enum cgms_hdl {
-  CGMS_SVC_HDL = CGMS_START_HDL,    /*!< \brief CGM service declaration */
+  CGMS_SVC_HDL = CGMS_START_HDL,    /*!< \brief CGM service declaration, 240 */
 
   CGMS_MEAS_CH_HDL,                 /*!< \brief CGM measurement characteristic */
   CGMS_MEAS_HDL,                    /*!< \brief CGM measurement value */
-  CGMS_MEAS_CH_CCC_HDL,             /*!< \brief CGM measurement CCCD */
+  CGMS_MEAS_CH_CCC_HDL,             /*!< \brief CGM measurement CCCD, 243 */
    
   CGMS_FEAT_CH_HDL,                 /*!< \brief CGM feature characteristic: ATT_UUID_CGM_FEATURE */
   CGMS_FEAT_HDL,                    /*!< \brief CGM feature, 245 */

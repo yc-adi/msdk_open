@@ -24,6 +24,9 @@
 #ifndef CGMPS_API_H
 #define CGMPS_API_H
 
+#include "cgmps_api.h"
+#include "cgmps_main.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -37,6 +40,35 @@ extern "C" {
 
 /*! \brief All supported features of the glucose profile */
 #define GLP_ALL_SUPPORTED_FEATURES      0x000F
+
+/*! \brief Connection control block */
+typedef struct
+{
+  dmConnId_t    connId;               /*! \brief Connection ID */
+  bool_t        cgmMeasToSend;        /*! \brief CGM measurement ready to be sent on this channel */
+} cgmpsConn_t;
+
+/* Control block */
+static struct
+{
+  uint8_t       operand[CGMPS_OPERAND_MAX]; /* Stored operand filter data */
+  cgmpsRec_t    *pCurrRec;                  /* Pointer to current measurement record */
+  cgmpsConn_t   conn[DM_CONN_MAX];          /* connection control blcok */
+  wsfTimer_t    measTimer;                  /* periodic measurement timer */
+  wsfTimerTicks_t periodMs;                 /* Measurement timer expiration period in ms */
+  bool_t        inProgress;                 /* TRUE if RACP procedure in progress */
+  bool_t        txReady;                    /* TRUE if ready to send next notification or indication */
+  bool_t        aborting;                   /* TRUE if abort procedure in progress */
+  uint8_t       cgmMeasCccIdx;              /* CGM measurement CCCD index */
+  uint8_t       racpCccIdx;                 /* Record access control point CCCD index */
+  uint8_t       oper;                       /* Stored operator */
+} cgmpsCb;
+
+static bool_t cgmpsNoConnActive(void);
+static cgmpsConn_t *cgmpsFindNextToSend(uint8_t cccIdx);
+void CgmpsMeasStart(dmConnId_t connId, uint8_t timerEvt, uint8_t cgmMeasCccIdx, uint32_t timerPeriodMs, uint8_t hndlrId);
+void CgmpsMeasStop(dmConnId_t connId);
+void cgmpsMeasTimerExp(wsfMsgHdr_t *pMsg);
 
 /*************************************************************************************************/
 /*!

@@ -82,9 +82,11 @@
 
 #define TRIM_TIMER_EVT 0x99
 #define CUST_SPEC_TMR_EVT 0x9A
+#define CGM_MEAS_TMR_EVT 0x9B
 
 #define TRIM_TIMER_PERIOD_MS 100000
 #define CUST_SPEC_TMR_PERIOD_MS 60000
+#define CGM_MEAS_PERIOD_MS 5000
 
 /*! Button press handling constants */
 #define BTN_SHORT_MS 200
@@ -120,6 +122,14 @@ static const attsCccSet_t cgmCccSet[CGM_CCC_IDX_MAX] =
   {CGMS_RACP_CH_CCC_HDL,  ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}    /* CGM_RACP_CCC_IDX */
   //{CGMS_SOPS_CCCD_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}     /* CGM_SOPS_CCC_IDX */
 };
+
+/*! Application message type */
+typedef union {
+    wsfMsgHdr_t hdr;
+    dmEvt_t dm;
+    attsCccEvt_t ccc;
+    attEvt_t att;
+} cgmMsg_t;
 
 /**************************************************************************************************
   Configurable Parameters
@@ -263,6 +273,7 @@ wsfTimer_t custSpecAppTimer;
   global Variables
 **************************************************************************************************/
 uint8_t conn_opened = 0; /// 0: connection is not opened
+extern appSlaveCb_t appSlaveCb;
 
 extern void setAdvTxPower(void);
 extern void printTime(void);
@@ -551,6 +562,33 @@ static void datsPrivAddDevToResListInd(dmEvt_t *pMsg)
 
 /*************************************************************************************************/
 /*!
+ *  \brief  Process CCC state change.
+ *
+ *  \param  pMsg    Pointer to message.
+ *
+ *  \return None.
+ */
+/*************************************************************************************************/
+static void cgmProcCccState(cgmMsg_t *pMsg)
+{
+    APP_TRACE_INFO3("ccc state ind value:%d handle:%d idx:%d", pMsg->ccc.value, pMsg->ccc.handle,
+                    pMsg->ccc.idx);
+
+    /* handle CGM measurement CCC */
+    if (pMsg->ccc.idx == CGM_MEAS_CCC_IDX) {
+        if (pMsg->ccc.value == ATT_CLIENT_CFG_NOTIFY) {
+            CgmpsMeasStart((dmConnId_t)pMsg->ccc.hdr.param, CGM_MEAS_TMR_EVT, CGM_MEAS_CCC_IDX, CGM_MEAS_PERIOD_MS, cgmCb.handlerId);
+        } else {
+            CgmpsMeasStop((dmConnId_t)pMsg->ccc.hdr.param);
+        }
+    }
+
+    // TODO: other changes
+}
+
+
+/*************************************************************************************************/
+/*!
  *  \brief  Set up advertising and other procedures that need to be performed after
  *          device reset.
  *
@@ -559,7 +597,7 @@ static void datsPrivAddDevToResListInd(dmEvt_t *pMsg)
  *  \return None.
  */
 /*************************************************************************************************/
-static void glucSetup(dmEvt_t *pMsg)
+static void cgmSetup(dmEvt_t *pMsg)
 {
     /* set advertising and scan response data for discoverable mode */
     AppAdvSetData(APP_ADV_DATA_DISCOVERABLE, sizeof(cgmAdvDataDisc), (uint8_t *) cgmAdvDataDisc);
@@ -583,13 +621,17 @@ static void glucSetup(dmEvt_t *pMsg)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsProcMsg(dmEvt_t *pMsg)
+static void cgmProcMsg(dmEvt_t *pMsg)
 {
     uint8_t uiEvent = APP_UI_NONE;
 
     switch (pMsg->hdr.event) {
     case ATTS_HANDLE_VALUE_CNF:
         CgmpsProcMsg(&pMsg->hdr);
+        break;
+
+    case ATTS_CCC_STATE_IND:
+        cgmProcCccState((cgmMsg_t *)pMsg);
         break;
 
     case DM_RESET_CMPL_IND:
@@ -601,7 +643,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
         datsRestoreResolvingList(pMsg);
         setAdvTxPower();
 
-        glucSetup(pMsg);
+        cgmSetup(pMsg);
 
         uiEvent = APP_UI_RESET_CMPL;
         break;
@@ -723,7 +765,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
 #endif /* BT_VER */
 
     case TRIM_TIMER_EVT:
-#if DEEP_SLEEP == 2 // remove me !!!
+#if DEEP_SLEEP == 0
         trimStart();
         WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
 #endif
@@ -742,6 +784,10 @@ static void datsProcMsg(dmEvt_t *pMsg)
         }
 
         LED_On(LED_RED);
+        break;
+
+    case CGM_MEAS_TMR_EVT:
+        cgmpsMeasTimerExp((wsfMsgHdr_t *)pMsg);
         break;
 
     default:
@@ -1013,7 +1059,7 @@ void CgmHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
         }
 
         /* perform profile and user interface-related operations */
-        datsProcMsg((dmEvt_t *)pMsg);
+        cgmProcMsg((dmEvt_t *)pMsg);
     }
 }
 
@@ -1044,19 +1090,30 @@ void WdxsResetSystem(void)
 /*************************************************************************************************/
 static void cgmCccCback(attsCccEvt_t *pEvt)
 {
-  appDbHdl_t dbHdl = AppDbGetHdl((dmConnId_t) pEvt->hdr.param);
+    attsCccEvt_t *pMsg;
+    appDbHdl_t dbHdl = AppDbGetHdl((dmConnId_t) pEvt->hdr.param);
+    int isBonded = AppCheckBonded((dmConnId_t)pEvt->hdr.param);
 
-  APP_TRACE_INFO4("cgmCccCback, hdl %d, dbHdl %d, idx %d, val %d", pEvt->handle, dbHdl, pEvt->idx, pEvt->value);
+    APP_TRACE_INFO4("cgmCccCback, hdl %d, dbHdl %d, idx %d, val %d", pEvt->handle, dbHdl, pEvt->idx, pEvt->value);
 
-  /* If CCC not set from initialization and there's a device record and currently bonded */
-  if ((pEvt->handle != ATT_HANDLE_NONE) &&
-      (dbHdl != APP_DB_HDL_NONE) &&
-      AppCheckBonded((dmConnId_t)pEvt->hdr.param))
-  {
-    APP_TRACE_INFO0("Store value in device database.");
-    AppDbSetCccTblValue(dbHdl, pEvt->idx, pEvt->value);
-    AppDbNvmStoreCccTbl(dbHdl); // work with iKeyDist = 0
-  }
+    /* If CCC not set from initialization and there's a device record and currently bonded */
+    if ((pEvt->handle != ATT_HANDLE_NONE) &&
+        (dbHdl != APP_DB_HDL_NONE) && isBonded)
+    {
+        APP_TRACE_INFO0("Store value in device database.");
+        AppDbSetCccTblValue(dbHdl, pEvt->idx, pEvt->value);
+        AppDbNvmStoreCccTbl(dbHdl); // work with iKeyDist = 0
+    }
+    else
+    {
+        APP_TRACE_INFO2("Do nothing. bonded %d, bondable %d", isBonded, appSlaveCb.bondable);
+    }
+    
+    // in order to trigger characteristic notification
+    if ((pMsg = WsfMsgAlloc(sizeof(attsCccEvt_t))) != NULL) {
+        memcpy(pMsg, pEvt, sizeof(attsCccEvt_t));
+        WsfMsgSend(cgmCb.handlerId, pMsg);
+    }
 }
 
 /*************************************************************************************************/

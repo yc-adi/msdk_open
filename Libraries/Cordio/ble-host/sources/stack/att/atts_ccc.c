@@ -79,6 +79,9 @@ static void attsCccCback(dmConnId_t connId, uint8_t idx, uint16_t handle, uint16
   evt.handle = handle;
   evt.value = value;
 
+  APP_TRACE_INFO4("attsCccCback, evt 20, param/connId %d, idx %d, hndl %d, val %d",
+    connId, idx, handle, value);
+
   (*attsCccCb.cback)(&evt);
 }
 

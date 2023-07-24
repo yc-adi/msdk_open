@@ -66,25 +66,6 @@ static cgmpsRec_t cgmpsDb[CGM_DB_NUM_RECORDS] =
       CH_GLM_LOC_FINGER | (CH_GLM_TYPE_ART_BLOOD << 4),         /* Sample type and sample location */
       CH_GLM_STATUS_BATT_LOW                                    /* Sensor status annunciation */
     },
-
-    /* context */
-    {
-      CH_GLMC_FLAG_CARB |  CH_GLMC_FLAG_MEAL |                  /* Flags */
-      CH_GLMC_FLAG_TESTER | CH_GLMC_FLAG_EXERCISE |
-      CH_GLMC_FLAG_MED | CH_GLMC_FLAG_MED_KG |
-      CH_GLMC_FLAG_HBA1C,
-      0x0001,                                                   /* Sequence number */
-      0,                                                        /* Extended Flags */
-      CH_GLMC_CARB_DINNER,                                      /* Carbohydrate ID */
-      SFLT_TO_UINT16(12, -3),                                   /* Carbohydrate (SFLOAT) */
-      CH_GLMC_MEAL_POSTPRANDIAL,                                /* Meal */
-      CH_GLMC_HEALTH_NONE | (CH_GLMC_TESTER_SELF << 4),         /* Tester and health */
-      300,                                                      /* Exercise Duration */
-      99,                                                       /* Exercise Intensity */
-      CH_GLMC_MED_LONG,                                         /* Medication ID */
-      SFLT_TO_UINT16(50, -6),                                   /* Medication (SFLOAT) */
-      SFLT_TO_UINT16(10, 0)                                     /* HbA1c */
-    },
   },
 
   /* record 2 */
@@ -100,25 +81,6 @@ static cgmpsRec_t cgmpsDb[CGM_DB_NUM_RECORDS] =
       CH_GLM_LOC_FINGER | (CH_GLM_TYPE_ART_BLOOD << 4),         /* Sample type and sample location */
       0                                                         /* Sensor status annunciation */
     },
-
-    /* context */
-    {
-      CH_GLMC_FLAG_CARB |  CH_GLMC_FLAG_MEAL |                  /* Flags */
-      CH_GLMC_FLAG_TESTER | CH_GLMC_FLAG_EXERCISE |
-      CH_GLMC_FLAG_MED | CH_GLMC_FLAG_MED_L |
-      CH_GLMC_FLAG_HBA1C,
-      0x0002,                                                   /* Sequence number */
-      0,                                                        /* Extended Flags */
-      CH_GLMC_CARB_BREAKFAST,                                   /* Carbohydrate ID */
-      SFLT_TO_UINT16(3, -3),                                    /* Carbohydrate (SFLOAT) */
-      CH_GLMC_MEAL_PREPRANDIAL,                                 /* Meal */
-      CH_GLMC_HEALTH_NONE | (CH_GLMC_TESTER_SELF << 4),         /* Tester and health */
-      1000,                                                     /* Exercise Duration */
-      25,                                                       /* Exercise Intensity */
-      CH_GLMC_MED_LONG,                                         /* Medication ID */
-      SFLT_TO_UINT16(10, -3),                                   /* Medication (SFLOAT) */
-      SFLT_TO_UINT16(11, 0)                                     /* HbA1c */
-    },
   },
 
   /* record 3 */
@@ -132,24 +94,6 @@ static cgmpsRec_t cgmpsDb[CGM_DB_NUM_RECORDS] =
       SFLT_TO_UINT16(20, -5),                                   /* Glucose concentration (SFLOAT) */
       CH_GLM_LOC_FINGER | (CH_GLM_TYPE_ART_BLOOD << 4),         /* Sample type and sample location */
       0                                                         /* Sensor status annunciation */
-    },
-
-    /* context */
-    {
-      CH_GLMC_FLAG_TESTER | CH_GLMC_FLAG_EXERCISE |             /* Flags */
-      CH_GLMC_FLAG_MED | CH_GLMC_FLAG_MED_L |
-      CH_GLMC_FLAG_HBA1C,
-      0x0003,                                                   /* Sequence number */
-      0,                                                        /* Extended Flags */
-      0,                                                        /* Carbohydrate ID */
-      SFLT_TO_UINT16(0, 0),                                     /* Carbohydrate (SFLOAT) */
-      0,                                                        /* Meal */
-      CH_GLMC_HEALTH_NONE | (CH_GLMC_TESTER_SELF << 4),         /* Tester and health */
-      1001,                                                     /* Exercise Duration */
-      26,                                                       /* Exercise Intensity */
-      CH_GLMC_MED_LONG,                                         /* Medication ID */
-      SFLT_TO_UINT16(15, -3),                                   /* Medication (SFLOAT) */
-      SFLT_TO_UINT16(12, 0)                                     /* HbA1c */
     },
   }
 };
@@ -413,18 +357,5 @@ void cgmpsDbGenerateRecord(void)
  /*************************************************************************************************/
 void cgmpsDbToggleMedicationUnits(void)
 {
-  if (cgmpsDb[1].context.flags & CH_GLMC_FLAG_MED_L)
-  {
-    /* Change medication quantity to Kilograms. */
-    cgmpsDb[1].context.flags &= ~CH_GLMC_FLAG_MED_L;
-    cgmpsDb[1].context.flags |= CH_GLMC_FLAG_MED_KG;
-    cgmpsDb[1].context.medication = SFLT_TO_UINT16(50, -6);
-  }
-  else
-  {
-    /* Change medication quantiy to Liters. */
-    cgmpsDb[1].context.flags &= ~CH_GLMC_FLAG_MED_KG;
-    cgmpsDb[1].context.flags |= CH_GLMC_FLAG_MED_L;
-    cgmpsDb[1].context.medication = SFLT_TO_UINT16(10, -3);
-  }
+  //TODO
 }

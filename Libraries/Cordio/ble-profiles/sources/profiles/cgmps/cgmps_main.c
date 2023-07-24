@@ -39,26 +39,64 @@
   Local Variables
 **************************************************************************************************/
 
-/* Control block */
-static struct
-{
-  uint8_t       operand[GLPS_OPERAND_MAX];  /* Stored operand filter data */
-  cgmpsRec_t     *pCurrRec;                  /* Pointer to current measurement record */
-  bool_t        inProgress;                 /* TRUE if RACP procedure in progress */
-  bool_t        txReady;                    /* TRUE if ready to send next notification or indication */
-  bool_t        aborting;                   /* TRUE if abort procedure in progress */
-  uint8_t       glmCccIdx;                  /* Glucose measurement CCCD index */
-  uint8_t       glmcCccIdx;                 /* Glucose measurement context CCCD index */
-  uint8_t       racpCccIdx;                 /* Record access control point CCCD index */
-  uint8_t       oper;                       /* Stored operator */
-} cgmpsCb;
 
 /*************************************************************************************************/
 /*!
- *  \brief  Build a glucose measurement characteristic.
+ *  \brief  Return TRUE if no connections with active measurements.
+ *
+ *  \return TRUE if no connections active.
+ */
+/*************************************************************************************************/
+static bool_t cgmpsNoConnActive(void)
+{
+  cgmpsConn_t    *pConn = cgmpsCb.conn;
+  uint8_t       i;
+
+  for (i = 0; i < DM_CONN_MAX; i++, pConn++)
+  {
+    if (pConn->connId != DM_CONN_ID_NONE)
+    {
+      return FALSE;
+    }
+  }
+  return TRUE;
+}
+
+
+/*************************************************************************************************/
+/*!
+ *  \brief  Find next connection with measurement to send.
+ *
+ *  \param  cccIdx  measurement CCC descriptor index.
+ *
+ *  \return Connection control block.
+ */
+/*************************************************************************************************/
+static cgmpsConn_t *cgmpsFindNextToSend(uint8_t cccIdx)
+{
+  cgmpsConn_t *pConn = cgmpsCb.conn;
+  uint8_t i;
+
+  for (i = 0; i < DM_CONN_MAX; i++, pConn++)
+  {
+    if (pConn->connId != DM_CONN_ID_NONE && pConn->cgmMeasToSend)
+    {
+      if (AttsCccEnabled(pConn->connId, cccIdx))
+      {
+        return pConn;
+      }
+    }
+  }
+  return NULL;
+}
+
+
+/*************************************************************************************************/
+/*!
+ *  \brief  Build a CGM measurement characteristic.
  *
  *  \param  pBuf     Pointer to buffer to hold the built glucose measurement.
- *  \param  pGlm     Glucose measurement values.
+ *  \param  pGlm     CGM measurement values.
  *
  *  \return Length of pBuf in bytes.
  */
@@ -105,98 +143,6 @@ static uint8_t cgmpsBuildGlm(uint8_t *pBuf, cgmpsGlm_t *pGlm)
   return (uint8_t) (p - pBuf);
 }
 
-/*************************************************************************************************/
-/*!
- *  \brief  Build a glucose measurement context characteristic.
- *
- *  \param  pBuf     Pointer to buffer to hold the built glucose measurement context.
- *  \param  pGlmc    Glucose measurement context values.
- *
- *  \return Length of pBuf in bytes.
- */
-/*************************************************************************************************/
-static uint8_t cgmpsBuildGlmc(uint8_t *pBuf, cgmpsGlmc_t *pGlmc)
-{
-  uint8_t   *p = pBuf;
-  uint8_t   flags = pGlmc->flags;
-
-  /* flags */
-  UINT8_TO_BSTREAM(p, flags);
-
-  /* sequence number */
-  UINT16_TO_BSTREAM(p, pGlmc->seqNum);
-
-  /* extended flags present */
-  if (flags & CH_GLMC_FLAG_EXT)
-  {
-    UINT8_TO_BSTREAM(p, pGlmc->extFlags);
-  }
-
-  /* carbohydrate id and carbohydrate present */
-  if (flags & CH_GLMC_FLAG_CARB)
-  {
-    UINT8_TO_BSTREAM(p, pGlmc->carbId);
-    UINT16_TO_BSTREAM(p, pGlmc->carb);
-  }
-
-  /* meal present */
-  if (flags & CH_GLMC_FLAG_MEAL)
-  {
-    UINT8_TO_BSTREAM(p, pGlmc->meal);
-  }
-
-  /* tester-health present */
-  if (flags & CH_GLMC_FLAG_TESTER)
-  {
-    UINT8_TO_BSTREAM(p, pGlmc->testerHealth);
-  }
-
-  /* exercise duration and exercise intensity present */
-  if (flags & CH_GLMC_FLAG_EXERCISE)
-  {
-    UINT16_TO_BSTREAM(p, pGlmc->exerDuration);
-    UINT8_TO_BSTREAM(p, pGlmc->exerIntensity);
-  }
-
-  /* medication ID and medication present */
-  if (flags & CH_GLMC_FLAG_MED)
-  {
-    UINT8_TO_BSTREAM(p, pGlmc->medicationId);
-    UINT16_TO_BSTREAM(p, pGlmc->medication);
-  }
-
-  /* hba1c present */
-  if (flags & CH_GLMC_FLAG_HBA1C)
-  {
-    UINT16_TO_BSTREAM(p, pGlmc->hba1c);
-  }
-
-  /* return length */
-  return (uint8_t) (p - pBuf);
-}
-
-/*************************************************************************************************/
-/*!
- *  \brief  Send a glucose measurement context notification.
- *
- *  \param  connId      Connection ID.
- *  \param  pRec        Return pointer to glucose record.
- *
- *  \return None.
- */
-/*************************************************************************************************/
-void cgmpsSendMeasContext(dmConnId_t connId, cgmpsRec_t *pRec)
-{
-  uint8_t buf[ATT_DEFAULT_PAYLOAD_LEN];
-  uint8_t len;
-
-  /* build glucose measurement context characteristic */
-  len = cgmpsBuildGlmc(buf, &cgmpsCb.pCurrRec->context);
-
-  /* send notification */
-  AttsHandleValueNtf(connId, GLS_GLMC_HDL, len, buf);
-  cgmpsCb.txReady = FALSE;
-}
 
 /*************************************************************************************************/
 /*!
@@ -234,7 +180,7 @@ void cgmpsSendMeas(dmConnId_t connId, cgmpsRec_t *pRec)
 /*************************************************************************************************/
 void cgmpsRacpSendRsp(dmConnId_t connId, uint8_t opcode, uint8_t status)
 {
-  uint8_t buf[GLPS_RACP_RSP_LEN];
+  uint8_t buf[CGMPS_RACP_RSP_LEN];
 
   /* build response */
   buf[0] = CH_RACP_OPCODE_RSP;
@@ -243,7 +189,7 @@ void cgmpsRacpSendRsp(dmConnId_t connId, uint8_t opcode, uint8_t status)
   buf[3] = status;
 
   /* send indication */
-  AttsHandleValueInd(connId, CGMS_RACP_HDL, GLPS_RACP_RSP_LEN, buf);
+  AttsHandleValueInd(connId, CGMS_RACP_HDL, CGMPS_RACP_RSP_LEN, buf);
   cgmpsCb.txReady = FALSE;
 }
 
@@ -259,7 +205,7 @@ void cgmpsRacpSendRsp(dmConnId_t connId, uint8_t opcode, uint8_t status)
 /*************************************************************************************************/
 void cgmpsRacpSendNumRecRsp(dmConnId_t connId, uint16_t numRec)
 {
-  uint8_t buf[GLPS_RACP_NUM_REC_RSP_LEN];
+  uint8_t buf[CGMPS_RACP_NUM_REC_RSP_LEN];
 
   /* build response */
   buf[0] = CH_RACP_OPCODE_NUM_RSP;
@@ -268,7 +214,7 @@ void cgmpsRacpSendNumRecRsp(dmConnId_t connId, uint16_t numRec)
   buf[3] = UINT16_TO_BYTE1(numRec);
 
   /* send indication */
-  AttsHandleValueInd(connId, CGMS_RACP_HDL, GLPS_RACP_RSP_LEN, buf);
+  AttsHandleValueInd(connId, CGMS_RACP_HDL, CGMPS_RACP_RSP_LEN, buf);
   cgmpsCb.txReady = FALSE;
 }
 
@@ -333,20 +279,13 @@ static void cgmpsHandleValueCnf(attEvt_t *pMsg)
     /* procedure no longer in progress */
     cgmpsCb.inProgress = FALSE;
   }
-  /* if this is for measurement or context notification */
-  else if (pMsg->handle == CGMS_MEAS_HDL || pMsg->handle == GLS_GLMC_HDL)
+  /* if this is for measurement notification */
+  else if (pMsg->handle == CGMS_MEAS_HDL)
   {
     if (cgmpsCb.pCurrRec != NULL)
     {
-      /* if measurement was sent and there is context to send */
-      if (pMsg->handle == CGMS_MEAS_HDL && AttsCccEnabled(connId, cgmpsCb.glmcCccIdx) &&
-          (cgmpsCb.pCurrRec->meas.flags & CH_GLM_FLAG_CONTEXT_INFO))
-      {
-        /* send context */
-        cgmpsSendMeasContext(connId, cgmpsCb.pCurrRec);
-      }
-      /* else if there is another record */
-      else if (cgmpsDbGetNextRecord(cgmpsCb.oper, cgmpsCb.operand,
+      /* if there is another record */
+      if (cgmpsDbGetNextRecord(cgmpsCb.oper, cgmpsCb.operand,
                                    cgmpsCb.pCurrRec, &cgmpsCb.pCurrRec) == CH_RACP_RSP_SUCCESS)
       {
         /* send measurement */
@@ -604,6 +543,113 @@ void CgmpsInit(void)
   cgmpsDbInit();
 }
 
+
+/*************************************************************************************************/
+/*!
+ *  \brief  Start periodic CGM measurement.  This function starts a timer to perform
+ *          periodic measurements.
+ *
+ *  \param  connId          DM connection identifier.
+ *  \param  timerEvt        WSF event designated by the application for the timer.
+ *  \param  cgmMeasCccIdx   Index of CGM measurement CCC descriptor in CCC descriptor handle table.
+ *  \param  timerPeriodMs   the measurement period in ms
+ *  \return None.
+ */
+/*************************************************************************************************/
+void CgmpsMeasStart(dmConnId_t connId, uint8_t timerEvt, uint8_t cgmMeasCccIdx, uint32_t timerPeriodMs, uint8_t hndlrId)
+{
+  bool_t active = cgmpsNoConnActive();
+
+  APP_TRACE_INFO4("CgmpsMeasStart, evt %d, idx %d, T %d, active %d", timerEvt, cgmMeasCccIdx, timerPeriodMs, active);
+
+  /* if this is first connection */
+  if (active)
+  {
+    /* initialize control block */
+    cgmpsCb.measTimer.handlerId = hndlrId;
+    cgmpsCb.measTimer.msg.event = timerEvt;
+    cgmpsCb.measTimer.msg.status = cgmMeasCccIdx;
+    cgmpsCb.periodMs = timerPeriodMs;
+
+    /* start timer */
+    WsfTimerStartMs(&cgmpsCb.measTimer, cgmpsCb.periodMs);
+  }
+
+  /* set conn id */
+  cgmpsCb.conn[connId - 1].connId = connId;
+}
+
+
+/*************************************************************************************************/
+/*!
+ *  \brief  Stop periodic CGM measurement.
+ *
+ *  \param  connId      DM connection identifier.
+ *
+ *  \return None.
+ */
+/*************************************************************************************************/
+void CgmpsMeasStop(dmConnId_t connId)
+{
+  /* clear connection */
+  cgmpsCb.conn[connId - 1].connId = DM_CONN_ID_NONE;
+  cgmpsCb.conn[connId - 1].cgmMeasToSend = FALSE;
+
+  /* if no remaining connections */
+  if (cgmpsNoConnActive())
+  {
+    /* stop timer */
+    WsfTimerStop(&cgmpsCb.measTimer);
+  }
+}
+
+
+/*************************************************************************************************/
+/*!
+ *  \brief  This function is called by the application when the periodic measurement
+ *          timer expires.
+ *
+ *  \param  pMsg     Event message.
+ *
+ *  \return None.
+ */
+/*************************************************************************************************/
+void cgmpsMeasTimerExp(wsfMsgHdr_t *pMsg)
+{
+  cgmpsConn_t  *pConn;
+
+  APP_TRACE_INFO0("cgmpsMeasTimerExp");
+
+  /* if there are active connections */
+  if (cgmpsNoConnActive() == FALSE)
+  {
+    /* set up heart rate measurement to be sent on all connections */
+    //hrpsSetupToSend();
+
+    /* read heart rate measurement sensor data */
+    //AppHwHrmRead(&hrpsCb.hrm);
+
+    /* if ready to send measurements */
+    if (cgmpsCb.txReady)
+    {
+      /* find next connection to send (note ccc idx is stored in timer status) */
+      if ((pConn = cgmpsFindNextToSend(pMsg->status)) != NULL)
+      {
+        //hrpsSendHrmNtf(pConn->connId);
+        cgmpsCb.txReady = FALSE;
+        pConn->cgmMeasToSend = FALSE;
+      }
+    }
+
+    /* restart timer */
+    WsfTimerStartMs(&cgmpsCb.measTimer, cgmpsCb.periodMs);
+
+    /* increment energy expended for test/demonstration purposes */
+    //hrpsCb.hrm.energyExp++;
+  }
+}
+
+
 /*************************************************************************************************/
 /*!
  *  \brief  This function is called by the application when a message that requires
@@ -720,7 +766,7 @@ uint8_t CgmpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operatio
   uint8_t status;
 
   /* sanity check on length */
-  if (len < GLPS_RACP_MIN_WRITE_LEN)
+  if (len < CGMPS_RACP_MIN_WRITE_LEN)
   {
     return ATT_ERR_LENGTH;
   }
@@ -743,7 +789,7 @@ uint8_t CgmpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operatio
   }
 
   /* handle record request when notifications not enabled */
-  if (opcode == CH_RACP_OPCODE_REPORT && !AttsCccEnabled(connId, cgmpsCb.glmCccIdx))
+  if (opcode == CH_RACP_OPCODE_REPORT && !AttsCccEnabled(connId, cgmpsCb.cgmMeasCccIdx))
   {
     return CGMS_ERR_CCCD;
   }
@@ -818,7 +864,7 @@ void CgmpsSetFeature(uint8_t *pFeature)
 /*************************************************************************************************/
 void CgmpsSetCccIdx(uint8_t cgmCccIdx, uint8_t cgmStatusCccIdx, uint8_t racpCccIdx)
 {
-  cgmpsCb.glmCccIdx = cgmCccIdx;
+  cgmpsCb.cgmMeasCccIdx = cgmCccIdx;
   cgmpsCb.racpCccIdx = racpCccIdx;
 }
 

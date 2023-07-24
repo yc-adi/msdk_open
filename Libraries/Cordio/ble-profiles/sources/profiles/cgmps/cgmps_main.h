@@ -21,8 +21,8 @@
  *  limitations under the License.
  */
 /*************************************************************************************************/
-#ifndef GLPS_MAIN_H
-#define GLPS_MAIN_H
+#ifndef CGMPS_MAIN_H
+#define CGMPS_MAIN_H
 
 #include "app_hw.h"
 
@@ -38,16 +38,16 @@ extern "C" {
 **************************************************************************************************/
 
 /*! \brief Minimum RACP write length */
-#define GLPS_RACP_MIN_WRITE_LEN       2
+#define CGMPS_RACP_MIN_WRITE_LEN       2
 
 /*! \brief RACP response length */
-#define GLPS_RACP_RSP_LEN             4
+#define CGMPS_RACP_RSP_LEN             4
 
 /*! \brief Glucose RACP number of stored records response length */
-#define GLPS_RACP_NUM_REC_RSP_LEN     4
+#define CGMPS_RACP_NUM_REC_RSP_LEN     4
 
 /*! \brief RACP operand maximum length */
-#define GLPS_OPERAND_MAX              ((CH_RACP_GLS_FILTER_TIME_LEN * 2) + 1)
+#define CGMPS_OPERAND_MAX              ((CH_RACP_GLS_FILTER_TIME_LEN * 2) + 1)
 
 /**************************************************************************************************
   Data Types
@@ -65,28 +65,11 @@ typedef struct
   uint16_t        sensorStatus;     /*!< \brief Sensor status annunciation */
 } cgmpsGlm_t;
 
-/*! \brief Glucose measurement context structure */
-typedef struct
-{
-  uint8_t         flags;            /*!< \brief Flags */
-  uint16_t        seqNum;           /*!< \brief Sequence number */
-  uint8_t         extFlags;         /*!< \brief Extended Flags */
-  uint8_t         carbId;           /*!< \brief Carbohydrate ID */
-  uint16_t        carb;             /*!< \brief Carbohydrate (SFLOAT) */
-  uint8_t         meal;             /*!< \brief Meal */
-  uint8_t         testerHealth;     /*!< \brief Tester and health */
-  uint16_t        exerDuration;     /*!< \brief Exercise Duration */
-  uint8_t         exerIntensity;    /*!< \brief Exercise Intensity */
-  uint8_t         medicationId;     /*!< \brief Medication ID */
-  uint16_t        medication;       /*!< \brief Medication (SFLOAT) */
-  uint16_t        hba1c;            /*!< \brief HbA1c */
-} cgmpsGlmc_t;
 
 /*! \brief Glucose measurement record */
 typedef struct
 {
   cgmpsGlm_t     meas;               /*!< \brief Glucose measurement */
-  cgmpsGlmc_t    context;            /*!< \brief Glucose measurement context */
 } cgmpsRec_t;
 
 /*************************************************************************************************/
@@ -164,4 +147,4 @@ void cgmpsDbToggleMedicationUnits(void);
 };
 #endif
 
-#endif /* GLPS_MAIN_H */
+#endif /* CGMPS_MAIN_H */

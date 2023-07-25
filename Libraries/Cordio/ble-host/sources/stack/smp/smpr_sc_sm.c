@@ -173,25 +173,25 @@ static const smpAct_t smprScActionTbl[] =
 /*! State table for common actions */
 static const smpTblEntry_t smprScStateTblCommon[SMP_STATE_TBL_COMMON_MAX] =
 {
-/* Event                        Next state                                Action */
-  {SMP_MSG_DM_CONN_CLOSE,       SMPR_SC_SM_ST_IDLE,                          SMPR_SC_ACT_PAIRING_FAILED},
-  {SMP_MSG_CMD_PAIRING_FAILED,  SMPR_SC_SM_ST_IDLE,                          SMPR_SC_ACT_PAIRING_FAILED},
-  {SMP_MSG_API_CANCEL_REQ,      SMPR_SC_SM_ST_IDLE,                          SMPR_SC_ACT_PAIRING_CANCEL},
-  {SMP_MSG_INT_RSP_TIMEOUT,     SMPR_SC_SM_ST_RSP_TO,                        SMPR_SC_ACT_PAIRING_FAILED},
-  {0,                           0,                                        0}
+/* Event                        Next state              Action */
+  {SMP_MSG_DM_CONN_CLOSE,       SMPR_SC_SM_ST_IDLE,     SMPR_SC_ACT_PAIRING_FAILED},
+  {SMP_MSG_CMD_PAIRING_FAILED,  SMPR_SC_SM_ST_IDLE,     SMPR_SC_ACT_PAIRING_FAILED},
+  {SMP_MSG_API_CANCEL_REQ,      SMPR_SC_SM_ST_IDLE,     SMPR_SC_ACT_PAIRING_CANCEL},
+  {SMP_MSG_INT_RSP_TIMEOUT,     SMPR_SC_SM_ST_RSP_TO,   SMPR_SC_ACT_PAIRING_FAILED},
+  {0,                           0,                      0}
 };
 
 /*! State table for SMPR_SC_SM_ST_IDLE */
 static const smpTblEntry_t smprScStateTblIdle[] =
 {
-/* Event                        Next state                                Action  */
-  {SMP_MSG_API_SECURITY_REQ,    SMPR_SC_SM_ST_API_PAIR_REQ,                  SMPR_SC_ACT_SEND_SECURITY_REQ},
-  {SMP_MSG_DM_CONN_CLOSE,       SMPR_SC_SM_ST_IDLE,                          SMPR_SC_ACT_CLEANUP},
-  {SMP_MSG_CMD_PKT,             SMPR_SC_SM_ST_API_PAIR_RSP,                  SMPR_SC_ACT_PROC_PAIR_REQ},
-  {SMP_MSG_CMD_PAIRING_FAILED,  SMPR_SC_SM_ST_IDLE,                          SMPR_SC_ACT_NONE},
-  {SMP_MSG_API_CANCEL_REQ,      SMPR_SC_SM_ST_IDLE,                          SMPR_SC_ACT_CLEANUP},
-  {SMP_MSG_INT_RSP_TIMEOUT,     SMPR_SC_SM_ST_IDLE,                          SMPR_SC_ACT_NONE},
-  {0,                           0,                                        0}
+/* Event                        Next state                   Action  */
+  {SMP_MSG_API_SECURITY_REQ,    SMPR_SC_SM_ST_API_PAIR_REQ,  SMPR_SC_ACT_SEND_SECURITY_REQ},
+  {SMP_MSG_DM_CONN_CLOSE,       SMPR_SC_SM_ST_IDLE,          SMPR_SC_ACT_CLEANUP},
+  {SMP_MSG_CMD_PKT,             SMPR_SC_SM_ST_API_PAIR_RSP,  SMPR_SC_ACT_PROC_PAIR_REQ},
+  {SMP_MSG_CMD_PAIRING_FAILED,  SMPR_SC_SM_ST_IDLE,          SMPR_SC_ACT_NONE},
+  {SMP_MSG_API_CANCEL_REQ,      SMPR_SC_SM_ST_IDLE,          SMPR_SC_ACT_CLEANUP},
+  {SMP_MSG_INT_RSP_TIMEOUT,     SMPR_SC_SM_ST_IDLE,          SMPR_SC_ACT_NONE},
+  {0,                           0,                           0}
 };
 
 /*! State table for SMPR_SC_SM_ST_API_PAIR_REQ */

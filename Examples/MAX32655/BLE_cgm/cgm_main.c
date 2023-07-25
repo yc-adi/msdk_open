@@ -2,7 +2,7 @@
 /*!
  *  \file
  *
- *  \brief  Data transmitter sample application.
+ *  \brief  CGM sample application.
  *
  *  Copyright (c) 2012-2019 Arm Ltd. All Rights Reserved.
  *
@@ -109,7 +109,7 @@ static const attsCccSet_t cgmCccSet[CGM_CCC_IDX_MAX] =
 {
   /* cccd handle          value range               security level */
   {GATT_SC_CH_CCC_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC},    /* GATT_SC_CCC_IDX */
-//{GATT_SC_CH_CCC_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_NONE },  /* GATT_SC_CCC_IDX, @?@ remove me !!! */
+//{GATT_SC_CH_CCC_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_NONE },  /* GATT_SC_CCC_IDX */
 
   {WDXS_DC_CH_CCC_HDL,    ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_DC_CH_CCC_IDX */
   {WDXS_FTC_CH_CCC_HDL,   ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* WDXS_FTC_CH_CCC_IDX */
@@ -119,7 +119,7 @@ static const attsCccSet_t cgmCccSet[CGM_CCC_IDX_MAX] =
   {WP_DAT_CH_CCC_HDL,     ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* DATS_WP_DAT_CCC_IDX */
 
   {CGMS_MEAS_CH_CCC_HDL,  ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* CGM_MEAS_CCC_IDX */
-  {CGMS_RACP_CH_CCC_HDL,  ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}    /* CGM_RACP_CCC_IDX */
+  {CGMS_RACP_CH_CCC_HDL,  ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}     /* CGM_RACP_CCC_IDX */
   //{CGMS_SOPS_CCCD_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}     /* CGM_SOPS_CCC_IDX */
 };
 
@@ -143,7 +143,7 @@ static const appAdvCfg_t cgmAdvCfg = {
 
 /*! configurable parameters for slave */
 static const appSlaveCfg_t cgmSlaveCfg = {
-    1, /*! Maximum connections */
+    CGM_CONN_MAX, /*! Maximum connections */
 };
 
 /*! configurable parameters for security */
@@ -151,6 +151,7 @@ static const appSecCfg_t cgmSecCfg = {
     DM_AUTH_BOND_FLAG | DM_AUTH_SC_FLAG, /*! auth: Authentication and bonding flags */
     0, // DM_KEY_DIST_IRK, /*! iKeyDist: Initiator key distribution flags */
     DM_KEY_DIST_LTK | DM_KEY_DIST_IRK, /*! rKeyDist: Responder key distribution flags */
+    //DM_KEY_DIST_LTK, // TODO: check the diff
     FALSE, /*! oob: TRUE if Out-of-band pairing data is present */
     TRUE /*! initiateSec: TRUE to initiate security upon connection */
 };
@@ -187,7 +188,7 @@ static const smpCfg_t cgmSmpCfg = {
 
 /*! configurable parameters for connection parameter update */
 static const appUpdateCfg_t cgmUpdateCfg = {
-    10,           /*! Connection idle period in ms before attempting
+    6000,           /*! Connection idle period in ms before attempting
                       connection parameter update. set to zero to disable */
     (700 / 1.25), /*! Minimum connection interval in 1.25ms units */
     (700 / 1.25), /*! Maximum connection interval in 1.25ms units */
@@ -221,14 +222,15 @@ static const uint8_t cgmAdvDataDisc[] = {
   /*! flags */
   2,                                      /*! length */
   DM_ADV_TYPE_FLAGS,                      /*! AD type */
-  DM_FLAG_LE_LIMITED_DISC | DM_FLAG_LE_BREDR_NOT_SUP, /*! flags */
+  //DM_FLAG_LE_LIMITED_DISC | DM_FLAG_LE_BREDR_NOT_SUP, /*! flags */
+  DM_FLAG_LE_GENERAL_DISC | DM_FLAG_LE_BREDR_NOT_SUP, /*! flags */ // Since adv durations are all 0s.
 
   /*! service UUID list */
   5,                                      /*! length */
   DM_ADV_TYPE_16_UUID,                    /*! AD type */
   UINT16_TO_BYTES(ATT_UUID_CGM_SERVICE),
   UINT16_TO_BYTES(ATT_UUID_DEVICE_INFO_SERVICE)
-  // UINT16_TO_BYTES(ATT_UUID_BATTERY_SERVICE) // @?@ remove me !!! 7
+  // UINT16_TO_BYTES(ATT_UUID_BATTERY_SERVICE) // TODO
 };
 
 /*! scan data, discoverable mode */
@@ -307,7 +309,6 @@ static void datsSendData(dmConnId_t connId, uint8_t size, uint8_t *msg)
 /*************************************************************************************************/
 static void cgmDmCback(dmEvt_t *pDmEvt)
 {
-#if 0 // @?@ remove me !!!
     dmEvt_t *pMsg;
     uint16_t len;
 
@@ -337,18 +338,6 @@ static void cgmDmCback(dmEvt_t *pDmEvt)
             WsfMsgSend(cgmCb.handlerId, pMsg);
         }
     }
-#else
-  dmEvt_t *pMsg;
-  uint16_t len;
-
-  len = DmSizeOfEvt(pDmEvt);
-
-  if ((pMsg = WsfMsgAlloc(len)) != NULL)
-  {
-    memcpy(pMsg, pDmEvt, len);
-    WsfMsgSend(cgmCb.handlerId, pMsg);
-  }
-#endif
 }
 
 /*************************************************************************************************/
@@ -635,7 +624,7 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_RESET_CMPL_IND:
-        APP_TRACE_INFO1("@!@ DM_RESET_CMPL_IND %d", pMsg->hdr.event);
+        APP_TRACE_INFO1("DM_RESET_CMPL_IND %d", pMsg->hdr.event);
         
         AttsCalculateDbHash();
         DmSecGenerateEccKeyReq();

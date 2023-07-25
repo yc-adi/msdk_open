@@ -708,7 +708,7 @@ static void appSecPairInd(dmEvt_t *pMsg, appConnCb_t *pCb)
       ((pMsg->pairInd.auth & DM_AUTH_BOND_FLAG) != DM_AUTH_BOND_FLAG) ||
       (pCb->bonded && (DmConnSecLevel(pCb->connId) > DM_SEC_LEVEL_NONE)))
   {
-    /* store bonding state:  if peer is requesting bonding and we want bonding */
+    /* store bonding state: if peer is requesting bonding and we want bonding */
     pCb->bondByPairing = (pMsg->pairInd.auth & pAppSecCfg->auth & DM_AUTH_BOND_FLAG) == DM_AUTH_BOND_FLAG;
 
     /* if bonding and no device record */

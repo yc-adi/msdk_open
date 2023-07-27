@@ -66,7 +66,7 @@ uint32_t PalNvmGetSectorSize(void);
 /* Data Transfer */
 void PalFlashRead(void *pBuf, uint32_t size, uint32_t srcAddr);
 void PalFlashWrite(void *pBuf, uint32_t size, uint32_t dstAddr);
-void PalFlashEraseSector(uint32_t size, uint32_t startAddr);
+void PalFlashEraseSector(int32_t size, uint32_t startAddr);
 void PalFlashEraseChip(void);
 
 /*! \} */    /* PAL_FLASH */

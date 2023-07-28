@@ -36,12 +36,12 @@ extern "C" {
   Macros
 **************************************************************************************************/
 
-/** \name Error Codes
- *
+/** \name Error Codes, ATT_ERR_, application specific errors
+ *  
  */
 /**@{*/
-#define CGMS_ERR_IN_PROGRESS      0x80    /*!< \brief Procedure already in progress */
-#define CGMS_ERR_CCCD             0x81    /*!< \brief CCCD improperly configured */
+#define CGMS_ERR_IN_PROGRESS      0x88    /*!< \brief Procedure already in progress */
+#define CGMS_ERR_CCCD             0x89    /*!< \brief CCCD improperly configured */
 /**@}*/
 
 /**************************************************************************************************
@@ -52,7 +52,7 @@ extern "C" {
  *
  */
 /**@{*/
-#define CGMS_START_HDL               0xF0              /*!< \brief Start handle. */
+#define CGMS_START_HDL               0x0800              /*!< \brief Start handle. */
 #define CGMS_END_HDL                 (CGMS_MAX_HDL - 1) /*!< \brief End handle. */
 
 /**************************************************************************************************
@@ -61,17 +61,17 @@ extern "C" {
 
 /*! \brief CGM Service Handles (must match cgmsList[]) */
 enum cgms_hdl {
-  CGMS_SVC_HDL = CGMS_START_HDL,    /*!< \brief CGM service declaration, 240 */
+  CGMS_SVC_HDL = CGMS_START_HDL,    /*!< \brief CGM service declaration, 2048 */
 
-  CGMS_MEAS_CH_HDL,                 /*!< \brief CGM measurement characteristic */
-  CGMS_MEAS_HDL,                    /*!< \brief CGM measurement value */
-  CGMS_MEAS_CH_CCC_HDL,             /*!< \brief CGM measurement CCCD, 243 */
+  CGMS_MEAS_CH_HDL,                 /*!< \brief CGM measurement characteristic, 2049 */
+  CGMS_MEAS_HDL,                    /*!< \brief CGM measurement value, 2050 */
+  CGMS_MEAS_CH_CCC_HDL,             /*!< \brief CGM measurement CCCD, 2051 */
    
   CGMS_FEAT_CH_HDL,                 /*!< \brief CGM feature characteristic: ATT_UUID_CGM_FEATURE */
-  CGMS_FEAT_HDL,                    /*!< \brief CGM feature, 245 */
+  CGMS_FEAT_HDL,                    /*!< \brief CGM feature, 2053 */
 
   CGMS_ST_CH_HDL,                   /*!< \brief CGM status characteristic: ATT_UUID_CGM_STATUS */
-  CGMS_ST_HDL,                      /*!< \brief CGM status, 247 */
+  CGMS_ST_HDL,                      /*!< \brief CGM status, 2055 */
 
   CGMS_SESS_START_T_CH_HDL,         /*!< \brief CGM session start time characteristic: ATT_UUID_CGM_SESS_START_T */
   CGMS_SESS_START_T_HDL,            /*!< \brief CGM session start time */
@@ -80,8 +80,8 @@ enum cgms_hdl {
   CGMS_SESS_RUN_T_HDL,              /*!< \brief CGM session run time */
 
   CGMS_RACP_CH_HDL,                 /*!< \brief Record access control point characteristic */
-  CGMS_RACP_HDL,                    /*!< \brief Record access control point */
-  CGMS_RACP_CH_CCC_HDL,             /*!< \brief RACP client characteristic configuration, 254 */
+  CGMS_RACP_HDL,                    /*!< \brief Record access control point, 2061*/
+  CGMS_RACP_CH_CCC_HDL,             /*!< \brief RACP client characteristic configuration, 2062 */
 
 #if 0
   CGMS_SOPS_CH_HDL,                 /*!< \brief CGM Specific Ops Control Point characteristic */

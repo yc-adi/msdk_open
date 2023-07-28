@@ -781,7 +781,8 @@ uint8_t CgmpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operatio
   BSTREAM_TO_UINT8(opcode, pValue);
   BSTREAM_TO_UINT8(oper, pValue);
   len -= 2;
-
+  APP_TRACE_INFO2("CgmpsRacpWriteCback opc=%d oper=%d", opcode, oper);
+  
   /* handle a procedure in progress */
   if (opcode != CH_RACP_OPCODE_ABORT && cgmpsCb.inProgress)
   {

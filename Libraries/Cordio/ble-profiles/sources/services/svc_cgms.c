@@ -141,7 +141,7 @@ static const uint8_t cgmsRacpChPerm = ATTS_PERMIT_READ | ATTS_PERMIT_READ_AUTH;
 /* Note these are dummy values */
 static const uint8_t cgmsRacpVal[] = {0};
 static const uint16_t cgmsRacpValLen = sizeof(cgmsRacpVal);
-static const uint8_t cgmsRacpValPerm = CGMS_SEC_PERMIT_WRITE_AUTH;
+static const uint8_t cgmsRacpValPerm = ATTS_PERMIT_WRITE | ATTS_PERMIT_WRITE_ENC | ATTS_PERMIT_WRITE_AUTH;
 
 /* Record access control point client characteristic configuration */
 static uint8_t cgmsRacpChCccd[] = {UINT16_TO_BYTES(0x0000)};

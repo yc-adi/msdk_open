@@ -783,6 +783,8 @@ void AttsAddGroup(attsGroup_t *pGroup)
   attsGroup_t   *pElem;
   attsGroup_t   *pPrev = NULL;
 
+  APP_TRACE_INFO1("AttsAddGroup, stHndl=0x%X", pGroup->startHandle);
+
   /* task schedule lock */
   WsfTaskLock();
 

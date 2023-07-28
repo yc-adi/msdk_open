@@ -118,7 +118,7 @@ void dmSecHciHandler(hciEvt_t *pEvent)
           pCcb->usingLtk = FALSE;
 
           /* provide key to HCI */
-          APP_TRACE_INFO0("@!@ provide key to HCI");
+          APP_TRACE_INFO1("provide key to HCI, secLevel=0x%X", secLevel);
           HciLeLtkReqReplCmd(pEvent->hdr.param, pKey);
           return;
         }

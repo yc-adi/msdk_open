@@ -36,9 +36,9 @@
 #include "cgmps_main.h"
 
 /**************************************************************************************************
-  Local Variables
+  Global Variables
 **************************************************************************************************/
-
+extern cgmpsDbCb_t cgmpsDbCb;
 
 /*************************************************************************************************/
 /*!
@@ -315,73 +315,6 @@ static void cgmpsHandleValueCnf(attEvt_t *pMsg)
 static uint8_t cgmpsRacpOperCheck(uint8_t oper, uint16_t len, uint8_t *pOperand)
 {
   uint8_t status = CH_RACP_RSP_SUCCESS;
-  uint8_t filterType;
-  uint8_t filterLen = 0;
-
-  /* these operators have no operands */
-  if (oper == CH_RACP_OPERATOR_ALL || oper == CH_RACP_OPERATOR_FIRST ||
-      oper == CH_RACP_OPERATOR_LAST || oper == CH_RACP_OPERATOR_NULL)
-  {
-    if (len != 0)
-    {
-      status = CH_RACP_RSP_INV_OPERAND;
-    }
-  }
-  /* remaining operators must have operands */
-  else if (oper == CH_RACP_OPERATOR_LTEQ || oper == CH_RACP_OPERATOR_GTEQ ||
-           oper == CH_RACP_OPERATOR_RANGE)
-  {
-    if (len == 0)
-    {
-      status = CH_RACP_RSP_INV_OPERAND;
-    }
-    else
-    {
-      filterType = *pOperand;
-      len--;
-
-      /* operand length depends on filter type */
-      if (filterType == CH_RACP_GLS_FILTER_SEQ)
-      {
-        filterLen = CH_RACP_GLS_FILTER_SEQ_LEN;
-      }
-      else if (filterType == CH_RACP_GLS_FILTER_TIME)
-      {
-        filterLen = CH_RACP_GLS_FILTER_TIME_LEN;
-      }
-      else
-      {
-        status = CH_RACP_RSP_OPERAND_NOT_SUP;
-      }
-
-      if (status == CH_RACP_RSP_SUCCESS)
-      {
-        /* range operator has two filters, others have one */
-        if (oper == CH_RACP_OPERATOR_RANGE)
-        {
-          filterLen *= 2;
-        }
-
-        /* verify length */
-        if (len != filterLen)
-        {
-          status = CH_RACP_RSP_INV_OPERAND;
-        }
-      }
-    }
-  }
-  /* unknown operator */
-  else
-  {
-    status = CH_RACP_RSP_OPERATOR_NOT_SUP;
-  }
-
-  /* store operator and operand */
-  if (status == CH_RACP_RSP_SUCCESS)
-  {
-    cgmpsCb.oper = oper;
-    memcpy(cgmpsCb.operand, pOperand, len);
-  }
 
   return status;
 }
@@ -428,6 +361,8 @@ static void cgmpsRacpReport(dmConnId_t connId, uint8_t oper, uint8_t *pOperand)
 static void cgmpsRacpDelete(dmConnId_t connId, uint8_t oper, uint8_t *pOperand)
 {
   uint8_t status;
+
+  APP_TRACE_INFO0("cgmpsRacpDelete");
 
   /* delete records */
   status = cgmpsDbDeleteRecords(oper, pOperand);
@@ -479,11 +414,12 @@ static void cgmpsRacpAbort(dmConnId_t connId)
 /*************************************************************************************************/
 static void cgmpsRacpReportNum(dmConnId_t connId, uint8_t oper, uint8_t *pOperand)
 {
-  uint8_t status;
-  uint8_t numRec = 0;
+  uint8_t status = CH_RACP_RSP_SUCCESS;
+  uint8_t numRec = cgmpsDbCb.numRec;
 
-  /* get number of records */
-  status = cgmpsDbGetNumRecords(oper, pOperand, &numRec);
+  // TODO: get the record number according to the filter
+
+  APP_TRACE_INFO2("cgmpsRacpReportNum, st=%d num=%d", status, numRec);
 
   if (status == CH_RACP_RSP_SUCCESS)
   {
@@ -525,7 +461,7 @@ static void cgmpsToggleBondingFlag(void)
       cgmpsFlags |= CH_GLF_MULTI_BOND;
     }
 
-    // @?@ remove me !!! TODO: CgmpsSetFeature(cgmpsFlags);
+    // TODO: CgmpsSetFeature(cgmpsFlags);
   }
 }
 
@@ -774,6 +710,7 @@ uint8_t CgmpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operatio
   /* if control point not configured for indication */
   if (!AttsCccEnabled(connId, cgmpsCb.racpCccIdx))
   {
+    APP_TRACE_INFO1("RACP not configured for indication, racpCccIdx=%d", cgmpsCb.racpCccIdx);
     return CGMS_ERR_CCCD;
   }
 
@@ -781,17 +718,19 @@ uint8_t CgmpsRacpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operatio
   BSTREAM_TO_UINT8(opcode, pValue);
   BSTREAM_TO_UINT8(oper, pValue);
   len -= 2;
-  APP_TRACE_INFO2("CgmpsRacpWriteCback opc=%d oper=%d", opcode, oper);
+  APP_TRACE_INFO3("CgmpsRacpWriteCback opc=%d oper=%d len=%d", opcode, oper, len);
   
   /* handle a procedure in progress */
   if (opcode != CH_RACP_OPCODE_ABORT && cgmpsCb.inProgress)
   {
+    APP_TRACE_INFO0("a RACP procedure still in progress");
     return CGMS_ERR_IN_PROGRESS;
   }
 
   /* handle record request when notifications not enabled */
   if (opcode == CH_RACP_OPCODE_REPORT && !AttsCccEnabled(connId, cgmpsCb.cgmMeasCccIdx))
   {
+    APP_TRACE_INFO1("RACP report but meas not enabled, cgmMeasCccIdx=%d", cgmpsCb.cgmMeasCccIdx);
     return CGMS_ERR_CCCD;
   }
 

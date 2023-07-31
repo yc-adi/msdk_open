@@ -228,6 +228,8 @@ void InitRtc(void)
     }
 
     printf("RTC started\n");
+    MXC_Delay(10);
+    
     printTime();
 }
 

@@ -118,6 +118,8 @@ void smprActProcPairReq(smpCcb_t *pCcb, smpMsg_t *pMsg)
   /* call app callback */
   pairInd.hdr.param = pCcb->connId;
   pairInd.hdr.event = DM_SEC_PAIR_IND;
+
+  APP_TRACE_INFO1("smprActProcPairReq calls DmSmpCbackExec with pairInd.auth=%d", pairInd.auth);
   DmSmpCbackExec((dmEvt_t *) &pairInd);
 }
 

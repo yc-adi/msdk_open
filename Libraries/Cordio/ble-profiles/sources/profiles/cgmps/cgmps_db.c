@@ -41,14 +41,11 @@
 #define CGM_DB_NUM_RECORDS     3
 
 /**************************************************************************************************
-  Local Variables
+  Global Variables
 **************************************************************************************************/
 
 /*! Control block */
-static struct
-{
-  uint8_t numRec;
-} cgmpsDbCb;
+cgmpsDbCb_t cgmpsDbCb;
 
 /*! Example record database */
 static cgmpsRec_t cgmpsDb[CGM_DB_NUM_RECORDS] =
@@ -240,38 +237,10 @@ void cgmpsDbInit(void)
 uint8_t cgmpsDbGetNextRecord(uint8_t oper, uint8_t *pFilter, cgmpsRec_t *pCurrRec,  cgmpsRec_t **pRec)
 {
   uint8_t status;
+  
+  // TODO: get the record according to filter
 
-  switch (oper)
-  {
-    case CH_RACP_OPERATOR_ALL:
-      status = cgmpsDbOpAll(pCurrRec, pRec);
-      break;
-
-    case CH_RACP_OPERATOR_GTEQ:
-      /* check filter type */
-      if (*pFilter == CH_RACP_GLS_FILTER_SEQ)
-      {
-        status = cgmpsDbOpGteqSeqNum(pFilter, pCurrRec, pRec);
-      }
-      else
-      {
-        status = CH_RACP_RSP_OPERAND_NOT_SUP;
-      }
-      break;
-
-    case CH_RACP_OPERATOR_LAST:
-      status = cgmpsDbOpLast(pCurrRec, pRec);
-      break;
-
-    case CH_RACP_OPERATOR_NULL:
-      status = CH_RACP_RSP_INV_OPERATOR;
-      break;
-
-    default:
-      status = CH_RACP_RSP_OPERATOR_NOT_SUP;
-      break;
-
-  }
+  status = cgmpsDbOpLast(pCurrRec, pRec);
 
   return status;
 }
@@ -288,17 +257,9 @@ uint8_t cgmpsDbGetNextRecord(uint8_t oper, uint8_t *pFilter, cgmpsRec_t *pCurrRe
 /*************************************************************************************************/
 uint8_t cgmpsDbDeleteRecords(uint8_t oper, uint8_t *pFilter)
 {
-  /* only 'all records' is supported */
-  if (oper == CH_RACP_OPERATOR_ALL)
-  {
     cgmpsDbCb.numRec = 0;
 
     return CH_RACP_RSP_SUCCESS;
-  }
-  else
-  {
-    return CH_RACP_RSP_OPERATOR_NOT_SUP;
-  }
 }
 
 /*************************************************************************************************/

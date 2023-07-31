@@ -565,6 +565,7 @@ void smpGenerateLtk(smpCcb_t *pCcb)
   /* pass key to app via DM */
   pScr->keyInd.type = DM_KEY_LOCAL_LTK;
   pScr->keyInd.secLevel = (pCcb->auth & SMP_AUTH_MITM_FLAG) ? DM_SEC_LEVEL_ENC_AUTH : DM_SEC_LEVEL_ENC;
+  APP_TRACE_INFO1("smpGenerateLtk secLeve=%d", pScr->keyInd.secLevel);
   pScr->keyInd.hdr.event = DM_SEC_KEY_IND;
   DmSmpCbackExec((dmEvt_t *) &pScr->keyInd);
 }
@@ -692,7 +693,7 @@ uint8_t smpGetScSecLevel(smpCcb_t *pCcb)
   {
     secLevel = DM_SEC_LEVEL_ENC;
   }
-
+  APP_TRACE_INFO2("smpGetScSecLevel auth=%d secLevel=%d", pCcb->auth, secLevel);
   return secLevel;
 }
 
@@ -729,7 +730,7 @@ bool_t SmpDmLescEnabled(dmConnId_t connId)
 /*************************************************************************************************/
 uint8_t *SmpDmGetStk(dmConnId_t connId, uint8_t *pSecLevel)
 {
-  smpCcb_t     *pCcb;
+  smpCcb_t *pCcb;
 
   /* get connection control block */
   pCcb = smpCcbByConnId(connId);
@@ -751,7 +752,7 @@ uint8_t *SmpDmGetStk(dmConnId_t connId, uint8_t *pSecLevel)
   {
     /* set security level */
     *pSecLevel = (pCcb->auth & SMP_AUTH_MITM_FLAG) ? DM_SEC_LEVEL_ENC_AUTH : DM_SEC_LEVEL_ENC;
-
+    APP_TRACE_INFO1("SmpDmGetStk secLevel=%d", *pSecLevel);
     /* return buffer containing STK */
     return pCcb->pScr->buf.b3;
   }

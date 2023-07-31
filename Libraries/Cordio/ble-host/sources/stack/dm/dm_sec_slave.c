@@ -24,6 +24,7 @@
 
 #include "wsf_types.h"
 #include "wsf_msg.h"
+#include "wsf_trace.h"
 #include "util/calc128.h"
 #include "dm_api.h"
 #include "dm_sec.h"
@@ -105,7 +106,9 @@ void DmSecSlaveReq(dmConnId_t connId, uint8_t auth)
 void DmSecLtkRsp(dmConnId_t connId, bool_t keyFound, uint8_t secLevel, uint8_t *pKey)
 {
   dmSecApiLtkRsp_t  *pMsg;
-
+  
+  APP_TRACE_INFO2("DmSecLtkRsp kfnd=%d secLevel=%d", keyFound, secLevel);
+  
   if ((pMsg = WsfMsgAlloc(sizeof(dmSecApiLtkRsp_t))) != NULL)
   {
     pMsg->hdr.event = DM_SEC_MSG_API_LTK_RSP;

@@ -196,6 +196,7 @@ uint8_t attsPermissions(dmConnId_t connId, uint8_t permit, uint16_t handle, uint
   /* check if encryption required */
   if ((permissions & ATTS_PERMIT_READ_ENC) && (secLevel == DM_SEC_LEVEL_NONE))
   {
+    APP_TRACE_INFO0("encryption required");
     return ATT_ERR_AUTH;
   }
 
@@ -203,6 +204,7 @@ uint8_t attsPermissions(dmConnId_t connId, uint8_t permit, uint16_t handle, uint
   if (((permissions & (ATTS_PERMIT_READ_AUTH | ATTS_PERMIT_READ_ENC)) ==
        (ATTS_PERMIT_READ_AUTH | ATTS_PERMIT_READ_ENC)) && (secLevel < DM_SEC_LEVEL_ENC_AUTH))
   {
+    APP_TRACE_INFO0("encryption required with authenticated key");
     return ATT_ERR_AUTH;
   }
 
@@ -211,6 +213,7 @@ uint8_t attsPermissions(dmConnId_t connId, uint8_t permit, uint16_t handle, uint
   {
     if (attsCb.authorCback == NULL)
     {
+      APP_TRACE_INFO0("attsCb.authorCback is NULL");
       return ATT_ERR_AUTHOR;
     }
     else

@@ -98,11 +98,11 @@ void dmSecHciHandler(hciEvt_t *pEvent)
   dmSecEncryptIndEvt_t  encryptInd;
   uint8_t               secLevel;
 
-  APP_TRACE_INFO1("@!@ dmSecHciHandler() evt %d", pEvent->hdr.event);
+  APP_TRACE_INFO1("dmSecHciHandler() evt %d", pEvent->hdr.event);
 
   if ((pCcb = dmConnCcbByHandle(pEvent->hdr.param)) != NULL)
   {
-    APP_TRACE_INFO0("@!@ Find a connection control block with matching handle");
+    APP_TRACE_INFO0("find a connection control block with matching handle");
     if (pEvent->hdr.event == HCI_LE_LTK_REQ_CBACK_EVT)
     {
       /* if ediv and rand are zero then check if STK is available from SMP */

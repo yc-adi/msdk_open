@@ -641,6 +641,7 @@ bool_t smpProcRcvKey(smpCcb_t *pCcb, dmSecKeyIndEvt_t *pKeyInd, uint8_t *pBuf, u
     BSTREAM_TO_UINT16(pKeyInd->keyData.ltk.ediv, pBuf);
     memcpy(pKeyInd->keyData.ltk.rand, pBuf, SMP_RAND8_LEN);
     pKeyInd->secLevel = (pCcb->auth & SMP_AUTH_MITM_FLAG) ? DM_SEC_LEVEL_ENC_AUTH : DM_SEC_LEVEL_ENC;
+    APP_TRACE_INFO1("smpProcRcvKey secLeve=%d", pKeyInd->secLevel);
     pKeyInd->type = DM_KEY_PEER_LTK;
     keyIndReady = TRUE;
   }

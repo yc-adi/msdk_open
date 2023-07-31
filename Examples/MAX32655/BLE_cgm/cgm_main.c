@@ -119,7 +119,7 @@ static const attsCccSet_t cgmCccSet[CGM_CCC_IDX_MAX] =
   {WP_DAT_CH_CCC_HDL,     ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* DATS_WP_DAT_CCC_IDX */
 
   {CGMS_MEAS_CH_CCC_HDL,  ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* CGM_MEAS_CCC_IDX */
-  {CGMS_RACP_CH_CCC_HDL,  ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}     /* CGM_RACP_CCC_IDX */
+  {CGMS_RACP_CH_CCC_HDL,  ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_NONE}    /* CGM_RACP_CCC_IDX */
   //{CGMS_SOPS_CCCD_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}     /* CGM_SOPS_CCC_IDX */
 };
 
@@ -148,6 +148,7 @@ static const appSlaveCfg_t cgmSlaveCfg = {
 
 /*! configurable parameters for security */
 static const appSecCfg_t cgmSecCfg = {
+    //DM_AUTH_BOND_FLAG | DM_AUTH_MITM_FLAG, // TODO: check this flag
     DM_AUTH_BOND_FLAG | DM_AUTH_SC_FLAG, /*! auth: Authentication and bonding flags */
     0, // DM_KEY_DIST_IRK, /*! iKeyDist: Initiator key distribution flags */
     DM_KEY_DIST_LTK | DM_KEY_DIST_IRK, /*! rKeyDist: Responder key distribution flags */

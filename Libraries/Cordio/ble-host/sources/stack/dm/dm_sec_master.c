@@ -115,6 +115,8 @@ void DmSecEncryptReq(dmConnId_t connId, uint8_t secLevel, dmSecLtk_t *pLtk)
     memcpy(&pMsg->ltk, pLtk, sizeof(dmSecLtk_t));
     pMsg->secLevel = secLevel;
 
+    APP_TRACE_INFO1("DmSecEncryptReq evt=40 (DM_SEC_MSG_API_ENCRYPT_REQ) secLevel=%d", secLevel);
+
     WsfMsgSend(dmCb.handlerId, pMsg);
   }
 }

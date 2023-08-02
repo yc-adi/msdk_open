@@ -170,6 +170,7 @@ void LhciSendEvent(uint8_t *pBuf)
 {
   if (pBuf != NULL)
   {
+    MSG_TRACE_INFO0("LhciSendEvent");
     WsfMsgEnq(&lhciPersistCb.evtQ, 0, pBuf);
   }
 

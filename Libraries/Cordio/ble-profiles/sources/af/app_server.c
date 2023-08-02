@@ -204,6 +204,7 @@ void appServerHandleDbHashUpdate(attEvt_t *pMsg)
 /*************************************************************************************************/
 void appServerHandleSvcChangeCnf(attEvt_t *pMsg)
 {
+  APP_TRACE_INFO0("appServerHandleSvcChangeCnf");
   /* Check if this is a confirmation on the Service Changed Indication. */
   if (pMsg->handle == GATT_SC_HDL)
   {

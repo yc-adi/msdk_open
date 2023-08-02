@@ -25,6 +25,7 @@
 #include <string.h>
 #include "wsf_types.h"
 #include "wsf_msg.h"
+#include "wsf_trace.h"
 #include "sec_api.h"
 #include "util/calc128.h"
 #include "dm_api.h"
@@ -490,6 +491,7 @@ void DmPrivResolveAddr(uint8_t *pAddr, uint8_t *pIrk, uint16_t param)
     pMsg->hdr.param = param;
     Calc128Cpy(pMsg->irk, pIrk);
     BdaCpy(pMsg->addr, pAddr);
+    MSG_TRACE_INFO1("DmPrivResolveAddr hnd=%d evt=48", dmCb.handlerId);
     WsfMsgSend(dmCb.handlerId, pMsg);
   }
 }

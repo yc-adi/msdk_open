@@ -334,6 +334,7 @@ static void secCcmMicComplete(secQueueBuf_t *pBuf, uint8_t *s_0)
       pMsg->success = FALSE;
     }
 
+    MSG_TRACE_INFO3("secCcmMicComplete hndid=%d txtLen=%d success=%d", pCcm->handlerId, pMsg->textLen, pMsg->success);
     WsfMsgSend(pCcm->handlerId, pMsg);
   }
 }
@@ -374,6 +375,7 @@ static void secCcmGenSi(secQueueBuf_t *pBuf, uint8_t *pPriorS)
 
       pMsg->pCiphertext = pCcm->pWorking;
       pMsg->textLen = pCcm->textLen + pCcm->clearLen + pCcm->micLen;
+      MSG_TRACE_INFO2("secCcmGenSi hndid=%d txtLen=%d", pCcm->handlerId, pMsg->textLen);
       WsfMsgSend(pCcm->handlerId, pMsg);
     }
     else

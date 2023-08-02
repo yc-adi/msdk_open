@@ -308,6 +308,24 @@ bool_t WsfTokenService(void);
 /*! \brief 5 argument WSF message trace. */
 #define WSF_TRACE_MSG5(msg, var1, var2, var3, var4, var5) WSF_TRACE5("WSF", "INFO", msg, var1, var2, var3, var4, var5)
 
+#if 1
+#define MSG_TRACE_INFO0(msg)                        WSF_TRACE0(INFO, APP, msg)
+#define MSG_TRACE_INFO1(msg, var1)                  WSF_TRACE1(INFO, APP, msg, var1)
+#define MSG_TRACE_INFO2(msg, var1, var2)            WSF_TRACE2(INFO, APP, msg, var1, var2)
+#define MSG_TRACE_INFO3(msg, var1, var2, var3)      WSF_TRACE3(INFO, APP, msg, var1, var2, var3)
+#define MSG_TRACE_INFO4(msg, var1, var2, var3, var4) \
+                                                    WSF_TRACE4(INFO, APP, msg, var1, var2, var3, var4)
+#define MSG_TRACE_INFO5(msg, var1, var2, var3, var4, var5) \
+                                                    WSF_TRACE5(INFO, APP, msg, var1, var2, var3, var4, var5)
+#else
+#define MSG_TRACE_INFO0(msg)                        
+#define MSG_TRACE_INFO1(msg, var1)                  
+#define MSG_TRACE_INFO2(msg, var1, var2)            
+#define MSG_TRACE_INFO3(msg, var1, var2, var3)      
+#define MSG_TRACE_INFO4(msg, var1, var2, var3, var4)
+#define MSG_TRACE_INFO5(msg, var1, var2, var3, var4, var5)
+#endif
+
 /*! \brief 0 argument HCI info trace. */
 #define HCI_TRACE_INFO0(msg)                        WSF_TRACE0V("HCI", "INFO", msg)
 /*! \brief 1 argument HCI info trace. */
@@ -471,6 +489,9 @@ bool_t WsfTokenService(void);
 #define SMP_TRACE_INFO2(msg, var1, var2)            WSF_TRACE2("SMP", "INFO", msg, var1, var2)
 /*! \brief 3 argument SMP info trace. */
 #define SMP_TRACE_INFO3(msg, var1, var2, var3)      WSF_TRACE3("SMP", "INFO", msg, var1, var2, var3)
+/*! \brief 4 argument SMP info trace. */
+#define SMP_TRACE_INFO4(msg, var1, var2, var3, var4)  WSF_TRACE4("SMP", "INFO", msg, var1, var2, var3, var4)
+
 /*! \brief 0 argument SMP warning trace. */
 #define SMP_TRACE_WARN0(msg)                        WSF_TRACE0("SMP", "WARN", msg)
 /*! \brief 1 argument SMP warning trace. */

@@ -24,6 +24,7 @@
 #ifndef APP_DB_H
 #define APP_DB_H
 
+#include "app_cfg.h"
 #include "wsf_os.h"
 #include "dm_api.h"
 #include "att_api.h"
@@ -48,6 +49,51 @@ extern "C" {
 
 /*! \brief Device database record handle type */
 typedef void *appDbHdl_t;
+
+/*! Database record */
+typedef struct
+{
+  /*! Common for all roles */
+  bdAddr_t     peerAddr;                      /*! Peer address */
+  uint8_t      addrType;                      /*! Peer address type */
+  dmSecIrk_t   peerIrk;                       /*! Peer IRK */
+  dmSecCsrk_t  peerCsrk;                      /*! Peer CSRK */
+  uint8_t      keyValidMask;                  /*! Valid keys in this record */
+  bool_t       inUse;                         /*! TRUE if record in use */
+  bool_t       valid;                         /*! TRUE if record is valid */
+  bool_t       peerAddedToRl;                 /*! TRUE if peer device's been added to resolving list */
+  bool_t       peerRpao;                      /*! TRUE if RPA Only attribute's present on peer device */
+
+  /*! For slave local device */
+  dmSecLtk_t   localLtk;                      /*! Local LTK */
+  uint8_t      localLtkSecLevel;              /*! Local LTK security level */
+  bool_t       peerAddrRes;                   /*! TRUE if address resolution's supported on peer device (master) */
+
+  /*! For master local device */
+  dmSecLtk_t   peerLtk;                       /*! Peer LTK */
+  uint8_t      peerLtkSecLevel;               /*! Peer LTK security level */
+
+  /*! for ATT server local device */
+  uint16_t     cccTbl[APP_DB_NUM_CCCD];       /*! Client characteristic configuration descriptors */
+  uint32_t     peerSignCounter;               /*! Peer Sign Counter */
+  uint8_t      changeAwareState;              /*! Peer client awareness to state change in database */
+  uint8_t      csf[ATT_CSF_LEN];              /*! Peer client supported features record */
+
+  /*! for ATT client */
+  bool_t       cacheByHash;                   /*! TRUE if cached handles are maintained by comparing database hash */
+  uint8_t      dbHash[ATT_DATABASE_HASH_LEN]; /*! Peer database hash */
+  uint16_t     hdlList[APP_DB_HDL_LIST_LEN];  /*! Cached handle list */
+  uint8_t      discStatus;                    /*! Service discovery and configuration status */
+} appDbRec_t;
+
+/*! Database type */
+typedef struct
+{
+  appDbRec_t  rec[APP_DB_NUM_RECS];               /*! Device database records */
+  char        devName[ATT_DEFAULT_PAYLOAD_LEN];   /*! Device name */
+  uint8_t     devNameLen;                         /*! Device name length */
+  uint8_t     dbHash[ATT_DATABASE_HASH_LEN];      /*! Device GATT database hash */
+} appDb_t;
 
 /**************************************************************************************************
   Function Declarations

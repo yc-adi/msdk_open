@@ -562,7 +562,7 @@ static void appSlaveResolvedAddrInd(dmEvt_t *pMsg, appConnCb_t *pCb)
   /* if RPA resolved */
   if (pMsg->hdr.status == HCI_SUCCESS)
   {
-    APP_TRACE_INFO0("appSlaveResolvedAddrInd, RPA resolved");
+    APP_TRACE_INFO1("appSlaveResolvedAddrInd, RPA resolved findLtk=%d", appSlaveCb.findLtk);
     /* record found */
     pCb->dbHdl = appSlaveCb.dbHdl;
 
@@ -652,6 +652,8 @@ void appSlaveSecConnOpen(dmEvt_t *pMsg, appConnCb_t *pCb)
 
   /* find record for peer device */
   pCb->dbHdl = AppDbFindByAddr(pMsg->connOpen.addrType, pMsg->connOpen.peerAddr);
+
+  APP_TRACE_INFO1("appSlaveSecConnOpen dbHdl=0x%X", pCb->dbHdl);
 
   /* if record not found and the peer device uses an RPA */
   if ((pCb->dbHdl == NULL) && DM_RAND_ADDR_RPA(pMsg->connOpen.peerAddr, pMsg->connOpen.addrType))
@@ -918,6 +920,7 @@ static void appPrivSetAddrResEnableInd(dmEvt_t *pMsg)
 /*************************************************************************************************/
 static void appPrivAddDevToResListInd(dmEvt_t *pMsg, appConnCb_t *pCb)
 {
+  APP_TRACE_INFO0("appPrivAddDevToResListInd");
   if ((pMsg->hdr.status == HCI_SUCCESS) && pCb && (pCb->dbHdl != APP_DB_HDL_NONE))
   {
     /* peer device's been added to resolving list */
@@ -1076,7 +1079,7 @@ void AppSlaveProcDmMsg(dmEvt_t *pMsg)
 {
   appConnCb_t *pCb = NULL;
 
-  APP_TRACE_INFO0("AppSlaveProcDmMsg");
+  APP_TRACE_INFO1("AppSlaveProcDmMsg evt=%d", pMsg->hdr.event);
   
   /* look up app connection control block from DM connection ID */
   if ((pMsg->hdr.event != DM_ADV_STOP_IND) &&

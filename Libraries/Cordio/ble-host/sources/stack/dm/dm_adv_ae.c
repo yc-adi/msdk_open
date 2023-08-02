@@ -1646,6 +1646,7 @@ void DmPerAdvConfig(uint8_t advHandle)
   {
     pMsg->hdr.event = DM_ADV_PER_MSG_API_CONFIG;
     pMsg->advHandle = advHandle;
+    MSG_TRACE_INFO1("DmPerAdvConfig DM_ADV_PER_MSG_API_CONFIG hnd=%d", dmCb.handlerId);
     WsfMsgSend(dmCb.handlerId, pMsg);
   }
 }
@@ -1676,6 +1677,7 @@ void DmPerAdvSetData(uint8_t advHandle, uint8_t op, uint8_t len, uint8_t *pData)
     pMsg->op = op;
     pMsg->len = len;
     pMsg->pData = pData;
+    MSG_TRACE_INFO4("DmPerAdvSetData hnd=%d evt=81 advHnd=%d op=%d len=%d", dmCb.handlerId, advHandle, op, len);
     WsfMsgSend(dmCb.handlerId, pMsg);
   }
 }
@@ -1699,6 +1701,7 @@ void DmPerAdvStart(uint8_t advHandle)
   {
     pMsg->hdr.event = DM_ADV_PER_MSG_API_START;
     pMsg->advHandle = advHandle;
+    MSG_TRACE_INFO2("DmPerAdvStart hnd=%d evt=82 advhnd=%d", dmCb.handlerId, advHandle);
     WsfMsgSend(dmCb.handlerId, pMsg);
   }
 }
@@ -1722,6 +1725,7 @@ void DmPerAdvStop(uint8_t advHandle)
   {
     pMsg->hdr.event = DM_ADV_PER_MSG_API_STOP;
     pMsg->advHandle = advHandle;
+    MSG_TRACE_INFO0("DmPerAdvStop");
     WsfMsgSend(dmCb.handlerId, pMsg);
   }
 }

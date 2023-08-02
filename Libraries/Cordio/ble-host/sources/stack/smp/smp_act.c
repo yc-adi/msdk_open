@@ -37,6 +37,8 @@
 #define SMP_EXTRA_TRACE FALSE
 #endif
 
+extern uint8_t *smpStateStr(uint8_t state);
+
 /*************************************************************************************************/
 /*!
  *  \brief  Start SMP response timer.
@@ -760,6 +762,7 @@ void smpActAttemptRcvd(smpCcb_t *pCcb, smpMsg_t *pMsg)
 /*************************************************************************************************/
 void smpActNotifyDmAttemptsFailure(smpCcb_t *pCcb, smpMsg_t *pMsg)
 {
+  APP_TRACE_INFO0("smpActNotifyDmAttemptsFailure");
   /* notify DM of pairing failure */
   pMsg->hdr.status = SMP_ERR_ATTEMPTS;
   pMsg->hdr.event = DM_SEC_PAIR_FAIL_IND;
@@ -854,7 +857,8 @@ void smpSmExecute(smpCcb_t *pCcb, smpMsg_t *pMsg)
     SMP_TRACE_INFO2("SMP Exe: evt=%s st=%s", smpEventStr(pMsg->hdr.event), smpStateStr(pCcb->state));
   else
 #endif
-    SMP_TRACE_INFO2("smpSmExecute event=%d state=%d", pMsg->hdr.event, pCcb->state);
+    SMP_TRACE_INFO4("smpSmExecute evt=%d (%s) st=%d (%s)",
+      pMsg->hdr.event, smpEventStr(pMsg->hdr.event), pCcb->state, smpStateStr(pCcb->state));
 
   /* look up state table for state */
   pSmIf = DmConnRole(pCcb->connId) == DM_ROLE_SLAVE? smpCb.pSlave : smpCb.pMaster;

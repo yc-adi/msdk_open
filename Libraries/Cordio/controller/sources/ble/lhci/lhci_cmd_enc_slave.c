@@ -174,42 +174,42 @@ bool_t lhciSlvEncDecodeCmdPkt(LhciHdr_t *pHdr, uint8_t *pBuf)
   uint8_t paramLen = 0;
   uint8_t *pParam = NULL;
   uint16_t handle = 0;
+  uint8_t *pKey = pBuf;
+  uint16_t timeout;
 
   switch (pHdr->opCode)
   {
     /* --- Encryption --- */
 
     case HCI_OPCODE_LE_ENCRYPT:
-    {
-      uint8_t *pKey = pBuf;
       pParam = pBuf + HCI_KEY_LEN;
       LlEncrypt(pKey, pParam);
       paramLen = LHCI_LEN_LE_ENCRYPT_EVT;
       break;
-    }
+
     case HCI_OPCODE_LE_LTK_REQ_REPL:
       BSTREAM_TO_UINT16(handle, pBuf);
       status = LlLtkReqReply(handle, pBuf);
       paramLen = LHCI_LEN_LE_LTK_REQ_REPL_EVT;
       break;
+      
     case HCI_OPCODE_LE_LTK_REQ_NEG_REPL:
       BSTREAM_TO_UINT16(handle, pBuf);
       status = LlLtkReqNegReply(handle);
       paramLen = LHCI_LEN_LE_LTK_REQ_NEG_REPL_EVT;
       break;
+
     case HCI_OPCODE_READ_AUTH_PAYLOAD_TO:
       BSTREAM_TO_UINT16(handle, pBuf);
       paramLen = LHCI_LEN_READ_AUTH_PAYLOAD_TO_EVT;
       break;
+
     case HCI_OPCODE_WRITE_AUTH_PAYLOAD_TO:
-    {
-      uint16_t timeout;
       BSTREAM_TO_UINT16(handle, pBuf);
       BSTREAM_TO_UINT16(timeout, pBuf);
       status = LlWriteAuthPayloadTimeout(handle, timeout);
       paramLen = LHCI_LEN_WRITE_AUTH_PAYLOAD_TO_EVT;
       break;
-    }
 
     /* --- default --- */
 

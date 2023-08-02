@@ -119,6 +119,7 @@ void SecAesRevHciCback(secQueueBuf_t *pBuf, hciEvt_t *pEvent, wsfHandlerId_t han
   Calc128Cpy(pAes->pCiphertext, pEvent->leEncryptCmdCmpl.data);
 
   /* send message */
+  MSG_TRACE_INFO2("SecAesRevHciCback hndid=%d pAes=0x%X", handlerId, pAes);
   WsfMsgSend(handlerId, pAes);
 }
 

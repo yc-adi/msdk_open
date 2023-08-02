@@ -23,6 +23,7 @@
 /*************************************************************************************************/
 
 #include <string.h>
+#include "app_db.h"
 #include "led.h"
 #include "mxc_device.h"
 #include "mxc_delay.h"
@@ -287,6 +288,7 @@ wsfTimer_t custSpecAppTimer;
 **************************************************************************************************/
 uint8_t conn_opened = 0; /// 0: connection is not opened
 extern appSlaveCb_t appSlaveCb;
+extern appDb_t appDb;
 
 extern void setAdvTxPower(void);
 extern void printTime(void);
@@ -623,6 +625,8 @@ static void cgmSetup(dmEvt_t *pMsg)
 /*************************************************************************************************/
 static void cgmProcMsg(dmEvt_t *pMsg)
 {
+    appDbRec_t *pRec;
+
     APP_TRACE_INFO1("cgmProcMsg evt=%d", pMsg->hdr.event);
 
     uint8_t uiEvent = APP_UI_NONE;
@@ -678,21 +682,26 @@ static void cgmProcMsg(dmEvt_t *pMsg)
 #endif
         APP_TRACE_INFO2("Connection closed status 0x%x, reason 0x%x", pMsg->connClose.status,
                         pMsg->connClose.reason);
+
         switch (pMsg->connClose.reason) {
-        case HCI_ERR_CONN_TIMEOUT:
-            APP_TRACE_INFO0(" TIMEOUT");
+            case HCI_ERR_CONN_TIMEOUT:
+                APP_TRACE_INFO0(" TIMEOUT");
             break;
-        case HCI_ERR_LOCAL_TERMINATED:
-            APP_TRACE_INFO0(" LOCAL TERM");
+            
+            case HCI_ERR_LOCAL_TERMINATED:
+                APP_TRACE_INFO0(" LOCAL TERM");
             break;
-        case HCI_ERR_REMOTE_TERMINATED:
-            APP_TRACE_INFO0(" REMOTE TERM");
+        
+            case HCI_ERR_REMOTE_TERMINATED:
+                APP_TRACE_INFO0(" REMOTE TERM");
             break;
-        case HCI_ERR_CONN_FAIL:
-            APP_TRACE_INFO0(" FAIL ESTABLISH");
+
+            case HCI_ERR_CONN_FAIL:
+                APP_TRACE_INFO0(" FAIL ESTABLISH");
             break;
-        case HCI_ERR_MIC_FAILURE:
-            APP_TRACE_INFO0(" MIC FAILURE");
+
+            case HCI_ERR_MIC_FAILURE:
+                APP_TRACE_INFO0(" MIC FAILURE");
             break;
         }
 
@@ -701,6 +710,16 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         APP_TRACE_INFO0("DM_CONN_CLOSE_IND");
 
         uiEvent = APP_UI_CONN_CLOSE;
+
+        // without this, after disconnect a passkey connection, it will always
+        // trigger "pairing failed" in the next connection
+        pRec = appDb.rec;
+        while (pRec < &appDb.rec[APP_DB_NUM_RECS])
+        {
+            pRec->inUse == false;
+            pRec++;
+        }
+
         break;
 
     case DM_SEC_PAIR_CMPL_IND:

@@ -701,6 +701,9 @@ static void appSecPairInd(dmEvt_t *pMsg, appConnCb_t *pCb)
   uint8_t iKeyDist;
   uint8_t rKeyDist;
 
+  APP_TRACE_INFO4("appSecPairInd bondable=%d auth=%d bonded=%d secLevel=%d", 
+    appSlaveCb.bondable, pMsg->pairInd.auth, pCb->bonded, DmConnSecLevel(pCb->connId));
+
   /* if in bondable mode or if peer is not requesting bonding
    * or if already bonded with this device and link is encrypted
    */
@@ -715,7 +718,7 @@ static void appSecPairInd(dmEvt_t *pMsg, appConnCb_t *pCb)
     if (pCb->bondByPairing && pCb->dbHdl == APP_DB_HDL_NONE)
     {
       /* create a device record if none exists */
-      APP_TRACE_INFO0("appSecPairInd, create a record");
+      APP_TRACE_INFO1("appSecPairInd, create a record, auth=%d", pAppSecCfg->auth);
       pCb->dbHdl = AppDbNewRecord(DmConnPeerAddrType(pCb->connId), DmConnPeerAddr(pCb->connId));
     }
 
@@ -1073,6 +1076,8 @@ void AppSlaveProcDmMsg(dmEvt_t *pMsg)
 {
   appConnCb_t *pCb = NULL;
 
+  APP_TRACE_INFO0("AppSlaveProcDmMsg");
+  
   /* look up app connection control block from DM connection ID */
   if ((pMsg->hdr.event != DM_ADV_STOP_IND) &&
       (pMsg->hdr.event != DM_ADV_SET_STOP_IND))
@@ -1127,6 +1132,7 @@ void AppSlaveProcDmMsg(dmEvt_t *pMsg)
       break;
 
     default:
+      APP_TRACE_INFO0("  not here");
       break;
   }
 }
@@ -1612,6 +1618,7 @@ void AppSlaveSecProcDmMsg(dmEvt_t *pMsg)
       break;
 
     default:
+      APP_TRACE_INFO0("  not here");
       break;
   }
 }

@@ -296,6 +296,7 @@ bool_t smpProcPairing(smpCcb_t *pCcb, uint8_t *pOob, uint8_t *pDisplay)
   {
     /* set auth flags with mitm bit cleared */
     pCcb->auth = pCcb->pairReq[SMP_AUTHREQ_POS] & pCcb->pairRsp[SMP_AUTHREQ_POS] & ~SMP_AUTH_MITM_FLAG;
+    APP_TRACE_INFO3("Just Works: pairReq=%d pairRsp=%d auth=%d", pCcb->pairReq[SMP_AUTHREQ_POS], pCcb->pairRsp[SMP_AUTHREQ_POS], pCcb->auth);
   }
 
   /* if we ended up with 'just works' but the device configuration requires authentication */

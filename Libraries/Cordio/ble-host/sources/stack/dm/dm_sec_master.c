@@ -89,6 +89,7 @@ void DmSecPairReq(dmConnId_t connId, uint8_t oob, uint8_t auth, uint8_t iKeyDist
     pMsg->rKeyDist = rKeyDist & SMP_KEY_DIST_MASK;
 
     /* note we're sending this to SMP */
+    APP_TRACE_INFO1("DmSecPairReq evt=1(SMP_MSG_API_PAIR_REQ) auth=%d", auth);
     SmpDmMsgSend((smpDmMsg_t *) pMsg);
   }
 }

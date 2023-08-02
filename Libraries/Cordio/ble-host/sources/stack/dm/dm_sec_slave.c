@@ -59,6 +59,8 @@ void DmSecPairRsp(dmConnId_t connId, uint8_t oob, uint8_t auth, uint8_t iKeyDist
     pMsg->iKeyDist = iKeyDist & SMP_KEY_DIST_MASK;
     pMsg->rKeyDist = rKeyDist & SMP_KEY_DIST_MASK;
 
+    APP_TRACE_INFO1("DmSecPairRsp evt=2(SMP_MSG_API_PAIR_RSP) auth=%d", auth);
+
     /* note we're sending this to SMP */
     SmpDmMsgSend((smpDmMsg_t *) pMsg);
   }
@@ -84,6 +86,8 @@ void DmSecSlaveReq(dmConnId_t connId, uint8_t auth)
     pMsg->hdr.event = SMP_MSG_API_SECURITY_REQ;
     pMsg->hdr.param = connId;
     pMsg->auth = auth;
+
+    APP_TRACE_INFO1("DmSecSlaveReq evt=5(SMP_MSG_API_SECURITY_REQ) auth=%d", auth);
 
     /* note we're sending this to SMP */
     SmpDmMsgSend((smpDmMsg_t *) pMsg);

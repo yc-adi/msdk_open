@@ -82,7 +82,7 @@
 #define SPI_SLAVE_RX    0
 
 /*! \brief UART TX buffer size */
-#define PLATFORM_UART_TERMINAL_BUFFER_SIZE 2048U
+#define PLATFORM_UART_TERMINAL_BUFFER_SIZE (1024U*3)
 
 /*! \brief SPI */
 #define PLATFORM_SPI_BUF_SIZE   (2)

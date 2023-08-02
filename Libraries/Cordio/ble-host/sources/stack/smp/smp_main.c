@@ -693,6 +693,7 @@ uint8_t smpGetScSecLevel(smpCcb_t *pCcb)
   {
     secLevel = DM_SEC_LEVEL_ENC;
   }
+  
   APP_TRACE_INFO2("smpGetScSecLevel auth=%d secLevel=%d", pCcb->auth, secLevel);
   return secLevel;
 }

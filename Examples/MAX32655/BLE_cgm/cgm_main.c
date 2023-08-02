@@ -119,7 +119,7 @@ static const attsCccSet_t cgmCccSet[CGM_CCC_IDX_MAX] =
   {WP_DAT_CH_CCC_HDL,     ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_NONE },  /* DATS_WP_DAT_CCC_IDX */
 
   {CGMS_MEAS_CH_CCC_HDL,  ATT_CLIENT_CFG_NOTIFY,    DM_SEC_LEVEL_ENC},    /* CGM_MEAS_CCC_IDX */
-  {CGMS_RACP_CH_CCC_HDL,  ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_NONE}    /* CGM_RACP_CCC_IDX */
+  {CGMS_RACP_CH_CCC_HDL,  ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}     /* CGM_RACP_CCC_IDX */
   //{CGMS_SOPS_CCCD_HDL,    ATT_CLIENT_CFG_INDICATE,  DM_SEC_LEVEL_ENC}     /* CGM_SOPS_CCC_IDX */
 };
 
@@ -148,9 +148,9 @@ static const appSlaveCfg_t cgmSlaveCfg = {
 
 /*! configurable parameters for security */
 static const appSecCfg_t cgmSecCfg = {
-    //DM_AUTH_BOND_FLAG | DM_AUTH_MITM_FLAG, // TODO: check this flag
-    DM_AUTH_BOND_FLAG | DM_AUTH_SC_FLAG, /*! auth: Authentication and bonding flags */
-    0, // DM_KEY_DIST_IRK, /*! iKeyDist: Initiator key distribution flags */
+    //DM_AUTH_BOND_FLAG | DM_AUTH_MITM_FLAG | DM_AUTH_SC_FLAG, /*! auth: Authentication and bonding flags */
+    DM_AUTH_BOND_FLAG | DM_AUTH_MITM_FLAG, /*! auth: Authentication and bonding flags */
+    DM_KEY_DIST_IRK, /*! iKeyDist: Initiator key distribution flags */
     DM_KEY_DIST_LTK | DM_KEY_DIST_IRK, /*! rKeyDist: Responder key distribution flags */
     //DM_KEY_DIST_LTK, // TODO: check the diff
     FALSE, /*! oob: TRUE if Out-of-band pairing data is present */
@@ -160,10 +160,20 @@ static const appSecCfg_t cgmSecCfg = {
 /*! TRUE if Out-of-band pairing data is to be sent */
 static const bool_t cgmSendOobData = FALSE;
 
-/*! SMP security parameter configuration */
+/*! SMP security parameter configuration 
+*
+*   I/O Capability Codes to be set for 
+*   Pairing Request (SMP_CMD_PAIR_REQ) packets and Pairing Response (SMP_CMD_PAIR_RSP) packets
+*   when the MITM flag is set in Configurable security parameters above.
+*       -SMP_IO_DISP_ONLY         : Display only. 
+*       -SMP_IO_DISP_YES_NO       : Display yes/no. 
+*       -SMP_IO_KEY_ONLY          : Keyboard only.
+*       -SMP_IO_NO_IN_NO_OUT      : No input, no output. 
+*       -SMP_IO_KEY_DISP          : Keyboard display. 
+*/
 static const smpCfg_t cgmSmpCfg = {
     500, /*! 'Repeated attempts' timeout in msec */
-    SMP_IO_NO_IN_NO_OUT, /*! I/O Capability */
+    SMP_IO_DISP_ONLY, /*! I/O Capability */
     7, /*! Minimum encryption key length */
     16, /*! Maximum encryption key length */
     1, /*! Attempts to trigger 'repeated attempts' timeout */
@@ -613,6 +623,8 @@ static void cgmSetup(dmEvt_t *pMsg)
 /*************************************************************************************************/
 static void cgmProcMsg(dmEvt_t *pMsg)
 {
+    APP_TRACE_INFO1("cgmProcMsg evt=%d", pMsg->hdr.event);
+
     uint8_t uiEvent = APP_UI_NONE;
 
     switch (pMsg->hdr.event) {

@@ -251,6 +251,7 @@ void appServerCsfWriteCback(dmConnId_t connId, uint8_t changeAwareState, uint8_t
 /*************************************************************************************************/
 void AppServerProcAttMsg(wsfMsgHdr_t *pMsg)
 {
+  APP_TRACE_INFO0("AppServerProcAttMsg");
   switch(pMsg->event)
   {
     case ATTS_DB_HASH_CALC_CMPL_IND:

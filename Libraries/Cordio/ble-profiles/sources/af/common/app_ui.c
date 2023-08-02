@@ -52,103 +52,103 @@ void AppUiAction(uint8_t event)
       break;
 
     case APP_UI_RESET_CMPL:
-      APP_TRACE_INFO0(">>> Reset complete <<<");
+      APP_TRACE_INFO0("   >>> Reset complete <<<");
       break;
 
     case APP_UI_ADV_START:
-      APP_TRACE_INFO0(">>> Advertising started <<<");
+      APP_TRACE_INFO0("   >>> Advertising started <<<");
       break;
 
     case APP_UI_ADV_STOP:
-      APP_TRACE_INFO0(">>> Advertising stopped <<<");
+      APP_TRACE_INFO0("   >>> Advertising stopped <<<");
       break;
 
     case APP_UI_SCAN_START:
-      APP_TRACE_INFO0(">>> Scanning started <<<");
+      APP_TRACE_INFO0("   >>> Scanning started <<<");
       break;
 
     case APP_UI_SCAN_STOP:
-      APP_TRACE_INFO0(">>> Scanning stopped <<<");
+      APP_TRACE_INFO0("   >>> Scanning stopped <<<");
       break;
 
     case APP_UI_SCAN_REPORT:
-      APP_TRACE_INFO0(">>> Scan data received from peer <<<");
+      APP_TRACE_INFO0("   >>> Scan data received from peer <<<");
       break;
 
     case APP_UI_CONN_OPEN:
-      APP_TRACE_INFO0(">>> Connection opened <<<");
+      APP_TRACE_INFO0("   >>> Connection opened <<<");
       break;
 
     case APP_UI_CONN_CLOSE:
-      APP_TRACE_INFO0(">>> Connection closed <<<");
+      APP_TRACE_INFO0("   >>> Connection closed <<<");
       break;
 
     case APP_UI_SEC_PAIR_CMPL:
-      APP_TRACE_INFO0(">>> Pairing completed successfully <<<");
+      APP_TRACE_INFO0("   >>> Pairing completed successfully <<<");
       break;
 
     case APP_UI_SEC_PAIR_FAIL:
-      APP_TRACE_INFO0(">>> Pairing failed <<<");
+      APP_TRACE_INFO0("   >>> Pairing failed <<<");
       break;
 
     case APP_UI_SEC_ENCRYPT:
-      APP_TRACE_INFO0(">>> Connection encrypted <<<");
+      APP_TRACE_INFO0("   >>> Connection encrypted <<<");
       break;
 
     case APP_UI_SEC_ENCRYPT_FAIL:
-      APP_TRACE_INFO0(">>> Encryption failed <<<");
+      APP_TRACE_INFO0("   >>> Encryption failed <<<");
       break;
 
     case APP_UI_PASSKEY_PROMPT:
-      APP_TRACE_INFO0(">>> Prompt user to enter passkey <<<");
+      APP_TRACE_INFO0("   >>> Prompt user to enter passkey <<<");
       break;
 
     case APP_UI_ALERT_CANCEL:
-      APP_TRACE_INFO0(">>> Cancel a low or high alert <<<");
+      APP_TRACE_INFO0("   >>> Cancel a low or high alert <<<");
       break;
 
     case APP_UI_ALERT_LOW:
-      APP_TRACE_INFO0(">>> Low alert <<<");
+      APP_TRACE_INFO0("   >>> Low alert <<<");
       break;
 
     case APP_UI_ALERT_HIGH:
-      APP_TRACE_INFO0(">>> High alert <<<");
+      APP_TRACE_INFO0("   >>> High alert <<<");
       break;
 
     case APP_UI_ADV_SET_START_IND:
-      APP_TRACE_INFO0(">>> Advertising sets started <<<");
+      APP_TRACE_INFO0("   >>> Advertising sets started <<<");
       break;
 
     case APP_UI_ADV_SET_STOP_IND:
-      APP_TRACE_INFO0(">>> Advertising sets stopped <<<");
+      APP_TRACE_INFO0("   >>> Advertising sets stopped <<<");
       break;
 
     case APP_UI_SCAN_REQ_RCVD_IND:
-      APP_TRACE_INFO0(">>> Scan request received <<<");
+      APP_TRACE_INFO0("   >>> Scan request received <<<");
       break;
 
     case APP_UI_EXT_SCAN_START_IND:
-      APP_TRACE_INFO0(">>> Extended scanning started <<<");
+      APP_TRACE_INFO0("   >>> Extended scanning started <<<");
       break;
 
     case APP_UI_EXT_SCAN_STOP_IND:
-      APP_TRACE_INFO0(">>> Extended scanning stopped <<<");
+      APP_TRACE_INFO0("   >>> Extended scanning stopped <<<");
       break;
 
     case APP_UI_PER_ADV_SET_START_IND:
-      APP_TRACE_INFO0(">>> Periodic advertising set started <<<");
+      APP_TRACE_INFO0("   >>> Periodic advertising set started <<<");
       break;
 
     case APP_UI_PER_ADV_SET_STOP_IND:
-      APP_TRACE_INFO0(">>> Periodic advertising set stopped <<<");
+      APP_TRACE_INFO0("   >>> Periodic advertising set stopped <<<");
       break;
 
     case APP_UI_PER_ADV_SYNC_EST_IND:
-      APP_TRACE_INFO0(">>> Periodic advertising sync established <<<");
+      APP_TRACE_INFO0("   >>> Periodic advertising sync established <<<");
       break;
 
     case APP_UI_PER_ADV_SYNC_LOST_IND:
-      APP_TRACE_INFO0(">>> Periodic advertising sync lost <<<");
+      APP_TRACE_INFO0("   >>> Periodic advertising sync lost <<<");
       break;
 
     default:
@@ -172,7 +172,7 @@ void AppUiAction(uint8_t event)
 /*************************************************************************************************/
 void AppUiDisplayPasskey(uint32_t passkey)
 {
-  APP_TRACE_INFO1(">>> Passkey: %d <<<", passkey);
+  APP_TRACE_INFO1("   >>> Passkey: %d <<<", passkey);
 
   if (appUiCbackTbl.actionCback)
   {

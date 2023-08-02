@@ -195,6 +195,8 @@ bool_t smpScProcPairing(smpCcb_t *pCcb, uint8_t *pOob, uint8_t *pDisplay)
   if ((pCcb->pairReq[SMP_AUTHREQ_POS] & SMP_AUTH_SC_FLAG) &&
       (pCcb->pairRsp[SMP_AUTHREQ_POS] & SMP_AUTH_SC_FLAG))
   {
+    APP_TRACE_INFO2("  LESC pCcb->pairReq/Rsp=8 (SMP_AUTH_SC_FLAG) ReqOOB=%d ResOOB=%d",
+      pCcb->pairReq[SMP_OOB_POS], pCcb->pairRsp[SMP_OOB_POS]);
     /* if one or both devices have OOB authentication data */
     if ((pCcb->pairReq[SMP_OOB_POS] == SMP_OOB_DATA_PRESENT) ||
         (pCcb->pairRsp[SMP_OOB_POS] == SMP_OOB_DATA_PRESENT))
@@ -206,6 +208,8 @@ bool_t smpScProcPairing(smpCcb_t *pCcb, uint8_t *pOob, uint8_t *pDisplay)
   /* legacy pairing */
   else
   {
+    APP_TRACE_INFO2("  legacy pairing ReqOOB=%d ResOOB=%d",
+      pCcb->pairReq[SMP_OOB_POS], pCcb->pairRsp[SMP_OOB_POS]);
     /* if both devices have OOB authentication data */
     if ((pCcb->pairReq[SMP_OOB_POS] == SMP_OOB_DATA_PRESENT) &&
         (pCcb->pairRsp[SMP_OOB_POS] == SMP_OOB_DATA_PRESENT))
@@ -220,6 +224,9 @@ bool_t smpScProcPairing(smpCcb_t *pCcb, uint8_t *pOob, uint8_t *pDisplay)
       ((pCcb->pairReq[SMP_AUTHREQ_POS] & SMP_AUTH_MITM_FLAG) ||
        (pCcb->pairRsp[SMP_AUTHREQ_POS] & SMP_AUTH_MITM_FLAG)))
   {
+    APP_TRACE_INFO2("  MITM req=0x%x rsp=0x%x", pCcb->pairReq[SMP_AUTHREQ_POS], pCcb->pairRsp[SMP_AUTHREQ_POS]);
+
+    APP_TRACE_INFO2("  io req=%d rsp=%d", pCcb->pairReq[SMP_IO_POS], pCcb->pairRsp[SMP_IO_POS]);
     /* check for compatible I/O settings */
     if ((pCcb->pairReq[SMP_IO_POS] != SMP_IO_NO_IN_NO_OUT) &&     /* initiator has i/o and */
         (pCcb->pairRsp[SMP_IO_POS] != SMP_IO_NO_IN_NO_OUT) &&     /* responder has i/o and */
@@ -252,9 +259,11 @@ bool_t smpScProcPairing(smpCcb_t *pCcb, uint8_t *pOob, uint8_t *pDisplay)
   if ((pCcb->pairReq[SMP_AUTHREQ_POS] & SMP_AUTH_SC_FLAG) &&
       (pCcb->pairRsp[SMP_AUTHREQ_POS] & SMP_AUTH_SC_FLAG))
   {
+    APP_TRACE_INFO0("  SMP_AUTH_SC_FLAG");
     if (smpCb.lescSupported == FALSE)
     {
       /* cancel pairing if LESC is not initialized by application */
+      APP_TRACE_INFO0("  cancel pairing since LESC is not initialized");
       hdr.param = pCcb->connId;
       hdr.status = SMP_ERR_AUTH_REQ;
       hdr.event = SMP_MSG_API_CANCEL_REQ;
@@ -315,6 +324,7 @@ bool_t smpScProcPairing(smpCcb_t *pCcb, uint8_t *pOob, uint8_t *pDisplay)
       memcpy(pCcb->pScCcb->pPrivateKey, DmSecGetEccKey()->privKey, SMP_PRIVATE_KEY_LEN);
 
       /* Send internal message indicating LESC was requested */
+      APP_TRACE_INFO0("  evt 17 (SMP_MSG_INT_LESC)");
       hdr.event = SMP_MSG_INT_LESC;
     }
     else
@@ -328,6 +338,7 @@ bool_t smpScProcPairing(smpCcb_t *pCcb, uint8_t *pOob, uint8_t *pDisplay)
   else if ((pSmpCfg->auth & SMP_AUTH_SC_FLAG) != 0)
   {
     /* cancel pairing if configuration requires LESC and we are falling back to legacy */
+    APP_TRACE_INFO1("  auth=%d cancel pairing if cfg requires LESC and we are falling back to legacy", pSmpCfg->auth);
     hdr.param = pCcb->connId;
     hdr.status = SMP_ERR_AUTH_REQ;
     hdr.event = SMP_MSG_API_CANCEL_REQ;
@@ -337,6 +348,7 @@ bool_t smpScProcPairing(smpCcb_t *pCcb, uint8_t *pOob, uint8_t *pDisplay)
   else
   {
     /* in case we're falling back to legacy after being paired with SC */
+    APP_TRACE_INFO0("  evt=18 (SMP_MSG_INT_LEGACY)");
     pCcb->pScCcb->lescEnabled = FALSE;
 
     /* Send internal message indicating legacy security was requested */
@@ -352,8 +364,9 @@ bool_t smpScProcPairing(smpCcb_t *pCcb, uint8_t *pOob, uint8_t *pDisplay)
   }
   else
   {
-    /* set auth flags with mitm bit cleared */
+    /* set auth flags with mitm bit cleared */    
     pCcb->auth = pCcb->pairReq[SMP_AUTHREQ_POS] & pCcb->pairRsp[SMP_AUTHREQ_POS] & ~SMP_AUTH_MITM_FLAG;
+    APP_TRACE_INFO1("  auth=%d set auth flags with mitm bit cleared", pCcb->auth);
   }
 
   /* if we ended up with 'just works' but the device configuration requires authentication */

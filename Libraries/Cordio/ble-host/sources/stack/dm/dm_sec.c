@@ -118,7 +118,7 @@ void dmSecHciHandler(hciEvt_t *pEvent)
           pCcb->usingLtk = FALSE;
 
           /* provide key to HCI */
-          APP_TRACE_INFO1("provide key to HCI, secLevel=0x%X", secLevel);
+          APP_TRACE_INFO1("provide key to HCI, secLevel=%d", secLevel);
           HciLeLtkReqReplCmd(pEvent->hdr.param, pKey);
           return;
         }
@@ -126,7 +126,7 @@ void dmSecHciHandler(hciEvt_t *pEvent)
       else if (SmpDmLescEnabled(pCcb->connId) == TRUE)
       {
         /* EDIV and Rand must be zero in LE Secure Connections */
-        APP_TRACE_INFO0("@!@ EDIV and Rand must be zero");
+        APP_TRACE_INFO0("EDIV and Rand must be zero");
         HciLeLtkReqNegReplCmd(pEvent->hdr.param);
         return;
       }
@@ -142,7 +142,7 @@ void dmSecHciHandler(hciEvt_t *pEvent)
       /* use the header from the encryptInd struct for efficiency */
       pEvent->hdr.param = pCcb->connId;
       pEvent->hdr.event = DM_SEC_LTK_REQ_IND;
-      APP_TRACE_INFO0("@!@ set evt DM_SEC_LTK_REQ_IND");
+      APP_TRACE_INFO0("set evt DM_SEC_LTK_REQ_IND");
       (*dmCb.cback)((dmEvt_t *) pEvent);
     }
     else if (pEvent->hdr.event == HCI_ENC_KEY_REFRESH_CMPL_CBACK_EVT ||
@@ -161,12 +161,12 @@ void dmSecHciHandler(hciEvt_t *pEvent)
         pCcb->secLevel = pCcb->tmpSecLevel;
 
         /* set LTK flag */
-        APP_TRACE_INFO0("@!@ set LTK flag");
+        APP_TRACE_INFO0("set LTK flag");
         encryptInd.usingLtk = pCcb->usingLtk;
       }
       else
       {
-        APP_TRACE_INFO0("@!@ DM_SEC_ENCRYPT_FAIL_IND");
+        APP_TRACE_INFO0("DM_SEC_ENCRYPT_FAIL_IND");
         encryptInd.hdr.event = DM_SEC_ENCRYPT_FAIL_IND;
       }
 
@@ -321,6 +321,8 @@ void DmSecAuthRsp(dmConnId_t connId, uint8_t authDataLen, uint8_t *pAuthData)
     {
       memcpy(pMsg->authData, pAuthData, authDataLen);
     }
+
+    APP_TRACE_INFO1("DmSecAuthRsp evt=4(SMP_MSG_API_AUTH_RSP) authDataLen=%d", authDataLen);
 
     /* note we're sending this to SMP */
     SmpDmMsgSend((smpDmMsg_t *) pMsg);

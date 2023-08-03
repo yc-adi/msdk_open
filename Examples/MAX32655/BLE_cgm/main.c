@@ -725,8 +725,8 @@ int main(void)
 #if  DEEP_SLEEP == 1
             if (conn_opened)
             {
-                DeepSleep();
-                //WsfTimerSleep();
+                //DeepSleep();
+                WsfTimerSleep();
             }
             else
             {

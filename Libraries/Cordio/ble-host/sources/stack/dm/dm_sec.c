@@ -181,6 +181,15 @@ void dmSecHciHandler(hciEvt_t *pEvent)
   }
 }
 
+char *GetDmSecEvtStr(uint8_t evt)
+{
+  switch(evt) {
+    case 40: return "ENCRYPT_REQ";
+    case 41: return "LTK_RSP";
+    default: return " ";
+  }
+}
+
 /*************************************************************************************************/
 /*!
  *  \brief  DM dev event handler.
@@ -194,7 +203,7 @@ void dmSecMsgHandler(dmSecMsg_t *pMsg)
 {
   dmConnCcb_t *pCcb;
 
-  DM_TRACE_INFO1("dmSecMsgHandler, evt %d", pMsg->hdr.event);
+  DM_TRACE_INFO2("dmSecMsgHandler, evt %d %s", pMsg->hdr.event, GetDmSecEvtStr(pMsg->hdr.event));
 
   /* look up ccb */
   if ((pCcb = dmConnCcbById((dmConnId_t) pMsg->hdr.param)) != NULL)

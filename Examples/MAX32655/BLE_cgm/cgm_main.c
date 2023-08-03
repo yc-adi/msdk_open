@@ -389,7 +389,6 @@ static void datsAttCback(attEvt_t *pEvt)
  *  \return  None.
  */
 /*************************************************************************************************/
-#if DEEP_SLEEP == 0
 static void trimStart(void)
 {
     int err;
@@ -401,7 +400,6 @@ static void trimStart(void)
         APP_TRACE_INFO1("Error starting 32kHz crystal trim %d", err);
     }
 }
-#endif
 
 /*************************************************************************************************/
 /*!
@@ -625,10 +623,6 @@ static void cgmSetup(dmEvt_t *pMsg)
 /*************************************************************************************************/
 static void cgmProcMsg(dmEvt_t *pMsg)
 {
-    appDbRec_t *pRec;
-
-    APP_TRACE_INFO1("cgmProcMsg evt=%d", pMsg->hdr.event);
-
     uint8_t uiEvent = APP_UI_NONE;
 
     switch (pMsg->hdr.event) {
@@ -641,8 +635,6 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_RESET_CMPL_IND:
-        APP_TRACE_INFO1("DM_RESET_CMPL_IND %d", pMsg->hdr.event);
-        
         AttsCalculateDbHash();
         DmSecGenerateEccKeyReq();
         AppDbNvmReadAll();
@@ -655,21 +647,18 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_ADV_START_IND:
-#if DEEP_SLEEP == 2 // remove me !!!
         WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
-#endif
+
         uiEvent = APP_UI_ADV_START;
         break;
 
     case DM_ADV_STOP_IND:
-#if DEEP_SLEEP == 0
         WsfTimerStop(&trimTimer);
-#endif
+
         uiEvent = APP_UI_ADV_STOP;
         break;
 
     case DM_CONN_OPEN_IND:
-        APP_TRACE_INFO0("DM_CONN_OPEN_IND");
         conn_opened = 1;
         CgmpsProcMsg(&pMsg->hdr);
 
@@ -677,9 +666,8 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_CONN_CLOSE_IND:
-#if DEEP_SLEEP == 0
         WsfTimerStop(&trimTimer);
-#endif
+
         APP_TRACE_INFO2("Connection closed status 0x%x, reason 0x%x", pMsg->connClose.status,
                         pMsg->connClose.reason);
 
@@ -710,15 +698,6 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         APP_TRACE_INFO0("DM_CONN_CLOSE_IND");
 
         uiEvent = APP_UI_CONN_CLOSE;
-
-        // without this, after disconnect a passkey connection, it will always
-        // trigger "pairing failed" in the next connection
-        pRec = appDb.rec;
-        while (pRec < &appDb.rec[APP_DB_NUM_RECS])
-        {
-            pRec->inUse == false;
-            pRec++;
-        }
 
         break;
 
@@ -778,18 +757,9 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         APP_TRACE_INFO1("Clear resolving list status 0x%02x", pMsg->hdr.status);
         break;
 
-#if (BT_VER > 8)
-    case DM_PHY_UPDATE_IND:
-        APP_TRACE_INFO2("DM_PHY_UPDATE_IND - RX: %d, TX: %d", pMsg->phyUpdate.rxPhy,
-                        pMsg->phyUpdate.txPhy);
-        break;
-#endif /* BT_VER */
-
     case TRIM_TIMER_EVT:
-#if DEEP_SLEEP == 0
         trimStart();
         WsfTimerStartMs(&trimTimer, TRIM_TIMER_PERIOD_MS);
-#endif
         break;
 
     case CUST_SPEC_TMR_EVT:
@@ -1047,6 +1017,35 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
     }
 }
 
+char *GetCgmEvtStr(uint8_t evt)
+{
+    switch(evt) {
+        case 20: return "CCC_STATE";
+        case 21: return "DB_HASH_CALC_CMPL";    // ATTS_DB_HASH_CALC_CMPL_IND
+        case 22: return "MTU_UPDATE";
+        case 32: return "RESET_CMPL";           // DM_RESET_CMPL_IND
+        case 33: return "ADV_START";            // DM_ADV_START_IND
+        case 39: return "CONN_OPEN";
+        case 40: return "CONN_CLOSE";           // DM_CONN_CLOSE_IND
+        case 41: return "CONN_UPDATE";
+        case 42: return "PAIR_CMPL";            // DM_SEC_PAIR_CMPL_IND
+        case 44: return "SEC_ENCRYPT";
+        case 46: return "AUTH_REQ";
+        case 47: return "SEC_KEY";              // DM_SEC_KEY_IND
+        case 48: return "LTK_REQ";
+        case 49: return "SEC_PAIR";
+        case 58: return "ADD_DEV_TO_RES_LIST";  // DM_PRIV_ADD_DEV_TO_RES_LIST_IND
+        case 63: return "ADDR_RES_ENABLE";      // DM_PRIV_SET_ADDR_RES_ENABLE_IND
+        case 65: return "DATA_LEN_CHANGE";
+        case 70: return "PHY_UPDATE";
+        case 87: return "REMOTE_FEATURES";
+        case 153: return "TRIM_TIMER";          // TRIM_TIMER_EVT
+        case 154: return "CUST_SPEC_TMR";       // CUST_SPEC_TMR_EVT
+        case 155: return "CGM_MEAS_TMR";        // CGM_MEAS_TMR_EVT
+        default: return " ";
+    }
+}
+
 /*************************************************************************************************/
 /*!
  *  \brief  WSF event handler for application. 
@@ -1061,7 +1060,7 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
 void CgmHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
-        APP_TRACE_INFO1("CGM got evt %d", pMsg->event);
+        APP_TRACE_INFO2("\nCGM got evt %d (%s)", pMsg->event, GetCgmEvtStr(pMsg->event));
 
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {

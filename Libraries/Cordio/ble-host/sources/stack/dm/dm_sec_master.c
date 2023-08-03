@@ -25,6 +25,7 @@
 #include <string.h>
 #include "wsf_types.h"
 #include "wsf_msg.h"
+#include "wsf_trace.h"
 #include "util/calc128.h"
 #include "smp_api.h"
 #include "dm_api.h"

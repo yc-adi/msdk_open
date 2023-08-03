@@ -605,7 +605,6 @@ void CgmpsProcMsg(wsfMsgHdr_t *pMsg)
   switch(pMsg->event)
   {
     case DM_CONN_OPEN_IND:
-      APP_TRACE_INFO1("CgmpsProcMsg DM_CONN_OPEN_IND (%d)", DM_CONN_OPEN_IND);
       cgmpsConnOpen((dmEvt_t *) pMsg);
       break;
 

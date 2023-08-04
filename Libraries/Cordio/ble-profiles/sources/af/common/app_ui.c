@@ -21,11 +21,11 @@
  *  limitations under the License.
  */
 /*************************************************************************************************/
-
 #include "wsf_types.h"
 #include "wsf_os.h"
 #include "wsf_trace.h"
 #include "app_ui.h"
+#include "pal_uart.h"
 
 /**************************************************************************************************
   Local Variables
@@ -172,6 +172,12 @@ void AppUiAction(uint8_t event)
 /*************************************************************************************************/
 void AppUiDisplayPasskey(uint32_t passkey)
 {
+  char strPasskey[20];
+  uint8_t len;
+  sprintf(strPasskey, "%d\n", passkey);
+  len = strlen(strPasskey);
+  PalUartWriteData(PAL_UART_ID_TERMINAL, strPasskey, len);
+  
   APP_TRACE_INFO1("   >>> Passkey: %d <<<", passkey);
 
   if (appUiCbackTbl.actionCback)

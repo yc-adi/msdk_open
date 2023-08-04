@@ -53,11 +53,7 @@ void dmAdvCbInit(uint8_t advHandle)
   dmAdvCb.advType[advHandle] = DM_ADV_NONE;
   dmAdvCb.intervalMin[advHandle] = DM_GAP_ADV_SLOW_INT_MIN;
   dmAdvCb.intervalMax[advHandle] = DM_GAP_ADV_SLOW_INT_MAX;
-#if DEEP_SLEEP == 1
-  dmAdvCb.channelMap[advHandle] = DM_ADV_CHAN_ALL; // sometimes need to try more times to connect
-#else
-  dmAdvCb.channelMap[advHandle] = DM_ADV_CHAN_ALL;  // remove me !!!
-#endif
+  dmAdvCb.channelMap[advHandle] = DM_ADV_CHAN_37; // TODO: single channel for standby mode
   dmCb.advFiltPolicy[advHandle] = HCI_ADV_FILT_NONE;
   dmAdvCb.advState[advHandle] = DM_ADV_STATE_IDLE;
 }

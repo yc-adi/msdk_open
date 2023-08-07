@@ -237,6 +237,11 @@ static const uint8_t cgmAdvDataDisc[] = {
   //DM_FLAG_LE_LIMITED_DISC | DM_FLAG_LE_BREDR_NOT_SUP, /*! flags */
   DM_FLAG_LE_GENERAL_DISC | DM_FLAG_LE_BREDR_NOT_SUP, /*! flags */ // Since adv durations are all 0s.
 
+  /*! manufacturer specific data */
+  //3,                                      /*! length */
+  //DM_ADV_TYPE_MANUFACTURER,               /*! AD type */
+  //UINT16_TO_BYTES(HCI_ID_ANALOG),         /*! company ID */
+
   /*! service UUID list */
   5,                                      /*! length */
   DM_ADV_TYPE_16_UUID,                    /*! AD type */
@@ -755,6 +760,10 @@ static void cgmProcMsg(dmEvt_t *pMsg)
 
     case DM_PRIV_CLEAR_RES_LIST_IND:
         APP_TRACE_INFO1("Clear resolving list status 0x%02x", pMsg->hdr.status);
+        break;
+
+    case DM_PHY_UPDATE_IND:
+        APP_TRACE_INFO2("DM_PHY_UPDATE_IND - RX: %d, TX: %d", pMsg->phyUpdate.rxPhy, pMsg->phyUpdate.txPhy);
         break;
 
     case TRIM_TIMER_EVT:

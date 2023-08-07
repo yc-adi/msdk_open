@@ -119,6 +119,15 @@ static const uint8_t dmConnStateTbl[DM_CONN_SM_NUM_STATES][DM_CONN_NUM_MSGS][DM_
 /*! State machine action set array */
 dmConnAct_t *dmConnActSet[DM_CONN_NUM_ACT_SETS];
 
+char *GetDmConnEvtStr(uint8_t evt)
+{
+  switch(evt) {
+    case 29: return "HCI_DISCONNECT_CMPL";    // DM_CONN_MSG_HCI_DISCONNECT_CMPL
+    default: return " ";
+  }
+}
+
+
 /*************************************************************************************************/
 /*!
  *  \brief  Execute the DM connection state machine.
@@ -136,7 +145,7 @@ void dmConnSmExecute(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
   uint8_t           event;
   uint8_t           old_st = pCcb->state;
 
-  DM_TRACE_INFO2("dmConnSmExecute evt=%d st=%d", pMsg->hdr.event, old_st);  // search "DM conn event handler messages" and "DM_CONN_SM_"
+  DM_TRACE_INFO3("dmConnSmExecute evt=%d %s st=%d", pMsg->hdr.event, GetDmConnEvtStr(pMsg->hdr.event), old_st);  // search "DM conn event handler messages" and "DM_CONN_SM_"
 
   /* get the event */
   event = DM_MSG_MASK(pMsg->hdr.event);

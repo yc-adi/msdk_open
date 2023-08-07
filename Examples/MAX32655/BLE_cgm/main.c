@@ -79,6 +79,7 @@
 /**************************************************************************************************
   Macros
 **************************************************************************************************/
+#define USE_RTC         1
 #define SPI_SLAVE_RX    0
 
 /*! \brief UART TX buffer size */
@@ -565,7 +566,9 @@ int main(void)
 
     uint32_t memUsed;
 
+#if USE_RTC == 1
     InitRtc();
+#endif
 
 #if SPI_SLAVE_RX == 1
     int spiInitRet;
@@ -723,10 +726,10 @@ int main(void)
         if (!WsfOsActive())
         {
 #if  DEEP_SLEEP == 1
-            if (conn_opened)
+            if (conn_opened == 1|| conn_opened == 2)
             {
-                //DeepSleep();
-                WsfTimerSleep();
+                DeepSleep();
+                //WsfTimerSleep();
             }
             else
             {

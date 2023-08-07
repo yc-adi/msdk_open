@@ -118,6 +118,8 @@ static void hciEvtProcessIntEvt(hciEvt_t *pEvt)
 {
   pEvt->hdr.event &= ~HCI_EVT_INT_TYPE;
 
+  APP_TRACE_INFO1("hciEvtProcessIntEvt evt=%d", pEvt->hdr.event);
+
   switch (pEvt->hdr.event)
   {
     case HCI_LE_RAND_CMD_CMPL_CBACK_EVT:
@@ -174,6 +176,8 @@ void hciEvtProcessMsg(uint8_t *pEvt)
   LlEvt_t *pMsg = (LlEvt_t *)pEvt;
 
   uint8_t event = pMsg->hdr.event;
+
+  APP_TRACE_INFO2("hciEvtProcessMsg evt=%d %s", event, " ");
 
   /* if event generated internally by HCI APIs */
   if (event & HCI_EVT_INT_TYPE)

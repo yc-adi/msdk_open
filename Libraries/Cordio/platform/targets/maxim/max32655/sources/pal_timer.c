@@ -253,7 +253,7 @@ PalTimerState_t PalTimerGetState(void)
 /*************************************************************************************************/
 void PalTimerStart(uint32_t expUsec)
 {
-  //APP_TRACE_INFO1("PalTimerStart %d", expUsec); // TODO: important to be here for connection with standby
+  APP_TRACE_INFO1("PalTimerStart %d", expUsec); // TODO: important to be here for connection with standby
   PAL_TIMER_CHECK(palTimerCb.state == PAL_TIMER_STATE_READY);
   PAL_TIMER_CHECK(expUsec != 0);
   uint64_t compareValue;

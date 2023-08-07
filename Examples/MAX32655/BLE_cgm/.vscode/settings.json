@@ -92,7 +92,8 @@
         "${config:board}",
         "TARGET=${config:target}",
         "TARGET_REV=0x4131",
-        "__GNUC__"
+        "__GNUC__",
+        "HCI_TR_EXACTLE=1"
     ],
     "files.associations": {
         "spixf_reva.h": "c",

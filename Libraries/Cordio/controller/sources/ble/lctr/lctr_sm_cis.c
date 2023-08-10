@@ -52,6 +52,7 @@
 /*************************************************************************************************/
 static uint8_t lctrRemapEvent(lctrCisCtx_t *pCisCtx, uint8_t event)
 {
+  APP_TRACE_INFO1("lctrRemapEvent", event);
   switch (event)
   {
     /*** Peer messages ***/

@@ -21,6 +21,7 @@
 #include "pal_led.h"
 #include "pal_sys.h"
 #include "pal_bb.h"
+#include "pal_uart.h"
 #include "tmr.h"
 #include "lp.h"
 #include "gcr_regs.h"
@@ -67,6 +68,7 @@
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t conn_opened;
 
 /*! \brief      Scheduler timer driver control block. */
 static struct {
@@ -237,7 +239,7 @@ void PalTimerExecCallback(void)
  *  \return     state.
  */
 /*************************************************************************************************/
-PalTimerState_t PalTimerGetState(void)
+inline PalTimerState_t PalTimerGetState(void)
 {
   return palTimerCb.state;
 }
@@ -253,7 +255,7 @@ PalTimerState_t PalTimerGetState(void)
 /*************************************************************************************************/
 void PalTimerStart(uint32_t expUsec)
 {
-  APP_TRACE_INFO1("PalTimerStart %d", expUsec); // TODO: important to be here for connection with standby
+  //APP_TRACE_INFO1("PalTimerStart %d", expUsec); // TODO: important to be here for connection with standby
   PAL_TIMER_CHECK(palTimerCb.state == PAL_TIMER_STATE_READY);
   PAL_TIMER_CHECK(expUsec != 0);
   uint64_t compareValue;

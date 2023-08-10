@@ -202,7 +202,7 @@ void LctrMsgDispatcher(lctrMsgHdr_t *pMsg)
 
     if (lctrMsgDispTbl[dispId])
     {
-      lctrMsgDispTbl[dispId](pMsg);
+      lctrMsgDispTbl[dispId](pMsg);  // 0: lctrSlvProcessConnInd
     }
   }
   else

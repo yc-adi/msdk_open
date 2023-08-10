@@ -324,7 +324,7 @@ void dmAdvHciHandler(hciEvt_t *pEvent)
   {
     uint8_t cbackEvent = 0;
 
-    DM_TRACE_INFO1("HCI_LE_ADV_ENABLE_CMD_CMPL_CBACK_EVT: state: %d", dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT]);
+    DM_TRACE_INFO1("ADV_ENABLE_CMD_CMPL_CBACK st=%d", dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT]);
 
     switch (dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT])
     {

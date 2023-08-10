@@ -633,13 +633,13 @@ void lctrLlcpStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
       break;
     case LCTR_CONN_MSG_RX_LLCP:
       /* Mismatch between parser and available SM. */
-      LL_TRACE_WARN2("Unhandled LLCP packet handle=%u, opcode=%u", LCTR_GET_CONN_HANDLE(pCtx), lctrDataPdu.opcode);
+      APP_TRACE_WARN2("Unhandled LLCP packet handle=%u, opcode=%u", LCTR_GET_CONN_HANDLE(pCtx), lctrDataPdu.opcode);
       break;
     case LCTR_CONN_LLCP_START_PENDING:
       /* No action required. */
       break;
     default:
-      LL_TRACE_WARN2("Unhandled LLCP SM event, handle=%u, event=%u", LCTR_GET_CONN_HANDLE(pCtx), event);
+      APP_TRACE_INFO2("Unhandled LLCP SM event, handle=%u, event=%u", LCTR_GET_CONN_HANDLE(pCtx), event);
       break;
   }
 }
@@ -654,6 +654,7 @@ void lctrLlcpStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
 /*************************************************************************************************/
 void lctrSlvLlcpExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 {
+  APP_TRACE_INFO0("lctrSlvLlcpExecuteSm");
   /* Override state machine */
   switch (event)
   {

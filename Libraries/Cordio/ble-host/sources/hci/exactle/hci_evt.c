@@ -162,6 +162,25 @@ static void hciEvtProcessIntEvt(hciEvt_t *pEvt)
   }
 }
 
+char *GetHciEvtStr(uint8_t evt)
+{
+  switch(evt)
+  {
+    case 1: return "RST"; // LL_RESET_CNF
+    case 3: return "ADV_EN"; // LL_ADV_ENABLE_CNF
+    case 5: return "CONN";   // LL_CONN_IND
+    case 6: return "DISCONN";   // LL_DISCONNECT_IND
+    case 7: return "CREATE_CONN_CANCEL";  // LL_CREATE_CONN_CANCEL_CNF
+    case 10: return "RD_FEAT";  // LL_READ_REMOTE_FEAT_CNF
+    case 18: return "DATA_LEN_CHG";   // LL_DATA_LEN_CHANGE_IND
+    case 19: return "RD PUBKEY";  // LL_READ_LOCAL_P256_PUB_KEY_CMPL_IND
+    case 27: return "ENCRYPT_CMD_CMPL"; // HCI_LE_ENCRYPT_CMD_CMPL_CBACK_EVT
+    case 28: return "RAND CMD CMPL"; // HCI_LE_RAND_CMD_CMPL_CBACK_EVT
+    case 33: return "CH_SEL_ALGO";   // LL_CH_SEL_ALGO_IND
+    default: return " ";
+  }
+}
+
 /*************************************************************************************************/
 /*!
  *  \brief  Process received HCI events.
@@ -177,14 +196,14 @@ void hciEvtProcessMsg(uint8_t *pEvt)
 
   uint8_t event = pMsg->hdr.event;
 
-  APP_TRACE_INFO2("hciEvtProcessMsg evt=%d %s", event, " ");
-
   /* if event generated internally by HCI APIs */
   if (event & HCI_EVT_INT_TYPE)
   {
     hciEvtProcessIntEvt((hciEvt_t *)pMsg);
     return;
   }
+
+  APP_TRACE_INFO2("hciEvtProcessMsg evt=%d %s", event, GetHciEvtStr(event));
 
   /* convert hci event code to internal event code and perform special handling */
   switch (event)

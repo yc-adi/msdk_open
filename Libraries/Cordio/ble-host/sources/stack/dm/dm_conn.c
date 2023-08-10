@@ -129,6 +129,8 @@ static void dmConn2ActReadRemoteFeaturesCmpl(dmConnCcb_t *pCcb, hciEvt_t *pEvent
 static void dmConn2ActReadRemoteVerInfoCmpl(dmConnCcb_t *pCcb, hciEvt_t *pEvent);
 static void dmConn2ActReqPeerSca(dmConnCcb_t *pCcb, hciEvt_t *pEvent);
 
+extern char *GetDmEvtStr(uint8_t evt);
+
 /*************************************************************************************************/
 /*!
  *  \brief  Return the CCB with particular state conditions.
@@ -610,7 +612,7 @@ void dmConnUpdExecute(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
   dmConnAct_t *actSet;
   uint8_t     action;
 
-  DM_TRACE_INFO2("dmConnUpdExecute event=%d state=%d", pMsg->hdr.event, pCcb->state);
+  DM_TRACE_INFO3("dmConnUpdExecute evt=%d %s st=%d", pMsg->hdr.event, GetDmEvtStr(pMsg->hdr.event), pCcb->state);
 
   /* get action */
   action = dmConnUpdActTbl[DM_MSG_MASK(pMsg->hdr.event)];
@@ -1260,6 +1262,7 @@ void DmConnUpdate(dmConnId_t connId, hciConnSpec_t *pConnSpec)
     pMsg->hdr.param = connId;
     memcpy(&pMsg->connSpec, pConnSpec, sizeof(hciConnSpec_t));
 
+    APP_TRACE_INFO0("DmConnUpdate");
     WsfMsgSend(dmCb.handlerId, pMsg);
   }
 }

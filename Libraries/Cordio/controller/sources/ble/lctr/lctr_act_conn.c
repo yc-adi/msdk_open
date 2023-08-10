@@ -563,7 +563,7 @@ void lctrNotifyHostDisconnectInd(lctrConnCtx_t *pCtx)
       evt.reason = LL_ERROR_CODE_CONN_TERM_BY_LOCAL_HOST;
     }
 
-    LL_TRACE_INFO2("### LlEvent ###  LL_DISCONNECT_IND, handle=%u, status=LL_SUCCESS, reason=%u", handle, pCtx->termReason);
+    APP_TRACE_INFO1("### LlEvent ###  LL_DISCONNECT_IND, lctrNotifyHostDisconnectInd reason=%u", pCtx->termReason);
 
     LmgrSendEvent((LlEvt_t *)&evt);
   }

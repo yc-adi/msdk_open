@@ -107,9 +107,17 @@
 #define SECS_PER_HR (60 * SECS_PER_MIN)
 #define SECS_PER_DAY (24 * SECS_PER_HR)
 
+/******************
+ * DEBUG USE
+*******************/
+extern uint32_t u32DbgBuf[];
+extern uint32_t u32DbgBufNdx;
+extern uint8_t  u8DbgSt;
+
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern wsfOs_t wsfOs;
 
 /*! \brief  Pool runtime configuration. */
 static wsfBufPoolDesc_t mainPoolDesc[] = { { 16, 8 }, { 32, 4 }, { 192, 8 }, { 256, 16 } };
@@ -129,7 +137,7 @@ volatile int wutTrimComplete;
 uint32_t gNextJobTimeInUs = 0;
 
 #define MAX_WUT_TICKS (32768) /* Maximum deep sleep time, units of 32 kHz ticks */
-#define MIN_WUT_TICKS 100 /* Minimum deep sleep time, units of 32 kHz ticks */
+#define MIN_WUT_TICKS 100 /* Minimum deep sleep time, units of 32 kHz ticks (1/32768*100=3 ms) */
 #define WAKEUP_US 700 /* Deep sleep recovery time, units of us */
 
 #define WAKE_UP_TIME_IN_US              (750)  /// the time after wake up to backto normal operation
@@ -157,6 +165,7 @@ typedef void SDMASleepState_t;
 static volatile bool_t bHaveWUTEvent;
 
 extern uint8_t conn_opened;
+extern uint32_t palSysBusyCount;
 
 #endif  // DEEP_SLEEP
 
@@ -209,7 +218,7 @@ void printTime(void)
 
     subsec += sec;
 
-    APP_TRACE_INFO4("Uptime: DAY %d, %02d:%02d:%02d\n", day, hr, min, (uint32_t)subsec);
+    printf("Uptime: DAY %d, %02d:%02d:%02d\n", day, hr, min, (uint32_t)subsec);
 }
 
 void InitRtc(void)
@@ -230,8 +239,6 @@ void InitRtc(void)
 
     printf("RTC started\n");
     MXC_Delay(10);
-    
-    printTime();
 }
 
 void SPI_IRQHandler(void)
@@ -273,13 +280,23 @@ int DeepSleep(void)
     bool_t schTimerActive;
 
     /* If PAL system is busy, no need to sleep. */
-    if (PalSysIsBusy())
+    if (palSysBusyCount > 0)    // chciTrWrite
     {
+        if (conn_opened == 8) {
+            if (u32DbgBufNdx < 600) {
+                u32DbgBuf[u32DbgBufNdx++] = 11;
+            }
+        }
         return 1;
     }
 
-    if (!wsfOsReadyToSleep())
+    if (wsfOs.task.taskEventMask != 0)
     {
+        if (conn_opened == 8) {
+            if (u32DbgBufNdx < 600) {
+                u32DbgBuf[u32DbgBufNdx++] = 22;
+            }
+        }
         return 2;
     }
 
@@ -304,6 +321,11 @@ int DeepSleep(void)
 
     /* Check to see if we meet the minimum requirements for deep sleep */
     if (idleInWutCnt < (MIN_WUT_TICKS + WAKEUP_US)) {
+        if (conn_opened == 8) {
+            if (u32DbgBufNdx < 600) {
+                u32DbgBuf[u32DbgBufNdx++] = 44;
+            }
+        }
         return 4;
     }
 
@@ -321,16 +343,28 @@ int DeepSleep(void)
     else
     {
         schTimerActive = FALSE;
-    }
 
-    if (!schTimerActive) {
         uint32_t ts;
-        if (PalBbGetTimestamp(&ts)) {
-            /*Determine if PalBb is active, return if we get a valid time stamp indicating 
+        if (PalBbGetTimestamp(&ts))
+        {
+            /* Determine if PalBb is active, return if we get a valid time stamp indicating 
              * that the scheduler is waiting for a PalBb event */
+            if (conn_opened == 8) {
+                if (u32DbgBufNdx < 600) {
+                    u32DbgBuf[u32DbgBufNdx++] = 55;
+                }
+            }
             goto EXIT_SLEEP_FUNC;
         }
     }
+    
+    /**
+     * There are only two situations:
+     *  (1) scheduler is busy
+     *  (2) scheduler is idle and PalBb is inactive
+     */
+
+    /// start to prepare deep sleep
 
     /* Disable SysTick */
     SysTick->CTRL &= ~(SysTick_CTRL_ENABLE_Msk);
@@ -343,7 +377,7 @@ int DeepSleep(void)
     /* Snapshot the current WUT value with the PalBb clock */
     MXC_WUT_Store(MXC_WUT);
     preCaptureInWutCnt = MXC_WUT_GetCount(MXC_WUT);
-    if (schTimerActive) 
+    if (schTimerActive) // situation (1)
     {
         schUsec = PalTimerGetExpTime();  // old way: bool_t SchBleGetNextDueTime(uint32_t *pDueTime)
 
@@ -361,7 +395,7 @@ int DeepSleep(void)
                             (uint64_t)32768 / (uint64_t)BB_CLK_RATE_HZ;
         }
     } 
-    else
+    else    // situation (2)
     {
         schUsec = 0;
         bleSleepTicks = 0;
@@ -382,8 +416,40 @@ int DeepSleep(void)
         dsInWutCnt = MAX_WUT_TICKS;
     }
 
+#if 0
     /* Only enter deep sleep if we have enough time */
+    if (conn_opened) {
+        if (u32DbgBufNdx < 600 - 6) {
+            u32DbgBuf[u32DbgBufNdx++] = 66;
+            u32DbgBuf[u32DbgBufNdx++] = idleInWutCnt;
+            u32DbgBuf[u32DbgBufNdx++] = wsfTicksToNextExpiration;
+            u32DbgBuf[u32DbgBufNdx++] = schUsec;
+            u32DbgBuf[u32DbgBufNdx++] = bleSleepTicks;
+            //u32DbgBuf[u32DbgBufNdx++] = dsInWutCnt;
+        }
+    }
+#endif
+
     if (dsInWutCnt >= MIN_WUT_TICKS) {
+
+        /// debug
+        #if 0
+        if (conn_opened == 8 && u32DbgBufNdx < 600)
+        {
+            u8DbgSt++;
+            //u8DbgSt = u8DbgSt % 100;
+            u32DbgBuf[u32DbgBufNdx++] = 66;
+            //u32DbgBuf[u32DbgBufNdx++] = u8DbgSt;
+            u32DbgBuf[u32DbgBufNdx++] = sec;
+            u32DbgBuf[u32DbgBufNdx++] = subsec;
+            u32DbgBuf[u32DbgBufNdx++] = idleInWutCnt;
+            u32DbgBuf[u32DbgBufNdx++] = wsfTicksToNextExpiration;
+            u32DbgBuf[u32DbgBufNdx++] = schUsec;
+            u32DbgBuf[u32DbgBufNdx++] = bleSleepTicks;
+            u32DbgBuf[u32DbgBufNdx++] = dsInWutCnt;
+        }
+        #endif
+
         /* Arm the WUT interrupt */
         MXC_WUT->cmp = preCaptureInWutCnt + dsInWutCnt;
 
@@ -723,18 +789,10 @@ int main(void)
 
         wsfOsDispatcher();
 
-        if (!WsfOsActive())
+        if (wsfOs.numFunc == 0 || !WsfOsActive())
         {
 #if  DEEP_SLEEP == 1
-            if (conn_opened == 1|| conn_opened == 2)
-            {
-                DeepSleep();
-                //WsfTimerSleep();
-            }
-            else
-            {
-                DeepSleep();
-            }
+            DeepSleep();
 #else
             WsfTimerSleep();
 #endif

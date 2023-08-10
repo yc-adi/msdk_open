@@ -106,7 +106,7 @@ void lctrNotifyHostCisTerm(lctrCisCtx_t *pCisCtx)
       .reason         = pCisCtx->reason
   };
 
-  LL_TRACE_INFO2("### LlEvent ###  LL_DISCONNECT_IND, handle=%u, status=LL_SUCCESS, reason=%u", pCisCtx->cisHandle, pCisCtx->reason);
+  APP_TRACE_INFO2("### LlEvent ###  LL_DISCONNECT_IND, handle=%u, status=LL_SUCCESS, reason=%u", pCisCtx->cisHandle, pCisCtx->reason);
 
   LmgrSendEvent((LlEvt_t *)&evt);
 }

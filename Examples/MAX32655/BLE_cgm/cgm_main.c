@@ -52,6 +52,7 @@
 #include "wut.h"
 #include "trimsir_regs.h"
 #include "pal_btn.h"
+#include "pal_uart.h"
 #include "tmr.h"
 #include "wsf_efs.h"
 #include "svc_ch.h"
@@ -101,6 +102,49 @@
 #define OTA_INTERNAL 0
 #endif
 
+/******************
+ * DEBUG USE
+*******************/
+uint32_t u32DbgBuf[1024];
+uint32_t u32DbgBufNdx = 0;
+uint8_t  u8DbgSt = 0;
+
+void print_dbg_buf(void)
+{
+    int GroupCnt = 8;
+    uint32_t printed, str_pos = 0, j = 0;
+    char temp[200];
+    for (printed = 0; printed < 600 ; ++printed)
+    {
+        #if 0
+        if ((printed % GroupCnt) < (GroupCnt - 1))
+        {
+            str_pos += sprintf(&temp[str_pos], "%d,", u32DbgBuf[printed]);
+        }
+        else
+        {
+            str_pos += sprintf(&temp[str_pos], "%d", u32DbgBuf[printed]);
+            APP_TRACE_INFO1("%s", temp);
+            str_pos = 0;
+        }
+        #endif
+        if (++j <= GroupCnt && u32DbgBuf[printed + 1] != 66)
+        {
+            str_pos += sprintf(&temp[str_pos], "%d,", u32DbgBuf[printed]);
+        }
+        else
+        {
+            str_pos += sprintf(&temp[str_pos], "%d", u32DbgBuf[printed]);
+            PalUartWriteData(PAL_UART_ID_TERMINAL, (const uint8_t *)temp, str_pos);
+            //APP_TRACE_INFO1("%s", temp);
+            str_pos = 0;
+            j = 0;
+        }
+    }
+    u32DbgBufNdx = 0;
+    u8DbgSt = 0;
+}
+
 /**************************************************************************************************
   Client Characteristic Configuration Descriptors (CCCD)
 **************************************************************************************************/
@@ -139,7 +183,8 @@ typedef union {
 /*! configurable parameters for advertising */
 static const appAdvCfg_t cgmAdvCfg = {
     { 0, 0, 0 }, /*! Advertising durations in ms */
-    { 1280, 1280, 0 } /*! Advertising intervals in 0.625 ms units */
+    { 1280, 1280, 0 } /*! Advertising intervals in 0.625 ms units (20 ms to 10.24 secs) */
+                      /* random delay from 0ms to 10ms is automatically added.  */
 };
 
 /*! configurable parameters for slave */
@@ -205,7 +250,7 @@ static const appUpdateCfg_t cgmUpdateCfg = {
     (700 / 1.25), /*! Minimum connection interval in 1.25ms units */
     (700 / 1.25), /*! Maximum connection interval in 1.25ms units */
     0, /*! Connection latency */
-    600, /*! Supervision timeout in 10ms units */
+    600, /*! Supervision timeout in 10ms units, 600*10=6000 ms */
     5 /*! Number of update attempts before giving up */
 };
 
@@ -295,6 +340,7 @@ uint8_t conn_opened = 0; /// 0: connection is not opened
 extern appSlaveCb_t appSlaveCb;
 extern appDb_t appDb;
 
+extern char *GetDmEvtStr(uint8_t evt);
 extern void setAdvTxPower(void);
 extern void printTime(void);
 
@@ -665,6 +711,9 @@ static void cgmProcMsg(dmEvt_t *pMsg)
 
     case DM_CONN_OPEN_IND:
         conn_opened = 1;
+        
+        print_dbg_buf();
+        
         CgmpsProcMsg(&pMsg->hdr);
 
         uiEvent = APP_UI_CONN_OPEN;
@@ -672,7 +721,7 @@ static void cgmProcMsg(dmEvt_t *pMsg)
 
     case DM_CONN_CLOSE_IND:
         WsfTimerStop(&trimTimer);
-
+        
         APP_TRACE_INFO2("Connection closed status 0x%x, reason 0x%x", pMsg->connClose.status,
                         pMsg->connClose.reason);
 
@@ -700,7 +749,6 @@ static void cgmProcMsg(dmEvt_t *pMsg)
 
         CgmpsProcMsg(&pMsg->hdr);
         conn_opened = 0;
-        APP_TRACE_INFO0("DM_CONN_CLOSE_IND");
 
         uiEvent = APP_UI_CONN_CLOSE;
 
@@ -763,7 +811,8 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_PHY_UPDATE_IND:
-        APP_TRACE_INFO2("DM_PHY_UPDATE_IND - RX: %d, TX: %d", pMsg->phyUpdate.rxPhy, pMsg->phyUpdate.txPhy);
+        
+        APP_TRACE_INFO3("RX=%d TX=%d dbg=%d", pMsg->phyUpdate.rxPhy, pMsg->phyUpdate.txPhy, u8DbgSt);
         break;
 
     case TRIM_TIMER_EVT:
@@ -1026,34 +1075,6 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
     }
 }
 
-char *GetCgmEvtStr(uint8_t evt)
-{
-    switch(evt) {
-        case 20: return "CCC_STATE";
-        case 21: return "DB_HASH_CALC_CMPL";    // ATTS_DB_HASH_CALC_CMPL_IND
-        case 22: return "MTU_UPDATE";
-        case 32: return "RESET_CMPL";           // DM_RESET_CMPL_IND
-        case 33: return "ADV_START";            // DM_ADV_START_IND
-        case 39: return "CONN_OPEN";
-        case 40: return "CONN_CLOSE";           // DM_CONN_CLOSE_IND
-        case 41: return "CONN_UPDATE";
-        case 42: return "PAIR_CMPL";            // DM_SEC_PAIR_CMPL_IND
-        case 44: return "SEC_ENCRYPT";
-        case 46: return "AUTH_REQ";
-        case 47: return "SEC_KEY";              // DM_SEC_KEY_IND
-        case 48: return "LTK_REQ";
-        case 49: return "SEC_PAIR";
-        case 58: return "ADD_DEV_TO_RES_LIST";  // DM_PRIV_ADD_DEV_TO_RES_LIST_IND
-        case 63: return "ADDR_RES_ENABLE";      // DM_PRIV_SET_ADDR_RES_ENABLE_IND
-        case 65: return "DATA_LEN_CHANGE";
-        case 70: return "PHY_UPDATE";
-        case 87: return "REMOTE_FEATURES";
-        case 153: return "TRIM_TIMER";          // TRIM_TIMER_EVT
-        case 154: return "CUST_SPEC_TMR";       // CUST_SPEC_TMR_EVT
-        case 155: return "CGM_MEAS_TMR";        // CGM_MEAS_TMR_EVT
-        default: return " ";
-    }
-}
 
 /*************************************************************************************************/
 /*!
@@ -1069,7 +1090,7 @@ char *GetCgmEvtStr(uint8_t evt)
 void CgmHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
-        APP_TRACE_INFO2("\nCGM got evt %d (%s)", pMsg->event, GetCgmEvtStr(pMsg->event));
+        APP_TRACE_INFO2("\nCGM got evt %d (%s)", pMsg->event, GetDmEvtStr(pMsg->event));
 
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {

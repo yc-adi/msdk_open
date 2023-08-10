@@ -62,6 +62,8 @@
 /* Slave control block */
 appSlaveCb_t appSlaveCb;
 
+extern char *GetDmEvtStr(uint8_t evt);
+
 /**************************************************************************************************
   Local Functions
 **************************************************************************************************/
@@ -292,6 +294,7 @@ static void appSetAdvScanData(uint8_t advHandle, uint8_t mode)
 /*************************************************************************************************/
 static void appConnUpdateTimerStart(dmConnId_t connId)
 {
+  APP_TRACE_INFO0("appConnUpdateTimerStart");
   /* look up app connection control block from DM connection ID */
   appConnCb_t *pCb = &appConnCb[connId - 1];
 
@@ -313,6 +316,7 @@ void appConnUpdateTimerStop(appConnCb_t *pCb)
   /* stop connection update timer */
   if (pAppUpdateCfg->idlePeriod != 0)
   {
+    APP_TRACE_INFO0("appConnUpdateTimerStop");
     WsfTimerStop(&pCb->updateTimer);
   }
 }
@@ -522,6 +526,7 @@ static void appSlaveProcConnClose(dmEvt_t *pMsg, appConnCb_t *pCb)
 /*************************************************************************************************/
 static void appSlaveConnUpdate(dmEvt_t *pMsg, appConnCb_t *pCb)
 {
+  APP_TRACE_INFO1("appSlaveConnUpdate idlePeriod=%d", pAppUpdateCfg->idlePeriod);
   if (pAppUpdateCfg->idlePeriod != 0)
   {
     /* if successful */
@@ -1570,7 +1575,7 @@ void AppSlaveSecProcDmMsg(dmEvt_t *pMsg)
     pCb = NULL;
   }
 
-  APP_TRACE_INFO1("AppSlaveSecProcDmMsg evt %d", pMsg->hdr.event);
+  APP_TRACE_INFO2("AppSlaveSecProcDmMsg evt %d %s", pMsg->hdr.event, GetDmEvtStr(pMsg->hdr.event));
   switch(pMsg->hdr.event)
   {
     case DM_CONN_OPEN_IND:

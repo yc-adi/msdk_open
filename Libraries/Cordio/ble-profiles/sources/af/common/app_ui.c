@@ -21,11 +21,16 @@
  *  limitations under the License.
  */
 /*************************************************************************************************/
+
+#include <stdio.h>
+#include <string.h>
 #include "wsf_types.h"
 #include "wsf_os.h"
 #include "wsf_trace.h"
 #include "app_ui.h"
 #include "pal_uart.h"
+
+extern uint8_t conn_opened;
 
 /**************************************************************************************************
   Local Variables
@@ -77,6 +82,7 @@ void AppUiAction(uint8_t event)
 
     case APP_UI_CONN_OPEN:
       APP_TRACE_INFO0("   >>> Connection opened <<<");
+      //@?@ conn_opened = 8;
       break;
 
     case APP_UI_CONN_CLOSE:
@@ -176,7 +182,7 @@ void AppUiDisplayPasskey(uint32_t passkey)
   uint8_t len;
   sprintf(strPasskey, "%d\n", passkey);
   len = strlen(strPasskey);
-  PalUartWriteData(PAL_UART_ID_TERMINAL, strPasskey, len);
+  PalUartWriteData(PAL_UART_ID_TERMINAL, (const uint8_t *)strPasskey, len);
   
   APP_TRACE_INFO1("   >>> Passkey: %d <<<", passkey);
 

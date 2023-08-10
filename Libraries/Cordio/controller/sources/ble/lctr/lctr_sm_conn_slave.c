@@ -31,6 +31,26 @@
 #include "wsf_assert.h"
 #include "wsf_trace.h"
 
+extern uint8_t conn_opened;
+
+char *GetLctrEvtStr(uint8_t evt)
+{
+  switch (evt) 
+  {
+    case  0: return "rst";  // LCTR_CONN_MSG_RESET
+    case 11: return "RCV CONN"; // LCTR_CONN_MSG_RX_CONNECT_IND
+    case 12: return "RCV LLCP"; // LCTR_CONN_MSG_RX_LLCP
+    case 21: return "CONN_UPDATE"; // LCTR_CONN_MSG_API_CONN_UPDATE
+    case 27: return "REMOTE_FEAT"; // LCTR_CONN_MSG_API_REMOTE_FEATURE
+    case 42: return "ARQ_Q_FLUSHED"; // LCTR_CONN_ARQ_Q_FLUSHED
+    case 57: return "LLCP_PROC_CMPL"; // LCTR_CONN_LLCP_PROC_CMPL
+    case 58: return "LLCP_START_PENDING"; // LCTR_CONN_LLCP_START_PENDING
+    case 71: return "SUP TIMEOUT"; // LCTR_CONN_TERM_SUP_TIMEOUT
+    case 75: return "CONN TERM"; // LCTR_CONN_TERMINATED
+    default: return " ";
+  }
+}
+
 /*************************************************************************************************/
 /*!
  *  \brief      Execute slave connection state machine.
@@ -41,6 +61,8 @@
 /*************************************************************************************************/
 void lctrSlvConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 {
+  APP_TRACE_INFO3("lctrSlvConnExecuteSm evt=%d %s st=%d", event, GetLctrEvtStr(event), pCtx->state);
+
   /* State-specific events. */
   switch (pCtx->state)
   {
@@ -220,10 +242,11 @@ void lctrSlvConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 /*************************************************************************************************/
 void lctrConnStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
 {
+  APP_TRACE_INFO1("lctrConnStatelessEventHandler evt=%d", event);
   switch (event)
   {
     case LCTR_CONN_TERMINATED:
-      LL_TRACE_INFO2("lctrConnStatelessEventHandler: handle=%u, state=%u, event=TERMINATED", LCTR_GET_CONN_HANDLE(pCtx), pCtx->state);
+      APP_TRACE_INFO2("lctrConnStatelessEventHandler: handle=%u, state=%u, event=TERMINATED", LCTR_GET_CONN_HANDLE(pCtx), pCtx->state);
       if (pCtx->role == LL_ROLE_SLAVE)
       {
         SchTmRemove(LCTR_GET_CONN_HANDLE(pCtx));
@@ -248,6 +271,7 @@ void lctrConnStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
       lctrFlagLinkTerm(pCtx);
       break;
     default:
+      APP_TRACE_INFO0("not here");
       break;
   }
 }

@@ -119,10 +119,35 @@ static const uint8_t dmConnStateTbl[DM_CONN_SM_NUM_STATES][DM_CONN_NUM_MSGS][DM_
 /*! State machine action set array */
 dmConnAct_t *dmConnActSet[DM_CONN_NUM_ACT_SETS];
 
-char *GetDmConnEvtStr(uint8_t evt)
+char *GetDmEvtStr(uint8_t evt)
 {
   switch(evt) {
-    case 29: return "HCI_DISCONNECT_CMPL";    // DM_CONN_MSG_HCI_DISCONNECT_CMPL
+    case 20: return "CCC_STATE";
+    case 21: return "DB_HASH_CALC_CMPL";    // ATTS_DB_HASH_CALC_CMPL_IND
+    case 22: return "MTU_UPDATE";
+    case 28: return "CONN_CMPL"; // DM_CONN_MSG_HCI_LE_CONN_CMPL
+    case 29: return "HCI_DISCONNECT_CMPL";    // 
+    case 30: return "CONN_UPDATE_CMPL";  // DM_CONN_MSG_HCI_LE_CONN_UPDATE_CMPL
+    case 32: return "RESET_CMPL";           // DM_RESET_CMPL_IND
+    case 33: return "ADV_START";            // DM_ADV_START_IND
+    case 39: return "CONN_OPEN";
+    case 40: return "CONN_CLOSE";           // DM_CONN_CLOSE_IND
+    case 41: return "CONN_UPDATE";
+    case 42: return "PAIR_CMPL";            // DM_SEC_PAIR_CMPL_IND
+    case 44: return "SEC_ENCRYPT";
+    case 46: return "AUTH_REQ";
+    case 47: return "SEC_KEY";              // DM_SEC_KEY_IND
+    case 48: return "LTK_REQ";
+    case 49: return "SEC_PAIR";
+    case 58: return "ADD_DEV_TO_RES_LIST";  // DM_PRIV_ADD_DEV_TO_RES_LIST_IND
+    case 63: return "ADDR_RES_ENABLE";      // DM_PRIV_SET_ADDR_RES_ENABLE_IND
+    case 65: return "DATA_LEN_CHANGE";
+    case 70: return "PHY_UPDATE";
+    case 87: return "FEAT";   // DM_REMOTE_FEATURES_IND
+    case 113: return "UPDATE_SLAVE";  // DM_CONN_MSG_API_UPDATE_SLAVE
+    case 153: return "TRIM_TIMER";          // TRIM_TIMER_EVT
+    case 154: return "CUST_SPEC_TMR";       // CUST_SPEC_TMR_EVT
+    case 155: return "CGM_MEAS_TMR";        // CGM_MEAS_TMR_EVT
     default: return " ";
   }
 }
@@ -145,7 +170,7 @@ void dmConnSmExecute(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
   uint8_t           event;
   uint8_t           old_st = pCcb->state;
 
-  DM_TRACE_INFO3("dmConnSmExecute evt=%d %s st=%d", pMsg->hdr.event, GetDmConnEvtStr(pMsg->hdr.event), old_st);  // search "DM conn event handler messages" and "DM_CONN_SM_"
+  DM_TRACE_INFO3("dmConnSmExecute evt=%d %s st=%d", pMsg->hdr.event, GetDmEvtStr(pMsg->hdr.event), old_st);  // search "DM conn event handler messages" and "DM_CONN_SM_"
 
   /* get the event */
   event = DM_MSG_MASK(pMsg->hdr.event);

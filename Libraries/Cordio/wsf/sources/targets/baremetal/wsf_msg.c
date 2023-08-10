@@ -125,7 +125,7 @@ void WsfMsgSend(wsfHandlerId_t handlerId, void *pMsg)
 /*************************************************************************************************/
 void WsfMsgEnq(wsfQueue_t *pQueue, wsfHandlerId_t handlerId, void *pMsg)
 {
-  wsfMsgHdr_t *h = (wsfMsgHdr_t *)pMsg;
+  //wsfMsgHdr_t *h = (wsfMsgHdr_t *)pMsg;
   //h->msg_ndx = ++msg_ndx;
 
   //WSF_TRACE_MSG5("MsgSend hndId %u, ndx %03d, p 0x%04X, evt %03d, st %d", handlerId, h->msg_ndx, h->param, h->event, h->status);
@@ -164,7 +164,7 @@ void *WsfMsgDeq(wsfQueue_t *pQueue, wsfHandlerId_t *pHandlerId)
     /* hide header */
     pMsg++;
     // now it points to the msg body */
-    wsfMsgHdr_t *h = (wsfMsgHdr_t *)pMsg;
+    //wsfMsgHdr_t *h = (wsfMsgHdr_t *)pMsg;
     //WSF_TRACE_MSG5("MsgDeq  hndId %u, ndx %03d, p 0x%04X, evt %03d, st %d", *pHandlerId, h->msg_ndx, h->param, h->event, h->status);
   }
 

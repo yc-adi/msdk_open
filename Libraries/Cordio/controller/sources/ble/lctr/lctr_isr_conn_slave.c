@@ -41,6 +41,7 @@
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t conn_opened;
 
 /*! \brief      Assert BB meets data PDU requirements. */
 WSF_CT_ASSERT((BB_FIXED_DATA_PKT_LEN == 0) ||
@@ -168,6 +169,7 @@ static void lctrSlvConnUpdateOp(lctrConnCtx_t *pCtx, bool_t ignoreOffset)
   }
   /* Unconditionally reset supervision timer with transitional value.
    *     connIntervalOld + supervisionTimeoutNew */
+  APP_TRACE_INFO1("@?@ lctrSlvConnUpdateOp sup timeout %d", LCTR_CONN_IND_MS(connIntervalOld) + pCtx->supTimeoutMs);
   WsfTimerStartMs(&pCtx->tmrSupTimeout, LCTR_CONN_IND_MS(connIntervalOld) + pCtx->supTimeoutMs);
 
   /*** Notifications ***/
@@ -392,6 +394,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
   if (!pCtx->connEst && (pCtx->data.slv.rxFromMaster || (pCtx->data.slv.consCrcFailed > 0)))
   {
     lctrStoreConnTimeoutTerminateReason(pCtx);
+    APP_TRACE_INFO1("@?@ lctrSlvConnEndOp term sup timeout %d", pCtx->supTimeoutMs);
     WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs);
 
     pCtx->connEst = TRUE;
@@ -399,6 +402,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
   else if (pCtx->data.slv.rxFromMaster)
   {
     /* Reset supervision timer. */
+    //APP_TRACE_INFO1("@?@ lctrSlvConnEndOp rx sup timeout %d", pCtx->supTimeoutMs);  // @?@ will be triggered every 30 ms
     WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs);
   }
 
@@ -658,6 +662,7 @@ void lctrSlvConnTxCompletion(BbOpDesc_t *pOp, uint8_t status)
 /*************************************************************************************************/
 void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
 {
+  //APP_TRACE_INFO1("\nlctrSlvConnRxCompletion st=%d", status);  // @?@ too frequently
   lctrConnCtx_t * const pCtx = pOp->pCtx;
 
   BbBleData_t * const pBle = &pCtx->bleData;

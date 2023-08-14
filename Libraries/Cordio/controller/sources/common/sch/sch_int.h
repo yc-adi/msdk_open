@@ -93,10 +93,10 @@ void schRemoveHead(void);
  *  \return     TRUE if BOD time is in the future, FALSE otherwise.
  */
 /*************************************************************************************************/
-static inline bool_t schDueTimeInFuture(BbOpDesc_t *pBod)
+static inline bool_t schDueTimeInFuture(BbOpDesc_t *pBod, uint8_t src)
 {
   const uint32_t curTime = PalBbGetCurrentTime();
-
+  APP_TRACE_INFO4("@?@ src=%d due=%d cur=%d %d", src, pBod->dueUsec, curTime, (int)pBod->dueUsec - (int)curTime);
   return (BbGetTargetTimeDelta(pBod->dueUsec, curTime) > 0);
 }
 

@@ -486,12 +486,12 @@ static uint8_t lctrSetExtAdvDataSm(lctrAdvSet_t *pAdvSet, lctrAdvDataBuf_t *pDat
 
           /* Re-insert BOD's */
           pAdvSet->advBod.abortCback = lctrSlvExtAdvAbortOp;
-          (void)SchInsertAtDueTime(&pAdvSet->advBod, NULL);
+          (void)SchInsertAtDueTime(&pAdvSet->advBod, NULL, 16);
 
           if (pAdvSet->auxBodUsed)
           {
             pAdvSet->auxAdvBod.abortCback = lctrSlvAuxAdvEndOp;
-            (void)SchInsertAtDueTime(&pAdvSet->auxAdvBod, NULL);
+            (void)SchInsertAtDueTime(&pAdvSet->auxAdvBod, NULL, 17);
           }
         }
         else
@@ -917,7 +917,7 @@ uint8_t lctrSlvExtAdvBuildOp(lctrAdvSet_t *pAdvSet, uint32_t maxStartMs)
 
   if (pLctrSlvExtAdvMsg->enable.durMs)
   {
-    pOp->dueUsec = PalBbGetCurrentTime() + BbGetSchSetupDelayUs();
+    pOp->dueUsec = PalBbGetCurrentTime() + BbGetSchSetupDelayUs(12);
 
     uint32_t maxTime = maxStartMs * 1000;
     if (!SchInsertEarlyAsPossible(pOp, 0, maxTime))
@@ -985,7 +985,7 @@ uint8_t lctrSlvExtAdvBuildOp(lctrAdvSet_t *pAdvSet, uint32_t maxStartMs)
 void lctrSlvAuxRescheduleOp(lctrAdvSet_t *pAdvSet, BbOpDesc_t * const pOp)
 {
   uint32_t auxOffsUsec = pAdvSet->advBod.minDurUsec +
-                     WSF_MAX(BbGetSchSetupDelayUs(), LL_BLE_MAFS_US) +
+                     WSF_MAX(BbGetSchSetupDelayUs(13), LL_BLE_MAFS_US) +
                      WSF_MAX(pAdvSet->auxDelayUsec, pLctrRtCfg->auxDelayUsec);
 
   auxOffsUsec = WSF_MIN(auxOffsUsec, LL_AUX_PTR_MAX_USEC);
@@ -1003,7 +1003,7 @@ void lctrSlvAuxRescheduleOp(lctrAdvSet_t *pAdvSet, BbOpDesc_t * const pOp)
     do
     {
       /* No delay after primary channel operation. */
-      if (SchInsertAtDueTime(pOp, NULL))
+      if (SchInsertAtDueTime(pOp, NULL, 18))
       {
         break;
       }
@@ -2620,7 +2620,7 @@ static void lctrSlvPeriodicCommitOp(lctrAdvSet_t *pAdvSet, BbOpDesc_t * const pO
 
   while (TRUE)
   {
-    if (SchInsertAtDueTime(pOp, NULL))
+    if (SchInsertAtDueTime(pOp, NULL, 19))
     {
       break;
     }

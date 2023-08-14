@@ -79,6 +79,8 @@
 /**************************************************************************************************
   Macros
 **************************************************************************************************/
+#define DBG_DS          0   // remove me !!! @?@
+
 #define USE_RTC         1
 #define SPI_SLAVE_RX    0
 
@@ -110,9 +112,11 @@
 /******************
  * DEBUG USE
 *******************/
+#if DBG_DS == 1
 extern uint32_t u32DbgBuf[];
 extern uint32_t u32DbgBufNdx;
 extern uint8_t  u8DbgSt;
+#endif
 
 /**************************************************************************************************
   Global Variables
@@ -144,7 +148,7 @@ uint32_t gNextJobTimeInUs = 0;
 #define MIN_DEEP_SLEEP_TIME_IN_US       (WAKE_UP_TIME_IN_US)
 
 #define WAKEUP_IN_WUT_TICK      ((uint64_t)WAKEUP_US / (uint64_t)1000000 * (uint64_t)32768)
-#define RESTORE_OP_IN_WUT_TICK  65
+#define RESTORE_OP_IN_WUT_TICK  65+70+50
 #define RESTORE_OP_IN_US        ((uint64_t)RESTORE_OP_IN_WUT_TICK / (uint64_t)32768 * (uint64_t)1000000)
 
 #define WAKEUP_32M_US       (3200)
@@ -168,14 +172,6 @@ extern uint8_t conn_opened;
 extern uint32_t palSysBusyCount;
 
 #endif  // DEEP_SLEEP
-
-#define DBG_BUF_SIZE    (512)
-uint32_t debugFlag = 0;
-uint32_t debugBuf[512];
-uint32_t debugBufHead = 0;
-uint32_t debugBufTail = 0;
-uint32_t debugMax = 0;
-uint32_t debugMin = 0xFFFFFFFF;
 
 uint16_t spi_rx_data[SPI_BUF_LEN];
 mxc_spi_req_t spi_req;
@@ -282,21 +278,25 @@ int DeepSleep(void)
     /* If PAL system is busy, no need to sleep. */
     if (palSysBusyCount > 0)    // chciTrWrite
     {
+        #if DBG_DS == 1
         if (conn_opened == 8) {
-            if (u32DbgBufNdx < 600) {
+            if (u32DbgBufNdx < DBG_BUF_SIZE) {
                 u32DbgBuf[u32DbgBufNdx++] = 11;
             }
         }
+        #endif
         return 1;
     }
 
     if (wsfOs.task.taskEventMask != 0)
     {
+        #if DBG_DS == 1
         if (conn_opened == 8) {
-            if (u32DbgBufNdx < 600) {
+            if (u32DbgBufNdx < DBG_BUF_SIZE) {
                 u32DbgBuf[u32DbgBufNdx++] = 22;
             }
         }
+        #endif
         return 2;
     }
 
@@ -321,11 +321,14 @@ int DeepSleep(void)
 
     /* Check to see if we meet the minimum requirements for deep sleep */
     if (idleInWutCnt < (MIN_WUT_TICKS + WAKEUP_US)) {
+        #if DBG_DS == 1
         if (conn_opened == 8) {
-            if (u32DbgBufNdx < 600) {
+            if (u32DbgBufNdx < DBG_BUF_SIZE) {
                 u32DbgBuf[u32DbgBufNdx++] = 44;
+                u32DbgBuf[u32DbgBufNdx++] = idleInWutCnt;
             }
         }
+        #endif
         return 4;
     }
 
@@ -347,13 +350,17 @@ int DeepSleep(void)
         uint32_t ts;
         if (PalBbGetTimestamp(&ts))
         {
-            /* Determine if PalBb is active, return if we get a valid time stamp indicating 
-             * that the scheduler is waiting for a PalBb event */
+            /** Determine if PalBb is active (inactive if palBbEnableCnt 0), 
+             *  Return if we get a valid time stamp indicating that the scheduler
+             *  is waiting for a PalBb event.
+             */
+            #if DBG_DS == 1
             if (conn_opened == 8) {
-                if (u32DbgBufNdx < 600) {
+                if (u32DbgBufNdx < DBG_BUF_SIZE) {
                     u32DbgBuf[u32DbgBufNdx++] = 55;
                 }
             }
+            #endif
             goto EXIT_SLEEP_FUNC;
         }
     }
@@ -416,32 +423,14 @@ int DeepSleep(void)
         dsInWutCnt = MAX_WUT_TICKS;
     }
 
-#if 0
-    /* Only enter deep sleep if we have enough time */
-    if (conn_opened) {
-        if (u32DbgBufNdx < 600 - 6) {
-            u32DbgBuf[u32DbgBufNdx++] = 66;
-            u32DbgBuf[u32DbgBufNdx++] = idleInWutCnt;
-            u32DbgBuf[u32DbgBufNdx++] = wsfTicksToNextExpiration;
-            u32DbgBuf[u32DbgBufNdx++] = schUsec;
-            u32DbgBuf[u32DbgBufNdx++] = bleSleepTicks;
-            //u32DbgBuf[u32DbgBufNdx++] = dsInWutCnt;
-        }
-    }
-#endif
-
     if (dsInWutCnt >= MIN_WUT_TICKS) {
-
-        /// debug
-        #if 0
-        if (conn_opened == 8 && u32DbgBufNdx < 600)
+        #if DBG_DS == 1
+        if (conn_opened == 8 && u32DbgBufNdx < DBG_BUF_SIZE - DBG_GROUP_SIZE)
         {
             u8DbgSt++;
             //u8DbgSt = u8DbgSt % 100;
             u32DbgBuf[u32DbgBufNdx++] = 66;
             //u32DbgBuf[u32DbgBufNdx++] = u8DbgSt;
-            u32DbgBuf[u32DbgBufNdx++] = sec;
-            u32DbgBuf[u32DbgBufNdx++] = subsec;
             u32DbgBuf[u32DbgBufNdx++] = idleInWutCnt;
             u32DbgBuf[u32DbgBufNdx++] = wsfTicksToNextExpiration;
             u32DbgBuf[u32DbgBufNdx++] = schUsec;

@@ -94,7 +94,7 @@ static void bbMstConnTxCompCback(uint8_t status)
         break;
     }
 
-    BbTerminateBod();
+    BbTerminateBod(20);
   }
 
   /* Update statistics. */
@@ -190,7 +190,7 @@ static void bbMstConnRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint
         break;
     }
 
-    BbTerminateBod();               /* auto terminated on missed; just end */
+    BbTerminateBod(21);               /* auto terminated on missed; just end */
   }
 
   /* Update statistics. */

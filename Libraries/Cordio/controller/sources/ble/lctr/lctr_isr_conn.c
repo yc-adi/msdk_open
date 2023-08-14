@@ -393,7 +393,7 @@ bool_t lctrExceededMaxDur(lctrConnCtx_t *pCtx, uint32_t ceStartUsec, uint32_t pe
   }
 
   const uint32_t curTime = PalBbGetCurrentTime();
-  const uint32_t setupDelayUsec = BbGetSchSetupDelayUs();
+  const uint32_t setupDelayUsec = BbGetSchSetupDelayUs(11);
 
   uint32_t availCeUsec = LCTR_CONN_IND_US(pCtx->connInterval);
 

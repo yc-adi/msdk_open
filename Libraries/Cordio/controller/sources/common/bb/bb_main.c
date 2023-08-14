@@ -305,10 +305,11 @@ bool_t BbGetBodTerminateFlag(void)
  *              current executing BOD, typically in the related ISRs.
  */
 /*************************************************************************************************/
-void BbTerminateBod(void)
+void BbTerminateBod(uint8_t src)
 {
   WSF_ASSERT(bbCb.bodCompCback);
-
+  APP_TRACE_INFO1("@?@ term bod src=%d", src);
+  
   BbOpDesc_t * const pBod = bbCb.pOpInProgress;
   if (pBod &&
       (bbCb.prot[pBod->protId].lowPowerOpCback != NULL))
@@ -318,7 +319,7 @@ void BbTerminateBod(void)
 
   bbCb.pOpInProgress = NULL;
   bbCb.termBod = TRUE;
-  bbCb.bodCompCback();
+  bbCb.bodCompCback();  // schBodCompHandler
 }
 
 /*************************************************************************************************/
@@ -357,8 +358,9 @@ uint32_t BbGetBbTimerBoundaryUs(void)
  *  Returns the scheduler setup delay.
  */
 /*************************************************************************************************/
-uint16_t BbGetSchSetupDelayUs(void)
+uint16_t BbGetSchSetupDelayUs(uint8_t src)
 {
+  APP_TRACE_INFO2("@?@ get delay, src=%d delay=%d", src, pBbRtCfg->schSetupDelayUs);
   return pBbRtCfg->schSetupDelayUs;
 }
 

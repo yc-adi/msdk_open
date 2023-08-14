@@ -60,7 +60,7 @@ static void bbSlvBisTxCompCback(uint8_t status)
   if (BbGetBodTerminateFlag())
   {
     PalBbBleCancelTifs();
-    BbTerminateBod();
+    BbTerminateBod(12);
   }
 
   BB_ISR_MARK(bbBisStats.txIsrUsec);
@@ -107,7 +107,7 @@ static void bbSlvExecuteBisOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
   if (BbGetBodTerminateFlag() &&    /* Client signaled cancel. */
       BbGetCurrentBod())            /* Termination still pending. */
   {
-    BbTerminateBod();
+    BbTerminateBod(13);
   }
 }
 

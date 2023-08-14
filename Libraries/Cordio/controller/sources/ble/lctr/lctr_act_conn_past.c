@@ -75,7 +75,7 @@ void lctrSendPerSyncFromScan(lctrConnCtx_t *pCtx)
 
     /* Calculate the end time of CEref. */
     ceRefStart = lctrConnGetAnchorPoint(pCtx, (pCtx->eventCounter + ceOffset));
-    ceRefEnd = ceRefStart + pCtx->effConnDurUsec + BbGetSchSetupDelayUs();
+    ceRefEnd = ceRefStart + pCtx->effConnDurUsec + BbGetSchSetupDelayUs(7);
 
     /* paAnchor is for the first PE in the future from ceRefEnd. */
     if (BbGetTargetTimeDelta(ceRefEnd, paAnchor) > 0)
@@ -196,7 +196,7 @@ void lctrSendPerSyncFromBcst(lctrConnCtx_t *pCtx)
 
     /* Calculate the end time of CEref. */
     ceRefStart = lctrConnGetAnchorPoint(pCtx, (pCtx->eventCounter + ceOffset));
-    ceRefEnd = ceRefStart + pCtx->effConnDurUsec + BbGetSchSetupDelayUs();
+    ceRefEnd = ceRefStart + pCtx->effConnDurUsec + BbGetSchSetupDelayUs(8);
 
     /* paAnchor is for the first PE in the future from ceRefEnd. */
     if (BbGetTargetTimeDelta(ceRefEnd, paAnchor) > 0)

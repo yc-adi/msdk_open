@@ -70,7 +70,7 @@ schState_t SchGetState(void);
 
 /* List maintenance */
 void SchInsertNextAvailable(BbOpDesc_t *pBod);
-bool_t SchInsertAtDueTime(BbOpDesc_t *pBod, BbConflictAct_t conflictCback);
+bool_t SchInsertAtDueTime(BbOpDesc_t *pBod, BbConflictAct_t conflictCback, uint8_t src);
 bool_t SchInsertEarlyAsPossible(BbOpDesc_t *pBod, uint32_t min, uint32_t max);
 bool_t SchInsertLateAsPossible(BbOpDesc_t *pBod, uint32_t min, uint32_t max);
 bool_t SchRemove(BbOpDesc_t *pBod);

@@ -2136,7 +2136,7 @@ void lctrMstPerScanEndOp(BbOpDesc_t *pOp)
 
     pBle->chan.chanIdx = lctrPeriodicSelectNextChannel(&pPerScanCtx->chanParam, pPerScanCtx->eventCounter);
 
-    if (SchInsertAtDueTime(pOp, lctrPerScanResolveConflict))
+    if (SchInsertAtDueTime(pOp, lctrPerScanResolveConflict, 1))
     {
       break;
     }

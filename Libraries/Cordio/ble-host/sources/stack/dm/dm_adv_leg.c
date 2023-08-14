@@ -169,7 +169,7 @@ void dmAdvActStart(dmAdvMsg_t *pMsg)
 {
   DM_TRACE_INFO1("dmAdvActStart: state: %d", dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT]);
 
-   if (dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT] == DM_ADV_STATE_IDLE)
+  if (dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT] == DM_ADV_STATE_IDLE)
   {
     /* if doing directed advertising ignore the request */
     if ((dmAdvCb.advType[DM_ADV_HANDLE_DEFAULT] == DM_ADV_CONN_DIRECT) ||

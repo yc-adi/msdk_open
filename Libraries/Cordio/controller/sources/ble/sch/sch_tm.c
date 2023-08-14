@@ -114,7 +114,7 @@ void SchTmRemove(uint8_t handle)
 /*************************************************************************************************/
 bool_t SchTmCheckConflict(uint32_t refBegin, uint32_t interUsec, uint32_t durUsec)
 {
-  uint32_t refEnd = refBegin + durUsec + BbGetSchSetupDelayUs();    /* End time of the link to be compared. */
+  uint32_t refEnd = refBegin + durUsec + BbGetSchSetupDelayUs(16);    /* End time of the link to be compared. */
   uint32_t linkBegin, linkEnd;  /* Begin and end time of topology link. */
   uint8_t i;
 
@@ -137,7 +137,7 @@ bool_t SchTmCheckConflict(uint32_t refBegin, uint32_t interUsec, uint32_t durUse
         linkBegin -= schTmCb.tlink[i].interUsec;
       }
 
-      linkEnd = linkBegin + schTmCb.tlink[i].durUsec + BbGetSchSetupDelayUs();
+      linkEnd = linkBegin + schTmCb.tlink[i].durUsec + BbGetSchSetupDelayUs(17);
 
       /* Now, check conflicts between TM link and the reference. */
       while (!SCH_TM_IS_IN_FUTURE(linkBegin, refEnd))
@@ -151,7 +151,7 @@ bool_t SchTmCheckConflict(uint32_t refBegin, uint32_t interUsec, uint32_t durUse
 
         /* Use the smaller interval to check conflicts. */
         linkBegin += (interUsec < schTmCb.tlink[i].interUsec) ? interUsec : schTmCb.tlink[i].interUsec;
-        linkEnd = linkBegin + schTmCb.tlink[i].durUsec + BbGetSchSetupDelayUs();
+        linkEnd = linkBegin + schTmCb.tlink[i].durUsec + BbGetSchSetupDelayUs(18);
       }
     }
   }

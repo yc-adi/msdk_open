@@ -56,7 +56,7 @@ void lctrMstInitiateEndOp(BbOpDesc_t *pOp)
 
     while (TRUE)
     {
-      if (SchInsertAtDueTime(pConnBod, lctrConnResolveConflict))
+      if (SchInsertAtDueTime(pConnBod, lctrConnResolveConflict, 12))
       {
         break;
       }

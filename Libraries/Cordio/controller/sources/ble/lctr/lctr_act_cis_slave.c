@@ -110,7 +110,7 @@ static void lctrSendCisRspPdu(lctrConnCtx_t *pCtx, uint8_t opcode)
 
     if (cisOffMinUsec != cisOffMaxUsec)
     {
-      cisOffMinUsec = WSF_MAX(cisOffMinUsec, pCtx->connBod.minDurUsec + BbGetSchSetupDelayUs());
+      cisOffMinUsec = WSF_MAX(cisOffMinUsec, pCtx->connBod.minDurUsec + BbGetSchSetupDelayUs(6));
 
       if (cisOffMinUsec > cisOffMaxUsec)
       {

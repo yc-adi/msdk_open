@@ -1022,7 +1022,7 @@ void lctrMstCisCigEndOp(BbOpDesc_t *pOp)
       pCisCtx = lctrCisGetNextCis(&pCigCtx->list, pCisCtx);
     }
 
-    if (SchInsertAtDueTime(pOp, NULL))
+    if (SchInsertAtDueTime(pOp, NULL, 6))
     {
       break;
     }

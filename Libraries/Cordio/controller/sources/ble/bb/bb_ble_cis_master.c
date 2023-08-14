@@ -152,7 +152,7 @@ static void bbMstCisTxCompCback(uint8_t status)
     if (bbBleCb.evtState == BB_EVT_STATE_IDLE)
     {
       /* Avoid double terminating BOD */
-      BbTerminateBod();
+      BbTerminateBod(14);
       bbBleCb.evtState = BB_EVT_STATE_TERMINATING;
     }
   }
@@ -226,7 +226,7 @@ static void bbMstCisRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint3
     if (bbBleCb.evtState == BB_EVT_STATE_IDLE)
     {
       /* Avoid double terminating BOD */
-      BbTerminateBod();
+      BbTerminateBod(15);
       bbBleCb.evtState = BB_EVT_STATE_TERMINATING;
     }
   }

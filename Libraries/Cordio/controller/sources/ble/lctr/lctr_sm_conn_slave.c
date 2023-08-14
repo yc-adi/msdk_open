@@ -62,6 +62,11 @@ char *GetLctrEvtStr(uint8_t evt)
 void lctrSlvConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 {
   APP_TRACE_INFO3("lctrSlvConnExecuteSm evt=%d %s st=%d", event, GetLctrEvtStr(event), pCtx->state);
+  if (event == 11 && pCtx->state == 0)
+  {
+    conn_opened = 8;
+    APP_TRACE_INFO0("opened=8");
+  }
 
   /* State-specific events. */
   switch (pCtx->state)

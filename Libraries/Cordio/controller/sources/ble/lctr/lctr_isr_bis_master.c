@@ -916,7 +916,7 @@ void lctrMstBigEndOp(BbOpDesc_t *pOp)
     lctrSelectBigChannels(pBigCtx);
     lctrMstBigControlProcedureHandler(pBigCtx);
 
-    if (SchInsertAtDueTime(pOp, NULL))
+    if (SchInsertAtDueTime(pOp, NULL, 4))
     {
       break;
     }

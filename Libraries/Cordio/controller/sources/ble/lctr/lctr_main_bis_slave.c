@@ -941,7 +941,7 @@ uint8_t lctrSlvBigBuildOp(lctrBigCtx_t *pBigCtx)
   {
     lctrSelectBigChannels(pBigCtx);
 
-    if (SchInsertAtDueTime(pOp, NULL))
+    if (SchInsertAtDueTime(pOp, NULL, 21))
     {
       break;
     }

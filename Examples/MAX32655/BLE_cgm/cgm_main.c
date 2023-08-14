@@ -105,16 +105,16 @@
 /******************
  * DEBUG USE
 *******************/
-uint32_t u32DbgBuf[1024];
+uint32_t u32DbgBuf[DBG_BUF_SIZE];
 uint32_t u32DbgBufNdx = 0;
 uint8_t  u8DbgSt = 0;
 
 void print_dbg_buf(void)
 {
-    int GroupCnt = 8;
+    int GroupCnt = DBG_GROUP_SIZE;
     uint32_t printed, str_pos = 0, j = 0;
-    char temp[200];
-    for (printed = 0; printed < 600 ; ++printed)
+    char temp[100];
+    for (printed = 0; printed < DBG_BUF_SIZE ; ++printed)
     {
         #if 0
         if ((printed % GroupCnt) < (GroupCnt - 1))
@@ -135,8 +135,8 @@ void print_dbg_buf(void)
         else
         {
             str_pos += sprintf(&temp[str_pos], "%d", u32DbgBuf[printed]);
-            PalUartWriteData(PAL_UART_ID_TERMINAL, (const uint8_t *)temp, str_pos);
-            //APP_TRACE_INFO1("%s", temp);
+            //PalUartWriteData(PAL_UART_ID_TERMINAL, (const uint8_t *)temp, str_pos);
+            APP_TRACE_INFO1("%s", temp);
             str_pos = 0;
             j = 0;
         }
@@ -710,9 +710,7 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_CONN_OPEN_IND:
-        conn_opened = 1;
-        
-        print_dbg_buf();
+        conn_opened = 8;
         
         CgmpsProcMsg(&pMsg->hdr);
 
@@ -749,6 +747,9 @@ static void cgmProcMsg(dmEvt_t *pMsg)
 
         CgmpsProcMsg(&pMsg->hdr);
         conn_opened = 0;
+
+        APP_TRACE_INFO1("dbg ndx=%d", u32DbgBufNdx);
+        print_dbg_buf();
 
         uiEvent = APP_UI_CONN_CLOSE;
 

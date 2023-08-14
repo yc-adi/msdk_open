@@ -67,7 +67,7 @@ static uint32_t bbBleCalcScanDurationUsec(BbOpDesc_t *pBod, BbBleMstAdvEvent_t *
 
   /* Guard time at the end of a scan window to the next BOD. */
   /* Backoff for RX of preamble and AA which are compensated in BB driver. */
-  uint32_t totalGapUsec = BbGetSchSetupDelayUs() + setupUsec;
+  uint32_t totalGapUsec = BbGetSchSetupDelayUs(1) + setupUsec;
 
   switch (pBle->chan.rxPhy)
   {
@@ -146,12 +146,12 @@ static bool_t bbContScanOp(BbOpDesc_t *pBod, BbBleMstAdvEvent_t *pScan)
 
   uint32_t scanDurUsec;
 
-  if ((scanDurUsec = bbBleCalcScanDurationUsec(pBod, pScan, curTime, BbGetSchSetupDelayUs())) == 0)
+  if ((scanDurUsec = bbBleCalcScanDurationUsec(pBod, pScan, curTime, BbGetSchSetupDelayUs(2))) == 0)
   {
     return TRUE;
   }
 
-  bbBleCb.bbParam.dueUsec = BbAdjustTime(bbBleCb.lastScanStartUsec + BbGetSchSetupDelayUs());
+  bbBleCb.bbParam.dueUsec = BbAdjustTime(bbBleCb.lastScanStartUsec + BbGetSchSetupDelayUs(3));
   bbBleCb.bbParam.rxTimeoutUsec = scanDurUsec;
   PalBbBleSetDataParams(&bbBleCb.bbParam);
 
@@ -275,7 +275,7 @@ static void bbMstScanTxCompCback(uint8_t status)
 
   if (bodComplete)
   {
-    BbTerminateBod();
+    BbTerminateBod(4);
   }
 
 #if (BB_SNIFFER_ENABLED == TRUE)
@@ -491,7 +491,7 @@ static void bbMstScanRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint
 
   if (bodComplete)
   {
-    BbTerminateBod();
+    BbTerminateBod(5);
   }
 
 #if (BB_SNIFFER_ENABLED == TRUE)

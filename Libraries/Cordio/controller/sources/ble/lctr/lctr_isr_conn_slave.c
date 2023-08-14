@@ -402,7 +402,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
   else if (pCtx->data.slv.rxFromMaster)
   {
     /* Reset supervision timer. */
-    //APP_TRACE_INFO1("@?@ lctrSlvConnEndOp rx sup timeout %d", pCtx->supTimeoutMs);  // @?@ will be triggered every 30 ms
+    if (conn_opened != 0) APP_TRACE_INFO1("@?@ lctrSlvConnEndOp rx sup timeout %d", pCtx->supTimeoutMs);  // @?@ will be triggered every 30 ms
     WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs);
   }
 
@@ -545,7 +545,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
     uint32_t wwTotalUsec    = lctrCalcWindowWideningUsec(unsyncTimeUsec, pCtx->data.slv.totalAcc);
     uint32_t connInterUsec  = LCTR_CONN_IND_US(numUnsyncIntervals * pCtx->connInterval);
 
-    if (wwTotalUsec >= ((connInterUsec >> 1) - WSF_MAX(LL_BLE_TIFS_US, BbGetSchSetupDelayUs())))
+    if (wwTotalUsec >= ((connInterUsec >> 1) - WSF_MAX(LL_BLE_TIFS_US, BbGetSchSetupDelayUs(10))))
     {
       LL_TRACE_WARN2("!!! Terminating connection due to excessive WW handle=%u, eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pCtx->eventCounter);
       lctrSendConnMsg(pCtx, LCTR_CONN_TERMINATED);
@@ -555,6 +555,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
 
     /* Advance to next interval. */
     pOp->dueUsec = pCtx->data.slv.anchorPointUsec + connInterUsec - wwTotalUsec;
+    APP_TRACE_INFO1("@?@ connEndOp dueUsec=%d", pOp->dueUsec);
 
     pOp->minDurUsec = pCtx->data.slv.txWinSizeUsec + pCtx->effConnDurUsec + wwTotalUsec;
     pConn->rxSyncDelayUsec = pCtx->data.slv.txWinSizeUsec + (wwTotalUsec << 1);
@@ -603,7 +604,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
       }
     }
 
-    if (SchInsertAtDueTime(pOp, lctrConnResolveConflict))
+    if (SchInsertAtDueTime(pOp, lctrConnResolveConflict, 9))
     {
       break;
     }

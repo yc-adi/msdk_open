@@ -78,7 +78,7 @@ typedef enum
 #define BB_MIN_SCAN_US              (LL_ADV_PKT_MAX_USEC  + LL_BLE_TIFS_US + \
                                      LL_SCAN_REQ_MAX_USEC + LL_BLE_TIFS_US + \
                                      LL_SCAN_RSP_MAX_USEC + \
-                                     BbGetSchSetupDelayUs())
+                                     BbGetSchSetupDelayUs(0))
 
 /**************************************************************************************************
   Data Types

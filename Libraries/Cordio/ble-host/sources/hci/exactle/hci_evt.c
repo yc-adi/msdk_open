@@ -118,7 +118,7 @@ static void hciEvtProcessIntEvt(hciEvt_t *pEvt)
 {
   pEvt->hdr.event &= ~HCI_EVT_INT_TYPE;
 
-  APP_TRACE_INFO1("hciEvtProcessIntEvt evt=%d", pEvt->hdr.event);
+  //APP_TRACE_INFO1("hciEvtProcessIntEvt evt=%d", pEvt->hdr.event);
 
   switch (pEvt->hdr.event)
   {

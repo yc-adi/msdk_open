@@ -60,9 +60,11 @@ uint32_t            bbIsrStartTime;     /*!< ISR start time. */
  *  operations are execute in the given channel map, the BOD is considered completed.
  */
 /*************************************************************************************************/
-static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t status, bool_t firstOpInSet)
+static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t status, bool_t firstOpInSet, uint8_t src)
 {
-  if (BbGetBodTerminateFlag())
+  uint8_t flag = BbGetBodTerminateFlag();
+  APP_TRACE_INFO4("@?@ bbSetAdvOp st=%d 1st=%d term=%d src=%d", status, firstOpInSet, flag, src);
+  if (flag)
   {
     /* Client terminated. */
     return TRUE;
@@ -115,17 +117,18 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
     if (pAdv->pRxReqBuf)
     {
       /* Schedule with relative frame gap. */
-      bbBleCb.bbParam.dueUsec = BbAdjustTime(PalBbGetCurrentTime() + BbGetSchSetupDelayUs());
+      bbBleCb.bbParam.dueUsec = BbAdjustTime(PalBbGetCurrentTime() + BbGetSchSetupDelayUs(4));
     }
     else
     {
       /* Schedule with absolute frame gap. */
       uint32_t  advGap = SchBleCalcAdvPktDurationUsec(pBle->chan.txPhy, pBle->chan.initTxPhyOptions, pAdv->txAdvLen) +
-                         BbGetSchSetupDelayUs();
+                         BbGetSchSetupDelayUs(5);
       uint32_t auxOffsUsec = SchBleGetAlignedAuxOffsUsec(advGap);
       bbBleCb.bbParam.dueUsec = BbAdjustTime(bbBleCb.bbParam.dueUsec + auxOffsUsec);
     }
   }
+  //APP_TRACE_INFO1("@?@ dueUsec=%d", bbBleCb.bbParam.dueUsec);
 
   bbBleCb.evtState = BB_EVT_STATE_TX_ADV_IND;
 
@@ -209,7 +212,7 @@ static void bbSlvAdvTxCompCback(uint8_t status)
       else
       {
         /* Operation completed. */
-        bodComplete = bbSetupAdvOp(pCur, pAdv, status, FALSE);
+        bodComplete = bbSetupAdvOp(pCur, pAdv, status, FALSE, 1);
       }
 
       BB_INC_STAT(bbAdvStats.txAdv);
@@ -217,7 +220,7 @@ static void bbSlvAdvTxCompCback(uint8_t status)
 
     case BB_EVT_STATE_TX_SCAN_OR_CONN_RSP:
       /* Operation completed. */
-      bodComplete = bbSetupAdvOp(pCur, pAdv, status, FALSE);
+      bodComplete = bbSetupAdvOp(pCur, pAdv, status, FALSE, 2);
       BB_INC_STAT(bbAdvStats.txRsp);
       break;
 
@@ -242,7 +245,7 @@ Cleanup:
         break;
     }
 
-    BbTerminateBod();
+    BbTerminateBod(8);
   }
 
 #if (BB_SNIFFER_ENABLED == TRUE)
@@ -330,7 +333,7 @@ static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint3
           else
           {
             /* Operation completed. */
-            bodComplete = bbSetupAdvOp(pCur, pAdv, status, FALSE);
+            bodComplete = bbSetupAdvOp(pCur, pAdv, status, FALSE, 3);
           }
 
           if (pduAllow && pAdv->rxReqPostCback)
@@ -346,7 +349,7 @@ static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint3
         case BB_STATUS_FAILED:
         default:
           /* Operation completed. */
-          bodComplete = bbSetupAdvOp(pCur, pAdv, status, FALSE);
+          bodComplete = bbSetupAdvOp(pCur, pAdv, status, FALSE, 4);
           break;
       }
 
@@ -390,7 +393,7 @@ static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint3
         break;
     }
 
-    BbTerminateBod();
+    BbTerminateBod(9);
   }
 
 #if (BB_SNIFFER_ENABLED == TRUE)
@@ -428,7 +431,7 @@ static void bbSlvExecuteAdvOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
   bbBleCb.numChUsed = 0;
   bbBleCb.advChIdx = pAdv->firstAdvChIdx;
 
-  if (bbSetupAdvOp(pBod, pAdv, BB_STATUS_SUCCESS, TRUE))
+  if (bbSetupAdvOp(pBod, pAdv, BB_STATUS_SUCCESS, TRUE, 5))
   {
     BbSetBodTerminateFlag();
   }

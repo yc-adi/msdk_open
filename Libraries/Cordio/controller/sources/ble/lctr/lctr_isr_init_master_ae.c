@@ -197,7 +197,7 @@ void lctrMstExtInitiateEndOp(BbOpDesc_t *pOp)
 
     while (TRUE)
     {
-      if (SchInsertAtDueTime(pConnBod, lctrConnResolveConflict))
+      if (SchInsertAtDueTime(pConnBod, lctrConnResolveConflict, 10))
       {
         break;
       }
@@ -236,7 +236,7 @@ void lctrMstAuxInitiateEndOp(BbOpDesc_t *pOp)
 
     while (TRUE)
     {
-      if (SchInsertAtDueTime(pConnBod, lctrConnResolveConflict))
+      if (SchInsertAtDueTime(pConnBod, lctrConnResolveConflict, 11))
       {
         break;
       }

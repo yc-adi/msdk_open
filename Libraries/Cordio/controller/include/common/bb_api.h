@@ -325,7 +325,7 @@ bool_t BbGetBodTerminateFlag(void);
  *              current executing BOD, typically in the related ISRs.
  */
 /*************************************************************************************************/
-void BbTerminateBod(void);
+void BbTerminateBod(uint8_t src);
 
 /*************************************************************************************************/
 /*!
@@ -357,7 +357,7 @@ uint32_t BbGetBbTimerBoundaryUs(void);
  *  Returns the scheduler setup delay.
  */
 /*************************************************************************************************/
-uint16_t BbGetSchSetupDelayUs(void);
+uint16_t BbGetSchSetupDelayUs(uint8_t src);
 
 /*************************************************************************************************/
 /*!

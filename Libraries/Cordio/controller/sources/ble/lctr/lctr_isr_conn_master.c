@@ -436,7 +436,7 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
 
     pBle->chan.chanIdx = lctrChSelHdlr[pCtx->usedChSel](pCtx, 0);
 
-    if (SchInsertAtDueTime(pOp, lctrConnResolveConflict))
+    if (SchInsertAtDueTime(pOp, lctrConnResolveConflict, 8))
     {
       break;
     }

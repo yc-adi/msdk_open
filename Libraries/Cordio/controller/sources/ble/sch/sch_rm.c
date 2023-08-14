@@ -1014,7 +1014,7 @@ uint32_t SchRmGetOffsetUsec(uint32_t defOffsUsec, uint8_t handle, uint32_t refTi
         if (schRmCb.rsvn[i].refTimeCb != NULL)
         {
           (void)schRmCb.rsvn[i].refTimeCb(i, &uncommonOffsetUs);
-          uncommonOffsetUs += BbGetSchSetupDelayUs() + SCH_RM_MARGIN_UNCOMMON_US;
+          uncommonOffsetUs += BbGetSchSetupDelayUs(15) + SCH_RM_MARGIN_UNCOMMON_US;
         }
       }
     }

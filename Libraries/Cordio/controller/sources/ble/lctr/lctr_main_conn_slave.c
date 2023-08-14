@@ -370,7 +370,7 @@ void lctrSlvConnBuildOp(lctrConnCtx_t *pCtx)
   {
     pBle->chan.chanIdx = lctrChSelHdlr[pCtx->usedChSel](pCtx, 0);
 
-    if (SchInsertAtDueTime(pOp, lctrConnResolveConflict))
+    if (SchInsertAtDueTime(pOp, lctrConnResolveConflict, 24))
     {
       LL_TRACE_INFO1("    >>> Connection established, handle=%u <<<", LCTR_GET_CONN_HANDLE(pCtx));
       LL_TRACE_INFO1("                                connIntervalUsec=%u", LCTR_CONN_IND_US(pCtx->connInterval));

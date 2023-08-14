@@ -27,6 +27,7 @@
 #include "bb_ble_int.h"
 #include <string.h>
 #include "bb_ble_sniffer_api.h"
+#include "wsf_trace.h"
 
 /**************************************************************************************************
   Global Variables
@@ -78,7 +79,7 @@ static void bbSlvConnTxCompCback(uint8_t status)
       PalBbBleCancelTifs();
 
       /* Tx completion is end of BOD. */
-      BbTerminateBod();
+      BbTerminateBod(22);
     }
   }
   else
@@ -91,7 +92,7 @@ static void bbSlvConnTxCompCback(uint8_t status)
     }
 
     /* Tx failure is end of BOD. */
-    BbTerminateBod();
+    BbTerminateBod(23);
   }
 
   /* Update statistics. */
@@ -190,7 +191,7 @@ static void bbSlvConnRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint
         break;
     }
 
-    BbTerminateBod();
+    BbTerminateBod(24);
   }
 
   /* Update statistics. */
@@ -252,6 +253,7 @@ static void bbSlvExecuteConnOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
   bbBleCb.bbParam.rxCback = bbSlvConnRxCompCback;
   bbBleCb.bbParam.dueUsec = BbAdjustTime(pBod->dueUsec);
   pBod->dueUsec = bbBleCb.bbParam.dueUsec;
+  APP_TRACE_INFO1("@?@ connOp dueUsec=%d", pBod->dueUsec);
   bbBleCb.bbParam.rxTimeoutUsec = pConn->rxSyncDelayUsec;
 
   PalBbBleSetDataParams(&bbBleCb.bbParam);

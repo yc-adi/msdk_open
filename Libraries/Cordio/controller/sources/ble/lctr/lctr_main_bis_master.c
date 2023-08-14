@@ -351,7 +351,7 @@ void lctrMstBigBuildOp(lctrBigCtx_t *pBigCtx, LctrAcadBigInfo_t *pBigInfo)
 
     lctrSelectBigChannels(pBigCtx);
 
-    if (SchInsertAtDueTime(pOp, NULL))
+    if (SchInsertAtDueTime(pOp, NULL, 20))
     {
       break;
     }

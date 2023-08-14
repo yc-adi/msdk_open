@@ -197,6 +197,8 @@ void lctrSlvAdvPostProcessHandler(BbOpDesc_t *pOp, const uint8_t *pReqBuf)
 /*************************************************************************************************/
 void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
 {
+  uint32_t u32Temp = 0;
+
   BbBleData_t * const pBle = pOp->prot.pBle;
   BbBleSlvAdvEvent_t * const pAdv = &pBle->op.slvAdv;
 
@@ -213,7 +215,7 @@ void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
       /* pMsg->handle = 0; */           /* not used */
       pMsg->dispId = LCTR_DISP_ADV;
       pMsg->event = LCTR_ADV_MSG_TERMINATE;
-
+      APP_TRACE_INFO0("msg tx adv term");   // @?@
       WsfMsgSend(lmgrPersistCb.handlerId, pMsg);
     }
 
@@ -242,6 +244,7 @@ void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
       newAddr = localRpa;
     }
   }
+
   if (update)
   {
     uint8_t *pBuf = lctrSlvAdv.advBuf + LL_ADV_HDR_LEN;
@@ -306,6 +309,7 @@ void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
     }
 #endif
   }
+  
   SchBleCalcAdvOpDuration(pOp, 0);
 
   /*** Reschedule operation ***/
@@ -331,7 +335,7 @@ void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
         if (lmgrSlvAdvCb.advParam.advInterMinUsec == lmgrSlvAdvCb.advParam.advInterMaxUsec)
         {
           pOp->dueUsec += lmgrSlvAdvCb.advParam.advInterMinUsec;
-          result = SchInsertAtDueTime(pOp, NULL);
+          result = SchInsertAtDueTime(pOp, NULL, 3);
         }
         else
         {
@@ -354,6 +358,7 @@ void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
 
       break;
     }
+    
     case LL_ADV_CONN_DIRECT_HIGH_DUTY:
     {
       uint32_t advEventStart = pOp->dueUsec;
@@ -397,6 +402,7 @@ void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
       }
       break;
     }
+
     default:
       break;
   }

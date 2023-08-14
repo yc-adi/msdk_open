@@ -783,7 +783,7 @@ void lctrMstAuxDiscoverOpCommit(lctrExtScanCtx_t *pExtScanCtx, lctrAuxPtr_t *pAu
   pOp->dueUsec = startTs + auxOffsetUsec;
   SchBleCalcAdvOpDuration(pOp, 0);
 
-  if (SchInsertAtDueTime(pOp, NULL))
+  if (SchInsertAtDueTime(pOp, NULL, 13))
   {
     pExtScanCtx->auxOpPending = TRUE;
   }
@@ -1312,7 +1312,7 @@ void lctrMstPerScanOpCommit(lctrExtScanCtx_t *pExtScanCtx, lctrAuxPtr_t *pAuxPtr
 
   while (TRUE)
   {
-    if (SchInsertAtDueTime(pOp, lctrPerScanResolveConflict))
+    if (SchInsertAtDueTime(pOp, lctrPerScanResolveConflict, 14))
     {
       LL_TRACE_INFO1("    >>> Periodic scan started, handle=%u <<<", LCTR_GET_PER_SCAN_HANDLE(pPerScanCtx));
       LL_TRACE_INFO1("                               pOp=%08x", pOp);
@@ -1460,7 +1460,7 @@ void lctrMstPerScanTransferOpCommit(uint16_t connHandle)
 
   while (TRUE)
   {
-    if (SchInsertAtDueTime(pOp, lctrPerScanResolveConflict))
+    if (SchInsertAtDueTime(pOp, lctrPerScanResolveConflict, 15))
     {
       LL_TRACE_INFO1("    >>> Periodic scan from transfer started, handle=%u <<<", LCTR_GET_PER_SCAN_HANDLE(pPerScanCtx));
       LL_TRACE_INFO1("                                             pOp=%08x", pOp);

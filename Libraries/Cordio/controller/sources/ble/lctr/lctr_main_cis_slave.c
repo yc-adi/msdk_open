@@ -389,7 +389,7 @@ void lctrSlvCisCigOpCommit(lctrCigCtx_t *pCigCtx, lctrConnCtx_t *pCtx, lctrCisCt
 
   while (TRUE)
   {
-    if (SchInsertAtDueTime(pOp, lctrCisResolveConflict))
+    if (SchInsertAtDueTime(pOp, lctrCisResolveConflict, 23))
     {
       LL_TRACE_INFO1("    >>> CIS established, cisHandle=%u <<<", pCisCtx->cisHandle);
       LL_TRACE_INFO1("                         isoInterval=%u", LCTR_ISO_INT_TO_US(pCigCtx->isoInterval));

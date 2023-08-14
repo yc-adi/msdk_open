@@ -959,7 +959,7 @@ void lctrSlvCisCigEndOp(BbOpDesc_t *pOp)
         /* TODO: resolve magic number */
         if (pCisCtx->nse < 3)
         {
-          if (wwTotalUsec >= ((cigInterUsec >> 1) - WSF_MAX(LL_BLE_TIFS_US, BbGetSchSetupDelayUs())))
+          if (wwTotalUsec >= ((cigInterUsec >> 1) - WSF_MAX(LL_BLE_TIFS_US, BbGetSchSetupDelayUs(9))))
           {
             LL_TRACE_WARN2("!!! Terminating CIG due to excessive WW handle=%u, eventCounter=%u", pCisCtx->cisHandle, pCisCtx->cisEvtCounter);
             lctrSendCisMsg(pCisCtx, LCTR_CIS_MSG_CIS_CLOSED);
@@ -1007,7 +1007,7 @@ void lctrSlvCisCigEndOp(BbOpDesc_t *pOp)
       pCigCtx->offsetUsec = 0;
     }
 
-    if (SchInsertAtDueTime(pOp, lctrCisResolveConflict))
+    if (SchInsertAtDueTime(pOp, lctrCisResolveConflict, 7))
     {
       break;
     }

@@ -1128,7 +1128,7 @@ void lctrSlvPeriodicAdvEndOp(BbOpDesc_t *pOp)
     pAdvSet->perParam.perChIdx = lctrPeriodicSelectNextChannel(&pAdvSet->perParam.perChanParam,
                                                                pAdvSet->perParam.perEventCounter);
 
-    if (SchInsertAtDueTime(pOp, NULL))
+    if (SchInsertAtDueTime(pOp, NULL, 2))
     {
       break;
     }

@@ -268,7 +268,7 @@ void SchBleCalcAdvOpDuration(BbOpDesc_t *pBod, uint8_t fragLen)
 
       WSF_ASSERT(numChan > 0);
 
-      minDurUsec = (numChan - 1) * SchBleGetAlignedAuxOffsUsec(pktDuration + BbGetSchSetupDelayUs());
+      minDurUsec = (numChan - 1) * SchBleGetAlignedAuxOffsUsec(pktDuration + BbGetSchSetupDelayUs(14));
       minDurUsec += pktDuration;   /* For the last channel. */
 
       if (pAdv->pRxReqBuf)

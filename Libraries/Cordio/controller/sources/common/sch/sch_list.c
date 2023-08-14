@@ -34,7 +34,7 @@
 **************************************************************************************************/
 
 /*! \brief      Total BOD time including setup delay. */
-#define SCH_TOTAL_DUR(p)                (p->minDurUsec + BbGetSchSetupDelayUs())
+#define SCH_TOTAL_DUR(p)                (p->minDurUsec + BbGetSchSetupDelayUs(19))
 
 /*! \brief      Time immediately after the given BOD. */
 #define SCH_END_TIME(p)                 (p->dueUsec + SCH_TOTAL_DUR(p))
@@ -143,7 +143,7 @@ static inline bool_t SchEnoughTimeToCancel(BbOpDesc_t *pBod)
   const uint32_t curTime = PalBbGetCurrentTime();
   const uint32_t delta = BbGetTargetTimeDelta(pBod->dueUsec, curTime);
 
-  if (delta >= BbGetSchSetupDelayUs())
+  if (delta >= BbGetSchSetupDelayUs(20))
   {
     result = TRUE;
   }
@@ -189,7 +189,7 @@ static inline bool_t schCheckCancelHead(void)
  *  \param      pItem   Item to insert.
  */
 /*************************************************************************************************/
-static inline void schInsertToEmptyList(BbOpDesc_t *pItem)
+static inline void schInsertToEmptyList(BbOpDesc_t *pItem, uint8_t src)
 {
   WSF_ASSERT(pItem);
   WSF_ASSERT(schCb.pHead == NULL);
@@ -200,7 +200,7 @@ static inline void schInsertToEmptyList(BbOpDesc_t *pItem)
 
   pItem->pPrev = NULL;
   pItem->pNext = NULL;
-
+  APP_TRACE_INFO2("@?@ Empty dueUsec=%d src=%d ", pItem->dueUsec, src);
   SCH_TRACE_INFO1("++| schInsertToEmptyList |++ pBod=0x%08x", (uint32_t)pItem);
   SCH_TRACE_INFO1("++|                      |++     .dueUsec=%u", pItem->dueUsec);
   SCH_TRACE_INFO1("++|                      |++     .minDurUsec=%u", pItem->minDurUsec);
@@ -232,7 +232,7 @@ static inline void schInsertBefore(BbOpDesc_t *pItem, BbOpDesc_t *pTgt)
   {
     schCb.pHead = pItem;
   }
-
+  APP_TRACE_INFO1("@?@ Before dueUsec=%d", pItem->dueUsec);
   SCH_TRACE_INFO1("++| schInsertBefore      |++ pBod=0x%08x", (uint32_t)pItem);
   SCH_TRACE_INFO1("++|                      |++     .dueUsec=%u", pItem->dueUsec);
   SCH_TRACE_INFO1("++|                      |++     .minDurUsec=%u", pItem->minDurUsec);
@@ -264,7 +264,7 @@ static inline void schInsertAfter(BbOpDesc_t *pItem, BbOpDesc_t *pTgt)
   {
     schCb.pTail = pItem;
   }
-
+  APP_TRACE_INFO1("@?@ After dueUsec=%d", pItem->dueUsec);
   SCH_TRACE_INFO1("++| schInsertAfter       |++ pBod=0x%08x", (uint32_t)pItem);
   SCH_TRACE_INFO1("++|                      |++     .dueUsec=%u", pItem->dueUsec);
   SCH_TRACE_INFO1("++|                      |++     .minDurUsec=%u", pItem->minDurUsec);
@@ -514,7 +514,7 @@ static bool_t SchResolveConflict(BbOpDesc_t *pItem, BbOpDesc_t *pTgt)
     else
     {
       /* Insert at head. */
-      schInsertToEmptyList(pItem);
+      schInsertToEmptyList(pItem, 1);
     }
 
     /* Call abort callback for all removed BODs. */
@@ -603,6 +603,7 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       /* If HEAD BOD due time is not close, add scheduler timer to load it in the future.
        * Always stop existing timer first for simplicity.
        */
+      APP_TRACE_INFO1("@?@ try load, stop then start %d\n", execTimeUsec);
       PalTimerStop();
       PalTimerStart(execTimeUsec);
     }
@@ -652,12 +653,12 @@ void SchInsertNextAvailable(BbOpDesc_t *pBod)
 #if (SCH_CHECK_LIST_INTEGRITY)
   SchCheckIsNotInserted(pBod);
 #endif
-
-  pBod->dueUsec = PalBbGetCurrentTime() + BbGetSchSetupDelayUs();
-
+  uint16_t delayUs = BbGetSchSetupDelayUs(21);
+  pBod->dueUsec = PalBbGetCurrentTime() + delayUs;
+  APP_TRACE_INFO2("@?@ delay=%d dueUsec=%d", delayUs, pBod->dueUsec);
   if (schCb.pHead == NULL)
   {
-    schInsertToEmptyList(pBod);
+    schInsertToEmptyList(pBod, 2);
   }
   else if (SCH_IS_DONE_BEFORE(pBod, schCb.pHead) &&
            schCheckCancelHead())
@@ -706,16 +707,18 @@ void SchInsertNextAvailable(BbOpDesc_t *pBod)
  *  Insert BOD in the active list at the specified due time.
  */
 /*************************************************************************************************/
-bool_t SchInsertAtDueTime(BbOpDesc_t *pBod, BbConflictAct_t conflictCback)
+bool_t SchInsertAtDueTime(BbOpDesc_t *pBod, BbConflictAct_t conflictCback, uint8_t src)
 {
   bool_t result = FALSE;
 
 #if (SCH_CHECK_LIST_INTEGRITY)
   SchCheckIsNotInserted(pBod);
 #endif
+  APP_TRACE_INFO1("@?@ ins at due, src=%d", src);
 
-  if (!schDueTimeInFuture(pBod))
+  if (!schDueTimeInFuture(pBod, 1))
   {
+    APP_TRACE_INFO1("@?@ ins at due, src=%d InFuture=0", src);
     return FALSE;
   }
 
@@ -723,7 +726,7 @@ bool_t SchInsertAtDueTime(BbOpDesc_t *pBod, BbConflictAct_t conflictCback)
   {
     /* No conflict when list is empty. */
     WSF_ASSERT(pBod != schCb.pHead);
-    schInsertToEmptyList(pBod);
+    schInsertToEmptyList(pBod, 3);
     result = TRUE;
   }
   else
@@ -803,7 +806,7 @@ bool_t SchInsertEarlyAsPossible(BbOpDesc_t *pBod, uint32_t min, uint32_t max)
   /* Try inserting at minimum interval. */
   pBod->dueUsec += min;
 
-  if (!schDueTimeInFuture(pBod))
+  if (!schDueTimeInFuture(pBod, 2))
   {
     if (max != SCH_MAX_SPAN)
     {
@@ -814,13 +817,15 @@ bool_t SchInsertEarlyAsPossible(BbOpDesc_t *pBod, uint32_t min, uint32_t max)
     else
     {
       /* With SCH_MAX_SPAN, this function will insert the BOD regardless of the current due. */
-      pBod->dueUsec = PalBbGetCurrentTime() + BbGetSchSetupDelayUs();
+      uint16_t delayUs = BbGetSchSetupDelayUs(22);
+      pBod->dueUsec = PalBbGetCurrentTime() + delayUs;
+      APP_TRACE_INFO2("@?@ Early1 delay=%d dueUsec=%d", delayUs, pBod->dueUsec);
     }
   }
 
   if (schCb.pHead == NULL)
   {
-    schInsertToEmptyList(pBod);
+    schInsertToEmptyList(pBod, 4);
     result = TRUE;
   }
   else if (SCH_IS_DUE_BEFORE (pBod, schCb.pHead) &&
@@ -922,15 +927,15 @@ bool_t SchInsertLateAsPossible(BbOpDesc_t *pBod, uint32_t min, uint32_t max)
 
   if (schCb.pTail == NULL)
   {
-    if (schDueTimeInFuture(pBod))
+    if (schDueTimeInFuture(pBod, 3))
     {
-      schInsertToEmptyList(pBod);
+      schInsertToEmptyList(pBod, 5);
       result = TRUE;
     }
   }
   else if (SCH_IS_DUE_AFTER(pBod, schCb.pTail))
   {
-    if (schDueTimeInFuture(pBod))
+    if (schDueTimeInFuture(pBod, 4))
     {
       /* Insert at tail. */
       WSF_ASSERT(pBod != schCb.pTail);
@@ -955,7 +960,7 @@ bool_t SchInsertLateAsPossible(BbOpDesc_t *pBod, uint32_t min, uint32_t max)
 
         if ((targetOffset >= min) &&
             SCH_IS_DUE_BEFORE(pBod, pCur) &&
-            schDueTimeInFuture(pBod) &&
+            schDueTimeInFuture(pBod, 5) &&
             schCheckCancelHead())
         {
           /* Insert at head. */
@@ -969,7 +974,7 @@ bool_t SchInsertLateAsPossible(BbOpDesc_t *pBod, uint32_t min, uint32_t max)
       {
         pBod->dueUsec = SCH_END_TIME(pCur->pPrev);
 
-        if (!schDueTimeInFuture(pBod))
+        if (!schDueTimeInFuture(pBod, 6))
         {
           break;
         }
@@ -1150,7 +1155,7 @@ bool_t SchIsBodCancellable(BbOpDesc_t *pBod)
   const uint32_t curTime = PalBbGetCurrentTime();
   const uint32_t delta = BbGetTargetTimeDelta(pBod->dueUsec, curTime);
 
-  if (delta >= (uint32_t)(BbGetSchSetupDelayUs() + SCH_CANCEL_MARGIN_USEC))
+  if (delta >= (uint32_t)(BbGetSchSetupDelayUs(23) + SCH_CANCEL_MARGIN_USEC))
   {
     result = TRUE;
   }

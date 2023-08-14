@@ -1049,7 +1049,7 @@ void lctrMstCisCigOpCommit(lctrCigCtx_t *pCigCtx, lctrConnCtx_t *pCtx, lctrCisCt
 
   pOp->dueUsec = refTime + pCisCtx->offsetUsec;
 
-  (void)SchInsertAtDueTime(pOp, lctrCisResolveConflict);    /* CIS has the highest priority so scheduling will never fail. */
+  (void)SchInsertAtDueTime(pOp, lctrCisResolveConflict, 22);    /* CIS has the highest priority so scheduling will never fail. */
 
   pCigCtx->isBodStarted = TRUE;
 }

@@ -136,7 +136,7 @@ uint32_t gNextJobTimeInUs = 0;
 #define MIN_DEEP_SLEEP_TIME_IN_US       (WAKE_UP_TIME_IN_US)
 
 #define WAKEUP_IN_WUT_TICK      ((uint64_t)WAKEUP_US / (uint64_t)1000000 * (uint64_t)32768)
-#define RESTORE_OP_IN_WUT_TICK  65
+#define RESTORE_OP_IN_WUT_TICK  (185)
 #define RESTORE_OP_IN_US        ((uint64_t)RESTORE_OP_IN_WUT_TICK / (uint64_t)32768 * (uint64_t)1000000)
 
 #define WAKEUP_32M_US       (3200)

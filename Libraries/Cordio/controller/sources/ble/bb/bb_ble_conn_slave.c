@@ -253,7 +253,7 @@ static void bbSlvExecuteConnOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
   bbBleCb.bbParam.rxCback = bbSlvConnRxCompCback;
   bbBleCb.bbParam.dueUsec = BbAdjustTime(pBod->dueUsec);
   pBod->dueUsec = bbBleCb.bbParam.dueUsec;
-  APP_TRACE_INFO1("@?@ connOp dueUsec=%d", pBod->dueUsec);
+  //APP_TRACE_INFO1("@?@ connOp dueUsec=%d", pBod->dueUsec);
   bbBleCb.bbParam.rxTimeoutUsec = pConn->rxSyncDelayUsec;
 
   PalBbBleSetDataParams(&bbBleCb.bbParam);

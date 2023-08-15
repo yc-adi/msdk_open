@@ -173,7 +173,7 @@ static void l2cHciAclCback(uint8_t *pPacket)
     /* parse CID */
     BSTREAM_TO_UINT16(cid, p);
 
-    APP_TRACE_INFO3("l2cHciAclCback, hndl %d, cid %d %s", handle, cid, GetL2cHciAclCidStr(cid));
+    //APP_TRACE_INFO3("@?@ l2cHciAclCback, hndl %d, cid %d %s", handle, cid, GetL2cHciAclCidStr(cid));
     switch (cid)
     {
       case L2C_CID_LE_SIGNALING:
@@ -357,6 +357,6 @@ void L2cDataReq(uint16_t cid, uint16_t handle, uint16_t len, uint8_t *pPacket)
   UINT16_TO_BSTREAM(p, cid);
 
   /* Send to HCI */
-  APP_TRACE_INFO3("L2cDataReq, hndl %d, len %d, cid %d", handle, len, cid);
+  //@?@ APP_TRACE_INFO3("L2cDataReq, hndl %d, len %d, cid %d", handle, len, cid);
   HciSendAclData(pPacket);
 }

@@ -1691,7 +1691,7 @@ uint8_t *DmConnLocalRpa(dmConnId_t connId)
 uint8_t DmConnSecLevel(dmConnId_t connId)
 {
   WSF_ASSERT((connId > 0) && (connId <= DM_CONN_MAX));
-  APP_TRACE_INFO2("dmConnCb.ccb[%d].secLevel=%d", connId - 1, dmConnCb.ccb[connId-1].secLevel);
+  //@?@ APP_TRACE_INFO2("dmConnCb.ccb[%d].secLevel=%d", connId - 1, dmConnCb.ccb[connId-1].secLevel);
   return dmConnCb.ccb[connId-1].secLevel;
 }
 
@@ -1726,7 +1726,7 @@ void DmConnSetIdle(dmConnId_t connId, uint16_t idleMask, uint8_t idle)
 
   WsfTaskUnlock();
 
-  DM_TRACE_INFO2("connId=%d idleMask=0x%04x", connId, dmConnCb.ccb[connId-1].idleMask);
+  //@?@ DM_TRACE_INFO2("connId=%d idleMask=0x%04x", connId, dmConnCb.ccb[connId-1].idleMask);
 }
 
 /*************************************************************************************************/

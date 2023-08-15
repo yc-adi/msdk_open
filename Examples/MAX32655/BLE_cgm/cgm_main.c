@@ -748,8 +748,8 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         CgmpsProcMsg(&pMsg->hdr);
         conn_opened = 0;
 
-        APP_TRACE_INFO1("dbg ndx=%d", u32DbgBufNdx);
-        print_dbg_buf();
+        //APP_TRACE_INFO1("dbg ndx=%d", u32DbgBufNdx);
+        //print_dbg_buf();
 
         uiEvent = APP_UI_CONN_CLOSE;
 

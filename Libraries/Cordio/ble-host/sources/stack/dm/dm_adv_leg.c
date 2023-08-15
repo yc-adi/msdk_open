@@ -108,7 +108,7 @@ static void dmAdvConfig(uint8_t advType, uint8_t peerAddrType, uint8_t *pPeerAdd
 /*************************************************************************************************/
 void dmAdvActConfig(dmAdvMsg_t *pMsg)
 {
-  DM_TRACE_INFO1("dmAdvActConfig: state: %d", dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT]);
+  //@?@ DM_TRACE_INFO1("dmAdvActConfig: state: %d", dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT]);
 
   if (dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT] == DM_ADV_STATE_IDLE)
   {

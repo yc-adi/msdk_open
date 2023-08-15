@@ -63,7 +63,7 @@ uint32_t            bbIsrStartTime;     /*!< ISR start time. */
 static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t status, bool_t firstOpInSet, uint8_t src)
 {
   uint8_t flag = BbGetBodTerminateFlag();
-  APP_TRACE_INFO4("@?@ bbSetAdvOp st=%d 1st=%d term=%d src=%d", status, firstOpInSet, flag, src);
+  //APP_TRACE_INFO4("@?@ bbSetAdvOp st=%d 1st=%d term=%d src=%d", status, firstOpInSet, flag, src);
   if (flag)
   {
     /* Client terminated. */

@@ -200,7 +200,7 @@ static inline void schInsertToEmptyList(BbOpDesc_t *pItem, uint8_t src)
 
   pItem->pPrev = NULL;
   pItem->pNext = NULL;
-  APP_TRACE_INFO2("@?@ Empty dueUsec=%d src=%d ", pItem->dueUsec, src);
+  //APP_TRACE_INFO2("@?@ Empty dueUsec=%d src=%d ", pItem->dueUsec, src);
   SCH_TRACE_INFO1("++| schInsertToEmptyList |++ pBod=0x%08x", (uint32_t)pItem);
   SCH_TRACE_INFO1("++|                      |++     .dueUsec=%u", pItem->dueUsec);
   SCH_TRACE_INFO1("++|                      |++     .minDurUsec=%u", pItem->minDurUsec);
@@ -232,7 +232,7 @@ static inline void schInsertBefore(BbOpDesc_t *pItem, BbOpDesc_t *pTgt)
   {
     schCb.pHead = pItem;
   }
-  APP_TRACE_INFO1("@?@ Before dueUsec=%d", pItem->dueUsec);
+  //APP_TRACE_INFO1("@?@ Before dueUsec=%d", pItem->dueUsec);
   SCH_TRACE_INFO1("++| schInsertBefore      |++ pBod=0x%08x", (uint32_t)pItem);
   SCH_TRACE_INFO1("++|                      |++     .dueUsec=%u", pItem->dueUsec);
   SCH_TRACE_INFO1("++|                      |++     .minDurUsec=%u", pItem->minDurUsec);
@@ -264,7 +264,7 @@ static inline void schInsertAfter(BbOpDesc_t *pItem, BbOpDesc_t *pTgt)
   {
     schCb.pTail = pItem;
   }
-  APP_TRACE_INFO1("@?@ After dueUsec=%d", pItem->dueUsec);
+  //APP_TRACE_INFO1("@?@ After dueUsec=%d", pItem->dueUsec);
   SCH_TRACE_INFO1("++| schInsertAfter       |++ pBod=0x%08x", (uint32_t)pItem);
   SCH_TRACE_INFO1("++|                      |++     .dueUsec=%u", pItem->dueUsec);
   SCH_TRACE_INFO1("++|                      |++     .minDurUsec=%u", pItem->minDurUsec);
@@ -603,7 +603,7 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       /* If HEAD BOD due time is not close, add scheduler timer to load it in the future.
        * Always stop existing timer first for simplicity.
        */
-      APP_TRACE_INFO1("@?@ try load, stop then start %d\n", execTimeUsec);
+      //APP_TRACE_INFO1("@?@ try load, stop then start %d\n", execTimeUsec);
       PalTimerStop();
       PalTimerStart(execTimeUsec);
     }
@@ -655,7 +655,7 @@ void SchInsertNextAvailable(BbOpDesc_t *pBod)
 #endif
   uint16_t delayUs = BbGetSchSetupDelayUs(21);
   pBod->dueUsec = PalBbGetCurrentTime() + delayUs;
-  APP_TRACE_INFO2("@?@ delay=%d dueUsec=%d", delayUs, pBod->dueUsec);
+  //APP_TRACE_INFO2("@?@ delay=%d dueUsec=%d", delayUs, pBod->dueUsec);
   if (schCb.pHead == NULL)
   {
     schInsertToEmptyList(pBod, 2);
@@ -714,11 +714,11 @@ bool_t SchInsertAtDueTime(BbOpDesc_t *pBod, BbConflictAct_t conflictCback, uint8
 #if (SCH_CHECK_LIST_INTEGRITY)
   SchCheckIsNotInserted(pBod);
 #endif
-  APP_TRACE_INFO1("@?@ ins at due, src=%d", src);
+  //APP_TRACE_INFO1("@?@ ins at due, src=%d", src);
 
   if (!schDueTimeInFuture(pBod, 1))
   {
-    APP_TRACE_INFO1("@?@ ins at due, src=%d InFuture=0", src);
+    //APP_TRACE_INFO1("@?@ ins at due, src=%d InFuture=0", src);
     return FALSE;
   }
 

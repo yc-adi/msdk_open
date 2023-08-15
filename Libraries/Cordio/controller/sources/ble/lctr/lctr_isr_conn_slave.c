@@ -402,7 +402,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
   else if (pCtx->data.slv.rxFromMaster)
   {
     /* Reset supervision timer. */
-    if (conn_opened != 0) APP_TRACE_INFO1("@?@ lctrSlvConnEndOp rx sup timeout %d", pCtx->supTimeoutMs);  // @?@ will be triggered every 30 ms
+    //if (conn_opened != 0) APP_TRACE_INFO1("@?@ lctrSlvConnEndOp rx sup timeout %d", pCtx->supTimeoutMs);  // @?@ will be triggered every 30 ms
     WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs);
   }
 
@@ -555,7 +555,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
 
     /* Advance to next interval. */
     pOp->dueUsec = pCtx->data.slv.anchorPointUsec + connInterUsec - wwTotalUsec;
-    APP_TRACE_INFO1("@?@ connEndOp dueUsec=%d", pOp->dueUsec);
+    //APP_TRACE_INFO1("@?@ connEndOp dueUsec=%d", pOp->dueUsec);
 
     pOp->minDurUsec = pCtx->data.slv.txWinSizeUsec + pCtx->effConnDurUsec + wwTotalUsec;
     pConn->rxSyncDelayUsec = pCtx->data.slv.txWinSizeUsec + (wwTotalUsec << 1);

@@ -308,7 +308,7 @@ bool_t BbGetBodTerminateFlag(void)
 void BbTerminateBod(uint8_t src)
 {
   WSF_ASSERT(bbCb.bodCompCback);
-  APP_TRACE_INFO1("@?@ term bod src=%d", src);
+  //APP_TRACE_INFO1("@?@ term bod src=%d", src);
   
   BbOpDesc_t * const pBod = bbCb.pOpInProgress;
   if (pBod &&
@@ -360,7 +360,7 @@ uint32_t BbGetBbTimerBoundaryUs(void)
 /*************************************************************************************************/
 uint16_t BbGetSchSetupDelayUs(uint8_t src)
 {
-  APP_TRACE_INFO2("@?@ get delay, src=%d delay=%d", src, pBbRtCfg->schSetupDelayUs);
+  //APP_TRACE_INFO2("@?@ get delay, src=%d delay=%d", src, pBbRtCfg->schSetupDelayUs);
   return pBbRtCfg->schSetupDelayUs;
 }
 

@@ -133,7 +133,8 @@ char *GetDmEvtStr(uint8_t evt)
     case 39: return "CONN_OPEN";
     case 40: return "CONN_CLOSE";           // DM_CONN_CLOSE_IND
     case 41: return "CONN_UPDATE";
-    case 42: return "PAIR_CMPL";            // DM_SEC_PAIR_CMPL_IND
+    case 42: return "PAIR_CMPL";            // 
+    case 43: return "PAIR_FAIL";            // DM_SEC_PAIR_FAIL_IND
     case 44: return "SEC_ENCRYPT";
     case 46: return "AUTH_REQ";
     case 47: return "SEC_KEY";              // DM_SEC_KEY_IND

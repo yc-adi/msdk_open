@@ -29,6 +29,7 @@
 #include "wsf_trace.h"
 #include "app_ui.h"
 #include "pal_uart.h"
+#include "uart.h"
 
 extern uint8_t conn_opened;
 
@@ -37,6 +38,7 @@ extern uint8_t conn_opened;
 **************************************************************************************************/
 
 /*! \brief Callback struct */
+extern void *AsyncTxRequests[MXC_UART_INSTANCES];
 static appUiCback_t appUiCbackTbl;
 
 /*************************************************************************************************/
@@ -182,6 +184,12 @@ void AppUiDisplayPasskey(uint32_t passkey)
   uint8_t len;
   sprintf(strPasskey, "%d\n", passkey);
   len = strlen(strPasskey);
+
+  while(AsyncTxRequests[0] != NULL)
+  {
+    __ASM volatile ("nop");
+  }
+
   PalUartWriteData(PAL_UART_ID_TERMINAL, (const uint8_t *)strPasskey, len);
   
   APP_TRACE_INFO1("   >>> Passkey: %d <<<", passkey);

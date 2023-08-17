@@ -208,8 +208,6 @@ bool_t smpScProcPairing(smpCcb_t *pCcb, uint8_t *pOob, uint8_t *pDisplay)
   /* legacy pairing */
   else
   {
-    APP_TRACE_INFO2("  legacy pairing ReqOOB=%d ResOOB=%d",
-      pCcb->pairReq[SMP_OOB_POS], pCcb->pairRsp[SMP_OOB_POS]);
     /* if both devices have OOB authentication data */
     if ((pCcb->pairReq[SMP_OOB_POS] == SMP_OOB_DATA_PRESENT) &&
         (pCcb->pairRsp[SMP_OOB_POS] == SMP_OOB_DATA_PRESENT))
@@ -224,9 +222,6 @@ bool_t smpScProcPairing(smpCcb_t *pCcb, uint8_t *pOob, uint8_t *pDisplay)
       ((pCcb->pairReq[SMP_AUTHREQ_POS] & SMP_AUTH_MITM_FLAG) ||
        (pCcb->pairRsp[SMP_AUTHREQ_POS] & SMP_AUTH_MITM_FLAG)))
   {
-    APP_TRACE_INFO2("  MITM req=0x%x rsp=0x%x", pCcb->pairReq[SMP_AUTHREQ_POS], pCcb->pairRsp[SMP_AUTHREQ_POS]);
-
-    APP_TRACE_INFO2("  io req=%d rsp=%d", pCcb->pairReq[SMP_IO_POS], pCcb->pairRsp[SMP_IO_POS]);
     /* check for compatible I/O settings */
     if ((pCcb->pairReq[SMP_IO_POS] != SMP_IO_NO_IN_NO_OUT) &&     /* initiator has i/o and */
         (pCcb->pairRsp[SMP_IO_POS] != SMP_IO_NO_IN_NO_OUT) &&     /* responder has i/o and */
@@ -348,7 +343,6 @@ bool_t smpScProcPairing(smpCcb_t *pCcb, uint8_t *pOob, uint8_t *pDisplay)
   else
   {
     /* in case we're falling back to legacy after being paired with SC */
-    APP_TRACE_INFO0("  evt=18 (SMP_MSG_INT_LEGACY)");
     pCcb->pScCcb->lescEnabled = FALSE;
 
     /* Send internal message indicating legacy security was requested */

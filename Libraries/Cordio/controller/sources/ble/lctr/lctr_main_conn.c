@@ -1268,7 +1268,7 @@ void lctrSendConnMsg(lctrConnCtx_t *pCtx, uint8_t event)
     pMsg->dispId = LCTR_DISP_CONN;
     pMsg->event = event;
 
-    APP_TRACE_INFO2("-3- lctrSendConnMsg evt=%d %s", event, GetLctrEvtStr(event));
+    APP_TRACE_INFO2("-3- lctrSendConnMsg evt=%d(%s)", event, GetLctrEvtStr(event));
     WsfMsgSend(lmgrPersistCb.handlerId, pMsg);
   }
 }

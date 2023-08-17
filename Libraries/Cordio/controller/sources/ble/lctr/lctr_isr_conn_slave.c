@@ -414,6 +414,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
   /* Terminate connection */
   if (lctrCheckForLinkTerm(pCtx))
   {
+    APP_TRACE_INFO0("@?@ term for link");
     lctrSendConnMsg(pCtx, LCTR_CONN_TERMINATED);
     WsfTimerStop(&pCtx->tmrSupTimeout);
     return;
@@ -547,7 +548,8 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
 
     if (wwTotalUsec >= ((connInterUsec >> 1) - WSF_MAX(LL_BLE_TIFS_US, BbGetSchSetupDelayUs(10))))
     {
-      LL_TRACE_WARN2("!!! Terminating connection due to excessive WW handle=%u, eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pCtx->eventCounter);
+      //LL_TRACE_WARN2("!!! Terminating connection due to excessive WW handle=%u, eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pCtx->eventCounter);
+      APP_TRACE_INFO2("@?@ Terminating connection due to excessive WW handle=%u, eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pCtx->eventCounter);
       lctrSendConnMsg(pCtx, LCTR_CONN_TERMINATED);
       WsfTimerStop(&pCtx->tmrSupTimeout);
       return;

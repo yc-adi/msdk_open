@@ -186,8 +186,6 @@ dmConnCcb_t *dmConnCcbAlloc(uint8_t *pAddr)
       pCcb->inUse = TRUE;
       pCcb->featuresPresent = FALSE;
 
-      DM_TRACE_ALLOC1("dmConnCcbAlloc connId=%d", pCcb->connId);
-
       return pCcb;
     }
   }
@@ -261,8 +259,6 @@ dmConnCcb_t *dmConnCcbByBdAddr(uint8_t *pAddr)
       return pCcb;
     }
   }
-
-  DM_TRACE_INFO0("dmConnIdByBdAddr not found");
 
   return NULL;
 }

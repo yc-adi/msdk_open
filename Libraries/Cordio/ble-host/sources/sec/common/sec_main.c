@@ -81,7 +81,7 @@ static void secHciCback(hciEvt_t *pEvent)
     break;
 
   case HCI_LE_READ_LOCAL_P256_PUB_KEY_CMPL_CBACK_EVT:
-    APP_TRACE_INFO1("PUB_KEY_CMPL_CBACK_EVT 37, sec op type=%d", pBuf->type);  // search SEC_NUM_TYPES
+    APP_TRACE_INFO1("PUB KEY CMPL EVT 37, sec op type=%d", pBuf->type);  // search SEC_NUM_TYPES
     pBuf = WsfMsgDeq(&secCb.pubKeyQueue, &handlerId);
     break;
 

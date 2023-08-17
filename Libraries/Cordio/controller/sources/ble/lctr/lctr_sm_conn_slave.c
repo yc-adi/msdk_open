@@ -62,11 +62,6 @@ char *GetLctrEvtStr(uint8_t evt)
 void lctrSlvConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 {
   APP_TRACE_INFO3("lctrSlvConnExecuteSm evt=%d %s st=%d", event, GetLctrEvtStr(event), pCtx->state);
-  if (event == 11 && pCtx->state == 0)
-  {
-    conn_opened = 8;
-    APP_TRACE_INFO0("opened=8");
-  }
 
   /* State-specific events. */
   switch (pCtx->state)
@@ -247,11 +242,9 @@ void lctrSlvConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 /*************************************************************************************************/
 void lctrConnStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
 {
-  APP_TRACE_INFO1("lctrConnStatelessEventHandler evt=%d", event);
   switch (event)
   {
     case LCTR_CONN_TERMINATED:
-      APP_TRACE_INFO2("lctrConnStatelessEventHandler: handle=%u, state=%u, event=TERMINATED", LCTR_GET_CONN_HANDLE(pCtx), pCtx->state);
       if (pCtx->role == LL_ROLE_SLAVE)
       {
         SchTmRemove(LCTR_GET_CONN_HANDLE(pCtx));
@@ -261,7 +254,8 @@ void lctrConnStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
       lctrFreeConnCtx(pCtx);
       break;
     case LCTR_CONN_TERM_SUP_TIMEOUT:
-      LL_TRACE_WARN2("lctrConnStatelessEventHandler: handle=%u, state=%u, event=SUP_TIMEOUT", LCTR_GET_CONN_HANDLE(pCtx), pCtx->state);
+      //LL_TRACE_WARN2("lctrConnStatelessEventHandler: handle=%u, state=%u, event=SUP_TIMEOUT", LCTR_GET_CONN_HANDLE(pCtx), pCtx->state);
+      APP_TRACE_INFO2("lctrConnStatelessEventHandler: handle=%u, state=%u, event=SUP_TIMEOUT", LCTR_GET_CONN_HANDLE(pCtx), pCtx->state);
       /* lctrStoreConnFailEstablishTerminateReason or lctrStoreConnTimeoutTerminateReason */  /* already set as termination reason */
       lctrFlagLinkTerm(pCtx);
       break;
@@ -276,7 +270,6 @@ void lctrConnStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
       lctrFlagLinkTerm(pCtx);
       break;
     default:
-      APP_TRACE_INFO0("not here");
       break;
   }
 }

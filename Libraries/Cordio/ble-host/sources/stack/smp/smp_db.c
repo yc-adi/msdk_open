@@ -130,8 +130,6 @@ static smpDbDevice_t *smpDbAddDevice(uint8_t *pAddr, uint8_t addrType)
   smpDbDevice_t *pRec = &smpDbCb.db[SMP_DB_FIRST_REC];
   uint8_t i;
 
-  SMP_TRACE_INFO0("smpDbAddDevice");
-
   for (i = SMP_DB_FIRST_REC; i < SMP_DB_MAX_DEVICES; i++, pRec++)
   {
     if (smpDbRecordInUse(pRec) == FALSE)
@@ -163,8 +161,6 @@ static smpDbDevice_t *smpDbGetRecord(dmConnId_t connId)
   uint8_t addrType = DmHostAddrType(DmConnPeerAddrType(connId));
   uint8_t *pAddr = DmConnPeerAddr(connId);
   uint8_t i;
-
-  SMP_TRACE_INFO2("smpDbGetRecord: connId: %d type: %d", connId, addrType);
 
   for (i = SMP_DB_FIRST_REC; i < SMP_DB_MAX_DEVICES; i++, pRec++)
   {
@@ -266,8 +262,6 @@ void SmpDbSetFailureCount(dmConnId_t connId, uint8_t count)
 uint8_t SmpDbGetFailureCount(dmConnId_t connId)
 {
   smpDbDevice_t *pRec = smpDbGetRecord(connId);
-
-  SMP_TRACE_INFO2("SmpDbGetFailureCount: connId: %d count: %d", connId, pRec->failCount);
 
   return pRec->failCount;
 }

@@ -140,8 +140,6 @@ void dmAdvActSetData(dmAdvMsg_t *pMsg)
 {
   WSF_ASSERT(pMsg->apiSetData.len <= HCI_ADV_DATA_LEN);
 
-  DM_TRACE_INFO1("dmAdvActSetData: state: %d", dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT]);
-
   if (dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT] == DM_ADV_STATE_IDLE)
   {
     /* set new data in HCI */
@@ -167,8 +165,6 @@ void dmAdvActSetData(dmAdvMsg_t *pMsg)
 /*************************************************************************************************/
 void dmAdvActStart(dmAdvMsg_t *pMsg)
 {
-  DM_TRACE_INFO1("dmAdvActStart: state: %d", dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT]);
-
   if (dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT] == DM_ADV_STATE_IDLE)
   {
     /* if doing directed advertising ignore the request */
@@ -323,8 +319,6 @@ void dmAdvHciHandler(hciEvt_t *pEvent)
   if (pEvent->hdr.event == HCI_LE_ADV_ENABLE_CMD_CMPL_CBACK_EVT)
   {
     uint8_t cbackEvent = 0;
-
-    DM_TRACE_INFO1("ADV_ENABLE_CMD_CMPL_CBACK st=%d", dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT]);
 
     switch (dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT])
     {
@@ -492,8 +486,6 @@ void dmAdvStopDirected(void)
 /*************************************************************************************************/
 void dmAdvConnected(void)
 {
-  DM_TRACE_INFO1("dmAdvConnected state: %d", dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT]);
-
   WsfTimerStop(&dmAdvCb.advTimer);
 
   /* pass advertising stop event to dev priv */

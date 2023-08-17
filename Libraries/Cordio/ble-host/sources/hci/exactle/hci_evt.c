@@ -203,7 +203,7 @@ void hciEvtProcessMsg(uint8_t *pEvt)
     return;
   }
 
-  APP_TRACE_INFO2("hciEvtProcessMsg evt=%d %s", event, GetHciEvtStr(event));
+  APP_TRACE_INFO2("hciEvtProcessMsg evt=%d(%s)", event, GetHciEvtStr(event));
 
   /* convert hci event code to internal event code and perform special handling */
   switch (event)

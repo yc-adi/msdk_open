@@ -151,7 +151,6 @@ void smprActSendPairRsp(smpCcb_t *pCcb, smpMsg_t *pMsg)
   UINT8_TO_BSTREAM(p, pMsg->dm.pair.rKeyDist);
 
   /* process pairing request and response data */
-  APP_TRACE_INFO1("smprActSendPairRsp auth=%d", pCcb->auth);
   if (smpCb.procPairing(pCcb, &oob, &display))
   {
     /* set next expected packet */

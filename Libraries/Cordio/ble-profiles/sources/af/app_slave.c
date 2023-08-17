@@ -1140,7 +1140,6 @@ void AppSlaveProcDmMsg(dmEvt_t *pMsg)
       break;
 
     default:
-      APP_TRACE_INFO0("  not here");
       break;
   }
 }
@@ -1626,7 +1625,6 @@ void AppSlaveSecProcDmMsg(dmEvt_t *pMsg)
       break;
 
     default:
-      APP_TRACE_INFO0("  not here");
       break;
   }
 }

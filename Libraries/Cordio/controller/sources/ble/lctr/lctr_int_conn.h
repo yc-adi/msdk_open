@@ -37,6 +37,7 @@
 #include "wsf_cs.h"
 #include "wsf_msg.h"
 #include "wsf_timer.h"
+#include "wsf_trace.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -702,7 +703,7 @@ static inline bool_t lctrCheckForLinkTerm(lctrConnCtx_t *pCtx)
     /* Peer device is LL_TERMINATE_IND initiator. */
     if (pCtx->termAckReqd)                  /* Tx Ack required after Rx of LL_TERMINATE_IND */
     {
-      if (pCtx->ackAfterCtrlPdu)            /*     guarantee Ack Tx'ed */
+      if (pCtx->ackAfterCtrlPdu)            /* guarantee Ack Tx'ed */
       {
         return TRUE;
       }
@@ -710,8 +711,9 @@ static inline bool_t lctrCheckForLinkTerm(lctrConnCtx_t *pCtx)
     /* Local device is LL_TERMINATE_IND initiator. */
     else if ((pCtx->llcpState == LCTR_LLCP_STATE_IDLE) || /* LL_TERMINATE_IND not pending */
              (pCtx->txArqQ.pHead == NULL))                /* guarantee LL_TERMINATE_IND is Ack'ed */
-                                                          /*     i.e. "WsfQueueEmpty(&pCtx->txArqQ)" (optimized for ISR) */
+                                                          /* i.e. "WsfQueueEmpty(&pCtx->txArqQ)" (optimized for ISR) */
     {
+      APP_TRACE_INFO0("@?@ from local");
       return TRUE;
     }
   }

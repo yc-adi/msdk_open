@@ -718,7 +718,7 @@ bool_t SchInsertAtDueTime(BbOpDesc_t *pBod, BbConflictAct_t conflictCback, uint8
 
   if (!schDueTimeInFuture(pBod, 1))
   {
-    //APP_TRACE_INFO1("@?@ ins at due, src=%d InFuture=0", src);
+    APP_TRACE_INFO1("@?@ ins at due, src=%d InFuture=0", src);
     return FALSE;
   }
 

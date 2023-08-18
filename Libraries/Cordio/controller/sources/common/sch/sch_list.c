@@ -603,7 +603,7 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       /* If HEAD BOD due time is not close, add scheduler timer to load it in the future.
        * Always stop existing timer first for simplicity.
        */
-      APP_TRACE_INFO1("@?@ try load, stop then start %d\n", execTimeUsec);
+      APP_TRACE_INFO1("@?@ try load re start %d\n", execTimeUsec);
       PalTimerStop();
       PalTimerStart(execTimeUsec);
     }

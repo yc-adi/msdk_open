@@ -353,12 +353,10 @@ static bool_t schLoadBod(BbOpDesc_t *pBod)
 {
   bool_t loaded = FALSE;
 
-  // @?@ TODO: adjust dueUsec here
+  APP_TRACE_INFO0("@?@ schLoadBod");
 
   uint8_t timeInFuture = schDueTimeInFuture(pBod, 7);
   
-  APP_TRACE_INFO1("time in future %d", timeInFuture);
-
   if (timeInFuture)
   {
     /* Setup BB services. */
@@ -371,7 +369,7 @@ static bool_t schLoadBod(BbOpDesc_t *pBod)
     }
     else
     {
-      APP_TRACE_INFO1("@?@ bod term %d", schCb.eventSetFlagCount);
+      APP_TRACE_INFO1("@?@ bod term flag=%d", schCb.eventSetFlagCount);
       LL_TRACE_WARN1("!!! BOD terminated on startup, pBod=0x%08x", pBod);
 
       if (schCb.eventSetFlagCount)

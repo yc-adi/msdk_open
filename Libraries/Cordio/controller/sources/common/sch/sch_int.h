@@ -96,10 +96,13 @@ void schRemoveHead(void);
 static inline bool_t schDueTimeInFuture(BbOpDesc_t *pBod, uint8_t src)
 {
   const uint32_t curTime = PalBbGetCurrentTime();
-  APP_TRACE_INFO4("@?@ src=%d due=%d cur=%d %d", src, pBod->dueUsec, curTime, (int)pBod->dueUsec - (int)curTime);
-  return (BbGetTargetTimeDelta(pBod->dueUsec, curTime) > 0);
+  uint32_t delta = BbGetTargetTimeDelta(pBod->dueUsec, curTime);
+  if (delta == 0)
+  {
+    APP_TRACE_INFO4("@?@ src=%d due=%d cur=%d %d", src, pBod->dueUsec, curTime, (int)pBod->dueUsec - (int)curTime);
+  }
+  return ( delta > 0);
 }
-
 
 /*************************************************************************************************/
 /*!

@@ -79,7 +79,7 @@
 /**************************************************************************************************
   Macros
 **************************************************************************************************/
-#define DBG_DS          0   // remove me !!! @?@
+#define DBG_DS          1   // remove me !!! @?@
 
 #define USE_RTC         1
 #define SPI_SLAVE_RX    0
@@ -140,24 +140,22 @@ volatile int wutTrimComplete;
  */
 uint32_t gNextJobTimeInUs = 0;
 
-#define MAX_WUT_TICKS (32768) /* Maximum deep sleep time, units of 32 kHz ticks */
-#define MIN_WUT_TICKS 100 /* Minimum deep sleep time, units of 32 kHz ticks (1/32768*100=3 ms) */
-#define WAKEUP_US 700 /* Deep sleep recovery time, units of us */
+#define MAX_WUT_TICKS           (32768)     /* Maximum deep sleep time, units of 32 kHz ticks */
+#define MIN_WUT_TICKS           (100)       /* Minimum deep sleep time, units of 32 kHz ticks (1/32768*100=3 ms) */
 
-#define WAKE_UP_TIME_IN_US              (750)  /// the time after wake up to backto normal operation
-#define MIN_DEEP_SLEEP_TIME_IN_US       (WAKE_UP_TIME_IN_US)
+#define WAKEUP_US               (750)       /* Deep sleep recovery time, units of us */
+#define WAKEUP_IN_WUT_TICK      ((uint64_t)WAKEUP_US * (uint64_t)32768 / (uint64_t)1000000)
 
-#define WAKEUP_IN_WUT_TICK      ((uint64_t)WAKEUP_US / (uint64_t)1000000 * (uint64_t)32768)
-#define RESTORE_OP_IN_WUT_TICK  65+70+50
-#define RESTORE_OP_IN_US        ((uint64_t)RESTORE_OP_IN_WUT_TICK / (uint64_t)32768 * (uint64_t)1000000)
+#define RESTORE_OP_IN_WUT_TICK  (3)
+#define RESTORE_OP_IN_US        ((uint64_t)RESTORE_OP_IN_WUT_TICK * (uint64_t)1000000 / (uint64_t)32768)
 
-#define WAKEUP_32M_US       (3200)
-#define WUT_FREQ            (32768)
-#define US_TO_WUTTICKS(x)   (((x) * WUT_FREQ) / 1000000)
-#define WUT_MIN_TICKS       (10)
+#define WAKEUP_32M_US           (3200)
+#define WUT_FREQ                (32768)
+#define US_TO_WUTTICKS(x)       (((x) * WUT_FREQ) / 1000000)
+#define WUT_MIN_TICKS           (10)
 
-#define SLEEP_LED           (1)
-#define DEEPSLEEP_LED       (0)
+#define SLEEP_LED               (1)
+#define DEEPSLEEP_LED           (0)
 
 /**
  * @brief How many WUT ticks to delay entering Deep Sleep after being given the go ahead by the SDMA. 
@@ -292,8 +290,9 @@ int DeepSleep(void)
     {
         #if DBG_DS == 1
         if (conn_opened == 8) {
-            if (u32DbgBufNdx < DBG_BUF_SIZE) {
+            if (u32DbgBufNdx < DBG_BUF_SIZE - 1) {
                 u32DbgBuf[u32DbgBufNdx++] = 22;
+                u32DbgBuf[u32DbgBufNdx++] = wsfOs.task.taskEventMask;
             }
         }
         #endif
@@ -302,6 +301,13 @@ int DeepSleep(void)
 
     // MXC_UART_ReadyForSleep(MXC_UART_GET_UART(CONSOLE_UART)) == E_NO_ERROR
     if (AsyncTxRequests[CONSOLE_UART] != NULL) {
+        #if DBG_DS == 1
+        if (conn_opened == 8) {
+            if (u32DbgBufNdx < DBG_BUF_SIZE) {
+                u32DbgBuf[u32DbgBufNdx++] = 33;
+            }
+        }
+        #endif
         return 3;
     }
     
@@ -320,7 +326,7 @@ int DeepSleep(void)
     }
 
     /* Check to see if we meet the minimum requirements for deep sleep */
-    if (idleInWutCnt < (MIN_WUT_TICKS + WAKEUP_US)) {
+    if (idleInWutCnt < (MIN_WUT_TICKS + WAKEUP_IN_WUT_TICK)) {
         #if DBG_DS == 1
         if (conn_opened == 8) {
             if (u32DbgBufNdx < DBG_BUF_SIZE) {
@@ -617,6 +623,7 @@ int main(void)
     printf("\n\n***** MAX32665 BLE CGM, Non Deep Sleep Version *****\n");
 #endif
     printf("SystemCoreClock = %d MHz\n\n", SystemCoreClock/1000000);
+
     MXC_Delay(10000);
 
     uint32_t memUsed;

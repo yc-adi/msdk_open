@@ -292,7 +292,7 @@ void BbSetBodTerminateFlag(void)
  *  \return     TRUE if termination flag set, FALSE otherwise.
  */
 /*************************************************************************************************/
-bool_t BbGetBodTerminateFlag(void)
+inline bool_t BbGetBodTerminateFlag(void)
 {
   return bbCb.termBod;
 }
@@ -360,7 +360,7 @@ uint32_t BbGetBbTimerBoundaryUs(void)
 /*************************************************************************************************/
 uint16_t BbGetSchSetupDelayUs(uint8_t src)
 {
-  APP_TRACE_INFO2("@?@ get delay, src=%d delay=%d", src, pBbRtCfg->schSetupDelayUs);
+  //APP_TRACE_INFO2("@?@ get delay, src=%d delay=%d", src, pBbRtCfg->schSetupDelayUs);
   return pBbRtCfg->schSetupDelayUs;
 }
 

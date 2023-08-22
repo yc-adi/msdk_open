@@ -394,7 +394,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
   //@?@ remove me !!!
   if (BbGetBodTerminateFlag())
   {
-    APP_TRACE_INFO1("@?@ termBod=1 reset sup timeout %d", pCtx->supTimeoutMs);
+    //APP_TRACE_INFO1("@?@ termBod=1 reset sup timeout %d", pCtx->supTimeoutMs);
     WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs);
   }
 
@@ -409,7 +409,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
   else if (pCtx->data.slv.rxFromMaster)
   {
     /* Reset supervision timer. */
-    if (conn_opened != 0) APP_TRACE_INFO1("@?@ lctrSlvConnEndOp rx sup timeout %d", pCtx->supTimeoutMs);  // @?@ will be triggered every 30 ms
+    //if (conn_opened != 0) APP_TRACE_INFO1("@?@ lctrSlvConnEndOp rx sup timeout %d", pCtx->supTimeoutMs);  // @?@ will be triggered every 30 ms
     WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs);
   }
 
@@ -562,7 +562,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
 
     /* Advance to next interval. */
     pOp->dueUsec = pCtx->data.slv.anchorPointUsec + connInterUsec - wwTotalUsec;
-    APP_TRACE_INFO1("@?@ ConnEndOp due=%d", pOp->dueUsec);
+    //APP_TRACE_INFO1("@?@ ConnEndOp due=%d", pOp->dueUsec);
 
     pOp->minDurUsec = pCtx->data.slv.txWinSizeUsec + pCtx->effConnDurUsec + wwTotalUsec;
     pConn->rxSyncDelayUsec = pCtx->data.slv.txWinSizeUsec + (wwTotalUsec << 1);
@@ -731,7 +731,7 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
       flag += 4;
     }
 
-    APP_TRACE_INFO1("@?@ flag=%d", flag);
+    //APP_TRACE_INFO1("@?@ flag=%d", flag);
     BbSetBodTerminateFlag(flag);
     
     lctrRxPduFree(pRxBuf);

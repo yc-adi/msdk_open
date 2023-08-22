@@ -81,11 +81,6 @@
 #define SCH_CHECK_LIST_INTEGRITY            FALSE
 #endif
 
-extern uint8_t  conn_opened;
-extern uint32_t u32DeepSleepNdx;
-extern uint32_t u32LastDeepSleepCnt;
-extern uint8_t  u8StartRecord;
-extern uint32_t u32DbgBufNdx;
 
 #if (SCH_CHECK_LIST_INTEGRITY)
 /*************************************************************************************************/
@@ -206,7 +201,7 @@ static inline void schInsertToEmptyList(BbOpDesc_t *pItem, uint8_t src)
 
   pItem->pPrev = NULL;
   pItem->pNext = NULL;
-  APP_TRACE_INFO2("@?@ Empty due=%d src=%d ", pItem->dueUsec, src);
+  //APP_TRACE_INFO2("@?@ Empty due=%d src=%d ", pItem->dueUsec, src);
   SCH_TRACE_INFO1("++| schInsertToEmptyList |++ pBod=0x%08x", (uint32_t)pItem);
   SCH_TRACE_INFO1("++|                      |++     .dueUsec=%u", pItem->dueUsec);
   SCH_TRACE_INFO1("++|                      |++     .minDurUsec=%u", pItem->minDurUsec);
@@ -609,13 +604,9 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       /* If HEAD BOD due time is not close, add scheduler timer to load it in the future.
        * Always stop existing timer first for simplicity.
        */
-      APP_TRACE_INFO3("@?@ try load re start %d DSndx=%d cnt=%d\n", execTimeUsec, u32DeepSleepNdx, u32LastDeepSleepCnt);
+      //APP_TRACE_INFO1("@?@ try load re start %d\n", execTimeUsec);
       PalTimerStop();
       PalTimerStart(execTimeUsec);
-
-      u8StartRecord = 1;  //@?@ remove me !!!
-      conn_opened = 8;
-      u32DbgBufNdx = 0;
     }
     else
     {
@@ -724,11 +715,11 @@ bool_t SchInsertAtDueTime(BbOpDesc_t *pBod, BbConflictAct_t conflictCback, uint8
 #if (SCH_CHECK_LIST_INTEGRITY)
   SchCheckIsNotInserted(pBod);
 #endif
-  APP_TRACE_INFO1("@?@ ins at due, src=%d", src);
+  //APP_TRACE_INFO1("@?@ ins at due, src=%d", src);
 
   if (!schDueTimeInFuture(pBod, 1))
   {
-    APP_TRACE_INFO1("@?@ ins at due, src=%d InFuture=0", src);
+    //APP_TRACE_INFO1("@?@ ins at due, src=%d InFuture=0", src);
     return FALSE;
   }
 

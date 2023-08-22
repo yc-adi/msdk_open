@@ -44,7 +44,6 @@ enum
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
-extern uint8_t conn_opened;
 
 /*! \brief      Scheduler control block. */
 SchCtrlBlk_t schCb;
@@ -56,7 +55,7 @@ SchCtrlBlk_t schCb;
 /*************************************************************************************************/
 static void schBodCompHandler(void)
 {
-  APP_TRACE_INFO1("@?@ schBodCompHandler flg=%d", schCb.eventSetFlagCount + 1);
+  //APP_TRACE_INFO1("@?@ schBodCompHandler flg=%d", schCb.eventSetFlagCount + 1);
   WsfSetEvent(schCb.handlerId, SCH_EVENT_BOD_COMPLETE);
   schCb.eventSetFlagCount++;
 }
@@ -296,10 +295,6 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
       schRemoveHead();
       if (pBod->abortCback)
       {
-        if (conn_opened != 0)
-        {
-          __asm volatile("nop");
-        }
         pBod->abortCback(pBod);   // lctrSlvAdvEndOp
                                   // 
       }
@@ -354,7 +349,7 @@ static bool_t schLoadBod(BbOpDesc_t *pBod, char *src)
 {
   bool_t loaded = FALSE;
 
-  APP_TRACE_INFO1("@?@ schLoadBod %s", src);
+  //APP_TRACE_INFO1("@?@ schLoadBod %s", src);
 
   uint8_t timeInFuture = schDueTimeInFuture(pBod, 7);
   
@@ -370,7 +365,7 @@ static bool_t schLoadBod(BbOpDesc_t *pBod, char *src)
     }
     else
     {
-      APP_TRACE_INFO1("@?@ BodTermFlag=%d", schCb.eventSetFlagCount);
+      //APP_TRACE_INFO1("@?@ BodTermFlag=%d", schCb.eventSetFlagCount);
       LL_TRACE_WARN1("!!! BOD terminated on startup, pBod=0x%08x", pBod);
 
       if (schCb.eventSetFlagCount)

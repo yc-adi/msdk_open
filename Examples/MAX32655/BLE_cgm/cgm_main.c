@@ -710,7 +710,7 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_CONN_OPEN_IND:
-        conn_opened = 1;
+        //@?@ conn_opened = 1;
         
         CgmpsProcMsg(&pMsg->hdr);
 

@@ -116,11 +116,8 @@
 extern uint32_t u32DbgBuf[];
 extern uint32_t u32DbgBufNdx;
 extern uint8_t  u8DbgSt;
+uint8_t u8StartRecord = 0;
 #endif
-
-uint32_t u32DeepSleepNdx = 0;
-uint32_t u32LastDeepSleepCnt = 0;
-uint8_t  u8StartRecord = 0;
 
 /**************************************************************************************************
   Global Variables
@@ -446,8 +443,6 @@ int DeepSleep(void)
             if (u32DbgBufNdx >= DBG_BUF_SIZE - 1) u32DbgBufNdx = 0;
         }
         #endif
-        u32DeepSleepNdx++;
-        u32LastDeepSleepCnt = dsInWutCnt;
 
         /* Arm the WUT interrupt */
         MXC_WUT->cmp = preCaptureInWutCnt + dsInWutCnt;

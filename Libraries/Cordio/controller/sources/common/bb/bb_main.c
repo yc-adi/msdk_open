@@ -281,7 +281,7 @@ void BbSetBodTerminateFlag(uint8_t src)
 {
   if (bbCb.pOpInProgress)
   {
-    APP_TRACE_INFO1("@?@ term flag src=%d", src);
+    //APP_TRACE_INFO1("@?@ term flag src=%d", src);
     bbCb.termBod = TRUE;
   }
 }
@@ -309,7 +309,7 @@ inline bool_t BbGetBodTerminateFlag(void)
 void BbTerminateBod(uint8_t src)
 {
   WSF_ASSERT(bbCb.bodCompCback);
-  APP_TRACE_INFO1("@?@ term bod src=%d", src);
+  //APP_TRACE_INFO1("@?@ term bod src=%d", src);
   
   BbOpDesc_t * const pBod = bbCb.pOpInProgress;
   if (pBod &&

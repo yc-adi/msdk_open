@@ -254,7 +254,7 @@ static void bbSlvExecuteConnOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
   bbBleCb.bbParam.dueUsec = BbAdjustTime(pBod->dueUsec);
   pBod->dueUsec = bbBleCb.bbParam.dueUsec;
   uint32_t temp = PalBbGetCurrentTime();
-  APP_TRACE_INFO3("@?@ exe connOp @%d due=%d %d", temp, pBod->dueUsec, pBod->dueUsec - temp);
+  //APP_TRACE_INFO3("@?@ exe connOp @%d due=%d %d", temp, pBod->dueUsec, pBod->dueUsec - temp);
   bbBleCb.bbParam.rxTimeoutUsec = pConn->rxSyncDelayUsec;
 
   PalBbBleSetDataParams(&bbBleCb.bbParam);

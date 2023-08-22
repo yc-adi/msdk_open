@@ -222,7 +222,7 @@ void lctrAdvActSelfTerm(void)
           {
             /* pMsg->hdr.handle = 0; */
             pMsg->hdr.dispId = LCTR_DISP_CONN_IND;
-            /* pMsg->hdr.event = 0; */
+            pMsg->hdr.event = 222;  // indicate src
 
             pMsg->connIndEndTsUsec = lctrSlvAdv.reqEndTsUsec;
 

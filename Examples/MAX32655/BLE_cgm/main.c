@@ -118,6 +118,10 @@ extern uint32_t u32DbgBufNdx;
 extern uint8_t  u8DbgSt;
 #endif
 
+uint32_t u32DeepSleepNdx = 0;
+uint32_t u32LastDeepSleepCnt = 0;
+uint8_t  u8StartRecord = 0;
+
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
@@ -277,9 +281,10 @@ int DeepSleep(void)
     if (palSysBusyCount > 0)    // chciTrWrite
     {
         #if DBG_DS == 1
-        if (conn_opened == 8) {
+        if (conn_opened == 8 && u8StartRecord) {
             if (u32DbgBufNdx < DBG_BUF_SIZE) {
                 u32DbgBuf[u32DbgBufNdx++] = 11;
+                if (u32DbgBufNdx >= DBG_BUF_SIZE) u32DbgBufNdx = 0;
             }
         }
         #endif
@@ -289,10 +294,11 @@ int DeepSleep(void)
     if (wsfOs.task.taskEventMask != 0)
     {
         #if DBG_DS == 1
-        if (conn_opened == 8) {
+        if (conn_opened == 8 && u8StartRecord) {
             if (u32DbgBufNdx < DBG_BUF_SIZE - 1) {
                 u32DbgBuf[u32DbgBufNdx++] = 22;
                 u32DbgBuf[u32DbgBufNdx++] = wsfOs.task.taskEventMask;
+                if (u32DbgBufNdx >= DBG_BUF_SIZE - 1) u32DbgBufNdx = 0;
             }
         }
         #endif
@@ -301,13 +307,6 @@ int DeepSleep(void)
 
     // MXC_UART_ReadyForSleep(MXC_UART_GET_UART(CONSOLE_UART)) == E_NO_ERROR
     if (AsyncTxRequests[CONSOLE_UART] != NULL) {
-        #if DBG_DS == 1
-        if (conn_opened == 8) {
-            if (u32DbgBufNdx < DBG_BUF_SIZE) {
-                u32DbgBuf[u32DbgBufNdx++] = 33;
-            }
-        }
-        #endif
         return 3;
     }
     
@@ -328,10 +327,11 @@ int DeepSleep(void)
     /* Check to see if we meet the minimum requirements for deep sleep */
     if (idleInWutCnt < (MIN_WUT_TICKS + WAKEUP_IN_WUT_TICK)) {
         #if DBG_DS == 1
-        if (conn_opened == 8) {
-            if (u32DbgBufNdx < DBG_BUF_SIZE) {
+        if (conn_opened == 8 && u8StartRecord) {
+            if (u32DbgBufNdx < DBG_BUF_SIZE - 1) {
                 u32DbgBuf[u32DbgBufNdx++] = 44;
                 u32DbgBuf[u32DbgBufNdx++] = idleInWutCnt;
+                if (u32DbgBufNdx >= DBG_BUF_SIZE - 1) u32DbgBufNdx = 0;
             }
         }
         #endif
@@ -398,7 +398,7 @@ int DeepSleep(void)
         idleInWutCnt-= (WAKEUP_IN_WUT_TICK + RESTORE_OP_IN_WUT_TICK);
 
         /* Calculate the time to the next BLE scheduler event */
-        if (schUsec < WAKEUP_US)
+        if (schUsec < (WAKEUP_US + RESTORE_OP_IN_US))
         {
             bleSleepTicks = 0;
         }
@@ -431,19 +431,23 @@ int DeepSleep(void)
 
     if (dsInWutCnt >= MIN_WUT_TICKS) {
         #if DBG_DS == 1
-        if (conn_opened == 8 && u32DbgBufNdx < DBG_BUF_SIZE - DBG_GROUP_SIZE)
+        if (conn_opened == 8 && (u32DbgBufNdx < DBG_BUF_SIZE - DBG_GROUP_SIZE) && u8StartRecord)
         {
             u8DbgSt++;
             //u8DbgSt = u8DbgSt % 100;
             u32DbgBuf[u32DbgBufNdx++] = 66;
             //u32DbgBuf[u32DbgBufNdx++] = u8DbgSt;
-            u32DbgBuf[u32DbgBufNdx++] = idleInWutCnt;
             u32DbgBuf[u32DbgBufNdx++] = wsfTicksToNextExpiration;
+            u32DbgBuf[u32DbgBufNdx++] = idleInWutCnt;
             u32DbgBuf[u32DbgBufNdx++] = schUsec;
             u32DbgBuf[u32DbgBufNdx++] = bleSleepTicks;
             u32DbgBuf[u32DbgBufNdx++] = dsInWutCnt;
+
+            if (u32DbgBufNdx >= DBG_BUF_SIZE - 1) u32DbgBufNdx = 0;
         }
         #endif
+        u32DeepSleepNdx++;
+        u32LastDeepSleepCnt = dsInWutCnt;
 
         /* Arm the WUT interrupt */
         MXC_WUT->cmp = preCaptureInWutCnt + dsInWutCnt;

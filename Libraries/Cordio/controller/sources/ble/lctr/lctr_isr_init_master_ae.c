@@ -281,7 +281,7 @@ bool_t lctrMstExtConnIndTxCompHandler(BbOpDesc_t *pOp, const uint8_t *pIndBuf)
   lctrExtScanCtx_t * const pExtInitCtx = pOp->pCtx;
 
   pExtInitCtx->selfTerm = TRUE;
-  BbSetBodTerminateFlag();
+  BbSetBodTerminateFlag(33);
 
   return FALSE;
 }
@@ -519,7 +519,7 @@ void lctrMstInitiateRxExtAdvPktPostProcessHandler(BbOpDesc_t *pOp, const uint8_t
           if (pExtInitCtx->auxOpPending)
           {
             /* Extended advertising event continues with auxiliary BOD */
-            BbSetBodTerminateFlag();
+            BbSetBodTerminateFlag(34);
           }
         } while (FALSE);
       }
@@ -763,7 +763,7 @@ bool_t lctrMstInitiateRxAuxConnRspHandler(BbOpDesc_t *pOp, const uint8_t *pRspBu
 
   /* Signal termination only; initiate termination processing handled in lctrMstAuxInitiateEndOp(). */
   pExtInitCtx->selfTerm = TRUE;
-  BbSetBodTerminateFlag();
+  BbSetBodTerminateFlag(35);
 
   return FALSE;
 }

@@ -253,14 +253,15 @@ static void bbSlvExecuteConnOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
   bbBleCb.bbParam.rxCback = bbSlvConnRxCompCback;
   bbBleCb.bbParam.dueUsec = BbAdjustTime(pBod->dueUsec);
   pBod->dueUsec = bbBleCb.bbParam.dueUsec;
-  APP_TRACE_INFO2("@?@ exe connOp @%d due=%d", PalBbGetCurrentTime(), pBod->dueUsec);
+  uint32_t temp = PalBbGetCurrentTime();
+  APP_TRACE_INFO3("@?@ exe connOp @%d due=%d %d", temp, pBod->dueUsec, pBod->dueUsec - temp);
   bbBleCb.bbParam.rxTimeoutUsec = pConn->rxSyncDelayUsec;
 
   PalBbBleSetDataParams(&bbBleCb.bbParam);
 
   bbBleCb.evtState = 0;
 
-  pBle->op.slvConn.execCback(pBod);
+  pBle->op.slvConn.execCback(pBod);   // lctrSlvConnBeginOp
 }
 
 /*************************************************************************************************/

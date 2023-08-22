@@ -342,7 +342,7 @@ void lctrExtAdvActSelfTerm(lctrAdvSet_t *pAdvSet)
 
         pMsg->hdr.handle = pAdvSet->handle;
         pMsg->hdr.dispId = LCTR_DISP_CONN_IND;
-        /* pMsg->hdr.event = 0; */
+        pMsg->hdr.event = 111;  // indicate src
 
         /* coverity[var_deref_model] */
         pBuf += lctrUnpackAdvbPduHdr(&hdr, pBuf);

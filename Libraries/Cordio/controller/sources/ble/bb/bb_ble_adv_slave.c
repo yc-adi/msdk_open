@@ -433,7 +433,7 @@ static void bbSlvExecuteAdvOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
 
   if (bbSetupAdvOp(pBod, pAdv, BB_STATUS_SUCCESS, TRUE, 5))
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(2);
   }
 }
 

@@ -32,6 +32,9 @@
 #include "wsf_trace.h"
 
 extern uint8_t conn_opened;
+extern uint32_t u32DeepSleepNdx;
+extern uint32_t u32LastDeepSleepCnt;
+extern uint8_t  u8StartRecord;
 
 char *GetLctrEvtStr(uint8_t evt)
 {
@@ -45,7 +48,7 @@ char *GetLctrEvtStr(uint8_t evt)
     case 42: return "ARQ_Q_FLUSHED"; // LCTR_CONN_ARQ_Q_FLUSHED
     case 57: return "LLCP_PROC_CMPL"; // LCTR_CONN_LLCP_PROC_CMPL
     case 58: return "LLCP_START_PENDING"; // LCTR_CONN_LLCP_START_PENDING
-    case 71: return "SUP TIMEOUT"; // LCTR_CONN_TERM_SUP_TIMEOUT
+    case 71: u8StartRecord = 0; return "SUP TIMEOUT"; // LCTR_CONN_TERM_SUP_TIMEOUT   //@?@ remove me !!!
     case 75: return "CONN TERM"; // LCTR_CONN_TERMINATED
     default: return " ";
   }
@@ -61,10 +64,10 @@ char *GetLctrEvtStr(uint8_t evt)
 /*************************************************************************************************/
 void lctrSlvConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 {
-  APP_TRACE_INFO3("lctrSlvConnExecuteSm evt=%d(%s) st=%d", event, GetLctrEvtStr(event), pCtx->state);
+  APP_TRACE_INFO5("lctrSlvConnExecuteSm evt=%d(%s) st=%d DSndx=%d cnt=%d", event, GetLctrEvtStr(event), pCtx->state, u32DeepSleepNdx, u32LastDeepSleepCnt);
   if (event == 11 && pCtx->state == 0)
   {
-    conn_opened = 8;
+    // @?@ conn_opened = 8;
     APP_TRACE_INFO0("opened=8");
   }
 

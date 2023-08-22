@@ -77,7 +77,7 @@ void lctrConnIndHandler(BbOpDesc_t *pOp, uint8_t reqLen, const uint8_t *pReqBuf)
   {
     /* Stop advertising. */
     lctrSlvAdv.connIndRcvd = TRUE;
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(5);
 
     /* CONN_IND packet delivered when advertising termination completes.
      * cf. lctrAdvActSelfTerm() */
@@ -197,8 +197,6 @@ void lctrSlvAdvPostProcessHandler(BbOpDesc_t *pOp, const uint8_t *pReqBuf)
 /*************************************************************************************************/
 void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
 {
-  uint32_t u32Temp = 0;
-
   BbBleData_t * const pBle = pOp->prot.pBle;
   BbBleSlvAdvEvent_t * const pAdv = &pBle->op.slvAdv;
 

@@ -130,11 +130,11 @@ void print_dbg_buf(void)
         #endif
         if (++j <= GroupCnt && u32DbgBuf[printed + 1] != 66)
         {
-            str_pos += sprintf(&temp[str_pos], "%d,", u32DbgBuf[printed]);
+            str_pos += sprintf(&temp[str_pos], "%u,", u32DbgBuf[printed]);
         }
         else
         {
-            str_pos += sprintf(&temp[str_pos], "%d", u32DbgBuf[printed]);
+            str_pos += sprintf(&temp[str_pos], "%u", u32DbgBuf[printed]);
             //PalUartWriteData(PAL_UART_ID_TERMINAL, (const uint8_t *)temp, str_pos);
             APP_TRACE_INFO1("%s", temp);
             str_pos = 0;
@@ -247,8 +247,8 @@ static const smpCfg_t cgmSmpCfg = {
 static const appUpdateCfg_t cgmUpdateCfg = {
     6000,           /*! Connection idle period in ms before attempting
                       connection parameter update. set to zero to disable */
-    (700 / 1.25), /*! Minimum connection interval in 1.25ms units */
-    (700 / 1.25), /*! Maximum connection interval in 1.25ms units */
+    (1000 / 1.25), /*! Minimum connection interval in 1.25ms units */
+    (1000 / 1.25), /*! Maximum connection interval in 1.25ms units */
     0, /*! Connection latency */
     600, /*! Supervision timeout in 10ms units, 600*10=6000 ms */
     5 /*! Number of update attempts before giving up */
@@ -710,7 +710,7 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_CONN_OPEN_IND:
-        conn_opened = 8;
+        conn_opened = 1;
         
         CgmpsProcMsg(&pMsg->hdr);
 
@@ -749,7 +749,7 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         conn_opened = 0;
 
         APP_TRACE_INFO1("dbg ndx=%d", u32DbgBufNdx);
-        print_dbg_buf();
+        if ( u32DbgBufNdx > 0) print_dbg_buf();
 
         uiEvent = APP_UI_CONN_CLOSE;
 

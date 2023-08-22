@@ -56,7 +56,7 @@ SchCtrlBlk_t schCb;
 /*************************************************************************************************/
 static void schBodCompHandler(void)
 {
-  //@?@ APP_TRACE_INFO1("sch Bod Comp cnt=%d", schCb.eventSetFlagCount + 1);
+  APP_TRACE_INFO1("@?@ schBodCompHandler flg=%d", schCb.eventSetFlagCount + 1);
   WsfSetEvent(schCb.handlerId, SCH_EVENT_BOD_COMPLETE);
   schCb.eventSetFlagCount++;
 }
@@ -327,6 +327,7 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 
     else if (event & SCH_EVENT_BOD_LOAD)
     {
+      APP_TRACE_INFO0("@?@ from evt BOD_LOAD");
       schBodLoadHandler();
       event &= ~SCH_EVENT_BOD_LOAD;
     }
@@ -349,11 +350,11 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
  *  \return     TRUE if loaded, FALSE otherwise.
  */
 /*************************************************************************************************/
-static bool_t schLoadBod(BbOpDesc_t *pBod)
+static bool_t schLoadBod(BbOpDesc_t *pBod, char *src)
 {
   bool_t loaded = FALSE;
 
-  APP_TRACE_INFO0("@?@ schLoadBod");
+  APP_TRACE_INFO1("@?@ schLoadBod %s", src);
 
   uint8_t timeInFuture = schDueTimeInFuture(pBod, 7);
   
@@ -369,7 +370,7 @@ static bool_t schLoadBod(BbOpDesc_t *pBod)
     }
     else
     {
-      APP_TRACE_INFO1("@?@ bod term flag=%d", schCb.eventSetFlagCount);
+      APP_TRACE_INFO1("@?@ BodTermFlag=%d", schCb.eventSetFlagCount);
       LL_TRACE_WARN1("!!! BOD terminated on startup, pBod=0x%08x", pBod);
 
       if (schCb.eventSetFlagCount)
@@ -416,7 +417,7 @@ bool_t schTryCurTailLoadNext(void)
     schCb.state = SCH_STATE_EXEC;
 
     /* Try load next BOD. */
-    if (!(schLoadBod(schCb.pHead->pNext)))
+    if (!(schLoadBod(schCb.pHead->pNext, "tail")))
     {
       schCb.state = SCH_STATE_IDLE;
       loaded = FALSE;
@@ -449,7 +450,7 @@ bool_t schTryLoadHead(void)
   {
     schCb.state = SCH_STATE_EXEC;
 
-    if (!schLoadBod(schCb.pHead))
+    if (!schLoadBod(schCb.pHead, " "))
     {
       schCb.state = SCH_STATE_IDLE;
       loaded = FALSE;

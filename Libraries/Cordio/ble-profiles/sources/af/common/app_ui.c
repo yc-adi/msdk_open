@@ -182,7 +182,7 @@ void AppUiDisplayPasskey(uint32_t passkey)
   uint8_t len;
   sprintf(strPasskey, "%d\n", passkey);
   len = strlen(strPasskey);
-  PalUartWriteData(PAL_UART_ID_TERMINAL, (const uint8_t *)strPasskey, len);
+  //@?@ remove me !!! PalUartWriteData(PAL_UART_ID_TERMINAL, (const uint8_t *)strPasskey, len);
   
   APP_TRACE_INFO1("   >>> Passkey: %d <<<", passkey);
 

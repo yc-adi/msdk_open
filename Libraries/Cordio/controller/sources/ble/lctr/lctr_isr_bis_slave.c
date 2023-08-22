@@ -466,7 +466,7 @@ void lctrSlvBisTxCompletionSequential(BbOpDesc_t *pOp, uint8_t status)
   {
     LL_TRACE_WARN2("!!! Failed BIG transmission handle=%u ec[15:0]=%u", pBigCtx->handle, pBigCtx->eventCounter);
 
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(13);
     return;
   }
 
@@ -474,7 +474,7 @@ void lctrSlvBisTxCompletionSequential(BbOpDesc_t *pOp, uint8_t status)
 
   if (lctrSlvBisIsr.se.bisEvtIdx >= pBigCtx->numBis)
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(14);
     return;
   }
 
@@ -488,7 +488,7 @@ void lctrSlvBisTxCompletionSequential(BbOpDesc_t *pOp, uint8_t status)
     }
     else
     {
-      BbSetBodTerminateFlag();
+      BbSetBodTerminateFlag(15);
     }
     return;
   }
@@ -526,7 +526,7 @@ void lctrSlvBisTxCompletionInterleaved(BbOpDesc_t *pOp, uint8_t status)
   {
     LL_TRACE_WARN2("!!! Failed BIG transmission handle=%u ec[15:0]=%u", pBigCtx->handle, pBigCtx->eventCounter);
 
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(16);
     return;
   }
 
@@ -536,7 +536,7 @@ void lctrSlvBisTxCompletionInterleaved(BbOpDesc_t *pOp, uint8_t status)
 
   if (numSePkts > pBigCtx->nse)
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(17);
     return;
   }
 
@@ -550,7 +550,7 @@ void lctrSlvBisTxCompletionInterleaved(BbOpDesc_t *pOp, uint8_t status)
     }
     else
     {
-      BbSetBodTerminateFlag();
+      BbSetBodTerminateFlag(18);
     }
 
     return;

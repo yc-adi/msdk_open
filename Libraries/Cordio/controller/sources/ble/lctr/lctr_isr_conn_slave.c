@@ -300,9 +300,9 @@ void lctrSlvConnBeginOp(BbOpDesc_t *pOp)
   lctrConnCtx_t * const pCtx = pOp->pCtx;
   uint8_t *pBuf;
 
-  if (lctrCheckForLinkTerm(pCtx))
+  if (lctrCheckForLinkTerm(pCtx, 27))
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(27);
     return;
   }
 
@@ -326,7 +326,7 @@ void lctrSlvConnBeginOp(BbOpDesc_t *pOp)
   else
   {
     LL_TRACE_ERR1("!!! OOM while initializing receive buffer at start of CE, handle=%u", LCTR_GET_CONN_HANDLE(pCtx));
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(28);
   }
 }
 
@@ -391,6 +391,13 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
     pCtx->data.slv.unsyncedTime = 0;
   }
 
+  //@?@ remove me !!!
+  if (BbGetBodTerminateFlag())
+  {
+    APP_TRACE_INFO1("@?@ termBod=1 reset sup timeout %d", pCtx->supTimeoutMs);
+    WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs);
+  }
+
   if (!pCtx->connEst && (pCtx->data.slv.rxFromMaster || (pCtx->data.slv.consCrcFailed > 0)))
   {
     lctrStoreConnTimeoutTerminateReason(pCtx);
@@ -412,7 +419,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
   }
 
   /* Terminate connection */
-  if (lctrCheckForLinkTerm(pCtx))
+  if (lctrCheckForLinkTerm(pCtx, 2))
   {
     lctrSendConnMsg(pCtx, LCTR_CONN_TERMINATED);
     WsfTimerStop(&pCtx->tmrSupTimeout);
@@ -555,7 +562,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
 
     /* Advance to next interval. */
     pOp->dueUsec = pCtx->data.slv.anchorPointUsec + connInterUsec - wwTotalUsec;
-    APP_TRACE_INFO1("@?@ connEndOp dueUsec=%d", pOp->dueUsec);
+    APP_TRACE_INFO1("@?@ ConnEndOp due=%d", pOp->dueUsec);
 
     pOp->minDurUsec = pCtx->data.slv.txWinSizeUsec + pCtx->effConnDurUsec + wwTotalUsec;
     pConn->rxSyncDelayUsec = pCtx->data.slv.txWinSizeUsec + (wwTotalUsec << 1);
@@ -693,8 +700,9 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
   }
 
   /*** Connection event pre-processing ***/
-
-  if (lctrCheckForLinkTerm(pCtx) ||
+  uint8_t linkTerm = lctrCheckForLinkTerm(pCtx, 100);
+  uint8_t flag = 100;
+  if ( linkTerm ||
       (status == BB_STATUS_FAILED) ||
       (status == BB_STATUS_RX_TIMEOUT))
   {
@@ -708,7 +716,24 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
       LL_TRACE_ERR3("lctrSlvConnRxCompletion: BB failed with status=FAILED, handle=%u, bleChan=%u, eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pBle->chan.chanIdx, pCtx->eventCounter);
     }
 
-    BbSetBodTerminateFlag();
+    if (linkTerm) 
+    {
+      flag += 1;
+    }
+
+    if (status == BB_STATUS_FAILED)
+    {
+      flag += 2;
+    }
+
+    if (status == BB_STATUS_RX_TIMEOUT)
+    {
+      flag += 4;
+    }
+
+    APP_TRACE_INFO1("@?@ flag=%d", flag);
+    BbSetBodTerminateFlag(flag);
+    
     lctrRxPduFree(pRxBuf);
     goto Done;
   }
@@ -757,7 +782,8 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
     if ((pCtx->data.slv.consCrcFailed >= LCTR_MAX_CONS_CRC) || (status == BB_STATUS_FRAME_FAILED))
     {
       /* Close connection event. */
-      BbSetBodTerminateFlag();
+      APP_TRACE_INFO2("@?@ crc#=%d st=%d", pCtx->data.slv.consCrcFailed, status);
+      BbSetBodTerminateFlag(30);
       lctrRxPduFree(pRxBuf);
       goto Done;
     }
@@ -765,7 +791,7 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
     if(lctrGetConnOpFlag(pCtx, LL_OP_MODE_FLAG_SLV_CRC_CLOSE))
     {
       /* Close connection event. */
-      BbSetBodTerminateFlag();
+      BbSetBodTerminateFlag(31);
       lctrRxPduFree(pRxBuf);
       goto Done;
     }
@@ -807,7 +833,7 @@ SetupTx:
   /* Slave always transmits after receiving. */
   if ((txLen = lctrSetupForTx(pCtx, status, TRUE)) == 0)
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(32);
     goto PostProcessing;
   }
 

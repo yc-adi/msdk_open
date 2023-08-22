@@ -249,6 +249,8 @@ void AppHandlePasskey(dmSecAuthReqIndEvt_t *pAuthReq)
     SecRand((uint8_t *) &passkey, sizeof(uint32_t));
     passkey %= 1000000;
 
+    passkey = 112233;  //@?@ remove me !!!
+
     /* convert to byte buffer */
     buf[0] = UINT32_TO_BYTE0(passkey);
     buf[1] = UINT32_TO_BYTE1(passkey);

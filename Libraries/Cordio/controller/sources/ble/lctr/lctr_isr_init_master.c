@@ -248,6 +248,6 @@ bool_t lctrMstConnIndTxCompHandler(BbOpDesc_t *pOp, const uint8_t *pIndBuf)
   WSF_ASSERT(pOp->prot.pBle->chan.opType == BB_BLE_OP_MST_ADV_EVENT);
 
   lctrMstInit.selfTerm = TRUE;
-  BbSetBodTerminateFlag();
+  BbSetBodTerminateFlag(36);
   return FALSE;
 }

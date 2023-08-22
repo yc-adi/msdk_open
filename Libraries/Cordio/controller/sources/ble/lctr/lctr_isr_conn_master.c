@@ -206,9 +206,9 @@ void lctrMstConnBeginOp(BbOpDesc_t *pOp)
   lctrConnCtx_t * const pCtx = pOp->pCtx;
   uint8_t *pBuf;
 
-  if (lctrCheckForLinkTerm(pCtx))
+  if (lctrCheckForLinkTerm(pCtx, 21))
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(21);
     return;
   }
 
@@ -249,7 +249,7 @@ void lctrMstConnBeginOp(BbOpDesc_t *pOp)
   else
   {
     LL_TRACE_ERR1("!!! OOM while initializing receive buffer at start of CE, handle=%u", LCTR_GET_CONN_HANDLE(pCtx));
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(22);
   }
 }
 
@@ -321,7 +321,7 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
   }
 
   /* Terminate connection */
-  if (lctrCheckForLinkTerm(pCtx))
+  if (lctrCheckForLinkTerm(pCtx, 1))
   {
     lctrSendConnMsg(pCtx, LCTR_CONN_TERMINATED);
     WsfTimerStop(&pCtx->tmrSupTimeout);
@@ -529,7 +529,7 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
 
   /*** Connection event pre-processing ***/
 
-  if (lctrCheckForLinkTerm(pCtx) ||
+  if (lctrCheckForLinkTerm(pCtx, 23) ||
       (status == BB_STATUS_FAILED) ||
       (status == BB_STATUS_RX_TIMEOUT))
   {
@@ -543,7 +543,7 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
       LL_TRACE_ERR3("lctrMstConnRxCompletion: BB failed with status=FAILED, eventCounter=%u, bleChan=%u, handle=%u", pCtx->eventCounter, pCtx->bleData.chan.chanIdx, LCTR_GET_CONN_HANDLE(pCtx));
     }
 
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(23);
     lctrRxPduFree(pRxBuf);
     goto Done;
   }
@@ -567,7 +567,7 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
     if (lctrMstConnIsr.consCrcFailed >= LCTR_MAX_CONS_CRC)
     {
       /* Close connection event. */
-      BbSetBodTerminateFlag();
+      BbSetBodTerminateFlag(24);
       lctrRxPduFree(pRxBuf);
       goto Done;
     }
@@ -592,7 +592,7 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
 
   if (lctrExceededMaxDur(pCtx, pOp->dueUsec, pCtx->effConnDurUsec))
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(25);
     goto PostProcessing;
   }
 
@@ -603,7 +603,7 @@ SetupTx:
   txPduIsAcked = txPduIsAcked || !lctrGetConnOpFlag(pCtx, LL_OP_MODE_FLAG_MST_RETX_AFTER_RX_NACK);
   if (lctrSetupForTx(pCtx, status, !txPduIsAcked) == 0)
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(26);
     goto PostProcessing;
   }
 

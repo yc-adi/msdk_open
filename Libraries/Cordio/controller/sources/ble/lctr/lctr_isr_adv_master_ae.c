@@ -1059,7 +1059,7 @@ void lctrMstDiscoverRxExtAdvPktPostProcessHandler(BbOpDesc_t *pOp, const uint8_t
         if (pExtScanCtx->auxOpPending)
         {
           /* Extended advertising event continues with auxiliary BOD */
-          BbSetBodTerminateFlag();
+          BbSetBodTerminateFlag(3);
         }
 
         /* Auxiliary PDU expected; defer report. */

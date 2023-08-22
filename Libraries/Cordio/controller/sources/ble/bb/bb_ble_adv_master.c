@@ -531,7 +531,7 @@ static void bbMstExecuteScanOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
 
   if ((scanDurUsec = bbBleCalcScanDurationUsec(pBod, pScan, pBod->dueUsec, 0)) == 0)
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(1);
     return;
   }
 

@@ -613,7 +613,7 @@ void lctrMstBisRxCompletion(BbOpDesc_t *pOp, uint8_t *pBuf, uint8_t status)
 
   if (pBigCtx->state != LCTR_MST_BIG_STATE_SYNCED)
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(6);
     goto RxPostProcess;
   }
 
@@ -622,7 +622,7 @@ void lctrMstBisRxCompletion(BbOpDesc_t *pOp, uint8_t *pBuf, uint8_t status)
   case BB_STATUS_FAILED:
   case BB_STATUS_CANCELED:
     /* Continue to next BIG Event. */
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(7);
     goto RxPostProcess;
 
   default:
@@ -700,7 +700,7 @@ void lctrMstBisRxCompletion(BbOpDesc_t *pOp, uint8_t *pBuf, uint8_t status)
     if (!lctrMstBisLoopCounterInterleaved(pBigCtx))
     {
       /* Continue to next BIG Event. */
-      BbSetBodTerminateFlag();
+      BbSetBodTerminateFlag(8);
       goto RxPostProcess;
     }
     break;
@@ -710,7 +710,7 @@ void lctrMstBisRxCompletion(BbOpDesc_t *pOp, uint8_t *pBuf, uint8_t status)
     if (!lctrMstBisLoopCounterSequential(pBigCtx))
     {
       /* Continue to next BIG Event. */
-      BbSetBodTerminateFlag();
+      BbSetBodTerminateFlag(9);
       goto RxPostProcess;
     }
     break;
@@ -724,7 +724,7 @@ void lctrMstBisRxCompletion(BbOpDesc_t *pOp, uint8_t *pBuf, uint8_t status)
   }
   else
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(10);
   }
 
   /* Now that next Rx is setup, process the received packet. */
@@ -783,7 +783,7 @@ void lctrMstBigBeginOp(BbOpDesc_t *pOp)
 
   if (pBigCtx->state != LCTR_MST_BIG_STATE_SYNCED)
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(11);
     return;
   }
 
@@ -833,7 +833,7 @@ void lctrMstBigBeginOp(BbOpDesc_t *pOp)
 
   if (!lctrMstBisRxData(pBigCtx, FALSE, NULL))
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(12);
     return;
   }
 }

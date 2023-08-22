@@ -142,7 +142,7 @@ static void lctrSlvCisCigExecOp(lctrCisCtx_t *pCisCtx)
   else
   {
     LL_TRACE_ERR1("!!! OOM while initializing receive buffer at start of CIS, cisHandle=%u", pCisCtx->cisHandle);
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(20);
   }
 }
 

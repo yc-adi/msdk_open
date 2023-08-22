@@ -226,7 +226,7 @@ void BbExecuteBod(BbOpDesc_t *pBod)
 
   if (bbCb.prot[pBod->protId].execOpCback != NULL)
   {
-    bbCb.prot[pBod->protId].execOpCback(pBod);
+    bbCb.prot[pBod->protId].execOpCback(pBod);  // could be bbSlvExecuteConnOp, bbSlvExecuteAdvOp
   }
 
   if (bbCb.termBod)
@@ -277,10 +277,11 @@ BbOpDesc_t *BbGetCurrentBod(void)
  *              flag will help to decide if BbTerminateBod() should be called.
  */
 /*************************************************************************************************/
-void BbSetBodTerminateFlag(void)
+void BbSetBodTerminateFlag(uint8_t src)
 {
   if (bbCb.pOpInProgress)
   {
+    APP_TRACE_INFO1("@?@ term flag src=%d", src);
     bbCb.termBod = TRUE;
   }
 }

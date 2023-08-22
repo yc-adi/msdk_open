@@ -306,7 +306,7 @@ BbOpDesc_t *BbGetCurrentBod(void);
  *              flag will help to decide if BbTerminateBod() should be called.
  */
 /*************************************************************************************************/
-void BbSetBodTerminateFlag(void);
+void BbSetBodTerminateFlag(uint8_t src);
 
 /*************************************************************************************************/
 /*!

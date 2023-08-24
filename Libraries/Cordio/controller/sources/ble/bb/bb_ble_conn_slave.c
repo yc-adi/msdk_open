@@ -174,7 +174,7 @@ static void bbSlvConnRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint
   bbBleCb.pRxDataBuf = NULL;
 
   /* Set Tx buffer or BOD cancel expected to be called during this routine. */
-  pConn->rxDataCback(pCur, pBuf, status);
+  pConn->rxDataCback(pCur, pBuf, status);   // lctrSlvConnRxCompletion ?
 
   if (BbGetBodTerminateFlag())
   {

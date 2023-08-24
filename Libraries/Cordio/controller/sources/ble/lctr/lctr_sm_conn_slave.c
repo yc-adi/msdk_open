@@ -31,21 +31,25 @@
 #include "wsf_assert.h"
 #include "wsf_trace.h"
 
+extern uint32_t u32DeepSleepNdx;
+extern uint32_t u32LastDeepSleepCnt;
 
 char *GetLctrEvtStr(uint8_t evt)
 {
   switch (evt) 
   {
-    case  0: return "rst";  // LCTR_CONN_MSG_RESET
-    case 11: return "RCV CONN"; // LCTR_CONN_MSG_RX_CONNECT_IND
-    case 12: return "RCV LLCP"; // LCTR_CONN_MSG_RX_LLCP
-    case 21: return "CONN_UPDATE"; // LCTR_CONN_MSG_API_CONN_UPDATE
-    case 27: return "REMOTE_FEAT"; // LCTR_CONN_MSG_API_REMOTE_FEATURE
-    case 42: return "ARQ_Q_FLUSHED"; // LCTR_CONN_ARQ_Q_FLUSHED
-    case 57: return "LLCP_PROC_CMPL"; // LCTR_CONN_LLCP_PROC_CMPL
+    case  0: return "rst";                // LCTR_CONN_MSG_RESET
+    case 11: return "RCV CONN";           // LCTR_CONN_MSG_RX_CONNECT_IND
+    case 12: return "RCV LLCP";           // LCTR_CONN_MSG_RX_LLCP
+    case 21: return "CONN_UPDATE";        // LCTR_CONN_MSG_API_CONN_UPDATE
+    case 25: return "LTK_REPLY";          // LCTR_CONN_MSG_API_LTK_REPLY
+    case 27: return "REMOTE_FEAT";        // LCTR_CONN_MSG_API_REMOTE_FEATURE
+    case 42: return "ARQ_Q_FLUSHED";      // LCTR_CONN_ARQ_Q_FLUSHED
+    case 57: return "LLCP_PROC_CMPL";     // LCTR_CONN_LLCP_PROC_CMPL
     case 58: return "LLCP_START_PENDING"; // LCTR_CONN_LLCP_START_PENDING
-    case 71: return "SUP TIMEOUT"; // LCTR_CONN_TERM_SUP_TIMEOUT   //@?@ remove me !!!
-    case 75: return "CONN TERM"; // LCTR_CONN_TERMINATED
+    case 71: return "SUP TIMEOUT";        // LCTR_CONN_TERM_SUP_TIMEOUT   //@?@ remove me !!!
+    case 75: return "CONN TERM";          // 
+    case 81: return "LLCP_RSP_EXP";       // LCTR_CONN_TMR_LLCP_RSP_EXP
     default: return " ";
   }
 }
@@ -60,7 +64,7 @@ char *GetLctrEvtStr(uint8_t evt)
 /*************************************************************************************************/
 void lctrSlvConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 {
-  APP_TRACE_INFO3("lctrSlvConnExecuteSm evt=%d(%s) st=%d DSndx=%d cnt=%d", event, GetLctrEvtStr(event), pCtx->state);
+  APP_TRACE_INFO3("lctrSlvConnExecuteSm evt=%d(%s) st=%d", event, GetLctrEvtStr(event), pCtx->state);
 
   /* State-specific events. */
   switch (pCtx->state)
@@ -241,7 +245,7 @@ void lctrSlvConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 /*************************************************************************************************/
 void lctrConnStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
 {
-  APP_TRACE_INFO1("lctrConnStatelessEventHandler evt=%d", event);
+  APP_TRACE_INFO2("lctrConnStatelessEventHandler evt=%d(%s)", event, GetLctrEvtStr(event));
   switch (event)
   {
     case LCTR_CONN_TERMINATED:
@@ -270,7 +274,7 @@ void lctrConnStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
       lctrFlagLinkTerm(pCtx);
       break;
     default:
-      APP_TRACE_INFO0("not here");
+      APP_TRACE_INFO2("not here DSndx=% last=%d", u32DeepSleepNdx, u32LastDeepSleepCnt);
       break;
   }
 }

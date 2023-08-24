@@ -654,7 +654,7 @@ void lctrLlcpStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
 /*************************************************************************************************/
 void lctrSlvLlcpExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 {
-  APP_TRACE_INFO1("lctrSlvLlcpExecuteSm evt=%d", event);
+  APP_TRACE_INFO2("lctrSlvLlcpExecuteSm evt=%d(%s)", event, GetLctrEvtStr(event));
   /* Override state machine */
   switch (event)
   {

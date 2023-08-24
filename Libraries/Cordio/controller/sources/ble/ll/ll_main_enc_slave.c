@@ -87,7 +87,7 @@ uint8_t LlLtkReqReply(uint16_t handle, const uint8_t *pKey)
     pMsg->hdr.handle = handle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;
     pMsg->hdr.event  = LCTR_CONN_MSG_API_LTK_REPLY;
-
+    APP_TRACE_INFO0("MsgSend 1 LCTR_DISP_CONN 25 LCTR_CONN_MSG_API_LTK_REPLY");
     memcpy(pMsg->key, pKey, sizeof(pMsg->key));
 
     WsfMsgSend(lmgrPersistCb.handlerId, pMsg);

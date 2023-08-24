@@ -116,8 +116,10 @@
 extern uint32_t u32DbgBuf[];
 extern uint32_t u32DbgBufNdx;
 extern uint8_t  u8DbgSt;
-uint8_t u8StartRecord = 0;
 #endif
+uint8_t u8StartRecord = 0;
+uint32_t u32DeepSleepNdx = 0;
+uint32_t u32LastDeepSleepCnt = 0;
 
 /**************************************************************************************************
   Global Variables
@@ -442,6 +444,8 @@ int DeepSleep(void)
 
             if (u32DbgBufNdx >= DBG_BUF_SIZE - 1) u32DbgBufNdx = 0;
         }
+        u32DeepSleepNdx++;
+        u32LastDeepSleepCnt = dsInWutCnt;
         #endif
 
         /* Arm the WUT interrupt */
@@ -786,11 +790,18 @@ int main(void)
 
         if (wsfOs.numFunc == 0 || !WsfOsActive())
         {
-#if  DEEP_SLEEP == 1
-            DeepSleep();
-#else
+            #if  DEEP_SLEEP == 1
+            if (conn_opened != 8)
+            {
+                DeepSleep();
+            }
+            else
+            {
+                WsfTimerSleep();
+            }
+            #else
             WsfTimerSleep();
-#endif
+            #endif
         }
     }
 

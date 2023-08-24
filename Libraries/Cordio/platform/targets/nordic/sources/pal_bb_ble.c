@@ -935,7 +935,7 @@ void PalBbBleSetDataParams(const PalBbBleDataParam_t *pParam)
 
   /* store the callback function addresses to local memory */
   bbTxCallback = pParam->txCback;
-  bbRxCallback = pParam->rxCback;
+  bbRxCallback = pParam->rxCback;   // bbSlvConnRxCompCback => rxDataCback => lctrSlvConRxCompletion
 
   /* store due time for future use */
   bbAntennaDueTimeUsec = pParam->dueUsec;

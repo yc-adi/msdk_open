@@ -91,6 +91,7 @@ void AppUiAction(uint8_t event)
 
     case APP_UI_SEC_PAIR_CMPL:
       APP_TRACE_INFO0("   >>> Pairing completed successfully <<<");
+      conn_opened = 9;
       break;
 
     case APP_UI_SEC_PAIR_FAIL:

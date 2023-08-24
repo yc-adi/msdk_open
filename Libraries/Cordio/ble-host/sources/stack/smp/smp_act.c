@@ -37,6 +37,10 @@
 #define SMP_EXTRA_TRACE FALSE
 #endif
 
+extern uint32_t u32DeepSleepNdx;
+extern uint32_t u32LastDeepSleepCnt;
+extern uint8_t u8StartRecord;
+
 extern uint8_t *smpStateStr(uint8_t state);
 
 /*************************************************************************************************/

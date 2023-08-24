@@ -296,7 +296,7 @@ static const uint8_t cgmAdvDataDisc[] = {
 };
 
 /*! scan data, discoverable mode */
-static const uint8_t datsScanDataDisc[] = {
+static const uint8_t cgmScanDataDisc[] = {
     /*! device name */
     4, /*! length */
     DM_ADV_TYPE_LOCAL_NAME, /*! AD type */
@@ -459,8 +459,7 @@ static void trimStart(void)
  *  \return ATT status.
  */
 /*************************************************************************************************/
-
-uint8_t datsWpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation, uint16_t offset,
+uint8_t cgmWpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation, uint16_t offset,
                          uint16_t len, uint8_t *pValue, attsAttr_t *pAttr)
 {
     if (len == sizeof(fileHeader_t)) {
@@ -475,6 +474,7 @@ uint8_t datsWpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation, 
 
     return ATT_SUCCESS;
 }
+
 /*************************************************************************************************/
 /*!
 *
@@ -485,7 +485,7 @@ uint8_t datsWpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation, 
 *  \return None.
 */
 /*************************************************************************************************/
-static void datsPrivAddDevToResList(appDbHdl_t dbHdl)
+static void cgmPrivAddDevToResList(appDbHdl_t dbHdl)
 {
     dmSecKey_t *pPeerKey;
 
@@ -506,7 +506,7 @@ static void datsPrivAddDevToResList(appDbHdl_t dbHdl)
 *  \return None.
 */
 /*************************************************************************************************/
-static void datsPrivRemDevFromResListInd(dmEvt_t *pMsg)
+static void cgmPrivRemDevFromResListInd(dmEvt_t *pMsg)
 {
     if (pMsg->hdr.status == HCI_SUCCESS) {
         if (AppDbGetHdl((dmConnId_t)pMsg->hdr.param) != APP_DB_HDL_NONE) {
@@ -528,7 +528,7 @@ static void datsPrivRemDevFromResListInd(dmEvt_t *pMsg)
  *  \return None.
  */
 /*************************************************************************************************/
-void datsDisplayStackVersion(const char *pVersion)
+void cgmDisplayStackVersion(const char *pVersion)
 {
     APP_TRACE_INFO1("Stack Version: %s", pVersion);
 }
@@ -543,19 +543,18 @@ void datsDisplayStackVersion(const char *pVersion)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsSetup(dmEvt_t *pMsg)
+static void cgmSetup(dmEvt_t *pMsg)
 {
     /* Initialize control information */
     cgmCb.restoringResList = FALSE;
 
     /* set advertising and scan response data for discoverable mode */
-    AppAdvSetData(APP_ADV_DATA_DISCOVERABLE, sizeof(cgmAdvDataDisc), (uint8_t *)cgmAdvDataDisc);
-    AppAdvSetData(APP_SCAN_DATA_DISCOVERABLE, sizeof(datsScanDataDisc),
-                  (uint8_t *)datsScanDataDisc);
+    AppAdvSetData(APP_ADV_DATA_DISCOVERABLE,  sizeof(cgmAdvDataDisc),   (uint8_t *)cgmAdvDataDisc);
+    AppAdvSetData(APP_SCAN_DATA_DISCOVERABLE, sizeof(cgmScanDataDisc), (uint8_t *)cgmScanDataDisc);
 
     /* set advertising and scan response data for connectable mode */
-    AppAdvSetData(APP_ADV_DATA_CONNECTABLE, sizeof(cgmAdvDataDisc), (uint8_t *)cgmAdvDataDisc);
-    AppAdvSetData(APP_SCAN_DATA_CONNECTABLE, sizeof(datsScanDataDisc), (uint8_t *)datsScanDataDisc);
+    AppAdvSetData(APP_ADV_DATA_CONNECTABLE,  sizeof(cgmAdvDataDisc),  (uint8_t *)cgmAdvDataDisc);
+    AppAdvSetData(APP_SCAN_DATA_CONNECTABLE, sizeof(cgmScanDataDisc), (uint8_t *)cgmScanDataDisc);
 
     /* start advertising; automatically set connectable/discoverable mode and bondable mode */
     AppAdvStart(APP_MODE_AUTO_INIT);
@@ -570,14 +569,14 @@ static void datsSetup(dmEvt_t *pMsg)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsRestoreResolvingList(dmEvt_t *pMsg)
+static void cgmRestoreResolvingList(dmEvt_t *pMsg)
 {
     /* Restore first device to resolving list in Controller. */
     cgmCb.resListRestoreHdl = AppAddNextDevToResList(APP_DB_HDL_NONE);
 
     if (cgmCb.resListRestoreHdl == APP_DB_HDL_NONE) {
         /* No device to restore.  Setup application. */
-        datsSetup(pMsg);
+        cgmSetup(pMsg);
     } else {
         cgmCb.restoringResList = TRUE;
     }
@@ -592,22 +591,22 @@ static void datsRestoreResolvingList(dmEvt_t *pMsg)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsPrivAddDevToResListInd(dmEvt_t *pMsg)
+static void cgmPrivAddDevToResListInd(dmEvt_t *pMsg)
 {
     /* Check if in the process of restoring the Device List from NV */
     if (cgmCb.restoringResList) {
         /* Set the advertising peer address. */
-        datsPrivAddDevToResList(cgmCb.resListRestoreHdl);
+        cgmPrivAddDevToResList(cgmCb.resListRestoreHdl);
 
         /* Retore next device to resolving list in Controller. */
         cgmCb.resListRestoreHdl = AppAddNextDevToResList(cgmCb.resListRestoreHdl);
 
         if (cgmCb.resListRestoreHdl == APP_DB_HDL_NONE) {
             /* No additional device to restore. Setup application. */
-            datsSetup(pMsg);
+            cgmSetup(pMsg);
         }
     } else {
-        datsPrivAddDevToResList(AppDbGetHdl((dmConnId_t)pMsg->hdr.param));
+        cgmPrivAddDevToResList(AppDbGetHdl((dmConnId_t)pMsg->hdr.param));
     }
 }
 
@@ -637,31 +636,6 @@ static void cgmProcCccState(cgmMsg_t *pMsg)
     // TODO: other changes
 }
 
-
-/*************************************************************************************************/
-/*!
- *  \brief  Set up advertising and other procedures that need to be performed after
- *          device reset.
- *
- *  \param  pMsg    Pointer to message.
- *
- *  \return None.
- */
-/*************************************************************************************************/
-static void cgmSetup(dmEvt_t *pMsg)
-{
-    /* set advertising and scan response data for discoverable mode */
-    AppAdvSetData(APP_ADV_DATA_DISCOVERABLE, sizeof(cgmAdvDataDisc), (uint8_t *) cgmAdvDataDisc);
-    AppAdvSetData(APP_SCAN_DATA_DISCOVERABLE, sizeof(datsScanDataDisc), (uint8_t *) datsScanDataDisc);
-
-    /* set advertising and scan response data for connectable mode */
-    AppAdvSetData(APP_ADV_DATA_CONNECTABLE, 0, NULL);
-    AppAdvSetData(APP_SCAN_DATA_CONNECTABLE, 0, NULL);
-
-    /* start advertising; automatically set connectable/discoverable mode and bondable mode */
-    AppAdvStart(APP_MODE_AUTO_INIT);
-}
-
 /*************************************************************************************************/
 /*!
  *  \brief  Process messages from the event handler.
@@ -689,7 +663,7 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         AttsCalculateDbHash();
         DmSecGenerateEccKeyReq();
         AppDbNvmReadAll();
-        datsRestoreResolvingList(pMsg);
+        cgmRestoreResolvingList(pMsg);
         setAdvTxPower();
 
         cgmSetup(pMsg);
@@ -797,11 +771,11 @@ static void cgmProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_PRIV_ADD_DEV_TO_RES_LIST_IND:
-        datsPrivAddDevToResListInd(pMsg);
+        cgmPrivAddDevToResListInd(pMsg);
         break;
 
     case DM_PRIV_REM_DEV_FROM_RES_LIST_IND:
-        datsPrivRemDevFromResListInd(pMsg);
+        cgmPrivRemDevFromResListInd(pMsg);
         break;
 
     case DM_ADV_NEW_ADDR_IND:
@@ -986,7 +960,7 @@ static void cgmBtnCback(uint8_t btn)
         case APP_UI_BTN_1_EX_LONG: {
             const char *pVersion;
             StackGetVersionNumber(&pVersion);
-            datsDisplayStackVersion(pVersion);
+            cgmDisplayStackVersion(pVersion);
         } break;
 
         case APP_UI_BTN_2_SHORT:
@@ -1188,7 +1162,7 @@ void CgmStart(void)
     /* Initialize attribute server database */
     SvcCoreGattCbackRegister(GattReadCback, GattWriteCback);
     SvcCoreAddGroup();
-    SvcWpCbackRegister(NULL, datsWpWriteCback);
+    SvcWpCbackRegister(NULL, cgmWpWriteCback);
     SvcWpAddGroup();
 
     SvcCgmsAddGroup();

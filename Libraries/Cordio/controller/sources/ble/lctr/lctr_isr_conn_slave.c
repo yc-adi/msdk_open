@@ -42,6 +42,11 @@
   Global Variables
 **************************************************************************************************/
 extern uint8_t conn_opened;
+extern uint32_t u32DeepSleepNdx;
+extern uint32_t u32LastDeepSleepCnt;
+extern uint8_t u8StartRecord;
+
+extern void print_dbg_buf(void);
 
 /*! \brief      Assert BB meets data PDU requirements. */
 WSF_CT_ASSERT((BB_FIXED_DATA_PKT_LEN == 0) ||
@@ -670,7 +675,6 @@ void lctrSlvConnTxCompletion(BbOpDesc_t *pOp, uint8_t status)
 /*************************************************************************************************/
 void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
 {
-  //APP_TRACE_INFO1("\nlctrSlvConnRxCompletion st=%d", status);  // @?@ too frequently
   lctrConnCtx_t * const pCtx = pOp->pCtx;
 
   BbBleData_t * const pBle = &pCtx->bleData;
@@ -771,7 +775,8 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
       pCtx->data.slv.consCrcFailed++;
     } else {
       /* Decryption failure */
-      LL_TRACE_WARN3("lctrSlvConnRxCompletion: BB failed with status=BB_STATUS_FRAME_FAILED, handle=%u, rxPktCounter=%u, eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pCtx->rxPktCounter, pCtx->eventCounter);
+      //LL_TRACE_WARN3("lctrSlvConnRxCompletion: BB failed with status=BB_STATUS_FRAME_FAILED, handle=%u, rxPktCounter=%u, eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pCtx->rxPktCounter, pCtx->eventCounter);
+      APP_TRACE_INFO2("@?@ BB  FRAME_FAILED, rxPktCounter=%u, eventCounter=%u", pCtx->rxPktCounter, pCtx->eventCounter);
       if(!decremented) {
         /* Decremente the packet counter, master will re-transmit the unacknowledged packet */
         lctrDecPacketCounterRx(pCtx);
@@ -783,6 +788,13 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
     {
       /* Close connection event. */
       APP_TRACE_INFO2("@?@ crc#=%d st=%d", pCtx->data.slv.consCrcFailed, status);
+      //@?@ remove me !!!
+      APP_TRACE_INFO2("DS ndx=%d last=%d", u32DeepSleepNdx, u32LastDeepSleepCnt);
+      
+      if (u8StartRecord == 1) print_dbg_buf();
+
+      u8StartRecord = 0;
+
       BbSetBodTerminateFlag(30);
       lctrRxPduFree(pRxBuf);
       goto Done;
@@ -868,6 +880,7 @@ PostProcessing:
 
   /* Rx post-processing. */
   lctrCheckControlPduAck(pCtx);
+
   lctrRxPostProcessing(pCtx, pRxBuf, pNextRxBuf, loadRxBuf);
 
   /*** ISR complete ***/

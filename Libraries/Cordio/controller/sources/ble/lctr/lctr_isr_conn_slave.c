@@ -389,6 +389,12 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
     pCtx->data.slv.unsyncedTime = 0;
   }
 
+  if (BbGetBodTerminateFlag())  //@?@ remove me !!!
+  {
+    //APP_TRACE_INFO0("termBod=1");
+    //WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs);
+  }
+
   if (!pCtx->connEst && (pCtx->data.slv.rxFromMaster || (pCtx->data.slv.consCrcFailed > 0)))
   {
     lctrStoreConnTimeoutTerminateReason(pCtx);

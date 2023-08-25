@@ -28,6 +28,7 @@
 #include "sch_api.h"
 #include "pal_bb.h"
 #include "wsf_assert.h"
+#include "wsf_trace.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -96,8 +97,12 @@ void schRemoveHead(void);
 static inline bool_t schDueTimeInFuture(BbOpDesc_t *pBod)
 {
   const uint32_t curTime = PalBbGetCurrentTime();
-
-  return (BbGetTargetTimeDelta(pBod->dueUsec, curTime) > 0);
+  uint32_t delta = BbGetTargetTimeDelta(pBod->dueUsec, curTime);
+  if (delta == 0)
+  {
+    APP_TRACE_INFO3("@?@ due=%d cur=%d %d", pBod->dueUsec, curTime, (int)pBod->dueUsec - (int)curTime);
+  }
+  return ( delta > 0);
 }
 
 

@@ -110,6 +110,7 @@
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern wsfOs_t wsfOs;
 
 /*! \brief  Pool runtime configuration. */
 static wsfBufPoolDesc_t mainPoolDesc[] = { { 16, 8 }, { 32, 4 }, { 192, 8 }, { 256, 16 } };
@@ -120,53 +121,26 @@ static LlRtCfg_t mainLlRtCfg;
 
 volatile int wutTrimComplete;
 
-#if DEEP_SLEEP == 1
-/**
- * @brief global variable to keep the minimal time for the next job (task). 
- * After each job, task, action, or response, need to update this variable.
- * If this time is long enough, the CPU will enter deep sleep.
- */
-uint32_t gNextJobTimeInUs = 0;
+#define MAX_DS_WUT_TICKS        (32768)     /* Maximum deep sleep time, units of 32 kHz ticks */
+#define MIN_DS_WUT_TICKS        (100)       /* Minimum deep sleep time, units of 32 kHz ticks (1/32768*100=3 ms) */
 
-#define MAX_WUT_TICKS (32768) /* Maximum deep sleep time, units of 32 kHz ticks */
-#define MIN_WUT_TICKS 100 /* Minimum deep sleep time, units of 32 kHz ticks */
-#define WAKEUP_US 700 /* Deep sleep recovery time, units of us */
+#define WAKEUP_US               (750)       /* Deep sleep recovery time, units of us */
+#define WAKEUP_IN_WUT_TICK      ((uint64_t)WAKEUP_US * (uint64_t)32768 / (uint64_t)1000000)
 
-#define WAKE_UP_TIME_IN_US              (750)  /// the time after wake up to backto normal operation
-#define MIN_DEEP_SLEEP_TIME_IN_US       (WAKE_UP_TIME_IN_US)
+#define RESTORE_OP_IN_WUT_TICK  (3)
+#define RESTORE_OP_IN_US        ((uint64_t)RESTORE_OP_IN_WUT_TICK * (uint64_t)1000000 / (uint64_t)32768)
 
-#define WAKEUP_IN_WUT_TICK      ((uint64_t)WAKEUP_US / (uint64_t)1000000 * (uint64_t)32768)
-#define RESTORE_OP_IN_WUT_TICK  (185)
-#define RESTORE_OP_IN_US        ((uint64_t)RESTORE_OP_IN_WUT_TICK / (uint64_t)32768 * (uint64_t)1000000)
+#define WAKEUP_32M_US           (3200)
+#define WUT_FREQ                (32768)
+#define US_TO_WUTTICKS(x)       (((x) * WUT_FREQ) / 1000000)
+#define WUT_MIN_TICKS           (10)
 
-#define WAKEUP_32M_US       (3200)
-#define WUT_FREQ            (32768)
-#define US_TO_WUTTICKS(x)   (((x) * WUT_FREQ) / 1000000)
-#define WUT_MIN_TICKS       (10)
-
-#define SLEEP_LED           (1)
-#define DEEPSLEEP_LED       (0)
-
-/**
- * @brief How many WUT ticks to delay entering Deep Sleep after being given the go ahead by the SDMA. 
- */
-#define DEEPSLEEP_DELAY (20)
-
-typedef void SDMASleepState_t;
-
-static volatile bool_t bHaveWUTEvent;
+#define SLEEP_LED               (1)
+#define DEEPSLEEP_LED           (0)
 
 extern uint8_t conn_opened;
-
-#endif  // DEEP_SLEEP
-
-#define DBG_BUF_SIZE    (512)
-uint32_t debugFlag = 0;
-uint32_t debugBuf[512];
-uint32_t debugBufHead = 0;
-uint32_t debugBufTail = 0;
-uint32_t debugMax = 0;
-uint32_t debugMin = 0xFFFFFFFF;
+uint32_t u32DeepSleepNdx = 0;
+uint32_t u32LastDeepSleepCnt = 0;
 
 uint16_t spi_rx_data[SPI_BUF_LEN];
 mxc_spi_req_t spi_req;
@@ -178,6 +152,11 @@ mxc_spi_req_t spi_req;
 int spiRxReady = 0;
 
 extern bool_t ChciTrService(void);
+
+#if DBG_DS == 1
+extern uint32_t u32DbgBuf[];
+extern uint32_t u32DbgBufNdx;
+#endif
 
 /**************************************************************************************************
   Functions
@@ -230,8 +209,6 @@ void InitRtc(void)
 
     printf("RTC started\n");
     MXC_Delay(10);
-    
-    printTime();
 }
 
 void SPI_IRQHandler(void)
@@ -267,10 +244,13 @@ extern void *AsyncRxRequests[MXC_UART_INSTANCES];
 
 int DeepSleep(void)
 {
-    uint32_t preCaptureInWutCnt, schUsec;
+    volatile uint32_t preCaptureInWutCnt;
+    uint32_t schUsec;
     uint32_t dsInWutCnt, dsWutTicks;
     uint64_t bleSleepTicks, idleInWutCnt, schUsecElapsed; //dsSysTickPeriods, ;
     bool_t schTimerActive;
+    uint32_t u64WutCmpVal;
+    volatile uint32_t wutCnt;
 
     /* If PAL system is busy, no need to sleep. */
     if (PalSysIsBusy())
@@ -278,7 +258,7 @@ int DeepSleep(void)
         return 1;
     }
 
-    if (!wsfOsReadyToSleep())
+    if (wsfOs.task.taskEventMask != 0)
     {
         return 2;
     }
@@ -298,12 +278,12 @@ int DeepSleep(void)
         idleInWutCnt = 0;
     }
 
-    if (idleInWutCnt > MAX_WUT_TICKS) {
-        idleInWutCnt = MAX_WUT_TICKS;
+    if (idleInWutCnt > MAX_DS_WUT_TICKS) {
+        idleInWutCnt = MAX_DS_WUT_TICKS;
     }
 
     /* Check to see if we meet the minimum requirements for deep sleep */
-    if (idleInWutCnt < (MIN_WUT_TICKS + WAKEUP_US)) {
+    if (idleInWutCnt < (MIN_DS_WUT_TICKS + WAKEUP_IN_WUT_TICK)) {
         return 4;
     }
 
@@ -351,13 +331,13 @@ int DeepSleep(void)
         idleInWutCnt-= (WAKEUP_IN_WUT_TICK + RESTORE_OP_IN_WUT_TICK);
 
         /* Calculate the time to the next BLE scheduler event */
-        if (schUsec < WAKEUP_US)
+        if (schUsec < (WAKEUP_US + RESTORE_OP_IN_US))
         {
             bleSleepTicks = 0;
         }
         else
         {
-            bleSleepTicks = ((uint64_t)schUsec - (uint64_t)WAKEUP_US - RESTORE_OP_IN_US) *
+            bleSleepTicks = ((uint64_t)schUsec - (uint64_t)WAKEUP_US - (uint64_t)RESTORE_OP_IN_US) *
                             (uint64_t)32768 / (uint64_t)BB_CLK_RATE_HZ;
         }
     } 
@@ -378,15 +358,32 @@ int DeepSleep(void)
     }
 
     /* Bound the deep sleep time */
-    if (dsInWutCnt > MAX_WUT_TICKS) {
-        dsInWutCnt = MAX_WUT_TICKS;
+    if (conn_opened == 2)   //@?@ remove me !!!
+    {
+        //dsInWutCnt += 328;  // 10 ms
     }
 
+    /**
+     * In WUT one-shot mode, the timer peripheral increments the WUTn_CNT.count field 
+     * until it matches the WUTn_CMP.compare field and then stops incrementing and 
+     * disables the timer.
+    */
+
     /* Only enter deep sleep if we have enough time */
-    if (dsInWutCnt >= MIN_WUT_TICKS) {
+    if (dsInWutCnt >= MIN_DS_WUT_TICKS) {
+        if (dsInWutCnt > MAX_DS_WUT_TICKS) {
+            dsInWutCnt = MAX_DS_WUT_TICKS;
+        }
+
+        /*
+        u64WutCmpVal = (uint64_t)preCaptureInWutCnt + (uint64_t)dsInWutCnt;
+        if (u64WutCmpVal > 0xFFFFFFFF) {
+            u64WutCmpVal = 0xFFFFFFFF - preCaptureInWutCnt;
+        }
+        */
         /* Arm the WUT interrupt */
         MXC_WUT->cmp = preCaptureInWutCnt + dsInWutCnt;
-
+        
         if (schTimerActive)
         {
             /* Stop the BLE scheduler timer */
@@ -415,7 +412,16 @@ int DeepSleep(void)
             MXC_WUT_RestoreBBClock(MXC_WUT, BB_CLK_RATE_HZ);
 
             /* Restart the BLE scheduler timer */
-            dsWutTicks = MXC_WUT->cnt - preCaptureInWutCnt;
+            wutCnt = MXC_WUT_GetCount(MXC_WUT);
+            if (wutCnt >= preCaptureInWutCnt)
+            {
+                dsWutTicks = wutCnt - preCaptureInWutCnt;
+            }
+            else
+            {
+                dsWutTicks = 0xFFFFFFFF - preCaptureInWutCnt + wutCnt;
+            }
+
             schUsecElapsed = (uint64_t)dsWutTicks * (uint64_t)1000000 / (uint64_t)32768;
 
             int palTimerStartTicks = schUsec - schUsecElapsed;
@@ -424,6 +430,20 @@ int DeepSleep(void)
             }
             PalTimerStart(palTimerStartTicks);
         }
+
+        #if DBG_DS == 1
+        if (u32DbgBufNdx < DBG_BUF_SIZE - DBG_GROUP_SIZE) {
+            u32DbgBuf[u32DbgBufNdx++] = preCaptureInWutCnt;
+            u32DbgBuf[u32DbgBufNdx++] = dsInWutCnt;
+            u32DbgBuf[u32DbgBufNdx++] = u64WutCmpVal;
+            u32DbgBuf[u32DbgBufNdx++] = wutCnt;
+            u32DbgBuf[u32DbgBufNdx++] = dsWutTicks;
+            u32DbgBuf[u32DbgBufNdx++] = schUsecElapsed;
+            if (u32DbgBufNdx >= DBG_BUF_SIZE) {
+                u32DbgBufNdx = 0;
+            }
+        }
+        #endif
     }
 
     /* Re-enable SysTick */
@@ -723,21 +743,19 @@ int main(void)
 
         wsfOsDispatcher();
 
-        if (!WsfOsActive())
+        if (wsfOs.numFunc == 0 || !WsfOsActive())
         {
-#if  DEEP_SLEEP == 1
-            if (conn_opened == 1|| conn_opened == 2)
-            {
-                DeepSleep();
-                //WsfTimerSleep();
-            }
-            else
-            {
-                DeepSleep();
-            }
-#else
+            #if  DEEP_SLEEP == 1
+            DeepSleep();
+            //WsfTimerSleep();
+            #else
             WsfTimerSleep();
 #endif
+        }
+        if (u32DeepSleepNdx == 1)
+        {
+            APP_TRACE_INFO2("%d %d", u32LastDeepSleepCnt, u32DeepSleepNdx);
+            u32DeepSleepNdx = 0;
         }
     }
 

@@ -34,6 +34,8 @@
 #include "atts_main.h"
 #include "svc_core.h"
 
+extern uint8_t conn_opened;
+
 /*************************************************************************************************/
 /*!
  *  \brief  Compare the given attribute's UUID to the given UUID.
@@ -205,6 +207,7 @@ uint8_t attsPermissions(dmConnId_t connId, uint8_t permit, uint16_t handle, uint
        (ATTS_PERMIT_READ_AUTH | ATTS_PERMIT_READ_ENC)) && (secLevel < DM_SEC_LEVEL_ENC_AUTH))
   {
     APP_TRACE_INFO0("encryption required with authenticated key");
+    conn_opened = 11;  //@?@ remove me !!!
     return ATT_ERR_AUTH;
   }
 

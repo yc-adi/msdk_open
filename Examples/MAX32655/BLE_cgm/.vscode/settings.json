@@ -93,11 +93,14 @@
         "TARGET=${config:target}",
         "TARGET_REV=0x4131",
         "__GNUC__",
-        "HCI_TR_EXACTLE=1"
+        "HCI_TR_EXACTLE=1",
+        "DEEP_SLEEP=1"
     ],
     "files.associations": {
         "spixf_reva.h": "c",
-        "spi_regs.h": "c"
-    }
+        "spi_regs.h": "c",
+        "wsf_os.h": "c"
+    },
+    "cortex-debug.variableUseNaturalFormat": true
 }
 

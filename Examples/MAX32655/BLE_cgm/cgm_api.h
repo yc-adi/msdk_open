@@ -33,8 +33,13 @@ extern "C" {
 /**************************************************************************************************
   Macros
 **************************************************************************************************/
+#define DBG_DS          (1)
+
+#define DBG_BUF_SIZE    (600)
+#define DBG_GROUP_SIZE  (6)
+
 #ifndef CGM_CONN_MAX
-#define CGM_CONN_MAX 1
+#define CGM_CONN_MAX    (1)
 #endif
 
 /*! enumeration of CGM CCCD */

@@ -206,7 +206,7 @@ dmConnCcb_t *dmConnCcbAlloc(uint8_t *pAddr)
 /*************************************************************************************************/
 void dmConnCcbDealloc(dmConnCcb_t *pCcb)
 {
-  DM_TRACE_FREE1("dmConnCcbDealloc %d", pCcb->connId);
+  //DM_TRACE_FREE1("dmConnCcbDealloc %d", pCcb->connId);
 
   pCcb->inUse = FALSE;
 }
@@ -1688,7 +1688,6 @@ uint8_t *DmConnLocalRpa(dmConnId_t connId)
 uint8_t DmConnSecLevel(dmConnId_t connId)
 {
   WSF_ASSERT((connId > 0) && (connId <= DM_CONN_MAX));
-  APP_TRACE_INFO2("dmConnCb.ccb[%d].secLevel=%d", connId - 1, dmConnCb.ccb[connId-1].secLevel);
   return dmConnCb.ccb[connId-1].secLevel;
 }
 

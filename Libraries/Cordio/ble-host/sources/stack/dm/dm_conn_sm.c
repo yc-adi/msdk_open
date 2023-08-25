@@ -145,7 +145,7 @@ void dmConnSmExecute(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
   uint8_t           event;
   uint8_t           old_st = pCcb->state;
 
-  DM_TRACE_INFO3("dmConnSmExecute evt=%d %s st=%d", pMsg->hdr.event, GetDmConnEvtStr(pMsg->hdr.event), old_st);  // search "DM conn event handler messages" and "DM_CONN_SM_"
+  //DM_TRACE_INFO3("dmConnSmExecute evt=%d %s st=%d", pMsg->hdr.event, GetDmConnEvtStr(pMsg->hdr.event), old_st);  // search "DM conn event handler messages" and "DM_CONN_SM_"
 
   /* get the event */
   event = DM_MSG_MASK(pMsg->hdr.event);

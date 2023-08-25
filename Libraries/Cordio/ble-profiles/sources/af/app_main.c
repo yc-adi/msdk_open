@@ -246,8 +246,12 @@ void AppHandlePasskey(dmSecAuthReqIndEvt_t *pAuthReq)
   if (pAuthReq->display)
   {
     /* generate random passkey, limit to 6 digit max */
+    #if 0   //@?@ remove me !!!
     SecRand((uint8_t *) &passkey, sizeof(uint32_t));
     passkey %= 1000000;
+    #else
+    passkey = 112233;
+    #endif
 
     /* convert to byte buffer */
     buf[0] = UINT32_TO_BYTE0(passkey);

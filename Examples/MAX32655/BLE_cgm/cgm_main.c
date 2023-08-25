@@ -101,6 +101,46 @@
 #define OTA_INTERNAL 0
 #endif
 
+/******************************************************************************
+ * DEBUG USE
+******************************************************************************/
+uint32_t u32DbgBuf[DBG_BUF_SIZE];
+uint32_t u32DbgBufNdx = 0;
+
+void print_dbg_buf(void)
+{
+    int GroupCnt = DBG_GROUP_SIZE;
+    uint32_t printed, str_pos = 0, j = 0;
+    char temp[100];
+    for (printed = 0; printed < DBG_BUF_SIZE ; ++printed)
+    {
+        #if 0
+        if ((printed % GroupCnt) < (GroupCnt - 1))
+        {
+            str_pos += sprintf(&temp[str_pos], "%d,", u32DbgBuf[printed]);
+        }
+        else
+        {
+            str_pos += sprintf(&temp[str_pos], "%d", u32DbgBuf[printed]);
+            APP_TRACE_INFO1("%s", temp);
+            str_pos = 0;
+        }
+        #endif
+        if (++j <= GroupCnt - 1 && u32DbgBuf[printed + 1] != 66)
+        {
+            str_pos += sprintf(&temp[str_pos], "%u,", u32DbgBuf[printed]);
+        }
+        else
+        {
+            str_pos += sprintf(&temp[str_pos], "%u", u32DbgBuf[printed]);
+            //PalUartWriteData(PAL_UART_ID_TERMINAL, (const uint8_t *)temp, str_pos);
+            APP_TRACE_INFO1("%s", temp);
+            str_pos = 0;
+            j = 0;
+        }
+    }
+}
+
 /**************************************************************************************************
   Client Characteristic Configuration Descriptors (CCCD)
 **************************************************************************************************/
@@ -700,7 +740,9 @@ static void cgmProcMsg(dmEvt_t *pMsg)
 
         CgmpsProcMsg(&pMsg->hdr);
         conn_opened = 0;
-        APP_TRACE_INFO0("DM_CONN_CLOSE_IND");
+        
+        APP_TRACE_INFO1("DbgNdx=%d", u32DbgBufNdx);
+        if (u32DbgBufNdx > 0) print_dbg_buf();
 
         uiEvent = APP_UI_CONN_CLOSE;
 
@@ -1038,6 +1080,7 @@ char *GetCgmEvtStr(uint8_t evt)
         case 40: return "CONN_CLOSE";           // DM_CONN_CLOSE_IND
         case 41: return "CONN_UPDATE";
         case 42: return "PAIR_CMPL";            // DM_SEC_PAIR_CMPL_IND
+        case 43: return "PAIR_FAIL";            // DM_SEC_PAIR_FAIL_IND
         case 44: return "SEC_ENCRYPT";
         case 46: return "AUTH_REQ";
         case 47: return "SEC_KEY";              // DM_SEC_KEY_IND
@@ -1070,6 +1113,10 @@ void CgmHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
         APP_TRACE_INFO2("\nCGM got evt %d (%s)", pMsg->event, GetCgmEvtStr(pMsg->event));
+        if (conn_opened == 1 && pMsg->event == 41)
+        {
+            conn_opened = 2;
+        }
 
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {

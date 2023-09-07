@@ -130,18 +130,28 @@ void attsProcWrite(attsCcb_t *pCcb, uint16_t len, uint8_t *pPacket)
   uint16_t    writeLen;
   uint8_t     err = ATT_SUCCESS;
 
+  static uint8_t test = 0;  //@?@ remove me !!!
+
   /* parse opcode handle, calculate write length */
   pPacket += L2C_PAYLOAD_START;
   BSTREAM_TO_UINT8(opcode, pPacket);
   BSTREAM_TO_UINT16(handle, pPacket);
   writeLen = len - ATT_WRITE_REQ_LEN;
 
-  APP_TRACE_INFO2("attsProcWrite opc=%d attribute handle=%d", opcode, handle);
+  APP_TRACE_INFO1("attsProcWrite att hndl=%d", handle);
 
   /* find attribute */
   if ((pAttr = attsFindByHandle(handle, &pGroup)) != NULL)
   {
     APP_TRACE_INFO2("wl=%d maxl=%d", writeLen, pAttr->maxLen);
+    if (writeLen == 2 && pAttr->maxLen == 2) {
+      test++;
+      if (test == 4)
+      {
+        __asm("nop");
+        __asm("nop");
+      }
+    }
     /* verify permissions */
     if ((err = attsPermissions(pCcb->pMainCcb->connId, ATTS_PERMIT_WRITE,
                                handle, pAttr->permissions)) != ATT_SUCCESS)

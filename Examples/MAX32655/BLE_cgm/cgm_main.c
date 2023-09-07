@@ -1170,7 +1170,7 @@ static void cgmCccCback(attsCccEvt_t *pEvt)
     appDbHdl_t dbHdl = AppDbGetHdl((dmConnId_t) pEvt->hdr.param);
     int isBonded = AppCheckBonded((dmConnId_t)pEvt->hdr.param);
 
-    APP_TRACE_INFO4("cgmCccCback, hdl %d, dbHdl %d, idx %d, val %d", pEvt->handle, dbHdl, pEvt->idx, pEvt->value);
+    APP_TRACE_INFO5("cgmCccCback, hdl=%d dbHdl=%d(0x%X) idx=%d val=%d", pEvt->handle, dbHdl, dbHdl, pEvt->idx, pEvt->value);
 
     /* If CCC not set from initialization and there's a device record and currently bonded */
     if ((pEvt->handle != ATT_HANDLE_NONE) &&

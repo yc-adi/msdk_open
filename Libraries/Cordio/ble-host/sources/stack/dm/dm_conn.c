@@ -33,6 +33,7 @@
 #include "dm_dev.h"
 #include "dm_main.h"
 #include "dm_conn.h"
+#include "lmgr_api_adv_slave.h"
 
 /**************************************************************************************************
   Macros
@@ -117,6 +118,7 @@ dmConnAct_t *dmConnUpdActSet[DM_CONN_NUM_ACT_SETS];
 /* Control block */
 dmConnCb_t dmConnCb;
 
+extern lmgrSlvAdvCtrlBlk_t lmgrSlvAdvCb;
 /**************************************************************************************************
   Local Functions
 **************************************************************************************************/
@@ -260,7 +262,7 @@ dmConnCcb_t *dmConnCcbByBdAddr(uint8_t *pAddr)
     }
   }
 
-  DM_TRACE_INFO0("dmConnIdByBdAddr not found");
+  DM_TRACE_INFO1("dmConnIdByBdAddr not found. AddrType=0x%X", lmgrSlvAdvCb.advParam.ownAddrType);
 
   return NULL;
 }

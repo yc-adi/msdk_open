@@ -285,7 +285,7 @@ static attsGroup_t svcTimeGroup =
 /*************************************************************************************************/
 void SvcTimeAddGroup(void)
 {
-  AttsAddGroup(&svcTimeGroup);
+  AttsAddGroup(&svcTimeGroup, "Time");
 }
 
 /*************************************************************************************************/

@@ -164,6 +164,7 @@ static uint8_t cgmpsDbOpAll(cgmpsRec_t *pCurrRec,  cgmpsRec_t **pRec)
  *  \return CH_RACP_RSP_SUCCESS if a record is found, otherwise an error status is returned.
  */
 /*************************************************************************************************/
+#if 0
 static uint8_t cgmpsDbOpGteqSeqNum(uint8_t *pFilter, cgmpsRec_t *pCurrRec,  cgmpsRec_t **pRec)
 {
   uint16_t seqNum;
@@ -184,6 +185,7 @@ static uint8_t cgmpsDbOpGteqSeqNum(uint8_t *pFilter, cgmpsRec_t *pCurrRec,  cgmp
 
   return CH_RACP_RSP_NO_RECORDS;
 }
+#endif
 
 /*************************************************************************************************/
 /*!

@@ -696,7 +696,7 @@ static inline void lctrSetControlPduAck(lctrConnCtx_t *pCtx)
  *  \return TRUE if connection is terminated, FALSE otherwise.
  */
 /*************************************************************************************************/
-static inline bool_t lctrCheckForLinkTerm(lctrConnCtx_t *pCtx)
+static inline bool_t lctrCheckForLinkTerm(lctrConnCtx_t *pCtx, uint8_t src)
 {
   uint8_t ret = 0;
   if (pCtx->state == LCTR_CONN_STATE_TERMINATING)
@@ -704,7 +704,7 @@ static inline bool_t lctrCheckForLinkTerm(lctrConnCtx_t *pCtx)
     /* Peer device is LL_TERMINATE_IND initiator. */
     if (pCtx->termAckReqd)                  /* Tx Ack required after Rx of LL_TERMINATE_IND */
     {
-      if (pCtx->ackAfterCtrlPdu)            /*     guarantee Ack Tx'ed */
+      if (pCtx->ackAfterCtrlPdu)            /* guarantee Ack Tx'ed */
       {
         ret = 1;
       }
@@ -720,7 +720,7 @@ static inline bool_t lctrCheckForLinkTerm(lctrConnCtx_t *pCtx)
 
   if (ret)
   {
-    APP_TRACE_INFO1("LinkTerm=%d", ret);
+    APP_TRACE_INFO2("LinkTerm=%d src=%d", ret, src);
   }
 
   return ret;

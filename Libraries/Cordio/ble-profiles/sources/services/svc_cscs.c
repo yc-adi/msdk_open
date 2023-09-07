@@ -185,7 +185,7 @@ static attsGroup_t svcCscsGroup =
 /*************************************************************************************************/
 void SvcCscsAddGroup(void)
 {
-  AttsAddGroup(&svcCscsGroup);
+  AttsAddGroup(&svcCscsGroup, "Cscs");
 }
 
 /*************************************************************************************************/

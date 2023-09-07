@@ -34,6 +34,7 @@
 #include "util/bstream.h"
 #include "ll_defs.h"
 #include <string.h>
+#include "wsf_trace.h"
 
 /**************************************************************************************************
   Macros

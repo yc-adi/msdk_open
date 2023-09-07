@@ -369,7 +369,7 @@ static attsGroup_t svcCgmsGroup =
 /*************************************************************************************************/
 void SvcCgmsAddGroup(void)
 {
-  AttsAddGroup(&svcCgmsGroup);
+  AttsAddGroup(&svcCgmsGroup, "SvcCgms");
 }
 
 /*************************************************************************************************/

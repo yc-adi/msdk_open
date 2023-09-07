@@ -298,7 +298,7 @@ void lctrSlvConnBeginOp(BbOpDesc_t *pOp)
   lctrConnCtx_t * const pCtx = pOp->pCtx;
   uint8_t *pBuf;
 
-  if (lctrCheckForLinkTerm(pCtx))
+  if (lctrCheckForLinkTerm(pCtx, 4))
   {
     BbSetBodTerminateFlag();
     return;
@@ -414,7 +414,7 @@ void lctrSlvConnEndOp(BbOpDesc_t *pOp)
   }
 
   /* Terminate connection */
-  if (lctrCheckForLinkTerm(pCtx))
+  if (lctrCheckForLinkTerm(pCtx, 5))
   {
     lctrSendConnMsg(pCtx, LCTR_CONN_TERMINATED);
     WsfTimerStop(&pCtx->tmrSupTimeout);
@@ -694,7 +694,7 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
 
   /*** Connection event pre-processing ***/
 
-  if (lctrCheckForLinkTerm(pCtx) ||
+  if (lctrCheckForLinkTerm(pCtx, 6) ||
       (status == BB_STATUS_FAILED) ||
       (status == BB_STATUS_RX_TIMEOUT))
   {

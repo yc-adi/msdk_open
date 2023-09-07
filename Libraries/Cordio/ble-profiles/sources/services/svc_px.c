@@ -189,7 +189,7 @@ static attsGroup_t svcPxGroup =
 void SvcPxAddGroup(void)
 {
   /* add services */
-  AttsAddGroup(&svcPxGroup);
+  AttsAddGroup(&svcPxGroup, "Px");
 }
 
 /*************************************************************************************************/

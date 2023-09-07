@@ -547,7 +547,7 @@ void AttsAuthorRegister(attsAuthorCback_t cback);
  *  \return None.
  */
 /*************************************************************************************************/
-void AttsAddGroup(attsGroup_t *pGroup);
+void AttsAddGroup(attsGroup_t *pGroup, char *src);
 
 /*************************************************************************************************/
 /*!

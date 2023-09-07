@@ -62,6 +62,8 @@
 /* Slave control block */
 appSlaveCb_t appSlaveCb;
 
+extern appDb_t appDb;
+
 /**************************************************************************************************
   Local Functions
 **************************************************************************************************/
@@ -706,6 +708,31 @@ static void appSecPairInd(dmEvt_t *pMsg, appConnCb_t *pCb)
   APP_TRACE_INFO4("appSecPairInd bondable=%d auth=%d bonded=%d secLevel=%d", 
     appSlaveCb.bondable, pMsg->pairInd.auth, pCb->bonded, DmConnSecLevel(pCb->connId));
 
+  /**
+   * if the central device chooses to remove bonding, when it connects again, on the peripheral 
+   * side, the bondable flag is still set. Need to identify this situation here.
+   */
+  if (!appSlaveCb.bondable)
+  {
+    for (int i = 0; i < APP_DB_NUM_RECS; i++)
+    {
+      if (BdaCmp((const uint8_t *)appDb.rec[i].peerAddr, (const uint8_t *)appSlaveCb.peerAddr))
+      {
+        // now the bonded device is requesting to pair again, clear the bonding info first
+        AppSlaveClearAllBondingInfo();
+        AppDbNvmDeleteAll();
+
+        AppConnClose(pCb->connId);
+
+        AppAdvStart(APP_MODE_AUTO_INIT);
+
+        APP_TRACE_INFO0("request to pair a bonded device, delete old info and restart ADV");
+        
+        return;
+      }
+    }
+  }
+
   /* if in bondable mode or if peer is not requesting bonding
    * or if already bonded with this device and link is encrypted
    */
@@ -720,7 +747,7 @@ static void appSecPairInd(dmEvt_t *pMsg, appConnCb_t *pCb)
     if (pCb->bondByPairing && pCb->dbHdl == APP_DB_HDL_NONE)
     {
       /* create a device record if none exists */
-      APP_TRACE_INFO1("appSecPairInd, create a record, auth=%d", pAppSecCfg->auth);
+      APP_TRACE_INFO1("create a record, auth=%d", pAppSecCfg->auth);
       pCb->dbHdl = AppDbNewRecord(DmConnPeerAddrType(pCb->connId), DmConnPeerAddr(pCb->connId));
     }
 

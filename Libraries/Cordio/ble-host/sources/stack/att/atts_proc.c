@@ -102,7 +102,7 @@ bool_t attsUuid16Cmp(uint8_t *pUuid16, uint8_t uuidLen, uint8_t *pUuid)
 /*************************************************************************************************/
 attsAttr_t *attsFindByHandle(uint16_t handle, attsGroup_t **pAttrGroup)
 {
-  attsGroup_t   *pGroup;
+  attsGroup_t *pGroup;
 
   /* iterate over attribute group list */
   for (pGroup = attsCb.groupQueue.pHead; pGroup != NULL; pGroup = pGroup->pNext)

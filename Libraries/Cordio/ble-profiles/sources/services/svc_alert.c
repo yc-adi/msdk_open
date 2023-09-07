@@ -416,7 +416,7 @@ static attsGroup_t svcAlertGroup =
 /*************************************************************************************************/
 void SvcAlertAddGroup(void)
 {
-  AttsAddGroup(&svcAlertGroup);
+  AttsAddGroup(&svcAlertGroup, "SvcAlert");
 }
 
 /*************************************************************************************************/

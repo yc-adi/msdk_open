@@ -114,7 +114,7 @@ static attsGroup_t svcScpssGroup =
 /*************************************************************************************************/
 void SvcScpssAddGroup(void)
 {
-  AttsAddGroup(&svcScpssGroup);
+  AttsAddGroup(&svcScpssGroup, "Scpss");
 }
 
 /*************************************************************************************************/

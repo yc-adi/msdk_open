@@ -70,8 +70,6 @@ typedef struct
   uint8_t numRec;
 } cgmpsDbCb_t;
 
-static bool_t cgmpsNoConnActive(void);
-static cgmpsConn_t *cgmpsFindNextToSend(uint8_t cccIdx);
 void CgmpsMeasStart(dmConnId_t connId, uint8_t timerEvt, uint8_t cgmMeasCccIdx, uint32_t timerPeriodMs, uint8_t hndlrId);
 void CgmpsMeasStop(dmConnId_t connId);
 void cgmpsMeasTimerExp(wsfMsgHdr_t *pMsg);

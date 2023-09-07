@@ -200,7 +200,20 @@ static void attsDataCback(uint16_t handle, uint16_t len, uint8_t *pPacket)
     return;
   }
 #endif
-  APP_TRACE_INFO2("attsDataCback, opcode %d, method %d", opcode, method);
+
+  /** 
+   *   2 1  ATT Exchange MTU Transaction          attsProcMtuReq
+   *  16 8  ATT Read by Group Type Transaction    attsProcReadGroupTypeReq
+   *   8 4  ATT Read by Type Transanction         attsProcReadTypeReq
+   *   4 2  ATT Find Information Transaction
+   *  18 9  ATT Write Transaction                 attsProcWrite
+   */
+  APP_TRACE_INFO2("attsDataCback opcd=%d mthd=%d", opcode, method);
+
+  if (opcode == 18 && method == 9) {
+    __asm("nop");
+    __asm("nop");
+  }
   
   /* if no error process request */
   if (!err)
@@ -778,12 +791,12 @@ void AttsCalculateDbHash(void)
  *  \return None.
  */
 /*************************************************************************************************/
-void AttsAddGroup(attsGroup_t *pGroup)
+void AttsAddGroup(attsGroup_t *pGroup, char *src)
 {
   attsGroup_t   *pElem;
   attsGroup_t   *pPrev = NULL;
 
-  APP_TRACE_INFO1("AttsAddGroup, stHndl=0x%X", pGroup->startHandle);
+  APP_TRACE_INFO3("AttsAddGroup strtHndl=%d(0x%X) %s", pGroup->startHandle, pGroup->startHandle, src);
 
   /* task schedule lock */
   WsfTaskLock();

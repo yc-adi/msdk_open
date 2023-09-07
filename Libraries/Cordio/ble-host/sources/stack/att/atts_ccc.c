@@ -80,9 +80,9 @@ static void attsCccCback(dmConnId_t connId, uint8_t idx, uint16_t handle, uint16
   evt.value = value;
 
   APP_TRACE_INFO4("attsCccCback, evt 20, param/connId %d, idx %d, hndl %d, val %d",
-    connId, idx, handle, value);
+                  connId, idx, handle, value);
 
-  (*attsCccCb.cback)(&evt);
+  (*attsCccCb.cback)(&evt); // search "void.*CccCback\("
 }
 
 /*************************************************************************************************/
@@ -225,6 +225,7 @@ static uint8_t attsCccWriteValue(dmConnId_t connId, uint16_t handle, uint8_t *pV
   /* if handle not found return error */
   if (i == attsCccCb.setLen)
   {
+    APP_TRACE_INFO1("@?@ failed to find the hdl=%d", handle);
     return ATT_ERR_NOT_FOUND;
   }
 
@@ -234,6 +235,7 @@ static uint8_t attsCccWriteValue(dmConnId_t connId, uint16_t handle, uint8_t *pV
   if (((value != 0) && (value != ATT_CLIENT_CFG_NOTIFY) && (value != ATT_CLIENT_CFG_INDICATE)) ||
       ((value != 0) && ((value & pSet->valueRange) == 0)))
   {
+    APP_TRACE_INFO0("@?@ ATT_ERR_VALUE_RANGE");
     return ATT_ERR_VALUE_RANGE;
   }
 
@@ -254,6 +256,7 @@ static uint8_t attsCccWriteValue(dmConnId_t connId, uint16_t handle, uint8_t *pV
   }
   else
   {
+    APP_TRACE_INFO0("@?@ ATT_ERR_RESOURCES");
     return ATT_ERR_RESOURCES;
   }
 }
@@ -271,16 +274,19 @@ static uint8_t attsCccWriteValue(dmConnId_t connId, uint16_t handle, uint8_t *pV
  */
 /*************************************************************************************************/
 static uint8_t attsCccMainCback(dmConnId_t connId, uint8_t method, uint16_t handle, uint8_t *pValue)
-{
-  APP_TRACE_INFO3("attsCccMainCback connId=%d handle=%d, %s", connId, handle, method == ATT_METHOD_READ ? "R" : "W");
-
+{  
+  uint8_t ret;
   if (method == ATT_METHOD_READ)
   {
-    return attsCccReadValue(connId, handle, pValue);
+    ret = attsCccReadValue(connId, handle, pValue);
+    APP_TRACE_INFO2("attsCccMainCback connId=%d val=%d, R", connId, *pValue);
+    return ret;
   }
   else
   {
-    return attsCccWriteValue(connId, handle, pValue);
+    APP_TRACE_INFO2("attsCccMainCback connId=%d val=%d, W", connId, *pValue);
+    ret = attsCccWriteValue(connId, handle, pValue);    
+    return ret;
   }
 }
 

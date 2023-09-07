@@ -127,7 +127,7 @@ static attsGroup_t svcBattGroup =
 /*************************************************************************************************/
 void SvcBattAddGroup(void)
 {
-  AttsAddGroup(&svcBattGroup);
+  AttsAddGroup(&svcBattGroup, "Batt");
 }
 
 /*************************************************************************************************/

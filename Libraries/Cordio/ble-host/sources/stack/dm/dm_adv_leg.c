@@ -140,8 +140,6 @@ void dmAdvActSetData(dmAdvMsg_t *pMsg)
 {
   WSF_ASSERT(pMsg->apiSetData.len <= HCI_ADV_DATA_LEN);
 
-  DM_TRACE_INFO1("dmAdvActSetData: state: %d", dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT]);
-
   if (dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT] == DM_ADV_STATE_IDLE)
   {
     /* set new data in HCI */

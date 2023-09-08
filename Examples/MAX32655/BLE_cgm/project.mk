@@ -66,7 +66,7 @@ ${BOOTLOADER_OBJ}: bl_build.S ${BOOTLOADER_BIN}
 	${CC} ${AFLAGS} -o ${@} -c bl_build.S
 endif
 
-DEEP_SLEEP = 0
+DEEP_SLEEP = 1
 
 # Optimize for size
 MXC_OPTIMIZE_CFLAGS=-Os

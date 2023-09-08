@@ -625,11 +625,11 @@ void lctrLlcpStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
       break;
     case LCTR_CONN_TERM_INST_PASSED:
       lctrStoreInstantPassedTerminateReason(pCtx);
-      lctrFlagLinkTerm(pCtx);
+      lctrFlagLinkTerm(pCtx, 4);
       break;
     case LCTR_CONN_TMR_LLCP_RSP_EXP:
       lctrStoreLlcpTimeoutTerminateReason(pCtx);
-      lctrFlagLinkTerm(pCtx);
+      lctrFlagLinkTerm(pCtx, 5);
       break;
     case LCTR_CONN_MSG_RX_LLCP:
       /* Mismatch between parser and available SM. */

@@ -2,11 +2,13 @@
 /*!
 *  \file   main.c
 *
-*  \brief  Main file for cgm application.
+*  \brief  Main file for CGM application.
 *
 *  Copyright (c) 2013-2019 Arm Ltd. All Rights Reserved.
 *
 *  Copyright (c) 2019 Packetcraft, Inc.
+*
+*  Partial Copyright (c) 2023 Analog Devices, Inc.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.

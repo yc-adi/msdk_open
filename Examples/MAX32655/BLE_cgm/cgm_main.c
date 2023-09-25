@@ -8,6 +8,8 @@
  *
  *  Copyright (c) 2019-2020 Packetcraft, Inc.
  *
+ *  Partial Copyright (c) 2023 Analog Devices, Inc.
+ *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
@@ -1113,11 +1115,7 @@ void CgmHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
         APP_TRACE_INFO2("\nCGM got evt %d (%s)", pMsg->event, GetCgmEvtStr(pMsg->event));
-        if (conn_opened == 1 && pMsg->event == 41)
-        {
-            conn_opened = 2;
-        }
-
+        
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {
             /* process server-related ATT messages */

@@ -21,8 +21,8 @@
  *  limitations under the License.
  */
 /*************************************************************************************************/
-#ifndef EXAMPLES_MAX32655_CGM_API_H
-#define EXAMPLES_MAX32655_CGM_API_H
+#ifndef EXAMPLES_MAX32655_BLE_CGM_CGM_API_H
+#define EXAMPLES_MAX32655_BLE_CGM_CGM_API_H
 
 #include "wsf_os.h"
 
@@ -99,4 +99,4 @@ void CgmHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg);
 };
 #endif
 
-#endif // EXAMPLES_MAX32655_CGM_API_H
+#endif // EXAMPLES_MAX32655_BLE_CGM_CGM_API_H

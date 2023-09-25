@@ -242,6 +242,7 @@ void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
       newAddr = localRpa;
     }
   }
+
   if (update)
   {
     uint8_t *pBuf = lctrSlvAdv.advBuf + LL_ADV_HDR_LEN;
@@ -306,6 +307,7 @@ void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
     }
 #endif
   }
+
   SchBleCalcAdvOpDuration(pOp, 0);
 
   /*** Reschedule operation ***/

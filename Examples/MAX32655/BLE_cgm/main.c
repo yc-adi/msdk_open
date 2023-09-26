@@ -359,12 +359,6 @@ int DeepSleep(void)
         dsInWutCnt = idleInWutCnt;
     }
 
-    /* Bound the deep sleep time */
-    if (conn_opened == 2)   //@?@ remove me !!!
-    {
-        //dsInWutCnt += 328;  // 10 ms
-    }
-
     /**
      * In WUT one-shot mode, the timer peripheral increments the WUTn_CNT.count field 
      * until it matches the WUTn_CMP.compare field and then stops incrementing and 
@@ -412,6 +406,8 @@ int DeepSleep(void)
 
             /* Restore the BB counter */
             MXC_WUT_RestoreBBClock(MXC_WUT, BB_CLK_RATE_HZ);
+
+            PalBbBleRefreshKeyAfterSleep();
 
             /* Restart the BLE scheduler timer */
             wutCnt = MXC_WUT_GetCount(MXC_WUT);

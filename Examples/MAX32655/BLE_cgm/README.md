@@ -53,5 +53,8 @@ DM events
 "AppSlaveSecProcDmMsg evt="
 63 DM_PRIV_SET_ADDR_RES_ENABLE_IND
 65 DM_CONN_DATA_LEN_CHANGE_IND
+
+"App got evt "
+16 APP_CONN_UPDATE_TIMEOUT_IND
 ```
 

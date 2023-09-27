@@ -37,8 +37,6 @@
 #define SMP_EXTRA_TRACE FALSE
 #endif
 
-extern uint8_t *smpStateStr(uint8_t state);
-
 /*************************************************************************************************/
 /*!
  *  \brief  Start SMP response timer.
@@ -644,7 +642,6 @@ bool_t smpProcRcvKey(smpCcb_t *pCcb, dmSecKeyIndEvt_t *pKeyInd, uint8_t *pBuf, u
     BSTREAM_TO_UINT16(pKeyInd->keyData.ltk.ediv, pBuf);
     memcpy(pKeyInd->keyData.ltk.rand, pBuf, SMP_RAND8_LEN);
     pKeyInd->secLevel = (pCcb->auth & SMP_AUTH_MITM_FLAG) ? DM_SEC_LEVEL_ENC_AUTH : DM_SEC_LEVEL_ENC;
-    APP_TRACE_INFO1("smpProcRcvKey secLeve=%d", pKeyInd->secLevel);
     pKeyInd->type = DM_KEY_PEER_LTK;
     keyIndReady = TRUE;
   }
@@ -857,8 +854,8 @@ void smpSmExecute(smpCcb_t *pCcb, smpMsg_t *pMsg)
     SMP_TRACE_INFO2("SMP Exe: evt=%s st=%s", smpEventStr(pMsg->hdr.event), smpStateStr(pCcb->state));
   else
 #endif
-    SMP_TRACE_INFO4("smpSmExecute evt=%d (%s) st=%d (%s)",
-      pMsg->hdr.event, smpEventStr(pMsg->hdr.event), pCcb->state, smpStateStr(pCcb->state));
+    SMP_TRACE_INFO3("smpSmExecute evt=%d (%s) st=%d",
+      pMsg->hdr.event, smpEventStr(pMsg->hdr.event), pCcb->state);
 
   /* look up state table for state */
   pSmIf = DmConnRole(pCcb->connId) == DM_ROLE_SLAVE? smpCb.pSlave : smpCb.pMaster;

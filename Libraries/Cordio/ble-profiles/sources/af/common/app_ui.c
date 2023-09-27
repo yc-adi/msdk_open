@@ -174,10 +174,6 @@ void AppUiAction(uint8_t event)
 /*************************************************************************************************/
 void AppUiDisplayPasskey(uint32_t passkey)
 {
-  char strPasskey[20];
-  sprintf(strPasskey, "%d\n", passkey);
-  //@?@ PalUartWriteData(PAL_UART_ID_TERMINAL, strPasskey, strlen(strPasskey));
-  
   APP_TRACE_INFO1("   >>> Passkey: %d <<<", passkey);
 
   if (appUiCbackTbl.actionCback)

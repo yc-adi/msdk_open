@@ -34,8 +34,6 @@
 #include "atts_main.h"
 #include "svc_core.h"
 
-extern uint8_t conn_opened;
-
 /*************************************************************************************************/
 /*!
  *  \brief  Compare the given attribute's UUID to the given UUID.
@@ -198,7 +196,6 @@ uint8_t attsPermissions(dmConnId_t connId, uint8_t permit, uint16_t handle, uint
   /* check if encryption required */
   if ((permissions & ATTS_PERMIT_READ_ENC) && (secLevel == DM_SEC_LEVEL_NONE))
   {
-    APP_TRACE_INFO0("encryption required");
     return ATT_ERR_AUTH;
   }
 
@@ -207,7 +204,6 @@ uint8_t attsPermissions(dmConnId_t connId, uint8_t permit, uint16_t handle, uint
        (ATTS_PERMIT_READ_AUTH | ATTS_PERMIT_READ_ENC)) && (secLevel < DM_SEC_LEVEL_ENC_AUTH))
   {
     APP_TRACE_INFO0("encryption required with authenticated key");
-    conn_opened = 11;  //@?@ remove me !!!
     return ATT_ERR_AUTH;
   }
 
@@ -216,7 +212,6 @@ uint8_t attsPermissions(dmConnId_t connId, uint8_t permit, uint16_t handle, uint
   {
     if (attsCb.authorCback == NULL)
     {
-      APP_TRACE_INFO0("attsCb.authorCback is NULL");
       return ATT_ERR_AUTHOR;
     }
     else
@@ -439,8 +434,6 @@ void attsProcReadReq(attsCcb_t *pCcb, uint16_t len, uint8_t *pPacket)
   /* parse handle */
   pPacket += L2C_PAYLOAD_START + ATT_HDR_LEN;
   BSTREAM_TO_UINT16(handle, pPacket);
-
-  APP_TRACE_INFO1("attsProcReadReq, hndl %d", handle);
 
   /* find attribute */
   if ((pAttr = attsFindByHandle(handle, &pGroup)) != NULL)

@@ -208,13 +208,8 @@ static void attsDataCback(uint16_t handle, uint16_t len, uint8_t *pPacket)
    *   4 2  ATT Find Information Transaction
    *  18 9  ATT Write Transaction                 attsProcWrite
    */
-  APP_TRACE_INFO2("attsDataCback opcd=%d mthd=%d", opcode, method);
+  //APP_TRACE_INFO2("attsDataCback opcd=%d mthd=%d", opcode, method);
 
-  if (opcode == 18 && method == 9) {
-    __asm("nop");
-    __asm("nop");
-  }
-  
   /* if no error process request */
   if (!err)
   {

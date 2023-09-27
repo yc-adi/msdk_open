@@ -103,7 +103,7 @@ static void attL2cDataCback(uint16_t handle, uint16_t len, uint8_t *pPacket)
   else
   {
     /* call server data callback */
-    (*attCb.pServer->dataCback)(handle, len, pPacket); // attsDataCback
+    (*attCb.pServer->dataCback)(handle, len, pPacket);
   }
 }
 
@@ -119,8 +119,6 @@ static void attL2cDataCback(uint16_t handle, uint16_t len, uint8_t *pPacket)
 static void attL2cCtrlCback(wsfMsgHdr_t *pMsg)
 {
   attCcb_t      *pCcb;
-
-  APP_TRACE_INFO1("attL2cCtrlCback, evt %d", pMsg->event);
 
   /* get connection control block */
   pCcb = attCcbByConnId((dmConnId_t) pMsg->param);

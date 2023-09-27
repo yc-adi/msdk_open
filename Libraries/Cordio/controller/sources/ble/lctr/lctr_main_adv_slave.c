@@ -406,8 +406,6 @@ void lctrSlvAdvBuildOp(void)
       pduHdr.pduType = LL_PDU_SCAN_RSP;
       pduHdr.len = LL_SCAN_PREFIX_LEN + lmgrSlvAdvCb.scanRspData.len;
 
-      APP_TRACE_INFO3("@?@ txlen=%d hdrlen=%d %u", pAdv->txAdvLen, pduHdr.len, advA);
-
       pBuf  = lctrSlvAdv.scanRspBuf;
       pBuf += lctrPackAdvbPduHdr(pBuf, &pduHdr);
       pBuf += lctrPackScanRspPdu(pBuf, advA, &lmgrSlvAdvCb.scanRspData);

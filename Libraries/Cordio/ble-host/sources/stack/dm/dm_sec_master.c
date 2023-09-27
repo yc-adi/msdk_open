@@ -25,7 +25,6 @@
 #include <string.h>
 #include "wsf_types.h"
 #include "wsf_msg.h"
-#include "wsf_trace.h"
 #include "util/calc128.h"
 #include "smp_api.h"
 #include "dm_api.h"
@@ -90,7 +89,6 @@ void DmSecPairReq(dmConnId_t connId, uint8_t oob, uint8_t auth, uint8_t iKeyDist
     pMsg->rKeyDist = rKeyDist & SMP_KEY_DIST_MASK;
 
     /* note we're sending this to SMP */
-    APP_TRACE_INFO1("DmSecPairReq evt=1(SMP_MSG_API_PAIR_REQ) auth=%d", auth);
     SmpDmMsgSend((smpDmMsg_t *) pMsg);
   }
 }
@@ -116,8 +114,6 @@ void DmSecEncryptReq(dmConnId_t connId, uint8_t secLevel, dmSecLtk_t *pLtk)
     pMsg->hdr.param = connId;
     memcpy(&pMsg->ltk, pLtk, sizeof(dmSecLtk_t));
     pMsg->secLevel = secLevel;
-
-    APP_TRACE_INFO1("DmSecEncryptReq evt=40 (DM_SEC_MSG_API_ENCRYPT_REQ) secLevel=%d", secLevel);
 
     WsfMsgSend(dmCb.handlerId, pMsg);
   }

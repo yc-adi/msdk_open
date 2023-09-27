@@ -121,6 +121,7 @@ static cgmpsRec_t *cgmpsDbGetEnd(void)
  *  \return Pointer to record or NULL if no record.
  */
 /*************************************************************************************************/
+#if 0
 static cgmpsRec_t *cgmpsDbGetNext(cgmpsRec_t *pCurrRec)
 {
   if (cgmpsDbCb.numRec == 0 || pCurrRec == cgmpsDbGetEnd())
@@ -136,6 +137,7 @@ static cgmpsRec_t *cgmpsDbGetNext(cgmpsRec_t *pCurrRec)
     return (pCurrRec + 1);
   }
 }
+#endif
 
 /*************************************************************************************************/
 /*!
@@ -147,11 +149,13 @@ static cgmpsRec_t *cgmpsDbGetNext(cgmpsRec_t *pCurrRec)
  *  \return CH_RACP_RSP_SUCCESS if a record is found, otherwise an error status is returned.
  */
 /*************************************************************************************************/
+#if 0
 static uint8_t cgmpsDbOpAll(cgmpsRec_t *pCurrRec,  cgmpsRec_t **pRec)
 {
   *pRec = cgmpsDbGetNext(pCurrRec);
   return (*pRec != NULL) ? CH_RACP_RSP_SUCCESS : CH_RACP_RSP_NO_RECORDS;
 }
+#endif
 
 /*************************************************************************************************/
 /*!

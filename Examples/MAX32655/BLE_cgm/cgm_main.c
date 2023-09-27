@@ -103,46 +103,6 @@
 #define OTA_INTERNAL 0
 #endif
 
-/******************************************************************************
- * DEBUG USE
-******************************************************************************/
-uint32_t u32DbgBuf[DBG_BUF_SIZE];
-uint32_t u32DbgBufNdx = 0;
-
-void print_dbg_buf(void)
-{
-    int GroupCnt = DBG_GROUP_SIZE;
-    uint32_t printed, str_pos = 0, j = 0;
-    char temp[100];
-    for (printed = 0; printed < DBG_BUF_SIZE ; ++printed)
-    {
-        #if 0
-        if ((printed % GroupCnt) < (GroupCnt - 1))
-        {
-            str_pos += sprintf(&temp[str_pos], "%d,", u32DbgBuf[printed]);
-        }
-        else
-        {
-            str_pos += sprintf(&temp[str_pos], "%d", u32DbgBuf[printed]);
-            APP_TRACE_INFO1("%s", temp);
-            str_pos = 0;
-        }
-        #endif
-        if (++j <= GroupCnt - 1 && u32DbgBuf[printed + 1] != 66)
-        {
-            str_pos += sprintf(&temp[str_pos], "%u,", u32DbgBuf[printed]);
-        }
-        else
-        {
-            str_pos += sprintf(&temp[str_pos], "%u", u32DbgBuf[printed]);
-            //PalUartWriteData(PAL_UART_ID_TERMINAL, (const uint8_t *)temp, str_pos);
-            APP_TRACE_INFO1("%s", temp);
-            str_pos = 0;
-            j = 0;
-        }
-    }
-}
-
 /**************************************************************************************************
   Client Characteristic Configuration Descriptors (CCCD)
 **************************************************************************************************/
@@ -742,9 +702,6 @@ static void cgmProcMsg(dmEvt_t *pMsg)
 
         CgmpsProcMsg(&pMsg->hdr);
         conn_opened = 0;
-        
-        APP_TRACE_INFO1("DbgNdx=%d", u32DbgBufNdx);
-        if (u32DbgBufNdx > 0) print_dbg_buf();
 
         uiEvent = APP_UI_CONN_CLOSE;
 
@@ -855,8 +812,6 @@ static void cgmProcMsg(dmEvt_t *pMsg)
 /*************************************************************************************************/
 void CgmHandlerInit(wsfHandlerId_t handlerId)
 {
-    APP_TRACE_INFO0("CgmHandlerInit");
-
     /* store handler ID */
     cgmCb.handlerId = handlerId;
 
@@ -883,7 +838,7 @@ void CgmHandlerInit(wsfHandlerId_t handlerId)
     custSpecAppTimer.handlerId = handlerId;
     custSpecAppTimer.msg.event = CUST_SPEC_TMR_EVT;
 
-    APP_TRACE_INFO0("start customer specified app timer");
+    APP_TRACE_INFO0("start custSpecAppTimer");
     MXC_Delay(1000);
     //WsfTimerStartMs(&custSpecAppTimer, CUST_SPEC_TMR_PERIOD_MS); // first start
 
@@ -1114,7 +1069,7 @@ char *GetCgmEvtStr(uint8_t evt)
 void CgmHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
-        APP_TRACE_INFO2("\nCGM got evt %d (%s)", pMsg->event, GetCgmEvtStr(pMsg->event));
+        APP_TRACE_INFO2("\nCGM got evt=%d (%s)", pMsg->event, GetCgmEvtStr(pMsg->event));
         
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {
@@ -1168,7 +1123,7 @@ static void cgmCccCback(attsCccEvt_t *pEvt)
     appDbHdl_t dbHdl = AppDbGetHdl((dmConnId_t) pEvt->hdr.param);
     int isBonded = AppCheckBonded((dmConnId_t)pEvt->hdr.param);
 
-    APP_TRACE_INFO5("cgmCccCback, hdl=%d dbHdl=%d(0x%X) idx=%d val=%d", pEvt->handle, dbHdl, dbHdl, pEvt->idx, pEvt->value);
+    APP_TRACE_INFO4("cgmCccCback hdl=%d dbHdl=0x%X idx=%d val=%d", pEvt->handle, dbHdl, pEvt->idx, pEvt->value);
 
     /* If CCC not set from initialization and there's a device record and currently bonded */
     if ((pEvt->handle != ATT_HANDLE_NONE) &&

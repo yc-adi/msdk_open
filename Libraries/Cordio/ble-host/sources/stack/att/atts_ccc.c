@@ -79,9 +79,6 @@ static void attsCccCback(dmConnId_t connId, uint8_t idx, uint16_t handle, uint16
   evt.handle = handle;
   evt.value = value;
 
-  APP_TRACE_INFO4("attsCccCback, evt 20, param/connId %d, idx %d, hndl %d, val %d",
-                  connId, idx, handle, value);
-
   (*attsCccCb.cback)(&evt); // search "void.*CccCback\("
 }
 
@@ -235,7 +232,6 @@ static uint8_t attsCccWriteValue(dmConnId_t connId, uint16_t handle, uint8_t *pV
   if (((value != 0) && (value != ATT_CLIENT_CFG_NOTIFY) && (value != ATT_CLIENT_CFG_INDICATE)) ||
       ((value != 0) && ((value & pSet->valueRange) == 0)))
   {
-    APP_TRACE_INFO0("@?@ ATT_ERR_VALUE_RANGE");
     return ATT_ERR_VALUE_RANGE;
   }
 
@@ -275,18 +271,15 @@ static uint8_t attsCccWriteValue(dmConnId_t connId, uint16_t handle, uint8_t *pV
 /*************************************************************************************************/
 static uint8_t attsCccMainCback(dmConnId_t connId, uint8_t method, uint16_t handle, uint8_t *pValue)
 {  
-  uint8_t ret;
+  ATT_TRACE_INFO2("attsCccMainCback connId=%d handle=%d", connId, handle);
+
   if (method == ATT_METHOD_READ)
   {
-    ret = attsCccReadValue(connId, handle, pValue);
-    APP_TRACE_INFO2("attsCccMainCback connId=%d val=%d, R", connId, *pValue);
-    return ret;
+    return attsCccReadValue(connId, handle, pValue);
   }
   else
   {
-    APP_TRACE_INFO2("attsCccMainCback connId=%d val=%d, W", connId, *pValue);
-    ret = attsCccWriteValue(connId, handle, pValue);    
-    return ret;
+    return attsCccWriteValue(connId, handle, pValue);
   }
 }
 

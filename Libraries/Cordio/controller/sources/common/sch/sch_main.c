@@ -225,6 +225,7 @@ void SchReset(void)
   schCb.schHandlerWatermarkUsec = 0;
   schCb.delayLoadWatermarkCount = 0;
   schCb.delayLoadTotalCount = 0;
+  schCb.cnt = 0;
 }
 
 /*************************************************************************************************/
@@ -322,6 +323,26 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
   {
     schCb.schHandlerWatermarkUsec = durUsec;
   }
+}
+
+/*************************************************************************************************/
+/*!
+ *  \brief      Is BOD due time in the future.
+ *
+ *  \param      pBod    Target BOD.
+ *
+ *  \return     TRUE if BOD time is in the future, FALSE otherwise.
+ */
+/*************************************************************************************************/
+bool_t schDueTimeInFuture(BbOpDesc_t *pBod)
+{
+  const uint32_t curTime = PalBbGetCurrentTime();
+  uint32_t delta = BbGetTargetTimeDelta(pBod->dueUsec, curTime);
+  if (delta == 0)
+  {
+    APP_TRACE_INFO3("due=%d cur=%d %d", pBod->dueUsec, curTime, (int)pBod->dueUsec - (int)curTime);
+  }
+  return ( delta > 0);
 }
 
 /*************************************************************************************************/

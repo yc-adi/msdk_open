@@ -66,6 +66,8 @@ typedef struct
   uint16_t delayLoadWatermarkCount; /*!< Statistics: Delay loading watermark count. */
   uint16_t delayLoadCount;          /*!< Statistics: Delay loading count. */
   uint32_t delayLoadTotalCount;     /*!< Statistics: Delay loading total count. */
+
+  uint8_t cnt;
 } SchCtrlBlk_t;
 
 /**************************************************************************************************
@@ -94,17 +96,7 @@ void schRemoveHead(void);
  *  \return     TRUE if BOD time is in the future, FALSE otherwise.
  */
 /*************************************************************************************************/
-static inline bool_t schDueTimeInFuture(BbOpDesc_t *pBod)
-{
-  const uint32_t curTime = PalBbGetCurrentTime();
-  uint32_t delta = BbGetTargetTimeDelta(pBod->dueUsec, curTime);
-  if (delta == 0)
-  {
-    APP_TRACE_INFO3("@?@ due=%d cur=%d %d", pBod->dueUsec, curTime, (int)pBod->dueUsec - (int)curTime);
-  }
-  return ( delta > 0);
-}
-
+bool_t schDueTimeInFuture(BbOpDesc_t *pBod);
 
 /*************************************************************************************************/
 /*!

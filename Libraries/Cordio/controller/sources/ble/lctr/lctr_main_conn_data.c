@@ -95,8 +95,6 @@ static uint8_t *pLctrTxCompBuf;
 /*! \brief      Completed transmit buffer handle ID. */
 static wsfHandlerId_t lctrTxCompBufHandlerId;
 
-extern uint8_t conn_opened;
-
 /*************************************************************************************************/
 /*!
  *  \brief      Check to see whether it is necessary to abort slave latency when slave
@@ -949,12 +947,7 @@ void lctrRxEnq(uint8_t *pBuf, uint16_t eventCounter, uint16_t connHandle)
   UINT16_TO_BUF(pBuf, eventCounter);
 
   /* Queue LE Data PDU. */
-  if (conn_opened == 11)
-  {
-    __asm("nop");
-    __asm("nop");
-  }
-  APP_TRACE_INFO5("\n@?@ enq rx: %02x %02x %02x %02x %02x", pBuf[2], pBuf[3], pBuf[4], pBuf[5], pBuf[6]);
+  APP_TRACE_INFO5("\nenq rx: %02x %02x %02x %02x %02x", pBuf[2], pBuf[3], pBuf[4], pBuf[5], pBuf[6]);
   WsfMsgEnq(&lmgrConnCb.rxDataQ, connHandle, pBuf);
   WsfSetEvent(lmgrPersistCb.handlerId, (1 << LCTR_EVENT_RX_PENDING));
 }

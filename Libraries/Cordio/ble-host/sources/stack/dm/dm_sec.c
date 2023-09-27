@@ -98,11 +98,8 @@ void dmSecHciHandler(hciEvt_t *pEvent)
   dmSecEncryptIndEvt_t  encryptInd;
   uint8_t               secLevel;
 
-  APP_TRACE_INFO1("dmSecHciHandler() evt %d", pEvent->hdr.event);
-
   if ((pCcb = dmConnCcbByHandle(pEvent->hdr.param)) != NULL)
   {
-    APP_TRACE_INFO0("find a connection control block with matching handle");
     if (pEvent->hdr.event == HCI_LE_LTK_REQ_CBACK_EVT)
     {
       /* if ediv and rand are zero then check if STK is available from SMP */
@@ -118,7 +115,6 @@ void dmSecHciHandler(hciEvt_t *pEvent)
           pCcb->usingLtk = FALSE;
 
           /* provide key to HCI */
-          APP_TRACE_INFO1("provide key to HCI, secLevel=%d", secLevel);
           HciLeLtkReqReplCmd(pEvent->hdr.param, pKey);
           return;
         }
@@ -126,7 +122,6 @@ void dmSecHciHandler(hciEvt_t *pEvent)
       else if (SmpDmLescEnabled(pCcb->connId) == TRUE)
       {
         /* EDIV and Rand must be zero in LE Secure Connections */
-        APP_TRACE_INFO0("EDIV and Rand must be zero");
         HciLeLtkReqNegReplCmd(pEvent->hdr.param);
         return;
       }
@@ -142,7 +137,6 @@ void dmSecHciHandler(hciEvt_t *pEvent)
       /* use the header from the encryptInd struct for efficiency */
       pEvent->hdr.param = pCcb->connId;
       pEvent->hdr.event = DM_SEC_LTK_REQ_IND;
-      APP_TRACE_INFO0("set evt DM_SEC_LTK_REQ_IND");
       (*dmCb.cback)((dmEvt_t *) pEvent);
     }
     else if (pEvent->hdr.event == HCI_ENC_KEY_REFRESH_CMPL_CBACK_EVT ||
@@ -161,12 +155,10 @@ void dmSecHciHandler(hciEvt_t *pEvent)
         pCcb->secLevel = pCcb->tmpSecLevel;
 
         /* set LTK flag */
-        APP_TRACE_INFO0("set LTK flag");
         encryptInd.usingLtk = pCcb->usingLtk;
       }
       else
       {
-        APP_TRACE_INFO0("DM_SEC_ENCRYPT_FAIL_IND");
         encryptInd.hdr.event = DM_SEC_ENCRYPT_FAIL_IND;
       }
 
@@ -178,15 +170,6 @@ void dmSecHciHandler(hciEvt_t *pEvent)
       encryptInd.hdr.status = pEvent->hdr.status;
       SmpDmEncryptInd((wsfMsgHdr_t *) &encryptInd);
     }
-  }
-}
-
-char *GetDmSecEvtStr(uint8_t evt)
-{
-  switch(evt) {
-    case 40: return "ENCRYPT_REQ";
-    case 41: return "LTK_RSP";
-    default: return " ";
   }
 }
 
@@ -202,8 +185,6 @@ char *GetDmSecEvtStr(uint8_t evt)
 void dmSecMsgHandler(dmSecMsg_t *pMsg)
 {
   dmConnCcb_t *pCcb;
-
-  DM_TRACE_INFO2("dmSecMsgHandler, evt %d %s", pMsg->hdr.event, GetDmSecEvtStr(pMsg->hdr.event));
 
   /* look up ccb */
   if ((pCcb = dmConnCcbById((dmConnId_t) pMsg->hdr.param)) != NULL)
@@ -330,8 +311,6 @@ void DmSecAuthRsp(dmConnId_t connId, uint8_t authDataLen, uint8_t *pAuthData)
     {
       memcpy(pMsg->authData, pAuthData, authDataLen);
     }
-
-    APP_TRACE_INFO1("DmSecAuthRsp evt=4(SMP_MSG_API_AUTH_RSP) authDataLen=%d", authDataLen);
 
     /* note we're sending this to SMP */
     SmpDmMsgSend((smpDmMsg_t *) pMsg);

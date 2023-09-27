@@ -370,7 +370,6 @@ appDbHdl_t AppDbFindByAddr(uint8_t addrType, uint8_t *pAddr)
   {
     if (pRec->inUse && (pRec->addrType == peerAddrType) && BdaCmp(pRec->peerAddr, pAddr))
     {
-      APP_TRACE_INFO1("AppDbFindByAddr found:0x%X", pRec);
       return (appDbHdl_t) pRec;
     }
   }
@@ -869,7 +868,6 @@ bool_t AppDbGetPeerAddedToRl(appDbHdl_t hdl)
 /*************************************************************************************************/
 void AppDbSetPeerAddedToRl(appDbHdl_t hdl, bool_t peerAddedToRl)
 {
-  APP_TRACE_INFO0("AppDbSetPeerAddedToRl");
   ((appDbRec_t *)hdl)->peerAddedToRl = peerAddedToRl;
 }
 

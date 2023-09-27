@@ -49,7 +49,7 @@ typedef struct
 } cgmpsConn_t;
 
 /* Control block */
-static struct
+typedef struct
 {
   uint8_t       operand[CGMPS_OPERAND_MAX]; /* Stored operand filter data */
   cgmpsRec_t    *pCurrRec;                  /* Pointer to current measurement record */
@@ -62,7 +62,7 @@ static struct
   uint8_t       cgmMeasCccIdx;              /* CGM measurement CCCD index */
   uint8_t       racpCccIdx;                 /* Record access control point CCCD index */
   uint8_t       oper;                       /* Stored operator */
-} cgmpsCb;
+} cgmpsCb_t;
 
 
 typedef struct

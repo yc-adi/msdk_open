@@ -39,6 +39,7 @@
   Global Variables
 **************************************************************************************************/
 extern cgmpsDbCb_t cgmpsDbCb;
+cgmpsCb_t cgmpsCb;
 
 /*************************************************************************************************/
 /*!
@@ -49,8 +50,8 @@ extern cgmpsDbCb_t cgmpsDbCb;
 /*************************************************************************************************/
 static bool_t cgmpsNoConnActive(void)
 {
-  cgmpsConn_t    *pConn = cgmpsCb.conn;
-  uint8_t       i;
+  cgmpsConn_t *pConn = cgmpsCb.conn;
+  uint8_t i;
 
   for (i = 0; i < DM_CONN_MAX; i++, pConn++)
   {
@@ -598,10 +599,6 @@ void cgmpsMeasTimerExp(wsfMsgHdr_t *pMsg)
 /*************************************************************************************************/
 void CgmpsProcMsg(wsfMsgHdr_t *pMsg)
 {
-#if WSF_TRACE_ENABLED == TRUE
-  char *evt_str;
-#endif
-
   switch(pMsg->event)
   {
     case DM_CONN_OPEN_IND:

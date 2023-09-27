@@ -47,6 +47,14 @@ extern "C" {
   Macros
 **************************************************************************************************/
 
+/* maximum number of event handlers per task */
+#ifndef WSF_MAX_HANDLERS
+#define WSF_MAX_HANDLERS                          16
+#endif
+
+/*! \brief OS serivice function number */
+#define WSF_OS_MAX_SERVICE_FUNCTIONS                  3
+
 /*! \brief Derive task from handler ID */
 #define WSF_TASK_FROM_ID(handlerID)       (((handlerID) >> 4) & 0x0F)
 
@@ -72,16 +80,10 @@ extern "C" {
 #define WSF_HANDLER_EVENT     0x04        /*!< \brief Event set for event handler */
 /**@}*/
 
-/* maximum number of event handlers per task */
-#define WSF_MAX_HANDLERS      												16
-
-#define WSF_DISPATCHER_MSG_STACK_SIZE									4096
-#define WSF_DISPATCHER_HND_STACK_SIZE									4096
-#define WSF_DISPATCHER_MSG_TASK_PRIORITY							configMAX_PRIORITIES - 2
-#define WSF_DISPATCHER_HND_TASK_PRIORITY							configMAX_PRIORITIES - 3
-
-/*! \brief OS serivice function number */
-#define WSF_OS_MAX_SERVICE_FUNCTIONS                  3
+#define WSF_DISPATCHER_MSG_STACK_SIZE     4096
+#define WSF_DISPATCHER_HND_STACK_SIZE     4096
+#define WSF_DISPATCHER_MSG_TASK_PRIORITY  (configMAX_PRIORITIES - 2)
+#define WSF_DISPATCHER_HND_TASK_PRIORITY  (configMAX_PRIORITIES - 3)
 
 /**************************************************************************************************
   Data Types
@@ -102,43 +104,6 @@ typedef uint8_t wsfTaskEvent_t;
 /*! \brief      Idle check function. */
 typedef bool_t (*WsfOsIdleCheckFunc_t)(void);
 
-/*! \brief Common message structure passed to event handler */
-typedef struct
-{
-  uint16_t        param;          /*!< \brief General purpose parameter passed to event handler */
-  uint8_t         event;          /*!< \brief General purpose event value passed to event handler */
-  uint8_t         status;         /*!< \brief General purpose status value passed to event handler */
-//  uint8_t         msg_ndx;        /*!< \brief message index */
-} wsfMsgHdr_t;
-
-/*************************************************************************************************/
-/*!
- *  \brief  Event handler callback function.
- *
- *  \param  event    Mask of events set for the event handler.
- *  \param  pMsg     Pointer to message for the event handler.
- */
-/*************************************************************************************************/
-typedef void (*wsfEventHandler_t)(wsfEventMask_t event, wsfMsgHdr_t *pMsg);
-
-/*! \brief  Task structure */
-typedef struct
-{
-  wsfEventHandler_t     handler[WSF_MAX_HANDLERS];
-  wsfEventMask_t        handlerEventMask[WSF_MAX_HANDLERS];
-  wsfQueue_t            msgQueue;
-  wsfTaskEvent_t        taskEventMask;
-  uint8_t               numHandler;
-} wsfOsTask_t;
-
-/*! \brief  OS structure */
-typedef struct
-{
-  wsfOsTask_t                 task;
-  WsfOsIdleCheckFunc_t        sleepCheckFuncs[WSF_OS_MAX_SERVICE_FUNCTIONS];
-  uint8_t                     numFunc;
-} wsfOs_t;
-
 /**************************************************************************************************
   External Variables
 **************************************************************************************************/
@@ -150,12 +115,27 @@ extern wsfHandlerId_t WsfActiveHandler;
   Data Types
 **************************************************************************************************/
 
+/*! \brief Common message structure passed to event handler */
+typedef struct
+{
+  uint16_t        param;          /*!< \brief General purpose parameter passed to event handler */
+  uint8_t         event;          /*!< \brief General purpose event value passed to event handler */
+  uint8_t         status;         /*!< \brief General purpose status value passed to event handler */
+} wsfMsgHdr_t;
 
 /**************************************************************************************************
   Callback Function Types
 **************************************************************************************************/
 
-
+/*************************************************************************************************/
+/*!
+ *  \brief  Event handler callback function.
+ *
+ *  \param  event    Mask of events set for the event handler.
+ *  \param  pMsg     Pointer to message for the event handler.
+ */
+/*************************************************************************************************/
+typedef void (*wsfEventHandler_t)(wsfEventMask_t event, wsfMsgHdr_t *pMsg);
 
 /**************************************************************************************************
   Function Declarations

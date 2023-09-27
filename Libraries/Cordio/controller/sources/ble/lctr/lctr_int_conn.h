@@ -647,7 +647,7 @@ uint32_t lctrGetConnRefTime(uint8_t connHandle, uint32_t *pDurUsec);
 /*************************************************************************************************/
 static inline void lctrFlagLinkTerm(lctrConnCtx_t *pCtx, uint8_t src)
 {
-  APP_TRACE_INFO1("@?@ term src=%d", src);
+  APP_TRACE_INFO1("term src=%d", src);
 
   bool_t removeBod = (pCtx->state == LCTR_CONN_STATE_ESTABLISHED_READY);
 

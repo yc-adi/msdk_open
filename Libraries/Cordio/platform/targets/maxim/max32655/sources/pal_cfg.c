@@ -171,8 +171,8 @@ void palCfgLoadLlParams(uint8_t *pConfig)
 /*************************************************************************************************/
 void palCfgLoadBdAddress(uint8_t *pDevAddr)
 {
-  uint32_t id[MXC_SYS_USN_CHECKSUM_LEN/4];
-  uint32_t checksum[MXC_SYS_USN_CHECKSUM_LEN/4];
+  uint8_t id[MXC_SYS_USN_CHECKSUM_LEN];
+  uint8_t checksum[MXC_SYS_USN_CHECKSUM_LEN];
 
   if(MXC_SYS_GetUSN((uint8_t*)id, (uint8_t*)checksum) != E_NO_ERROR) {
     PalSysAssertTrap();
@@ -183,7 +183,7 @@ void palCfgLoadBdAddress(uint8_t *pDevAddr)
   pDevAddr[4] = 0x18;
   pDevAddr[3] = 0x80;
 
-  pDevAddr[2] = checksum[2];
+  pDevAddr[2] = id[6] | id[7] | id[8];
   pDevAddr[1] = checksum[1];
   pDevAddr[0] = checksum[0];
 }

@@ -126,15 +126,6 @@ void l2cRxSignalingPkt(uint16_t handle, uint16_t len, uint8_t *pPacket)
   }
 }
 
-char *GetL2cHciAclCidStr(uint8_t cid)
-{
-  switch(cid) {
-    case 4: return "ATT";           // L2C_CID_ATT
-    case 5: return "LE_SIGNALING";  // L2C_CID_LE_SIGNALING
-    case 6: return "SMP";           // L2C_CID_SMP
-    default: return " ";
-  }
-}
 /*************************************************************************************************/
 /*!
  *  \brief  HCI ACL data callback function.
@@ -173,7 +164,6 @@ static void l2cHciAclCback(uint8_t *pPacket)
     /* parse CID */
     BSTREAM_TO_UINT16(cid, p);
 
-    APP_TRACE_INFO3("l2cHciAclCback hndl=%d cid=%d, %s", handle, cid, GetL2cHciAclCidStr(cid));
     switch (cid)
     {
       case L2C_CID_LE_SIGNALING:

@@ -175,8 +175,6 @@ void hciEvtProcessMsg(uint8_t *pEvt)
 
   uint8_t event = pMsg->hdr.event;
 
-  //@?@ APP_TRACE_INFO2("hciEvtProcessMsg evt=%d %s", event, " ");
-
   /* if event generated internally by HCI APIs */
   if (event & HCI_EVT_INT_TYPE)
   {
@@ -350,7 +348,7 @@ void hciEvtProcessMsg(uint8_t *pEvt)
       event = pMsg->hdr.event;
 
       /* Note: HCI and LL event structures identical, no translation needed */
-      hciCb.evtCback((hciEvt_t *)pMsg);
+      hciCb.evtCback((hciEvt_t *)pMsg);  // dmHciEvtCback
 
       /* execute core procedure for connection close after callback */
       if (event == HCI_DISCONNECT_CMPL_CBACK_EVT)

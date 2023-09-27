@@ -32,6 +32,7 @@
 #include "wsf_assert.h"
 #include "util/bstream.h"
 #include "dm_api.h"
+#include "ll_api.h"
 #include "app_api.h"
 #include "app_main.h"
 #include "app_ui.h"
@@ -87,6 +88,9 @@ appReqActCfg_t *pAppMasterReqActCfg = (appReqActCfg_t *) &appReqActCfg;
 
 /*! Configurable pointer for incoming request actions on slave */
 appReqActCfg_t *pAppSlaveReqActCfg = (appReqActCfg_t *) &appReqActCfg;
+
+/*! For long distance test, use CODED PHY */
+uint8_t appCodedPhyDemo = 0;
 
 /*************************************************************************************************/
 /*!
@@ -246,12 +250,12 @@ void AppHandlePasskey(dmSecAuthReqIndEvt_t *pAuthReq)
   if (pAuthReq->display)
   {
     /* generate random passkey, limit to 6 digit max */
-    #if 0   //@?@ remove me !!!
+#if 0
     SecRand((uint8_t *) &passkey, sizeof(uint32_t));
     passkey %= 1000000;
-    #else
+#else
     passkey = 112233;
-    #endif
+#endif
 
     /* convert to byte buffer */
     buf[0] = UINT32_TO_BYTE0(passkey);
@@ -523,4 +527,19 @@ void AppUpdatePrivacyMode(appDbHdl_t hdl)
       AppDbSetPeerAddedToRl(hdl, FALSE);
     }
   }
+}
+
+/*************************************************************************************************/
+/*!
+ *  \brief      Get Bluetooth device address currently used by LL 
+ *              or all zeros if address is not set.
+ *
+ *  \param      pBdAddr Pointer where address will be stored.
+ *
+ *  \return None.
+ */
+/*************************************************************************************************/
+void AppGetBdAddr(uint8_t *pBdAddr)
+{
+  LlGetBdAddr(pBdAddr);
 }

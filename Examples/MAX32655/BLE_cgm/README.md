@@ -49,6 +49,9 @@ handlerId: 11, wdxsFileEraseHandler␍␊
 handlerId: 12, wdxsFileWriteHandler␍␊
 
 DM events
+"CGM got evt="
+"AppSlaveSecProcDmMsg evt="
+63 DM_PRIV_SET_ADDR_RES_ENABLE_IND
 65 DM_CONN_DATA_LEN_CHANGE_IND
 ```
 

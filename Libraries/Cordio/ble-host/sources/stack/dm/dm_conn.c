@@ -119,6 +119,7 @@ dmConnAct_t *dmConnUpdActSet[DM_CONN_NUM_ACT_SETS];
 dmConnCb_t dmConnCb;
 
 extern lmgrSlvAdvCtrlBlk_t lmgrSlvAdvCb;
+
 /**************************************************************************************************
   Local Functions
 **************************************************************************************************/
@@ -208,7 +209,7 @@ dmConnCcb_t *dmConnCcbAlloc(uint8_t *pAddr)
 /*************************************************************************************************/
 void dmConnCcbDealloc(dmConnCcb_t *pCcb)
 {
-  //DM_TRACE_FREE1("dmConnCcbDealloc %d", pCcb->connId);
+  DM_TRACE_FREE1("dmConnCcbDealloc %d", pCcb->connId);
 
   pCcb->inUse = FALSE;
 }

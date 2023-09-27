@@ -186,8 +186,6 @@ void appServerHandleDbHashUpdate(attEvt_t *pMsg)
     /* Make all active clients change-unaware. */
     AttsCsfSetClientChangeAwareState(DM_CONN_ID_NONE, ATTS_CLIENT_CHANGE_UNAWARE);
 
-    APP_TRACE_INFO0("Database hash updated");
-
     /* Send all connect clients configured to receive Service Changed Indications one now. */
     GattSendServiceChangedInd(DM_CONN_ID_NONE, ATT_HANDLE_START, ATT_HANDLE_MAX);
   }
@@ -204,7 +202,6 @@ void appServerHandleDbHashUpdate(attEvt_t *pMsg)
 /*************************************************************************************************/
 void appServerHandleSvcChangeCnf(attEvt_t *pMsg)
 {
-  APP_TRACE_INFO0("appServerHandleSvcChangeCnf");
   /* Check if this is a confirmation on the Service Changed Indication. */
   if (pMsg->handle == GATT_SC_HDL)
   {
@@ -252,7 +249,6 @@ void appServerCsfWriteCback(dmConnId_t connId, uint8_t changeAwareState, uint8_t
 /*************************************************************************************************/
 void AppServerProcAttMsg(wsfMsgHdr_t *pMsg)
 {
-  APP_TRACE_INFO0("AppServerProcAttMsg");
   switch(pMsg->event)
   {
     case ATTS_DB_HASH_CALC_CMPL_IND:

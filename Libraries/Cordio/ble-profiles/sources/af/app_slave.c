@@ -341,7 +341,6 @@ static void appSlaveResolveAddr(dmEvt_t *pMsg)
 
   /* get the first database record */
   hdl = AppDbGetNextRecord(APP_DB_HDL_NONE);
-  APP_TRACE_INFO1("appSlaveResolveAddr, 1st rec 0x%X", hdl);
 
   /* if we have any bond records */
   if ((hdl != APP_DB_HDL_NONE) && ((pPeerKey = AppDbGetKey(hdl, DM_KEY_IRK, NULL)) != NULL))
@@ -564,7 +563,6 @@ static void appSlaveResolvedAddrInd(dmEvt_t *pMsg, appConnCb_t *pCb)
   /* if RPA resolved */
   if (pMsg->hdr.status == HCI_SUCCESS)
   {
-    APP_TRACE_INFO1("appSlaveResolvedAddrInd, RPA resolved findLtk=%d", appSlaveCb.findLtk);
     /* record found */
     pCb->dbHdl = appSlaveCb.dbHdl;
 
@@ -580,7 +578,6 @@ static void appSlaveResolvedAddrInd(dmEvt_t *pMsg, appConnCb_t *pCb)
   /* if RPA did not resolve and there're more bonded records to go through */
   else if ((pMsg->hdr.status == HCI_ERR_AUTH_FAILURE) && (appSlaveCb.dbHdl != APP_DB_HDL_NONE))
   {
-    APP_TRACE_INFO0("appSlaveResolvedAddrInd, RPA not resolved");
     /* get the next database record */
     appSlaveCb.dbHdl = AppDbGetNextRecord(appSlaveCb.dbHdl);
 
@@ -655,8 +652,6 @@ void appSlaveSecConnOpen(dmEvt_t *pMsg, appConnCb_t *pCb)
   /* find record for peer device */
   pCb->dbHdl = AppDbFindByAddr(pMsg->connOpen.addrType, pMsg->connOpen.peerAddr);
 
-  APP_TRACE_INFO1("appSlaveSecConnOpen dbHdl=0x%X", pCb->dbHdl);
-
   /* if record not found and the peer device uses an RPA */
   if ((pCb->dbHdl == NULL) && DM_RAND_ADDR_RPA(pMsg->connOpen.peerAddr, pMsg->connOpen.addrType))
   {
@@ -666,7 +661,7 @@ void appSlaveSecConnOpen(dmEvt_t *pMsg, appConnCb_t *pCb)
 
   if (pAppSecCfg->initiateSec && AppDbCheckBonded())
   {
-    APP_TRACE_INFO0("Send slave security request if configured to do so.");
+    APP_TRACE_INFO0("Send slv sec req if configured");
     DmSecSlaveReq((dmConnId_t) pMsg->hdr.param, pAppSecCfg->auth);
   }
 }
@@ -747,7 +742,6 @@ static void appSecPairInd(dmEvt_t *pMsg, appConnCb_t *pCb)
     if (pCb->bondByPairing && pCb->dbHdl == APP_DB_HDL_NONE)
     {
       /* create a device record if none exists */
-      APP_TRACE_INFO1("create a record, auth=%d", pAppSecCfg->auth);
       pCb->dbHdl = AppDbNewRecord(DmConnPeerAddrType(pCb->connId), DmConnPeerAddr(pCb->connId));
     }
 
@@ -947,7 +941,6 @@ static void appPrivSetAddrResEnableInd(dmEvt_t *pMsg)
 /*************************************************************************************************/
 static void appPrivAddDevToResListInd(dmEvt_t *pMsg, appConnCb_t *pCb)
 {
-  APP_TRACE_INFO0("appPrivAddDevToResListInd");
   if ((pMsg->hdr.status == HCI_SUCCESS) && pCb && (pCb->dbHdl != APP_DB_HDL_NONE))
   {
     /* peer device's been added to resolving list */
@@ -1105,8 +1098,6 @@ void AppSlaveInit(void)
 void AppSlaveProcDmMsg(dmEvt_t *pMsg)
 {
   appConnCb_t *pCb = NULL;
-
-  APP_TRACE_INFO1("AppSlaveProcDmMsg evt=%d", pMsg->hdr.event);
   
   /* look up app connection control block from DM connection ID */
   if ((pMsg->hdr.event != DM_ADV_STOP_IND) &&
@@ -1162,7 +1153,6 @@ void AppSlaveProcDmMsg(dmEvt_t *pMsg)
       break;
 
     default:
-      APP_TRACE_INFO0("  not here");
       break;
   }
 }
@@ -1597,7 +1587,7 @@ void AppSlaveSecProcDmMsg(dmEvt_t *pMsg)
     pCb = NULL;
   }
 
-  APP_TRACE_INFO1("AppSlaveSecProcDmMsg evt %d", pMsg->hdr.event);
+  APP_TRACE_INFO1("AppSlaveSecProcDmMsg evt=%d", pMsg->hdr.event);
   switch(pMsg->hdr.event)
   {
     case DM_CONN_OPEN_IND:
@@ -1648,7 +1638,6 @@ void AppSlaveSecProcDmMsg(dmEvt_t *pMsg)
       break;
 
     default:
-      APP_TRACE_INFO0("  not here");
       break;
   }
 }

@@ -59,6 +59,7 @@
 #endif
 
 #include "pal_bb.h"
+#include "pal_bb_ble.h"
 #include "pal_cfg.h"
 
 #include "cgm_api.h"
@@ -112,6 +113,23 @@
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+typedef struct
+{
+  wsfEventHandler_t     handler[WSF_MAX_HANDLERS];
+  wsfEventMask_t        handlerEventMask[WSF_MAX_HANDLERS];
+  wsfQueue_t            msgQueue;
+  wsfTaskEvent_t        taskEventMask;
+  uint8_t               numHandler;
+} wsfOsTask_t;
+
+/*! \brief  OS structure */
+typedef struct
+{
+  wsfOsTask_t                 task;
+  WsfOsIdleCheckFunc_t        sleepCheckFuncs[WSF_OS_MAX_SERVICE_FUNCTIONS];
+  uint8_t                     numFunc;
+} wsfOs_t;
+
 extern wsfOs_t wsfOs;
 
 /*! \brief  Pool runtime configuration. */
@@ -154,11 +172,6 @@ mxc_spi_req_t spi_req;
 int spiRxReady = 0;
 
 extern bool_t ChciTrService(void);
-
-#if DBG_DS == 1
-extern uint32_t u32DbgBuf[];
-extern uint32_t u32DbgBufNdx;
-#endif
 
 /**************************************************************************************************
   Functions
@@ -251,7 +264,6 @@ int DeepSleep(void)
     uint32_t dsInWutCnt, dsWutTicks;
     uint64_t bleSleepTicks, idleInWutCnt, schUsecElapsed; //dsSysTickPeriods, ;
     bool_t schTimerActive;
-    uint32_t u64WutCmpVal;
     volatile uint32_t wutCnt;
 
     /* If PAL system is busy, no need to sleep. */
@@ -428,20 +440,6 @@ int DeepSleep(void)
             }
             PalTimerStart(palTimerStartTicks);
         }
-
-        #if DBG_DS == 1
-        if (u32DbgBufNdx < DBG_BUF_SIZE - DBG_GROUP_SIZE) {
-            u32DbgBuf[u32DbgBufNdx++] = preCaptureInWutCnt;
-            u32DbgBuf[u32DbgBufNdx++] = dsInWutCnt;
-            u32DbgBuf[u32DbgBufNdx++] = u64WutCmpVal;
-            u32DbgBuf[u32DbgBufNdx++] = wutCnt;
-            u32DbgBuf[u32DbgBufNdx++] = dsWutTicks;
-            u32DbgBuf[u32DbgBufNdx++] = schUsecElapsed;
-            if (u32DbgBufNdx >= DBG_BUF_SIZE) {
-                u32DbgBufNdx = 0;
-            }
-        }
-        #endif
     }
 
     /* Re-enable SysTick */
@@ -475,7 +473,8 @@ static int mainWsfInit(void)
 
     /* +12 for message headroom, +4 for header. */
     const uint16_t aclBufSize = 12 + mainLlRtCfg.maxAclLen + 4 + BB_DATA_PDU_TAILROOM;
-
+    (void)aclBufSize;
+    
     /* Adjust buffer allocation based on platform configuration. */
     mainPoolDesc[2].len = maxRptBufSize;
     mainPoolDesc[2].num = mainLlRtCfg.maxAdvReports;

@@ -149,20 +149,20 @@ static const uint16_t cgmsRacpChCccdLen = sizeof(cgmsRacpChCccd);
 static const uint8_t cgmsRacpChCccdPerm = ATTS_PERMIT_WRITE | ATTS_PERMIT_WRITE_ENC | ATTS_PERMIT_WRITE_AUTH;
 
 /* CGM SOPS characteristic */
-static uint8_t cgmsSops[] = {0};
-static const uint8_t cgmsSopsLen = sizeof(cgmsSops);
-static const uint8_t cgmsSopsPerm = ATTS_PERMIT_READ | ATTS_PERMIT_READ_AUTH;;
+//static uint8_t cgmsSops[] = {0};
+//static const uint8_t cgmsSopsLen = sizeof(cgmsSops);
+//static const uint8_t cgmsSopsPerm = ATTS_PERMIT_READ | ATTS_PERMIT_READ_AUTH;;
 
 /* CGM SOPS value */
 /* Note these are dummy values */
-static const uint8_t cgmsSopsVal[] = {0};
-static const uint16_t cgmsSopsValLen = sizeof(cgmsSopsVal);
-static const uint8_t cgmsSopsValPerm = CGMS_SEC_PERMIT_WRITE_AUTH;
+//static const uint8_t cgmsSopsVal[] = {0};
+//static const uint16_t cgmsSopsValLen = sizeof(cgmsSopsVal);
+//static const uint8_t cgmsSopsValPerm = CGMS_SEC_PERMIT_WRITE_AUTH;
 
 /* CGM SOPS CCCD */
-static uint8_t cgmsSopsCccd[] = {UINT16_TO_BYTES(0x0000)};
-static const uint16_t cgmsSopsCccdLen = sizeof(cgmsSopsCccd);
-static const uint8_t cgmsSopsCccdPerm = ATTS_PERMIT_WRITE | ATTS_PERMIT_WRITE_ENC | ATTS_PERMIT_WRITE_AUTH;
+//static uint8_t cgmsSopsCccd[] = {UINT16_TO_BYTES(0x0000)};
+//static const uint16_t cgmsSopsCccdLen = sizeof(cgmsSopsCccd);
+//static const uint8_t cgmsSopsCccdPerm = ATTS_PERMIT_WRITE | ATTS_PERMIT_WRITE_ENC | ATTS_PERMIT_WRITE_AUTH;
 
 /* Attribute list for CGM group, must match cgms_hdl */
 static const attsAttr_t cgmsList[] =

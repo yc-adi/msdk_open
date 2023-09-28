@@ -23,10 +23,13 @@
 /*************************************************************************************************/
 
 #include <string.h>
+#include <string.h>
 #include "bb_ble_int.h"
 #include "bb_ble_sniffer_api.h"
 #include "sch_api.h"
 #include "sch_api_ble.h"
+#include "wsf_trace.h"
+#include "lmgr_api.h"
 #include "wsf_trace.h"
 #include "lmgr_api.h"
 

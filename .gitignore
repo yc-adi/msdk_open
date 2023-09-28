@@ -4,10 +4,12 @@ Examples/*/*/*/build
 Examples/*/*/*/buildrv
 .vscode/settings.json
 Libraries/PeriphDrivers/Documentation/MAX*
+Libraries/PeriphDrivers/bin
 docs
 Documentation/Libraries
 Documentation/res
 Examples/MAX78000/PowerTest
+Examples/MAX32570
 __pycache__
 msdk-internal
 Tools/GNUTools
@@ -27,3 +29,11 @@ Libraries/EMV
 Libraries/RF-PHY-closed
 Libraries/RF-PHY
 .github/workflows/ci-tests/Examples_tests/results/
+.cortex-debug.peripherals.state.json
+.cortex-debug.registers.state.json
+ar_args.txt
+.husky/_/
+node_modules
+package-lock.json
+package.json
+.python-version

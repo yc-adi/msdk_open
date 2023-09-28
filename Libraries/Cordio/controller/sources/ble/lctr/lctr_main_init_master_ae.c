@@ -566,7 +566,7 @@ void LctrMstExtInitDefaults(void)
 
   if (appCodedPhyDemo == 0)
   {
-  lctrMstExtInit.enaPhys = 1 << LCTR_SCAN_PHY_1M;
+    lctrMstExtInit.enaPhys = 1 << LCTR_SCAN_PHY_1M;
   }
   else
   {

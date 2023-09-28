@@ -40,8 +40,8 @@ override PROJECT=maxusb
 ifeq "$(TARGET)" ""
 $(error TARGET must be specified)
 endif
-TARGET_UC:=$(shell echo $(TARGET) | tr a-z A-Z)
-TARGET_LC:=$(shell echo $(TARGET) | tr A-Z a-z)
+TARGET_UC := $(subst m,M,$(subst a,A,$(subst x,X,$(TARGET))))
+TARGET_LC := $(subst M,m,$(subst A,a,$(subst X,x,$(TARGET))))
 $(info $(TARGET_UC))
 
 ifeq "$(COMPILER)" ""
@@ -105,6 +105,7 @@ SRCS += hid_raw.c
 SRCS += cdc_acm.c
 SRCS += fifo.c
 SRCS += msc.c
+SRCS += ccid.c
 # Generic debug log, useful for minimally-invasive tracing of the USB stack
 #SRCS += dbg_log.c
 

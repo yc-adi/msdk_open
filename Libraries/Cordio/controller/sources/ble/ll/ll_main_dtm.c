@@ -22,7 +22,6 @@
  */
 /*************************************************************************************************/
 
-#include <string.h>
 #include "ll_api.h"
 #include "ll_defs.h"
 #include "lctr_api.h"
@@ -37,6 +36,8 @@
 #include "wsf_math.h"
 #include "wsf_msg.h"
 #include "wsf_trace.h"
+#include <string.h>
+
 
 /* Access internal definitions. */
 #include "../lctr/lctr_int.h"
@@ -473,7 +474,7 @@ uint8_t LlEnhancedTxTest(uint8_t rfChan, uint8_t len, uint8_t pktType, uint8_t p
 
     if (llTestCb.state == LL_TEST_STATE_IDLE) {
         /* Init test state. */
-        memset((void *)&llTestCb.rpt, 0, sizeof(llTestCb.rpt));
+        memset(&llTestCb.rpt, 0, sizeof(llTestCb.rpt));
     }
 
     /* Handle non-packet test mode. */
@@ -910,7 +911,7 @@ uint8_t LlEnhancedRxTest(uint8_t rfChan, uint8_t phy, uint8_t modIdx, uint16_t n
     llTestCb.state = LL_TEST_STATE_RX;
     lmgrCb.testEnabled = TRUE;
     LmgrIncResetRefCount();
-    memset((void *)&llTestCb.rpt, 0, sizeof(llTestCb.rpt)); /* clear report */
+    memset(&llTestCb.rpt, 0, sizeof(llTestCb.rpt)); /* clear report */
     BbStart(BB_PROT_BLE_DTM);
     SchInsertNextAvailable(pOp);
 
@@ -1028,7 +1029,7 @@ uint8_t LlEndTest(LlTestReport_t *pRpt)
     LL_TRACE_INFO1("                numRxCrcError=%u", llTestCb.rpt.numRxCrcError);
     LL_TRACE_INFO1("                numRxTimeout=%u", llTestCb.rpt.numRxTimeout);
 
-    memset((void *)&llTestCb.rpt, 0, sizeof(llTestCb.rpt)); /* clear report */
+    memset(&llTestCb.rpt, 0, sizeof(llTestCb.rpt)); /* clear report */
 
     return LL_SUCCESS;
 }
@@ -1060,7 +1061,7 @@ uint8_t LlSetTxTestErrorPattern(uint32_t pattern)
 /*************************************************************************************************/
 static void llTestResetHandler(void)
 {
-    memset((void *)&llTestCb, 0, sizeof(llTestCb));
+    memset(&llTestCb, 0, sizeof(llTestCb));
     llTestCb.tx.errPattern = 0xFFFFFFFF;
 
     llTestCb.packetsFreed = TRUE;

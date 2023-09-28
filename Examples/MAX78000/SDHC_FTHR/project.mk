@@ -13,10 +13,16 @@
 
 # Add your config here!
 
-# This example is only compatible with the FTHR board,
-# so we override the BOARD value to hard-set it.
-override BOARD=FTHR_RevA
-$(warning Warning: This project is forced to compile for the FTHR board only!)
+BOARD = FTHR_RevA
 
+ifneq ($(BOARD),FTHR_RevA)
+$(error ERR_NOTSUPPORTED: This project requires an SD card slot and is only supported for the MAX78000FTHR)
+endif
+
+# Enable SDHC library
 LIB_SDHC = 1
+# Use FatFS version R0.15
+FATFS_VERSION = ff15
 
+# Enable CLI library
+LIB_CLI = 1

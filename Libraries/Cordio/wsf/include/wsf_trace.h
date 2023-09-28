@@ -553,6 +553,9 @@ bool_t WsfTokenService(void);
 #define LL_TRACE_INFO2(msg, var1, var2)             WSF_TRACE2V("LL", "INFO", msg, var1, var2)
 /*! \brief 3 argument LL info trace. */
 #define LL_TRACE_INFO3(msg, var1, var2, var3)       WSF_TRACE3V("LL", "INFO", msg, var1, var2, var3)
+/*! \brief 4 argument LL info trace. */
+#define LL_TRACE_INFO4(msg, var1, var2, var3, var4) WSF_TRACE4V("LL", "INFO", msg, var1, var2, var3, var4)
+
 /*! \brief 0 argument LL warning trace. */
 #define LL_TRACE_WARN0(msg)                         WSF_TRACE0V("LL", "WARN", msg)
 /*! \brief 1 argument LL warning trace. */

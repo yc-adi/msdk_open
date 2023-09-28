@@ -98,6 +98,7 @@ void schRemoveHead(void);
 /*************************************************************************************************/
 bool_t schDueTimeInFuture(BbOpDesc_t *pBod);
 
+
 /*************************************************************************************************/
 /*!
  *  \brief      Return the time between now and the BOD to be executed.

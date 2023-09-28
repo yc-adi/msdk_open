@@ -175,7 +175,7 @@ static void dmExtAdvCbInit(uint8_t advHandle)
     dmExtAdvCb[advHandle].priAdvPhy = HCI_ADV_PHY_LE_CODED;
     dmExtAdvCb[advHandle].secAdvPhy = HCI_ADV_PHY_LE_CODED;
   } else {
-  dmExtAdvCb[advHandle].useLegacyPdu = TRUE;
+    dmExtAdvCb[advHandle].useLegacyPdu = TRUE;
     dmExtAdvCb[advHandle].priAdvPhy = HCI_ADV_PHY_LE_1M;
     dmExtAdvCb[advHandle].secAdvPhy = HCI_ADV_PHY_LE_1M;
   }

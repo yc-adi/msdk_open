@@ -51,12 +51,19 @@
 
 int MXC_DMA_Init(void)
 {
+#ifndef MSDK_NO_GPIO_CLK_INIT
     if (!MXC_SYS_IsClockEnabled(MXC_SYS_PERIPH_CLOCK_DMA)) {
         MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_DMA);
         MXC_SYS_Reset_Periph(MXC_SYS_RESET0_DMA);
     }
+#endif
 
     return MXC_DMA_RevA_Init((mxc_dma_reva_regs_t *)MXC_DMA);
+}
+
+void MXC_DMA_DeInit(void)
+{
+    return MXC_DMA_RevA_DeInit((mxc_dma_reva_regs_t *)MXC_DMA);
 }
 
 int MXC_DMA_AcquireChannel(void)

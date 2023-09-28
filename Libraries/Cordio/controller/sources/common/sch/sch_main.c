@@ -337,12 +337,8 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 bool_t schDueTimeInFuture(BbOpDesc_t *pBod)
 {
   const uint32_t curTime = PalBbGetCurrentTime();
-  uint32_t delta = BbGetTargetTimeDelta(pBod->dueUsec, curTime);
-  if (delta == 0)
-  {
-    APP_TRACE_INFO3("due=%d cur=%d %d", pBod->dueUsec, curTime, (int)pBod->dueUsec - (int)curTime);
-  }
-  return ( delta > 0);
+  int32_t delta = BbGetTargetTimeDelta(pBod->dueUsec, curTime);
+  return (delta > 0);
 }
 
 /*************************************************************************************************/

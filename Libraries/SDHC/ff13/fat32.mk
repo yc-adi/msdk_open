@@ -39,6 +39,8 @@
 # project.
 ################################################################################
 
+$(warning Warning: Building with FatFS R0.13.  The MSDK will update the default FatFS version to R0.15 next release.  See https://github.com/Analog-Devices-MSDK/msdk/pull/720)
+
 ifeq "$(FAT32_DRIVER_DIR)" ""
 $(error FAT32_DRIVER_DIR must be specified")
 endif
@@ -75,5 +77,5 @@ IPATH += ${FAT32_DRIVER_DIR}/Source
 
 # Add rule to build the Driver Library
 ${FAT32_DRIVER_BUILD_DIR}/FAT32.a: FORCE
-	$(MAKE) -C ${FAT32_DRIVER_DIR} lib BUILD_DIR=${FAT32_DRIVER_BUILD_DIR}
+	$(MAKE) -C ${FAT32_DRIVER_DIR} lib BUILD_DIR=${FAT32_DRIVER_BUILD_DIR} BOARD=${BOARD}
 

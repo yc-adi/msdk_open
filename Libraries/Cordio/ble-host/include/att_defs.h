@@ -118,6 +118,7 @@ extern "C" {
 #define ATT_ERR_MUTE_DISABLE          0x82      /*!< \brief Mute disable */
 #define ATT_ERR_VALUE_RANGE_x83       0x83      /*!< \brief Value out of range 0x83 */
 /**@}*/
+// search "ATT_ERR_" for other application specific errors
 
 /** \name ATT HCI Error Status
  *

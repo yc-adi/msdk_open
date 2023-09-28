@@ -633,6 +633,8 @@ int MXC_SPI_MasterTransactionDMA(mxc_spi_req_t *req);
  */
 int MXC_SPI_SlaveTransaction(mxc_spi_req_t *req);
 
+int MXC_SPI_SlaveRx(mxc_spi_req_t *req);
+
 /**
  * @brief   Setup an interrupt-driven SPI transaction
  *

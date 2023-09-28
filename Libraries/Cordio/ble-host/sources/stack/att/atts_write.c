@@ -144,6 +144,7 @@ void attsProcWrite(attsCcb_t *pCcb, uint16_t len, uint8_t *pPacket)
                                handle, pAttr->permissions)) != ATT_SUCCESS)
     {
       /* err has been set; fail */
+      APP_TRACE_INFO1("perm=0x%X failed", pAttr->permissions);
     }
     /* verify write length, fixed length */
     else if (((pAttr->settings & ATTS_SET_VARIABLE_LEN) == 0) &&

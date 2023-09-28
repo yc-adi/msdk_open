@@ -457,7 +457,7 @@ static attsGroup_t uriCfgGroup =
 /*************************************************************************************************/
 void SvcUriCfgAddGroup(void)
 {;
-  AttsAddGroup(&uriCfgGroup);
+  AttsAddGroup(&uriCfgGroup, "UriCfg");
 }
 
 /*************************************************************************************************/

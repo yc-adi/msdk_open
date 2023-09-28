@@ -79,7 +79,7 @@ static void attsCccCback(dmConnId_t connId, uint8_t idx, uint16_t handle, uint16
   evt.handle = handle;
   evt.value = value;
 
-  (*attsCccCb.cback)(&evt);
+  (*attsCccCb.cback)(&evt); // search "void.*CccCback\("
 }
 
 /*************************************************************************************************/

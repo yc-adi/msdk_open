@@ -24,6 +24,7 @@
 
 #include "wsf_types.h"
 #include "wsf_msg.h"
+#include "wsf_trace.h"
 #include "util/calc128.h"
 #include "dm_api.h"
 #include "dm_sec.h"
@@ -58,6 +59,8 @@ void DmSecPairRsp(dmConnId_t connId, uint8_t oob, uint8_t auth, uint8_t iKeyDist
     pMsg->iKeyDist = iKeyDist & SMP_KEY_DIST_MASK;
     pMsg->rKeyDist = rKeyDist & SMP_KEY_DIST_MASK;
 
+    APP_TRACE_INFO1("DmSecPairRsp evt=2(PAIR_RSP) auth=%d", auth);
+
     /* note we're sending this to SMP */
     SmpDmMsgSend((smpDmMsg_t *) pMsg);
   }
@@ -84,6 +87,8 @@ void DmSecSlaveReq(dmConnId_t connId, uint8_t auth)
     pMsg->hdr.param = connId;
     pMsg->auth = auth;
 
+    APP_TRACE_INFO1("DmSecSlaveReq evt=5(SEC_REQ) auth=%d", auth);
+
     /* note we're sending this to SMP */
     SmpDmMsgSend((smpDmMsg_t *) pMsg);
   }
@@ -105,6 +110,8 @@ void DmSecSlaveReq(dmConnId_t connId, uint8_t auth)
 void DmSecLtkRsp(dmConnId_t connId, bool_t keyFound, uint8_t secLevel, uint8_t *pKey)
 {
   dmSecApiLtkRsp_t  *pMsg;
+  
+  APP_TRACE_INFO2("DmSecLtkRsp kfnd=%d secLevel=%d", keyFound, secLevel);
 
   if ((pMsg = WsfMsgAlloc(sizeof(dmSecApiLtkRsp_t))) != NULL)
   {

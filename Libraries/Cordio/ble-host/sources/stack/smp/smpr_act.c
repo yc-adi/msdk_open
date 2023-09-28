@@ -118,6 +118,8 @@ void smprActProcPairReq(smpCcb_t *pCcb, smpMsg_t *pMsg)
   /* call app callback */
   pairInd.hdr.param = pCcb->connId;
   pairInd.hdr.event = DM_SEC_PAIR_IND;
+
+  SMP_TRACE_INFO1("smprActProcPairReq calls DmSmpCbackExec with pairInd.auth=%d", pairInd.auth);
   DmSmpCbackExec((dmEvt_t *) &pairInd);
 }
 
@@ -149,6 +151,7 @@ void smprActSendPairRsp(smpCcb_t *pCcb, smpMsg_t *pMsg)
   UINT8_TO_BSTREAM(p, pMsg->dm.pair.rKeyDist);
 
   /* process pairing request and response data */
+  SMP_TRACE_INFO1("smprActSendPairRsp auth=%d", pCcb->auth);
   if (smpCb.procPairing(pCcb, &oob, &display))
   {
     /* set next expected packet */

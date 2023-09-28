@@ -192,7 +192,7 @@ void dmDevPassEvtToDevPriv(uint8_t event, uint8_t param, uint8_t advHandle, bool
 {
   dmDevPrivMsg_t evt;
 
-  DM_TRACE_INFO3("dmDevPassEvtToDevPriv: event: %d, param: %d, advHandle: %d", event, param, advHandle);
+  DM_TRACE_INFO3("dmDevPassEvtToDevPriv evt=%d param=%d advHandle=%d", event, param, advHandle);
 
   /* build event */
   evt.hdr.event = event;

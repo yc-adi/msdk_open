@@ -331,8 +331,8 @@ static attsGroup_t svcGattGroup =
 /*************************************************************************************************/
 void SvcCoreAddGroup(void)
 {
-  AttsAddGroup(&svcGapGroup);
-  AttsAddGroup(&svcGattGroup);
+  AttsAddGroup(&svcGapGroup, "SvcGap");
+  AttsAddGroup(&svcGattGroup, "SvcGatt");
 }
 
 /*************************************************************************************************/

@@ -87,7 +87,7 @@ static attsGroup_t svcIpssGroup =
 /*************************************************************************************************/
 void SvcIpssAddGroup(void)
 {
-  AttsAddGroup(&svcIpssGroup);
+  AttsAddGroup(&svcIpssGroup, "Ipss");
 }
 
 /*************************************************************************************************/

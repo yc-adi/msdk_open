@@ -155,7 +155,7 @@ static attsGroup_t svcMprxsGroup =
 /*************************************************************************************************/
 void SvcMprxsAddGroup(void)
 {
-  AttsAddGroup(&svcMprxsGroup);
+  AttsAddGroup(&svcMprxsGroup, "SvcMprxs");
 }
 
 /*************************************************************************************************/

@@ -83,8 +83,7 @@ void SchTmAdd(uint8_t handle, uint32_t interUsec, uint32_t durUsec, bool_t movab
   schTmCb.tlink[handle].durUsec = durUsec;
   schTmCb.tlink[handle].refTimeCb = refTimeCb;
 
-  LL_TRACE_INFO2("Topology Add, handle=%u, interval_ms=%u", handle, LL_MATH_DIV_10E3(interUsec));
-  LL_TRACE_INFO1("Topology Add,            durUsec=%u", durUsec);
+  LL_TRACE_INFO3("Topology Add, hnd=%u interval_ms=%u durUsec=%u", handle, LL_MATH_DIV_10E3(interUsec), durUsec);
 }
 
 /*************************************************************************************************/

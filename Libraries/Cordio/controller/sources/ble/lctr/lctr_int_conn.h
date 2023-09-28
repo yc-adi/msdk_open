@@ -37,6 +37,7 @@
 #include "wsf_cs.h"
 #include "wsf_msg.h"
 #include "wsf_timer.h"
+#include "wsf_trace.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -644,8 +645,10 @@ uint32_t lctrGetConnRefTime(uint8_t connHandle, uint32_t *pDurUsec);
  *  \param  pCtx    Connection context.
  */
 /*************************************************************************************************/
-static inline void lctrFlagLinkTerm(lctrConnCtx_t *pCtx)
+static inline void lctrFlagLinkTerm(lctrConnCtx_t *pCtx, uint8_t src)
 {
+  APP_TRACE_INFO1("term src=%d", src);
+
   bool_t removeBod = (pCtx->state == LCTR_CONN_STATE_ESTABLISHED_READY);
 
   pCtx->state = LCTR_CONN_STATE_TERMINATING;    /* signals ISR to terminate link */
@@ -695,8 +698,9 @@ static inline void lctrSetControlPduAck(lctrConnCtx_t *pCtx)
  *  \return TRUE if connection is terminated, FALSE otherwise.
  */
 /*************************************************************************************************/
-static inline bool_t lctrCheckForLinkTerm(lctrConnCtx_t *pCtx)
+static inline bool_t lctrCheckForLinkTerm(lctrConnCtx_t *pCtx, uint8_t src)
 {
+  uint8_t ret = 0;
   if (pCtx->state == LCTR_CONN_STATE_TERMINATING)
   {
     /* Peer device is LL_TERMINATE_IND initiator. */
@@ -704,7 +708,7 @@ static inline bool_t lctrCheckForLinkTerm(lctrConnCtx_t *pCtx)
     {
       if (pCtx->ackAfterCtrlPdu)            /*     guarantee Ack Tx'ed */
       {
-        return TRUE;
+        ret = 1;
       }
     }
     /* Local device is LL_TERMINATE_IND initiator. */
@@ -712,11 +716,16 @@ static inline bool_t lctrCheckForLinkTerm(lctrConnCtx_t *pCtx)
              (pCtx->txArqQ.pHead == NULL))                /* guarantee LL_TERMINATE_IND is Ack'ed */
                                                           /*     i.e. "WsfQueueEmpty(&pCtx->txArqQ)" (optimized for ISR) */
     {
-      return TRUE;
+      ret = 2;
     }
   }
 
-  return FALSE;
+  if (ret)
+  {
+    APP_TRACE_INFO2("LinkTerm=%d src=%d", ret, src);
+  }
+
+  return ret;
 }
 
 /*************************************************************************************************/

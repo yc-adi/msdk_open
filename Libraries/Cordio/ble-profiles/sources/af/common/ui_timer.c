@@ -205,5 +205,6 @@ void UiTimerInit(void)
 
   /* Start timer handler */
   iuTimerWsfHandlerId = WsfOsSetNextHandler(uiTimerWsfHandler);
+  APP_TRACE_INFO1("handlerId: %d, uiTimerWsfHandler", iuTimerWsfHandlerId);
   uiTimerWsfHandlerInit(iuTimerWsfHandlerId);
 }

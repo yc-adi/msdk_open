@@ -296,6 +296,7 @@ bool_t smpProcPairing(smpCcb_t *pCcb, uint8_t *pOob, uint8_t *pDisplay)
   {
     /* set auth flags with mitm bit cleared */
     pCcb->auth = pCcb->pairReq[SMP_AUTHREQ_POS] & pCcb->pairRsp[SMP_AUTHREQ_POS] & ~SMP_AUTH_MITM_FLAG;
+    APP_TRACE_INFO3("Just Works: pairReq=%d pairRsp=%d auth=%d", pCcb->pairReq[SMP_AUTHREQ_POS], pCcb->pairRsp[SMP_AUTHREQ_POS], pCcb->auth);
   }
 
   /* if we ended up with 'just works' but the device configuration requires authentication */
@@ -758,6 +759,7 @@ void smpActAttemptRcvd(smpCcb_t *pCcb, smpMsg_t *pMsg)
 /*************************************************************************************************/
 void smpActNotifyDmAttemptsFailure(smpCcb_t *pCcb, smpMsg_t *pMsg)
 {
+  APP_TRACE_INFO0("smpActNotifyDmAttemptsFailure");
   /* notify DM of pairing failure */
   pMsg->hdr.status = SMP_ERR_ATTEMPTS;
   pMsg->hdr.event = DM_SEC_PAIR_FAIL_IND;
@@ -852,7 +854,8 @@ void smpSmExecute(smpCcb_t *pCcb, smpMsg_t *pMsg)
     SMP_TRACE_INFO2("SMP Exe: evt=%s st=%s", smpEventStr(pMsg->hdr.event), smpStateStr(pCcb->state));
   else
 #endif
-    SMP_TRACE_INFO2("smpSmExecute event=%d state=%d", pMsg->hdr.event, pCcb->state);
+    SMP_TRACE_INFO3("smpSmExecute evt=%d (%s) st=%d",
+      pMsg->hdr.event, smpEventStr(pMsg->hdr.event), pCcb->state);
 
   /* look up state table for state */
   pSmIf = DmConnRole(pCcb->connId) == DM_ROLE_SLAVE? smpCb.pSlave : smpCb.pMaster;

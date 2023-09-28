@@ -106,7 +106,7 @@ PalFlashState_t PalNvmGetState(void)
 /*************************************************************************************************/
 uint32_t PalNvmGetTotalSize(void)
 {
-  return &__pal_nvm_db_end__ - &__pal_nvm_db_start__;
+  return (uint32_t)&__pal_nvm_db_end__ - (uint32_t)&__pal_nvm_db_start__;
 }
 
 /*************************************************************************************************/
@@ -192,7 +192,7 @@ void PalFlashWrite(void *pBuf, uint32_t size, uint32_t dstAddr)
  *  \return None.
  */
 /*************************************************************************************************/
-void PalFlashEraseSector(uint32_t size, uint32_t startAddr)
+void PalFlashEraseSector(int32_t size, uint32_t startAddr)
 {
   if(!PAL_NVM_IS_SECTOR_ALIGNED(startAddr)) {
       WSF_ASSERT(FALSE);
@@ -201,7 +201,7 @@ void PalFlashEraseSector(uint32_t size, uint32_t startAddr)
   /* Offset the address into flash */
   startAddr += (uint32_t)&__pal_nvm_db_start__;
 
-  while(size) {
+  while(size > 0) {
     WsfCsEnter();
     MXC_FLC_PageErase(startAddr);
     WsfCsExit();

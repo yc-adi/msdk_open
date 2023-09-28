@@ -235,17 +235,17 @@ void lctrConnStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
     case LCTR_CONN_TERM_SUP_TIMEOUT:
       LL_TRACE_WARN2("lctrConnStatelessEventHandler: handle=%u, state=%u, event=SUP_TIMEOUT", LCTR_GET_CONN_HANDLE(pCtx), pCtx->state);
       /* lctrStoreConnFailEstablishTerminateReason or lctrStoreConnTimeoutTerminateReason */  /* already set as termination reason */
-      lctrFlagLinkTerm(pCtx);
+      lctrFlagLinkTerm(pCtx, 1);
       break;
     case LCTR_CONN_TERM_MIC_FAILED:
       LL_TRACE_WARN2("lctrConnStatelessEventHandler: handle=%u, state=%u, event=MIC_FAILED", LCTR_GET_CONN_HANDLE(pCtx), pCtx->state);
       lctrStoreMicFailedTerminateReason(pCtx);
-      lctrFlagLinkTerm(pCtx);
+      lctrFlagLinkTerm(pCtx, 2);
       break;
     case LCTR_CONN_MSG_RESET:
       LL_TRACE_INFO2("lctrConnStatelessEventHandler: handle=%u, state=%u, event=RESET", LCTR_GET_CONN_HANDLE(pCtx), pCtx->state);
       lctrStoreResetTerminateReason(pCtx);
-      lctrFlagLinkTerm(pCtx);
+      lctrFlagLinkTerm(pCtx, 3);
       break;
     default:
       break;

@@ -467,6 +467,7 @@ void AppDiscProcDmMsg(dmEvt_t *pMsg)
 void AppDiscProcAttMsg(attEvt_t *pMsg)
 {
   appDiscCb_t *pAppDiscCb = &appDiscCb[(dmConnId_t)pMsg->hdr.param - 1];
+  APP_TRACE_INFO2("AppDiscProcAttMsg, inProg %d, evt %d", pAppDiscCb->inProgress, pMsg->hdr.event);
   uint8_t status;
 
   /* Check status */

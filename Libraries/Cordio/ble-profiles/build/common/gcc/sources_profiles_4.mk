@@ -30,6 +30,8 @@ C_FILES += \
 	$(ROOT_DIR)/ble-profiles/sources/profiles/blpc/blpc_main.c \
 	$(ROOT_DIR)/ble-profiles/sources/profiles/blps/blps_main.c \
 	$(ROOT_DIR)/ble-profiles/sources/profiles/cpp/cpps_main.c \
+	$(ROOT_DIR)/ble-profiles/sources/profiles/cgmps/cgmps_db.c \
+	$(ROOT_DIR)/ble-profiles/sources/profiles/cgmps/cgmps_main.c \
 	$(ROOT_DIR)/ble-profiles/sources/profiles/cscp/cscps_main.c \
 	$(ROOT_DIR)/ble-profiles/sources/profiles/dis/dis_main.c \
 	$(ROOT_DIR)/ble-profiles/sources/profiles/fmpl/fmpl_main.c \

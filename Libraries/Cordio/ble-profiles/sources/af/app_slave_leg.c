@@ -237,8 +237,7 @@ void AppAdvSetData(uint8_t location, uint8_t len, uint8_t *pData)
       appAdvSetData(DM_ADV_HANDLE_DEFAULT, location, len, pData, 58, 58);
     } else {
       /* legacy advertising data length cannot exceed 31 bytes */
-      if (len > HCI_ADV_DATA_LEN)
-      {
+      if (len > HCI_ADV_DATA_LEN) {
         len = HCI_ADV_DATA_LEN;
       }
 

@@ -22,6 +22,7 @@
  */
 /*************************************************************************************************/
 
+#include <stdio.h>
 #include "wsf_types.h"
 #include "wsf_assert.h"
 #include "wsf_trace.h"
@@ -133,14 +134,15 @@ void dmConnSmExecute(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
   dmConnAct_t       *actSet;
   uint8_t           action;
   uint8_t           event;
+  uint8_t           old_st = pCcb->state;
 
-  DM_TRACE_INFO2("dmConnSmExecute event=%d state=%d", pMsg->hdr.event, pCcb->state);
+  DM_TRACE_INFO2("dmConnSmExecute evt=%d st=%d", pMsg->hdr.event, pCcb->state);
 
   /* get the event */
   event = DM_MSG_MASK(pMsg->hdr.event);
 
   /* get action */
-  action = dmConnStateTbl[pCcb->state][event][DM_CONN_ACTION];
+  action = dmConnStateTbl[old_st][event][DM_CONN_ACTION];
 
   /* set next state */
   pCcb->state = dmConnStateTbl[pCcb->state][event][DM_CONN_NEXT_STATE];

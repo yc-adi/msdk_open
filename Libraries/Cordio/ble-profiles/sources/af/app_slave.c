@@ -62,6 +62,8 @@
 /* Slave control block */
 appSlaveCb_t appSlaveCb;
 
+extern appDb_t appDb;
+
 /**************************************************************************************************
   Local Functions
 **************************************************************************************************/
@@ -657,9 +659,9 @@ void appSlaveSecConnOpen(dmEvt_t *pMsg, appConnCb_t *pCb)
     appSlaveResolveAddr(pMsg);
   }
 
-  /* send slave security request if configured to do so */
   if (pAppSecCfg->initiateSec && AppDbCheckBonded())
   {
+    APP_TRACE_INFO0("Send slv sec req if configured");
     DmSecSlaveReq((dmConnId_t) pMsg->hdr.param, pAppSecCfg->auth);
   }
 }
@@ -697,6 +699,34 @@ static void appSecPairInd(dmEvt_t *pMsg, appConnCb_t *pCb)
 {
   uint8_t iKeyDist;
   uint8_t rKeyDist;
+
+  APP_TRACE_INFO4("appSecPairInd bondable=%d auth=%d bonded=%d secLevel=%d", 
+    appSlaveCb.bondable, pMsg->pairInd.auth, pCb->bonded, DmConnSecLevel(pCb->connId));
+
+  /**
+   * if the central device chooses to remove bonding, when it connects again, on the peripheral 
+   * side, the bondable flag is still set. Need to identify this situation here.
+   */
+  if (!appSlaveCb.bondable)
+  {
+    for (int i = 0; i < APP_DB_NUM_RECS; i++)
+    {
+      if (BdaCmp((const uint8_t *)appDb.rec[i].peerAddr, (const uint8_t *)appSlaveCb.peerAddr))
+      {
+        // now the bonded device is requesting to pair again, clear the bonding info first
+        AppSlaveClearAllBondingInfo();
+        AppDbNvmDeleteAll();
+
+        AppConnClose(pCb->connId);
+
+        AppAdvStart(APP_MODE_AUTO_INIT);
+
+        APP_TRACE_INFO0("request to pair a bonded device, delete old info and restart ADV");
+        
+        return;
+      }
+    }
+  }
 
   /* if in bondable mode or if peer is not requesting bonding
    * or if already bonded with this device and link is encrypted
@@ -1557,6 +1587,7 @@ void AppSlaveSecProcDmMsg(dmEvt_t *pMsg)
     pCb = NULL;
   }
 
+  APP_TRACE_INFO1("AppSlaveSecProcDmMsg evt=%d", pMsg->hdr.event);
   switch(pMsg->hdr.event)
   {
     case DM_CONN_OPEN_IND:

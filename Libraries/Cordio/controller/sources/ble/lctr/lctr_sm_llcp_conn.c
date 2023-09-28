@@ -886,6 +886,7 @@ bool_t lctrLlcpExecuteCommonSm(lctrConnCtx_t *pCtx, uint8_t event)
     if ((pCtx->llcpActiveProc == LCTR_PROC_CMN_TERM) || (pCtx->llcpIncompMask & (1 << LCTR_PROC_CMN_TERM)))
     {
       pCtx->state = LCTR_CONN_STATE_TERMINATING;    /* update parent state */
+      APP_TRACE_INFO0("LCTR CONN TERM");
     }
   }
 

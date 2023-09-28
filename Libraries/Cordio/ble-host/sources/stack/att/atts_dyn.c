@@ -277,8 +277,6 @@ void AttsDynAddAttr(void *pSvcHandle, const uint8_t *pUuid, const uint8_t *pValu
   pAttr->settings = settings;
   pAttr->permissions = permissions;
 
-
-
   if (pValue)
   {
     /* Copy the initial value */
@@ -295,7 +293,7 @@ void AttsDynAddAttr(void *pSvcHandle, const uint8_t *pUuid, const uint8_t *pValu
   /* Add the service when the last attribute has been added */
   if (handle == pGroup->group.endHandle)
   {
-    AttsAddGroup(&pGroup->group);
+    AttsAddGroup(&pGroup->group, "Dyn");
   }
 }
 
@@ -350,6 +348,6 @@ void AttsDynAddAttrConst(void *pSvcHandle, const uint8_t *pUuid, const uint8_t *
   /* Add the service when the last attribute has been added */
   if (handle == pGroup->group.endHandle)
   {
-    AttsAddGroup(&pGroup->group);
+    AttsAddGroup(&pGroup->group, "Dyn Const");
   }
 }

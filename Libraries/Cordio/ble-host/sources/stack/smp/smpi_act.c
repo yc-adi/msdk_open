@@ -162,6 +162,7 @@ void smpiActProcPairRsp(smpCcb_t *pCcb, smpMsg_t *pMsg)
   else
   {
     /* proceed to process pairing */
+    SMP_TRACE_INFO1("smpiActProcPairRsp auth=%d", pCcb->auth);
     if (smpCb.procPairing(pCcb, &oob, &display))
     {
       smpCb.procAuthReq(pCcb, oob, display);

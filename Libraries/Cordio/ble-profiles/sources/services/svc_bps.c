@@ -194,7 +194,7 @@ static attsGroup_t svcBpsGroup =
 /*************************************************************************************************/
 void SvcBpsAddGroup(void)
 {
-  AttsAddGroup(&svcBpsGroup);
+  AttsAddGroup(&svcBpsGroup, "SvcBps");
 }
 
 /*************************************************************************************************/

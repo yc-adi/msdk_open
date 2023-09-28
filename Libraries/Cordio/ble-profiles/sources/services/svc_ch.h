@@ -518,6 +518,31 @@ extern "C" {
 #define CH_RACP_GLS_FILTER_TIME_LEN           7       /*!< \brief User facing time filter length */
 /**@}*/
 
+/** \name CGM Service Feature
+ *  \see Continuous Clucose Monitoring Service Revision v1.0.1, Section 3.2 CGM Feature
+ *  The CGM Feature characteristic is used to describe the supported features of the Server.
+ *  feature field struct:
+ *         Feature 3 bytes,
+ *         Type-Sample Location Field 1 byte,
+ *         CRC 2 bytes.
+ */
+/**@{*/
+#define CGMS_FEAT_LEN 6
+/**@}*/
+
+/** \name CGM Service Status
+ *  \see Continuous Clucose Monitoring Service Revision v1.0.1, Section 3.3 CGM Status
+ *  The structure of the CGM Status Field shall be identical to the structure of the 
+ *  Sensor Status Annunciation Field, as defined in the spec Section 3.1.1.5.
+ */
+/**@{*/
+#define CGMS_ST_LEN 3
+/**@}*/
+
+#define CGMS_SESS_START_T_LEN 8
+
+#define CGMS_SESS_RUN_T_LEN 4
+
 /** \name Service Changed Length
  *
  */

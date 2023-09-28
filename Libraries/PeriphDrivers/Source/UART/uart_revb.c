@@ -46,8 +46,8 @@
     (MXC_F_UART_REVB_INT_FL_RX_FERR | MXC_F_UART_REVB_INT_FL_RX_PAR | MXC_F_UART_REVB_INT_FL_RX_OV)
 
 /* **** Variable Declaration **** */
-static void *AsyncTxRequests[MXC_UART_INSTANCES];
-static void *AsyncRxRequests[MXC_UART_INSTANCES];
+void *AsyncTxRequests[MXC_UART_INSTANCES];
+void *AsyncRxRequests[MXC_UART_INSTANCES];
 
 typedef struct {
     mxc_uart_revb_req_t *req;

@@ -241,7 +241,7 @@ static attsGroup_t svcPlxsGroup =
 /*************************************************************************************************/
 void SvcPlxsAddGroup(void)
 {
-  AttsAddGroup(&svcPlxsGroup);
+  AttsAddGroup(&svcPlxsGroup, "Plxs");
 }
 
 /*************************************************************************************************/

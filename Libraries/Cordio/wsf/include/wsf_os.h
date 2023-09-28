@@ -80,6 +80,11 @@ extern "C" {
 #define WSF_HANDLER_EVENT     0x04        /*!< \brief Event set for event handler */
 /**@}*/
 
+#define WSF_DISPATCHER_MSG_STACK_SIZE     4096
+#define WSF_DISPATCHER_HND_STACK_SIZE     4096
+#define WSF_DISPATCHER_MSG_TASK_PRIORITY  (configMAX_PRIORITIES - 2)
+#define WSF_DISPATCHER_HND_TASK_PRIORITY  (configMAX_PRIORITIES - 3)
+
 /**************************************************************************************************
   Data Types
 **************************************************************************************************/

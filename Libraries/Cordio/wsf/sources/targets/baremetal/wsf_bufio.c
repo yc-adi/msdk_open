@@ -105,7 +105,7 @@ static void wsfBufIoUartTxStart(uint16_t len)
  *  \return Number of characters in Tx buffer.
  */
 /*************************************************************************************************/
-static uint16_t wsfBufIoUartTxBufCount(void)
+uint16_t wsfBufIoUartTxBufCount(void)
 {
   uint16_t count;
 

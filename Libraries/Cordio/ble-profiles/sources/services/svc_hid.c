@@ -540,7 +540,7 @@ static attsGroup_t svcHidkbGroup =
 /*************************************************************************************************/
 void SvcHidAddGroup(void)
 {
-  AttsAddGroup(&svcHidkbGroup);
+  AttsAddGroup(&svcHidkbGroup, "Hid");
 }
 
 /*************************************************************************************************/

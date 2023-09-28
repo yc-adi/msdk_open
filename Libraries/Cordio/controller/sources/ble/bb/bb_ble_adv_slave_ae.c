@@ -29,6 +29,8 @@
 #include "sch_api_ble.h"
 #include "wsf_trace.h"
 #include "lmgr_api.h"
+#include "wsf_trace.h"
+#include "lmgr_api.h"
 
 /**************************************************************************************************
   Macros
@@ -37,6 +39,7 @@
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t appCodedPhyDemo;
 extern lmgrCtrlBlk_t lmgrCb;
 
 BbBleAuxAdvPktStats_t bbAuxAdvStats; /*!< Auxiliary advertising packet statistics. */
@@ -402,12 +405,15 @@ static void bbSlvExecuteAuxAdvOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
     bbBleClrIfs();
   }
   
-  // for long range adv demo, update the ADV data here
-  uint8_t *pData = (uint8_t *)pAuxAdv->txAuxAdvPdu[1].pBuf;
-  uint8_t const pos = 8;
-  pData[pos]++;                     // the first byte of the 50-byte data
-  pData[pos + 49] = pData[pos];     // the last byte
-  APP_TRACE_INFO1("%02X", pData[pos]);
+  if (appCodedPhyDemo)
+  {
+    // for long range adv demo, update the ADV data here
+    uint8_t *pData = (uint8_t *)pAuxAdv->txAuxAdvPdu[1].pBuf;
+    uint8_t const pos = 8;
+    pData[pos]++;                     // the first byte of the 50-byte data
+    pData[pos + 49] = pData[pos];     // the last byte
+    APP_TRACE_INFO1("%02X", pData[pos]);
+  }
 
   PalBbBleTxData(pAuxAdv->txAuxAdvPdu, 2);
 }

@@ -220,7 +220,7 @@ void dmSecMsgHandler(dmSecMsg_t *pMsg)
       }
       else
       {
-        /* key not found; set connection idle */
+        DM_TRACE_INFO0("key not found; set connection idle.");
         DmConnSetIdle(pCcb->connId, DM_IDLE_DM_ENC, DM_CONN_IDLE);
 
         HciLeLtkReqNegReplCmd(pCcb->handle);

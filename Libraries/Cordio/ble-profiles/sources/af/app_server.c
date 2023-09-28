@@ -186,8 +186,6 @@ void appServerHandleDbHashUpdate(attEvt_t *pMsg)
     /* Make all active clients change-unaware. */
     AttsCsfSetClientChangeAwareState(DM_CONN_ID_NONE, ATTS_CLIENT_CHANGE_UNAWARE);
 
-    APP_TRACE_INFO0("Database hash updated");
-
     /* Send all connect clients configured to receive Service Changed Indications one now. */
     GattSendServiceChangedInd(DM_CONN_ID_NONE, ATT_HANDLE_START, ATT_HANDLE_MAX);
   }

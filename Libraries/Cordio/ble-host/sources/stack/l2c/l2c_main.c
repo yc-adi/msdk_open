@@ -347,5 +347,6 @@ void L2cDataReq(uint16_t cid, uint16_t handle, uint16_t len, uint8_t *pPacket)
   UINT16_TO_BSTREAM(p, cid);
 
   /* Send to HCI */
+  APP_TRACE_INFO6("L2cDataReq hndl=%d, %02X %02X %02X %02X %02X", handle, pPacket[2], pPacket[4], pPacket[5], pPacket[6], pPacket[7]);
   HciSendAclData(pPacket);
 }

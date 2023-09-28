@@ -256,7 +256,7 @@ static attsGroup_t svcWdxsGroup =
 /*************************************************************************************************/
 void SvcWdxsAddGroup(void)
 {
-  AttsAddGroup(&svcWdxsGroup);
+  AttsAddGroup(&svcWdxsGroup, "Wdxs");
 }
 
 /*************************************************************************************************/

@@ -947,6 +947,7 @@ void lctrRxEnq(uint8_t *pBuf, uint16_t eventCounter, uint16_t connHandle)
   UINT16_TO_BUF(pBuf, eventCounter);
 
   /* Queue LE Data PDU. */
+  APP_TRACE_INFO5("\nenq rx: %02x %02x %02x %02x %02x", pBuf[2], pBuf[3], pBuf[4], pBuf[5], pBuf[6]);
   WsfMsgEnq(&lmgrConnCb.rxDataQ, connHandle, pBuf);
   WsfSetEvent(lmgrPersistCb.handlerId, (1 << LCTR_EVENT_RX_PENDING));
 }

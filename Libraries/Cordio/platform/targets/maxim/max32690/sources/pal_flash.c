@@ -225,7 +225,7 @@ void PalFlashWrite(void *pBuf, uint32_t size, uint32_t dstAddr)
  *  \return None.
  */
 /*************************************************************************************************/
-void PalFlashEraseSector(uint32_t size, uint32_t startAddr)
+void PalFlashEraseSector(int32_t size, uint32_t startAddr)
 {
   if(!PAL_NVM_IS_SECTOR_ALIGNED(startAddr)) {
     PalSysAssertTrap();
@@ -240,7 +240,7 @@ void PalFlashEraseSector(uint32_t size, uint32_t startAddr)
   startAddr += (uint32_t)__pal_nvm_db_start__;	
 #endif 
 
-  while(size) {
+  while(size > 0) {
     WsfCsEnter();
     MXC_FLC_PageErase(startAddr);
     WsfCsExit();

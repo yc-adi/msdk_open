@@ -93,7 +93,7 @@ static const smpAct_t smprActionTbl[] =
   smpActNotifyDmRspToFailure,
   smpActPairingCmpl,
   smprActSendSecurityReq,
-  smprActProcPairReq,
+  smprActProcPairReq,             /* SMPR_ACT_PROC_PAIR_REQ */
   smprActSendPairRsp,
   smprActProcPairCnf,
   smprActProcPairCnfCalc1,

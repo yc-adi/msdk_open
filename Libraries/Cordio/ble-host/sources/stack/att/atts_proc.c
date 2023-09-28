@@ -203,6 +203,7 @@ uint8_t attsPermissions(dmConnId_t connId, uint8_t permit, uint16_t handle, uint
   if (((permissions & (ATTS_PERMIT_READ_AUTH | ATTS_PERMIT_READ_ENC)) ==
        (ATTS_PERMIT_READ_AUTH | ATTS_PERMIT_READ_ENC)) && (secLevel < DM_SEC_LEVEL_ENC_AUTH))
   {
+    APP_TRACE_INFO0("encryption required with authenticated key");
     return ATT_ERR_AUTH;
   }
 

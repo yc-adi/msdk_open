@@ -103,7 +103,7 @@ static void lctrSlvAcadDisp(lctrAcadSlvMsg_t *pMsg)
 {
   lctrAdvSet_t *pAdvSet;
 
-  LL_TRACE_INFO2("lctrSlvAcadDisp: handle=%u, event=%u", pMsg->hdr.handle, pMsg->hdr.event);
+  LL_TRACE_INFO2("lctrSlvAcadDisp hndl=%u evt=%u", pMsg->hdr.handle, pMsg->hdr.event);
 
   if (pMsg->hdr.dispId != LCTR_DISP_BCST)
   {

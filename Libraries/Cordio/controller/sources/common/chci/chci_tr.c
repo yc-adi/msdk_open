@@ -22,6 +22,8 @@
  */
 /*************************************************************************************************/
 
+#include <stdio.h>
+#include <string.h>
 #include "chci_tr.h"
 #include "chci_api.h"
 #include "hci_defs.h"
@@ -29,8 +31,8 @@
 #include "wsf_msg.h"
 #include "wsf_math.h"
 #include "wsf_os.h"
+#include "wsf_trace.h"
 #include "util/bstream.h"
-#include <string.h>
 
 #if (CHCI_TR_UART == 1)
 #include "pal_uart.h"
@@ -525,6 +527,10 @@ void ChciTrHandlerInit(wsfHandlerId_t handlerId, uint16_t maxAclLen, uint16_t ma
 /*************************************************************************************************/
 void ChciTrHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
+  char buf[100];
+  uint8_t pos = 0;
+  uint8_t i;
+
   if (chciTrCb.pDataPending == NULL)
   {
     uint8_t protCount = 0;
@@ -546,6 +552,14 @@ void ChciTrHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
         chciTrCb.protPending  = prot;
 
         chciTrIncrementCounters(type);
+
+        // show the TX data
+        pos = sprintf(buf, "04 ");
+        for (i = 0; i < len; ++i)
+        {
+          pos += sprintf(&buf[pos], "%02X ", pData[i]);
+        }
+        WsfTrace("TX: %s", buf);
         chciTrWrite(prot, type, len, pData);
         break;
       }

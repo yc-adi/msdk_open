@@ -121,7 +121,7 @@ void LhciHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
       {
         pos += sprintf(&buf[pos], "%02X ", pPldBuf[i]);
       }
-      WsfTrace("RX CMD: %s", buf);
+      WsfTrace("RX: %s", buf);
       
 
       if (!lhciCommonDecodeCmdPkt(&hdr, pPldBuf))

@@ -22,6 +22,7 @@
  */
 /*************************************************************************************************/
 
+#include <stdio.h>
 #include "lhci_int.h"
 #include "chci_api.h"
 #include "hci_defs.h"
@@ -30,6 +31,7 @@
 #include "pal_bb.h"
 #include "wsf_assert.h"
 #include "wsf_msg.h"
+#include "wsf_trace.h"
 #include "util/bstream.h"
 #include <string.h>
 
@@ -106,9 +108,21 @@ void LhciHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
     wsfHandlerId_t handlerId;
     LhciHdr_t hdr;
 
+    char buf[100];
+    uint8_t pos = 0;
+
     while ((pCmdBuf = WsfMsgDeq(&lhciPersistCb.cmdQ, &handlerId)) != NULL)
     {
       uint8_t *pPldBuf = pCmdBuf + lhciUnpackHdr(&hdr, pCmdBuf);
+
+      // show the received HCI command data
+      pos = sprintf(buf, "01 %02X %02X %02X ", hdr.opCode & 0xFF, (hdr.opCode & 0xFF00) >> 8, hdr.len);
+      for (uint8_t i = 0; i < hdr.len; ++i)
+      {
+        pos += sprintf(&buf[pos], "%02X ", pPldBuf[i]);
+      }
+      WsfTrace("RX CMD: %s", buf);
+      
 
       if (!lhciCommonDecodeCmdPkt(&hdr, pPldBuf))
       {

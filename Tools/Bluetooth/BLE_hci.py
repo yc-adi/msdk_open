@@ -49,7 +49,6 @@ import datetime
 import struct
 import threading
 from termcolor import colored
-import readline
 
 
 # Setup the default serial port settings

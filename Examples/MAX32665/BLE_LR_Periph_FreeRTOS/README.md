@@ -27,9 +27,9 @@ viewing the trace messages and interacting with the application. Port uses setti
 
 ### Log
 ```
-===================================  
+============================================  
 -=- MAX32665 BLE FreeRTOS (V10.5.1) Demo -=-  
-===================================  
+============================================  
 SystemCoreClock = 96000000  
 terminal: init  
 ===================================  

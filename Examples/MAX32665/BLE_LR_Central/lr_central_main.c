@@ -73,9 +73,11 @@ Macros
 
 #define SCAN_START_EVT 0x99
 #define USER_APP_TMR_EVT 0x9A
+#define USER_APP_STAT_TMR_EVT 0x9B
 
 #define SCAN_START_MS 500
 #define USER_APP_TMR_MS 5000
+#define USER_APP_STAT_TMR_MS 4000
 
 /* Down sample the number of scan reports we print */
 #define SCAN_REPORT_DOWN_SAMPLE 20
@@ -88,10 +90,13 @@ Macros
 #define BTN_1_TMR MXC_TMR2
 #define BTN_2_TMR MXC_TMR2
 
+extern uint32_t appCodedPhyDemoExtAdvCnt;
+
 /**************************************************************************************************
   Local Variables
 **************************************************************************************************/
 wsfTimer_t userAppTmr;
+wsfTimer_t userAppStatTmr;
 
 /*! application control block */
 struct {
@@ -1217,6 +1222,12 @@ static void datcProcMsg(dmEvt_t *pMsg)
         LED_Off(0); // turn off red led
         break;
 
+    case USER_APP_STAT_TMR_EVT:
+        WsfTimerStartMs(&userAppStatTmr, USER_APP_STAT_TMR_MS);
+        APP_TRACE_INFO2("\nSTAT: rcvd %d in %d secs", appCodedPhyDemoExtAdvCnt, USER_APP_STAT_TMR_MS / 1000);
+        appCodedPhyDemoExtAdvCnt = 0;
+        break;
+
     default:
         break;
     }
@@ -1272,6 +1283,10 @@ void DatcHandlerInit(wsfHandlerId_t handlerId)
     userAppTmr.handlerId = handlerId;
     userAppTmr.msg.event = USER_APP_TMR_EVT;
     WsfTimerStartMs(&userAppTmr, USER_APP_TMR_MS);
+
+    userAppStatTmr.handlerId = handlerId;
+    userAppStatTmr.msg.event = USER_APP_STAT_TMR_EVT;
+    WsfTimerStartMs(&userAppStatTmr, USER_APP_STAT_TMR_MS);
 }
 
 /*************************************************************************************************/

@@ -180,9 +180,9 @@ void vTask1(void *pvParameters)
 int main(void)
 {
     /* Print banner (RTOS scheduler not running) */
-    printf("\n===================================\n");
+    printf("\n============================================\n");
     printf("-=- %s BLE FreeRTOS (%s) Demo -=-\n", STRING(TARGET), tskKERNEL_VERSION_NUMBER);
-    printf("===================================\n");
+    printf("============================================\n");
 #if configUSE_TICKLESS_IDLE
     printf("Tickless idle is enabled\n");
     /* Initialize CPU Active LED */

@@ -44,6 +44,7 @@
 
 extern void LED_On(unsigned int idx);
 extern uint8_t appCodedPhyDemo;
+extern uint32_t appCodedPhyDemoExtAdvCnt;
 
 /**************************************************************************************************
   Local Variables
@@ -200,9 +201,10 @@ bool_t hciCoreEvtProcessLlEvt(LlEvt_t *pEvt)
         if (pMsg->extAdvReportInd.addr[5] == 0 && pMsg->extAdvReportInd.addr[4] == 0x18 && pMsg->extAdvReportInd.addr[3] == 0x80)
         {
           LED_On(0);  // 0: red led ID
+          appCodedPhyDemoExtAdvCnt++;
         }
 
-        WsfTrace("\n%02x:%02x:%02x:%02x:%02x:%02x %02X %02X %02X ... %02X %02X %02X", 
+        WsfTrace("\n%02x:%02x:%02x:%02x:%02x:%02x %02X %02X %02X ... %02X %02X %02X, %d", 
                   pMsg->extAdvReportInd.addr[5], pMsg->extAdvReportInd.addr[4], pMsg->extAdvReportInd.addr[3],
                   pMsg->extAdvReportInd.addr[2], pMsg->extAdvReportInd.addr[1], pMsg->extAdvReportInd.addr[0],
                   pMsg->extAdvReportInd.pData[8 + 0], 
@@ -210,7 +212,7 @@ bool_t hciCoreEvtProcessLlEvt(LlEvt_t *pEvt)
                   pMsg->extAdvReportInd.pData[8 + 2], 
                   pMsg->extAdvReportInd.pData[8 + 47],
                   pMsg->extAdvReportInd.pData[8 + 48],
-                  pMsg->extAdvReportInd.pData[8 + 49]);
+                  pMsg->extAdvReportInd.pData[8 + 49], appCodedPhyDemoExtAdvCnt);
       }
 
       break;

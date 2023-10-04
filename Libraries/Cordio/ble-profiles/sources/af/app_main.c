@@ -90,6 +90,7 @@ appReqActCfg_t *pAppSlaveReqActCfg = (appReqActCfg_t *) &appReqActCfg;
 
 /*! For long distance test, use CODED PHY */
 uint8_t appCodedPhyDemo = 0;
+uint32_t appCodedPhyDemoExtAdvCnt = 0;
 
 /*************************************************************************************************/
 /*!

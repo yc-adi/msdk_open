@@ -472,6 +472,10 @@ void attsProcReadReq(attsCcb_t *pCcb, uint16_t len, uint8_t *pPacket)
         }
       }
     }
+    else
+    {
+      APP_TRACE_INFO2("invalid permissions, hndl=%d perm=0x%X", handle, pAttr->permissions);
+    }
   }
   /* else invalid handle */
   else

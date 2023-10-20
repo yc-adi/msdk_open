@@ -14,7 +14,7 @@ LIB_CORDIO = 1
 INIT_PERIPHERAL = 1
 INIT_CENTRAL = 0
 
-DEBUG = 0
+DEBUG = 1
 
 # TRACE option
 # Set to 0 to disable
@@ -66,7 +66,7 @@ ${BOOTLOADER_OBJ}: bl_build.S ${BOOTLOADER_BIN}
 	${CC} ${AFLAGS} -o ${@} -c bl_build.S
 endif
 
-DEEP_SLEEP = 1
+DEEP_SLEEP = 0
 
 # Optimize for size
 MXC_OPTIMIZE_CFLAGS=-Os

@@ -146,7 +146,7 @@ static const uint8_t cgmsRacpValPerm = ATTS_PERMIT_WRITE | ATTS_PERMIT_WRITE_ENC
 /* Record access control point client characteristic configuration */
 static uint8_t cgmsRacpChCccd[] = {UINT16_TO_BYTES(0x0000)};
 static const uint16_t cgmsRacpChCccdLen = sizeof(cgmsRacpChCccd);
-static const uint8_t cgmsRacpChCccdPerm = ATTS_PERMIT_WRITE | ATTS_PERMIT_WRITE_ENC | ATTS_PERMIT_WRITE_AUTH;
+static const uint8_t cgmsRacpChCccdPerm = ATTS_PERMIT_READ | ATTS_PERMIT_WRITE | ATTS_PERMIT_WRITE_ENC | ATTS_PERMIT_WRITE_AUTH;
 
 /* CGM SOPS characteristic */
 //static uint8_t cgmsSops[] = {0};
@@ -167,7 +167,7 @@ static const uint8_t cgmsRacpChCccdPerm = ATTS_PERMIT_WRITE | ATTS_PERMIT_WRITE_
 /* Attribute list for CGM group, must match cgms_hdl */
 static const attsAttr_t cgmsList[] =
 {
-  /* Service declaration */
+  /* CGMS_SVC_HDL Service declaration */
   {
     attPrimSvcUuid, // 0x2800, primary service. CGMS_v1.0.1, 2 Service Declaration
     (uint8_t *) cgmsSvc, // 0x181F
@@ -178,7 +178,7 @@ static const attsAttr_t cgmsList[] =
   },
 
   // <--- CGM measurement ATT_UUID_CGM_MEAS
-  /* CGM measurement characteristic declaration */
+  /* CGMS_MEAS_CH_HDL CGM measurement characteristic declaration */
   {
     attChUuid, // 0x2803, NOTE: in attsIsHashableAttr() the next item will be ignored
     (uint8_t *) cgmsMeasCh,
@@ -187,7 +187,7 @@ static const attsAttr_t cgmsList[] =
     cgmsMeasChSetting,
     cgmsMeasChPerm
   },
-  /* Characteristic value */
+  /* CGMS_MEAS_HDL Characteristic value */
   {
     attCgmmChUuid, // 0x2AA7
     (uint8_t *) cgmsMeasVal,
@@ -196,7 +196,7 @@ static const attsAttr_t cgmsList[] =
     0,
     0
   },
-  /* Client characteristic configuration descriptor */
+  /* CGMS_MEAS_CH_CCC_HDL Client characteristic configuration descriptor */
   {
     attCliChCfgUuid, // 0x2902
     (uint8_t *) cgmsMeasCccd,
@@ -208,7 +208,7 @@ static const attsAttr_t cgmsList[] =
   // --->
 
   // <--- CGM feature ATT_UUID_CGM_FEATURE
-  // characteristic declaration
+  // CGMS_FEAT_CH_HDL characteristic declaration
   {
     attChUuid, // 0x2803
     (uint8_t *) cgmsFeatCh,
@@ -217,7 +217,7 @@ static const attsAttr_t cgmsList[] =
     0,
     cgmsFeatChPerm
   },
-  // characteristic value
+  // CGMS_FEAT_HDL characteristic value
   {
     attCgmfChUuid,
     cgmsFeatVal,
@@ -229,7 +229,7 @@ static const attsAttr_t cgmsList[] =
   // --->
 
   // <--- CGM status ATT_UUID_CGM_STATUS
-  // characteristic declaration
+  // CGMS_ST_CH_HDL characteristic declaration
   {
     attChUuid, // 0x2803
     (uint8_t *) cgmsStCh,
@@ -238,7 +238,7 @@ static const attsAttr_t cgmsList[] =
     0,
     cgmsStChPerm
   },
-  // characteristic value
+  // CGMS_ST_HDL characteristic value
   {
     attCgmfChUuid,
     cgmsStVal,
@@ -250,7 +250,7 @@ static const attsAttr_t cgmsList[] =
   // --->
 
   // <--- CGM session start time ATT_UUID_CGM_SESS_START_T
-  // characteristic declaration
+  // CGMS_SESS_START_T_CH_HDL characteristic declaration
   {
     attChUuid, // 0x2803
     (uint8_t *) cgmsSessStartTCh,
@@ -259,7 +259,7 @@ static const attsAttr_t cgmsList[] =
     0,
     cgmsSessStartTChPerm
   },
-  // characteristic value
+  // CGMS_SESS_START_T_HDL characteristic value
   {
     attCgmSessStartTChUuid,
     cgmsSessStartTVal,
@@ -271,7 +271,7 @@ static const attsAttr_t cgmsList[] =
   // --->
 
   // <--- CGM session run time ATT_UUID_CGM_SESS_RUN_T
-  // characteristic declaration
+  // CGMS_SESS_RUN_T_CH_HDL characteristic declaration
   {
     attChUuid, // 0x2803
     (uint8_t *) cgmsSessRunTCh,
@@ -280,7 +280,7 @@ static const attsAttr_t cgmsList[] =
     0,
     cgmsSessRunTChPerm
   },
-  // characteristic value
+  // CGMS_SESS_RUN_T_HDL characteristic value
   {
     attCgmSessRunTChUuid,
     cgmsSessRunTVal,
@@ -291,7 +291,7 @@ static const attsAttr_t cgmsList[] =
   },
   // --->
 
-  /* Record access control point characteristic delclaration */
+  /* CGMS_RACP_CH_HDL Record access control point characteristic delclaration */
   {
     attChUuid, // 0x2803
     (uint8_t *) cgmsRacpCh,
@@ -300,7 +300,7 @@ static const attsAttr_t cgmsList[] =
     0,
     cgmsRacpChPerm
   },
-  /* Characteristic value */
+  /* CGMS_RACP_HDL Characteristic value */
   {
     attRacpChUuid,
     (uint8_t *) cgmsRacpVal,
@@ -309,7 +309,7 @@ static const attsAttr_t cgmsList[] =
     (ATTS_SET_VARIABLE_LEN | ATTS_SET_WRITE_CBACK),
     cgmsRacpValPerm
   },
-  /* Client characteristic configuration descriptor */
+  /* CGMS_RACP_CH_CCC_HDL Client characteristic configuration descriptor */
   {
     attCliChCfgUuid,
     (uint8_t *) cgmsRacpChCccd,

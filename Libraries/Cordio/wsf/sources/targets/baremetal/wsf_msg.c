@@ -45,7 +45,6 @@ typedef struct wsfMsg_tag
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
-uint16_t msgNdx = 0;
 
 /*************************************************************************************************/
 /*!
@@ -137,11 +136,6 @@ void WsfMsgEnq(wsfQueue_t *pQueue, wsfHandlerId_t handlerId, void *pMsg)
 
   /* set handler ID */
   p->handlerId = handlerId;
-
-  msgNdx++;
-  uint16_t *p16 = (uint16_t *)pMsg;
-  uint8_t *p8 = (uint8_t *)pMsg;
-  //WsfTrace("msg enq %d hndlr=%d param=%d evt=%d st=%d", msgNdx, handlerId, p16[0], p8[2], p8[3]);
 
   WsfQueueEnq(pQueue, p);
 }

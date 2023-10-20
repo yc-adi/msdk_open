@@ -92,13 +92,6 @@ enum cgms_hdl {
   CGMS_MAX_HDL                       /*!< \brief Maximum handle. */
 };
 
-enum // @?@ remove me !!!
-{
-  GLS_GLMC_CH_HDL,                  /*!< \brief Glucose measurement context characteristic */
-  GLS_GLMC_HDL,                     /*!< \brief Glucose measurement context */
-  GLS_GLMC_CH_CCC_HDL               /*!< \brief Glucose measurement context client characteristic configuration */
-};
-
 /**@}*/
 
 /**************************************************************************************************

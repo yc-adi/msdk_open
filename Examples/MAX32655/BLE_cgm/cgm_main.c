@@ -812,6 +812,12 @@ static void cgmProcMsg(dmEvt_t *pMsg)
 /*************************************************************************************************/
 void CgmHandlerInit(wsfHandlerId_t handlerId)
 {
+    uint8_t addr[6] = { 0 };
+    AppGetBdAddr(addr);
+    APP_TRACE_INFO6("MAC Addr: %02x:%02x:%02x:%02x:%02x:%02x", addr[5], addr[4], addr[3], addr[2],
+                    addr[1], addr[0]);
+    APP_TRACE_INFO1("Adv local name: %s", &datsScanDataDisc[2]);
+
     /* store handler ID */
     cgmCb.handlerId = handlerId;
 

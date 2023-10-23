@@ -262,7 +262,7 @@ static const uint8_t datsScanDataDisc[] = {
 
 /*! CGM Feature */
 static uint8_t cgmFeature[CGMS_FEAT_LEN] = {
-    1, 2, 3,    // Feature 3 bytes
+    8, 0, 0,    // Feature 3 bytes
     4,          // Type-Sample Location Field 1 byte,
     0, 0        // CRC 2 bytes
 };

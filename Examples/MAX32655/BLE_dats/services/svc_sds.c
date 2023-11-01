@@ -126,7 +126,7 @@ static attsGroup_t svcSecDatGroup = { NULL, (attsAttr_t *)secDatList, NULL,
 /*************************************************************************************************/
 void SvcSecDataAddGroup(void)
 {
-    AttsAddGroup(&svcSecDatGroup);
+    AttsAddGroup(&svcSecDatGroup, "dats");
 }
 
 /*************************************************************************************************/

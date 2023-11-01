@@ -141,7 +141,7 @@ static attsGroup_t svcMcsGroup = { NULL, (attsAttr_t *)mcsList, NULL,
 /*************************************************************************************************/
 void SvcMcsAddGroup(void)
 {
-    AttsAddGroup(&svcMcsGroup);
+    AttsAddGroup(&svcMcsGroup, "mcs");
 }
 
 /*************************************************************************************************/

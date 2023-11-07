@@ -351,7 +351,7 @@ uint8_t datsWpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation,
                           uint16_t offset, uint16_t len, uint8_t *pValue, attsAttr_t *pAttr)
 {
   /* print received data */
-  APP_TRACE_INFO0((const char*) pValue);
+  APP_TRACE_INFO1("datsWpWriteCback: %s", (const char*) pValue);
 
   /* send back some data */
   datsSendData(connId);

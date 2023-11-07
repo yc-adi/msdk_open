@@ -58,6 +58,7 @@
 /**************************************************************************************************
   Golbal Variables
 **************************************************************************************************/
+uint8_t gu8Debug = 0;
 
 /* Slave control block */
 appSlaveCb_t appSlaveCb;
@@ -1095,6 +1096,7 @@ void AppSlaveProcDmMsg(dmEvt_t *pMsg)
       break;
 
     case DM_CONN_CLOSE_IND:
+      APP_TRACE_INFO0("case DM_CONN_CLOSE_IND");
       appSlaveConnClose(pMsg, pCb);
       break;
 
@@ -1192,9 +1194,14 @@ void appAdvStart(uint8_t numSets, uint8_t *pAdvHandles, uint16_t *pInterval, uin
 {
   uint8_t i;
 
+  uint8_t connectable = appSlaveConnectableAdv(numSets, pAdvHandles);
+  uint8_t app_num_conns = appNumConns(DM_ROLE_SLAVE);
+  APP_TRACE_INFO5("appAdvStart: numSets=%d connectable=%d appNumConns=%d MAX=%d AdvSt=%d", 
+                 numSets, connectable, app_num_conns, pAppSlaveCfg->connMax, appSlaveCb.advState[0]);
+
   /* start advertising if not connectable advertising or multiple connections supported */
-  if (!appSlaveConnectableAdv(numSets, pAdvHandles) ||
-      (appNumConns(DM_ROLE_SLAVE) < pAppSlaveCfg->connMax))
+  if (!connectable ||
+      (app_num_conns < pAppSlaveCfg->connMax))
   {
     /* for each advertising set */
     for (i = 0; i < numSets; i++)

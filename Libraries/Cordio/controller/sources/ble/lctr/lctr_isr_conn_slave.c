@@ -731,7 +731,6 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
       lctrIncPacketCounterRx(pCtx);
       decremented = FALSE;
     }
-
   }
   else if ((status == BB_STATUS_CRC_FAILED) || (status == BB_STATUS_FRAME_FAILED))
   {

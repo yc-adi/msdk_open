@@ -171,7 +171,7 @@ static void appSlaveLegAdvRestart(dmEvt_t *pMsg)
       appSlaveCb.advDirected = FALSE;
       return;
     }
-
+    
     /* advertising is stopped once a connection is opened */
     appSlaveCb.advState[DM_ADV_HANDLE_DEFAULT] = APP_ADV_STOPPED;
   }

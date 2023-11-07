@@ -77,7 +77,7 @@ void lctrInitActInitiate(void)
 
       WsfMsgSend(lmgrPersistCb.handlerId, pTermMsg);
     }
-
+    APP_TRACE_INFO0("@?@ lctrInitActInitiate LCTR_INIT_MSG_TERMINATE");
     return;
   }
 
@@ -107,6 +107,8 @@ void lctrInitActInitiate(void)
   lctrMstInitiateOpCommit();
 
   lmgrCb.scanMode = LMGR_SCAN_MODE_INITIATE;
+
+  APP_TRACE_INFO0("@?@ lctrInitActInitiate end");
 }
 
 /*************************************************************************************************/
@@ -116,6 +118,7 @@ void lctrInitActInitiate(void)
 /*************************************************************************************************/
 void lctrInitActConnect(void)
 {
+  APP_TRACE_INFO1("@?@ lctrInitActConnect lgmrCb.numInitEnabled=%d", lmgrCb.numInitEnabled);
   if (lmgrCb.numInitEnabled)
   {
     BbBleData_t * const pBle = &lctrMstInit.bleData;

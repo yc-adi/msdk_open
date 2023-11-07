@@ -130,7 +130,7 @@ static void mainWsfInit(void)
 /*!
 *  \fn     WUT_IRQHandler
 *
-*  \brief  WUY interrupt handler.
+*  \brief  WUT interrupt handler.
 *
 *  \return None.
 */

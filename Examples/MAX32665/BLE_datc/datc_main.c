@@ -22,6 +22,8 @@
  */
 /*************************************************************************************************/
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "wsf_types.h"
 #include "util/bstream.h"
@@ -46,6 +48,7 @@
 #include "wpc/wpc_api.h"
 #include "datc_api.h"
 #include "util/calc128.h"
+#include "util/terminal.h"
 #include "pal_btn.h"
 #include "pal_uart.h"
 #include "tmr.h"
@@ -145,7 +148,7 @@ static const appSecCfg_t datcSecCfg = {
     DM_KEY_DIST_IRK, /*! Initiator key distribution flags */
     DM_KEY_DIST_LTK | DM_KEY_DIST_IRK, /*! Responder key distribution flags */
     FALSE, /*! TRUE if Out-of-band pairing data is present */
-    TRUE /*! TRUE to initiate security upon connection */
+    FALSE /*! TRUE to initiate security upon connection */
 };
 
 /* OOB UART parameters */
@@ -171,7 +174,7 @@ dmConnId_t oobConnId;
 */
 static const smpCfg_t datcSmpCfg = {
     500, /*! 'Repeated attempts' timeout in msec */
-    SMP_IO_KEY_ONLY, /*! I/O Capability */
+    SMP_IO_DISP_ONLY, /*! I/O Capability */
     7, /*! Minimum encryption key length */
     16, /*! Maximum encryption key length */
     1, /*! Attempts to trigger 'repeated attempts' timeout */
@@ -183,8 +186,8 @@ static const smpCfg_t datcSmpCfg = {
 
 /*! Connection parameters */
 static const hciConnSpec_t datcConnCfg = {
-    6, /*! Minimum connection interval in 1.25ms units */
-    6, /*! Maximum connection interval in 1.25ms units */
+    200, /*! Minimum connection interval in 1.25ms units */
+    200, /*! Maximum connection interval in 1.25ms units */
     0, /*! Connection latency */
     600, /*! Supervision timeout in 10ms units */
     0, /*! Unused */
@@ -467,6 +470,13 @@ static void datcScanStop(dmEvt_t *pMsg)
 
         /* Open connection */
         if (datcConnInfo.doConnect) {
+            char str[100];
+            sprintf(str, "\ndoConnect: addrType=%d addr=%02X:%02X:%02X:%02X:%02X:%02X dbHdl=%d\n",
+                         datcConnInfo.addrType,
+                         datcConnInfo.addr[5], datcConnInfo.addr[4], datcConnInfo.addr[3], 
+                         datcConnInfo.addr[2], datcConnInfo.addr[1], datcConnInfo.addr[0], 
+                         datcConnInfo.dbHdl);
+            APP_TRACE_INFO1("%s", str);
             AppConnOpen(datcConnInfo.addrType, datcConnInfo.addr, datcConnInfo.dbHdl);
             datcConnInfo.doConnect = FALSE;
         }
@@ -585,6 +595,7 @@ static void datcScanReport(dmEvt_t *pMsg)
         datcConnInfo.addrType = DmHostAddrType(pMsg->scanReport.addrType);
         memcpy(datcConnInfo.addr, pMsg->scanReport.addr, sizeof(bdAddr_t));
         datcConnInfo.dbHdl = dbHdl;
+        
         datcConnInfo.doConnect = TRUE;
     } else {
         static int scanReportDownSample = 0;
@@ -592,7 +603,7 @@ static void datcScanReport(dmEvt_t *pMsg)
         /* Down sample the number of scan reports we print */
         if (scanReportDownSample++ == SCAN_REPORT_DOWN_SAMPLE) {
             scanReportDownSample = 0;
-            datcPrintScanReport(pMsg);
+            //@?@ datcPrintScanReport(pMsg);
         }
     }
 }
@@ -817,6 +828,86 @@ static void datcStartSpeedTest(dmConnId_t connId)
 
 /*************************************************************************************************/
 /*!
+ *  \brief  Handler for a user terminal command.
+ *  
+ *  cmd ps l          list the FreeRTOS task info
+ *  cmd ps s          display the FreeRTOS task statistics
+ * 
+ *  \param  argc      The number of arguments passed to the command.
+ *  \param  argv      The array of arguments; the 0th argument is the command.
+ *      cmd close_conn <n>                  close connection. n: connection index, 0 for all connections.
+ *      cmd show_conn_num                   display the active connection number.
+ *      cmd conn_svr 01 2A 03 04 05 06      connect to server (addr 01:2A:03:04:05:06)
+ *      cmd send_data                       send test data to the server
+ *
+ *  \return Error code.
+ */
+/*************************************************************************************************/
+#define TERM_CMD_RESP_BUF_SIZE 1000
+uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
+{
+    char Resp[TERM_CMD_RESP_BUF_SIZE];
+    Resp[0] = 0;
+
+    if (argc < 2) {
+        return TERMINAL_ERROR_TOO_FEW_ARGUMENTS;
+    } else {
+        if (strcmp(argv[1], "conn_svr") == 0) {
+            TerminalTxPrint("server addr: %s:%s:%s:%s:%s:%s\r\n", argv[2], argv[3], argv[4], argv[5], argv[6], argv[7]);
+            char* endptr;  // Used to check for conversion errors
+            uint8_t addr[6];
+            for (int i = 0; i < 6; ++i)
+            {
+                addr[5 - i] = (uint8_t)strtol(argv[2 + i], &endptr, 16);
+            }
+
+            // borrow from datcScanReport()
+            /* stop scanning and connect */
+            datcCb.autoConnect = FALSE;
+
+            AppScanStop();
+
+            /* Store peer information for connect on scan stop */
+            datcConnInfo.addrType = 0;
+            memcpy(datcConnInfo.addr, addr, sizeof(bdAddr_t));
+            datcConnInfo.dbHdl = 0;
+            datcConnInfo.doConnect = TRUE;
+#if 0
+            // borrow from datcScanStop()
+            datcCb.scanning = FALSE;
+            datcCb.autoConnect = FALSE;
+
+            /* Open connection */
+            if (datcConnInfo.doConnect) {
+                char *str[100];
+                uint8_t pos = 0;
+                pos = sprintf(str, "\ndoConnect: addrType=%d addr=%02X:%02X:%02X:%02X:%02X:%02X dbHdl=%d\n",
+                            datcConnInfo.addrType,
+                            datcConnInfo.addr[5], datcConnInfo.addr[4], datcConnInfo.addr[3], 
+                            datcConnInfo.addr[2], datcConnInfo.addr[1], datcConnInfo.addr[0], 
+                            datcConnInfo.dbHdl);
+                APP_TRACE_INFO1("%s", str);
+                AppConnOpen(datcConnInfo.addrType, datcConnInfo.addr, datcConnInfo.dbHdl);
+                datcConnInfo.doConnect = FALSE;
+            }
+#endif
+        } else if (strcmp(argv[1], "send_data") == 0) {
+            dmConnId_t connId = datcCb.btnConnId;
+            datcSendData(connId);
+        } else {
+            TerminalTxPrint("cmd argc:%d\r\n", argc);
+        }
+    }
+
+    if (Resp[0] != 0) {
+        TerminalTxPrint(Resp);
+    }
+
+    return TERMINAL_ERROR_OK;
+}
+
+/*************************************************************************************************/
+/*!
  *  \brief  Button press callback.
  *
  *  \param  btn    Button press.
@@ -858,6 +949,7 @@ static void datcBtnCback(uint8_t btn)
         case APP_UI_BTN_1_LONG:
             /* disconnect */
             AppConnClose(connId);
+
             break;
 
 #if (BT_VER > 8)

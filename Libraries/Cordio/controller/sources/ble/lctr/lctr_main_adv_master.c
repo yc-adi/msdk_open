@@ -95,7 +95,7 @@ static void lctrMstScanAdvRptNotify(LlAdvReportInd_t *pRpt)
     pRpt->hdr.event = LL_ADV_REPORT_IND;
     pRpt->hdr.status = LL_SUCCESS;
 
-    LL_TRACE_INFO1("### LlEvent ###  LL_ADV_REPORT_IND, status=LL_SUCCESS addressType=%u", pRpt->addrType);
+    //@?@ LL_TRACE_INFO1("### LlEvent ###  LL_ADV_REPORT_IND, status=LL_SUCCESS addressType=%u", pRpt->addrType);
 
     LmgrSendEvent((LlEvt_t *)pRpt);
   }

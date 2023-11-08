@@ -29,6 +29,8 @@
 #include "dm_scan.h"
 #include "dm_main.h"
 
+extern uint8_t gu8Debug;
+
 /**************************************************************************************************
   Local Variables
 **************************************************************************************************/
@@ -103,6 +105,7 @@ void DmScanStart(uint8_t scanPhys, uint8_t mode, const uint8_t *pScanType, bool_
     pMsg->duration = duration;
     pMsg->period = period;
     pMsg->filterDup = filterDup;
+    
     WsfMsgSend(dmCb.handlerId, pMsg);
   }
 }

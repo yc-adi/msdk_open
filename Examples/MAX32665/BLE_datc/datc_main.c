@@ -70,7 +70,7 @@ Macros
 #define SPEED_TEST_TMR MXC_TMR3
 
 #define SCAN_START_EVT 0x99
-#define SCAN_START_MS 500
+#define SCAN_START_MS 1000
 
 /* Down sample the number of scan reports we print */
 #define SCAN_REPORT_DOWN_SAMPLE 20
@@ -434,7 +434,8 @@ static void datcRestartScanningHandler(void)
 static void datcRestartScanning(void)
 {
     /* Start the scanning start timer */
-    WsfTimerStartMs(&datcCb.scanTimer, SCAN_START_MS);
+    //@?@ WsfTimerStartMs(&datcCb.scanTimer, SCAN_START_MS);
+    datcRestartScanningHandler();
 }
 
 /*************************************************************************************************/
@@ -864,7 +865,6 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
             // borrow from datcScanReport()
             /* stop scanning and connect */
             datcCb.autoConnect = FALSE;
-
             AppScanStop();
 
             /* Store peer information for connect on scan stop */
@@ -1189,6 +1189,7 @@ static void datcProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_SCAN_STOP_IND:
+        APP_TRACE_INFO0("@?@ DM_SCAN_STOP_IND");
         datcScanStop(pMsg);
         uiEvent = APP_UI_SCAN_STOP;
         break;

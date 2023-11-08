@@ -30,6 +30,8 @@
 #include "lctr_int_conn.h"
 #include <string.h>
 
+extern uint8_t gu8Debug;
+
 /*************************************************************************************************/
 /*!
  *  \brief      Start initiate connection scan.
@@ -109,6 +111,7 @@ void lctrInitActInitiate(void)
   lmgrCb.scanMode = LMGR_SCAN_MODE_INITIATE;
 
   APP_TRACE_INFO0("@?@ lctrInitActInitiate end");
+  gu8Debug = 1;
 }
 
 /*************************************************************************************************/

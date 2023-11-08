@@ -433,6 +433,12 @@ void DmHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
     if (!dmCb.resetting)
     {
       /* route message to DM component handling function */
+      APP_TRACE_INFO2("@?@ DmHandler evt=%d ndx=%d", pMsg->event, DM_ID_FROM_MSG(pMsg->event));
+      if (pMsg->event == 16)
+      {
+        __asm("nop");
+        __asm("nop");
+      }
       (*(dmFcnIfTbl[DM_ID_FROM_MSG(pMsg->event)]->msgHandler))(pMsg);
     }
   }

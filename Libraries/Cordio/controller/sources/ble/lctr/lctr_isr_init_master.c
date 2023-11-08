@@ -37,6 +37,8 @@
 #include "util/bstream.h"
 #include <string.h>
 
+extern uint8_t gu8Debug;
+
 /*************************************************************************************************/
 /*!
  *  \brief  End an initiate scan operation in the master role.
@@ -46,6 +48,11 @@
 /*************************************************************************************************/
 void lctrMstInitiateEndOp(BbOpDesc_t *pOp)
 {
+  if (gu8Debug == 2)
+  {
+    APP_TRACE_INFO0("@?@ lctrMstInitiateEndOp");
+    gu8Debug = 3;
+  }
   lctrConnCtx_t *pCtx = LCTR_GET_CONN_CTX(lctrMstInit.data.init.connHandle);
   BbOpDesc_t * pConnBod = &pCtx->connBod;
 
@@ -247,6 +254,7 @@ bool_t lctrMstConnIndTxCompHandler(BbOpDesc_t *pOp, const uint8_t *pIndBuf)
   WSF_ASSERT(pOp->protId == BB_PROT_BLE);
   WSF_ASSERT(pOp->prot.pBle->chan.opType == BB_BLE_OP_MST_ADV_EVENT);
 
+  APP_TRACE_INFO0("@?@ lctrMstConnIndTxCompHandler");
   lctrMstInit.selfTerm = TRUE;
   BbSetBodTerminateFlag();
   return FALSE;

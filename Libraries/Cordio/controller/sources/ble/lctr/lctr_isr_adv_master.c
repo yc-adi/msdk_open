@@ -40,6 +40,8 @@
 extern bool_t bbTxAccAddrShiftMask;
 #endif
 
+extern uint8_t gu8Debug;
+
 /*************************************************************************************************/
 /*!
  *  \brief  End a discovery scan operation in the master role.
@@ -50,6 +52,12 @@ extern bool_t bbTxAccAddrShiftMask;
 void lctrMstDiscoverEndOp(BbOpDesc_t *pOp)
 {
   lctrMstScanCtx_t *pCtx = (lctrMstScanCtx_t *)pOp->pCtx;
+
+  if (gu8Debug > 1)
+  {
+    APP_TRACE_INFO3("@?@ %d lctrMstDiscoverEndOp shutdown=%d selfTerm=%d", gu8Debug, pCtx->shutdown, pCtx->selfTerm);
+    gu8Debug++;
+  }
 
   WSF_ASSERT(pOp->protId == BB_PROT_BLE);
   WSF_ASSERT(pOp->prot.pBle->chan.opType == BB_BLE_OP_MST_ADV_EVENT);
@@ -75,10 +83,22 @@ void lctrMstDiscoverEndOp(BbOpDesc_t *pOp)
         pMsg->dispId = LCTR_DISP_INIT;
         pMsg->event = LCTR_INIT_MSG_TERMINATE;
       }
-
+      APP_TRACE_INFO1("@?@ %d send msg", gu8Debug);
       WsfMsgSend(lmgrPersistCb.handlerId, pMsg);
     }
+
+    if (gu8Debug > 1)
+    {
+      APP_TRACE_INFO1("@?@ %d aft msg", gu8Debug);
+      gu8Debug = 5;
+    }
     return;
+  }
+
+  if (gu8Debug > 1)
+  {
+    APP_TRACE_INFO1("@?@ %d no shutdown, no term", gu8Debug);
+    gu8Debug = 6;
   }
 
   /*** Update scan data ***/
@@ -157,6 +177,14 @@ void lctrMstDiscoverEndOp(BbOpDesc_t *pOp)
         LL_TRACE_WARN1("!!!                           scanWindowUsec=%u", LCTR_BLE_TO_US(pCtx->scanParam.scanWindow));
       }
     }
+  }
+
+  if (gu8Debug > 1)
+  {
+    APP_TRACE_INFO1("@?@ %d end of lctrMstDiscoverEndOp", gu8Debug);
+    gu8Debug = 7;
+    BbOpDesc_t * const pCur = BbGetCurrentBod();
+    BbBleMstAdvEvent_t * const pScan = &pCur->prot.pBle->op.mstAdv;
   }
 }
 

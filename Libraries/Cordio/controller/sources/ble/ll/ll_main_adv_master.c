@@ -28,6 +28,8 @@
 #include "wsf_trace.h"
 #include "bb_ble_api.h"
 
+extern uint8_t gu8Debug;
+
 /*************************************************************************************************/
 /*!
  *  \brief      Set scan channel map.
@@ -163,7 +165,6 @@ void LlScanEnable(uint8_t enable, uint8_t filterDup)
     pMsg->hdr.event = enable ? LCTR_SCAN_MSG_DISCOVER_ENABLE : LCTR_SCAN_MSG_DISCOVER_DISABLE;
 
     pMsg->filtDup = filterDup;
-
     WsfMsgSend(lmgrPersistCb.handlerId, pMsg);
   }
 }

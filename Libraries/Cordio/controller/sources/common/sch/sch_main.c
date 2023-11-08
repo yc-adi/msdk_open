@@ -47,6 +47,7 @@ enum
 
 /*! \brief      Scheduler control block. */
 SchCtrlBlk_t schCb;
+extern uint8_t gu8Debug;
 
 /*************************************************************************************************/
 /*!
@@ -55,6 +56,11 @@ SchCtrlBlk_t schCb;
 /*************************************************************************************************/
 static void schBodCompHandler(void)
 {
+  if (gu8Debug == 1)
+  {
+    APP_TRACE_INFO0("@?@ sch cmplt");
+    gu8Debug = 2;
+  }
   WsfSetEvent(schCb.handlerId, SCH_EVENT_BOD_COMPLETE);
   schCb.eventSetFlagCount++;
 }

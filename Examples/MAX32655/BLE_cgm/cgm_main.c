@@ -24,6 +24,7 @@
  */
 /*************************************************************************************************/
 
+#include <stdio.h>
 #include <string.h>
 #include "app_db.h"
 #include "led.h"
@@ -253,11 +254,20 @@ static const uint8_t cgmAdvDataDisc[] = {
 };
 
 /*! scan data, discoverable mode */
-static const uint8_t datsScanDataDisc[] = {
+uint8_t datsScanDataDisc[12] = {
     /*! device name */
-    4, /*! length */
-    DM_ADV_TYPE_LOCAL_NAME, /*! AD type */
-    'C','G','M'
+    11, /*! length */                            // 0
+    DM_ADV_TYPE_LOCAL_NAME, /*! AD type */      // 1
+    'C',                                        // 2
+    'G',                                        // 3
+    'M',                                        // 4
+    '0',                                        // 5
+    '0',                                        // 6
+    '0',                                        // 7
+    '0',                                        // 8
+    '0',                                        // 9
+    '0',                                        // 10
+    0                                           // 11 spaceholder
 };
 
 /*! CGM Feature */
@@ -816,6 +826,9 @@ void CgmHandlerInit(wsfHandlerId_t handlerId)
     AppGetBdAddr(addr);
     APP_TRACE_INFO6("MAC Addr: %02x:%02x:%02x:%02x:%02x:%02x", addr[5], addr[4], addr[3], addr[2],
                     addr[1], addr[0]);
+
+    //sprintf((char *)&datsScanDataDisc[5], "%02X%02X%02X", addr[2], addr[1], addr[0]);
+
     APP_TRACE_INFO1("Adv local name: %s", &datsScanDataDisc[2]);
 
     /* store handler ID */
@@ -1075,7 +1088,7 @@ char *GetCgmEvtStr(uint8_t evt)
 void CgmHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
-        APP_TRACE_INFO2("\nCGM got evt=%d (%s)", pMsg->event, GetCgmEvtStr(pMsg->event));
+        //@? APP_TRACE_INFO2("\nCGM got evt=%d (%s)", pMsg->event, GetCgmEvtStr(pMsg->event));
         
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {

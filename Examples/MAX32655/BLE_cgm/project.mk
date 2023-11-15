@@ -14,13 +14,13 @@ LIB_CORDIO = 1
 INIT_PERIPHERAL = 1
 INIT_CENTRAL = 0
 
-DEBUG = 1
+DEBUG = 0
 
 # TRACE option
 # Set to 0 to disable
 # Set to 1 to enable serial port trace messages
 # Set to 2 to enable verbose messages
-TRACE = 1
+TRACE = 0
 
 BUILD_BOOTLOADER?=1
 
@@ -66,7 +66,7 @@ ${BOOTLOADER_OBJ}: bl_build.S ${BOOTLOADER_BIN}
 	${CC} ${AFLAGS} -o ${@} -c bl_build.S
 endif
 
-DEEP_SLEEP = 0
+DEEP_SLEEP = 1
 
 # Optimize for size
 MXC_OPTIMIZE_CFLAGS=-Os

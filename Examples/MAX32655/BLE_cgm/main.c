@@ -86,7 +86,7 @@
 #define SPI_SLAVE_RX    0
 
 /*! \brief UART TX buffer size */
-#define PLATFORM_UART_TERMINAL_BUFFER_SIZE (1024U*3)
+#define PLATFORM_UART_TERMINAL_BUFFER_SIZE (1024U*1)
 
 /*! \brief SPI */
 #define PLATFORM_SPI_BUF_SIZE   (2)
@@ -150,7 +150,6 @@ volatile int wutTrimComplete;
 #define RESTORE_OP_IN_WUT_TICK  (3)
 #define RESTORE_OP_IN_US        ((uint64_t)RESTORE_OP_IN_WUT_TICK * (uint64_t)1000000 / (uint64_t)32768)
 
-#define WAKEUP_32M_US           (3200)
 #define WUT_FREQ                (32768)
 #define US_TO_WUTTICKS(x)       (((x) * WUT_FREQ) / 1000000)
 #define WUT_MIN_TICKS           (10)
@@ -242,16 +241,6 @@ extern void MXC_LP_EnterStandbyMode(void);
 #endif  
 
 #if DEEP_SLEEP == 1
-/*************************************************************************************************/
-/* Get the time delay expected on powerup */
-uint32_t get_powerup_delay(uint32_t wait_ticks)
-{
-    uint32_t ret;
-
-    ret = US_TO_WUTTICKS(WAKEUP_32M_US + (wait_ticks / 32));
-
-    return ret;
-}
 
 /*************************************************************************************************/
 extern void *AsyncTxRequests[MXC_UART_INSTANCES];
@@ -419,7 +408,10 @@ int DeepSleep(void)
             /* Restore the BB counter */
             MXC_WUT_RestoreBBClock(MXC_WUT, BB_CLK_RATE_HZ);
 
-            PalBbBleRefreshKeyAfterSleep();
+            if (conn_opened)
+            {
+                PalBbBleRefreshKeyAfterSleep();
+            }
 
             /* Restart the BLE scheduler timer */
             wutCnt = MXC_WUT_GetCount(MXC_WUT);

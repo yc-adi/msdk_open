@@ -192,6 +192,8 @@ void LctrMsgDispatcher(lctrMsgHdr_t *pMsg)
 {
   uint8_t dispId = pMsg->dispId;
 
+  APP_TRACE_INFO3("@? LlHandler LctrMsgDispatcher hndl=%d dispId=%d evt=%d", pMsg->handle, pMsg->dispId, pMsg->event);
+
   pLctrMsg = pMsg;
 
   if (dispId != LCTR_DISP_BCST)
@@ -259,6 +261,10 @@ void LctrEventHandler(uint8_t event)
 
   if (lctrEventHdlrTbl[event])
   {
+    if (event != 9 && event != 6)
+    {
+      APP_TRACE_INFO1("@?@ LlHandler LctrEventHandler evt=%d", event);
+    }
     lctrEventHdlrTbl[event]();
   }
 }

@@ -78,7 +78,7 @@ extern "C" {
 /**@{*/
 /*! \brief Maximum number of connections */
 #ifndef DM_CONN_MAX
-#define DM_CONN_MAX              3
+#define DM_CONN_MAX              8
 #endif
 
 /*! \brief Maximum number of periodic advertising synchronizations */
@@ -137,7 +137,7 @@ extern "C" {
 
 /*! \brief Maximum number of connection oriented channel registered clients */
 #ifndef L2C_COC_REG_MAX
-#define L2C_COC_REG_MAX          4
+#define L2C_COC_REG_MAX          4  //@?
 #endif
 /**@}*/
 
@@ -176,7 +176,7 @@ extern "C" {
 /**@{*/
 /*! Max number of devices in the database */
 #ifndef SMP_DB_MAX_DEVICES
-#define SMP_DB_MAX_DEVICES       3
+#define SMP_DB_MAX_DEVICES       DM_CONN_MAX
 #endif
 /**@}*/
 

@@ -300,6 +300,9 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
       lctrSetBbPacketCounterTx(pCtx);
       BbBleTxData(&bbDesc[0], bbDescCnt);
       numTxBytes = LL_DATA_HDR_LEN + bbDesc[0].pBuf[LCTR_DATA_PDU_LEN_OFFSET];
+
+      //@?
+      //PRINT_BUF(TX, bbDesc[0].pBuf, bbDesc[0].len);
     }
     else
     {

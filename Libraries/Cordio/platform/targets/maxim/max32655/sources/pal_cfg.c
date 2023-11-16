@@ -26,6 +26,9 @@
 #define PAL_CFG_LL_MAX 0
 #endif
 
+#define PAL_CFG_LL_CONN_MAX     (8)
+
+
 /*! \brief  LL configuration. */
 typedef struct {
   /* Advertiser */

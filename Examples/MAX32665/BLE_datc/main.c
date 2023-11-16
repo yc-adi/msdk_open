@@ -273,6 +273,7 @@ int main(void)
 #endif
 
     StackInitDatc();
+    
     DatcStart();
 
     WsfOsEnterMainLoop();

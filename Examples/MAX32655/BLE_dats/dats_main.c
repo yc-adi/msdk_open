@@ -22,6 +22,7 @@
  */
 /*************************************************************************************************/
 
+#include <stdio.h>
 #include <string.h>
 #include "wsf_types.h"
 #include "util/bstream.h"
@@ -50,7 +51,9 @@
 #include "pal_btn.h"
 #include "pal_uart.h"
 #include "tmr.h"
+#include "util/terminal.h"
 #include "svc_sds.h"
+#include "ll_api.h"
 /**************************************************************************************************
   Macros
 **************************************************************************************************/
@@ -63,6 +66,8 @@
 
 #endif /* BT_VER */
 
+#define MAX_CONN    (1)
+
 #define TRIM_TIMER_EVT 0x99
 
 #define TRIM_TIMER_PERIOD_MS 60000
@@ -74,6 +79,10 @@
 
 #define BTN_1_TMR MXC_TMR2
 #define BTN_2_TMR MXC_TMR3
+
+extern uint8_t gu8Debug;
+extern appConnCb_t appConnCb[DM_CONN_MAX];
+extern appSlaveCb_t appSlaveCb;
 
 /*! Enumeration of client characteristic configuration descriptors */
 enum {
@@ -95,7 +104,7 @@ static const appAdvCfg_t datsAdvCfg = {
 
 /*! configurable parameters for slave */
 static const appSlaveCfg_t datsSlaveCfg = {
-    1, /*! Maximum connections */
+    MAX_CONN, /*! Maximum connections */
 };
 
 /*! Configurable security parameters to set
@@ -114,11 +123,12 @@ static const appSlaveCfg_t datsSlaveCfg = {
 *       -DM_KEY_DIST_CSRK  : Distribute CSRK used for signed data 
 */
 static const appSecCfg_t datsSecCfg = {
-    DM_AUTH_BOND_FLAG | DM_AUTH_SC_FLAG | DM_AUTH_MITM_FLAG, /*! Authentication and bonding flags */
+    //DM_AUTH_BOND_FLAG | DM_AUTH_SC_FLAG | DM_AUTH_MITM_FLAG, /*! Authentication and bonding flags */
+    DM_AUTH_BOND_FLAG | DM_AUTH_SC_FLAG, /*! Authentication and bonding flags */
     DM_KEY_DIST_IRK, /*! Initiator key distribution flags */
     DM_KEY_DIST_LTK | DM_KEY_DIST_IRK, /*! Responder key distribution flags */
     FALSE, /*! TRUE if Out-of-band pairing data is present */
-    TRUE /*! TRUE to initiate security upon connection */
+    FALSE /*! TRUE to initiate security upon connection */
 };
 
 /* OOB UART parameters */
@@ -144,7 +154,7 @@ dmConnId_t oobConnId;
 */
 static const smpCfg_t datsSmpCfg = {
     500, /*! 'Repeated attempts' timeout in msec */
-    SMP_IO_KEY_ONLY, /*! I/O Capability */
+    SMP_IO_DISP_ONLY, /*! I/O Capability */
     7, /*! Minimum encryption key length */
     16, /*! Maximum encryption key length */
     1, /*! Attempts to trigger 'repeated attempts' timeout */
@@ -211,14 +221,21 @@ static const uint8_t datsAdvDataDisc[] = {
 };
 
 /*! scan data, discoverable mode */
-static const uint8_t datsScanDataDisc[] = {
+uint8_t datsScanDataDisc[] = {
     /*! device name */
-    5, /*! length */
-    DM_ADV_TYPE_LOCAL_NAME, /*! AD type */
-    'D',
-    'A',
-    'T',
-    'S'
+    11, /*! length */                        // 0
+    DM_ADV_TYPE_LOCAL_NAME, /*! AD type */  // 1
+    'D',    // 2
+    'A',    // 3
+    'T',    // 4
+    'S',    // 5
+    '0',    // 6
+    '0',    // 7
+    '0',    // 8
+    '0',    // 9
+    '0',    // 10
+    '0',    // 11
+    0       // space holder
 };
 
 /**************************************************************************************************
@@ -279,7 +296,14 @@ void oobRxCback(void)
 /*************************************************************************************************/
 static void datsSendData(dmConnId_t connId)
 {
-    uint8_t str[] = "hello back";
+    uint8_t addr[6];
+    AppGetBdAddr(addr);
+
+    uint8_t str[50];
+    sprintf((char *)str, "back from %s %02X:%02X:%02X:%02X:%02X:%02X",
+            (char *)&datsScanDataDisc[2], 
+            addr[5], addr[4], addr[3], addr[2], addr[1], addr[0]);
+    APP_TRACE_INFO0((const char *)str);
 
     if (AttsCccEnabled(connId, DATS_WP_DAT_CCC_IDX)) {
         /* send notification */
@@ -426,7 +450,7 @@ uint8_t datsWpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation, 
 
     if (len < 64) {
         /* print received data if not a speed test message */
-        APP_TRACE_INFO0((const char *)pValue);
+        APP_TRACE_INFO1("datsWpWriteCback rcvd: %s", (const char *)pValue);
 
         /* send back some data */
         datsSendData(connId);
@@ -436,6 +460,7 @@ uint8_t datsWpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation, 
             packetCount = 0;
         }
     }
+
     return ATT_SUCCESS;
 }
 
@@ -755,8 +780,10 @@ void DatsHandlerInit(wsfHandlerId_t handlerId)
     uint8_t addr[6] = { 0 };
     APP_TRACE_INFO0("DatsHandlerInit");
     AppGetBdAddr(addr);
-    APP_TRACE_INFO6("MAC Addr: %02x:%02x:%02x:%02x:%02x:%02x", addr[5], addr[4], addr[3], addr[2],
-                    addr[1], addr[0]);
+    APP_TRACE_INFO6("MAC Addr: %02X:%02X:%02X:%02X:%02X:%02X", 
+                    addr[5], addr[4], addr[3], addr[2], addr[1], addr[0]);
+    
+    sprintf((char *)&datsScanDataDisc[6], "%02X%02X%02X", addr[2], addr[1], addr[0]);
     APP_TRACE_INFO1("Adv local name: %s", &datsScanDataDisc[2]);
 
     /* store handler ID */
@@ -794,8 +821,9 @@ void DatsHandlerInit(wsfHandlerId_t handlerId)
 static void datsBtnCback(uint8_t btn)
 {
 #if (BT_VER > 8)
-    dmConnId_t connId;
-    if ((connId = AppConnIsOpen()) != DM_CONN_ID_NONE)
+    dmConnId_t connId = AppConnIsOpen();
+    APP_TRACE_INFO1("connId=%d", connId);
+    if (connId != DM_CONN_ID_NONE)
 #else
     if (AppConnIsOpen() != DM_CONN_ID_NONE)
 #endif /* BT_VER */
@@ -869,6 +897,19 @@ static void datsBtnCback(uint8_t btn)
             AppAdvStop();
             break;
 
+        case APP_UI_BTN_2_MED: {
+            appConnCb_t *pCcb = appConnCb;
+            uint8_t i;
+
+            for (i = DM_CONN_MAX; i > 0; i--, pCcb++)
+            {
+                if (pCcb->connId != DM_CONN_ID_NONE)
+                {
+                    TerminalTxPrint("%d\n", pCcb->connId);
+                }
+            }
+        } break;
+
         default:
             APP_TRACE_INFO0(" - No action assigned");
             break;
@@ -891,6 +932,44 @@ static void datsWsfBufDiagnostics(WsfBufDiag_t *pInfo)
         APP_TRACE_INFO2("Dats got WSF Buffer Allocation Failure - Task: %d Len: %d",
                         pInfo->param.alloc.taskId, pInfo->param.alloc.len);
     }
+}
+
+/*************************************************************************************************/
+/*!
+ *  \brief  Handler for a user terminal command.
+ *  
+ *  cmd ps l          list the FreeRTOS task info
+ *  cmd ps s          display the FreeRTOS task statistics
+ * 
+ *  \param  argc      The number of arguments passed to the command.
+ *  \param  argv      The array of arguments; the 0th argument is the command.
+ *      cmd close_conn <n>      close connection. n: connection index, 0 for all connections.
+ *      cmd show_conn_num       display the active connection number.
+ *
+ *  \return Error code.
+ */
+/*************************************************************************************************/
+#define TERM_CMD_RESP_BUF_SIZE 1000
+uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
+{
+    char Resp[TERM_CMD_RESP_BUF_SIZE];
+    Resp[0] = 0;
+
+    if (argc < 2) {
+        return TERMINAL_ERROR_TOO_FEW_ARGUMENTS;
+    } else {
+        if (strcmp(argv[1], "test") == 0) {
+            TerminalTxPrint("test\n");
+        } else {
+            TerminalTxPrint("cmd argc:%d\n", argc);
+        }
+    }
+
+    if (Resp[0] != 0) {
+        TerminalTxPrint(Resp);
+    }
+
+    return TERMINAL_ERROR_OK;
 }
 
 /*************************************************************************************************/

@@ -121,7 +121,7 @@ static const uint8_t lctrAdvNextStateTbl[LCTR_ADV_STATE_TOTAL][LCTR_ADV_MSG_TOTA
 /*************************************************************************************************/
 void lctrSlvAdvExecuteSm(uint8_t event)
 {
-  LL_TRACE_INFO2("lctrSlvAdvExecuteSm: state=%u, event=%u", lctrSlvAdv.state, event);
+  APP_TRACE_INFO2("@? lctrSlvAdvExecuteSm st=%u evt=%u", lctrSlvAdv.state, event);
 
   if (lctrAdvActionTbl[lctrSlvAdv.state][event])
   {

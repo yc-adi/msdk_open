@@ -41,6 +41,7 @@
 /*************************************************************************************************/
 void lctrSlvConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 {
+  APP_TRACE_INFO2("@? lctrSlvConnExecuteSm evt=%d Ctx st=%d", event, pCtx->state);
   /* State-specific events. */
   switch (pCtx->state)
   {

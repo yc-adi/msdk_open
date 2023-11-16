@@ -31,6 +31,7 @@
 #include "lmgr_api_adv_slave.h"
 #include <string.h>
 #include "bb_ble_sniffer_api.h"
+#include "wsf_trace.h"
 
 /**************************************************************************************************
   Macros
@@ -316,6 +317,8 @@ static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint3
           bool_t pduAllow = BbBlePduFiltCheck(pAdv->pRxReqBuf, &pBle->pduFilt, FALSE, &pAdv->filtResults);
           if (pduAllow && pAdv->rxReqCback(pCur, pAdv->pRxReqBuf))
           {
+            // display all scan request packets
+            //@? PRINT_BLE_RX_BUFF(pAdv->pRxReqBuf[0], pAdv->pRxReqBuf[1]);
             BB_ISR_MARK(bbAdvStats.txSetupUsec);
 
             bbBleClrIfs();  /* last operation in event */

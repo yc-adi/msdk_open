@@ -2930,6 +2930,7 @@ void BbBleDrvRadioIRQHandler(void)
         bbTxPhyOptions = tifsTxPhyOptions;
       }
 
+      APP_TRACE_INFO1("@? bbRxCallback rssi=%d", rssi);
       /* see if the CRC failed */
       if ((NRF_RADIO->CRCSTATUS & RADIO_CRCSTATUS_CRCSTATUS_Msk) == RADIO_CRCSTATUS_CRCSTATUS_CRCError)
       {

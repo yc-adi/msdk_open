@@ -84,6 +84,7 @@ void lctrScanCleanup(lctrMstScanCtx_t *pCtx)
 /*************************************************************************************************/
 void lctrScanActDiscover(void)
 {
+  APP_TRACE_INFO0("@?@         lctrScanActDiscover");
   lctrScanEnableMsg_t *pMsg = (lctrScanEnableMsg_t *)pLctrMsg;
 
   lctrMstScan.scanParam = lmgrMstScanCb.scanParam;
@@ -193,6 +194,7 @@ void lctrScanActResetTerm(void)
 /*************************************************************************************************/
 void lctrScanActUpdateScanParam(void)
 {
+  APP_TRACE_INFO0("@?@         lctrScanActUpdateScanParam");
   lctrScanParamMsg_t *pMsg = (lctrScanParamMsg_t *)pLctrMsg;
 
   lmgrMstScanCb.scanParam = pMsg->param;

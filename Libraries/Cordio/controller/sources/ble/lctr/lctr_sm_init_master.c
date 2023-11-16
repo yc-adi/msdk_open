@@ -105,7 +105,7 @@ static const uint8_t lctrInitNextStateTbl[LCTR_INIT_STATE_TOTAL][LCTR_INIT_MSG_T
 /*************************************************************************************************/
 void lctrMstInitExecuteSm(uint8_t event)
 {
-  LL_TRACE_INFO2("lctrMstInitExecuteSm: state=%u, event=%u", lctrMstInit.state, event);
+  LL_TRACE_INFO2("lctrMstInitExecuteSm evt=%u st=%u", event, lctrMstInit.state);
 
   if (lctrInitActionTbl[lctrMstInit.state][event])
   {

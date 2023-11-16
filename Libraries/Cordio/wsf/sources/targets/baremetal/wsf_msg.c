@@ -142,15 +142,21 @@ void WsfMsgEnq(wsfQueue_t *pQueue, wsfHandlerId_t handlerId, void *pMsg)
   msgNdx++;
   uint16_t *p16 = (uint16_t *)pMsg;
   uint8_t *p8 = (uint8_t *)pMsg;
+  
+  if (handlerId == 8)
+  {
+    __asm("nop");
+    __asm("nop");
+  }
+  
   if (gu8Debug > 0)
   {
-    WsfTrace("msg enq %d hndlr=%d param=%d evt=%d st=%d", msgNdx, handlerId, p16[0], p8[2], p8[3]);
-    if (handlerId == 2 && p16[0] == 0 && p8[2] == 3 && p8[3] == 3)
+    if (handlerId == 2 && p16[0] == 0 && p8[2] == 0 && p8[3] == 0)
     {
       __asm("nop");
       __asm("nop");
-      WsfTrace("here");
     }
+    WsfTrace("msg enq %d hndlr=%d param=%d evt=%d st=%d", msgNdx, handlerId, p16[0], p8[2], p8[3]);
   }
 
   WsfQueueEnq(pQueue, p);

@@ -34,6 +34,7 @@
 #include "att_handler.h"
 #include "smp_handler.h"
 #include "l2c_api.h"
+#include "ll_api.h"
 #include "att_api.h"
 #include "smp_api.h"
 #include "app_api.h"
@@ -42,6 +43,8 @@
 #include "svc_core.h"
 #include "sec_api.h"
 #include "hci_defs.h"
+
+extern LlRtCfg_t *pLctrRtCfg;
 
 /*************************************************************************************************/
 /*!
@@ -93,4 +96,6 @@ void StackInitDatc(void)
 
     handlerId = WsfOsSetNextHandler(DatcHandler);
     DatcHandlerInit(handlerId);
+
+    pLctrRtCfg->maxConn = 8;
 }

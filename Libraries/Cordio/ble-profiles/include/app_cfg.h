@@ -43,7 +43,7 @@ extern "C" {
 
 /*! \brief Number of application database device records */
 #ifndef APP_DB_NUM_RECS
-#define APP_DB_NUM_RECS 3
+#define APP_DB_NUM_RECS 8   // DM_CONN_MAX
 #endif
 
 /*! \brief Number of client characteristic configuration descriptor handles per record */

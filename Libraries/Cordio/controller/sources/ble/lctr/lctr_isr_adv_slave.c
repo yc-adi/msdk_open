@@ -37,6 +37,8 @@
 #include "util/bstream.h"
 #include <string.h>
 
+extern uint8_t gu8Debug;
+
 /*************************************************************************************************/
 /*!
  *  \brief      Scan request packet handler.
@@ -72,6 +74,8 @@ bool_t lctrScanReqHandler(BbOpDesc_t *pOp, uint8_t reqLen)
 /*************************************************************************************************/
 void lctrConnIndHandler(BbOpDesc_t *pOp, uint8_t reqLen, const uint8_t *pReqBuf)
 {
+  APP_TRACE_INFO0("@? lctrConnIndHandler");
+  
   if (lctrMsgDispTbl[LCTR_DISP_CONN] &&
      (reqLen == LL_CONN_IND_PDU_LEN))
   {
@@ -83,6 +87,8 @@ void lctrConnIndHandler(BbOpDesc_t *pOp, uint8_t reqLen, const uint8_t *pReqBuf)
      * cf. lctrAdvActSelfTerm() */
 
     /*** Received advertising PDU post-processing. ***/
+    // display the connection indication packet
+    PRINT_BLE_RX_BUFF(pReqBuf[0], pReqBuf[1]);
 
     if ((lctrSlvAdv.advBuf[0] & (1 << LCTR_ADV_HDR_CH_SEL_SHIFT)) &&   /* local advertiser supports CS#2 */
         (pReqBuf[0] & (1 << LCTR_ADV_HDR_CH_SEL_SHIFT)))               /* peer initiator supports CS#2 */

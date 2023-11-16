@@ -22,6 +22,7 @@
  */
 /*************************************************************************************************/
 
+#include <stdio.h>
 #include <string.h>
 #include "wsf_types.h"
 #include "util/bstream.h"
@@ -65,7 +66,7 @@
 
 #endif /* BT_VER */
 
-#define MAX_CONN    (3)
+#define MAX_CONN    (1)
 
 #define TRIM_TIMER_EVT 0x99
 
@@ -220,14 +221,21 @@ static const uint8_t datsAdvDataDisc[] = {
 };
 
 /*! scan data, discoverable mode */
-static const uint8_t datsScanDataDisc[] = {
+uint8_t datsScanDataDisc[] = {
     /*! device name */
-    5, /*! length */
-    DM_ADV_TYPE_LOCAL_NAME, /*! AD type */
-    'D',
-    'A',
-    'T',
-    'Z'
+    11, /*! length */                        // 0
+    DM_ADV_TYPE_LOCAL_NAME, /*! AD type */  // 1
+    'D',    // 2
+    'A',    // 3
+    'T',    // 4
+    'S',    // 5
+    '0',    // 6
+    '0',    // 7
+    '0',    // 8
+    '0',    // 9
+    '0',    // 10
+    '0',    // 11
+    0       // space holder
 };
 
 /**************************************************************************************************
@@ -288,8 +296,13 @@ void oobRxCback(void)
 /*************************************************************************************************/
 static void datsSendData(dmConnId_t connId)
 {
-    uint8_t str[] = "hello back to x";
-    str[sizeof(str) - 2] = '0' + connId;
+    uint8_t addr[6];
+    AppGetBdAddr(addr);
+
+    uint8_t str[50];
+    sprintf((char *)str, "back from %s %02X:%02X:%02X:%02X:%02X:%02X",
+            (char *)&datsScanDataDisc[2], 
+            addr[5], addr[4], addr[3], addr[2], addr[1], addr[0]);
     APP_TRACE_INFO0((const char *)str);
 
     if (AttsCccEnabled(connId, DATS_WP_DAT_CCC_IDX)) {
@@ -434,9 +447,10 @@ uint8_t datsWpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation, 
                          uint16_t len, uint8_t *pValue, attsAttr_t *pAttr)
 {
     static uint32_t packetCount = 0;
+
     if (len < 64) {
         /* print received data if not a speed test message */
-        APP_TRACE_INFO1("datsWpWriteCback: %s", (const char *)pValue);
+        APP_TRACE_INFO1("datsWpWriteCback rcvd: %s", (const char *)pValue);
 
         /* send back some data */
         datsSendData(connId);
@@ -446,6 +460,7 @@ uint8_t datsWpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation, 
             packetCount = 0;
         }
     }
+
     return ATT_SUCCESS;
 }
 
@@ -556,7 +571,7 @@ static void datsSetup(dmEvt_t *pMsg)
     AppAdvSetData(APP_SCAN_DATA_CONNECTABLE, sizeof(datsScanDataDisc), (uint8_t *)datsScanDataDisc);
 
     /* start advertising; automatically set connectable/discoverable mode and bondable mode */
-    AppAdvStart(APP_MODE_AUTO_INIT);
+    //@? AppAdvStart(APP_MODE_AUTO_INIT);
 }
 
 /*************************************************************************************************/
@@ -765,8 +780,10 @@ void DatsHandlerInit(wsfHandlerId_t handlerId)
     uint8_t addr[6] = { 0 };
     APP_TRACE_INFO0("DatsHandlerInit");
     AppGetBdAddr(addr);
-    APP_TRACE_INFO6("MAC Addr: %02x:%02x:%02x:%02x:%02x:%02x", addr[5], addr[4], addr[3], addr[2],
-                    addr[1], addr[0]);
+    APP_TRACE_INFO6("MAC Addr: %02X:%02X:%02X:%02X:%02X:%02X", 
+                    addr[5], addr[4], addr[3], addr[2], addr[1], addr[0]);
+    
+    sprintf((char *)&datsScanDataDisc[6], "%02X%02X%02X", addr[2], addr[1], addr[0]);
     APP_TRACE_INFO1("Adv local name: %s", &datsScanDataDisc[2]);
 
     /* store handler ID */
@@ -921,13 +938,11 @@ static void datsWsfBufDiagnostics(WsfBufDiag_t *pInfo)
 /*!
  *  \brief  Handler for a user terminal command.
  *  
- *  cmd ps l          list the FreeRTOS task info
- *  cmd ps s          display the FreeRTOS task statistics
- * 
  *  \param  argc      The number of arguments passed to the command.
  *  \param  argv      The array of arguments; the 0th argument is the command.
- *      cmd close_conn <n>      close connection. n: connection index, 0 for all connections.
- *      cmd show_conn_num       display the active connection number.
+ *      cmd adv_start           start advertising
+ *      cmd adv_stop            stop advertising
+ *      
  *
  *  \return Error code.
  */
@@ -941,8 +956,12 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
     if (argc < 2) {
         return TERMINAL_ERROR_TOO_FEW_ARGUMENTS;
     } else {
-        if (strcmp(argv[1], "ps") == 0) {
-            TerminalTxPrint("cmd argc:%d\n", argc);
+        if (strcmp(argv[1], "adv_on") == 0) {
+            TerminalTxPrint("start advertising\n");
+            AppAdvStart(APP_MODE_AUTO_INIT);
+        } else if (strcmp(argv[1], "adv_off") == 0) {
+            TerminalTxPrint("stop advertising\n");
+            AppAdvStop();
         } else {
             TerminalTxPrint("cmd argc:%d\n", argc);
         }

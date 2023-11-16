@@ -259,6 +259,7 @@ void lctrMstRxDirectAdvBPduHandler(void)
 /*************************************************************************************************/
 void lctrMstDiscoverBuildOp(void)
 {
+  APP_TRACE_INFO0("@? lctrMstDiscoverBuildOp");
   /* Pre-resolve common structures for efficient access. */
   BbOpDesc_t * const pOp = &lctrMstScan.scanBod;
   BbBleData_t * const pBle = &lctrMstScan.bleData;

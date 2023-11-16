@@ -213,7 +213,7 @@ static const uint8_t lctrAcadNextStateTbl[LCTR_ACAD_STATE_TOTAL][LCTR_ACAD_COMM_
 /*************************************************************************************************/
 void lctrSlvExtAdvExecuteSm(lctrAdvSet_t *pAdvSet, uint8_t event)
 {
-  LL_TRACE_INFO3("lctrSlvExtAdvExecuteSm: handle=%u, state=%u, event=%u", pAdvSet->handle, pAdvSet->state, event);
+  APP_TRACE_INFO3("@? lctrSlvExtAdvExecuteSm hndl=%u st=%u evt=%u", pAdvSet->handle, pAdvSet->state, event);
 
   if (lctrExtAdvActionTbl[pAdvSet->state][event])
   {

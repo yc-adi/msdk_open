@@ -53,11 +53,7 @@ void lctrMstDiscoverEndOp(BbOpDesc_t *pOp)
 {
   lctrMstScanCtx_t *pCtx = (lctrMstScanCtx_t *)pOp->pCtx;
 
-  if (gu8Debug > 1)
-  {
-    APP_TRACE_INFO3("@?@ %d lctrMstDiscoverEndOp shutdown=%d selfTerm=%d", gu8Debug, pCtx->shutdown, pCtx->selfTerm);
-    gu8Debug++;
-  }
+  //APP_TRACE_INFO2("@? lctrMstDiscoverEndOp shutdown=%d selfTerm=%d", pCtx->shutdown, pCtx->selfTerm);
 
   WSF_ASSERT(pOp->protId == BB_PROT_BLE);
   WSF_ASSERT(pOp->prot.pBle->chan.opType == BB_BLE_OP_MST_ADV_EVENT);
@@ -177,14 +173,6 @@ void lctrMstDiscoverEndOp(BbOpDesc_t *pOp)
         LL_TRACE_WARN1("!!!                           scanWindowUsec=%u", LCTR_BLE_TO_US(pCtx->scanParam.scanWindow));
       }
     }
-  }
-
-  if (gu8Debug > 1)
-  {
-    APP_TRACE_INFO1("@?@ %d end of lctrMstDiscoverEndOp", gu8Debug);
-    gu8Debug = 7;
-    BbOpDesc_t * const pCur = BbGetCurrentBod();
-    BbBleMstAdvEvent_t * const pScan = &pCur->prot.pBle->op.mstAdv;
   }
 }
 

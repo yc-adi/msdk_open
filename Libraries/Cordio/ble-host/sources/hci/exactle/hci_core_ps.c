@@ -339,6 +339,11 @@ void HciCoreHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
       if (handlerId == HCI_EVT_TYPE)
       {
         /* Parse/process events */
+        LlEvt_t *pMsg = (LlEvt_t *)pBuf;
+        if (!(pMsg->hdr.param == 0 && pMsg->hdr.event == 2 && pMsg->hdr.status == 0))
+        {
+          APP_TRACE_INFO3("@? HciCoreHandler RX EVT param=%d evt=%d st=%d", pMsg->hdr.param, pMsg->hdr.event, pMsg->hdr.status);
+        }
         hciEvtProcessMsg(pBuf);
 
         /* Free buffer */
@@ -351,6 +356,7 @@ void HciCoreHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
         if ((pBuf = hciCoreAclReassembly(pBuf)) != NULL)
         {
           /* Call ACL callback; client will free buffer */
+          APP_TRACE_INFO0("@? HciCoreHandler RX ACL");
           hciCb.aclCback(pBuf);
         }
       }

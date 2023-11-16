@@ -111,7 +111,6 @@ void lctrInitActInitiate(void)
   lmgrCb.scanMode = LMGR_SCAN_MODE_INITIATE;
 
   APP_TRACE_INFO0("@?@ lctrInitActInitiate end");
-  gu8Debug = 1;
 }
 
 /*************************************************************************************************/

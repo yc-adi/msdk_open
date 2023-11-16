@@ -63,6 +63,7 @@ const uint16_t scaPpmTbl[] =
 /*************************************************************************************************/
 static void lctrSlvProcessConnInd(lctrConnMsg_t *pMsg)
 {
+  APP_TRACE_INFO2("@? lctrSlvProcessConnInd evt=%d dispId=%d", pMsg->hdr.event, pMsg->hdr.dispId);
   lctrConnEstablish_t *pConnEst = &pMsg->connEstablish;
   lctrConnCtx_t *pCtx;
 

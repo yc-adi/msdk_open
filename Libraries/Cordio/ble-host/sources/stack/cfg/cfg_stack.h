@@ -176,7 +176,7 @@ extern "C" {
 /**@{*/
 /*! Max number of devices in the database */
 #ifndef SMP_DB_MAX_DEVICES
-#define SMP_DB_MAX_DEVICES       3
+#define SMP_DB_MAX_DEVICES       DM_CONN_MAX
 #endif
 /**@}*/
 

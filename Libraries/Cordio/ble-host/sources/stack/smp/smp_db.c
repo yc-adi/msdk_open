@@ -164,7 +164,7 @@ static smpDbDevice_t *smpDbGetRecord(dmConnId_t connId)
   uint8_t *pAddr = DmConnPeerAddr(connId);
   uint8_t i;
 
-  SMP_TRACE_INFO2("smpDbGetRecord: connId: %d type: %d", connId, addrType);
+  SMP_TRACE_INFO2("smpDbGetRecord connId=%d type=%d", connId, addrType);
 
   for (i = SMP_DB_FIRST_REC; i < SMP_DB_MAX_DEVICES; i++, pRec++)
   {

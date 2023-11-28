@@ -168,8 +168,8 @@ static dmConnCcb_t *dmConnCmplStates(void)
 /*************************************************************************************************/
 dmConnCcb_t *dmConnCcbAlloc(uint8_t *pAddr)
 {
-  dmConnCcb_t   *pCcb = dmConnCb.ccb;
-  uint8_t       i;
+  dmConnCcb_t *pCcb = dmConnCb.ccb;
+  uint8_t     i;
 
   for (i = 0; i < DM_CONN_MAX; i++, pCcb++)
   {

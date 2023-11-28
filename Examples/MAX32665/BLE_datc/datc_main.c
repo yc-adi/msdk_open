@@ -36,6 +36,7 @@
 #include "wsf_nvm.h"
 #include "hci_api.h"
 #include "dm_api.h"
+#include "dm_conn.h"
 #include "dm_priv.h"
 #include "gap/gap_api.h"
 #include "att_api.h"
@@ -875,6 +876,20 @@ uint8_t GetConnNum(void)
 /*************************************************************************************************/
 void ShowConns(void)
 {
+    dmConnCcb_t *pCcb = dmConnCb.ccb;
+    uint8_t     i;
+
+    for (i = DM_CONN_MAX; i > 0; i--, pCcb++)
+    {
+        if (pCcb->inUse)
+        {
+            WsfTrace("%d: connId=%d %02X:%02X:%02X:%02X:%02X:%02X", DM_CONN_MAX - i + 1, pCcb->connId,
+                     pCcb->peerAddr[5], pCcb->peerAddr[4], pCcb->peerAddr[3], 
+                     pCcb->peerAddr[2], pCcb->peerAddr[1], pCcb->peerAddr[0]);
+        }
+    }
+
+    /*
     appConnCb_t *pCcb = appConnCb;
     uint8_t       i;
     uint8_t       cnt = 0;
@@ -884,13 +899,12 @@ void ShowConns(void)
         if (pCcb->connId != DM_CONN_ID_NONE)
         {
             cnt++;
-            //pLctrConnTbl[pCcb->connId]
             WsfTrace("%d: connId=%d", cnt, pCcb->connId);
         }
     }
 
     appDbRec_t *pRec = appDb.rec;
-    /* find matching record */
+    // find matching record
     for (i = APP_DB_NUM_RECS; i > 0; i--, pRec++)
     {
         if (pRec->inUse)
@@ -899,6 +913,7 @@ void ShowConns(void)
             WsfTrace("%d, %s", i, pRec->peerAddrStr);
         }
     }
+    */
 }
 
 /*************************************************************************************************/
@@ -941,12 +956,9 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
             TerminalTxPrint("Established connections: %d\r\n", cnt);
         }
         else if (strcmp(argv[1], "show_conns") == 0) {
-            cnt = GetConnNum();
-            TerminalTxPrint("Established connections: %d\r\n", cnt);
-
             ShowConns();
 
-            TerminalTxPrint("\r\n", cnt);
+            //TerminalTxPrint("\r\n");
         }
         else if (strcmp(argv[1], "conn_svr") == 0) {
             TerminalTxPrint("server addr: %s:%s:%s:%s:%s:%s\r\n", argv[2], argv[3], argv[4], argv[5], argv[6], argv[7]);

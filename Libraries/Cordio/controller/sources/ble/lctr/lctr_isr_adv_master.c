@@ -369,7 +369,7 @@ bool_t lctrMstScanRspRxCompHandler(BbOpDesc_t *pOp, const uint8_t *pRspBuf)
         /* scanReqAdvAddr is assigned when LL_PDU_ADV_SCAN_IND is received. */
         if (lctrMstScan.data.disc.scanReqAdvAddr != pScan->filtResults.peerAddr)
         {
-          LL_TRACE_WARN0("Ignore SCAN_RSP due to mismatched advAddr in SCAN_REQ");
+          //LL_TRACE_WARN0("Ignore SCAN_RSP due to mismatched advAddr in SCAN_REQ");
           break;
         }
 

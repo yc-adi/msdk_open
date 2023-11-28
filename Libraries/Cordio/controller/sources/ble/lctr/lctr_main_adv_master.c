@@ -44,6 +44,7 @@
 lctrMstScanCtx_t lctrMstScan;
 
 extern uint8_t appCodedPhyDemo;
+extern uint8_t gu8Debug;
 
 /*************************************************************************************************/
 /*!
@@ -95,7 +96,9 @@ static void lctrMstScanAdvRptNotify(LlAdvReportInd_t *pRpt)
     pRpt->hdr.event = LL_ADV_REPORT_IND;
     pRpt->hdr.status = LL_SUCCESS;
 
+    if (gu8Debug) { //@?
     LL_TRACE_INFO1("### LlEvent ###  LL_ADV_REPORT_IND, status=LL_SUCCESS addressType=%u", pRpt->addrType);
+    }
 
     LmgrSendEvent((LlEvt_t *)pRpt);
   }
@@ -270,7 +273,7 @@ void lctrMstDiscoverBuildOp(void)
   uint8_t *pBuf;
 
   /*** General Setup ***/
-
+  pOp->type = 2;
   pOp->reschPolicy = BB_RESCH_MOVEABLE;
   pOp->protId = BB_PROT_BLE;
   pOp->prot.pBle = pBle;
@@ -415,7 +418,10 @@ void lctrMstDiscoverBuildOp(void)
   lctrMstScan.selfTerm = FALSE;
   lctrMstScan.shutdown = FALSE;
 
+  APP_TRACE_INFO3("@? due=%d min=%d max=%d", pOp->dueUsec, pOp->minDurUsec, pOp->maxDurUsec);
   SchInsertNextAvailable(pOp);
+  SchPrintBod(); //@?
+
   lctrMstScan.scanWinStartUsec = pOp->dueUsec;
 }
 

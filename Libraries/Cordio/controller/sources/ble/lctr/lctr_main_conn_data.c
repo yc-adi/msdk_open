@@ -947,6 +947,7 @@ void lctrRxEnq(uint8_t *pBuf, uint16_t eventCounter, uint16_t connHandle)
   UINT16_TO_BUF(pBuf, eventCounter);
 
   /* Queue LE Data PDU. */
+  //@? will cause trouble PRINT_BLE_RX_BUFF(pBuf[2], pBuf[3]);
   WsfMsgEnq(&lmgrConnCb.rxDataQ, connHandle, pBuf);
   WsfSetEvent(lmgrPersistCb.handlerId, (1 << LCTR_EVENT_RX_PENDING));
 }

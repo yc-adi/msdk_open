@@ -24,6 +24,7 @@
 #ifndef APP_CFG_H
 #define APP_CFG_H
 
+#include "cfg_stack.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -43,7 +44,7 @@ extern "C" {
 
 /*! \brief Number of application database device records */
 #ifndef APP_DB_NUM_RECS
-#define APP_DB_NUM_RECS 3
+#define APP_DB_NUM_RECS DM_CONN_MAX
 #endif
 
 /*! \brief Number of client characteristic configuration descriptor handles per record */

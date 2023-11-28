@@ -148,7 +148,7 @@ uint16_t LctrInitConnMem(uint8_t *pFreeMem, uint32_t freeMemSize)
   }
 
   /* Allocate memory. */
-  LL_TRACE_INFO2("    RAM: %u x %u bytes -- connection context", pLctrRtCfg->maxConn, sizeof(lctrConnCtx_t));
+  APP_TRACE_INFO2("    RAM: %u x %u bytes -- connection context: pLctrConnTbl", pLctrRtCfg->maxConn, sizeof(lctrConnCtx_t));
   pLctrConnTbl = (lctrConnCtx_t *)pAvailMem;
   pAvailMem += sizeof(lctrConnCtx_t) * pLctrRtCfg->maxConn;
 
@@ -377,6 +377,8 @@ lctrConnCtx_t *lctrAllocConnCtx(void)
   {
     if (!pLctrConnTbl[connIdx].enabled)
     {
+      APP_TRACE_INFO0("@? lctrAllocConnCtx - fill in the conn context");
+      
       lctrConnCtx_t *pCtx = LCTR_GET_CONN_CTX(connIdx);
 
       memset(&pLctrConnTbl[connIdx], 0, sizeof(lctrConnCtx_t));

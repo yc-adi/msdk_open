@@ -78,7 +78,7 @@ extern "C" {
 /**@{*/
 /*! \brief Maximum number of connections */
 #ifndef DM_CONN_MAX
-#define DM_CONN_MAX              3
+#define DM_CONN_MAX              3  //@?
 #endif
 
 /*! \brief Maximum number of periodic advertising synchronizations */

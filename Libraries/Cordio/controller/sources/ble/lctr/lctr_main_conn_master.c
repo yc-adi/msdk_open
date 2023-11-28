@@ -319,7 +319,7 @@ void lctrMstConnBuildOp(lctrConnCtx_t *pCtx, lctrConnInd_t *pConnInd)
   pCtx->localConnDurUsec = lctrCalcConnDurationUsec(pCtx, &pCtx->localDataPdu);  /* actual PHY */
 
   /*** General setup ***/
-
+  pOp->type = 1;
   pOp->minDurUsec = pCtx->effConnDurUsec;
   pOp->maxDurUsec = LCTR_CONN_IND_US(pCtx->connInterval);
 

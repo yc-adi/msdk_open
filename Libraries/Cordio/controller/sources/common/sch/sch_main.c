@@ -47,6 +47,7 @@ enum
 
 /*! \brief      Scheduler control block. */
 SchCtrlBlk_t schCb;
+extern uint8_t gu8Debug;
 
 /*************************************************************************************************/
 /*!
@@ -266,6 +267,9 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
       schRemoveHead();
       if (pBod->endCback)
       {
+        if (gu8Debug) {
+          APP_TRACE_INFO1("@? type=%d", pBod->type);
+        }
         pBod->endCback(pBod);
       }
       schCb.eventSetFlagCount--;

@@ -39,6 +39,16 @@ extern "C" {
   Macros
 **************************************************************************************************/
 
+#define PRINT_BLE_RX_BUFF(hdr, n) {char str[200]; uint8_t pos = 0; pos=sprintf(str, "RX: %02X %02X ", hdr, n); \
+          for (int ii = 0; ii < ((n)); ii++) { \
+          pos+=sprintf(&str[pos], "%02X ", *(volatile uint8_t *)(0x40053180 + ii)); } \
+          sprintf(&str[pos], "\n"); APP_TRACE_INFO1("%s", str);}
+
+#define PRINT_BUF(prompt, addr, n) {char str[200]; uint8_t pos = 0; pos = sprintf(str, "%s: ", #prompt); \
+          for (int ii = 0; ii < ((n)); ii++) { \
+          pos += sprintf(&str[pos], "%02X ", (char)addr[ii]);}  \
+          sprintf(&str[pos], "\n"); APP_TRACE_INFO1("%s", str);}
+
 #ifndef WSF_TRACE_ENABLED
 /*! \brief      Trace enable flag (default is disabled, override with compile-time directive). */
 #define WSF_TRACE_ENABLED         FALSE
@@ -364,6 +374,8 @@ bool_t WsfTokenService(void);
 #define DM_TRACE_INFO2(msg, var1, var2)             WSF_TRACE2("DM", "INFO", msg, var1, var2)
 /*! \brief 3 argument DM info trace. */
 #define DM_TRACE_INFO3(msg, var1, var2, var3)       WSF_TRACE3("DM", "INFO", msg, var1, var2, var3)
+/*! \brief 4 argument DM info trace. */
+#define DM_TRACE_INFO4(msg, var1, var2, var3, var4) WSF_TRACE4("DM", "INFO", msg, var1, var2, var3, var4)
 /*! \brief 0 argument DM warning trace. */
 #define DM_TRACE_WARN0(msg)                         WSF_TRACE0("DM", "WARN", msg)
 /*! \brief 1 argument DM warning trace. */

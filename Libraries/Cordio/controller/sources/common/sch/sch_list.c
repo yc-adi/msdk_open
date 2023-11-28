@@ -81,6 +81,8 @@
 #define SCH_CHECK_LIST_INTEGRITY            FALSE
 #endif
 
+extern uint8_t gu8Debug;
+
 #if (SCH_CHECK_LIST_INTEGRITY)
 /*************************************************************************************************/
 /*!
@@ -667,15 +669,16 @@ void SchInsertNextAvailable(BbOpDesc_t *pBod)
 #if (SCH_CHECK_LIST_INTEGRITY)
   SchCheckIsNotInserted(pBod);
 #endif
-
-  pBod->dueUsec = PalBbGetCurrentTime() + BbGetSchSetupDelayUs();
+  uint32_t cur = PalBbGetCurrentTime();
+  uint32_t delay = BbGetSchSetupDelayUs();
+  pBod->dueUsec = cur + delay;
+  APP_TRACE_INFO3("@? SchInsertNextAvailable due=%d cur=%d delay=%d", pBod->dueUsec, cur, delay);
 
   if (schCb.pHead == NULL)
   {
     schInsertToEmptyList(pBod);
   }
-  else if (SCH_IS_DONE_BEFORE(pBod, schCb.pHead) &&
-           schCheckCancelHead())
+  else if (SCH_IS_DONE_BEFORE(pBod, schCb.pHead) && schCheckCancelHead())
   {
     /* Insert at head */
     WSF_ASSERT(pBod != schCb.pHead);
@@ -695,7 +698,7 @@ void SchInsertNextAvailable(BbOpDesc_t *pBod)
         pBod->dueUsec = SCH_END_TIME(pCur);
       }
 
-      if ((pCur->pNext == NULL) ||                          /* insert at tail */
+      if ((pCur->pNext == NULL) ||  /* insert at tail */
           SCH_IS_DONE_BEFORE(pBod, pCur->pNext))
       {
         schInsertAfter(pBod, pCur);
@@ -706,7 +709,7 @@ void SchInsertNextAvailable(BbOpDesc_t *pBod)
     }
   }
 
-  SchInsertTryLoadBod(pBod);
+  SchInsertTryLoadBod(pBod);  // immediately try to load this BOD to start the whole process
 }
 
 /*************************************************************************************************/
@@ -1171,4 +1174,40 @@ bool_t SchIsBodCancellable(BbOpDesc_t *pBod)
   }
 
   return result;
+}
+
+/*************************************************************************************************/
+/*!
+ *  \brief      show BOD info.
+ *
+ *  \param      NONE
+ *
+ *  \return     NOE
+ */
+/*************************************************************************************************/
+void SchPrintBod(void)
+{
+  if (schCb.pHead == NULL)
+  {
+    WsfTrace("empty schCb");
+    return;
+  }
+
+  WsfTrace("cnt=%d", schCb.cnt);
+
+  if (schCb.cnt == 2)
+  {
+    gu8Debug = 1;
+  }
+  BbOpDesc_t *pCur = schCb.pHead;
+  uint8_t i = 1;
+  uint32_t curTime;
+  uint32_t delta;
+  do
+  {
+    curTime = PalBbGetCurrentTime();
+    delta = BbGetTargetTimeDelta(pCur->dueUsec, curTime);
+    WsfTrace("%d type=%d due=%d(%d) min=%d max=%d", i++, pCur->type, pCur->dueUsec, delta, pCur->minDurUsec, pCur->maxDurUsec);
+    pCur = pCur->pNext;
+  } while (pCur != NULL);
 }

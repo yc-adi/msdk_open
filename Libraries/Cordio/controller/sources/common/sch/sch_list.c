@@ -1193,7 +1193,7 @@ void SchPrintBod(void)
     return;
   }
 
-  WsfTrace("cnt=%d", schCb.cnt);
+  WsfTrace("BOD cnt=%d", schCb.cnt);
 
   if (schCb.cnt == 2)
   {

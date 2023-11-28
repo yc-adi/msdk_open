@@ -223,7 +223,7 @@ static const uint8_t datsAdvDataDisc[] = {
 /*! scan data, discoverable mode */
 uint8_t datsScanDataDisc[] = {
     /*! device name */
-    11, /*! length */                        // 0
+    11, /*! length */                       // 0
     DM_ADV_TYPE_LOCAL_NAME, /*! AD type */  // 1
     'D',    // 2
     'A',    // 3
@@ -235,7 +235,7 @@ uint8_t datsScanDataDisc[] = {
     '0',    // 9
     '0',    // 10
     '0',    // 11
-    0       // space holder
+    0       // 12 space holder
 };
 
 /**************************************************************************************************
@@ -822,7 +822,6 @@ static void datsBtnCback(uint8_t btn)
 {
 #if (BT_VER > 8)
     dmConnId_t connId = AppConnIsOpen();
-    APP_TRACE_INFO1("connId=%d", connId);
     if (connId != DM_CONN_ID_NONE)
 #else
     if (AppConnIsOpen() != DM_CONN_ID_NONE)
@@ -973,6 +972,7 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
 
     return TERMINAL_ERROR_OK;
 }
+
 /*************************************************************************************************/
 /*!
  *  \brief     Platform button press handler.

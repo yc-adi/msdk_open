@@ -67,7 +67,6 @@ void DatcHandlerInit(wsfHandlerId_t handlerId);
 /*************************************************************************************************/
 void DatcHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg);
 
-uint8_t GetConnNum(void);
 void ShowConns(void);
  
 #ifdef __cplusplus

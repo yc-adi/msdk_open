@@ -296,8 +296,8 @@ dmConnCcb_t *dmConnCcbById(dmConnId_t connId)
 /*************************************************************************************************/
 uint8_t dmConnNum(void)
 {
-  dmConnCcb_t   *pCcb = dmConnCb.ccb;
-  uint8_t       i, j;
+  dmConnCcb_t *pCcb = dmConnCb.ccb;
+  uint8_t     i, j;
 
   for (i = DM_CONN_MAX, j = 0; i > 0; i--, pCcb++)
   {

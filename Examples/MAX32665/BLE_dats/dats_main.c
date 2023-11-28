@@ -222,7 +222,7 @@ static const uint8_t datsAdvDataDisc[] = {
 /*! scan data, discoverable mode */
 uint8_t datsScanDataDisc[] = {
     /*! device name */
-    11, /*! length */                        // 0
+    11, /*! length */                       // 0
     DM_ADV_TYPE_LOCAL_NAME, /*! AD type */  // 1
     'D',    // 2
     'A',    // 3
@@ -449,7 +449,7 @@ uint8_t datsWpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation, 
 
     if (len < 64) {
         /* print received data if not a speed test message */
-        APP_TRACE_INFO1("@? datsWpWriteCback rcvd: %s", (const char *)pValue);
+        APP_TRACE_INFO1("datsWpWriteCback rcvd: %s", (const char *)pValue);
 
         /* send back some data */
         datsSendData(connId);
@@ -821,7 +821,6 @@ static void datsBtnCback(uint8_t btn)
 {
 #if (BT_VER > 8)
     dmConnId_t connId = AppConnIsOpen();
-    APP_TRACE_INFO1("@? connId=%d", connId);
     if (connId != DM_CONN_ID_NONE)
 #else
     if (AppConnIsOpen() != DM_CONN_ID_NONE)

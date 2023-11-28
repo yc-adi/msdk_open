@@ -846,30 +846,6 @@ static void datcStartSpeedTest(dmConnId_t connId)
 
 /*************************************************************************************************/
 /*!
- *  \brief  return the established connection number
- *
- *  \return establish connection number
- */
-/*************************************************************************************************/
-uint8_t GetConnNum(void)
-{
-    appConnCb_t   *pCcb = appConnCb;
-    uint8_t       i;
-    uint8_t       cnt = 0;
-
-    for (i = DM_CONN_MAX; i > 0; i--, pCcb++)
-    {
-        if (pCcb->connId != DM_CONN_ID_NONE)
-        {
-            cnt++;
-        }
-    }
-
-    return cnt;
-}
-
-/*************************************************************************************************/
-/*!
  *  \brief  display the established connection info
  *  appDb
  */
@@ -934,6 +910,7 @@ void ShowConns(void)
  *      cmd close_conn <n>                  close connection. n: connection index, 0 for all connections.
  *      cmd get_conn_num                    display the active connection number.
  *      cmd conn_svr 01 2A 03 04 05 06      connect to server (addr 01:2A:03:04:05:06)
+ *      cmd qry                             query status
  *      cmd send_data <n>                   send test data to the server <n>
  *      cmd scan_on                         start scan
  *      cmd test
@@ -945,41 +922,34 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
 {
     char Resp[TERM_CMD_RESP_BUF_SIZE];
     uint8_t cnt;
+    uint8_t i;
 
     Resp[0] = 0;
 
     if (argc < 2) {
         return TERMINAL_ERROR_TOO_FEW_ARGUMENTS;
     } else {
-        if (strcmp(argv[1], "get_conn_num") == 0) {
-            cnt = GetConnNum();
+        if (strcmp(argv[1], "clear") == 0) {
+            dmConnCcb_t *pCcb = dmConnCb.ccb;
+
+            for (i = DM_CONN_MAX; i > 0; i--, pCcb++)
+            {
+                if (pCcb->inUse)
+                {
+                    AppConnClose(pCcb->connId);
+                }
+            }
+                
+            AppClearAllBondingInfo();
+            AppDbNvmDeleteAll();
+        }
+        else if (strcmp(argv[1], "get_conn_num") == 0) {
+            cnt = dmConnNum();
             TerminalTxPrint("Established connections: %d\r\n", cnt);
         }
         else if (strcmp(argv[1], "show_conns") == 0) {
             ShowConns();
-
-            //TerminalTxPrint("\r\n");
         }
-        else if (strcmp(argv[1], "conn_svr") == 0) {
-            TerminalTxPrint("server addr: %s:%s:%s:%s:%s:%s\r\n", argv[2], argv[3], argv[4], argv[5], argv[6], argv[7]);
-            char* endptr;  // Used to check for conversion errors
-            uint8_t addr[6];
-            for (int i = 0; i < 6; ++i)
-            {
-                addr[5 - i] = (uint8_t)strtol(argv[2 + i], &endptr, 16);
-            }
-
-            // borrow from datcScanReport()
-            /* stop scanning and connect */
-            datcCb.autoConnect = FALSE;
-            AppScanStop();
-
-            /* Store peer information for connect on scan stop */
-            datcConnInfo.addrType = 0;
-            memcpy(datcConnInfo.addr, addr, sizeof(bdAddr_t));
-            datcConnInfo.dbHdl = 0;
-            datcConnInfo.doConnect = TRUE;
-        } 
         
         else if (strcmp(argv[1], "auto_conn_on") == 0) {
             datcCb.autoConnect = TRUE;
@@ -1016,6 +986,14 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
             TerminalTxPrint("datcCb.check=%d\r\n", datcCb.check);
         } 
         
+        else if (strcmp(argv[1], "qry") == 0) {
+            TerminalTxPrint("check=%d conn=%d\r\n", datcCb.check, datcCb.autoConnect);
+
+            SchPrintBod();
+
+            ShowConns();
+        }
+
         else if (strcmp(argv[1], "show_scan_report_on") == 0) {
             datcCb.showScanReport = TRUE;
             TerminalTxPrint("start to show scan report\r\n");
@@ -1035,6 +1013,7 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         else if (strcmp(argv[1], "show_bod") == 0) {
             SchPrintBod();
         }
+
         else if (strcmp(argv[1], "test") == 0) {
             gu8Debug = 0;
             TerminalTxPrint("gu8Debug = 0\r\n");

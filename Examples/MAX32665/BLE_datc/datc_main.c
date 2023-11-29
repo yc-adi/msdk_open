@@ -93,6 +93,7 @@ extern appDb_t appDb;
 /**************************************************************************************************
   Local Variables
 **************************************************************************************************/
+
 /*! application control block */
 struct {
     uint16_t hdlList[DM_CONN_MAX][APP_DB_HDL_LIST_LEN]; /*! Cached handle list */

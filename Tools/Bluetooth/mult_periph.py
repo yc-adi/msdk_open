@@ -138,11 +138,10 @@ if __name__ == '__main__':
     monitor_input_thd.daemon = True
     monitor_input_thd.start()
 
-    ser1 = ComClass(1, '/dev/serial/by-id/usb-FTDI_FT231X_USB_UART_D30BPVGV-if00-port0', 115200)  	# dats MAX32666 y6
-    #ser2 = ComClass(2, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D30A1X9V-if00-port0', 115200)  # datc MAX32665 board_2
-    ser2 = ComClass(2, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D309ZDE9-if00-port0', 115200)  # datc MAX32655 y2
-    ser3 = ComClass(3, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D307NU7N-if00-port0', 115200)  # datc MAX32655 y3
-    ser4 = ComClass(4, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D3073IDG-if00-port0', 115200)  # datc MAX32655 y1
+    ser1 = ComClass(1, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D3074PPH-if00-port0', 115200)  # dats MAX32655 y9
+    ser2 = ComClass(2, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D3073IDG-if00-port0', 115200)  # datc MAX32655 y1
+    ser3 = ComClass(3, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D309ZDE9-if00-port0', 115200)  # datc MAX32655 y2
+    ser4 = ComClass(4, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D307NU7N-if00-port0', 115200)  # datc MAX32655 y3
 
     while True:
         pass

@@ -52,7 +52,6 @@ typedef struct
 {
   /*! Common for all roles */
   bdAddr_t     peerAddr;                      /*! Peer address */
-  char         peerAddrStr[18];
   uint8_t      addrType;                      /*! Peer address type */
   dmSecIrk_t   peerIrk;                       /*! Peer IRK */
   dmSecCsrk_t  peerCsrk;                      /*! Peer CSRK */

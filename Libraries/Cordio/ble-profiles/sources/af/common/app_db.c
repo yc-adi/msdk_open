@@ -1269,8 +1269,3 @@ void AppDbNvmDeleteAll(void)
     WsfNvmEraseData(DBNV_ID(APP_DB_NVM_VALID_ID, i), NULL);
   }
 }
-
-void PreparePeerAddrStr(bdAddr_t addr, char *str)
-{
-  sprintf(str, "%02X:%02X:%02X:%02X:%02X:%02X", addr[5], addr[4], addr[3], addr[2], addr[1], addr[0]);
-}

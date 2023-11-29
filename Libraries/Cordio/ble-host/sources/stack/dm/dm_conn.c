@@ -1723,7 +1723,7 @@ void DmConnSetIdle(dmConnId_t connId, uint16_t idleMask, uint8_t idle)
 
   WsfTaskUnlock();
 
-  DM_TRACE_INFO2("connId=%d idleMask=0x%04x", connId, dmConnCb.ccb[connId-1].idleMask);
+  //DM_TRACE_INFO2("connId=%d idleMask=0x%04x", connId, dmConnCb.ccb[connId-1].idleMask);
 }
 
 /*************************************************************************************************/

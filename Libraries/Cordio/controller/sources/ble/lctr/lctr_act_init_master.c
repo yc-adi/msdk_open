@@ -101,7 +101,7 @@ void lctrInitActInitiate(void)
   lctrMstInit.backoffCount = 1;
   lctrMstInit.upperLimit = 1;
   
-  APP_TRACE_INFO1("@? lctrInitActInitiate peerAddr=%X", pInitMsg->peerAddr);
+  //APP_TRACE_INFO1("@? lctrInitActInitiate peerAddr=%X", pInitMsg->peerAddr);
   lctrMstInitiateBuildOp(&pInitMsg->connSpec, pInitMsg->peerAddrType, pInitMsg->peerAddr);
   lctrMstConnBuildOp(pCtx, &lctrMstInit.data.init.connInd);
 

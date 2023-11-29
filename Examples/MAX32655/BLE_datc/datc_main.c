@@ -475,8 +475,8 @@ static void datcScanStart(dmEvt_t *pMsg)
 /*************************************************************************************************/
 static void datcScanStop(dmEvt_t *pMsg)
 {
-    APP_TRACE_INFO4("@? datcScanStop st=%d check=%d autoConn=%d doConn=%d",
-                     pMsg->hdr.status, datcCb.check, datcCb.autoConnect, datcConnInfo.doConnect);
+    //APP_TRACE_INFO4("@? datcScanStop st=%d check=%d autoConn=%d doConn=%d",
+    //                 pMsg->hdr.status, datcCb.check, datcCb.autoConnect, datcConnInfo.doConnect);
 
     if (pMsg->hdr.status == HCI_SUCCESS) {
         datcCb.check = FALSE;
@@ -484,6 +484,7 @@ static void datcScanStop(dmEvt_t *pMsg)
 
         /* Open connection */
         if (datcConnInfo.doConnect) {
+            /*
             char str[100];
             sprintf(str, "@?     doConnect addrType=%d addr=%02X:%02X:%02X:%02X:%02X:%02X dbHdl=%d",
                          datcConnInfo.addrType,
@@ -491,6 +492,7 @@ static void datcScanStop(dmEvt_t *pMsg)
                          datcConnInfo.addr[2], datcConnInfo.addr[1], datcConnInfo.addr[0], 
                          datcConnInfo.dbHdl);
             APP_TRACE_INFO1("%s", str);
+            */
             AppConnOpen(datcConnInfo.addrType, datcConnInfo.addr, datcConnInfo.dbHdl);
             datcConnInfo.doConnect = FALSE;
         }
@@ -1006,7 +1008,7 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         else if (strcmp(argv[1], "show_bod") == 0) {
             SchPrintBod();
         }
-        
+
         else if (strcmp(argv[1], "show_scan_report_on") == 0) {
             datcCb.showScanReport = TRUE;
             TerminalTxPrint("start to show scan report\r\n");
@@ -1319,7 +1321,7 @@ static void datcProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_SCAN_STOP_IND:
-        APP_TRACE_INFO0("@? DM_SCAN_STOP_IND");
+        //APP_TRACE_INFO0("@? DM_SCAN_STOP_IND");
         datcScanStop(pMsg);
         uiEvent = APP_UI_SCAN_STOP;
         break;

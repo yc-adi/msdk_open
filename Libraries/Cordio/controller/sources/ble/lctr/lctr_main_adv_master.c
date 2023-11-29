@@ -418,9 +418,9 @@ void lctrMstDiscoverBuildOp(void)
   lctrMstScan.selfTerm = FALSE;
   lctrMstScan.shutdown = FALSE;
 
-  APP_TRACE_INFO3("@? due=%d min=%d max=%d", pOp->dueUsec, pOp->minDurUsec, pOp->maxDurUsec);
+  //APP_TRACE_INFO3("@? due=%d min=%d max=%d", pOp->dueUsec, pOp->minDurUsec, pOp->maxDurUsec);
   SchInsertNextAvailable(pOp);
-  SchPrintBod(); //@?
+  //SchPrintBod(); //@?
 
   lctrMstScan.scanWinStartUsec = pOp->dueUsec;
 }

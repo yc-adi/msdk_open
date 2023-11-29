@@ -377,7 +377,7 @@ lctrConnCtx_t *lctrAllocConnCtx(void)
   {
     if (!pLctrConnTbl[connIdx].enabled)
     {
-      APP_TRACE_INFO0("@? lctrAllocConnCtx - fill in the conn context");
+      //APP_TRACE_INFO0("@? lctrAllocConnCtx - fill in the conn context");
       
       lctrConnCtx_t *pCtx = LCTR_GET_CONN_CTX(connIdx);
 

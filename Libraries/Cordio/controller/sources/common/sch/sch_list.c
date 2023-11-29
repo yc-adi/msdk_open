@@ -672,7 +672,7 @@ void SchInsertNextAvailable(BbOpDesc_t *pBod)
   uint32_t cur = PalBbGetCurrentTime();
   uint32_t delay = BbGetSchSetupDelayUs();
   pBod->dueUsec = cur + delay;
-  APP_TRACE_INFO3("@? SchInsertNextAvailable due=%d cur=%d delay=%d", pBod->dueUsec, cur, delay);
+  //APP_TRACE_INFO3("@? SchInsertNextAvailable due=%d cur=%d delay=%d", pBod->dueUsec, cur, delay);
 
   if (schCb.pHead == NULL)
   {

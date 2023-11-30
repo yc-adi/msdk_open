@@ -33,6 +33,7 @@
 #include "svc_ch.h"
 #include "app_api.h"
 #include "app_main.h"
+#include "wsf_os.h"
 
 /**************************************************************************************************
   Macros
@@ -71,6 +72,10 @@ static appDiscCb_t appDiscCb[DM_CONN_MAX];
 
 /*! Discovery callback */
 static appDiscCback_t appDiscCback;
+
+extern OCMP_ST_t ocmpSt;
+
+extern void datcRestartScanningHandler(void);
 
 /*************************************************************************************************/
 /*!
@@ -731,9 +736,16 @@ void AppDiscComplete(dmConnId_t connId, uint8_t status)
   if (status == APP_DISC_CFG_CMPL)
   {
     pAppDiscCb->connCfgStatus = APP_DISC_CFG_CMPL;
-  }
 
-  APP_TRACE_INFO2("AppDiscComplete connId:%d status:0x%02x", connId, status);
+    ocmpSt = OCMP_ST_CONN;
+    APP_TRACE_INFO2("AppDiscComplete connId=%d st=%d ocmp=3(CONNECTED)", connId, status);
+
+    datcRestartScanningHandler();
+  }
+  else
+  {
+    APP_TRACE_INFO2("AppDiscComplete connId=%d st=%d", connId, status);
+  }
 }
 
 /*************************************************************************************************/

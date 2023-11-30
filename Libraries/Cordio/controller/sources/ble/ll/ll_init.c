@@ -115,9 +115,7 @@ void LlInitRunTimeCfg(const LlRtCfg_t *pCfg)
 {
   WSF_ASSERT(pLctrRtCfg == NULL);
   WSF_ASSERT(pCfg);
-  static int i = LL_MAX_CONN;
-  APP_TRACE_INFO1("@? LL_MAX_CONN=%d", i);
-
+  
   WSF_ASSERT(pCfg->btVer >= LL_VER_BT_CORE_SPEC_4_0);
   WSF_ASSERT(pCfg->maxAdvReports > 0);
   WSF_ASSERT(pCfg->maxAdvSets <= LL_MAX_ADV_SETS);

@@ -1041,6 +1041,12 @@ void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
     if (pMsg != NULL) {
         APP_TRACE_INFO1("Dats got evt %d", pMsg->event);
 
+        if (pMsg->event == 153)
+        {
+            __asm("nop");
+            __asm("nop");
+        }
+        
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {
             /* process server-related ATT messages */

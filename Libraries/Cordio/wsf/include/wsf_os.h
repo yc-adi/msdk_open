@@ -118,6 +118,15 @@ typedef struct
   uint8_t         status;         /*!< \brief General purpose status value passed to event handler */
 } wsfMsgHdr_t;
 
+/*! \brief one central multiple-peripheral (OCMP) state machine */
+typedef enum {
+  OCMP_ST_INIT = 0,
+  OCMP_ST_SCAN,
+  OCMP_ST_CONNECTING,
+  OCMP_ST_CONN,
+  OCMP_ST_SCAN_CONN
+} OCMP_ST_t;
+
 /**************************************************************************************************
   Callback Function Types
 **************************************************************************************************/

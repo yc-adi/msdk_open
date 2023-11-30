@@ -27,6 +27,8 @@
 #include "wsf_trace.h"
 #include "app_ui.h"
 
+extern OCMP_ST_t ocmpSt;
+
 /**************************************************************************************************
   Local Variables
 **************************************************************************************************/
@@ -64,11 +66,31 @@ void AppUiAction(uint8_t event)
       break;
 
     case APP_UI_SCAN_START:
-      APP_TRACE_INFO0(">>> Scanning started <<<");
+      if (ocmpSt == OCMP_ST_INIT)
+      {
+        ocmpSt = OCMP_ST_SCAN;
+      }
+      else if (ocmpSt == OCMP_ST_CONN)
+      {
+        ocmpSt = OCMP_ST_SCAN_CONN;
+      }
+      APP_TRACE_INFO1(">>> Scanning started, ocmp=%d <<<", ocmpSt);
       break;
 
-    case APP_UI_SCAN_STOP:
-      APP_TRACE_INFO0(">>> Scanning stopped <<<");
+    case APP_UI_SCAN_STOP:      
+      if (ocmpSt == OCMP_ST_SCAN)
+      {
+        ocmpSt = OCMP_ST_INIT;
+      }
+      else if (ocmpSt == OCMP_ST_CONNECTING)
+      {
+        //
+      }
+      else if (ocmpSt == OCMP_ST_SCAN_CONN)
+      {
+        ocmpSt = OCMP_ST_CONN;
+      }
+      APP_TRACE_INFO1(">>> Scanning stopped, ocmp=%d <<<", ocmpSt);
       break;
 
     case APP_UI_SCAN_REPORT:

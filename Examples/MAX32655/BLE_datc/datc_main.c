@@ -57,6 +57,8 @@
 #include "pal_uart.h"
 #include "tmr.h"
 #include "sdsc_api.h"
+#include "wsf_os.h"
+
 /**************************************************************************************************
 Macros
 **************************************************************************************************/
@@ -89,6 +91,7 @@ Macros
 
 extern uint8_t gu8Debug;
 extern appDb_t appDb;
+extern OCMP_ST_t ocmpSt;
 
 /**************************************************************************************************
   Local Variables
@@ -425,7 +428,7 @@ static void datcAttCback(attEvt_t *pEvt)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datcRestartScanningHandler(void)
+void datcRestartScanningHandler(void)
 {
     datcCb.autoConnect = TRUE;
     datcConnInfo.doConnect = FALSE;
@@ -487,15 +490,15 @@ static void datcScanStopConnStart(dmEvt_t *pMsg)
 
         /* Open connection */
         if (datcConnInfo.doConnect) {
-            /*
             char str[100];
-            sprintf(str, "@?     doConnect addrType=%d addr=%02X:%02X:%02X:%02X:%02X:%02X dbHdl=%d",
+            ocmpSt = OCMP_ST_CONNECTING;  // start connecting
+            sprintf(str, "doConnect addrType=%d addr=%02X:%02X:%02X:%02X:%02X:%02X dbHdl=%d ocmp=2(CONNECTING)",
                          datcConnInfo.addrType,
                          datcConnInfo.addr[5], datcConnInfo.addr[4], datcConnInfo.addr[3], 
                          datcConnInfo.addr[2], datcConnInfo.addr[1], datcConnInfo.addr[0], 
                          datcConnInfo.dbHdl);
             APP_TRACE_INFO1("%s", str);
-            */
+            
             AppConnOpen(datcConnInfo.addrType, datcConnInfo.addr, datcConnInfo.dbHdl);
             datcConnInfo.doConnect = FALSE;
         }
@@ -573,7 +576,13 @@ static void datcScanReport(dmEvt_t *pMsg)
     bool_t connected = FALSE;
 
     /* disregard if not scanning or autoconnecting */
+    /*
     if (!datcCb.check || !datcCb.autoConnect) {
+        return;
+    }
+    */
+    if (ocmpSt == OCMP_ST_CONNECTING)
+    {
         return;
     }
 
@@ -675,8 +684,6 @@ static void datcValueNtf(attEvt_t *pMsg)
 /*************************************************************************************************/
 static void datcSetup(dmEvt_t *pMsg)
 {
-    APP_TRACE_INFO0("@? datcSetup");
-
     datcCb.check = FALSE;
     datcCb.autoConnect = FALSE;
     datcConnInfo.doConnect = FALSE;
@@ -944,7 +951,8 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
                     AppConnClose(pCcb->connId);
                 }
             }
-
+            ocmpSt = OCMP_ST_INIT;
+            
             AppClearAllBondingInfo();
             AppDbNvmDeleteAll();
         }
@@ -981,7 +989,7 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         } 
 
         else if (strcmp(argv[1], "qry") == 0) {
-            TerminalTxPrint("check=%d conn=%d\r\n", datcCb.check, datcCb.autoConnect);
+            TerminalTxPrint("ocmp=%d check=%d conn=%d\r\n", ocmpSt, datcCb.check, datcCb.autoConnect);
 
             SchPrintBod();
 
@@ -1004,7 +1012,7 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
             } else {
                 connId = atoi(argv[2]);
             }
-            TerminalTxPrint("connId=%d\r\n", connId);
+            //TerminalTxPrint("connId=%d\r\n", connId);
             datcSendData(connId);
         }
 
@@ -1314,6 +1322,8 @@ static void datcProcMsg(dmEvt_t *pMsg)
         DmSecGenerateEccKeyReq();
         AppDbNvmReadAll();
         datcRestoreResolvingList(pMsg);
+
+        ocmpSt = OCMP_ST_INIT;
         datcRestartScanning();
         uiEvent = APP_UI_RESET_CMPL;
         break;
@@ -1445,7 +1455,7 @@ static void datcProcMsg(dmEvt_t *pMsg)
 void DatcHandlerInit(wsfHandlerId_t handlerId)
 {
     uint8_t addr[6] = { 0 };
-    APP_TRACE_INFO0("DatcHandlerInit");
+
     AppGetBdAddr(addr);
     APP_TRACE_INFO6("MAC Addr: %02x:%02x:%02x:%02x:%02x:%02x", addr[5], addr[4], addr[3], addr[2],
                     addr[1], addr[0]);

@@ -459,9 +459,12 @@ static void datcRestartScanning(void)
 /*************************************************************************************************/
 static void datcScanStart(dmEvt_t *pMsg)
 {
+    /*
     if (pMsg->hdr.status == HCI_SUCCESS) {
+        APP_TRACE_INFO0("@? datcCb.check = TRUE");
         datcCb.check = TRUE;
     }
+    */
 }
 
 /*************************************************************************************************/
@@ -473,9 +476,9 @@ static void datcScanStart(dmEvt_t *pMsg)
  *  \return None.
  */
 /*************************************************************************************************/
-static void datcScanStop(dmEvt_t *pMsg)
+static void datcScanStopConnStart(dmEvt_t *pMsg)
 {
-    //APP_TRACE_INFO4("@? datcScanStop st=%d check=%d autoConn=%d doConn=%d",
+    //APP_TRACE_INFO4("@? datcScanStopConnStart st=%d check=%d autoConn=%d doConn=%d",
     //                 pMsg->hdr.status, datcCb.check, datcCb.autoConnect, datcConnInfo.doConnect);
 
     if (pMsg->hdr.status == HCI_SUCCESS) {
@@ -1322,7 +1325,7 @@ static void datcProcMsg(dmEvt_t *pMsg)
 
     case DM_SCAN_STOP_IND:
         //APP_TRACE_INFO0("@? DM_SCAN_STOP_IND");
-        datcScanStop(pMsg);
+        datcScanStopConnStart(pMsg);
         uiEvent = APP_UI_SCAN_STOP;
         break;
 

@@ -25,6 +25,8 @@
 #ifndef CFG_MAC_BLE_H
 #define CFG_MAC_BLE_H
 
+#include "cfg_stack.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -40,7 +42,7 @@ extern "C" {
 #endif
 
 #ifndef LL_MAX_CONN
-#define LL_MAX_CONN             4       /*!< Absolute maximum number of connections (maximum is 32). */
+#define LL_MAX_CONN             DM_CONN_MAX       /*!< Absolute maximum number of connections (maximum is 32). */
 #endif
 
 #ifndef LL_MAX_FRAG

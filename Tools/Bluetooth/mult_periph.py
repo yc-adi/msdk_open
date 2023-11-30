@@ -25,7 +25,7 @@ import sys
 import threading
 import time
 
-cmd_data = [list(), list(), list(), list()]
+cmd_data = [list(), list(), list(), list(), list()]
 
 
 def get_curr_time_str():
@@ -92,9 +92,11 @@ class ComClass:
         while self.enable:
             cnt = self.comSerial.inWaiting()
             if cnt != None and cnt > 0:
-                rcvd = self.comSerial.read(cnt).decode()
+                try:
+                    rcvd = self.comSerial.read(cnt).decode()
+                except:
+                    pass
                 self.comSerial.flushInput()
-                #print(f'origin:\n{rcvd}')
 
                 if (len(last_data) > 0):
                     last_data.append(rcvd)
@@ -142,6 +144,7 @@ if __name__ == '__main__':
     ser2 = ComClass(2, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D3073IDG-if00-port0', 115200)  # datc MAX32655 y1
     ser3 = ComClass(3, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D309ZDE9-if00-port0', 115200)  # datc MAX32655 y2
     ser4 = ComClass(4, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D307NU7N-if00-port0', 115200)  # datc MAX32655 y3
+    ser5 = ComClass(5, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D30BLH58-if00-port0', 115200)  # datc MAX32655 y4
 
     while True:
         pass

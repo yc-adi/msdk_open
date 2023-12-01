@@ -102,7 +102,6 @@ struct {
     uint16_t hdlList[DM_CONN_MAX][APP_DB_HDL_LIST_LEN]; /*! Cached handle list */
     wsfHandlerId_t handlerId; /*! WSF hander ID */
     bool_t check; /*! TRUE start to check scan results */
-    bool_t autoConnect; /*! TRUE if auto-connecting */
     bool_t showScanReport;  /*! TRUE display the scan report */
     uint8_t discState[DM_CONN_MAX]; /*! Service discovery state */
     uint8_t hdlListLen; /*! Cached handle list length */
@@ -132,8 +131,8 @@ datcConnInfo_t datcConnInfo;
 
 /*! configurable parameters for master */
 static const appMasterCfg_t datcMasterCfg = {
-    480, /*! The scan interval, in 0.625 ms units */
-    48, /*! The scan window, in 0.625 ms units, 0.625*48=30 ms */
+    320, /*! The scan interval, in 0.625 ms units, 0.625x320=200 ms*/
+    48, /*! The scan window, in 0.625 ms units, 0.625x48=30 ms */
     0, /*! The scan duration in ms */
     DM_DISC_MODE_NONE, /*! The GAP discovery mode */
     DM_SCAN_TYPE_ACTIVE /*! The scan type (active or passive) */
@@ -197,10 +196,10 @@ static const smpCfg_t datcSmpCfg = {
 
 /*! Connection parameters */
 static const hciConnSpec_t datcConnCfg = {
-    400, /*! Minimum connection interval in 1.25ms units */
-    400, /*! Maximum connection interval in 1.25ms units */
+    160, /*! Minimum connection interval in 1.25ms units, 1.25x160=200 ms */
+    160, /*! Maximum connection interval in 1.25ms units */
     0, /*! Connection latency */
-    600, /*! Supervision timeout in 10ms units */
+    100, /*! Supervision timeout in 10ms units */
     0, /*! Unused */
     0 /*! Unused */
 };
@@ -430,7 +429,6 @@ static void datcAttCback(attEvt_t *pEvt)
 /*************************************************************************************************/
 void datcRestartScanningHandler(void)
 {
-    datcCb.autoConnect = TRUE;
     datcConnInfo.doConnect = FALSE;
     AppScanStart(datcMasterCfg.discMode, datcMasterCfg.scanType, datcMasterCfg.scanDuration);
 }
@@ -481,13 +479,7 @@ static void datcScanStart(dmEvt_t *pMsg)
 /*************************************************************************************************/
 static void datcScanStopConnStart(dmEvt_t *pMsg)
 {
-    //APP_TRACE_INFO4("@? datcScanStopConnStart st=%d check=%d autoConn=%d doConn=%d",
-    //                 pMsg->hdr.status, datcCb.check, datcCb.autoConnect, datcConnInfo.doConnect);
-
     if (pMsg->hdr.status == HCI_SUCCESS) {
-        datcCb.check = FALSE;
-        datcCb.autoConnect = FALSE;
-
         /* Open connection */
         if (datcConnInfo.doConnect) {
             char str[100];
@@ -575,13 +567,7 @@ static void datcScanReport(dmEvt_t *pMsg)
     bool_t need_to_connect = FALSE;
     bool_t connected = FALSE;
 
-    /* disregard if not scanning or autoconnecting */
-    /*
-    if (!datcCb.check || !datcCb.autoConnect) {
-        return;
-    }
-    */
-    if (ocmpSt == OCMP_ST_CONNECTING)
+    if (ocmpSt == OCMP_ST_CONNECTING || !datcCb.check)
     {
         return;
     }
@@ -613,11 +599,7 @@ static void datcScanReport(dmEvt_t *pMsg)
     }
 
     if (need_to_connect) {
-        //@? datcPrintScanReport(pMsg);
-
         /* stop scanning and connect */
-        //@? TODO
-        datcCb.autoConnect = FALSE;
         AppScanStop();
 
         /* Store peer information for connect on scan stop */
@@ -671,6 +653,8 @@ static void datcValueNtf(attEvt_t *pMsg)
     if (datcCb.speedTestCounter == 0) {
         APP_TRACE_INFO0((const char *)pMsg->pValue);
     }
+    
+    datcRestartScanningHandler();
 }
 
 /*************************************************************************************************/
@@ -684,8 +668,6 @@ static void datcValueNtf(attEvt_t *pMsg)
 /*************************************************************************************************/
 static void datcSetup(dmEvt_t *pMsg)
 {
-    datcCb.check = FALSE;
-    datcCb.autoConnect = FALSE;
     datcConnInfo.doConnect = FALSE;
     datcCb.restoringResList = FALSE;
 
@@ -751,6 +733,8 @@ static void datcSendData(dmConnId_t connId)
     uint8_t str[] = "hello world";
 
     if (pDatcWpHdlList[connId - 1][WPC_P1_DAT_HDL_IDX] != ATT_HANDLE_NONE) {
+        AppScanStop();
+
         AttcWriteCmd(connId, pDatcWpHdlList[connId - 1][WPC_P1_DAT_HDL_IDX], sizeof(str), str);
     }
 }
@@ -865,8 +849,19 @@ static void datcStartSpeedTest(dmConnId_t connId)
 void ShowConns(void)
 {
     dmConnCcb_t *pCcb = dmConnCb.ccb;
-    uint8_t     i;
+    uint8_t i;
+    uint8_t cnt = 0;
 
+    for (i = DM_CONN_MAX; i > 0; i--, pCcb++)
+    {
+        if (pCcb->inUse)
+        {
+            cnt++;
+        }
+    }
+    WsfTrace("conns=%d", cnt);
+
+    pCcb = dmConnCb.ccb;
     for (i = DM_CONN_MAX; i > 0; i--, pCcb++)
     {
         if (pCcb->inUse)
@@ -951,8 +946,10 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
                     AppConnClose(pCcb->connId);
                 }
             }
+
+            datcCb.check = TRUE;
             ocmpSt = OCMP_ST_INIT;
-            
+
             AppClearAllBondingInfo();
             AppDbNvmDeleteAll();
         }
@@ -962,18 +959,6 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         }
         else if (strcmp(argv[1], "show_conns") == 0) {
             ShowConns();
-        }
-        
-        else if (strcmp(argv[1], "auto_conn_on") == 0) {
-            datcCb.autoConnect = TRUE;
-            TerminalTxPrint("enable auto conn\r\n");
-        } 
-        else if (strcmp(argv[1], "auto_conn_off") == 0) {
-            datcCb.autoConnect = FALSE;
-            TerminalTxPrint("disable auto conn\r\n");
-        } 
-        else if (strcmp(argv[1], "auto_conn_st") == 0) {
-            TerminalTxPrint("datcCb.autoConnect=%d\r\n", datcCb.autoConnect);
         }
 
         else if (strcmp(argv[1], "check_on") == 0) {
@@ -989,7 +974,7 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         } 
 
         else if (strcmp(argv[1], "qry") == 0) {
-            TerminalTxPrint("ocmp=%d check=%d conn=%d\r\n", ocmpSt, datcCb.check, datcCb.autoConnect);
+            TerminalTxPrint("ocmp=%d check=%d\r\n", ocmpSt, datcCb.check);
 
             SchPrintBod();
 
@@ -998,7 +983,6 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
 
         else if (strcmp(argv[1], "scan_on") == 0) {
             datcCb.check = TRUE;
-            datcCb.autoConnect = TRUE;
 
             datcRestartScanningHandler();
 
@@ -1012,7 +996,6 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
             } else {
                 connId = atoi(argv[2]);
             }
-            //TerminalTxPrint("connId=%d\r\n", connId);
             datcSendData(connId);
         }
 
@@ -1069,13 +1052,7 @@ static void datcBtnCback(uint8_t btn)
         switch (btn) {
         case APP_UI_BTN_1_SHORT:
             if (numConnections < DM_CONN_MAX - 1) {
-                /* if scanning cancel scanning */
-                if (datcCb.check) {
-                    AppScanStop();
-                } else if (!datcCb.autoConnect) {
-                    /* else auto connect */
-                    datcRestartScanning();
-                }
+                datcRestartScanning();
             } else {
                 APP_TRACE_INFO0("datcBtnCback: Max connections reached.");
             }
@@ -1153,13 +1130,7 @@ static void datcBtnCback(uint8_t btn)
     } else { /* button actions when not connected */
         switch (btn) {
         case APP_UI_BTN_1_SHORT:
-            /* if scanning cancel scanning */
-            if (datcCb.check) {
-                AppScanStop();
-            } else if (!datcCb.autoConnect) {
-                /* else auto connect */
-                datcRestartScanning();
-            }
+            datcRestartScanning();
             break;
 
         case APP_UI_BTN_1_MED:
@@ -1323,6 +1294,7 @@ static void datcProcMsg(dmEvt_t *pMsg)
         AppDbNvmReadAll();
         datcRestoreResolvingList(pMsg);
 
+        datcCb.check = FALSE;
         ocmpSt = OCMP_ST_INIT;
         datcRestartScanning();
         uiEvent = APP_UI_RESET_CMPL;
@@ -1554,7 +1526,7 @@ void DatcHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
         if (datcCb.speedTestCounter == 0 && pMsg->event != DM_SCAN_REPORT_IND) {
-            APP_TRACE_INFO1("Datc got evt %d", pMsg->event);
+            //@? APP_TRACE_INFO1("Datc got evt %d", pMsg->event);
         }
 
         if (pMsg->event <= ATT_CBACK_END) { /* process ATT messages */

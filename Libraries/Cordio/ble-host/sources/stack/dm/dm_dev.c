@@ -194,7 +194,7 @@ void dmDevPassEvtToDevPriv(uint8_t event, uint8_t param, uint8_t advHandle, bool
 
   // evt=13 param=37        DM_SCAN_STOP_IND
   // evt=12 param=36        DM_SCAN_START_IND advHandle=0 dmDevPrivMsgHandler, dmDevPrivActRpaStart
-  DM_TRACE_INFO3("dmDevPassEvtToDevPriv evt=%d param=%d advHandle=%d", event, param, advHandle);
+  //@? DM_TRACE_INFO3("dmDevPassEvtToDevPriv evt=%d param=%d advHandle=%d", event, param, advHandle);
 
   /* build event */
   evt.hdr.event = event;

@@ -138,11 +138,16 @@ static void bbMstConnTxCompCback(uint8_t status)
 /*************************************************************************************************/
 static void bbMstConnRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint32_t timestamp, uint8_t rxPhyOptions)
 {
-  BB_ISR_START();
-
-  WSF_ASSERT(BbGetCurrentBod());
-
   BbOpDesc_t * const pCur = BbGetCurrentBod();
+  if (pCur == NULL)
+  {
+    APP_TRACE_INFO0("@? !!! bbCb.pOpInProgress=NULL");
+    return;
+  }
+  //@? WSF_ASSERT(BbGetCurrentBod());
+
+  BB_ISR_START();
+  
   BbBleMstConnEvent_t * const pConn = &pCur->prot.pBle->op.mstConn;
 
 #if (BB_SNIFFER_ENABLED == TRUE)

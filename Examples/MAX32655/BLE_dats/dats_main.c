@@ -303,7 +303,7 @@ static void datsSendData(dmConnId_t connId)
     sprintf((char *)str, "back from %s %02X:%02X:%02X:%02X:%02X:%02X",
             (char *)&datsScanDataDisc[2], 
             addr[5], addr[4], addr[3], addr[2], addr[1], addr[0]);
-    APP_TRACE_INFO0((const char *)str);
+    //@? APP_TRACE_INFO0((const char *)str);
 
     if (AttsCccEnabled(connId, DATS_WP_DAT_CCC_IDX)) {
         /* send notification */
@@ -571,7 +571,7 @@ static void datsSetup(dmEvt_t *pMsg)
     AppAdvSetData(APP_SCAN_DATA_CONNECTABLE, sizeof(datsScanDataDisc), (uint8_t *)datsScanDataDisc);
 
     /* start advertising; automatically set connectable/discoverable mode and bondable mode */
-    //@? AppAdvStart(APP_MODE_AUTO_INIT);
+    AppAdvStart(APP_MODE_AUTO_INIT);
 }
 
 /*************************************************************************************************/
@@ -778,7 +778,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
 void DatsHandlerInit(wsfHandlerId_t handlerId)
 {
     uint8_t addr[6] = { 0 };
-    APP_TRACE_INFO0("DatsHandlerInit");
+
     AppGetBdAddr(addr);
     APP_TRACE_INFO6("MAC Addr: %02X:%02X:%02X:%02X:%02X:%02X", 
                     addr[5], addr[4], addr[3], addr[2], addr[1], addr[0]);
@@ -1039,14 +1039,8 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
 void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
-        APP_TRACE_INFO1("Dats got evt %d", pMsg->event);
+        //@? APP_TRACE_INFO1("Dats got evt %d", pMsg->event);
 
-        if (pMsg->event == 153)
-        {
-            __asm("nop");
-            __asm("nop");
-        }
-        
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {
             /* process server-related ATT messages */

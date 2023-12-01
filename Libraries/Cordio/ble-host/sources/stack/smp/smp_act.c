@@ -852,7 +852,7 @@ void smpSmExecute(smpCcb_t *pCcb, smpMsg_t *pMsg)
     SMP_TRACE_INFO2("SMP Exe: evt=%s st=%s", smpEventStr(pMsg->hdr.event), smpStateStr(pCcb->state));
   else
 #endif
-    SMP_TRACE_INFO2("smpSmExecute event=%d state=%d", pMsg->hdr.event, pCcb->state);
+  //@? SMP_TRACE_INFO2("smpSmExecute evt=%d st=%d", pMsg->hdr.event, pCcb->state);
 
   /* look up state table for state */
   pSmIf = DmConnRole(pCcb->connId) == DM_ROLE_SLAVE? smpCb.pSlave : smpCb.pMaster;

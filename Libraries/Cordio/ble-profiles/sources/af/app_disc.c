@@ -550,7 +550,7 @@ void AppDiscProcAttMsg(attEvt_t *pMsg)
       /* continue with service discovery */
       status = AttcDiscServiceCmpl(pAppDiscCb->pDiscCb, pMsg);
 
-      APP_TRACE_INFO1("AttcDiscServiceCmpl status 0x%02x", status);
+      //@? APP_TRACE_INFO1("AttcDiscServiceCmpl st=0x%02x", status);
 
       /* if discovery complete  and successful */
       if (status == ATT_SUCCESS)
@@ -572,7 +572,7 @@ void AppDiscProcAttMsg(attEvt_t *pMsg)
       /* continue with characteristic discovery */
       status = AttcDiscCharCmpl(pAppDiscCb->pDiscCb, pMsg);
 
-      APP_TRACE_INFO1("AttcDiscCharCmpl status 0x%02x", status);
+      //@? APP_TRACE_INFO1("AttcDiscCharCmpl st=0x%02X", status);
 
       /* if discovery complete and successful */
       if (status == ATT_SUCCESS)
@@ -614,7 +614,7 @@ void AppDiscProcAttMsg(attEvt_t *pMsg)
     {
       status = AttcDiscConfigCmpl((dmConnId_t) pMsg->hdr.param, pAppDiscCb->pDiscCb);
 
-      APP_TRACE_INFO1("AttcDiscConfigCmpl status 0x%02x", status);
+      //@? APP_TRACE_INFO1("AttcDiscConfigCmpl st=0x%02x", status);
 
       /* if configuration complete */
       if (status != ATT_CONTINUING)
@@ -744,7 +744,7 @@ void AppDiscComplete(dmConnId_t connId, uint8_t status)
   }
   else
   {
-    APP_TRACE_INFO2("AppDiscComplete connId=%d st=%d", connId, status);
+    //@? APP_TRACE_INFO2("AppDiscComplete connId=%d st=%d", connId, status);
   }
 }
 

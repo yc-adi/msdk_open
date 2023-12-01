@@ -141,7 +141,7 @@ void dmConnSmExecute(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
   action = dmConnStateTbl[pCcb->state][event][DM_CONN_ACTION];
 
   // evt=29 st=3 act=
-  DM_TRACE_INFO4("dmConnSmExecute evt=%d(%d) st=%d act=%d", pMsg->hdr.event, event, pCcb->state, action);
+  //@? DM_TRACE_INFO4("dmConnSmExecute evt=%d(%d) st=%d act=%d", pMsg->hdr.event, event, pCcb->state, action);
 
   /* set next state */
   pCcb->state = dmConnStateTbl[pCcb->state][event][DM_CONN_NEXT_STATE];

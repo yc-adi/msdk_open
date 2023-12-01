@@ -26,6 +26,7 @@
 
 #include "wsf_os.h"
 #include "wsf_timer.h"
+#include "cfg_stack.h"
 #include "dm_main.h"
 
 #ifdef __cplusplus

@@ -109,6 +109,11 @@ extern wsfHandlerId_t WsfActiveHandler;
 /**************************************************************************************************
   Data Types
 **************************************************************************************************/
+typedef enum
+{
+  MSG_T_EMPTY = 0,
+  MSG_T_DM_SCAN_MSG_API_START
+} MSG_t;
 
 /*! \brief Common message structure passed to event handler */
 typedef struct

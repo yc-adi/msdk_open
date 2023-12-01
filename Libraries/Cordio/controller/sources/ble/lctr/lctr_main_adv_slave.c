@@ -229,7 +229,7 @@ void lctrSlvAdvBuildOp(void)
   memset(pBle, 0, sizeof(BbBleData_t));
 
   /*** General Setup ***/
-
+  pOp->type = 10;   // lctrSlvAdvBuildOp
   pOp->reschPolicy = BB_RESCH_MOVEABLE_PREFERRED;
   pOp->protId = BB_PROT_BLE;
   pOp->prot.pBle = pBle;

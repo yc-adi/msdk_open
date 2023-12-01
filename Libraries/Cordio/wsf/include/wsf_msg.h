@@ -54,12 +54,13 @@ void *WsfMsgDataAlloc(uint16_t len, uint8_t tailroom);
 /*!
  *  \brief  Allocate a message buffer to be sent with WsfMsgSend().
  *
- *  \param  len   Message length in bytes.
+ *  \param  len       Message length in bytes.
+ *  \param  msgType   Message type
  *
  *  \return Pointer to message buffer or NULL if allocation failed.
  */
 /*************************************************************************************************/
-void *WsfMsgAlloc(uint16_t len);
+void *WsfMsgAlloc(uint16_t len, MSG_t msgType);
 
 /*************************************************************************************************/
 /*!

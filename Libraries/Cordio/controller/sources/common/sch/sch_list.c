@@ -1195,10 +1195,6 @@ void SchPrintBod(void)
 
   WsfTrace("BOD cnt=%d", schCb.cnt);
 
-  if (schCb.cnt == 2)
-  {
-    //@? gu8Debug = 1;
-  }
   BbOpDesc_t *pCur = schCb.pHead;
   uint8_t i = 1;
   uint32_t curTime;

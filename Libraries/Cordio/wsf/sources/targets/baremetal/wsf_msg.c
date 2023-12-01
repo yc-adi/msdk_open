@@ -63,17 +63,20 @@ void *WsfMsgDataAlloc(uint16_t len, uint8_t tailroom)
 /*!
  *  \brief  Allocate a message buffer to be sent with WsfMsgSend().
  *
- *  \param  len   Message length in bytes.
+ *  \param  len       Message length in bytes.
+ *  \param  msgType   Message type
  *
  *  \return Pointer to message buffer or NULL if allocation failed.
  */
 /*************************************************************************************************/
-void *WsfMsgAlloc(uint16_t len)
+void *WsfMsgAlloc(uint16_t len, MSG_t msgType)
 {
   wsfMsg_t  *pMsg;
 
   pMsg = WsfBufAlloc(len + sizeof(wsfMsg_t));
   memset(pMsg, '\0', len + sizeof(wsfMsg_t));
+  pMsg->msgType = msgType;
+
   /* hide header */
   if (pMsg != NULL)
   {
@@ -125,7 +128,7 @@ void WsfMsgSend(wsfHandlerId_t handlerId, void *pMsg)
 /*************************************************************************************************/
 void WsfMsgEnq(wsfQueue_t *pQueue, wsfHandlerId_t handlerId, void *pMsg)
 {
-  wsfMsg_t    *p;
+  wsfMsg_t *p;
 
   WSF_ASSERT(pMsg != NULL);
 

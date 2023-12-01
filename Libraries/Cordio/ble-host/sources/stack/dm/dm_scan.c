@@ -84,7 +84,7 @@ void DmScanStart(uint8_t scanPhys, uint8_t mode, const uint8_t *pScanType, bool_
   uint8_t idx;            /* param array index */
   dmScanApiStart_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmScanApiStart_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmScanApiStart_t), MSG_T_DM_SCAN_MSG_API_START)) != NULL)
   {
     pMsg->hdr.event = DM_SCAN_MSG_API_START;
     pMsg->scanPhys = scanPhys;

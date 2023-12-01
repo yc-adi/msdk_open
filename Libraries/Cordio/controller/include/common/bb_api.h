@@ -168,6 +168,22 @@ typedef struct BbOpDesc_tag
   uint8_t       type;               /*!< BOD type
                                      1  lctrMstConnBuildOp
                                      2  lctrMstDiscoverBuildOp
+                                     3  lctrMstExtDiscoverBuildOp                                        
+                                     4  lctrMstAuxDiscoverBuildOp
+                                     5  lctrMstPerScanBuildOp
+                                     6  lctrMstInitiateBuildOp
+                                     7  lctrMstExtInitiateBuildOp
+                                     8  lctrMstAuxInitiateBuildOp
+                                     9  lctrMstBigBuildOp
+                                     10 lctrSlvAdvBuildOp
+                                        lctrSlvExtAdvBuildOp
+                                        lctrSlvPeriodicAdvBuildOp
+                                        lctrSlvConnBuildOp
+                                        lctrSlvBigBuildOp
+                                     4  lctrSlvAuxScanBuildOp
+                                     5  lctrSlvAuxNonConnNonScanBuildOp
+                                     6  lctrSlvAuxConnBuildOp
+                                        
                                      */
 
   union

@@ -129,7 +129,7 @@ uint8_t LctrRejectCisReq(uint16_t cisHandle, uint8_t reason)
 
   lctrRejCisReq_t *pMsg;
 
-  if ((pMsg = (lctrRejCisReq_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrRejCisReq_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = pCisCtx->aclHandle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;
@@ -177,7 +177,7 @@ uint8_t LctrAcceptCisReq(uint16_t cisHandle)
 
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = pCisCtx->aclHandle;
     pMsg->dispId = LCTR_DISP_CONN;

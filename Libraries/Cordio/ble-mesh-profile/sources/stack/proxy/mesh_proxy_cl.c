@@ -174,7 +174,7 @@ static void meshProxyClSendMsg(meshGattProxyConnId_t connId, uint16_t netKeyInde
   uint8_t *pPdu;
 
   /* Allocate the Stack Message. */
-  if ((pMsg = WsfMsgAlloc(sizeof(meshSendProxyConfig_t) + proxyPduLen)) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(meshSendProxyConfig_t) + proxyPduLen, MSG_T_EMPTY)) != NULL)
   {
     /* Set event type. */
     pMsg->hdr.event = MESH_MSG_API_PROXY_CFG_REQ;

@@ -596,7 +596,7 @@ bool_t smpSendKey(smpCcb_t *pCcb, uint8_t keyDist)
     /* if flow not disabled set up to send next key */
     if (!pCcb->flowDisabled)
     {
-      if ((pHdr = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+      if ((pHdr = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
       {
         pHdr->event = SMP_MSG_INT_SEND_NEXT_KEY;
         pHdr->param = pCcb->connId;

@@ -222,7 +222,7 @@ void LlReset(void)
   lctrMsgHdr_t *pMsg;
 
   /* Reset state machines. */
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->dispId = LCTR_DISP_BCST;
     pMsg->event = LCTR_MSG_RESET;

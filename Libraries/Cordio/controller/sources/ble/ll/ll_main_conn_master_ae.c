@@ -204,7 +204,7 @@ uint8_t LlExtCreateConn(const LlExtInitParam_t *pInitParam, const LlExtInitScanP
   }
 
   lctrExtInitiateMsg_t *pMsg;
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.dispId = LCTR_DISP_EXT_INIT;
     pMsg->hdr.event = LCTR_EXT_INIT_MSG_INITIATE;

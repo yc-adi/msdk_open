@@ -124,7 +124,7 @@ void DmAdvConfig(uint8_t advHandle, uint8_t advType, uint8_t peerAddrType, uint8
 
   WSF_ASSERT(advHandle < DM_NUM_ADV_SETS);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiConfig_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiConfig_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_ADV_MSG_API_CONFIG;
     pMsg->advType = advType;
@@ -155,7 +155,7 @@ void DmAdvSetData(uint8_t advHandle, uint8_t op, uint8_t location, uint8_t len, 
   WSF_ASSERT((location == DM_DATA_LOC_SCAN) || (location == DM_DATA_LOC_ADV));
   WSF_ASSERT(advHandle < DM_NUM_ADV_SETS);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiSetData_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiSetData_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_ADV_MSG_API_SET_DATA;
     pMsg->advHandle = advHandle;
@@ -186,7 +186,7 @@ void DmAdvStart(uint8_t numSets, uint8_t *pAdvHandles, uint16_t *pDuration, uint
 
   WSF_ASSERT(numSets <= DM_NUM_ADV_SETS);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiStart_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiStart_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_ADV_MSG_API_START;
     pMsg->numSets = numSets;
@@ -220,7 +220,7 @@ void DmAdvStop(uint8_t numSets, uint8_t *pAdvHandles)
 
   WSF_ASSERT(numSets <= DM_NUM_ADV_SETS);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiStop_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiStop_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_ADV_MSG_API_STOP;
     pMsg->numSets = numSets;
@@ -249,7 +249,7 @@ void DmAdvRemoveAdvSet(uint8_t advHandle)
 
   WSF_ASSERT(advHandle < DM_NUM_ADV_SETS);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiRemove_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiRemove_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_ADV_MSG_API_REMOVE;
     pMsg->advHandle = advHandle;
@@ -268,7 +268,7 @@ void DmAdvClearAdvSets(void)
 {
   wsfMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->event = DM_ADV_MSG_API_CLEAR;
     WsfMsgSend(dmCb.handlerId, pMsg);
@@ -291,7 +291,7 @@ void DmAdvSetRandAddr(uint8_t advHandle, const uint8_t *pAddr)
 
   WSF_ASSERT(advHandle < DM_NUM_ADV_SETS);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiSetRandAddr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiSetRandAddr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_ADV_MSG_API_SET_RAND_ADDR;
     pMsg->advHandle = advHandle;

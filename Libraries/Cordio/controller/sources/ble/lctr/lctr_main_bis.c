@@ -926,7 +926,7 @@ uint8_t *lctrBisRxIsoDataPduAlloc(void)
   uint8_t *pPdu;
 
   /* Use LL_ISO_PDU_MAX_LEN to ensure use of data buffers located in the large pool. */
-  if ((pPdu = (uint8_t*)WsfMsgAlloc(allocLen)) != NULL)
+  if ((pPdu = (uint8_t*)WsfMsgAlloc(allocLen, MSG_T_EMPTY)) != NULL)
   {
     /* Return start of ISO Data PDU. */
     pPdu += LCTR_ISO_SDU_START_OFFSET;

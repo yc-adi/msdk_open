@@ -112,7 +112,7 @@ static uint8_t lightTerminalGattSrHandler(uint32_t argc, char **argv)
     return TERMINAL_ERROR_EXEC;
   }
 
-  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->event = APP_MESH_NODE_IDENTITY_USER_INTERACTION_EVT;
 

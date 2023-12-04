@@ -235,7 +235,7 @@ void LlExtScanEnable(uint8_t enable, uint8_t filterDup, uint16_t duration, uint1
     return;
   }
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     /* pMsg->hdr.handle = -1; */     /* Subsystem broadcast message */
     pMsg->hdr.dispId = LCTR_DISP_EXT_SCAN;
@@ -297,7 +297,7 @@ uint8_t LlPeriodicAdvCreateSync(const LlPerAdvCreateSyncCmd_t *pParam)
 
   lctrPerCreateSyncMsg_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.dispId = LCTR_DISP_PER_CREATE_SYNC;
     pMsg->hdr.event  = LCTR_CREATE_SYNC_MSG_CREATE;
@@ -342,7 +342,7 @@ uint8_t LlPeriodicAdvCreateSyncCancel(void)
 
   LctrPerScanMsg_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.dispId = LCTR_DISP_PER_CREATE_SYNC;
     pMsg->hdr.event  = LCTR_CREATE_SYNC_MSG_CANCEL;
@@ -391,7 +391,7 @@ uint8_t LlPeriodicAdvTerminateSync(uint16_t syncHandle)
 
   LctrPerScanMsg_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.dispId = LCTR_DISP_PER_SCAN;
     pMsg->hdr.event  = LCTR_PER_SCAN_MSG_TERMINATE;

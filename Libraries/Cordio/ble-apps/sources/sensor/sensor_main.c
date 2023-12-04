@@ -176,7 +176,7 @@ static void sensorDmCback(dmEvt_t *pDmEvt)
 
   len = DmSizeOfEvt(pDmEvt);
 
-  if ((pMsg = WsfMsgAlloc(len)) != NULL)
+  if ((pMsg = WsfMsgAlloc(len, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pDmEvt, len);
     WsfMsgSend(sensorHandlerId, pMsg);

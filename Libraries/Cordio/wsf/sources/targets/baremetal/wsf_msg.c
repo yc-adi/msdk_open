@@ -42,6 +42,7 @@ typedef struct wsfMsg_tag
 {
   struct wsfMsg_tag   *pNext;
   wsfHandlerId_t      handlerId;
+  MSG_t               msgType;
 } wsfMsg_t;
 
 /*************************************************************************************************/
@@ -56,7 +57,7 @@ typedef struct wsfMsg_tag
 /*************************************************************************************************/
 void *WsfMsgDataAlloc(uint16_t len, uint8_t tailroom)
 {
-  return WsfMsgAlloc(len + tailroom);
+  return WsfMsgAlloc(len + tailroom, MSG_T_EMPTY);
 }
 
 /*************************************************************************************************/
@@ -158,6 +159,12 @@ void *WsfMsgDeq(wsfQueue_t *pQueue, wsfHandlerId_t *pHandlerId)
   if ((pMsg = WsfQueueDeq(pQueue)) != NULL)
   {
     *pHandlerId = pMsg->handlerId;
+
+    if (pMsg->msgType == MSG_T_LCTR_SCAN_MSG_DISCOVER_ENABLE)
+    {
+      __asm("nop");
+      __asm("nop");
+    }
 
     /* hide header */
     pMsg++;

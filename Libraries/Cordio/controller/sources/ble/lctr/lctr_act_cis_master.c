@@ -330,7 +330,7 @@ void lctrMstCisLlcpActHostCisReq(lctrConnCtx_t *pCtx, lctrCisCtx_t *pCisCtx)
       lctrMsgHdr_t *pTermMsg;
 
       /* Send SM a terminate event. */
-      if ((pTermMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pTermMsg))) != NULL)
+      if ((pTermMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pTermMsg), MSG_T_EMPTY)) != NULL)
       {
         pTermMsg->handle = pCisCtx->aclHandle;
         pTermMsg->dispId = LCTR_DISP_CONN;

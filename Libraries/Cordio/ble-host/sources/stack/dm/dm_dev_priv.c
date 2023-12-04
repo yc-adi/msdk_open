@@ -629,7 +629,7 @@ void DmDevPrivStart(uint16_t changeInterval)
 {
   dmDevPrivApiStart_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmDevPrivApiStart_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmDevPrivApiStart_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_DEV_PRIV_MSG_API_START;
     pMsg->changeInterval = changeInterval;
@@ -648,7 +648,7 @@ void DmDevPrivStop(void)
 {
   wsfMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->event = DM_DEV_PRIV_MSG_API_STOP;
     WsfMsgSend(dmCb.handlerId, pMsg);

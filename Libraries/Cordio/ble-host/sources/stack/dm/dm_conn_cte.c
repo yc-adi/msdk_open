@@ -647,7 +647,7 @@ void DmConnCteRxSampleStart(dmConnId_t connId, uint8_t slotDurations, uint8_t sw
   WSF_ASSERT((switchPatternLen >= HCI_MIN_NUM_ANTENNA_IDS) && \
              (switchPatternLen <= HCI_MAX_NUM_ANTENNA_IDS));
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiRxSampleStart_t) + switchPatternLen)) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiRxSampleStart_t) + switchPatternLen, MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_CTE_MSG_API_RX_SAMPLE_START;
     pMsg->connId = connId;
@@ -675,7 +675,7 @@ void DmConnCteRxSampleStop(dmConnId_t connId)
 {
   dmConnCteApiRxSampleStop_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiRxSampleStop_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiRxSampleStop_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_CTE_MSG_API_RX_SAMPLE_STOP;
     pMsg->connId = connId;
@@ -705,7 +705,7 @@ void DmConnCteTxConfig(dmConnId_t connId, uint8_t cteTypeBits, uint8_t switchPat
   WSF_ASSERT((switchPatternLen >= HCI_MIN_NUM_ANTENNA_IDS) && \
              (switchPatternLen <= HCI_MAX_NUM_ANTENNA_IDS));
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiTxConfig_t) + switchPatternLen)) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiTxConfig_t) + switchPatternLen, MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_CTE_MSG_API_TX_CFG;
     pMsg->connId = connId;
@@ -737,7 +737,7 @@ void DmConnCteReqStart(dmConnId_t connId, uint16_t cteReqInt, uint8_t reqCteLen,
 {
   dmConnCteApiReqStart_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiReqStart_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiReqStart_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_CTE_MSG_API_REQ_START;
     pMsg->connId = connId;
@@ -762,7 +762,7 @@ void DmConnCteReqStop(dmConnId_t connId)
 {
   dmConnCteApiReqStop_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiReqStop_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiReqStop_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_CTE_MSG_API_REQ_STOP;
     pMsg->connId = connId;
@@ -784,7 +784,7 @@ void DmConnCteRspStart(dmConnId_t connId)
 {
   dmConnCteApiRspEnable_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiRspEnable_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiRspEnable_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_CTE_MSG_API_RSP_START;
     pMsg->connId = connId;
@@ -806,7 +806,7 @@ void DmConnCteRspStop(dmConnId_t connId)
 {
   dmConnCteApiRspEnable_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiRspEnable_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnCteApiRspEnable_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_CTE_MSG_API_RSP_STOP;
     pMsg->connId = connId;

@@ -78,7 +78,7 @@ uint8_t SecAes(uint8_t *pKey, uint8_t *pPlaintext, wsfHandlerId_t handlerId,
   secQueueBuf_t  *pBuf;
 
   /* allocate a buffer */
-  if ((pBuf = WsfMsgAlloc(sizeof(secQueueBuf_t))) != NULL)
+  if ((pBuf = WsfMsgAlloc(sizeof(secQueueBuf_t), MSG_T_EMPTY)) != NULL)
   {
     pBuf->msg.hdr.status = getNextToken();
     pBuf->msg.hdr.param = param;

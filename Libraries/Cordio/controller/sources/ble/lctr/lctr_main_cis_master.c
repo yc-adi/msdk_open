@@ -842,7 +842,7 @@ uint8_t LctrCreateCis(uint8_t numCis, LlCisCreateCisParams_t *pCreateCisParam)
   /* Only start first CIS establishment procedure. */
   lctrCreateCis_t *pMsg;
 
-  if ((pMsg = (lctrCreateCis_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrCreateCis_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = lctrMstCreateCisPend.aclHandle[0];
     pMsg->hdr.dispId = LCTR_DISP_CONN;
@@ -1109,7 +1109,7 @@ void lctrMstCreateCisDone(lctrCisCtx_t *pCisCtx)
     {
       lctrCreateCis_t *pMsg;
 
-      if ((pMsg = (lctrCreateCis_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+      if ((pMsg = (lctrCreateCis_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
       {
         pMsg->hdr.handle = lctrMstCreateCisPend.aclHandle[i];
         pMsg->hdr.dispId = LCTR_DISP_CONN;

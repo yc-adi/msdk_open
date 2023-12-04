@@ -260,7 +260,7 @@ void eattcSendMsg(dmConnId_t connId, uint8_t priority, uint16_t handle, uint8_t 
     attcApiMsg_t *pMsg;
 
     /* allocate message buffer */
-    if ((pMsg = WsfMsgAlloc(sizeof(attcApiMsg_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(attcApiMsg_t), MSG_T_EMPTY)) != NULL)
     {
       EATT_TRACE_INFO2("eattcSendMsg: sending event: %#x slot: %#x", msgId, slot);
 

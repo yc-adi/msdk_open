@@ -1804,7 +1804,7 @@ void lctrCisPowerMonitorCheckRssi(int8_t rssi, uint8_t status, uint8_t phy, lctr
   if (sendReqDelta != 0)
   {
     lctrMsgPwrCtrlReq_t *pMsg;
-    if ((pMsg = (lctrMsgPwrCtrlReq_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+    if ((pMsg = (lctrMsgPwrCtrlReq_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
     {
       pMsg->hdr.handle = LCTR_GET_CONN_HANDLE(pConnCtx);
       pMsg->hdr.dispId = LCTR_DISP_CONN;

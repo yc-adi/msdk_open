@@ -164,7 +164,7 @@ void lctrSendCisMsg(lctrCisCtx_t *pCisCtx, uint8_t event)
 {
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = pCisCtx->cisHandle;
     pMsg->dispId = LCTR_DISP_CIS;
@@ -186,7 +186,7 @@ void lctrSendCisLlcpMsg(lctrCisCtx_t *pCisCtx, uint8_t event)
 {
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = pCisCtx->aclHandle;
     pMsg->dispId = LCTR_DISP_CONN;
@@ -378,7 +378,7 @@ void lctrCisActDisc(lctrCisCtx_t *pCisCtx)
 {
   lctrCisDisc_t *pMsg;
 
-  if ((pMsg = (lctrCisDisc_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrCisDisc_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = pCisCtx->aclHandle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;

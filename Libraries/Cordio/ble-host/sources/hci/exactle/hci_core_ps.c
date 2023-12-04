@@ -176,7 +176,7 @@ bool_t hciCoreEvtProcessLlEvt(LlEvt_t *pEvt)
     break;
   }
 
-  if ((pMsg = WsfMsgAlloc(msgLen + reportLen)) != NULL)
+  if ((pMsg = WsfMsgAlloc(msgLen + reportLen, MSG_T_EMPTY)) != NULL)
   {
     /* copy event to message buffer */
     memcpy(pMsg, pEvt, msgLen);
@@ -301,7 +301,7 @@ void hciCoreEvtSendIntEvt(uint8_t *pEvt, uint8_t evtSize)
 {
   hciEvt_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(evtSize)) != NULL)
+  if ((pMsg = WsfMsgAlloc(evtSize, MSG_T_EMPTY)) != NULL)
   {
     /* copy event to message buffer */
     memcpy(pMsg, pEvt, evtSize);

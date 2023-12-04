@@ -107,7 +107,7 @@ uint8_t LlSetScanParam(const LlScanParam_t *pParam)
 
   lctrScanParamMsg_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.dispId = LCTR_DISP_SCAN;
     pMsg->hdr.event = LCTR_SCAN_MSG_PARAM_UPD;
@@ -157,13 +157,26 @@ void LlScanEnable(uint8_t enable, uint8_t filterDup)
     return;
   }
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if (enable)
   {
-    pMsg->hdr.dispId = LCTR_DISP_SCAN;
-    pMsg->hdr.event = enable ? LCTR_SCAN_MSG_DISCOVER_ENABLE : LCTR_SCAN_MSG_DISCOVER_DISABLE;
+    if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_LCTR_SCAN_MSG_DISCOVER_ENABLE)) != NULL)
+    {
+      pMsg->hdr.dispId = LCTR_DISP_SCAN;
+      pMsg->hdr.event = LCTR_SCAN_MSG_DISCOVER_ENABLE;
+      pMsg->filtDup = filterDup;
 
-    pMsg->filtDup = filterDup;
+      WsfMsgSend(lmgrPersistCb.handlerId, pMsg);
+    }
+  }
+  else
+  {
+    if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_LCTR_SCAN_MSG_DISCOVER_ENABLE)) != NULL)
+    {
+      pMsg->hdr.dispId = LCTR_DISP_SCAN;
+      pMsg->hdr.event = LCTR_SCAN_MSG_DISCOVER_DISABLE;
+      pMsg->filtDup = filterDup;
 
-    WsfMsgSend(lmgrPersistCb.handlerId, pMsg);
+      WsfMsgSend(lmgrPersistCb.handlerId, pMsg);
+    }
   }
 }

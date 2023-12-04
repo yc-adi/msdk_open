@@ -269,7 +269,7 @@ static void chciRxPacketSM(void)
       chciTrHwError(CHCI_TR_CODE_INVALID_DATA);
       chciTrCb.rxPktState = CHCI_RX_STATE_IDLE;
     }
-    else if ((chciTrCb.pRdBuf = (uint8_t *)WsfMsgAlloc(hdrLen + allocLen)) != NULL)
+    else if ((chciTrCb.pRdBuf = (uint8_t *)WsfMsgAlloc(hdrLen + allocLen, MSG_T_EMPTY)) != NULL)
     {
       if (dataLen > 0)
       {

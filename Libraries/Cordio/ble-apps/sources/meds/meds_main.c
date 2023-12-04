@@ -189,7 +189,7 @@ static void medsDmCback(dmEvt_t *pDmEvt)
 
   len = DmSizeOfEvt(pDmEvt);
 
-  if ((pMsg = WsfMsgAlloc(len)) != NULL)
+  if ((pMsg = WsfMsgAlloc(len, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pDmEvt, len);
     WsfMsgSend(medsCb.handlerId, pMsg);
@@ -233,7 +233,7 @@ void medsCccCback(attsCccEvt_t *pEvt)
     AppDbSetCccTblValue(dbHdl, pEvt->idx, pEvt->value);
   }
 
-  if ((pMsg = WsfMsgAlloc(sizeof(attsCccEvt_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(attsCccEvt_t), MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pEvt, sizeof(attsCccEvt_t));
     WsfMsgSend(medsCb.handlerId, pMsg);

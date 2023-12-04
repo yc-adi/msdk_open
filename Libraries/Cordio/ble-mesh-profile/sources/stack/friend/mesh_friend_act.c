@@ -372,7 +372,7 @@ static void meshFriendCredDerivCompleteCback(meshAddress_t friendAddr, meshAddre
   WSF_ASSERT(pCtx->netKeyIndex == netKeyIndex);
 
   /* Allocate message with key derivation status. */
-  if((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->event = isSuccess ? MESH_FRIEND_MSG_KEY_DERIV_SUCCESS : MESH_FRIEND_MSG_KEY_DERIV_FAILED;
     pMsg->param = LPN_CTX_IDX(pCtx);
@@ -458,7 +458,7 @@ void meshFriendActPrepKeyMat(meshFriendLpnCtx_t *pCtx, void *pMsg)
                           meshFriendCredDerivCompleteCback, pCtx) != MESH_SUCCESS)
   {
     /* Simulate adding credentials failed. */
-    if((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+    if((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
     {
       ((wsfMsgHdr_t *)pMsg)->event = MESH_FRIEND_MSG_KEY_DERIV_FAILED;
       ((wsfMsgHdr_t *)pMsg)->param = LPN_CTX_IDX(pCtx);

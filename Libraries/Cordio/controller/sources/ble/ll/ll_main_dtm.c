@@ -340,7 +340,7 @@ static void llTestTxOpEndCback(BbOpDesc_t *pOp)
             lctrMsgHdr_t *pMsg;
 
             /* Send SM an test termination event. */
-            if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL) {
+            if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL) {
                 /* pMsg->handle = 0; */ /* not used */
                 pMsg->dispId = LCTR_DISP_TEST;
                 pMsg->event = LL_TEST_MSG_TERMINATE;
@@ -733,7 +733,7 @@ static void llTestRxOpEndCback(BbOpDesc_t *pOp)
             lctrMsgHdr_t *pMsg;
 
             /* Send SM an test termination event. */
-            if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL) {
+            if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL) {
                 /* pMsg->handle = 0; */ /* not used */
                 pMsg->dispId = LCTR_DISP_TEST;
                 pMsg->event = LL_TEST_MSG_TERMINATE;

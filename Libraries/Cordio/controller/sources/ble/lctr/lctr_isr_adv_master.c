@@ -40,6 +40,8 @@
 extern bool_t bbTxAccAddrShiftMask;
 #endif
 
+extern uint8_t gu8Debug;
+
 /*************************************************************************************************/
 /*!
  *  \brief  End a discovery scan operation in the master role.
@@ -63,7 +65,7 @@ void lctrMstDiscoverEndOp(BbOpDesc_t *pOp)
     lctrMsgHdr_t *pMsg;
 
     /* Send SM a scan termination event. */
-    if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+    if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
     {
       if (pCtx == &lctrMstScan)
       {
@@ -146,6 +148,7 @@ void lctrMstDiscoverEndOp(BbOpDesc_t *pOp)
       {
         pScan->elapsedUsec = BbGetTargetTimeDelta(pOp->dueUsec, pCtx->scanWinStartUsec);
         WSF_ASSERT(pScan->elapsedUsec < pOp->maxDurUsec);
+        
         break;
       }
       else
@@ -157,6 +160,14 @@ void lctrMstDiscoverEndOp(BbOpDesc_t *pOp)
         LL_TRACE_WARN1("!!!                           scanWindowUsec=%u", LCTR_BLE_TO_US(pCtx->scanParam.scanWindow));
       }
     }
+  }
+
+  //@?
+  if (gu8Debug == 1)
+  {
+    __asm("nop");
+    __asm("nop");
+    SchPrintBod();
   }
 }
 
@@ -282,7 +293,7 @@ void lctrMstDiscoverAdvPktPostProcessHandler(BbOpDesc_t *pOp, const uint8_t *pAd
     case LL_PDU_ADV_NONCONN_IND:
     case LL_PDU_ADV_SCAN_IND:
       if ((lmgrMstScanCb.numAdvReport < pLctrRtCfg->maxAdvReports) &&
-          ((pRxAdvBuf = WsfMsgAlloc(LCTR_ADVB_BUF_SIZE)) != NULL))
+          ((pRxAdvBuf = WsfMsgAlloc(LCTR_ADVB_BUF_SIZE, MSG_T_EMPTY)) != NULL))
       {
         /* Store data in extra buffer area. */
         pScan->pRxAdvBuf[LCTR_ADVB_BUF_OFFSET_RSSI] = pScan->advRssi;
@@ -374,7 +385,7 @@ bool_t lctrMstScanRspRxCompHandler(BbOpDesc_t *pOp, const uint8_t *pRspBuf)
         }
 
         if ((lmgrMstScanCb.numAdvReport < pLctrRtCfg->maxAdvReports) &&
-            ((pRxRspBuf = WsfMsgAlloc(LCTR_ADVB_BUF_SIZE)) != NULL))
+            ((pRxRspBuf = WsfMsgAlloc(LCTR_ADVB_BUF_SIZE, MSG_T_EMPTY)) != NULL))
         {
           /* Store data in extra buffer area. */
           pScan->pRxRspBuf[LCTR_ADVB_BUF_OFFSET_RSSI] = pScan->advRssi;

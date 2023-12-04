@@ -78,6 +78,9 @@ Macros
 #define SCAN_START_EVT 0x99
 #define SCAN_START_MS 1000
 
+#define OCMP_CONNECTING_TMR_EVT 0x9A    // for ocmpConnectingTimer
+#define OCMP_CONNECTING_TMR_MS  12000
+
 /* Down sample the number of scan reports we print */
 #define SCAN_REPORT_DOWN_SAMPLE 20
 
@@ -96,6 +99,7 @@ extern OCMP_ST_t ocmpSt;
 /**************************************************************************************************
   Local Variables
 **************************************************************************************************/
+wsfTimer_t ocmpConnectingTimer;
 
 /*! application control block */
 struct {
@@ -386,7 +390,7 @@ static void datcDmCback(dmEvt_t *pDmEvt)
             reportLen = 0;
         }
 
-        if ((pMsg = WsfMsgAlloc(len + reportLen)) != NULL) {
+        if ((pMsg = WsfMsgAlloc(len + reportLen, MSG_T_EMPTY)) != NULL) {
             memcpy(pMsg, pDmEvt, len);
             if (pDmEvt->hdr.event == DM_SCAN_REPORT_IND) {
                 pMsg->scanReport.pData = (uint8_t *)((uint8_t *)pMsg + len);
@@ -410,7 +414,7 @@ static void datcAttCback(attEvt_t *pEvt)
 {
     attEvt_t *pMsg;
 
-    if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen)) != NULL) {
+    if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen, MSG_T_EMPTY)) != NULL) {
         memcpy(pMsg, pEvt, sizeof(attEvt_t));
         pMsg->pValue = (uint8_t *)(pMsg + 1);
         memcpy(pMsg->pValue, pEvt->pValue, pEvt->valueLen);
@@ -429,6 +433,8 @@ static void datcAttCback(attEvt_t *pEvt)
 /*************************************************************************************************/
 void datcRestartScanningHandler(void)
 {
+    WsfTimerStop(&ocmpConnectingTimer);
+
     datcConnInfo.doConnect = FALSE;
     AppScanStart(datcMasterCfg.discMode, datcMasterCfg.scanType, datcMasterCfg.scanDuration);
 }
@@ -493,6 +499,8 @@ static void datcScanStopConnStart(dmEvt_t *pMsg)
             
             AppConnOpen(datcConnInfo.addrType, datcConnInfo.addr, datcConnInfo.dbHdl);
             datcConnInfo.doConnect = FALSE;
+
+            WsfTimerStartMs(&ocmpConnectingTimer, OCMP_CONNECTING_TMR_MS);  // OCMP_CONNECTING_TMR_EVT, make sure connection is established within a period
         }
     }
 }
@@ -649,12 +657,12 @@ static void datcValueNtf(attEvt_t *pMsg)
 {
     if (pMsg->handle == pSecDatHdlList[pMsg->hdr.param - 1][SEC_DAT_HDL_IDX])
         APP_TRACE_INFO0(">> Notification from secure data service <<<");
+    
     /* print the received data */
     if (datcCb.speedTestCounter == 0) {
         APP_TRACE_INFO0((const char *)pMsg->pValue);
+        APP_TRACE_INFO0("DONE!");
     }
-    
-    datcRestartScanningHandler();
 }
 
 /*************************************************************************************************/
@@ -733,7 +741,7 @@ static void datcSendData(dmConnId_t connId)
     uint8_t str[] = "hello world";
 
     if (pDatcWpHdlList[connId - 1][WPC_P1_DAT_HDL_IDX] != ATT_HANDLE_NONE) {
-        AppScanStop();
+        //@? AppScanStop();
 
         AttcWriteCmd(connId, pDatcWpHdlList[connId - 1][WPC_P1_DAT_HDL_IDX], sizeof(str), str);
     }
@@ -1016,7 +1024,14 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         }
 
         else if (strcmp(argv[1], "test") == 0) {
-            gu8Debug = 0;
+            if (gu8Debug == 0)
+            {
+                gu8Debug = 1;
+            }
+            else
+            {
+                gu8Debug = 0;
+            }
             TerminalTxPrint("gu8Debug = 0\r\n");
         }
         else
@@ -1405,6 +1420,14 @@ static void datcProcMsg(dmEvt_t *pMsg)
     case SCAN_START_EVT:
         datcRestartScanningHandler();
         break;
+
+    case OCMP_CONNECTING_TMR_EVT:
+        if (ocmpSt == OCMP_ST_CONNECTING)
+        {
+            WsfTrace("connecting too long");
+            ocmpSt = OCMP_ST_INIT;
+            //TODO other operations
+        }
 
     default:
         break;

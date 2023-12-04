@@ -70,7 +70,7 @@ void lctrInitActInitiate(void)
     lctrMsgHdr_t *pTermMsg;
 
     /* Send SM a terminate event. */
-    if ((pTermMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pTermMsg))) != NULL)
+    if ((pTermMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pTermMsg), MSG_T_EMPTY)) != NULL)
     {
       pTermMsg->dispId = LCTR_DISP_INIT;
       pTermMsg->event = LCTR_INIT_MSG_TERMINATE;
@@ -125,7 +125,7 @@ void lctrInitActConnect(void)
     lctrConnEstablish_t *pMsg;
     lctrConnCtx_t *pCtx;
 
-    if ((pMsg = (lctrConnEstablish_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+    if ((pMsg = (lctrConnEstablish_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
     {
       pCtx = LCTR_GET_CONN_CTX(lctrMstInit.data.init.connHandle);
 

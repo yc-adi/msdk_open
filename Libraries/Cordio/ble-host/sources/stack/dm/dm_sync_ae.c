@@ -714,7 +714,7 @@ dmSyncId_t DmSyncStart(uint8_t advSid, uint8_t advAddrType, const uint8_t *pAdvA
 
   if (pScb != NULL)
   {
-    if ((pMsg = WsfMsgAlloc(sizeof(dmSyncApiStart_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(dmSyncApiStart_t), MSG_T_EMPTY)) != NULL)
     {
       pMsg->hdr.param = pScb->syncId;
       pMsg->hdr.event = DM_SYNC_MSG_API_START;
@@ -754,7 +754,7 @@ void DmSyncStop(dmSyncId_t syncId)
 {
   wsfMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->param = syncId;
     pMsg->event = DM_SYNC_MSG_API_STOP;

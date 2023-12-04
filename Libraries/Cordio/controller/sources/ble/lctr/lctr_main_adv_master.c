@@ -323,7 +323,7 @@ void lctrMstDiscoverBuildOp(void)
   pScan->txReqCback = lctrMstScanReqTxCompHandler;
   pScan->rxRspCback = lctrMstScanRspRxCompHandler;
 
-  if ((pScan->pRxAdvBuf = WsfMsgAlloc(LCTR_ADVB_BUF_SIZE)) == NULL)
+  if ((pScan->pRxAdvBuf = WsfMsgAlloc(LCTR_ADVB_BUF_SIZE, MSG_T_EMPTY)) == NULL)
   {
     /* Attempt to obtain buffer on next advertising operation. */
     LL_TRACE_ERR0("Could not allocate advertising buffer");
@@ -335,7 +335,7 @@ void lctrMstDiscoverBuildOp(void)
   {
     case LL_SCAN_ACTIVE:
     {
-      if ((pScan->pRxRspBuf = WsfMsgAlloc(LCTR_ADVB_BUF_SIZE)) == NULL)
+      if ((pScan->pRxRspBuf = WsfMsgAlloc(LCTR_ADVB_BUF_SIZE, MSG_T_EMPTY)) == NULL)
       {
         /* Attempt to obtain buffer on next advertising operation. */
         LL_TRACE_ERR0("Could not allocate advertising buffer");

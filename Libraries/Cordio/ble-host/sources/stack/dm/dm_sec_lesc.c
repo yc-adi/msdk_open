@@ -102,7 +102,7 @@ void DmSecKeypressReq(dmConnId_t connId, uint8_t keypressType)
 {
   smpDmKeypress_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(smpDmKeypress_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(smpDmKeypress_t), MSG_T_EMPTY)) != NULL)
   {
     /* Execution an an SMP state machine event to send the keypress to the peer device */
     pMsg->keypress = keypressType;
@@ -277,7 +277,7 @@ void DmSecCompareRsp(dmConnId_t connId, bool_t valid)
 {
   smpDmMsg_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(smpDmMsg_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(smpDmMsg_t), MSG_T_EMPTY)) != NULL)
   {
     /* Execution an an SMP state machine event to send the compare response */
     pMsg->hdr.param = connId;

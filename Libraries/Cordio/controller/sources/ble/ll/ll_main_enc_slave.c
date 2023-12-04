@@ -82,7 +82,7 @@ uint8_t LlLtkReqReply(uint16_t handle, const uint8_t *pKey)
     return LL_ERROR_CODE_CMD_DISALLOWED;
   }
 
-  if ((pMsg = (lctrLtkReply_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrLtkReply_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = handle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;
@@ -126,7 +126,7 @@ uint8_t LlLtkReqNegReply(uint16_t handle)
     return LL_ERROR_CODE_CMD_DISALLOWED;
   }
 
-  if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = handle;
     pMsg->dispId = LCTR_DISP_CONN;

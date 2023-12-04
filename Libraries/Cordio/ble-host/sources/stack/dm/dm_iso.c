@@ -784,7 +784,7 @@ void DmIsoDataPathSetup(HciIsoSetupDataPath_t *pDataPathParam)
 
   if (pIsoCb != NULL)
   {
-    if ((pMsg = WsfMsgAlloc(sizeof(dmIsoApiSetup_t) + pDataPathParam->codecConfigLen)) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(dmIsoApiSetup_t) + pDataPathParam->codecConfigLen, MSG_T_EMPTY)) != NULL)
     {
       pMsg->hdr.event = DM_ISO_MSG_API_SETUP;
       pMsg->hdr.param = handle;
@@ -823,7 +823,7 @@ void DmIsoDataPathRemove(uint16_t handle, uint8_t directionBits)
 
   WSF_ASSERT((directionBits & HCI_ISO_DATA_PATH_INPUT_BIT) || (directionBits & HCI_ISO_DATA_PATH_OUTPUT_BIT))
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmIsoApiRemove_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmIsoApiRemove_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_ISO_MSG_API_REMOVE;
     pMsg->hdr.param = handle;

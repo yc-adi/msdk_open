@@ -259,7 +259,7 @@ void DmPastRptRcvEnable(dmSyncId_t syncId, bool_t enable)
 {
   wsfMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->param = syncId;
     pMsg->event = DM_PAST_MSG_API_RCV_ENABLE;
@@ -284,7 +284,7 @@ void DmPastSyncTrsf(dmConnId_t connId, uint16_t serviceData, dmSyncId_t syncId)
 {
   dmPastApiTrsf_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmPastApiTrsf_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmPastApiTrsf_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.param = syncId;
     pMsg->hdr.event = DM_PAST_MSG_API_SYNC_TRSF;
@@ -310,7 +310,7 @@ void DmPastSetInfoTrsf(dmConnId_t connId, uint16_t serviceData, uint8_t advHandl
 {
   dmPastApiTrsf_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmPastApiTrsf_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmPastApiTrsf_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.param = advHandle;
     pMsg->hdr.event = DM_PAST_MSG_API_SET_INFO_TRSF;
@@ -342,7 +342,7 @@ void DmPastConfig(dmConnId_t connId, uint8_t mode, uint16_t skip, uint16_t syncT
 {
   dmPastApiCfg_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmPastApiCfg_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmPastApiCfg_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.param = connId;
     pMsg->hdr.event = DM_PAST_MSG_API_CFG;
@@ -374,7 +374,7 @@ void DmPastDefaultConfig(uint8_t mode, uint16_t skip, uint16_t syncTimeout, uint
 {
   dmPastApiCfg_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmPastApiCfg_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmPastApiCfg_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_PAST_MSG_API_DEFAULT_CFG;
     pMsg->mode = mode;

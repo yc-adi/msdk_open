@@ -887,7 +887,7 @@ void MeshPublishMessage(meshPubMsgInfo_t *pPubMsgInfo, const uint8_t *pMsgParam,
     }
 
     /* Allocate the Stack Message and additional size for message parameters. */
-    if ((pMsg = WsfMsgAlloc(sizeof(meshPublishMessage_t) + msgParamLen)) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(meshPublishMessage_t) + msgParamLen, MSG_T_EMPTY)) != NULL)
     {
 
       /* Set event type. */
@@ -974,7 +974,7 @@ void MeshAddGattProxyConn(meshGattProxyConnId_t connId, uint16_t maxProxyPdu)
     }
 
     /* Allocate the Stack Message. */
-    if ((pMsg = WsfMsgAlloc(sizeof(meshAddGattProxyConn_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(meshAddGattProxyConn_t), MSG_T_EMPTY)) != NULL)
     {
       /* Set event type. */
       pMsg->hdr.event = MESH_MSG_API_ADD_GATT_CONN;
@@ -1024,7 +1024,7 @@ void MeshRemoveGattProxyConn(meshGattProxyConnId_t connId)
     }
 
     /* Allocate the Stack Message. */
-    if ((pMsg = WsfMsgAlloc(sizeof(meshRemoveGattProxyConn_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(meshRemoveGattProxyConn_t), MSG_T_EMPTY)) != NULL)
     {
       /* Set event type. */
       pMsg->hdr.event = MESH_MSG_API_REM_GATT_CONN;
@@ -1091,7 +1091,7 @@ void MeshProcessGattProxyPdu(meshGattProxyConnId_t connId, const uint8_t *pProxy
       return;
     }
 
-    if ((pMsg = WsfMsgAlloc(sizeof(meshProcessGattProxyPdu_t) + proxyPduLen)) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(meshProcessGattProxyPdu_t) + proxyPduLen, MSG_T_EMPTY)) != NULL)
     {
       /* Set event type. */
       pMsg->hdr.event = MESH_MSG_API_PROC_GATT_MSG;
@@ -1146,7 +1146,7 @@ void MeshSignalGattProxyIfRdy(meshGattProxyConnId_t connId)
     }
 
     /* Allocate the Stack Message. */
-    if ((pMsg = WsfMsgAlloc(sizeof(meshSignalGattProxyIfRdy_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(meshSignalGattProxyIfRdy_t), MSG_T_EMPTY)) != NULL)
     {
       /* Set event type. */
       pMsg->hdr.event = MESH_MSG_API_SGN_GATT_IF_RDY;
@@ -1211,7 +1211,7 @@ void MeshAddAdvIf(meshAdvIfId_t advIfId)
     }
 
     /* Allocate the Stack Message. */
-    if ((pMsg = WsfMsgAlloc(sizeof(meshAddAdvIf_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(meshAddAdvIf_t), MSG_T_EMPTY)) != NULL)
     {
       /* Set event type. */
       pMsg->hdr.event = MESH_MSG_API_ADD_ADV_IF;
@@ -1256,7 +1256,7 @@ void MeshRemoveAdvIf(meshAdvIfId_t advIfId)
     }
 
     /* Allocate the Stack Message. */
-    if ((pMsg = WsfMsgAlloc(sizeof(meshRemoveAdvIf_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(meshRemoveAdvIf_t), MSG_T_EMPTY)) != NULL)
     {
       /* Set event type. */
       pMsg->hdr.event = MESH_MSG_API_REM_ADV_IF;
@@ -1311,7 +1311,7 @@ void MeshProcessAdvPdu(meshAdvIfId_t advIfId, const uint8_t *pAdvPdu, uint8_t ad
     }
 
     /* Allocate the Stack Message and aditional size for message parameters. */
-    if ((pMsg = WsfMsgAlloc(sizeof(meshProcessAdvPdu_t) + advPduLen)) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(meshProcessAdvPdu_t) + advPduLen, MSG_T_EMPTY)) != NULL)
     {
       /* Set event type. */
       pMsg->hdr.event = MESH_MSG_API_PROC_ADV_MSG;
@@ -1366,7 +1366,7 @@ void MeshSignalAdvIfRdy(meshAdvIfId_t advIfId)
     }
 
     /* Allocate the Stack Message. */
-    if ((pMsg = WsfMsgAlloc(sizeof(meshSignalAdvIfRdy_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(meshSignalAdvIfRdy_t), MSG_T_EMPTY)) != NULL)
     {
       /* Set event type. */
       pMsg->hdr.event = MESH_MSG_API_SGN_ADV_IF_RDY;
@@ -1525,7 +1525,7 @@ void MeshAttentionSet(meshElementId_t elemId, uint8_t attTimeSec)
     }
 
     /* Allocate the Stack Message. */
-    if ((pMsg = WsfMsgAlloc(sizeof(meshAttentionSet_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(meshAttentionSet_t), MSG_T_EMPTY)) != NULL)
     {
       /* Set event type. */
       pMsg->hdr.event = MESH_MSG_API_ATT_SET;

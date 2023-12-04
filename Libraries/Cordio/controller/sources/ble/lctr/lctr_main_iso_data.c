@@ -419,7 +419,7 @@ uint8_t *lctrCisRxPduAlloc(uint16_t maxRxLen)
   uint8_t *pBuf;
 
   /* Include ISO header. */
-  if ((pBuf = WsfMsgAlloc(HCI_ISO_DL_MAX_LEN + allocLen)) != NULL)
+  if ((pBuf = WsfMsgAlloc(HCI_ISO_DL_MAX_LEN + allocLen, MSG_T_EMPTY)) != NULL)
   {
     /* Return start of data PDU. */
     pBuf += LCTR_CIS_DATA_PDU_START_OFFSET + HCI_ISO_DL_MAX_LEN;
@@ -958,7 +958,7 @@ static uint8_t *lctrRxSduAlloc(void)
   const uint32_t allocLen = HCI_ISO_HDR_LEN + HCI_ISO_DL_MAX_LEN + pLctrRtCfg->maxIsoSduLen + BB_DATA_PDU_TAILROOM;
 
   /* Use LL_ISO_PDU_MAX_LEN to ensure use of data buffers located in the large pool. */
-  if ((pSdu = (uint8_t*)WsfMsgAlloc(allocLen)) != NULL)
+  if ((pSdu = (uint8_t*)WsfMsgAlloc(allocLen, MSG_T_EMPTY)) != NULL)
   {
     lctrIsoDataRxDecAvailBuf();
   }

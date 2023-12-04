@@ -347,7 +347,7 @@ void lctrReceivePeriodicSyncInd(lctrConnCtx_t *pCtx)
 
   if (pCtx->syncMode != LL_SYNC_TRSF_MODE_OFF)
   {
-    if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
     {
       pMsg->hdr.dispId = LCTR_DISP_TRANFER_SYNC;
       pMsg->hdr.event  = LCTR_TRANSFER_SYNC_MSG_START;

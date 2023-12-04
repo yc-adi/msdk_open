@@ -1262,7 +1262,7 @@ void lctrSendConnMsg(lctrConnCtx_t *pCtx, uint8_t event)
 {
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = LCTR_GET_CONN_HANDLE(pCtx);
     pMsg->dispId = LCTR_DISP_CONN;
@@ -1561,7 +1561,7 @@ uint8_t lctrSetTxPowerReporting(uint16_t handle, uint8_t enableLocal, uint8_t en
   {
     pCtx->controllerInitRead = TRUE;
     lctrMsgPwrCtrlReq_t *pMsg;
-    if ((pMsg = (lctrMsgPwrCtrlReq_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+    if ((pMsg = (lctrMsgPwrCtrlReq_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
     {
       pMsg->hdr.handle = LCTR_GET_CONN_HANDLE(pCtx);
       pMsg->hdr.dispId = LCTR_DISP_CONN;

@@ -57,7 +57,7 @@ static uint8_t *lhciAllocExtAdvRptEvt(uint8_t evtCode, uint8_t paramLen)
   uint8_t *pEvtBuf;
 
   /* Use LHCI_EXT_ADV_RPT_DATA_LEN_MAX to ensure allocation from the extended advertising buffer pool. */
-  if ((pEvtBuf = WsfMsgAlloc(HCI_EVT_HDR_LEN + LHCI_EXT_ADV_RPT_DATA_LEN_MAX)) != NULL)
+  if ((pEvtBuf = WsfMsgAlloc(HCI_EVT_HDR_LEN + LHCI_EXT_ADV_RPT_DATA_LEN_MAX, MSG_T_EMPTY)) != NULL)
   {
     pEvtBuf += lhciPackEvtHdr(pEvtBuf, evtCode, paramLen);
   }
@@ -82,7 +82,7 @@ static uint8_t *lhciAllocPerAdvRptEvt(uint8_t evtCode, uint8_t paramLen)
   uint8_t *pEvtBuf;
 
   /* Use LHCI_PER_ADV_RPT_DATA_LEN_MAX to ensure allocation from the extended advertising buffer pool. */
-  if ((pEvtBuf = WsfMsgAlloc(HCI_EVT_HDR_LEN + LHCI_PER_ADV_RPT_DATA_LEN_MAX)) != NULL)
+  if ((pEvtBuf = WsfMsgAlloc(HCI_EVT_HDR_LEN + LHCI_PER_ADV_RPT_DATA_LEN_MAX, MSG_T_EMPTY)) != NULL)
   {
     pEvtBuf += lhciPackEvtHdr(pEvtBuf, evtCode, paramLen);
   }

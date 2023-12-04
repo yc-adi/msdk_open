@@ -47,7 +47,7 @@ void DmSecPairRsp(dmConnId_t connId, uint8_t oob, uint8_t auth, uint8_t iKeyDist
 {
   smpDmPair_t  *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(smpDmPair_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(smpDmPair_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = SMP_MSG_API_PAIR_RSP;
     pMsg->hdr.param = connId;
@@ -78,7 +78,7 @@ void DmSecSlaveReq(dmConnId_t connId, uint8_t auth)
 {
   smpDmSecurityReq_t  *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(smpDmSecurityReq_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(smpDmSecurityReq_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = SMP_MSG_API_SECURITY_REQ;
     pMsg->hdr.param = connId;
@@ -106,7 +106,7 @@ void DmSecLtkRsp(dmConnId_t connId, bool_t keyFound, uint8_t secLevel, uint8_t *
 {
   dmSecApiLtkRsp_t  *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmSecApiLtkRsp_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmSecApiLtkRsp_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_SEC_MSG_API_LTK_RSP;
     pMsg->hdr.param = connId;

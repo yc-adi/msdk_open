@@ -637,7 +637,7 @@ void lctrAutoPowerMonitorAct(lctrConnCtx_t *pCtx)
     uint8_t reqPhy = pCtx->bleData.chan.rxPhy + (((pCtx->bleData.chan.rxPhy == BB_PHY_BLE_CODED) && (pCtx->bleData.chan.initTxPhyOptions == BB_PHY_OPTIONS_BLE_S2)) ? 1 : 0);
 
     lctrMsgPwrCtrlReq_t *pMsg;
-    if ((pMsg = (lctrMsgPwrCtrlReq_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+    if ((pMsg = (lctrMsgPwrCtrlReq_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
     {
       pMsg->hdr.handle = LCTR_GET_CONN_HANDLE(pCtx);
       pMsg->hdr.dispId = LCTR_DISP_CONN;

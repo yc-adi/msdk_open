@@ -342,7 +342,7 @@ static inline meshCfgMdlClOpReq_t *meshCfgMdlClAllocateRequest(meshAddress_t cfg
   }
 
   /* Allocate API message. */
-  if ((pReq = (meshCfgMdlClOpReq_t *)WsfMsgAlloc(sizeof(meshCfgMdlClOpReq_t) + msgParamLen)) != NULL)
+  if ((pReq = (meshCfgMdlClOpReq_t *)WsfMsgAlloc(sizeof(meshCfgMdlClOpReq_t) + msgParamLen, MSG_T_EMPTY)) != NULL)
   {
     /* Allocate operation request parameters. */
     if ((pReq->pReqParam = (meshCfgMdlClOpReqParams_t *)WsfBufAlloc(sizeof(meshCfgMdlClOpReqParams_t)))

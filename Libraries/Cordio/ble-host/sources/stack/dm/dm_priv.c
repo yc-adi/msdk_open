@@ -484,7 +484,7 @@ void DmPrivResolveAddr(uint8_t *pAddr, uint8_t *pIrk, uint16_t param)
 {
   dmPrivApiResolveAddr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivApiResolveAddr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivApiResolveAddr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_PRIV_MSG_API_RESOLVE_ADDR;
     pMsg->hdr.param = param;
@@ -526,7 +526,7 @@ void DmPrivAddDevToResList(uint8_t addrType, const uint8_t *pIdentityAddr, uint8
 {
   dmPrivApiAddDevToResList_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivApiAddDevToResList_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivApiAddDevToResList_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_PRIV_MSG_API_ADD_DEV_TO_RES_LIST;
     pMsg->hdr.param = param;
@@ -561,7 +561,7 @@ void DmPrivRemDevFromResList(uint8_t addrType, const uint8_t *pIdentityAddr, uin
 {
   dmPrivApiRemDevFromResList_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivApiRemDevFromResList_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivApiRemDevFromResList_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_PRIV_MSG_API_REM_DEV_FROM_RES_LIST;
     pMsg->hdr.param = param;
@@ -592,7 +592,7 @@ void DmPrivClearResList(void)
 {
   dmPrivMsg_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivMsg_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivMsg_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_PRIV_MSG_API_CLEAR_RES_LIST;
     WsfMsgSend(dmCb.handlerId, pMsg);
@@ -653,7 +653,7 @@ void DmPrivSetAddrResEnable(bool_t enable)
 {
   dmPrivApiSetAddrResEnable_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivMsg_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivMsg_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_PRIV_MSG_API_SET_ADDR_RES_ENABLE;
     pMsg->hdr.param = 0;
@@ -696,7 +696,7 @@ void DmPrivSetPrivacyMode(uint8_t addrType, const uint8_t *pIdentityAddr, uint8_
 {
   dmPrivApiSetPrivacyMode_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivApiSetPrivacyMode_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivApiSetPrivacyMode_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_PRIV_MSG_API_SET_PRIVACY_MODE;
     pMsg->addrType = addrType;
@@ -720,7 +720,7 @@ void DmPrivGenerateAddr(uint8_t *pIrk, uint16_t param)
 {
   dmPrivApiGenAddr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivApiGenAddr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmPrivApiGenAddr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_PRIV_MSG_API_GEN_ADDR;
     pMsg->hdr.param = param;

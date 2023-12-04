@@ -588,7 +588,7 @@ static void provisionerDmCback(dmEvt_t *pDmEvt)
       break;
   }
 
-  if ((pMsg = WsfMsgAlloc(len + reportLen)) != NULL)
+  if ((pMsg = WsfMsgAlloc(len + reportLen, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pDmEvt, len);
 
@@ -623,7 +623,7 @@ static void provisionerMeshCback(meshEvt_t *pEvt)
 
   len = MeshSizeOfEvt(pEvt);
 
-  if ((pMsg = WsfMsgAlloc(len)) != NULL)
+  if ((pMsg = WsfMsgAlloc(len, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pEvt, len);
     WsfMsgSend(provisionerHandlerId, pMsg);
@@ -646,7 +646,7 @@ static void provisionerMeshPrvClCback(meshPrvClEvt_t *pEvt)
 
   len = MeshPrvClSizeOfEvt(pEvt);
 
-  if ((pMsg = WsfMsgAlloc(len)) != NULL)
+  if ((pMsg = WsfMsgAlloc(len, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pEvt, len);
     WsfMsgSend(provisionerHandlerId, pMsg);
@@ -683,7 +683,7 @@ static void provisionerMeshCfgMdlClCback(meshCfgMdlClEvt_t* pEvt)
 
   len = MeshCfgSizeOfEvt((wsfMsgHdr_t *) pEvt);
 
-  if ((pMsg = WsfMsgAlloc(len)) != NULL)
+  if ((pMsg = WsfMsgAlloc(len, MSG_T_EMPTY)) != NULL)
   {
     if (MeshCfgMsgDeepCopy((wsfMsgHdr_t *) pMsg, (wsfMsgHdr_t *) pEvt))
     {
@@ -802,7 +802,7 @@ static void provisionerAttCback(attEvt_t *pEvt)
 {
   attEvt_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen)) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pEvt, sizeof(attEvt_t));
     pMsg->pValue = (uint8_t *) (pMsg + 1);

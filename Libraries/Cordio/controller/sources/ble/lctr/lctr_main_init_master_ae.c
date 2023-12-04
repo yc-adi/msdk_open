@@ -285,7 +285,7 @@ uint8_t lctrMstExtInitiateBuildOp(lctrExtScanCtx_t *pExtInitCtx, LlConnSpec_t *p
   pScan->rxAdvCback = lctrMstInitiateRxExtAdvPktHandler;
   pScan->rxAdvPostCback = lctrMstInitiateRxExtAdvPktPostProcessHandler;
 
-  if ((pScan->pRxAdvBuf = WsfMsgAlloc(LL_ADV_HDR_LEN + LL_EXT_ADV_HDR_MAX_LEN)) == NULL)
+  if ((pScan->pRxAdvBuf = WsfMsgAlloc(LL_ADV_HDR_LEN + LL_EXT_ADV_HDR_MAX_LEN, MSG_T_EMPTY )) == NULL)
   {
     LL_TRACE_ERR0("Could not allocate advertising buffer");
     return LL_ERROR_CODE_UNSPECIFIED_ERROR;
@@ -634,7 +634,7 @@ void lctrSendExtInitMsg(lctrExtScanCtx_t *pExtInitCtx, uint8_t event)
 {
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = (pExtInitCtx) ? LCTR_GET_EXT_INIT_HANDLE(pExtInitCtx) : LCTR_SCAN_PHY_ALL;
     pMsg->dispId = LCTR_DISP_EXT_INIT;

@@ -136,7 +136,7 @@ static void meshAccPpSendWsfPubEvt(meshAccPpQueueElem_t *pQueueElem, uint32_t ti
   }
 
   /* Allocate and send event. */
-  if ((pEvt = (meshModelPeriodicPubEvt_t *)WsfMsgAlloc(sizeof(meshModelPeriodicPubEvt_t))) != NULL)
+  if ((pEvt = (meshModelPeriodicPubEvt_t *)WsfMsgAlloc(sizeof(meshModelPeriodicPubEvt_t), MSG_T_EMPTY)) != NULL)
   {
     pEvt->hdr.event = MESH_MODEL_EVT_PERIODIC_PUB;
     pEvt->elementId = pQueueElem->elemId;

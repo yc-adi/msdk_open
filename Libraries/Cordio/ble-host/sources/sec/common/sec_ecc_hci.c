@@ -104,7 +104,7 @@ bool_t SecEccGenKey(wsfHandlerId_t handlerId, uint16_t param, uint8_t event)
   secQueueBuf_t *pBuf;
   uint16_t bufSize = sizeof(secQueueBuf_t) + sizeof(secEccMsg_t);
 
-  if ((pBuf = WsfMsgAlloc(bufSize)) != NULL)
+  if ((pBuf = WsfMsgAlloc(bufSize, MSG_T_EMPTY)) != NULL)
   {
     /* Record the event and parameter for use in the HCI response */
     pBuf->msg.hdr.param = param;
@@ -140,7 +140,7 @@ bool_t SecEccGenSharedSecret(secEccKey_t *pKey, wsfHandlerId_t handlerId, uint16
   secQueueBuf_t *pBuf;
   uint16_t bufSize = sizeof(secQueueBuf_t) + sizeof(secEccMsg_t);
 
-  if ((pBuf = WsfMsgAlloc(bufSize)) != NULL)
+  if ((pBuf = WsfMsgAlloc(bufSize, MSG_T_EMPTY)) != NULL)
   {
     uint8_t pubKeyX[SEC_ECC_KEY_LEN];
     uint8_t pubKeyY[SEC_ECC_KEY_LEN];

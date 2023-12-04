@@ -176,13 +176,13 @@ typedef struct BbOpDesc_tag
                                      8  lctrMstAuxInitiateBuildOp
                                      9  lctrMstBigBuildOp
                                      10 lctrSlvAdvBuildOp
-                                        lctrSlvExtAdvBuildOp
-                                        lctrSlvPeriodicAdvBuildOp
-                                        lctrSlvConnBuildOp
-                                        lctrSlvBigBuildOp
-                                     4  lctrSlvAuxScanBuildOp
-                                     5  lctrSlvAuxNonConnNonScanBuildOp
-                                     6  lctrSlvAuxConnBuildOp
+                                     11 lctrSlvExtAdvBuildOp
+                                     12 lctrSlvPeriodicAdvBuildOp
+                                     13 lctrSlvConnBuildOp
+                                     14 lctrSlvBigBuildOp
+                                     15 lctrSlvAuxScanBuildOp
+                                     16 lctrSlvAuxNonConnNonScanBuildOp
+                                     17 lctrSlvAuxConnBuildOp
                                         
                                      */
 

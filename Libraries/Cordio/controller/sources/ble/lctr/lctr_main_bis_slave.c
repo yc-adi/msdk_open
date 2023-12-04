@@ -465,7 +465,7 @@ static uint8_t lctrMstBigChClassUpdate(uint64_t chanMap)
     {
       lctrMsgHdr_t *pMsg;
 
-      if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t))) != NULL)
+      if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t), MSG_T_EMPTY)) != NULL)
       {
         pMsg->handle = pBigCtx->handle;
         pMsg->dispId = LCTR_DISP_BIG_BCST;
@@ -595,7 +595,7 @@ uint8_t LctrSlvBisCreateBig(LlCreateBig_t *pCreateBig)
 
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = pCreateBig->bigHandle;
     pMsg->dispId = LCTR_DISP_BIG_BCST;
@@ -684,7 +684,7 @@ uint8_t LctrSlvBisCreateBigTest(LlCreateBigTest_t *pCreateBigTest)
 
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = pCreateBigTest->bigHandle;
     pMsg->dispId = LCTR_DISP_BIG_BCST;
@@ -733,7 +733,7 @@ uint8_t LctrSlvBisTerminateBig(uint8_t bigHandle, uint8_t reason)
 
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = bigHandle;
     pMsg->dispId = LCTR_DISP_BIG_BCST;
@@ -829,7 +829,7 @@ void lctrSlvBigSendMsg(lctrBigCtx_t *pBigCtx, uint8_t event)
 {
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = pBigCtx->handle;
     pMsg->dispId = LCTR_DISP_BIG_BCST;
@@ -856,7 +856,7 @@ void lctrSlvBigSendAcadMsg(lctrBigCtx_t *pBigCtx, uint8_t event)
 
   lctrBigCreated_t *pMsg;
 
-  if ((pMsg = (lctrBigCreated_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrBigCreated_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = pBigCtx->roleData.slv.pAdvSet->handle;
     pMsg->hdr.dispId = LCTR_DISP_ACAD;

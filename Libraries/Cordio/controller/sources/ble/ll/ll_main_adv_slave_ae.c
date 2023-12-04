@@ -339,7 +339,7 @@ void LlExtAdvEnable(uint8_t enable, uint8_t numAdvSets, LlExtAdvEnableParam_t en
     {
       LctrExtAdvEnableMsg_t *pMsg;
 
-      if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+      if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
       {
         pMsg->hdr.handle = enaParam[i].handle;
         pMsg->hdr.dispId = LCTR_DISP_EXT_ADV;
@@ -367,7 +367,7 @@ void LlExtAdvEnable(uint8_t enable, uint8_t numAdvSets, LlExtAdvEnableParam_t en
     {
       LctrExtAdvEnableMsg_t *pMsg;
 
-      if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+      if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
       {
         pMsg->hdr.handle = handles[i];
         pMsg->hdr.dispId = LCTR_DISP_EXT_ADV;

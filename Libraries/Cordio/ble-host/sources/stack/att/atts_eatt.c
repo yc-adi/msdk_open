@@ -325,7 +325,7 @@ void EattsMultiValueNtf(dmConnId_t connId, uint8_t priority, uint16_t numTuples,
       uint8_t       i;
 
       /* allocate message buffer */
-      if ((pMsg = WsfMsgAlloc(sizeof(attsApiMsg_t))) != NULL)
+      if ((pMsg = WsfMsgAlloc(sizeof(attsApiMsg_t), MSG_T_EMPTY)) != NULL)
       {
         /* set parameters */
         pMsg->hdr.param = connId;

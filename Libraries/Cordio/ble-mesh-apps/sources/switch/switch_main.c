@@ -178,7 +178,7 @@ static void switchDmCback(dmEvt_t *pDmEvt)
 
   len = DmSizeOfEvt(pDmEvt);
 
-  if ((pMsg = WsfMsgAlloc(len)) != NULL)
+  if ((pMsg = WsfMsgAlloc(len, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pDmEvt, len);
     WsfMsgSend(switchHandlerId, pMsg);
@@ -201,7 +201,7 @@ static void switchMeshCback(meshEvt_t *pEvt)
 
   len = MeshSizeOfEvt(pEvt);
 
-  if ((pMsg = WsfMsgAlloc(len)) != NULL)
+  if ((pMsg = WsfMsgAlloc(len, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pEvt, len);
     WsfMsgSend(switchHandlerId, pMsg);
@@ -224,7 +224,7 @@ static void switchMeshPrvSrCback(meshPrvSrEvt_t *pEvt)
 
   len = MeshPrvSrSizeOfEvt(pEvt);
 
-  if ((pMsg = WsfMsgAlloc(len)) != NULL)
+  if ((pMsg = WsfMsgAlloc(len, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pEvt, len);
     WsfMsgSend(switchHandlerId, pMsg);
@@ -247,7 +247,7 @@ static void switchMeshLpnEvtNotifyCback(const meshLpnEvt_t *pEvt)
 
   len = MeshLpnSizeOfEvt((wsfMsgHdr_t *) pEvt);
 
-  if ((pMsg = WsfMsgAlloc(len)) != NULL)
+  if ((pMsg = WsfMsgAlloc(len, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pEvt, len);
     WsfMsgSend(switchHandlerId, pMsg);
@@ -270,7 +270,7 @@ static void switchMeshCfgMdlSrCback(const meshCfgMdlSrEvt_t* pEvt)
 
   len = MeshCfgSizeOfEvt((wsfMsgHdr_t *) pEvt);
 
-  if ((pMsg = WsfMsgAlloc(len)) != NULL)
+  if ((pMsg = WsfMsgAlloc(len, MSG_T_EMPTY)) != NULL)
   {
     if (MeshCfgMsgDeepCopy((wsfMsgHdr_t *) pMsg, (wsfMsgHdr_t *) pEvt))
     {

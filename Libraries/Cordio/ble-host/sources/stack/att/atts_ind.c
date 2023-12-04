@@ -437,7 +437,7 @@ void attsHandleValueIndNtf(dmConnId_t connId, uint16_t handle, uint8_t slot, uin
           uint8_t       *p;
 
           /* allocate message buffer */
-          if ((pMsg = WsfMsgAlloc(sizeof(attsApiMsg_t))) != NULL)
+          if ((pMsg = WsfMsgAlloc(sizeof(attsApiMsg_t), MSG_T_EMPTY)) != NULL)
           {
             /* set parameters */
             pMsg->hdr.param = connId;

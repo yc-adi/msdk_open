@@ -187,7 +187,7 @@ void lctrAdvActSelfTerm(void)
         }
 
         lctrConnEstablish_t *pMsg;
-        if ((pMsg = (lctrConnEstablish_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+        if ((pMsg = (lctrConnEstablish_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
         {
           lctrUnpackConnIndPdu(&pMsg->connInd, pBuf + LL_ADV_HDR_LEN);
 
@@ -205,7 +205,7 @@ void lctrAdvActSelfTerm(void)
           }
 
           /* Cannot reuse pBuf message. */
-          lctrMsgHdr_t *pResMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t));
+          lctrMsgHdr_t *pResMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t), MSG_T_EMPTY);
 
           if (pResMsg)
           {

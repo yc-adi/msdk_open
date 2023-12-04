@@ -114,7 +114,7 @@ static const uint8_t lctrScanNextStateTbl[LCTR_SCAN_STATE_TOTAL][LCTR_SCAN_MSG_T
 /*************************************************************************************************/
 void lctrMstScanExecuteSm(uint8_t event)
 {
-  LL_TRACE_INFO2("lctrMstScanExecuteSm: state=%u, event=%u", lctrMstScan.state, event);
+  LL_TRACE_INFO2("lctrMstScanExecuteSm st=%u, evt=%u", lctrMstScan.state, event);
 
   if (lctrScanActionTbl[lctrMstScan.state][event])
   {

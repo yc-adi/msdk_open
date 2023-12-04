@@ -134,7 +134,7 @@ void DmCisAccept(uint16_t handle)
 {
   wsfMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->event = DM_CIS_MSG_API_ACCEPT;
     pMsg->param = handle;
@@ -158,7 +158,7 @@ void DmCisReject(uint16_t handle, uint8_t reason)
 {
   dmCisApiReject_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmCisApiReject_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmCisApiReject_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CIS_MSG_API_REJECT;
     pMsg->hdr.param = handle;

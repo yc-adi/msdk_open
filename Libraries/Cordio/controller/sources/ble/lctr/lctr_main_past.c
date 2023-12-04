@@ -89,7 +89,7 @@ uint8_t LctrPeriodicAdvSyncTransfer(uint16_t connHandle, uint16_t serviceData, u
     return LL_ERROR_CODE_UNSUPPORTED_REMOTE_FEATURE;
   }
 
-  if ((pMsg = (lctrPerAdvSyncTrsf_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrPerAdvSyncTrsf_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = connHandle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;
@@ -150,7 +150,7 @@ uint8_t LctrPeriodicAdvSetInfoTransfer(uint16_t connHandle, uint16_t serviceData
     return LL_ERROR_CODE_UNSUPPORTED_REMOTE_FEATURE;
   }
 
-  if ((pMsg = (lctrPerAdvSyncTrsf_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrPerAdvSyncTrsf_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = connHandle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;

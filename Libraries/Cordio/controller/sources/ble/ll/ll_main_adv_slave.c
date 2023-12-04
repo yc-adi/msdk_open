@@ -145,7 +145,7 @@ uint8_t LlSetAdvParam(uint16_t advIntervalMin, uint16_t advIntervalMax, uint8_t 
 
   lctrAdvParamMsg_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.dispId = LCTR_DISP_ADV;
     pMsg->hdr.event = LCTR_ADV_MSG_PARAM_UPD;
@@ -290,7 +290,7 @@ void LlAdvEnable(uint8_t enable)
     {
       if (bbBleIsPeerInResList(lmgrSlvAdvCb.advParam.peerAddrType, lmgrSlvAdvCb.advParam.peerAddr))
       {
-        if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+        if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
         {
           pMsg->dispId = LCTR_DISP_ADV;
           pMsg->event = LCTR_ADV_MSG_START;
@@ -305,7 +305,7 @@ void LlAdvEnable(uint8_t enable)
     return;
   }
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->dispId = LCTR_DISP_ADV;
     pMsg->event = enable ? LCTR_ADV_MSG_START : LCTR_ADV_MSG_STOP;

@@ -224,7 +224,7 @@ static uint8_t lctrConnChClassUpdate(uint64_t chanMap)
         status = LL_ERROR_CODE_CMD_DISALLOWED;
       }
 
-      if ((pMsg = (lctrChanMapUpdate_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+      if ((pMsg = (lctrChanMapUpdate_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
       {
         pMsg->hdr.handle = handle;
         pMsg->hdr.dispId = LCTR_DISP_CONN;

@@ -373,7 +373,7 @@ uint8_t LlDisconnect(uint16_t handle, uint8_t reason)
   if (handle < pLctrRtCfg->maxConn)
   {
     /* ACL handle */
-    if ((pMsg = (lctrDisconnect_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+    if ((pMsg = (lctrDisconnect_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
     {
       pMsg->hdr.handle = handle;
       pMsg->hdr.dispId = LCTR_DISP_CONN;
@@ -393,7 +393,7 @@ uint8_t LlDisconnect(uint16_t handle, uint8_t reason)
       return LL_ERROR_CODE_CMD_DISALLOWED;
     }
 
-    if ((pMsg = (lctrDisconnect_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+    if ((pMsg = (lctrDisconnect_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
     {
       pMsg->hdr.handle = handle;
       pMsg->hdr.dispId = LCTR_DISP_CIS;
@@ -453,7 +453,7 @@ uint8_t LlConnUpdate(uint16_t handle, const LlConnSpec_t *pConnSpec)
     return status;
   }
 
-  if ((pMsg = (lctrConnUpdate_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrConnUpdate_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = handle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;
@@ -507,7 +507,7 @@ uint8_t LlRemoteConnParamReqReply(uint16_t handle, const LlConnSpec_t *pConnSpec
     return status;
   }
 
-  if ((pMsg = (lctrConnParamReply_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrConnParamReply_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = handle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;
@@ -552,7 +552,7 @@ uint8_t LlRemoteConnParamReqNegReply(uint16_t handle, uint8_t reason)
     return LL_ERROR_CODE_CMD_DISALLOWED;
   }
 
-  if ((pMsg = (lctrConnParamNegReply_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrConnParamNegReply_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = handle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;
@@ -596,7 +596,7 @@ uint8_t LlReadRemoteVerInfo(uint16_t handle)
     return LL_ERROR_CODE_CMD_DISALLOWED;
   }
 
-  if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = handle;
     pMsg->dispId = LCTR_DISP_CONN;
@@ -650,7 +650,7 @@ uint8_t LlSetDataLen(uint16_t handle, uint16_t txLen, uint16_t txTime)
 
   lctrDataLengthChange_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = handle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;
@@ -807,7 +807,7 @@ uint8_t LlSetLocalMinUsedChan(uint8_t phys, int8_t pwrThres, uint8_t minUsedCh)
         return LL_ERROR_CODE_CMD_DISALLOWED;
       }
 
-      if ((pMsg = (lctrSetMinUsedChan_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+      if ((pMsg = (lctrSetMinUsedChan_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
       {
         pMsg->hdr.handle = handle;
         pMsg->hdr.dispId = LCTR_DISP_CONN;
@@ -992,7 +992,7 @@ uint8_t LlRequestPeerSca(uint16_t handle)
     return LL_ERROR_CODE_UNSUPPORTED_REMOTE_FEATURE;
   }
 
-  if ((pMsg = (lctrScaReq_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrScaReq_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = handle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;
@@ -1061,7 +1061,7 @@ uint8_t LlModifySleepClockAccuracy(uint8_t action)
         continue;
       }
 
-      if ((pMsg = (lctrScaReq_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+      if ((pMsg = (lctrScaReq_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
       {
         pMsg->hdr.handle = handle;
         pMsg->hdr.dispId = LCTR_DISP_CONN;
@@ -1109,7 +1109,7 @@ uint8_t LlPowerCtrlReq(uint16_t handle, int8_t delta, uint8_t phy)
     return LL_ERROR_CODE_UNSUPPORTED_FEATURE_PARAM_VALUE;
   }
 
-  if ((pMsg = (lctrMsgPwrCtrlReq_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrMsgPwrCtrlReq_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = handle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;

@@ -79,7 +79,7 @@ uint8_t *hciCmdAlloc(uint16_t opcode, uint16_t len)
   uint8_t   *p;
 
   /* allocate buffer */
-  if ((p = WsfMsgAlloc(len + HCI_CMD_HDR_LEN)) != NULL)
+  if ((p = WsfMsgAlloc(len + HCI_CMD_HDR_LEN, MSG_T_EMPTY)) != NULL)
   {
     /* set HCI command header */
     UINT16_TO_BSTREAM(p, opcode);

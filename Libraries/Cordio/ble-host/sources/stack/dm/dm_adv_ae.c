@@ -1655,7 +1655,7 @@ void DmPerAdvConfig(uint8_t advHandle)
 
   WSF_ASSERT(advHandle < DM_NUM_ADV_SETS);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvPerApiConfig_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvPerApiConfig_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_ADV_PER_MSG_API_CONFIG;
     pMsg->advHandle = advHandle;
@@ -1682,7 +1682,7 @@ void DmPerAdvSetData(uint8_t advHandle, uint8_t op, uint8_t len, uint8_t *pData)
   WSF_ASSERT(advHandle < DM_NUM_ADV_SETS);
   WSF_ASSERT(len <= HCI_PER_ADV_DATA_LEN);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvPerApiSetData_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvPerApiSetData_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_ADV_PER_MSG_API_SET_DATA;
     pMsg->advHandle = advHandle;
@@ -1708,7 +1708,7 @@ void DmPerAdvStart(uint8_t advHandle)
 
   WSF_ASSERT(advHandle < DM_NUM_ADV_SETS);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvPerApiStart_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvPerApiStart_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_ADV_PER_MSG_API_START;
     pMsg->advHandle = advHandle;
@@ -1731,7 +1731,7 @@ void DmPerAdvStop(uint8_t advHandle)
 
   WSF_ASSERT(advHandle < DM_NUM_ADV_SETS);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvPerApiStop_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvPerApiStop_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_ADV_PER_MSG_API_STOP;
     pMsg->advHandle = advHandle;

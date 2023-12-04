@@ -496,7 +496,7 @@ static void watchDmCback(dmEvt_t *pDmEvt)
     reportLen = 0;
   }
 
-  if ((pMsg = WsfMsgAlloc(len + reportLen)) != NULL)
+  if ((pMsg = WsfMsgAlloc(len + reportLen, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pDmEvt, len);
 
@@ -523,7 +523,7 @@ static void watchAttCback(attEvt_t *pEvt)
 {
   attEvt_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen)) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pEvt, sizeof(attEvt_t));
     pMsg->pValue = (uint8_t *) (pMsg + 1);
@@ -683,7 +683,7 @@ static void watchCccCback(attsCccEvt_t *pEvt)
     AppDbSetCccTblValue(dbHdl, pEvt->idx, pEvt->value);
   }
 
-  if ((pMsg = WsfMsgAlloc(sizeof(attsCccEvt_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(attsCccEvt_t), MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pEvt, sizeof(attsCccEvt_t));
     WsfMsgSend(watchCb.handlerId, pMsg);

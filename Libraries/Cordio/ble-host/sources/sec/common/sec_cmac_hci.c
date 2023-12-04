@@ -275,7 +275,7 @@ bool_t SecCmac(const uint8_t *pKey, uint8_t *pPlainText, uint16_t textLen, wsfHa
   secQueueBuf_t *pBuf;
   uint16_t bufSize = sizeof(secQueueBuf_t) + sizeof(secCmacSecCb_t);
 
-  if ((pBuf = WsfMsgAlloc(bufSize)) != NULL)
+  if ((pBuf = WsfMsgAlloc(bufSize, MSG_T_EMPTY)) != NULL)
   {
     secCmacSecCb_t *pCmacCb = (secCmacSecCb_t *) (pBuf + 1);
 

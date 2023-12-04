@@ -77,7 +77,7 @@ void DmSecPairReq(dmConnId_t connId, uint8_t oob, uint8_t auth, uint8_t iKeyDist
 {
   smpDmPair_t  *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(smpDmPair_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(smpDmPair_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = SMP_MSG_API_PAIR_REQ;
     pMsg->hdr.param = connId;
@@ -108,7 +108,7 @@ void DmSecEncryptReq(dmConnId_t connId, uint8_t secLevel, dmSecLtk_t *pLtk)
 {
   dmSecApiEncryptReq_t  *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmSecApiEncryptReq_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmSecApiEncryptReq_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_SEC_MSG_API_ENCRYPT_REQ;
     pMsg->hdr.param = connId;

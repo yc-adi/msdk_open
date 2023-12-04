@@ -560,7 +560,7 @@ void DmCisClose(uint16_t handle, uint8_t reason)
 {
   dmCisApiClose_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmCisApiClose_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmCisApiClose_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CIS_MSG_API_CLOSE;
     pMsg->hdr.param = handle;

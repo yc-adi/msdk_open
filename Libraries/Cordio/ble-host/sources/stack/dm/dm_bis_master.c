@@ -695,7 +695,7 @@ void DmBigSyncStart(uint8_t bigHandle, uint16_t syncHandle, uint8_t mse, uint16_
   WSF_ASSERT(bigHandle < DM_BIG_MAX);
   WSF_ASSERT((numBis > 0 ) && (numBis <= DM_BIS_MAX));
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmBisApiBigSyncStart_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmBisApiBigSyncStart_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.param = bigHandle;
     pMsg->hdr.event = DM_BIS_MSG_API_BIG_SYNC_START;
@@ -727,7 +727,7 @@ void DmBigSyncStop(uint8_t bigHandle)
 {
   wsfMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->param = bigHandle;
     pMsg->event = DM_BIS_MSG_API_BIG_SYNC_STOP;

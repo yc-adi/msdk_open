@@ -714,7 +714,7 @@ void DmCisCigConfig(uint8_t cigId, dmConnId_t numCis, HciCisCisParams_t *pCisPar
 
   if (pCigCb != NULL)
   {
-    if ((pMsg = WsfMsgAlloc(sizeof(dmCisCigApiConfig_t) + (numCis * sizeof(HciCisCisParams_t)))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(dmCisCigApiConfig_t) + (numCis * sizeof(HciCisCisParams_t)), MSG_T_EMPTY)) != NULL)
     {
       pMsg->hdr.event = DM_CIS_CIG_MSG_API_CONFIG;
       pMsg->hdr.param = cigId;
@@ -744,7 +744,7 @@ void DmCisCigRemove(uint8_t cigId)
 
   WSF_ASSERT(cigId < HCI_MAX_CIG_ID);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->event = DM_CIS_CIG_MSG_API_REMOVE;
     pMsg->param = cigId;
@@ -771,7 +771,7 @@ void DmCisOpen(uint8_t numCis, uint16_t *pCisHandle, uint16_t *pAclHandle)
 
   WSF_ASSERT((numCis > 0 ) && (numCis <= DM_CIS_MAX));
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmCisApiOpen_t) + (numCis * 2 * sizeof(uint16_t)))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmCisApiOpen_t) + (numCis * 2 * sizeof(uint16_t)), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CIS_MSG_API_OPEN;
     pMsg->hdr.param = pCisHandle[0];

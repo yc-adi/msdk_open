@@ -369,7 +369,7 @@ dmConnId_t dmConnOpenAccept(uint8_t clientId, uint8_t initPhys, uint8_t advHandl
   if (pCcb != NULL)
   {
     // Allocate sizeof(dmConnMsg_t) because message may be reused in state machine with different callbacks
-    if ((pMsg = WsfMsgAlloc(sizeof(dmConnMsg_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(dmConnMsg_t), MSG_T_EMPTY)) != NULL)
     {
       pMsg->hdr.param = pCcb->connId;
       pMsg->hdr.event = (role == DM_ROLE_MASTER) ?
@@ -1164,7 +1164,7 @@ void DmConnClose(uint8_t clientId, dmConnId_t connId, uint8_t reason)
   dmConnApiClose_t *pMsg;
 
   // Allocate sizeof(dmConnMsg_t) because message may be reused in state machine with different callbacks
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnMsg_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnMsg_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_MSG_API_CLOSE;
     pMsg->hdr.param = connId;
@@ -1253,7 +1253,7 @@ void DmConnUpdate(dmConnId_t connId, hciConnSpec_t *pConnSpec)
   dmConnApiUpdate_t *pMsg;
 
   // Allocate sizeof(dmConnMsg_t) because message may be reused in state machine with different callbacks
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnMsg_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnMsg_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = (DmConnRole(connId) == DM_ROLE_MASTER) ?
                       DM_CONN_MSG_API_UPDATE_MASTER : DM_CONN_MSG_API_UPDATE_SLAVE;
@@ -1404,7 +1404,7 @@ void DmConnReadRssi(dmConnId_t connId)
 {
   dmConnApiReadRssi_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnApiReadRssi_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnApiReadRssi_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_MSG_API_READ_RSSI;
     pMsg->hdr.param = connId;
@@ -1429,7 +1429,7 @@ void DmRemoteConnParamReqReply(dmConnId_t connId, hciConnSpec_t *pConnSpec)
 {
   dmConnApiRemConnParamReqReply_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnApiRemConnParamReqReply_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnApiRemConnParamReqReply_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_MSG_API_REM_CONN_PARAM_REQ_REPLY;
     pMsg->hdr.param = connId;
@@ -1455,7 +1455,7 @@ void DmRemoteConnParamReqNegReply(dmConnId_t connId, uint8_t reason)
 {
   dmConnApiRemConnParamReqNegReply_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnApiRemConnParamReqNegReply_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnApiRemConnParamReqNegReply_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_MSG_API_REM_CONN_PARAM_REQ_NEG_REPLY;
     pMsg->hdr.param = connId;
@@ -1480,7 +1480,7 @@ void DmConnSetDataLen(dmConnId_t connId, uint16_t txOctets, uint16_t txTime)
 {
   dmConnApiSetDataLen_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnApiSetDataLen_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnApiSetDataLen_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_MSG_API_SET_DATA_LEN;
     pMsg->hdr.param = connId;
@@ -1505,7 +1505,7 @@ void DmWriteAuthPayloadTimeout(dmConnId_t connId, uint16_t timeout)
 {
   dmConnApiWriteAuthPayloadTo_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnApiWriteAuthPayloadTo_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnApiWriteAuthPayloadTo_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_MSG_API_WRITE_AUTH_TO;
     pMsg->hdr.param = connId;
@@ -1528,7 +1528,7 @@ void DmConnRequestPeerSca(dmConnId_t connId)
 {
   dmConnApiReqPeerSca_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmConnApiReqPeerSca_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmConnApiReqPeerSca_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_CONN_MSG_API_REQ_PEER_SCA;
     pMsg->hdr.param = connId;

@@ -230,7 +230,7 @@ uint8_t LlSetPhy(uint16_t handle, uint8_t allPhys, uint8_t txPhys, uint8_t rxPhy
     rxPhys = LL_PHYS_NONE;
   }
 
-  if ((pMsg = (lctrPhyUpdate_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrPhyUpdate_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = handle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;

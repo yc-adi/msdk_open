@@ -467,7 +467,7 @@ bool_t SecCcmEnc(const uint8_t *pKey, uint8_t *pNonce, uint8_t *pPlainText, uint
 
   WSF_ASSERT(clearLen < SEC_CCM_MAX_ADDITIONAL_LEN);
 
-  if ((pBuf = WsfMsgAlloc(bufSize)) != NULL)
+  if ((pBuf = WsfMsgAlloc(bufSize, MSG_T_EMPTY)) != NULL)
   {
     secCcmSecCb_t *pCcm = (secCcmSecCb_t *) (pBuf + 1);
 
@@ -535,7 +535,7 @@ bool_t SecCcmDec(const uint8_t *pKey, uint8_t *pNonce, uint8_t *pCypherText, uin
 
   WSF_ASSERT(clearLen < SEC_CCM_MAX_ADDITIONAL_LEN);
 
-  if ((pBuf = WsfMsgAlloc(bufSize)) != NULL)
+  if ((pBuf = WsfMsgAlloc(bufSize, MSG_T_EMPTY)) != NULL)
   {
     secCcmSecCb_t *pCcm = (secCcmSecCb_t *) (pBuf + 1);
 

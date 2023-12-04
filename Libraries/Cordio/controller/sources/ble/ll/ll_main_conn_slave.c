@@ -56,7 +56,7 @@ uint8_t LlReadRemoteFeat(uint16_t handle)
     return LL_ERROR_CODE_UNKNOWN_CONN_ID;
   }
 
-  if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = handle;
     pMsg->dispId = LCTR_DISP_CONN;

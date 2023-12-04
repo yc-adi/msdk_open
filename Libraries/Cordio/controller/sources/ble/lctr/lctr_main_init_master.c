@@ -85,7 +85,7 @@ void lctrMstInitiateBuildOp(LlConnSpec_t *pConnSpec, uint8_t peerAddrType, uint6
   uint8_t *pBuf;
 
   /*** General Setup ***/
-
+  pOp->type = 6;
   pOp->reschPolicy = BB_RESCH_MOVEABLE_PREFERRED;
   pOp->protId = BB_PROT_BLE;
   pOp->prot.pBle = pBle;
@@ -123,7 +123,7 @@ void lctrMstInitiateBuildOp(LlConnSpec_t *pConnSpec, uint8_t peerAddrType, uint6
 
   pScan->rxAdvCback = lctrMstInitiateAdvPktHandler;
 
-  if ((pScan->pRxAdvBuf = WsfMsgAlloc(LCTR_ADVB_BUF_SIZE)) == NULL)
+  if ((pScan->pRxAdvBuf = WsfMsgAlloc(LCTR_ADVB_BUF_SIZE, MSG_T_EMPTY)) == NULL)
   {
     /* Attempt to obtain buffer on next advertising operation. */
     LL_TRACE_ERR0("Could not allocate advertising buffer");

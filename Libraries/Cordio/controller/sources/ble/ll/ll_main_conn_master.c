@@ -81,7 +81,7 @@ uint8_t LlSetChannelMap(uint16_t handle, const uint8_t *pChanMap)
     return LL_ERROR_CODE_INVALID_HCI_CMD_PARAMS;
   }
 
-  if ((pMsg = (lctrChanMapUpdate_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrChanMapUpdate_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = handle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;
@@ -146,7 +146,7 @@ uint8_t LlCreateConn(const LlInitParam_t *pInitParam, const LlConnSpec_t *pConnS
     return LL_ERROR_CODE_INVALID_HCI_CMD_PARAMS;
   }
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.dispId = LCTR_DISP_INIT;
     pMsg->hdr.event = LCTR_INIT_MSG_INITIATE;
@@ -182,7 +182,7 @@ void LlCreateConnCancel(void)
 
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     if (lmgrCb.useExtCmds)
     {

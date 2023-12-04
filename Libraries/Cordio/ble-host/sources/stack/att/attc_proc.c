@@ -547,7 +547,7 @@ void attcSendMsg(dmConnId_t connId, uint16_t handle, uint8_t msgId, attcPktParam
         attcApiMsg_t *pMsg;
 
         /* allocate message buffer */
-        if ((pMsg = WsfMsgAlloc(sizeof(attcApiMsg_t))) != NULL)
+        if ((pMsg = WsfMsgAlloc(sizeof(attcApiMsg_t), MSG_T_EMPTY)) != NULL)
         {
           /* set parameters */
           pMsg->hdr.param = connId;

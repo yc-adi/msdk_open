@@ -1225,7 +1225,7 @@ meshSendMessage_t *MeshAccAllocMsg(const meshMsgInfo_t *pMsgInfo, const uint8_t 
   apiMsgLen += (pMsgInfo->pDstLabelUuid != NULL ? MESH_LABEL_UUID_SIZE : 0);
 
   /* Allocate the Stack Message and additional size for message parameters. */
-  if ((pMsg = WsfMsgAlloc(apiMsgLen)) != NULL)
+  if ((pMsg = WsfMsgAlloc(apiMsgLen, MSG_T_EMPTY)) != NULL)
   {
     /* Copy message information. */
     memcpy(&(pMsg->msgInfo), pMsgInfo, sizeof(meshMsgInfo_t));

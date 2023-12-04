@@ -118,7 +118,7 @@ void DmScanStop(void)
 {
   wsfMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->event = DM_SCAN_MSG_API_STOP;
     WsfMsgSend(dmCb.handlerId, pMsg);

@@ -605,7 +605,7 @@ void MeshPrvSrEnterPbAdvProvisioningMode(uint8_t ifId, uint32_t beaconInterval)
   }
 
   /* Allocate the Stack Message and additional size for message parameters. */
-  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvSrEnterPbAdv_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvSrEnterPbAdv_t), MSG_T_EMPTY)) != NULL)
   {
     /* Set event type. */
     pMsg->hdr.event = PRV_SR_EVT_BEGIN_NO_LINK;
@@ -660,7 +660,7 @@ void MeshPrvSrEnterPbGattProvisioningMode(uint8_t connId)
   }
 
   /* Allocate the Stack Message and additional size for message parameters. */
-  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvSrEnterPbGatt_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvSrEnterPbGatt_t), MSG_T_EMPTY)) != NULL)
   {
     /* Set event type. */
     pMsg->hdr.event = PRV_SR_EVT_BEGIN_LINK_OPEN;
@@ -715,7 +715,7 @@ void MeshPrvSrInputComplete(meshPrvInputOobSize_t inputOobSize, meshPrvInOutOobD
   }
 
   /* Allocate the Stack Message and additional size for message parameters. */
-  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvSrInputOob_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvSrInputOob_t), MSG_T_EMPTY)) != NULL)
   {
     /* Set event type. */
     pMsg->hdr.event = PRV_SR_EVT_INPUT_READY;

@@ -571,7 +571,7 @@ void MeshPrvClStartPbAdvProvisioning(uint8_t ifId,
   }
 
   /* Allocate the Stack Message and additional size for message parameters. */
-  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvClStartPbAdv_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvClStartPbAdv_t), MSG_T_EMPTY)) != NULL)
   {
     /* Set event type and parameters. */
     pMsg->hdr.event = PRV_CL_EVT_BEGIN_NO_LINK;
@@ -637,7 +637,7 @@ void MeshPrvClStartPbGattProvisioning(uint8_t connId,
   }
 
   /* Allocate the Stack Message and additional size for message parameters. */
-  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvClStartPbGatt_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvClStartPbGatt_t), MSG_T_EMPTY)) != NULL)
   {
     /* Set event type and parameters. */
     pMsg->hdr.event = PRV_CL_EVT_BEGIN_LINK_OPEN;
@@ -672,7 +672,7 @@ void MeshPrvClCancel(void)
   }
 
   /* Allocate the Stack Message and additional size for message parameters. */
-  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     /* Set event type and parameters. */
     pMsg->event = PRV_CL_EVT_CANCEL;
@@ -718,7 +718,7 @@ void MeshPrvClSelectAuthentication(meshPrvClSelectAuth_t *pSelectAuth)
   }
 
   /* Allocate the Stack Message and additional size for message parameters. */
-  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvClSelAuthParam_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvClSelAuthParam_t), MSG_T_EMPTY)) != NULL)
   {
     /* Set event type and parameters. */
     pMsg->hdr.event = PRV_CL_EVT_AUTH_SELECTED;
@@ -770,7 +770,7 @@ void MeshPrvClEnterOutputOob(meshPrvOutputOobSize_t outputOobSize,
   }
 
   /* Allocate the Stack Message and additional size for message parameters. */
-  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvClEnterOob_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(meshPrvClEnterOob_t), MSG_T_EMPTY)) != NULL)
   {
     /* Set event type and parameters. */
     pMsg->hdr.event = PRV_CL_EVT_INPUT_READY;

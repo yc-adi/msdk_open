@@ -841,8 +841,8 @@ bool_t SchInsertEarlyAsPossible(BbOpDesc_t *pBod, uint32_t min, uint32_t max)
     schInsertToEmptyList(pBod);
     result = TRUE;
   }
-  else if (SCH_IS_DUE_BEFORE (pBod, schCb.pHead) &&
-           SCH_IS_DONE_BEFORE(pBod, schCb.pHead) &&
+  else if (SCH_IS_DUE_BEFORE (pBod, schCb.pHead) &&   // pBod is due before pHead
+           SCH_IS_DONE_BEFORE(pBod, schCb.pHead) &&   // pBod completion time is before pHead due time 
            schCheckCancelHead())
   {
     /* Insert at head */
@@ -1203,7 +1203,7 @@ void SchPrintBod(void)
   {
     curTime = PalBbGetCurrentTime();
     delta = BbGetTargetTimeDelta(pCur->dueUsec, curTime);
-    WsfTrace("%d type=%d due=%d(%d) min=%d max=%d", i++, pCur->type, pCur->dueUsec, delta, pCur->minDurUsec, pCur->maxDurUsec);
+    WsfTrace("%d type=%d delta=%d min=%d max=%d", i++, pCur->type, delta, pCur->minDurUsec, pCur->maxDurUsec);
     pCur = pCur->pNext;
   } while (pCur != NULL);
 }

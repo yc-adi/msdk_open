@@ -71,7 +71,7 @@ void dmSecApiLtkMsg(dmConnId_t connId, uint8_t status, dmSecLtk_t *pLtk, uint8_t
 {
   dmSecApiEncryptReq_t  *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmSecApiEncryptReq_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmSecApiEncryptReq_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = event;
     pMsg->hdr.param = connId;
@@ -272,7 +272,7 @@ void DmSecCancelReq(dmConnId_t connId, uint8_t reason)
 {
   wsfMsgHdr_t  *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->event = SMP_MSG_API_CANCEL_REQ;
     pMsg->param = connId;
@@ -301,7 +301,7 @@ void DmSecAuthRsp(dmConnId_t connId, uint8_t authDataLen, uint8_t *pAuthData)
 
   WSF_ASSERT(authDataLen <= SMP_OOB_LEN);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(smpDmAuthRsp_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(smpDmAuthRsp_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = SMP_MSG_API_AUTH_RSP;
     pMsg->hdr.param = connId;

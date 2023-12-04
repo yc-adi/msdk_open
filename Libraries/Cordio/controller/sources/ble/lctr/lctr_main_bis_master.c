@@ -227,7 +227,7 @@ uint8_t LctrMstBigCreateSync(LlBigCreateSync_t *pParam)
   pMsg->dispId = LCTR_DISP_BIG_SYNC;
   pMsg->event = LCTR_MST_BIG_INT_SYNC_TIMEOUT;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = pParam->bigHandle;
     pMsg->dispId = LCTR_DISP_BIG_SYNC;
@@ -266,7 +266,7 @@ void LctrMstBigTerminateSync(uint8_t bigHandle)
 
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = bigHandle;
     pMsg->dispId = LCTR_DISP_BIG_SYNC;
@@ -495,7 +495,7 @@ void lctrMstBigSendMsg(lctrBigCtx_t *pBigCtx, LctrMstBigMsg_t event)
 {
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = pBigCtx->handle;
     pMsg->dispId = LCTR_DISP_BIG_SYNC;

@@ -148,7 +148,7 @@ static void meshLpnRxPduNotifyCback(meshNwkPduRxInfo_t *pNwkPduRxInfo)
 
   if ((ctxIdx = meshLpnCtxIdxByNetKeyIndex(pNwkPduRxInfo->netKeyIndex)) != MESH_LPN_INVALID_CTX_IDX)
   {
-    if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
     {
       pMsg->hdr.event = MESH_LPN_MSG_FRIEND_MESSAGE;
       pMsg->hdr.param = ctxIdx;
@@ -229,7 +229,7 @@ static void meshLpnCtlRecvCback(const meshLtrCtlPduInfo_t *pCtlPduInfo)
             (pCtlPduInfo->friendLpnAddr != MESH_ADDR_TYPE_UNASSIGNED) &&
             (pCtlPduInfo->friendLpnAddr == lpnCb.pLpnTbl[ctxIdx].friendAddr))
         {
-          if ((pMsg = WsfMsgAlloc(sizeof(meshLpnFriendOffer_t))) != NULL)
+          if ((pMsg = WsfMsgAlloc(sizeof(meshLpnFriendOffer_t), MSG_T_EMPTY)) != NULL)
           {
             pMsg->event = MESH_LPN_MSG_FRIEND_UPDATE;
             pMsg->param = ctxIdx;
@@ -251,7 +251,7 @@ static void meshLpnCtlRecvCback(const meshLtrCtlPduInfo_t *pCtlPduInfo)
             (pCtlPduInfo->ttl == 0x00) &&
             (pCtlPduInfo->friendLpnAddr == MESH_ADDR_TYPE_UNASSIGNED))
         {
-          if ((pMsg = WsfMsgAlloc(sizeof(meshLpnFriendOffer_t))) != NULL)
+          if ((pMsg = WsfMsgAlloc(sizeof(meshLpnFriendOffer_t), MSG_T_EMPTY)) != NULL)
           {
             pMsg->event = MESH_LPN_MSG_FRIEND_OFFER;
             pMsg->param = ctxIdx;
@@ -278,7 +278,7 @@ static void meshLpnCtlRecvCback(const meshLtrCtlPduInfo_t *pCtlPduInfo)
             (pCtlPduInfo->friendLpnAddr != MESH_ADDR_TYPE_UNASSIGNED) &&
             (pCtlPduInfo->friendLpnAddr == lpnCb.pLpnTbl[ctxIdx].friendAddr))
         {
-          if ((pMsg = WsfMsgAlloc(sizeof(meshLpnFriendSubscrCnf_t))) != NULL)
+          if ((pMsg = WsfMsgAlloc(sizeof(meshLpnFriendSubscrCnf_t), MSG_T_EMPTY)) != NULL)
           {
             pMsg->event = MESH_LPN_MSG_FRIEND_SUBSCR_CNF;
             pMsg->param = ctxIdx;
@@ -350,7 +350,7 @@ static void meshLpnFriendSubscrEventNotifyCback(meshLocalCfgFriendSubscrEvent_t 
             WsfQueueEnq(&(lpnCb.pLpnTbl[i].subscrListQueue), ptr);
 
             /* Send a Friend Poll to trigger the Subscription Add afterwards */
-            if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+            if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
             {
               pMsg->event = MESH_LPN_MSG_SEND_FRIEND_POLL;
               pMsg->param = i;
@@ -413,7 +413,7 @@ static void meshLpnNetKeyDelNotifyCback(uint16_t netKeyIndex)
 
   if ((ctxIdx = meshLpnCtxIdxByNetKeyIndex(netKeyIndex)) != MESH_LPN_INVALID_CTX_IDX)
   {
-    if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
     {
       pMsg->event = MESH_LPN_MSG_TERMINATE;
       pMsg->param = ctxIdx;
@@ -822,7 +822,7 @@ bool_t MeshLpnEstablishFriendship(uint16_t netKeyIndex, meshFriendshipCriteria_t
       lpnCb.pLpnTbl[ctxIdx].sleepDurationMs = sleepDurationMs;
 
       /* Allocate the message and additional size for message parameters. */
-      if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+      if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
       {
         pMsg->event = MESH_LPN_MSG_ESTABLISH;
         pMsg->param = ctxIdx;
@@ -860,7 +860,7 @@ void MeshLpnTerminateFriendship(uint16_t netKeyIndex)
     if (ctxIdx != MESH_LPN_INVALID_CTX_IDX)
     {
       /* Allocate the message and additional size for message parameters. */
-      if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+      if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
       {
         pMsg->event = MESH_LPN_MSG_SEND_FRIEND_CLEAR;
         pMsg->param = ctxIdx;

@@ -205,7 +205,7 @@ uint8_t *lhciAllocEvt(uint8_t evtCode, uint8_t paramLen)
 {
   uint8_t *pEvtBuf;
 
-  if ((pEvtBuf = WsfMsgAlloc(HCI_EVT_HDR_LEN + paramLen)) != NULL)
+  if ((pEvtBuf = WsfMsgAlloc(HCI_EVT_HDR_LEN + paramLen, MSG_T_EMPTY)) != NULL)
   {
     pEvtBuf += lhciPackEvtHdr(pEvtBuf, evtCode, paramLen);
   }
@@ -227,7 +227,7 @@ uint8_t *lhciAllocCmdCmplEvt(uint8_t paramLen, uint16_t opCode)
 {
   uint8_t *pEvtBuf;
 
-  if ((pEvtBuf = WsfMsgAlloc(HCI_EVT_HDR_LEN + HCI_LEN_CMD_CMPL + paramLen)) != NULL)
+  if ((pEvtBuf = WsfMsgAlloc(HCI_EVT_HDR_LEN + HCI_LEN_CMD_CMPL + paramLen, MSG_T_EMPTY)) != NULL)
   {
     pEvtBuf += lhciPackEvtHdr(pEvtBuf, HCI_CMD_CMPL_EVT, HCI_LEN_CMD_CMPL + paramLen);
     pEvtBuf += lhciPackCmdCompleteEvt(pEvtBuf, opCode);

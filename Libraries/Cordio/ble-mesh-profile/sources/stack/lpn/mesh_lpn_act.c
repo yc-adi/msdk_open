@@ -93,7 +93,7 @@ static void meshSecFriendCredDerivCback(meshAddress_t friendAddress, meshAddress
   WSF_ASSERT(ctxIdx != MESH_LPN_INVALID_CTX_IDX);
 
   /* Terminate Friendship */
-  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     if (isSuccess)
     {
@@ -387,7 +387,7 @@ void meshLpnActResendFriendReq(meshLpnCtx_t *pLpnCtx, meshLpnSmMsg_t *pMsg)
 {
   wsfMsgHdr_t *pReqMsg;
 
-  if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     if (pLpnCtx->establishRetryCount)
     {
@@ -534,7 +534,7 @@ void meshLpnActResendFriendPoll(meshLpnCtx_t *pLpnCtx, meshLpnSmMsg_t *pMsg)
 {
   wsfMsgHdr_t *pReqMsg;
 
-  if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     if (pLpnCtx->txRetryCount)
     {
@@ -626,7 +626,7 @@ void meshLpnActFriendshipEstablished(meshLpnCtx_t *pLpnCtx, meshLpnSmMsg_t *pMsg
   /* Check for subscribed addresses */
   if (subscrAddressListNotEmpty || subscrVirtualAddrListNotEmpty)
   {
-    if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+    if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
     {
       pLpnCtx->subscrReq.nextAddressIdx = 0;
       pLpnCtx->subscrReq.nextVirtualAddrIdx = 0;
@@ -776,7 +776,7 @@ void meshLpnActProcessFriendUpdate(meshLpnCtx_t *pLpnCtx, meshLpnSmMsg_t *pMsg)
 
     WsfBufFree(ptr);
 
-    if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+    if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
     {
       pReqMsg->event = MESH_LPN_MSG_SEND_FRIEND_SUBSCR_ADD_RM;
 
@@ -916,7 +916,7 @@ void meshLpnActResendFriendSubscrAddRm(meshLpnCtx_t *pLpnCtx, meshLpnSmMsg_t *pM
 {
   wsfMsgHdr_t *pReqMsg;
 
-  if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     if (pLpnCtx->txRetryCount)
     {
@@ -1025,7 +1025,7 @@ void meshLpnActProcessFriendSubscrCnf(meshLpnCtx_t *pLpnCtx, meshLpnSmMsg_t *pMs
         }
       }
 
-      if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+      if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
       {
         /* Re-send request */
         pReqMsg->event = MESH_LPN_MSG_SEND_FRIEND_SUBSCR_ADD_RM;
@@ -1046,7 +1046,7 @@ void meshLpnActProcessFriendSubscrCnf(meshLpnCtx_t *pLpnCtx, meshLpnSmMsg_t *pMs
 
       WsfBufFree(ptr);
 
-      if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+      if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
       {
         /* Re-send request */
         pReqMsg->event = MESH_LPN_MSG_SEND_FRIEND_SUBSCR_ADD_RM;
@@ -1070,7 +1070,7 @@ void meshLpnActProcessFriendSubscrCnf(meshLpnCtx_t *pLpnCtx, meshLpnSmMsg_t *pMs
   }
   else
   {
-    if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+    if ((pReqMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
     {
       /* Re-send request */
       pReqMsg->event = MESH_LPN_MSG_RESEND_FRIEND_SUBSCR_ADD_RM;

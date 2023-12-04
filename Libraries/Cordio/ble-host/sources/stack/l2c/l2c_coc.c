@@ -2630,7 +2630,7 @@ uint16_t L2cCocConnectReq(dmConnId_t connId, l2cCocRegId_t regId, uint16_t psm)
 
   if (pChanCb != NULL)
   {
-    if ((pMsg = WsfMsgAlloc(sizeof(l2cApiConnectReq_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(l2cApiConnectReq_t), MSG_T_EMPTY)) != NULL)
     {
       pMsg->hdr.param = connId;
       pMsg->hdr.event = L2C_MSG_API_CONNECT_REQ;
@@ -2665,7 +2665,7 @@ void L2cCocDisconnectReq(uint16_t cid)
   wsfMsgHdr_t *pMsg;
 
   /* allocate message buffer */
-  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(wsfMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     /* send message */
     pMsg->event = L2C_MSG_API_DISCONNECT_REQ;
@@ -2695,7 +2695,7 @@ void L2cCocDataReq(uint16_t cid, uint16_t len, uint8_t *pPayload)
   if ((pPkt = l2cMsgAlloc(L2C_LE_SDU_PKT_BASE_LEN + len)) != NULL)
   {
     /* allocate message buffer */
-    if ((pMsg = WsfMsgAlloc(sizeof(l2cApiDataReq_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(l2cApiDataReq_t), MSG_T_EMPTY)) != NULL)
     {
       /* copy length and packet data to packet buffer */
       p = (uint8_t *) pPkt + L2C_PAYLOAD_START;
@@ -2752,7 +2752,7 @@ bool_t L2cCocEnhancedConnectReq(dmConnId_t connId, l2cCocRegId_t regId, uint16_t
     if (pRegCb->inUse && connId != DM_CONN_ID_NONE)
     {
       /* alocate message buffer */
-      if ((pMsg = WsfMsgAlloc(sizeof(l2cApiEnConnectReq_t))) != NULL)
+      if ((pMsg = WsfMsgAlloc(sizeof(l2cApiEnConnectReq_t), MSG_T_EMPTY)) != NULL)
       {
         /* unused channels should be zero */
         memset(pMsg->chanList, 0, sizeof(pMsg->chanList));
@@ -2841,7 +2841,7 @@ bool_t L2cCocEnhancedReconfigReq(dmConnId_t connId, uint16_t mtu, uint16_t mps,
     /* Check that MTU is greater or equal to greatest of all mtu and do the same for MPS unless only 1 channel. */
     if ((mtu >= maxMtu) && ((numChan == 1) || (mps >= maxMps)))
     {
-      if ((pMsg = WsfMsgAlloc(sizeof(l2cApiEnConnectReq_t))) != NULL)
+      if ((pMsg = WsfMsgAlloc(sizeof(l2cApiEnConnectReq_t), MSG_T_EMPTY)) != NULL)
       {
         pMsg->mtu = mtu;
         pMsg->mps = mps;

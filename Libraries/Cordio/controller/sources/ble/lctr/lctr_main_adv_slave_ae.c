@@ -879,7 +879,7 @@ uint8_t lctrSlvExtAdvBuildOp(lctrAdvSet_t *pAdvSet, uint32_t maxStartMs)
 
     lctrMsgHdr_t *pMsg;
 
-    if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t) + BB_REQ_PDU_MAX_LEN)) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t) + BB_REQ_PDU_MAX_LEN, MSG_T_EMPTY)) != NULL)
     {
       pAdv->pRxReqBuf = (uint8_t *)(pMsg + 1);      /* hide header */
       pAdv->rxReqCback = lctrSlvRxLegacyReqHandler;
@@ -1240,7 +1240,7 @@ void lctrSlvAuxScanBuildOp(lctrAdvSet_t *pAdvSet)
 
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t) + LL_ADV_HDR_LEN + LL_SCAN_REQ_PDU_LEN)) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t) + LL_ADV_HDR_LEN + LL_SCAN_REQ_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     pAuxAdv->pRxAuxReqBuf = (uint8_t *)(pMsg + 1);      /* hide header */
     pAuxAdv->rxAuxReqCback = lctrSlvRxAuxScanReqHandler;
@@ -1360,7 +1360,7 @@ void lctrSlvAuxConnBuildOp(lctrAdvSet_t *pAdvSet)
 
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t) + LL_ADV_HDR_LEN + LL_CONN_IND_PDU_LEN)) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t) + LL_ADV_HDR_LEN + LL_CONN_IND_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     pAuxAdv->pRxAuxReqBuf = (uint8_t *)(pMsg + 1);      /* hide header */
     pAuxAdv->rxAuxReqCback = lctrSlvRxAuxConnReqHandler;
@@ -1411,7 +1411,7 @@ static uint8_t lctrSlvPeriodicChClassUpdate(uint64_t chanMap)
   {
     if (LctrPerAdvEnabled(perAdvHandle) == TRUE)
     {
-      if ((pMsg = (lctrChanMapUpdate_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+      if ((pMsg = (lctrChanMapUpdate_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
       {
         pMsg->hdr.handle = (uint16_t)perAdvHandle;
         pMsg->hdr.dispId = LCTR_DISP_ACAD;
@@ -2231,7 +2231,7 @@ void LctrSetPeriodicAdvEnable(uint8_t handle, bool_t enable)
 
   LctrPerAdvEnableMsg_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.handle = handle;
     pMsg->hdr.dispId = LCTR_DISP_PER_ADV;
@@ -2488,7 +2488,7 @@ void lctrSendAdvSetMsg(lctrAdvSet_t *pAdvSet, uint8_t event)
 {
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = pAdvSet->handle;
     pMsg->dispId = LCTR_DISP_EXT_ADV;
@@ -2543,7 +2543,7 @@ void lctrSendPeriodicAdvSetMsg(lctrAdvSet_t *pAdvSet, uint8_t event)
 {
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = pAdvSet->handle;
     pMsg->dispId = LCTR_DISP_PER_ADV;

@@ -171,7 +171,7 @@ void lctrSlvAdvPostProcessHandler(BbOpDesc_t *pOp, const uint8_t *pReqBuf)
         if (sendRsp && lmgrSlvAdvCb.scanReportEna)
         {
           lctrSlvScanReport_t *pScanReq;
-          if ((pScanReq = WsfMsgAlloc(sizeof(lctrSlvScanReport_t))) != NULL)
+          if ((pScanReq = WsfMsgAlloc(sizeof(lctrSlvScanReport_t), MSG_T_EMPTY)) != NULL)
           {
             pScanReq->scanIdAddr     = pAdv->filtResults.peerIdAddr;
             pScanReq->scanIdAddrType = pAdv->filtResults.peerIdAddrRand;
@@ -210,7 +210,7 @@ void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
     lctrMsgHdr_t *pMsg;
 
     /* Send SM an advertising termination event. */
-    if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+    if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
     {
       /* pMsg->handle = 0; */           /* not used */
       pMsg->dispId = LCTR_DISP_ADV;
@@ -388,7 +388,7 @@ void lctrSlvAdvEndOp(BbOpDesc_t *pOp)
         lctrMsgHdr_t *pMsg;
 
         /* Send SM an advertising termination event. */
-        if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+        if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
         {
           /* pMsg->handle = 0; */           /* not used */
           pMsg->dispId = LCTR_DISP_ADV;

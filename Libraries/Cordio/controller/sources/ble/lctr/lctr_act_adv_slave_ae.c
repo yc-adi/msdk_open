@@ -336,7 +336,7 @@ void lctrExtAdvActSelfTerm(lctrAdvSet_t *pAdvSet)
     {
       lctrConnEstablish_t *pMsg;
 
-      if ((pMsg = (lctrConnEstablish_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+      if ((pMsg = (lctrConnEstablish_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
       {
         lctrAdvbPduHdr_t hdr;
 

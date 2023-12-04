@@ -835,7 +835,7 @@ static void meshFriendNetKeyDelNotifyCback(uint16_t netKeyIndex)
   meshFriendNetKeyDel_t *pMsg;
 
   /* Allocate message. */
-  if((pMsg = WsfMsgAlloc(sizeof(meshFriendNetKeyDel_t))) != NULL)
+  if((pMsg = WsfMsgAlloc(sizeof(meshFriendNetKeyDel_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = MESH_FRIEND_MSG_NETKEY_DEL;
     pMsg->netKeyIndex = netKeyIndex;

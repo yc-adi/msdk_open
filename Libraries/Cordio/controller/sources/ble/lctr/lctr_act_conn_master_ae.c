@@ -147,7 +147,7 @@ void lctrExtInitActConnect(lctrExtScanCtx_t *pExtInitCtx)
   uint8_t peerIdAddrType = 0;
   uint64_t peerRpa = 0;
 
-  if ((pMsg = (lctrConnEstablish_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrConnEstablish_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pCtx = LCTR_GET_CONN_CTX(pExtInitCtx->data.init.connHandle);
 

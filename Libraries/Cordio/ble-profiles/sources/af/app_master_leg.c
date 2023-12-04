@@ -86,9 +86,9 @@ void AppScanStart(uint8_t mode, uint8_t scanType, uint16_t duration)
     }
     else
     {
-    DmScanSetInterval(HCI_SCAN_PHY_LE_1M_BIT, &pAppMasterCfg->scanInterval, &pAppMasterCfg->scanWindow);
+      DmScanSetInterval(HCI_SCAN_PHY_LE_1M_BIT, &pAppMasterCfg->scanInterval, &pAppMasterCfg->scanWindow);
 
-    DmScanStart(HCI_SCAN_PHY_LE_1M_BIT, mode, &scanType, TRUE, duration, 0);
+      DmScanStart(HCI_SCAN_PHY_LE_1M_BIT, mode, &scanType, TRUE, duration, 0);
     }
   }
 }

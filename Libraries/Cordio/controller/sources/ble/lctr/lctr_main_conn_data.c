@@ -687,7 +687,7 @@ uint8_t *lctrTxCtrlPduAlloc(uint8_t pduLen)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = WsfMsgAlloc(LCTR_DATA_TX_PDU_START_OFFSET + LCTR_DATA_PDU_LEN(pduLen))) != NULL)
+  if ((pPdu = WsfMsgAlloc(LCTR_DATA_TX_PDU_START_OFFSET + LCTR_DATA_PDU_LEN(pduLen), MSG_T_EMPTY)) != NULL)
   {
     pPdu += LCTR_DATA_TX_PDU_START_OFFSET;
     pPdu += lctrAssembleCtrlPdu(pPdu, pduLen);
@@ -907,7 +907,7 @@ uint8_t *lctrRxPduAlloc(uint16_t maxRxLen)
   uint8_t *pBuf;
 
   /* Include ACL header headroom. */
-  if ((pBuf = WsfMsgAlloc(HCI_ACL_HDR_LEN + allocLen)) != NULL)
+  if ((pBuf = WsfMsgAlloc(HCI_ACL_HDR_LEN + allocLen, MSG_T_EMPTY)) != NULL)
   {
     /* Return start of data PDU. */
     pBuf += LCTR_DATA_PDU_START_OFFSET;

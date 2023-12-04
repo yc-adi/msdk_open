@@ -373,7 +373,7 @@ void lhciGenerateAcl(uint16_t handle, uint16_t pktLen, uint8_t numPkts)
     unsigned int allocSize = HCI_ACL_HDR_LEN + BB_DATA_PLD_MAX_LEN + BB_DATA_PDU_TAILROOM;
 
     uint8_t *pAclBuf;
-    if ((pAclBuf = (uint8_t*)WsfMsgAlloc(allocSize)) == NULL)
+    if ((pAclBuf = (uint8_t*)WsfMsgAlloc(allocSize, MSG_T_EMPTY)) == NULL)
     {
       break;
     }

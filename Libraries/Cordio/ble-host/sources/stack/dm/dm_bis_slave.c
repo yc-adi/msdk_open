@@ -664,7 +664,7 @@ void DmBigStart(uint8_t bigHandle, uint8_t advHandle, uint8_t numBis, uint32_t s
   WSF_ASSERT(advHandle < DM_NUM_ADV_SETS);
   WSF_ASSERT((numBis > 0 ) && (numBis <= DM_BIS_MAX));
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmBisApiBigStart_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmBisApiBigStart_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_BIS_MSG_API_BIG_START;
     pMsg->hdr.param = bigHandle;
@@ -697,7 +697,7 @@ void DmBigStop(uint8_t bigHandle, uint8_t reason)
 
   WSF_ASSERT(bigHandle < DM_BIG_MAX);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmBisApiBigStop_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmBisApiBigStop_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.event = DM_BIS_MSG_API_BIG_STOP;
     pMsg->hdr.param = bigHandle;

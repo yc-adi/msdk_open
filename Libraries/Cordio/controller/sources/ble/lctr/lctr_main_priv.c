@@ -125,7 +125,7 @@ static void lctrPrivPendAddrRes(uint64_t rpa, bool_t peer, uint8_t peerAddrType,
   /* Send message to resolve the address. */
   lctrAddrResNeededMsg_t *pMsg;
 
-  if ((pMsg = (lctrAddrResNeededMsg_t *)WsfMsgAlloc(sizeof(*pMsg))) != NULL)
+  if ((pMsg = (lctrAddrResNeededMsg_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
   {
     pMsg->hdr.dispId = LCTR_DISP_PRIV;
     pMsg->hdr.event = LCTR_PRIV_MSG_ADDR_RES_NEEDED;

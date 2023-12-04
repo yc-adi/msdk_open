@@ -489,7 +489,7 @@ uint8_t lctrMstExtDiscoverBuildOp(lctrExtScanCtx_t *pExtScanCtx)
   pScan->rxAdvCback = lctrMstDiscoverRxExtAdvPktHandler;
   pScan->rxAdvPostCback = lctrMstDiscoverRxExtAdvPktPostProcessHandler;
 
-  if ((pScan->pRxAdvBuf = WsfMsgAlloc(LL_ADV_HDR_LEN + LL_EXT_ADV_HDR_MAX_LEN)) == NULL)
+  if ((pScan->pRxAdvBuf = WsfMsgAlloc(LL_ADV_HDR_LEN + LL_EXT_ADV_HDR_MAX_LEN, MSG_T_EMPTY)) == NULL)
   {
     LL_TRACE_ERR0("Could not allocate advertising buffer");
     return LL_ERROR_CODE_UNSPECIFIED_ERROR;
@@ -565,7 +565,7 @@ uint8_t lctrMstExtDiscoverBuildOp(lctrExtScanCtx_t *pExtScanCtx)
     case LL_SCAN_ACTIVE:
     {
       /* Allow only legacy scan response. */
-      if ((pScan->pRxRspBuf = WsfMsgAlloc(LL_ADVB_MAX_LEN)) == NULL)
+      if ((pScan->pRxRspBuf = WsfMsgAlloc(LL_ADVB_MAX_LEN, MSG_T_EMPTY)) == NULL)
       {
         WsfMsgFree(pScan->pRxAdvBuf);
         pScan->pRxAdvBuf = NULL;
@@ -1032,7 +1032,7 @@ void lctrSendExtScanMsg(lctrExtScanCtx_t *pExtScanCtx, uint8_t event)
 {
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = (pExtScanCtx) ? LCTR_GET_EXT_SCAN_HANDLE(pExtScanCtx) : LCTR_SCAN_PHY_ALL;
     pMsg->dispId = LCTR_DISP_EXT_SCAN;
@@ -1054,7 +1054,7 @@ void lctrSendCreateSyncMsg(lctrPerScanCtx_t *pCtx, uint8_t event)
 {
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->dispId = pCtx->createDispId;
     pMsg->event = event;
@@ -1075,7 +1075,7 @@ void lctrSendPerScanMsg(lctrPerScanCtx_t *pCtx, uint8_t event)
 {
   lctrMsgHdr_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t))) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t), MSG_T_EMPTY)) != NULL)
   {
     pMsg->handle = LCTR_GET_PER_SCAN_HANDLE(pCtx);
     pMsg->dispId = LCTR_DISP_PER_SCAN;

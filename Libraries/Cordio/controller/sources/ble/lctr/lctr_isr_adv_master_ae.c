@@ -2229,7 +2229,7 @@ uint32_t lctrMstPerScanRxPerAdvPktHandler(BbOpDesc_t *pOp, const uint8_t *pAdvBu
     /* TODO: Use ACAD state machine instead of direct message to BIG.
      *       Periodic Master should not know about BIG contexts. */
     LctrBigInfoMsg_t *pMsg;
-    if ((pMsg = WsfMsgAlloc(sizeof(LctrBigInfoMsg_t))) != NULL)
+    if ((pMsg = WsfMsgAlloc(sizeof(LctrBigInfoMsg_t), MSG_T_EMPTY)) != NULL)
     {
       pMsg->hdr.handle = 0;
       pMsg->hdr.dispId = LCTR_DISP_BIG_SYNC;

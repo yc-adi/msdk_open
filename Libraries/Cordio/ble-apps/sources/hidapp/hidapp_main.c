@@ -425,7 +425,7 @@ static void hidAppDmCback(dmEvt_t *pDmEvt)
 
   len = DmSizeOfEvt(pDmEvt);
 
-  if ((pMsg = WsfMsgAlloc(len)) != NULL)
+  if ((pMsg = WsfMsgAlloc(len, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pDmEvt, len);
     WsfMsgSend(hidAppCb.handlerId, pMsg);
@@ -445,7 +445,7 @@ static void hidAppAttCback(attEvt_t *pEvt)
 {
   attEvt_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen)) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen, MSG_T_EMPTY)) != NULL)
   {
     memcpy(pMsg, pEvt, sizeof(attEvt_t));
     pMsg->pValue = (uint8_t *) (pMsg + 1);

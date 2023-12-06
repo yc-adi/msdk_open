@@ -103,8 +103,8 @@ void attcProcPrepWriteRsp(attcCcb_t *pCcb, uint16_t len, uint8_t *pPacket, attEv
 /*************************************************************************************************/
 void AttcWriteCmd(dmConnId_t connId, uint16_t handle, uint16_t valueLen, uint8_t *pValue)
 {
-  attcPktParam_t  *pPkt;
-  uint8_t         *p;
+  attcPktParam_t *pPkt;
+  uint8_t        *p;
 
   /* allocate packet and parameter buffer */
   if ((pPkt = attMsgAlloc(ATT_WRITE_CMD_BUF_LEN + valueLen)) != NULL)

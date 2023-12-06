@@ -45,11 +45,16 @@ extern BbBleDataPktStats_t  bbConnStats;    /*!< Connection packet statistics. *
 /*************************************************************************************************/
 static void bbMstConnTxCompCback(uint8_t status)
 {
-  BB_ISR_START();
-
-  WSF_ASSERT(BbGetCurrentBod());
-
   BbOpDesc_t * const pCur = BbGetCurrentBod();
+  if (pCur == NULL)
+  {
+    APP_TRACE_INFO0("@? bbMstConnTxCompCback bbCb.pOpInProgress=NULL");
+    return;
+  }
+  //@? WSF_ASSERT(BbGetCurrentBod());
+
+  BB_ISR_START();
+  
   BbBleMstConnEvent_t * const pConn = &pCur->prot.pBle->op.mstConn;
 
 
@@ -141,7 +146,7 @@ static void bbMstConnRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint
   BbOpDesc_t * const pCur = BbGetCurrentBod();
   if (pCur == NULL)
   {
-    APP_TRACE_INFO0("@? !!! bbCb.pOpInProgress=NULL");
+    APP_TRACE_INFO0("@? !!! bbMstConnRxCompCback bbCb.pOpInProgress=NULL");
     return;
   }
   //@? WSF_ASSERT(BbGetCurrentBod());

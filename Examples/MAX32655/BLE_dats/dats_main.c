@@ -303,7 +303,6 @@ static void datsSendData(dmConnId_t connId)
     sprintf((char *)str, "back from %s %02X:%02X:%02X:%02X:%02X:%02X",
             (char *)&datsScanDataDisc[2], 
             addr[5], addr[4], addr[3], addr[2], addr[1], addr[0]);
-    //@? APP_TRACE_INFO0((const char *)str);
 
     if (AttsCccEnabled(connId, DATS_WP_DAT_CCC_IDX)) {
         /* send notification */
@@ -362,7 +361,7 @@ static void datsDmCback(dmEvt_t *pDmEvt)
     } else {
         len = DmSizeOfEvt(pDmEvt);
 
-        if ((pMsg = WsfMsgAlloc(len)) != NULL) {
+        if ((pMsg = WsfMsgAlloc(len, MSG_T_EMPTY)) != NULL) {
             memcpy(pMsg, pDmEvt, len);
             WsfMsgSend(datsCb.handlerId, pMsg);
         }
@@ -382,7 +381,7 @@ static void datsAttCback(attEvt_t *pEvt)
 {
     attEvt_t *pMsg;
 
-    if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen)) != NULL) {
+    if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen, MSG_T_EMPTY)) != NULL) {
         memcpy(pMsg, pEvt, sizeof(attEvt_t));
         pMsg->pValue = (uint8_t *)(pMsg + 1);
         memcpy(pMsg->pValue, pEvt->pValue, pEvt->valueLen);

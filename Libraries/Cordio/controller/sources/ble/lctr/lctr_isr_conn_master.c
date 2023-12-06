@@ -383,8 +383,8 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
 
   /*** Update for next operation ***/
 
-  uint32_t anchorPointUsec       = pOp->dueUsec;
-  uint16_t numIntervals          = 0;
+  uint32_t anchorPointUsec = pOp->dueUsec;
+  uint16_t numIntervals = 0;
 
   if (pBle->chan.tifsTxPhyOptions != BB_PHY_OPTIONS_DEFAULT)
   {

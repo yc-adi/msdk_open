@@ -25,7 +25,7 @@ import sys
 import threading
 import time
 
-cmd_data = [list(), list(), list(), list(), list()]
+cmd_data = [[] for _ in range(9)]
 
 
 def get_curr_time_str():
@@ -38,10 +38,11 @@ def get_curr_time_str():
 
 
 class ComClass:
-    def __init__(self, id, port, baud):
+    def __init__(self, id, port, baud, name):
         self.id = id
         self.port = port
         self.baud = baud
+        self.name = name
         self.comSerial = None
         self.enable = False
 
@@ -63,20 +64,20 @@ class ComClass:
         try:
             self.comSerial = serial.Serial(self.port, self.baud)
             self.enable = True
-            print(f"{get_curr_time_str()} --- open serial port {self.id}")
+            print(f"{get_curr_time_str()} --- open serial port {self.name}")
         except:
-            print(f"{get_curr_time_str()} --- fail to open serial port {self.id}")
+            print(f"{get_curr_time_str()} --- fail to open serial port {self.name}")
             self.close()
 
     def close(self):
         self.comSerial.close()
-        print(f"{get_curr_time_str()} --- close serial port {self.id}")
+        print(f"{get_curr_time_str()} --- close serial port {self.name}")
 
     def sendData(self):
         global cmd_data
         while self.enable:
             if len(cmd_data[self.id - 1]) > 0:
-                print(f'{get_curr_time_str()} {self.id}< {cmd_data[self.id - 1]}')
+                print(f'{get_curr_time_str()} {self.name}< {cmd_data[self.id - 1]}')
                 # self.comSerial.write(str(cmd_data[self.id - 1]).encode('UTF-8'))
                 encoded = cmd_data[self.id - 1].encode('UTF-8')
                 array = bytearray(encoded)
@@ -108,7 +109,7 @@ class ComClass:
                     i = 0
                     for line in lines:
                         i = i + 1
-                        print(f'{get_curr_time_str()} {self.id}> {line}')
+                        print(f'{get_curr_time_str()} {self.name}> {line}')
                     last_data.clear()
                 else:
                     last_data.append(rcvd)
@@ -140,11 +141,16 @@ if __name__ == '__main__':
     monitor_input_thd.daemon = True
     monitor_input_thd.start()
 
-    ser1 = ComClass(1, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D3074PPH-if00-port0', 115200)  # dats MAX32655 y9
-    ser2 = ComClass(2, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D3073IDG-if00-port0', 115200)  # datc MAX32655 y1
-    ser3 = ComClass(3, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D309ZDE9-if00-port0', 115200)  # datc MAX32655 y2
-    ser4 = ComClass(4, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D307NU7N-if00-port0', 115200)  # datc MAX32655 y3
-    ser5 = ComClass(5, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D30BLH58-if00-port0', 115200)  # datc MAX32655 y4
+    ser1 = ComClass(1, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D3074PPH-if00-port0', 115200, " C")  # dats MAX32655 y9
+    ser2 = ComClass(2, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D3073IDG-if00-port0', 115200, "P1")  # datc MAX32655 y1
+    ser3 = ComClass(3, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D309ZDE9-if00-port0', 115200, "P2")  # datc MAX32655 y2
+    ser4 = ComClass(4, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D307NU7N-if00-port0', 115200, "P3")  # datc MAX32655 y3
+    ser5 = ComClass(5, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D30BLH58-if00-port0', 115200, "P4")  # datc MAX32655 y4
+    ser6 = ComClass(6, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D307NU7M-if00-port0', 115200, "P5")  # datc MAX32655 
+    ser7 = ComClass(7, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D30A1B4P-if00-port0', 115200, "P6")  # datc MAX32655 
+    ser8 = ComClass(8, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D307NU76-if00-port0', 115200, "P7")  # datc MAX32655 
+    ser9 = ComClass(9, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D307NU7L-if00-port0', 115200, "P8")  # datc MAX32655 
+    
 
     while True:
         pass

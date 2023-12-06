@@ -165,7 +165,7 @@ typedef struct BbOpDesc_tag
   void          *pCtx;              /*!< Client defined context. */
   uint16_t      *pDataLen;          /*!< Pointer to client data length. */
 
-  uint8_t       type;               /*!< BOD type
+  uint8_t       bodType;            /*!< BOD type
                                      1  lctrMstConnBuildOp
                                      2  lctrMstDiscoverBuildOp
                                      3  lctrMstExtDiscoverBuildOp                                        

@@ -136,7 +136,7 @@ datcConnInfo_t datcConnInfo;
 /*! configurable parameters for master */
 static const appMasterCfg_t datcMasterCfg = {
     320, /*! The scan interval, in 0.625 ms units, 0.625x320=200 ms*/
-    48, /*! The scan window, in 0.625 ms units, 0.625x48=30 ms */
+    16, /*! The scan window, in 0.625 ms units, 0.625x16=10 ms */
     0, /*! The scan duration in ms */
     DM_DISC_MODE_NONE, /*! The GAP discovery mode */
     DM_SCAN_TYPE_ACTIVE /*! The scan type (active or passive) */
@@ -450,8 +450,6 @@ void datcRestartScanningHandler(void)
 /*************************************************************************************************/
 static void datcRestartScanning(void)
 {
-    /* Start the scanning start timer */
-    //@? WsfTimerStartMs(&datcCb.scanTimer, SCAN_START_MS);
     datcRestartScanningHandler();
 }
 
@@ -490,11 +488,9 @@ static void datcScanStopConnStart(dmEvt_t *pMsg)
         if (datcConnInfo.doConnect) {
             char str[100];
             ocmpSt = OCMP_ST_CONNECTING;  // start connecting
-            sprintf(str, "doConnect addrType=%d addr=%02X:%02X:%02X:%02X:%02X:%02X dbHdl=%d ocmp=2(CONNECTING)",
-                         datcConnInfo.addrType,
+            sprintf(str, "doConnect %02X:%02X:%02X:%02X:%02X:%02X ocmp=2",
                          datcConnInfo.addr[5], datcConnInfo.addr[4], datcConnInfo.addr[3], 
-                         datcConnInfo.addr[2], datcConnInfo.addr[1], datcConnInfo.addr[0], 
-                         datcConnInfo.dbHdl);
+                         datcConnInfo.addr[2], datcConnInfo.addr[1], datcConnInfo.addr[0]);
             APP_TRACE_INFO1("%s", str);
             
             AppConnOpen(datcConnInfo.addrType, datcConnInfo.addr, datcConnInfo.dbHdl);
@@ -596,13 +592,18 @@ static void datcScanReport(dmEvt_t *pMsg)
     }
 
     /* find device name */
-    if (!connected && ((pData = DmFindAdType(DM_ADV_TYPE_LOCAL_NAME, pMsg->scanReport.len,
-                                           pMsg->scanReport.pData)) != NULL)) {
-        /* check length and device name */
-        if (pData[DM_AD_LEN_IDX] >= 4 && (pData[DM_AD_DATA_IDX] == 'D') &&
-            (pData[DM_AD_DATA_IDX + 1] == 'A') && (pData[DM_AD_DATA_IDX + 2] == 'T') &&
-            (pData[DM_AD_DATA_IDX + 3] == 'S')) {
-            need_to_connect = TRUE;
+    pData = DmFindAdType(DM_ADV_TYPE_LOCAL_NAME, pMsg->scanReport.len, pMsg->scanReport.pData);
+    if (pData != NULL) {
+        if (!connected) {
+            /* check length and device name */
+            if (pData[DM_AD_LEN_IDX] >= 4 && (pData[DM_AD_DATA_IDX] == 'D') &&
+                (pData[DM_AD_DATA_IDX + 1] == 'A') && (pData[DM_AD_DATA_IDX + 2] == 'T') &&
+                (pData[DM_AD_DATA_IDX + 3] == 'S')) {
+                need_to_connect = TRUE;
+            }
+        } else {
+            WsfTrace("already connected");
+            datcPrintScanReport(pMsg);
         }
     }
 
@@ -661,7 +662,6 @@ static void datcValueNtf(attEvt_t *pMsg)
     /* print the received data */
     if (datcCb.speedTestCounter == 0) {
         APP_TRACE_INFO0((const char *)pMsg->pValue);
-        APP_TRACE_INFO0("DONE!");
     }
 }
 
@@ -732,18 +732,24 @@ static void datcPrivAddDevToResListInd(dmEvt_t *pMsg)
  *  \brief  Send example data.
  *
  *  \param  connId    Connection identifier.
+ *  \param  data      string
  *
  *  \return None.
  */
 /*************************************************************************************************/
-static void datcSendData(dmConnId_t connId)
+static void datcSendData(dmConnId_t connId, char *data)
 {
     uint8_t str[] = "hello world";
 
     if (pDatcWpHdlList[connId - 1][WPC_P1_DAT_HDL_IDX] != ATT_HANDLE_NONE) {
-        //@? AppScanStop();
-
-        AttcWriteCmd(connId, pDatcWpHdlList[connId - 1][WPC_P1_DAT_HDL_IDX], sizeof(str), str);
+        if (data[0] == '\0')
+        {
+            AttcWriteCmd(connId, pDatcWpHdlList[connId - 1][WPC_P1_DAT_HDL_IDX], strlen((const char *)str), str);
+        }
+        else
+        {
+            AttcWriteCmd(connId, pDatcWpHdlList[connId - 1][WPC_P1_DAT_HDL_IDX], strlen(data), (uint8_t *)data);
+        }
     }
 }
 
@@ -874,7 +880,7 @@ void ShowConns(void)
     {
         if (pCcb->inUse)
         {
-            WsfTrace("%d: connId=%d %02X:%02X:%02X:%02X:%02X:%02X", DM_CONN_MAX - i + 1, pCcb->connId,
+            WsfTrace("connId=%d %02X:%02X:%02X:%02X:%02X:%02X", pCcb->connId,
                      pCcb->peerAddr[5], pCcb->peerAddr[4], pCcb->peerAddr[3], 
                      pCcb->peerAddr[2], pCcb->peerAddr[1], pCcb->peerAddr[0]);
         }
@@ -916,18 +922,10 @@ void ShowConns(void)
  * 
  *  \param  argc      The number of arguments passed to the command.
  *  \param  argv      The array of arguments; the 0th argument is the command.
- *      cmd auto_conn_on                    enable auto conn
- *      cmd auto_conn_off                   disable auto conn
- *      cmd auto_conn_st                    report current auto conn statue
  *      cmd check_on                        start checking
  *      cmd check_off                       stop checking
- *      cmd check_st                        query check state
- *      cmd close_conn <n>                  close connection. n: connection index, 0 for all connections.
- *      cmd get_conn_num                    display the active connection number.
- *      cmd conn_svr 01 2A 03 04 05 06      connect to server (addr 01:2A:03:04:05:06)
  *      cmd qry                             query status
- *      cmd send_data <n>                   send test data to the server <n>
- *      cmd scan_on                         start scan
+ *      cmd send <connID> <data>            send data (in string without space) to the device with <connId>
  *      cmd test
  *  \return Error code.
  */
@@ -936,7 +934,6 @@ void ShowConns(void)
 uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
 {
     char Resp[TERM_CMD_RESP_BUF_SIZE];
-    uint8_t cnt;
     uint8_t i;
 
     Resp[0] = 0;
@@ -961,13 +958,6 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
             AppClearAllBondingInfo();
             AppDbNvmDeleteAll();
         }
-        else if (strcmp(argv[1], "get_conn_num") == 0) {
-            cnt = dmConnNum();
-            TerminalTxPrint("Established connections: %d\r\n", cnt);
-        }
-        else if (strcmp(argv[1], "show_conns") == 0) {
-            ShowConns();
-        }
 
         else if (strcmp(argv[1], "check_on") == 0) {
             datcCb.check = TRUE;
@@ -977,9 +967,6 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
             datcCb.check = FALSE;
             TerminalTxPrint("stop checking\r\n");
         }
-        else if (strcmp(argv[1], "check_st") == 0) {
-            TerminalTxPrint("datcCb.check=%d\r\n", datcCb.check);
-        } 
 
         else if (strcmp(argv[1], "qry") == 0) {
             TerminalTxPrint("ocmp=%d check=%d\r\n", ocmpSt, datcCb.check);
@@ -989,22 +976,16 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
             ShowConns();
         }
 
-        else if (strcmp(argv[1], "scan_on") == 0) {
-            datcCb.check = TRUE;
-
-            datcRestartScanningHandler();
-
-            TerminalTxPrint("start to scan\r\n");
-        }
-
-        else if (strcmp(argv[1], "send_data") == 0) {
-            dmConnId_t connId;
-            if (argc == 2) {
-                connId = datcCb.btnConnId;
-            } else {
-                connId = atoi(argv[2]);
+        else if (strcmp(argv[1], "send") == 0) {
+            if (argc != 4)
+            {
+                TerminalTxPrint("invalid cmd. \"cmd send_data <connId> <data in string without whitespace>\"\r\n");
             }
-            datcSendData(connId);
+            else
+            {
+                dmConnId_t connId = atoi(argv[2]);
+                datcSendData(connId, argv[3]);
+            }
         }
 
         else if (strcmp(argv[1], "show_bod") == 0) {
@@ -1012,7 +993,7 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         }
 
         else if (strcmp(argv[1], "show_scan_report_on") == 0) {
-            datcCb.showScanReport = TRUE;
+            //@? datcCb.showScanReport = TRUE;
             TerminalTxPrint("start to show scan report\r\n");
         } 
         else if (strcmp(argv[1], "show_scan_report_off") == 0) {
@@ -1130,7 +1111,7 @@ static void datcBtnCback(uint8_t btn)
             break;
         case APP_UI_BTN_2_LONG:
             /* send data */
-            datcSendData(connId);
+            datcSendData(connId, "");
             break;
 
         case APP_UI_BTN_2_EX_LONG:
@@ -1321,7 +1302,6 @@ static void datcProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_SCAN_STOP_IND:
-        //APP_TRACE_INFO0("@? DM_SCAN_STOP_IND");
         datcScanStopConnStart(pMsg);
         uiEvent = APP_UI_SCAN_STOP;
         break;
@@ -1356,6 +1336,10 @@ static void datcProcMsg(dmEvt_t *pMsg)
             break;
         }
         uiEvent = APP_UI_CONN_CLOSE;
+        if (ocmpSt == OCMP_ST_CONNECTING)
+        {
+            ocmpSt = OCMP_ST_INIT;
+        }
         datcRestartScanning();
         break;
 

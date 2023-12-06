@@ -672,7 +672,6 @@ void SchInsertNextAvailable(BbOpDesc_t *pBod)
   uint32_t cur = PalBbGetCurrentTime();
   uint32_t delay = BbGetSchSetupDelayUs();
   pBod->dueUsec = cur + delay;
-  //APP_TRACE_INFO3("@? SchInsertNextAvailable due=%d cur=%d delay=%d", pBod->dueUsec, cur, delay);
 
   if (schCb.pHead == NULL)
   {
@@ -1203,7 +1202,7 @@ void SchPrintBod(void)
   {
     curTime = PalBbGetCurrentTime();
     delta = BbGetTargetTimeDelta(pCur->dueUsec, curTime);
-    WsfTrace("%d type=%d delta=%d min=%d max=%d", i++, pCur->type, delta, pCur->minDurUsec, pCur->maxDurUsec);
+    WsfTrace("%d type=%d delta=%d min=%d max=%d", i++, pCur->bodType, delta, pCur->minDurUsec, pCur->maxDurUsec);
     pCur = pCur->pNext;
   } while (pCur != NULL);
 }

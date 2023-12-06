@@ -851,7 +851,7 @@ bool_t SchRmAdd(uint8_t handle, uint8_t pref, uint32_t minUsec, uint32_t maxUsec
 
   if (!schRmCheckRsvnCapacity(handle, prefInterUsec))
   {
-    APP_TRACE_INFO0("@? SchRmAdd failed");
+    WsfTrace("SchRmAdd failed");
     return FALSE;
   }
 
@@ -872,7 +872,7 @@ bool_t SchRmAdd(uint8_t handle, uint8_t pref, uint32_t minUsec, uint32_t maxUsec
 
   if (!status)
   {
-    APP_TRACE_INFO0("@? SchRmAdd failed");
+    WsfTrace("SchRmAdd failed");
   }
   return status;
 }

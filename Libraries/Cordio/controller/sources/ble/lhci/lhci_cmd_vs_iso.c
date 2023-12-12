@@ -147,7 +147,7 @@ void lhciGenerateIso(uint16_t handle, uint16_t pktLen, uint8_t numPkts)
   while (numPkts--)
   {
     uint8_t *pIsoBuf;
-    if ((pIsoBuf = (uint8_t*)WsfMsgAlloc(LL_ISO_PDU_MAX_LEN)) == NULL)
+    if ((pIsoBuf = (uint8_t*)WsfMsgAlloc(LL_ISO_PDU_MAX_LEN, MSG_T_EMPTY)) == NULL)
     {
       break;
     }

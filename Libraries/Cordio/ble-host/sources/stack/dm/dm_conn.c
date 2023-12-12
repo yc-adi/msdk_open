@@ -369,11 +369,11 @@ dmConnId_t dmConnOpenAccept(uint8_t clientId, uint8_t initPhys, uint8_t advHandl
   if (pCcb != NULL)
   {
     // Allocate sizeof(dmConnMsg_t) because message may be reused in state machine with different callbacks
-    if ((pMsg = WsfMsgAlloc(sizeof(dmConnMsg_t), MSG_T_EMPTY)) != NULL)
+    MSG_t msgType =  (role == DM_ROLE_MASTER) ? MSG_T_DM_CONN_MSG_API_OPEN : MSG_T_DM_CONN_MSG_API_ACCEPT;
+    if ((pMsg = WsfMsgAlloc(sizeof(dmConnMsg_t), msgType)) != NULL)
     {
       pMsg->hdr.param = pCcb->connId;
-      pMsg->hdr.event = (role == DM_ROLE_MASTER) ?
-                        DM_CONN_MSG_API_OPEN : DM_CONN_MSG_API_ACCEPT;
+      pMsg->hdr.event = (role == DM_ROLE_MASTER) ? DM_CONN_MSG_API_OPEN : DM_CONN_MSG_API_ACCEPT;
       pMsg->initPhys = initPhys;
       pMsg->advHandle = advHandle;
       pMsg->advType = advType;
@@ -382,7 +382,7 @@ dmConnId_t dmConnOpenAccept(uint8_t clientId, uint8_t initPhys, uint8_t advHandl
       BdaCpy(pMsg->peerAddr, pAddr);
       pMsg->addrType = addrType;
       pMsg->clientId = clientId;
-      WsfMsgSend(dmCb.handlerId, pMsg);
+      WsfMsgSend(dmCb.handlerId, pMsg);   // dmConnSmExecute, dmConnOpen
 
       /* set role */
       WsfTaskLock();

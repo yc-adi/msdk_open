@@ -249,5 +249,6 @@ bool_t lctrMstConnIndTxCompHandler(BbOpDesc_t *pOp, const uint8_t *pIndBuf)
 
   lctrMstInit.selfTerm = TRUE;
   BbSetBodTerminateFlag();
+  WsfTrace("@? lctrMstConnIndTxCompHandler");
   return FALSE;
 }

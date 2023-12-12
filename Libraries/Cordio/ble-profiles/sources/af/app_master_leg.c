@@ -128,7 +128,11 @@ dmConnId_t AppConnOpen(uint8_t addrType, uint8_t *pAddr, appDbHdl_t dbHdl)
   {
     return appConnOpen(HCI_INIT_PHY_LE_1M_BIT, addrType, pAddr, dbHdl);
   }
-
+  else
+  {
+    WsfTrace("not in legacy scanning mode, not to open the connection");
+  }
+  
   /* wrong connect mode */
   return DM_CONN_ID_NONE;
 }

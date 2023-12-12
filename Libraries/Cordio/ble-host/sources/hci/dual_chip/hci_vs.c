@@ -151,6 +151,7 @@ void hciCoreResetSequence(uint8_t *pMsg)
 
       case HCI_OPCODE_SET_EVENT_MASK:
         /* send next command in sequence */
+        WsfTrace("@? set evt mask in dual_chip");
         HciLeSetEventMaskCmd((uint8_t *) hciLeEventMask);
         break;
 

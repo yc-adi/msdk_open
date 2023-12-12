@@ -95,6 +95,7 @@ Macros
 extern uint8_t gu8Debug;
 extern appDb_t appDb;
 extern OCMP_ST_t ocmpSt;
+extern bool_t PalSysAssertTrapEnable;
 
 /**************************************************************************************************
   Local Variables
@@ -434,7 +435,7 @@ static void datcAttCback(attEvt_t *pEvt)
 void datcRestartScanningHandler(void)
 {
     WsfTimerStop(&ocmpConnectingTimer);
-
+    WsfTrace("@? start scnning, stop connecting timer");
     datcConnInfo.doConnect = FALSE;
     AppScanStart(datcMasterCfg.discMode, datcMasterCfg.scanType, datcMasterCfg.scanDuration);
 }
@@ -450,7 +451,8 @@ void datcRestartScanningHandler(void)
 /*************************************************************************************************/
 static void datcRestartScanning(void)
 {
-    datcRestartScanningHandler();
+    /* Start the scanning start timer */
+    WsfTimerStartMs(&datcCb.scanTimer, SCAN_START_MS);  // -> SCAN_START_EVT
 }
 
 /*************************************************************************************************/
@@ -493,7 +495,12 @@ static void datcScanStopConnStart(dmEvt_t *pMsg)
                          datcConnInfo.addr[2], datcConnInfo.addr[1], datcConnInfo.addr[0]);
             APP_TRACE_INFO1("%s", str);
             
-            AppConnOpen(datcConnInfo.addrType, datcConnInfo.addr, datcConnInfo.dbHdl);
+            dmConnId_t connId = AppConnOpen(datcConnInfo.addrType, datcConnInfo.addr, datcConnInfo.dbHdl);
+            if (connId == DM_CONN_ID_NONE)
+            {
+                WsfTrace("AppConnOpen failed!");
+            }
+
             datcConnInfo.doConnect = FALSE;
 
             WsfTimerStartMs(&ocmpConnectingTimer, OCMP_CONNECTING_TMR_MS);  // OCMP_CONNECTING_TMR_EVT, make sure connection is established within a period
@@ -969,7 +976,7 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         }
 
         else if (strcmp(argv[1], "qry") == 0) {
-            TerminalTxPrint("ocmp=%d check=%d\r\n", ocmpSt, datcCb.check);
+            TerminalTxPrint("ocmp=%d check=%d scanInterval=%d\r\n", ocmpSt, datcCb.check, dmConnCb.scanInterval[0]);
 
             SchPrintBod();
 
@@ -1005,15 +1012,39 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         }
 
         else if (strcmp(argv[1], "test") == 0) {
-            if (gu8Debug == 0)
+            if (argc >= 3)
             {
-                gu8Debug = 1;
+                if (argv[2][0] == '1')  // cmd test 1 0/1
+                {
+                    gu8Debug = atoi((const char *)argv[3]);
+                    TerminalTxPrint("gu8Debug = %d\r\n", gu8Debug);
+                }
+                else if (argv[2][0] == '2')
+                {
+                    if (argc == 3)
+                    {
+                        //
+                    }
+                    else if (argv[3][0] == '0')
+                    {
+                        PalSysAssertTrapEnable = 0;
+                    }
+                    else if (argv[3][0] == '1')
+                    {
+                        PalSysAssertTrapEnable = 1;
+                    }
+                    TerminalTxPrint("PalSysAssertTrapEnable=%d\r\n", PalSysAssertTrapEnable);
+                }
+                else if (argv[2][0] == '3')
+                {
+                    ocmpSt = OCMP_ST_INIT;
+                }
+                else if (argv[2][0] == '4')     // cmd test 4
+                {
+                    StackInitDatc();
+                    DatcStart();
+                }
             }
-            else
-            {
-                gu8Debug = 0;
-            }
-            TerminalTxPrint("gu8Debug = 0\r\n");
         }
         else
         {
@@ -1412,6 +1443,10 @@ static void datcProcMsg(dmEvt_t *pMsg)
             ocmpSt = OCMP_ST_INIT;
             //TODO other operations
         }
+        else
+        {
+            WsfTrace("OCMP_CONNECTING_TMR_EVT");
+        }
 
     default:
         break;
@@ -1464,6 +1499,9 @@ void DatcHandlerInit(wsfHandlerId_t handlerId)
     /* Setup scan start timer */
     datcCb.scanTimer.handlerId = handlerId;
     datcCb.scanTimer.msg.event = SCAN_START_EVT;
+
+    ocmpConnectingTimer.handlerId = handlerId;
+    ocmpConnectingTimer.msg.event = OCMP_CONNECTING_TMR_EVT;
 }
 
 /*************************************************************************************************/
@@ -1616,4 +1654,6 @@ void DatcStart(void)
 
     /* Reset the device */
     DmDevReset();
+
+    PalSysAssertTrapEnable = false;  //@?
 }

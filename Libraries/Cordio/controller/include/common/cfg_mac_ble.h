@@ -25,7 +25,7 @@
 #ifndef CFG_MAC_BLE_H
 #define CFG_MAC_BLE_H
 
-#include "cfg_stack.h"
+#include "../../ble-host/sources/stack/cfg/cfg_stack.h"
 
 #ifdef __cplusplus
 extern "C" {

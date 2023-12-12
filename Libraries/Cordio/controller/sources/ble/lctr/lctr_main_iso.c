@@ -1115,7 +1115,7 @@ void lctrIsoSendCodecSdu(uint16_t handle)
 
   uint8_t *pSduBuf;
 
-  if ((pSduBuf = WsfMsgAlloc(pLctrRtCfg->maxIsoSduLen + HCI_ISO_DL_MAX_LEN)) == NULL)
+  if ((pSduBuf = WsfMsgAlloc(pLctrRtCfg->maxIsoSduLen + HCI_ISO_DL_MAX_LEN, MSG_T_EMPTY)) == NULL)
   {
     LL_TRACE_ERR1("!!! Out of memory; dropping input SDU, stream=%u", handle);
     return;

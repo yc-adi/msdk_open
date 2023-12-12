@@ -385,7 +385,7 @@ static void datcDmCback(dmEvt_t *pDmEvt)
             reportLen = 0;
         }
 
-        if ((pMsg = WsfMsgAlloc(len + reportLen)) != NULL) {
+        if ((pMsg = WsfMsgAlloc(len + reportLen, MSG_T_EMPTY)) != NULL) {
             memcpy(pMsg, pDmEvt, len);
             if (pDmEvt->hdr.event == DM_SCAN_REPORT_IND) {
                 pMsg->scanReport.pData = (uint8_t *)((uint8_t *)pMsg + len);
@@ -409,7 +409,7 @@ static void datcAttCback(attEvt_t *pEvt)
 {
     attEvt_t *pMsg;
 
-    if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen)) != NULL) {
+    if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen, MSG_T_EMPTY)) != NULL) {
         memcpy(pMsg, pEvt, sizeof(attEvt_t));
         pMsg->pValue = (uint8_t *)(pMsg + 1);
         memcpy(pMsg->pValue, pEvt->pValue, pEvt->valueLen);

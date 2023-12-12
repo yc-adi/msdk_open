@@ -30,6 +30,7 @@
 #include "ll_defs.h"
 #include "ll_math.h"
 #include "wsf_msg.h"
+#include "wsf_trace.h"
 #include "util/bstream.h"
 #include "lmgr_api.h"
 #include <string.h>
@@ -204,6 +205,7 @@ static void lhciCommonSendCmdCmplEvt(LhciHdr_t *pCmdHdr, uint8_t status, uint8_t
     case HCI_OPCODE_NOP:
     case HCI_OPCODE_LE_MODIFY_SLEEP_CLK_ACC:
     case HCI_OPCODE_LE_SET_HOST_FEATURE:
+      WsfTrace("@? lhciCommonSendCmdCmplEvt");
       lhciPackCmdCompleteEvtStatus(pBuf, status);
       break;
 
@@ -310,16 +312,19 @@ static void lhciCommonSendCmdCmplEvt(LhciHdr_t *pCmdHdr, uint8_t status, uint8_t
 /*************************************************************************************************/
 bool_t lhciCommonDecodeCmdPkt(LhciHdr_t *pHdr, uint8_t *pBuf)
 {
+  WsfTrace("@? opCode=%04X OGF=%02X OCF=%03X", pHdr->opCode, HCI_OGF(pHdr->opCode), HCI_OCF(pHdr->opCode));
+
 #if LHCI_ENABLE_VS
   if (lhciCommonVsStdDecodeCmdPkt(pHdr, pBuf))
   {
+    WsfTrace("@? lhciCommonVsStdDecodeCmdPkt true");
     return TRUE;
   }
 #endif
 
   uint8_t status = HCI_SUCCESS;
   uint8_t paramLen = 0;
-
+  
   switch (pHdr->opCode)
   {
     /* --- status --- */
@@ -350,6 +355,7 @@ bool_t lhciCommonDecodeCmdPkt(LhciHdr_t *pHdr, uint8_t *pBuf)
       paramLen = LHCI_LEN_LE_REMOVE_DEV_WHITE_LIST_EVT;
       break;
     case HCI_OPCODE_SET_EVENT_MASK:
+      WsfTrace("@? lhciCommonDecodeCmdPkt");
       lhciUnpackSetEventMaskCmd(&lhciCb.evtMsk, pBuf);
       paramLen = LHCI_LEN_SET_EVENT_MASK_EVT;
       break;

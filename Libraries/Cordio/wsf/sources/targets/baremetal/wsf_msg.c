@@ -160,7 +160,13 @@ void *WsfMsgDeq(wsfQueue_t *pQueue, wsfHandlerId_t *pHandlerId)
   {
     *pHandlerId = pMsg->handlerId;
 
-    if (pMsg->msgType == MSG_T_LCTR_SCAN_MSG_DISCOVER_ENABLE)
+    if (gu8Debug == 3 && pMsg->msgType == MSG_T_DM_CONN_MSG_API_OPEN)
+    {
+      __asm("nop");
+      __asm("nop");
+    }
+
+    if (gu8Debug == 3 && pMsg->msgType == MSG_T_LCTR_INIT_MSG_INITIATE)
     {
       __asm("nop");
       __asm("nop");

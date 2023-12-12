@@ -115,7 +115,9 @@ typedef enum
   MSG_T_DM_SCAN_MSG_API_START,
   MSG_T_LCTR_SCAN_MSG_PARAM_UPD,
   MSG_T_LCTR_SCAN_MSG_DISCOVER_ENABLE,
-  
+  MSG_T_DM_CONN_MSG_API_OPEN,
+  MSG_T_DM_CONN_MSG_API_ACCEPT,
+  MSG_T_LCTR_INIT_MSG_INITIATE
 } MSG_t;
 
 /*! \brief Common message structure passed to event handler */

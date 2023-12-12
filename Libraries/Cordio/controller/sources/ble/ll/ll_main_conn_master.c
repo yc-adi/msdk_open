@@ -146,7 +146,7 @@ uint8_t LlCreateConn(const LlInitParam_t *pInitParam, const LlConnSpec_t *pConnS
     return LL_ERROR_CODE_INVALID_HCI_CMD_PARAMS;
   }
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_LCTR_INIT_MSG_INITIATE)) != NULL)
   {
     pMsg->hdr.dispId = LCTR_DISP_INIT;
     pMsg->hdr.event = LCTR_INIT_MSG_INITIATE;

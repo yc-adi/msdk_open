@@ -808,7 +808,7 @@ uint8_t *lctrTxIsoDataPduAlloc(void)
   const uint32_t allocLen = HCI_ISO_HDR_LEN + HCI_ISO_DL_MAX_LEN + pLctrRtCfg->maxIsoSduLen + BB_DATA_PDU_TAILROOM;
 
   /* Use LL_ISO_PDU_MAX_LEN to ensure use of data buffers located in the large pool. */
-  if ((pPdu = (uint8_t*)WsfMsgAlloc(allocLen)) == NULL)
+  if ((pPdu = (uint8_t*)WsfMsgAlloc(allocLen, MSG_T_EMPTY)) == NULL)
   {
     LL_TRACE_WARN1("lctrTxIsoDataPduAlloc: Unable to allocate framed Tx buffer, allocSize=%u", allocLen);
   }

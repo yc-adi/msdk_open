@@ -67,7 +67,7 @@
 static uint32_t palSysAssertCount;
 
 /*! \brief      Trap enabled flag. */
-static volatile bool_t PalSysAssertTrapEnable;
+volatile bool_t PalSysAssertTrapEnable;
 
 /*! \brief      Busy client count. */
 static uint32_t palSysBusyCount;

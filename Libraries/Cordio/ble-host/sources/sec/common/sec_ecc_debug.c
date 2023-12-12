@@ -90,7 +90,7 @@ void SecEccHciCback(secQueueBuf_t *pBuf, hciEvt_t *pEvent, wsfHandlerId_t handle
 /*************************************************************************************************/
 bool_t SecEccGenKey(wsfHandlerId_t handlerId, uint16_t param, uint8_t event)
 {
-  secEccMsg_t *pMsg = WsfMsgAlloc(sizeof(secEccMsg_t));
+  secEccMsg_t *pMsg = WsfMsgAlloc(sizeof(secEccMsg_t), MSG_T_EMPTY);
 
   if (pMsg)
   {
@@ -125,7 +125,7 @@ bool_t SecEccGenKey(wsfHandlerId_t handlerId, uint16_t param, uint8_t event)
 /*************************************************************************************************/
 bool_t SecEccGenSharedSecret(secEccKey_t *pKey, wsfHandlerId_t handlerId, uint16_t param, uint8_t event)
 {
-  secEccMsg_t *pMsg = WsfMsgAlloc(sizeof(secEccMsg_t));
+  secEccMsg_t *pMsg = WsfMsgAlloc(sizeof(secEccMsg_t), MSG_T_EMPTY);
 
   if (pMsg)
   {

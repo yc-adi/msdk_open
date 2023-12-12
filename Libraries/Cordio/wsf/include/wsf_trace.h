@@ -353,7 +353,7 @@ bool_t WsfTokenService(void);
 #define HCI_TRACE_ERR3(msg, var1, var2, var3)       WSF_TRACE3V("HCI", "ERR",  msg, var1, var2, var3)
 
 /*! \brief HCI PDUMP on command. */
-#define HCI_PDUMP_CMD(len, pBuf)
+#define HCI_PDUMP_CMD(len, pBuf)                    WsfPDump(WSF_PDUMP_TYPE_HCI_CMD, len, pBuf)
 /*! \brief HCI PDUMP on event. */
 #define HCI_PDUMP_EVT(len, pBuf)
 /*! \brief HCI PDUMP on transmitted ACL message. */

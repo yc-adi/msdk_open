@@ -317,7 +317,6 @@ bool_t lhciCommonDecodeCmdPkt(LhciHdr_t *pHdr, uint8_t *pBuf)
 #if LHCI_ENABLE_VS
   if (lhciCommonVsStdDecodeCmdPkt(pHdr, pBuf))
   {
-    WsfTrace("@? lhciCommonVsStdDecodeCmdPkt true");
     return TRUE;
   }
 #endif

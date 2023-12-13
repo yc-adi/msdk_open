@@ -78,11 +78,7 @@ import time
 
 # Setup the command line description text
 descText = """
-Connection sweep.
-
-This tool uses a Mini Circuits RCDAT to control attenuation between two devices
-running DTM software. A connection is created and PER data is gathered based on a 
-combination of parameters.
+PER test demo on connection.
 """
 
 # Parse the command line arguments
@@ -107,8 +103,6 @@ slv.resetFunc(None)
 print("\nmst reset")
 mst.resetFunc(None)
 
-sleep(0.2)
-
 slv_addr = "11:22:33:44:55:02"
 print(f"\nslv addr {slv_addr}")
 slv.addrFunc(Namespace(addr=slv_addr))
@@ -116,8 +110,6 @@ slv.addrFunc(Namespace(addr=slv_addr))
 mst_addr = "11:22:33:44:55:01"
 print(f"\nmst addr {mst_addr}")
 mst.addrFunc(Namespace(addr=mst_addr))
-
-sleep(0.2)
 
 print("\nslv start advertising.")
 slv.advFunc(Namespace(interval="60", stats="False", connect="True", maintain=False, listen="False"))
@@ -133,14 +125,15 @@ print("\nSlave and master sinkAclFunc")
 slv.sinkAclFunc(None)
 mst.sinkAclFunc(None)
 
-print("\nslave listenFunc, 1 sec")
-slv.listenFunc(Namespace(time=1, stats="False"))
+#print("\nslv and mst wait for HCI events")
+#slv.listenFunc(Namespace(time=1, stats="False"))
 #mst.listenFunc(Namespace(time=1, stats="False"))
 
 print("\nSlave and master sendAclFunc, slave listenFunc")
 slv.sendAclFunc(Namespace(packetLen=str(250), numPackets=str(0)))
 mst.sendAclFunc(Namespace(packetLen=str(250), numPackets=str(0)))
-slv.listenFunc(Namespace(time=1, stats="False"))
+#slv.listenFunc(Namespace(time=1, stats="False"))
+#mst.listenFunc(Namespace(time=1, stats="False"))
 
 start_secs = time.time()
 
@@ -151,10 +144,9 @@ mst.cmdFunc(Namespace(cmd="0102FF00"), timeout=10.0)
 print("sleep 5")
 sleep(5)
 
-print("\nslave read any pending events")
-slv.listenFunc(Namespace(time=1, stats="False"))
-print("\nmaster read any pending events")
-mst.listenFunc(Namespace(time=1, stats="False"))
+#print("\nmaster and slave read any pending events")
+#slv.listenFunc(Namespace(time=1, stats="False"))
+#mst.listenFunc(Namespace(time=1, stats="False"))
 
 print("\nMaster collects results.")
 perMaster = mst.connStatsFunc(None)

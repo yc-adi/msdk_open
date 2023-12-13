@@ -407,7 +407,10 @@ class BLE_hci:
         first = True
         while True:
             if self.mon_port is not None:
-                msg = self.mon_port.readline().decode("utf-8")
+                try:
+                    msg = self.mon_port.readline().decode("utf-8")
+                except:
+                    msg = ""
                 msg = msg.replace("\r\n", "")
                 if msg != "":
                     if first:

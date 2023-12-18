@@ -97,69 +97,103 @@ pprint(vars(args))
 mst = BLE_hci(Namespace(serialPort=args.masterSerial, monPort=args.mtp, baud=115200, id=1))
 slv = BLE_hci(Namespace(serialPort=args.slaveSerial,  monPort=args.stp, baud=115200, id=2))
 
-# start the test                
+# start the test
+
 print("\nslv reset")
-slv.resetFunc(None)
+#slv.resetFunc(None)
+slv.send_command("01030C00")
 print("\nmst reset")
-mst.resetFunc(None)
+#mst.resetFunc(None)
+mst.send_command("01030C00")
 
 slv_addr = "11:22:33:44:55:02"
 print(f"\nslv addr {slv_addr}")
-slv.addrFunc(Namespace(addr=slv_addr))
+#slv.addrFunc(Namespace(addr=slv_addr))
+slv.send_command("01F0FF06025544332211")
 
 mst_addr = "11:22:33:44:55:01"
 print(f"\nmst addr {mst_addr}")
-mst.addrFunc(Namespace(addr=mst_addr))
+#mst.addrFunc(Namespace(addr=mst_addr))
+mst.send_command("01F0FF06015544332211")
 
-print("\nslv start advertising.")
-slv.advFunc(Namespace(interval="60", stats="False", connect="True", maintain=False, listen="False"))
+print("\nslv starts advertising")
+#slv.advFunc(Namespace(interval="60", stats="False", connect="True", maintain=False, listen="False"))
+slv.send_command("01010C08FFFFFFFFFFFFFFFF")
+slv.send_command("01630C08FFFFFFFFFFFFFFFF")
+slv.send_command("01012008FFFFFFFFFFFFFFFF")
+slv.send_command("01312003000707")  # set default PHY
+slv.send_command("0106200F600060000000000000000000000700")  # set adv param
+slv.send_command("010A200101")  # enable ADV
 
-print("\nmst start connection.")
-mst.initFunc(Namespace(interval="6", timeout="64", addr=slv_addr, stats="False", maintain=False, listen="False"))
+sleep(5) #@?
+
+print("\nmst creates connection")
+#mst.initFunc(Namespace(interval="6", timeout="64", addr=slv_addr, stats="False", maintain=False, listen="False"))
+mst.send_command("01010C08FFFFFFFFFFFFFFFF")
+mst.send_command("01630C08FFFFFFFFFFFFFFFF")
+mst.send_command("01012008FFFFFFFFFFFFFFFF")
+mst.send_command("01312003000707")  # set default PHY
+mst.send_command("010D2019A000A00000000255443322110006000600000064000F100F10")  # create a connection
 
 print("\nslv and mst wait for HCI events")
 slv.listenFunc(Namespace(time=1, stats="False"))
 mst.listenFunc(Namespace(time=1, stats="False"))
 
-print("\nSlave and master sinkAclFunc")
-slv.sinkAclFunc(None)
-mst.sinkAclFunc(None)
+print("\nset data len")
+#slv.dataLenFunc(None)
+slv.send_command("012220060000FB009042")
+#mst.dataLenFunc(None)
+mst.send_command("012220060000FB009042")
 
-#print("\nslv and mst wait for HCI events")
-#slv.listenFunc(Namespace(time=1, stats="False"))
-#mst.listenFunc(Namespace(time=1, stats="False"))
+print("\nenable ACL sink")
+#slv.sinkAclFunc(None)
+slv.send_command("01E3FF0101")
+#mst.sinkAclFunc(None)
+mst.send_command("01E3FF0101")
 
-print("\nSlave and master sendAclFunc, slave listenFunc")
-slv.sendAclFunc(Namespace(packetLen=str(250), numPackets=str(0)))
-mst.sendAclFunc(Namespace(packetLen=str(250), numPackets=str(0)))
-#slv.listenFunc(Namespace(time=1, stats="False"))
-#mst.listenFunc(Namespace(time=1, stats="False"))
+print("\ngenerate ACL data")
+#slv.sendAclFunc(Namespace(packetLen=str(250), numPackets=str(0)))
+slv.send_command("01E5FF02FA00")
+#slv.sendAclFunc(Namespace(packetLen=str(250), numPackets=str(1)))
+slv.send_command("01E4FF050000FA0001")
+#mst.sendAclFunc(Namespace(packetLen=str(250), numPackets=str(0)))
+mst.send_command("01E5FF02FA00")
+#mst.sendAclFunc(Namespace(packetLen=str(250), numPackets=str(1)))
+mst.send_command("01E4FF050000FA0001")
 
 start_secs = time.time()
 
-print("\nReset the packet stats.")
+print("\nreset the packet stats")
 slv.cmdFunc(Namespace(cmd="0102FF00"), timeout=10.0)
 mst.cmdFunc(Namespace(cmd="0102FF00"), timeout=10.0)
 
-print("sleep 5")
-sleep(5)
-
-#print("\nmaster and slave read any pending events")
-#slv.listenFunc(Namespace(time=1, stats="False"))
-#mst.listenFunc(Namespace(time=1, stats="False"))
+print("wait 2 secs")
+sleep(2)
 
 print("\nMaster collects results.")
 perMaster = mst.connStatsFunc(None)
 print(f'perMst = {perMaster}')
 
 print("\nSlave collects results.")
-perSlave = slv.connStatsFunc(None)                
+perSlave = slv.connStatsFunc(None)
 print(f'perSlv = {perSlave}')
 
 print('--------------------------------------------------------------------------------------------')
-print("Reset the devices.")
-slv.resetFunc(None)
-mst.resetFunc(None)
+
+print("\ndisable ACL sink")
+#slv.sinkAclFunc(None)
+slv.send_command("01E3FF0100")
+#mst.sinkAclFunc(None)
+mst.send_command("01E3FF0100")
+
+sleep(1)
+
+print("\nslv reset")
+#slv.resetFunc(None)
+slv.send_command("01030C00")
+print("\nmst reset")
+#mst.resetFunc(None)
+mst.send_command("01030C00")
 
 print("DONE!")
 sys.exit(0)

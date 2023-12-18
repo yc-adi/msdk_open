@@ -38,12 +38,7 @@ uint8_t gu8Debug = 0;
 **************************************************************************************************/
 
 /* Internal message buf structure */
-typedef struct wsfMsg_tag
-{
-  struct wsfMsg_tag   *pNext;
-  wsfHandlerId_t      handlerId;
-  MSG_t               msgType;
-} wsfMsg_t;
+
 
 /*************************************************************************************************/
 /*!
@@ -167,6 +162,12 @@ void *WsfMsgDeq(wsfQueue_t *pQueue, wsfHandlerId_t *pHandlerId)
     }
 
     if (gu8Debug == 3 && pMsg->msgType == MSG_T_LCTR_INIT_MSG_INITIATE)
+    {
+      __asm("nop");
+      __asm("nop");
+    }
+
+    if (pMsg->msgType == MSG_T_LCTR_CONN_MSG_API_DATA_LEN_CHANGE)
     {
       __asm("nop");
       __asm("nop");

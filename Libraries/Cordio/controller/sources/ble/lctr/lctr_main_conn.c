@@ -882,7 +882,6 @@ void LctrTxAcl(uint8_t *pAclBuf)
     WSF_ASSERT(WsfQueueEmpty(&pCtx->txLeuQ));
 
     /*** Queue for transmit. ***/
-
     uint16_t fragLen = lctrTxFragLen(pCtx);
     lctrTxDataPduQueue(pCtx, fragLen, &aclHdr, pAclBuf);
     WsfSetEvent(lmgrPersistCb.handlerId, (1 << LCTR_EVENT_TX_PENDING));
@@ -890,7 +889,6 @@ void LctrTxAcl(uint8_t *pAclBuf)
   else
   {
     /*** Pend in LE-U pause queue. ***/
-
     WsfMsgEnq(&pCtx->txLeuQ, aclHdr.connHandle, pAclBuf);
   }
 }

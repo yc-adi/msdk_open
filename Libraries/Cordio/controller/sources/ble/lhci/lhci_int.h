@@ -30,6 +30,7 @@
 #include "ll_api.h"
 #include "wsf_os.h"
 #include "wsf_queue.h"
+#include "wsf_trace.h"
 #include "util/bstream.h"
 
 #ifdef __cplusplus
@@ -612,6 +613,29 @@ static inline uint8_t lhciPackEvtHdr(uint8_t *pBuf, uint8_t evtCode, uint8_t par
 
 /*************************************************************************************************/
 /*!
+ *  \brief  Pack a HCI Meta event packet header.
+ *
+ *  \param  pBuf        Packed packet buffer.
+ *  \param  evtCode     Event code.
+ *  \param  subEvtCode  Subevent code.
+ *  \param  paramLen    Parameter length.
+ *
+ *  \return Packet length.
+ */
+/*************************************************************************************************/
+static inline uint8_t lhciPackHciMetaEvtHdr(uint8_t *pBuf, uint8_t evtCode, uint8_t subEvtCode, uint8_t paramLen)
+{
+    const uint8_t len = HCI_EVT_HDR_LEN;
+
+    UINT8_TO_BSTREAM(pBuf, evtCode);
+    UINT8_TO_BSTREAM(pBuf, subEvtCode);
+    UINT8_TO_BSTREAM(pBuf, paramLen);
+
+    return len;
+}
+
+/*************************************************************************************************/
+/*!
  *  \brief  Pack a command status event packet.
  *
  *  \param  pBuf        Packed packet buffer.
@@ -697,10 +721,7 @@ static inline uint8_t lhciPackVsEvt(uint8_t *pBuf, uint16_t vsEvtCode)
  *  \param  pEvtBuf   Buffer containing event.
  */
 /*************************************************************************************************/
-static inline void lhciSendEvt(uint8_t *pEvtBuf)
-{
-    LhciSendEvent(pEvtBuf - HCI_EVT_HDR_LEN);
-}
+void lhciSendEvt(uint8_t *pEvtBuf);
 
 /*************************************************************************************************/
 /*!

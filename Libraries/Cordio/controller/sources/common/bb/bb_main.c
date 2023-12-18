@@ -232,7 +232,6 @@ void BbExecuteBod(BbOpDesc_t *pBod)
   if (bbCb.termBod)
   {
     bbCb.pOpInProgress = NULL;
-    WsfTrace("@? BbExecuteBod pOpInProgress=NULL");
   }
 }
 

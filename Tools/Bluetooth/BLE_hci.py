@@ -291,9 +291,9 @@ class BLE_hci:
                 status_string += '%02X'%payload[i]
 
             if self.id == "-":
-                print(str(datetime.datetime.now()) + "  <", status_string)
+                print(datetime.datetime.now().strftime("%H-%M-%S.%f")[:-3] + "  <", status_string)
             else:
-                print(str(datetime.datetime.now()) + f" {self.id}<", status_string)
+                print(datetime.datetime.now().strftime("%H-%M-%S.%f")[:-3] + f" {self.id}<", status_string)
 
         return status_string
 
@@ -306,10 +306,14 @@ class BLE_hci:
         start_time = datetime.datetime.now()
         delta = datetime.datetime.now() - start_time
         while((delta.seconds < seconds) or (seconds == 0)):
-            self.wait_event(print_evt = print_evt, timeout=0.1)
+            evtStr = self.wait_event(print_evt = print_evt, timeout=0.1)
+            if evtStr is not None and evtStr.find("040E2001FDFF") != -1:  # ConnStats
+                return evtStr
             delta = datetime.datetime.now() - start_time
             if((delta.seconds > 30) and ((delta.seconds % 30) == 0)) :
                 print(str(datetime.datetime.now()) + " |")
+
+        return ""
 
     ## Send HCI command.
      #
@@ -321,9 +325,9 @@ class BLE_hci:
         # Send the command and data
         if(print_cmd):
             if self.id == "-":
-                print(str(datetime.datetime.now()) + "  >", packet)
+                print(datetime.datetime.now().strftime("%H-%M-%S.%f")[:-3] + "  >", packet)
             else:
-                print(str(datetime.datetime.now()) + f" {self.id}>", packet)
+                print(datetime.datetime.now().strftime("%H-%M-%S.%f")[:-3] + f" {self.id}>", packet)
 
         arr = bytearray.fromhex(packet)
         
@@ -414,10 +418,10 @@ class BLE_hci:
                 msg = msg.replace("\r\n", "")
                 if msg != "":
                     if first:
-                        print(f'\n{str(datetime.datetime.now())} {self.id}  {msg}')
+                        print(f'\n{datetime.datetime.now().strftime("%H-%M-%S.%f")[:-3]} {self.id}  {msg}')
                         first = False
                     else:
-                        print(f'{str(datetime.datetime.now())} {self.id}  {msg}')
+                        print(f'{datetime.datetime.now().strftime("%H-%M-%S.%f")[:-3]} {self.id}  {msg}')
 
 
     ## Get connection stats.
@@ -425,20 +429,25 @@ class BLE_hci:
      # Send the command to get the connection stats, parse the return value, return the PER.
     ################################################################################
     def connStatsFunc(self, args):
-
         per = None
         retries = 5
         while((per == None) and (retries > 0)):
             # Send the command to get the connection stats, save the event
             statEvt = self.send_command("01FDFF00")
 
+            # Parse the resp
+            if statEvt is not None and statEvt.find("040E2001FDFF") != -1:
+                per = self.parseConnStatsEvt(statEvt)
+                return per
+            
             if(retries != 5):
                 # Delay to clear pending events
-                self.wait_events(1)
-                
+                evtStr = self.wait_events(1)
 
-            # Parse the connection stats event
-            per = self.parseConnStatsEvt(statEvt)
+                # the received evtStr could be the ConnStats data
+                if evtStr.find("040E2001FDFF") != -1:
+                    per = self.parseConnStatsEvt(evtStr)
+                    return per
 
             retries = retries - 1
 

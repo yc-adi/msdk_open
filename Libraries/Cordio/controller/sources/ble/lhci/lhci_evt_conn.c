@@ -26,6 +26,7 @@
 #include "chci_api.h"
 #include "hci_defs.h"
 #include "wsf_msg.h"
+#include "wsf_trace.h"
 #include "util/bstream.h"
 #include <string.h>
 

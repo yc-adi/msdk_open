@@ -28,6 +28,18 @@
 
 /*************************************************************************************************/
 /*!
+ *  \brief  Send an event.
+ *
+ *  \param  pEvtBuf   Buffer containing event.
+ */
+/*************************************************************************************************/
+void lhciSendEvt(uint8_t *pEvtBuf)
+{
+    LhciSendEvent(pEvtBuf - HCI_EVT_HDR_LEN);
+}
+
+/*************************************************************************************************/
+/*!
  *  \brief      Initialize LL HCI handler.
  *
  *  \param      handlerId  WSF handler ID.

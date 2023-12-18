@@ -36,6 +36,8 @@
 #include "util/bstream.h"
 #include <string.h>
 
+extern uint8_t gu8Debug;
+
 /*************************************************************************************************/
 /*!
  *  \brief      Get RSSI of a connection.
@@ -624,6 +626,7 @@ uint8_t LlReadRemoteVerInfo(uint16_t handle)
 /*************************************************************************************************/
 uint8_t LlSetDataLen(uint16_t handle, uint16_t txLen, uint16_t txTime)
 {
+  gu8Debug = 10;
   LL_TRACE_INFO1("### LlApi ###  LlSetDataLen: handle=%u", handle);
 
   if ((LL_API_PARAM_CHECK == 1) &&
@@ -650,7 +653,7 @@ uint8_t LlSetDataLen(uint16_t handle, uint16_t txLen, uint16_t txTime)
 
   lctrDataLengthChange_t *pMsg;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(*pMsg), MSG_T_LCTR_CONN_MSG_API_DATA_LEN_CHANGE)) != NULL)
   {
     pMsg->hdr.handle = handle;
     pMsg->hdr.dispId = LCTR_DISP_CONN;

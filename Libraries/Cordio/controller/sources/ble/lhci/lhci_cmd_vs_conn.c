@@ -69,7 +69,6 @@ bool_t lhciConnVsStdDecodeCmdPkt(LhciHdr_t *pHdr, uint8_t *pBuf)
       BSTREAM_TO_UINT16(handle, pBuf);
       BSTREAM_TO_UINT16(pktLen, pBuf);
       numPkts = *pBuf++;
-
       lhciGenerateAcl(handle, pktLen, numPkts);
       break;
     }

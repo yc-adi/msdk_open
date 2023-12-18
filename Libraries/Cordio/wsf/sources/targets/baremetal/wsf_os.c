@@ -108,6 +108,8 @@ static osThreadId_t wsfOsThreadId;
 
 OCMP_ST_t ocmpSt = OCMP_ST_INIT;
 
+extern uint8_t gu8Debug;
+
 /*************************************************************************************************/
 /*!
  *  \brief  Check if the WSF OS is active.
@@ -277,6 +279,7 @@ void wsfOsDispatcher(void)
   wsfTaskEvent_t    taskEventMask;
   wsfHandlerId_t    handlerId;
   uint8_t           i;
+  wsfMsg_t *pTemp;
 
   WSF_CS_INIT(cs);
 
@@ -295,6 +298,12 @@ void wsfOsDispatcher(void)
     {
       WSF_ASSERT(handlerId < WSF_MAX_HANDLERS);
       WSF_OS_SET_ACTIVE_HANDLER_ID(handlerId);
+      pTemp = (wsfMsg_t *)pMsg;
+      if (gu8Debug == 8)
+      {
+        __asm("nop");
+        __asm("nop");
+      }
       (*pTask->handler[handlerId])(0, pMsg);
       WsfMsgFree(pMsg);
     }

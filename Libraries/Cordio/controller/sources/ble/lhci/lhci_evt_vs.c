@@ -110,7 +110,7 @@ static bool_t LhciVsEncodeSnifferPktEvtPkt(BbBleSnifferPkt_t *pPktData)
       break;
   }
 
-  lhciSendEvt(pPkt);
+  lhciSendEvt(pPkt, 0);
   return TRUE;
 }
 

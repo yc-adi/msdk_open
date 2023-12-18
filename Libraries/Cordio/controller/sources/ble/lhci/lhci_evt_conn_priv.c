@@ -22,6 +22,7 @@
  */
 /*************************************************************************************************/
 
+#include <stdio.h>
 #include "lhci_int.h"
 #include "hci_defs.h"
 #include "wsf_msg.h"
@@ -80,6 +81,11 @@ bool_t lhciPrivConnEncodeEvtPkt(LlEvt_t *pEvt)
         {
           uint8_t *pBuf = pEvtBuf;
           lhciPackEnhancedConnCompleteEvt(pBuf, &pEvt->connInd);
+          if (pEvtBuf)
+          {
+            lhciSendEvt(pEvtBuf);
+            return TRUE;
+          }
         }
       }
       break;

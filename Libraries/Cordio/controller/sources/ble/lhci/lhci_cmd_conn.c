@@ -268,7 +268,7 @@ bool_t lhciConnDecodeCmdPkt(LhciHdr_t *pHdr, uint8_t *pBuf)
       BSTREAM_TO_UINT16(handle, pBuf);
       BSTREAM_TO_UINT16(txLen, pBuf);
       BSTREAM_TO_UINT16(txTime, pBuf);
-      status = LlSetDataLen(handle, txLen, txTime);
+      status = LlSetDataLen(handle, txLen, txTime);      
       paramLen = LHCI_LEN_LE_SET_DATA_LEN;
       break;
     }

@@ -207,6 +207,7 @@ void lhciRecv(uint8_t type, uint8_t *pBuf)
 /*************************************************************************************************/
 void lhciSendComplete(uint8_t type, uint8_t *pBuf)
 {
+  //WsfTrace("@? lhciSendComplete %02X %02X %02X %02X", pBuf[0], pBuf[1], pBuf[2], pBuf[3]);
   switch (type)
   {
     case CHCI_TR_TYPE_EVT:

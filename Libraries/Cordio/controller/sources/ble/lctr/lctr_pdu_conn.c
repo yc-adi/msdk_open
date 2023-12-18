@@ -818,6 +818,7 @@ uint8_t lctrDecodeCtrlPdu(lctrDataPdu_t *pPdu, const uint8_t *pBuf, uint8_t role
   pBuf += lctrUnpackDataPduHdr(&pPdu->hdr, pBuf);
   pPdu->opcode = *pBuf;
 
+  WsfTrace("@? lctrDecodeCtrlPdu opcode=0x%02X", pPdu->opcode);
   switch (pPdu->opcode)
   {
     case LL_PDU_CONN_UPDATE_IND:

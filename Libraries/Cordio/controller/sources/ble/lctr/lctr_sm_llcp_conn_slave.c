@@ -654,6 +654,7 @@ void lctrLlcpStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
 /*************************************************************************************************/
 void lctrSlvLlcpExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 {
+  WsfTrace("@? lctrSlvLlcpExecuteSm evt=%d", event);
   /* Override state machine */
   switch (event)
   {

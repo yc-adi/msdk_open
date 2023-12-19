@@ -957,6 +957,7 @@ void HciSendAclData(uint8_t *pData)
     if (WsfQueueEmpty(&hciCoreCb.aclQueue) && hciCoreCb.availBufs > 0)
     {
       /* send data */
+      //@? PRINT_BUF(ACL, pData+1, len + 2);
       hciCoreTxAclStart(pConn, len, pData);
     }
     else

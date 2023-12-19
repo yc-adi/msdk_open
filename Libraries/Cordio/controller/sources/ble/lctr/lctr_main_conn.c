@@ -683,7 +683,7 @@ void lctrConnRxPendingHandler(void)
 
     WSF_ASSERT(connHandle < pLctrRtCfg->maxConn);
     lctrConnCtx_t *pCtx = LCTR_GET_CONN_CTX(connHandle);
-
+    //@? PRINT_BUF(RX, pRxBuf, pRxBuf[1] + 2);
     if (!pCtx->enabled)
     {
       LL_TRACE_ERR1("!!! Data received on terminated connHandle=%u", connHandle);
@@ -717,7 +717,7 @@ void lctrConnRxPendingHandler(void)
         continue;
       }
     }
-
+    WsfTrace("@? llid=%d nesn=%d sn=%d md=%d len=%d", rxHdr.llid, rxHdr.nesn, rxHdr.sn, rxHdr.md, rxHdr.len);
     /* Demux PDU. */
     switch (rxHdr.llid)
     {

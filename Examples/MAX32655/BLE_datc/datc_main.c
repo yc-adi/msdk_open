@@ -97,6 +97,8 @@ extern appDb_t appDb;
 extern OCMP_ST_t ocmpSt;
 extern bool_t PalSysAssertTrapEnable;
 
+extern void StackInitDatc(void);
+
 /**************************************************************************************************
   Local Variables
 **************************************************************************************************/

@@ -49,6 +49,20 @@ enum
 SchCtrlBlk_t schCb;
 extern uint8_t gu8Debug;
 
+uint8_t gu8DbgBuf[DBG_BUF_SIZE];
+uint32_t gu8DbgBufNdx = 0;
+
+/*************************************************************************************************/
+/*!
+ *  \brief      Display debug buffer contents.
+ *  \param len  length of the data to show
+ */
+/*************************************************************************************************/
+void PrintDbgBuf(uint32_t len)
+{
+  PRINT_BUF(DBG, gu8DbgBuf, len);
+}
+
 /*************************************************************************************************/
 /*!
  *  \brief      BOD completion handler.

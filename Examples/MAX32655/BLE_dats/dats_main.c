@@ -83,6 +83,7 @@
 extern uint8_t gu8Debug;
 extern appConnCb_t appConnCb[DM_CONN_MAX];
 extern appSlaveCb_t appSlaveCb;
+extern void PrintDbgBuf(uint32_t len);
 
 /*! Enumeration of client characteristic configuration descriptors */
 enum {
@@ -960,6 +961,8 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         } else if (strcmp(argv[1], "adv_off") == 0) {
             TerminalTxPrint("stop advertising\n");
             AppAdvStop();
+        } else if (strcmp(argv[1], "qry") == 0) {
+            PrintDbgBuf(10);
         } else {
             TerminalTxPrint("cmd argc:%d\n", argc);
         }

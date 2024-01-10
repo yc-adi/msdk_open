@@ -254,20 +254,21 @@ static const uint8_t cgmAdvDataDisc[] = {
 };
 
 /*! scan data, discoverable mode */
-uint8_t datsScanDataDisc[12] = {
+uint8_t datsScanDataDisc[13] = {
     /*! device name */
-    11, /*! length */                            // 0
+    12, /*! length */                           // 0
     DM_ADV_TYPE_LOCAL_NAME, /*! AD type */      // 1
     'C',                                        // 2
     'G',                                        // 3
     'M',                                        // 4
-    '0',                                        // 5
+    '-',                                        // 5
     '0',                                        // 6
     '0',                                        // 7
     '0',                                        // 8
     '0',                                        // 9
     '0',                                        // 10
-    0                                           // 11 spaceholder
+    '0',                                        // 11
+    0                                           // 12 spaceholder
 };
 
 /*! CGM Feature */
@@ -827,7 +828,7 @@ void CgmHandlerInit(wsfHandlerId_t handlerId)
     APP_TRACE_INFO6("MAC Addr: %02x:%02x:%02x:%02x:%02x:%02x", addr[5], addr[4], addr[3], addr[2],
                     addr[1], addr[0]);
 
-    //sprintf((char *)&datsScanDataDisc[5], "%02X%02X%02X", addr[2], addr[1], addr[0]);
+    sprintf((char *)&datsScanDataDisc[6], "%02X%02X%02X", addr[2], addr[1], addr[0]);
 
     APP_TRACE_INFO1("Adv local name: %s", &datsScanDataDisc[2]);
 

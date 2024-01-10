@@ -315,6 +315,16 @@ int DeepSleep(void)
         }
     }
 
+    /* Adjust idleTicks for the time it takes to restart the BLE hardware */
+    if (idleInWutCnt > (WAKEUP_IN_WUT_TICK + RESTORE_OP_IN_WUT_TICK))
+    {
+        idleInWutCnt-= (WAKEUP_IN_WUT_TICK + RESTORE_OP_IN_WUT_TICK);
+    }
+    else
+    {
+        idleInWutCnt = 0;
+    }
+    
     /* Disable SysTick */
     SysTick->CTRL &= ~(SysTick_CTRL_ENABLE_Msk);
 
@@ -329,10 +339,7 @@ int DeepSleep(void)
     if (schTimerActive) 
     {
         schUsec = PalTimerGetExpTime();  // old way: bool_t SchBleGetNextDueTime(uint32_t *pDueTime)
-
-        /* Adjust idleTicks for the time it takes to restart the BLE hardware */
-        idleInWutCnt-= (WAKEUP_IN_WUT_TICK + RESTORE_OP_IN_WUT_TICK);
-
+        
         /* Calculate the time to the next BLE scheduler event */
         if (schUsec < (WAKEUP_US + RESTORE_OP_IN_US))
         {

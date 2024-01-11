@@ -95,6 +95,9 @@ static uint8_t *pLctrTxCompBuf;
 /*! \brief      Completed transmit buffer handle ID. */
 static wsfHandlerId_t lctrTxCompBufHandlerId;
 
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
+
 /*************************************************************************************************/
 /*!
  *  \brief      Check to see whether it is necessary to abort slave latency when slave
@@ -948,10 +951,18 @@ void lctrRxEnq(uint8_t *pBuf, uint16_t eventCounter, uint16_t connHandle)
 
   /* Queue LE Data PDU. */
   //PRINT_BLE_RX_BUFF(pBuf[2], pBuf[3]);
-  if (pBuf[2] == 0x13 && pBuf[3] == 0x09 && pBuf[4] == 0x14)
+  gu32DbgCharBufNdx += sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "R: ");
+  for (uint32_t i = 0; i < pBuf[3] && gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 4; ++i)
   {
-    __asm("nop");
+    gu32DbgCharBufNdx += sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "%02X ", pBuf[2 + i]);
   }
+  if (gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 2)
+  {
+    gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\r';
+    gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\n';
+  }
+  gu8DbgCharBuf[DBG_CHAR_BUF_SIZE - 1] = 0;
+
   WsfMsgEnq(&lmgrConnCb.rxDataQ, connHandle, pBuf);
   WsfSetEvent(lmgrPersistCb.handlerId, (1 << LCTR_EVENT_RX_PENDING));
 }

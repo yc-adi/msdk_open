@@ -46,7 +46,7 @@ extern "C" {
           sprintf(&str[pos], "\n"); APP_TRACE_INFO1("%s", str);}
 
 #define PRINT_BUF(prompt, addr, n) {char *p = (char *)(addr); char str[1024]; uint8_t pos = 0; pos = sprintf(str, "%s: ", #prompt); \
-          for (int ii = 0; ii < ((n)); ii++) { \
+          for (int ii = 0; ii < ((n)) && pos < 1020; ii++) { \
           pos += sprintf(&str[pos], "%02X ", p[ii]);}  \
           sprintf(&str[pos], "\n"); APP_TRACE_INFO1("%s", str);}
 

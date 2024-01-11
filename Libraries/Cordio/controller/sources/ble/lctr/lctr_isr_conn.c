@@ -30,12 +30,15 @@
 #include "wsf_math.h"
 #include "wsf_msg.h"
 #include "wsf_os.h"
+#include "wsf_trace.h"
 #include "util/bstream.h"
 #include <string.h>
 
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
 
 /*! \brief      Slave connection ISR control block. */
 static union
@@ -300,7 +303,18 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
       lctrSetBbPacketCounterTx(pCtx);
       BbBleTxData(&bbDesc[0], bbDescCnt);
       numTxBytes = LL_DATA_HDR_LEN + bbDesc[0].pBuf[LCTR_DATA_PDU_LEN_OFFSET];
-      PRINT_BUF(TX, bbDesc[0].pBuf, bbDesc[0].len);
+      //PRINT_BUF(TX, bbDesc[0].pBuf, bbDesc[0].len);
+      gu32DbgCharBufNdx += sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "T: ");
+      for (uint32_t i = 0; i < bbDesc[0].len && gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 4; ++i)
+      {
+        gu32DbgCharBufNdx += sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "%02X ", bbDesc[0].pBuf[i]);
+      }
+      if (gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 2)
+      {
+        gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\r';
+        gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\n';
+      }
+      gu8DbgCharBuf[DBG_CHAR_BUF_SIZE - 1] = 0;
     }
     else
     {

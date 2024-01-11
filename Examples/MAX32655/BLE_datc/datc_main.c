@@ -58,6 +58,7 @@
 #include "tmr.h"
 #include "sdsc_api.h"
 #include "wsf_os.h"
+#include "wsf_trace.h"
 
 /**************************************************************************************************
 Macros
@@ -317,7 +318,9 @@ static const attcDiscCfg_t datcDiscCfgList[] = {
 /* sanity check:  make sure configuration list length is <= handle list length */
 WSF_CT_ASSERT(DATC_DISC_CFG_LIST_LEN <= DATC_DISC_HDL_LIST_LEN);
 
+extern uint32_t gu32DbgCharBufNdx;
 extern void SchPrintBod(void);
+extern void PrintDbgBuf(uint32_t len);
 
 /*************************************************************************************************/
 /*!
@@ -983,6 +986,9 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
             SchPrintBod();
 
             ShowConns();
+
+            PrintDbgBuf(0);
+            gu32DbgCharBufNdx = 0;
         }
 
         else if (strcmp(argv[1], "send") == 0) {

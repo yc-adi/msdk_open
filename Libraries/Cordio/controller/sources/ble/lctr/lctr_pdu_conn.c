@@ -27,6 +27,7 @@
 #include "util/bstream.h"
 #include "hci_defs.h"
 #include "wsf_math.h"
+#include "wsf_trace.h"
 #include <string.h>
 
 /*************************************************************************************************/

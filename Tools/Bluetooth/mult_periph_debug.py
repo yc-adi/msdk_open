@@ -144,7 +144,7 @@ if __name__ == '__main__':
     #ser1 = ComClass(1, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D3074PPH-if00-port0', 115200, " C")  # dats MAX32655 y9
     #ser1 = ComClass(1, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D3073IDG-if00-port0', 115200, " C")  # datc MAX32655 y1
     #ser2 = ComClass(2, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D309ZDE9-if00-port0', 115200, "P1")  # datc MAX32655 y2
-    ser2 = ComClass(3, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D307NU7N-if00-port0', 115200, "P1")  # datc MAX32655 y3
+    ser2 = ComClass(2, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D307NU7N-if00-port0', 115200, "P1")  # datc MAX32655 y3
     ser1 = ComClass(1, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D30BLH58-if00-port0', 115200, " C")  # datc MAX32655 y4
     #ser6 = ComClass(6, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D307NU7M-if00-port0', 115200, "P5")  # datc MAX32655 y5
     #ser7 = ComClass(7, '/dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_D30A1B4P-if00-port0', 115200, "P6")  # datc MAX32655 y6

@@ -49,8 +49,8 @@ enum
 SchCtrlBlk_t schCb;
 extern uint8_t gu8Debug;
 
-uint8_t gu8DbgBuf[DBG_BUF_SIZE];
-uint32_t gu8DbgBufNdx = 0;
+uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];  
+uint32_t gu32DbgCharBufNdx = 0;
 
 /*************************************************************************************************/
 /*!
@@ -60,7 +60,7 @@ uint32_t gu8DbgBufNdx = 0;
 /*************************************************************************************************/
 void PrintDbgBuf(uint32_t len)
 {
-  PRINT_BUF(DBG, gu8DbgBuf, len);
+  APP_TRACE_INFO1("%s", gu8DbgCharBuf);
 }
 
 /*************************************************************************************************/

@@ -65,7 +65,13 @@ void lctrMstDiscoverEndOp(BbOpDesc_t *pOp)
     lctrMsgHdr_t *pMsg;
 
     /* Send SM a scan termination event. */
-    if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
+    MSG_t msgType = MSG_T_LCTR_INIT_MSG_TERMINATE;
+    if (pCtx == &lctrMstScan)
+    {
+      msgType = MSG_T_LCTR_SCAN_MSG_TERMINATE;
+    }
+    
+    if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), msgType)) != NULL)
     {
       if (pCtx == &lctrMstScan)
       {

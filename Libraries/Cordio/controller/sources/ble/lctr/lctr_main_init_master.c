@@ -85,7 +85,7 @@ void lctrMstInitiateBuildOp(LlConnSpec_t *pConnSpec, uint8_t peerAddrType, uint6
   uint8_t *pBuf;
 
   /*** General Setup ***/
-  pOp->bodType = 6;
+  pOp->bodType = 6;  // lctrMstInitiateBuildOp
   pOp->reschPolicy = BB_RESCH_MOVEABLE_PREFERRED;
   pOp->protId = BB_PROT_BLE;
   pOp->prot.pBle = pBle;

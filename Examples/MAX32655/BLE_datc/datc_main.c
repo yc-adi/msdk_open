@@ -207,7 +207,7 @@ static const hciConnSpec_t datcConnCfg = {
     160, /*! Minimum connection interval in 1.25ms units, 1.25x160=200 ms */
     160, /*! Maximum connection interval in 1.25ms units */
     0, /*! Connection latency */
-    100, /*! Supervision timeout in 10ms units */
+    300, /*! Supervision timeout in 10ms units */
     0, /*! Unused */
     0 /*! Unused */
 };
@@ -396,7 +396,12 @@ static void datcDmCback(dmEvt_t *pDmEvt)
             reportLen = 0;
         }
 
-        if ((pMsg = WsfMsgAlloc(len + reportLen, MSG_T_EMPTY)) != NULL) {
+        MSG_t msgType = MSG_T_EMPTY;
+        if (pDmEvt->hdr.event == DM_SCAN_REPORT_IND) {
+            msgType = MSG_T_DM_SCAN_REPORT_IND;
+        }
+
+        if ((pMsg = WsfMsgAlloc(len + reportLen, msgType)) != NULL) {
             memcpy(pMsg, pDmEvt, len);
             if (pDmEvt->hdr.event == DM_SCAN_REPORT_IND) {
                 pMsg->scanReport.pData = (uint8_t *)((uint8_t *)pMsg + len);
@@ -501,6 +506,7 @@ static void datcScanStopConnStart(dmEvt_t *pMsg)
             APP_TRACE_INFO1("%s", str);
             
             dmConnId_t connId = AppConnOpen(datcConnInfo.addrType, datcConnInfo.addr, datcConnInfo.dbHdl);
+            //@? gu8Debug = 18;
             if (connId == DM_CONN_ID_NONE)
             {
                 WsfTrace("AppConnOpen failed!");

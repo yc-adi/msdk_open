@@ -139,21 +139,29 @@ void dmConnSmExecute(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
 
   /* get action */
   action = dmConnStateTbl[pCcb->state][event][DM_CONN_ACTION];
+  uint8_t nextSt = dmConnStateTbl[pCcb->state][event][DM_CONN_NEXT_STATE];
+  uint8_t mainMstSlv = DM_CONN_ACT_SET_ID(action);
+  uint8_t actSetNdx = DM_CONN_ACT_ID(action);
 
+  // 24 DM_CONN_MSG_API_OPEN
+  // 28 DM_CONN_MSG_HCI_LE_CONN_CMPL
+  // 0  DM_CONN_SM_ST_IDLE
+  // evt=24(0) st=0 act=16 nxtSt=1 mainMstSlv=1 actSetNdx=0 DM_CONN_SM_ACT_OPEN
+  // evt=28(4) st=1 act=2 nxtSt=3 mainMstSlv=0 actSetNdx=2
   // evt=29 st=3 act=
-  //@? DM_TRACE_INFO4("dmConnSmExecute evt=%d(%d) st=%d act=%d", pMsg->hdr.event, event, pCcb->state, action);
+  WsfTrace("dmConnSmExecute evt=%d(%d) st=%d act=%d nxtSt=%d mainMstSlv=%d actSetNdx=%d", pMsg->hdr.event, event, pCcb->state, action, nextSt, mainMstSlv, actSetNdx);
 
   /* set next state */
-  pCcb->state = dmConnStateTbl[pCcb->state][event][DM_CONN_NEXT_STATE];
+  pCcb->state = nextSt;
 
   /* look up action set */
-  actSet = dmConnActSet[DM_CONN_ACT_SET_ID(action)];
+  actSet = dmConnActSet[mainMstSlv];
 
   /* if action set present */
   if (actSet != NULL)
   {
     /* execute action function in action set */
-    (*actSet[DM_CONN_ACT_ID(action)])(pCcb, pMsg);
+    (*actSet[actSetNdx])(pCcb, pMsg);
   }
   else
   {

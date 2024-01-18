@@ -131,7 +131,7 @@ static void lctrSendPowerCtrlReqPdu(lctrConnCtx_t *pCtx, int8_t delta)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_PWR_CTRL_REQ_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_PWR_CTRL_REQ_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -175,7 +175,7 @@ static void lctrSendPowerCtrlRspPdu(lctrConnCtx_t *pCtx)
   uint8_t txPhy = (pCtx->reqPhy < LL_PC_PHY_CODED_S2) ? pCtx->reqPhy : LL_PHY_LE_CODED;
   int8_t txPower = LCTR_GET_TXPOWER(pCtx, txPhy, option);
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_PWR_CTRL_RSP_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_PWR_CTRL_RSP_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -463,7 +463,7 @@ static void lctrSendPowerChangePdu(lctrConnCtx_t *pCtx, uint8_t opcode, uint8_t 
 
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_PWR_CHNG_IND_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_PWR_CHNG_IND_LEN, MSG_T_EMPTY)) != NULL)
   {
     bool_t seperateIndNeeded = FALSE;
     uint8_t *pBuf = pPdu;

@@ -50,7 +50,7 @@ static void lctrSendCisTermIndPdu(lctrConnCtx_t *pCtx, uint8_t opcode, lctrCisCt
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_CIS_TERM_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_CIS_TERM_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 

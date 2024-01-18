@@ -52,7 +52,7 @@ void lctrSendPerSyncFromScan(lctrConnCtx_t *pCtx)
 
   WSF_ASSERT((pPerScanCtx->enabled == TRUE) && (pPerScanCtx->state == LCTR_PER_SCAN_STATE_SYNC_ESTD));
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_PERIODIC_SYNC_PDU_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_PERIODIC_SYNC_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
     uint8_t field8 = 0;
@@ -171,7 +171,7 @@ void lctrSendPerSyncFromBcst(lctrConnCtx_t *pCtx)
   WSF_ASSERT(pAdvSet);
   WSF_ASSERT(pAdvSet->perParam.perAdvEnabled == TRUE);
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_PERIODIC_SYNC_PDU_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_PERIODIC_SYNC_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     BbOpDesc_t * const pPerOp = &pAdvSet->perParam.perAdvBod;
     BbBleData_t *pBle = &pAdvSet->perParam.perBleData;

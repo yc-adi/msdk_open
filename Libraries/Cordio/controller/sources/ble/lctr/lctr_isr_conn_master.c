@@ -332,7 +332,7 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
   {
     uint8_t *pPdu;
 
-    if ((pPdu = lctrTxCtrlPduAlloc(LL_CONN_UPD_IND_PDU_LEN)) != NULL)
+    if ((pPdu = lctrTxCtrlPduAlloc(LL_CONN_UPD_IND_PDU_LEN, MSG_T_EMPTY)) != NULL)
     {
       pCtx->data.mst.sendConnUpdInd = FALSE;
 

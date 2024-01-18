@@ -108,6 +108,10 @@ static osThreadId_t wsfOsThreadId;
 
 OCMP_ST_t ocmpSt = OCMP_ST_INIT;
 
+uint32_t gu32EvtNdx = 0;
+
+extern uint8_t gu8Debug;
+
 /*************************************************************************************************/
 /*!
  *  \brief  Check if the WSF OS is active.
@@ -165,6 +169,10 @@ void WsfSetEvent(wsfHandlerId_t handlerId, wsfEventMask_t event)
   WSF_ASSERT(WSF_HANDLER_FROM_ID(handlerId) < WSF_MAX_HANDLERS);
 
   WSF_TRACE_INFO2("WsfSetEvent handlerId:%u event:%u", handlerId, event);
+  if (gu8Debug == 18)
+  {
+    WsfTrace("@? Evt=%03d hndId=%d evt=%d", ++gu32EvtNdx, handlerId, event);
+  }
 
   WSF_CS_ENTER(cs);
   wsfOs.task.handlerEventMask[WSF_HANDLER_FROM_ID(handlerId)] |= event;

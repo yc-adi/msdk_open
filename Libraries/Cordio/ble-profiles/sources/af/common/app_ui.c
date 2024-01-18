@@ -28,6 +28,7 @@
 #include "app_ui.h"
 
 extern OCMP_ST_t ocmpSt;
+extern uint8_t gu8Debug;
 
 /**************************************************************************************************
   Local Variables
@@ -99,10 +100,12 @@ void AppUiAction(uint8_t event)
 
     case APP_UI_CONN_OPEN:
       APP_TRACE_INFO0(">>> Connection opened <<<");
+      gu8Debug = 18;  //@?
       break;
 
     case APP_UI_CONN_CLOSE:
       APP_TRACE_INFO0(">>> Connection closed <<<");
+      gu8Debug = 0;  //@?
       break;
 
     case APP_UI_SEC_PAIR_CMPL:

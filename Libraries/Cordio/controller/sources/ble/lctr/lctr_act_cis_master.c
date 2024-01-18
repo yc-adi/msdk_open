@@ -191,7 +191,7 @@ static void lctrSendCisReq(lctrConnCtx_t *pCtx, lctrCisCtx_t *pCisCtx, uint8_t n
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_CIS_REQ_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_CIS_REQ_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -254,7 +254,7 @@ static void lctrSendCisInd(lctrConnCtx_t *pCtx, lctrCisCtx_t *pCisCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_CIS_IND_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_CIS_IND_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 

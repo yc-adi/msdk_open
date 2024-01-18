@@ -292,7 +292,7 @@ void lctrSendChanMapUpdateInd(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_CHAN_MAP_IND_PDU_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_CHAN_MAP_IND_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -353,7 +353,7 @@ void lctrSendFeatureReq(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_FEATURE_PDU_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_FEATURE_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
     uint8_t opcode = (pCtx->role == LL_ROLE_MASTER) ? LL_PDU_FEATURE_REQ : LL_PDU_SLV_FEATURE_REQ;
@@ -380,7 +380,7 @@ void lctrSendFeatureRsp(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_FEATURE_PDU_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_FEATURE_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -433,7 +433,7 @@ void lctrSendVersionInd(lctrConnCtx_t *pCtx)
   {
     pCtx->numSentVerInd++;
 
-    if ((pPdu = lctrTxCtrlPduAlloc(LL_VERSION_IND_PDU_LEN)) != NULL)
+    if ((pPdu = lctrTxCtrlPduAlloc(LL_VERSION_IND_PDU_LEN, MSG_T_EMPTY)) != NULL)
     {
       uint8_t *pBuf = pPdu;
 
@@ -515,7 +515,7 @@ void lctrSendTerminateInd(lctrConnCtx_t *pCtx)
   uint8_t *pPdu;
   uint8_t *pBuf;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_TERMINATE_IND_PDU_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_TERMINATE_IND_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     pBuf = pPdu;
 
@@ -753,7 +753,7 @@ static void lctrSendConnParamPdu(lctrConnCtx_t *pCtx, uint8_t opcode, LlConnSpec
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_CONN_PARAM_PDU_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_CONN_PARAM_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
     unsigned int i;
@@ -929,11 +929,11 @@ void lctrStoreLocalDataLength(lctrConnCtx_t *pCtx)
  *  \param      opcode  PDU opcode.
  */
 /*************************************************************************************************/
-static void lctrSendDataLengthPdu(lctrConnCtx_t *pCtx, uint8_t opcode)
+static void lctrSendDataLengthPdu(lctrConnCtx_t *pCtx, uint8_t opcode, MSG_t msgType)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_DATA_LEN_PDU_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_DATA_LEN_PDU_LEN, msgType)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -984,7 +984,7 @@ static void lctrSendDataLengthPdu(lctrConnCtx_t *pCtx, uint8_t opcode)
 /*************************************************************************************************/
 void lctrSendDataLengthReq(lctrConnCtx_t *pCtx)
 {
-  lctrSendDataLengthPdu(pCtx, LL_PDU_LENGTH_REQ);
+  lctrSendDataLengthPdu(pCtx, LL_PDU_LENGTH_REQ, MSG_T_LL_PDU_LENGTH_REQ);
 }
 
 /*************************************************************************************************/
@@ -996,7 +996,7 @@ void lctrSendDataLengthReq(lctrConnCtx_t *pCtx)
 /*************************************************************************************************/
 void lctrSendDataLengthRsp(lctrConnCtx_t *pCtx)
 {
-  lctrSendDataLengthPdu(pCtx, LL_PDU_LENGTH_RSP);
+  lctrSendDataLengthPdu(pCtx, LL_PDU_LENGTH_RSP, MSG_T_LL_PDU_LENGTH_RSP);
 }
 
 /*************************************************************************************************/
@@ -1106,7 +1106,7 @@ static void lctrSendSetMinUsedChanPdu(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_MIN_USED_CHAN_PDU_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_MIN_USED_CHAN_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -1172,7 +1172,7 @@ static void lctrSendPeerScaReqPdu(lctrConnCtx_t *pCtx, uint8_t opcode)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_PEER_SCA_REQ_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_PEER_SCA_REQ_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -1242,7 +1242,7 @@ static void lctrSendPeerScaRspPdu(lctrConnCtx_t *pCtx, uint8_t opcode)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_PEER_SCA_RSP_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_PEER_SCA_RSP_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -1327,7 +1327,7 @@ void lctrSendUnknownRsp(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_UNKNOWN_RSP_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_UNKNOWN_RSP_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -1362,7 +1362,7 @@ void lctrSendRejectInd(lctrConnCtx_t *pCtx, uint8_t reason, bool_t forceRejectEx
 
   if (rejectExtInd)
   {
-    if ((pPdu = lctrTxCtrlPduAlloc(LL_REJECT_EXT_IND_PDU_LEN)) != NULL)
+    if ((pPdu = lctrTxCtrlPduAlloc(LL_REJECT_EXT_IND_PDU_LEN, MSG_T_EMPTY)) != NULL)
     {
       uint8_t *pBuf = pPdu;
 
@@ -1379,7 +1379,7 @@ void lctrSendRejectInd(lctrConnCtx_t *pCtx, uint8_t reason, bool_t forceRejectEx
   }
   else
   {
-    if ((pPdu = lctrTxCtrlPduAlloc(LL_REJECT_IND_PDU_LEN)) != NULL)
+    if ((pPdu = lctrTxCtrlPduAlloc(LL_REJECT_IND_PDU_LEN, MSG_T_EMPTY)) != NULL)
     {
       uint8_t *pBuf = pPdu;
 

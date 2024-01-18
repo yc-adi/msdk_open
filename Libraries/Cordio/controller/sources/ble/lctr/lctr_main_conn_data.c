@@ -686,11 +686,11 @@ static uint8_t lctrAssembleCtrlPdu(uint8_t *pBuf, uint8_t len)
  *  \return Pointer to the start of the PDU data buffer.
  */
 /*************************************************************************************************/
-uint8_t *lctrTxCtrlPduAlloc(uint8_t pduLen)
+uint8_t *lctrTxCtrlPduAlloc(uint8_t pduLen, MSG_t msgType)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = WsfMsgAlloc(LCTR_DATA_TX_PDU_START_OFFSET + LCTR_DATA_PDU_LEN(pduLen), MSG_T_EMPTY)) != NULL)
+  if ((pPdu = WsfMsgAlloc(LCTR_DATA_TX_PDU_START_OFFSET + LCTR_DATA_PDU_LEN(pduLen), msgType)) != NULL)
   {
     pPdu += LCTR_DATA_TX_PDU_START_OFFSET;
     pPdu += lctrAssembleCtrlPdu(pPdu, pduLen);
@@ -950,7 +950,7 @@ void lctrRxEnq(uint8_t *pBuf, uint16_t eventCounter, uint16_t connHandle)
   UINT16_TO_BUF(pBuf, eventCounter);
 
   /* Queue LE Data PDU. */
-  //PRINT_BLE_RX_BUFF(pBuf[2], pBuf[3]);
+  PRINT_BLE_RX_BUFF(pBuf[2], pBuf[3]);
   gu32DbgCharBufNdx += sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "R: ");
   for (uint32_t i = 0; i < pBuf[3] && gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 4; ++i)
   {

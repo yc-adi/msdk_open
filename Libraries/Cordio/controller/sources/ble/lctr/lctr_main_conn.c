@@ -1261,8 +1261,18 @@ bool_t LctrIsWaitingForReply(uint16_t handle, uint8_t reply)
 void lctrSendConnMsg(lctrConnCtx_t *pCtx, uint8_t event)
 {
   lctrMsgHdr_t *pMsg;
+  MSG_t msgType = MSG_T_EMPTY;
 
-  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t), MSG_T_EMPTY)) != NULL)
+  switch(event)
+  {
+    case LCTR_CONN_LLCP_PROC_CMPL:
+      msgType = MSG_T_LCTR_CONN_LLCP_PROC_CMPL;
+      break;
+    default:
+      break;
+  }
+
+  if ((pMsg = WsfMsgAlloc(sizeof(lctrMsgHdr_t), msgType)) != NULL)
   {
     pMsg->handle = LCTR_GET_CONN_HANDLE(pCtx);
     pMsg->dispId = LCTR_DISP_CONN;

@@ -103,7 +103,7 @@ static void lctrSendPhyPdu(lctrConnCtx_t *pCtx, uint8_t opcode, uint8_t txPhys, 
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_PHY_PDU_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_PHY_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -168,7 +168,7 @@ void lctrSendPhyUpdateIndPdu(lctrConnCtx_t *pCtx, uint8_t txPhys, uint8_t rxPhys
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_PHY_UPD_IND_PDU_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_PHY_UPD_IND_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 

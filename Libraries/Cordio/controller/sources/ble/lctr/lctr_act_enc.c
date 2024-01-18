@@ -212,7 +212,7 @@ void lctrSendEncRsp(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_ENC_RSP_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_ENC_RSP_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -242,7 +242,7 @@ void lctrSendStartEncReq(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_START_ENC_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_START_ENC_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -267,7 +267,7 @@ void lctrSendStartEncRsp(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_START_ENC_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_START_ENC_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -292,7 +292,7 @@ void lctrSendPauseEncReq(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_PAUSE_ENC_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_PAUSE_ENC_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -317,7 +317,7 @@ void lctrSendPauseEncRsp(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_PAUSE_ENC_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_PAUSE_ENC_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -342,7 +342,7 @@ void lctrSendPingReq(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_PING_PDU_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_PING_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 
@@ -367,7 +367,7 @@ void lctrSendPingRsp(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_PING_PDU_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_PING_PDU_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 

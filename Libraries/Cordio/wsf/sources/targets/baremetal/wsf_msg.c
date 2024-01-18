@@ -32,6 +32,7 @@
 #include "wsf_os.h"
 
 uint8_t gu8Debug = 0;
+uint32_t gu32MsgEnqNdx=0;
 
 /**************************************************************************************************
   Data Types
@@ -139,6 +140,17 @@ void WsfMsgEnq(wsfQueue_t *pQueue, wsfHandlerId_t handlerId, void *pMsg)
   /* set handler ID */
   p->handlerId = handlerId;
 
+  if (gu8Debug == 18)
+  {
+    gu32MsgEnqNdx++;
+    WsfTrace("@? Enq=%03d msgType=%d", gu32MsgEnqNdx, p->msgType);
+    if (p->msgType == 36)
+    {
+      __asm("nop");
+      __asm("nop");
+    }
+  }
+
   WsfQueueEnq(pQueue, p);
 }
 
@@ -166,7 +178,7 @@ void *WsfMsgDeq(wsfQueue_t *pQueue, wsfHandlerId_t *pHandlerId)
       __asm("nop");
     }
 
-    if (gu8Debug == 3 && pMsg->msgType == MSG_T_LCTR_INIT_MSG_INITIATE)
+    if (pMsg->msgType == MSG_T_LCTR_CONN_LLCP_PROC_CMPL)
     {
       __asm("nop");
       __asm("nop");

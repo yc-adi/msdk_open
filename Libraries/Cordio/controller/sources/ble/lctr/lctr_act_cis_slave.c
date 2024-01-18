@@ -101,7 +101,7 @@ static void lctrSendCisRspPdu(lctrConnCtx_t *pCtx, uint8_t opcode)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_CIS_RSP_LEN)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_CIS_RSP_LEN, MSG_T_EMPTY)) != NULL)
   {
     uint8_t *pBuf = pPdu;
     uint32_t cisOffMinUsec = lctrDataPdu.pld.cisReq.cisOffMinUsec;

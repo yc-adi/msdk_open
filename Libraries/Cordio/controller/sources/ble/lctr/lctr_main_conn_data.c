@@ -593,7 +593,10 @@ void lctrTxDataPduQueue(lctrConnCtx_t *pCtx, uint16_t fragLen, lctrAclHdr_t *pAc
     fragCnt++;
   }
 #endif
-
+  wsfMsg_t *p;
+  /* get message header */
+  p = ((wsfMsg_t *) pDesc) - 1;
+  p->msgType = 88;
   WsfMsgEnq(&pCtx->txArqQ, pAclHdr->connHandle, (uint8_t *)pDesc);
 
   lctrCheckAbortSlvLatency(pCtx);
@@ -910,7 +913,7 @@ uint8_t *lctrRxPduAlloc(uint16_t maxRxLen)
   uint8_t *pBuf;
 
   /* Include ACL header headroom. */
-  if ((pBuf = WsfMsgAlloc(HCI_ACL_HDR_LEN + allocLen, MSG_T_EMPTY)) != NULL)
+  if ((pBuf = WsfMsgAlloc(HCI_ACL_HDR_LEN + allocLen, MSG_T_LCTR_RX_PDU)) != NULL)
   {
     /* Return start of data PDU. */
     pBuf += LCTR_DATA_PDU_START_OFFSET;
@@ -951,6 +954,13 @@ void lctrRxEnq(uint8_t *pBuf, uint16_t eventCounter, uint16_t connHandle)
 
   /* Queue LE Data PDU. */
   PRINT_BLE_RX_BUFF(pBuf[2], pBuf[3]);
+  //@?
+  if (pBuf[4] == 0x15)
+  {
+    __asm("nop");
+    __asm("nop");
+  }
+  
   gu32DbgCharBufNdx += sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "R: ");
   for (uint32_t i = 0; i < pBuf[3] && gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 4; ++i)
   {

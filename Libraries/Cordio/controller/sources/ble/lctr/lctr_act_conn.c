@@ -352,8 +352,8 @@ void lctrStoreChanMap(lctrConnCtx_t *pCtx)
 void lctrSendFeatureReq(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
-
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_FEATURE_PDU_LEN, MSG_T_EMPTY)) != NULL)
+  MSG_t msgType = (pCtx->role == LL_ROLE_MASTER) ? MSG_T_LL_PDU_FEATURE_REQ : MSG_T_LL_PDU_SLV_FEATURE_REQ;
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_FEATURE_PDU_LEN, msgType)) != NULL)
   {
     uint8_t *pBuf = pPdu;
     uint8_t opcode = (pCtx->role == LL_ROLE_MASTER) ? LL_PDU_FEATURE_REQ : LL_PDU_SLV_FEATURE_REQ;
@@ -380,7 +380,7 @@ void lctrSendFeatureRsp(lctrConnCtx_t *pCtx)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = lctrTxCtrlPduAlloc(LL_FEATURE_PDU_LEN, MSG_T_EMPTY)) != NULL)
+  if ((pPdu = lctrTxCtrlPduAlloc(LL_FEATURE_PDU_LEN, MSG_T_LCTR_TX_FEAT_RSP)) != NULL)
   {
     uint8_t *pBuf = pPdu;
 

@@ -190,6 +190,7 @@ void lctrSlvConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
       break;
 
     case LCTR_CONN_STATE_TERMINATING:
+      WsfTrace("@? LCTR_CONN_STATE_TERMINATING reason=%d", pCtx->termReason);
       switch (event)
       {
         case LCTR_CONN_TMR_LLCP_RSP_EXP:

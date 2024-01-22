@@ -124,7 +124,7 @@ void DmAdvConfig(uint8_t advHandle, uint8_t advType, uint8_t peerAddrType, uint8
 
   WSF_ASSERT(advHandle < DM_NUM_ADV_SETS);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiConfig_t), MSG_T_EMPTY)) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiConfig_t), MSG_T_DM_ADV_CONFIG)) != NULL)
   {
     pMsg->hdr.event = DM_ADV_MSG_API_CONFIG;
     pMsg->advType = advType;
@@ -186,7 +186,7 @@ void DmAdvStart(uint8_t numSets, uint8_t *pAdvHandles, uint16_t *pDuration, uint
 
   WSF_ASSERT(numSets <= DM_NUM_ADV_SETS);
 
-  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiStart_t), MSG_T_EMPTY)) != NULL)
+  if ((pMsg = WsfMsgAlloc(sizeof(dmAdvApiStart_t), MSG_T_DM_ADV_START)) != NULL)
   {
     pMsg->hdr.event = DM_ADV_MSG_API_START;
     pMsg->numSets = numSets;

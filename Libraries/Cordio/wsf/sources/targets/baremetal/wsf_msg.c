@@ -38,13 +38,7 @@ uint32_t gu32MsgEnqNdx=0;
   Data Types
 **************************************************************************************************/
 
-/* Internal message buf structure */
-typedef struct wsfMsg_tag
-{
-  struct wsfMsg_tag   *pNext;
-  wsfHandlerId_t      handlerId;
-  MSG_t               msgType;
-} wsfMsg_t;
+
 
 /*************************************************************************************************/
 /*!
@@ -144,7 +138,7 @@ void WsfMsgEnq(wsfQueue_t *pQueue, wsfHandlerId_t handlerId, void *pMsg)
   {
     gu32MsgEnqNdx++;
     WsfTrace("@? Enq=%03d msgType=%d", gu32MsgEnqNdx, p->msgType);
-    if (p->msgType == 36)
+    if (p->msgType == 0)
     {
       __asm("nop");
       __asm("nop");

@@ -155,20 +155,24 @@ bool_t hciCoreEvtProcessLlEvt(LlEvt_t *pEvt)
   LlEvt_t *pMsg;
   size_t  msgLen = hciCoreSizeOfEvt(pEvt->hdr.event);
   size_t  reportLen;
+  MSG_t msgType = MSG_T_HCI_CORE_EVT_PROC_LL_EVT;
 
   /* find out report length */
   switch (pEvt->hdr.event)
   {
   case LL_ADV_REPORT_IND:
     reportLen = pEvt->advReportInd.len;
+    msgType = MSG_T_LL_ADV_REPORT_IND;
     break;
 
   case LL_EXT_ADV_REPORT_IND:
     reportLen = pEvt->extAdvReportInd.len;
+    msgType = MSG_T_LL_EXT_ADV_REPORT_IND;
     break;
 
   case LL_PER_ADV_REPORT_IND:
     reportLen = pEvt->perAdvReportInd.len;
+    msgType = MSG_T_LL_PER_ADV_REPORT_IND;
     break;
 
   default:
@@ -176,7 +180,7 @@ bool_t hciCoreEvtProcessLlEvt(LlEvt_t *pEvt)
     break;
   }
 
-  if ((pMsg = WsfMsgAlloc(msgLen + reportLen, MSG_T_EMPTY)) != NULL)
+  if ((pMsg = WsfMsgAlloc(msgLen + reportLen, msgType)) != NULL)
   {
     /* copy event to message buffer */
     memcpy(pMsg, pEvt, msgLen);

@@ -365,7 +365,7 @@ static void datsDmCback(dmEvt_t *pDmEvt)
     } else {
         len = DmSizeOfEvt(pDmEvt);
 
-        if ((pMsg = WsfMsgAlloc(len, MSG_T_EMPTY)) != NULL) {
+        if ((pMsg = WsfMsgAlloc(len, MSG_T_DATS_DM_CB)) != NULL) {
             memcpy(pMsg, pDmEvt, len);
             WsfMsgSend(datsCb.handlerId, pMsg);
         }
@@ -385,7 +385,7 @@ static void datsAttCback(attEvt_t *pEvt)
 {
     attEvt_t *pMsg;
 
-    if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen, MSG_T_EMPTY)) != NULL) {
+    if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen, MSG_T_DATS_ATT_CB)) != NULL) {
         memcpy(pMsg, pEvt, sizeof(attEvt_t));
         pMsg->pValue = (uint8_t *)(pMsg + 1);
         memcpy(pMsg->pValue, pEvt->pValue, pEvt->valueLen);

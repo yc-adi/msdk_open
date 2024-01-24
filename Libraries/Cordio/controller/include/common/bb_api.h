@@ -165,6 +165,27 @@ typedef struct BbOpDesc_tag
   void          *pCtx;              /*!< Client defined context. */
   uint16_t      *pDataLen;          /*!< Pointer to client data length. */
 
+  uint8_t       bodType;            /*!< BOD type
+                                     1  lctrMstConnBuildOp
+                                     2  lctrMstDiscoverBuildOp
+                                     3  lctrMstExtDiscoverBuildOp                                        
+                                     4  lctrMstAuxDiscoverBuildOp
+                                     5  lctrMstPerScanBuildOp
+                                     6  lctrMstInitiateBuildOp
+                                     7  lctrMstExtInitiateBuildOp
+                                     8  lctrMstAuxInitiateBuildOp
+                                     9  lctrMstBigBuildOp
+                                     10 lctrSlvAdvBuildOp
+                                     11 lctrSlvExtAdvBuildOp
+                                     12 lctrSlvPeriodicAdvBuildOp
+                                     13 lctrSlvConnBuildOp
+                                     14 lctrSlvBigBuildOp
+                                     15 lctrSlvAuxScanBuildOp
+                                     16 lctrSlvAuxNonConnNonScanBuildOp
+                                     17 lctrSlvAuxConnBuildOp
+                                        
+                                     */
+
   union
   {
     struct BbBleData_tag *pBle;     /*!< BLE operation data. */

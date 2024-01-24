@@ -60,6 +60,7 @@
 
 extern uint32_t __pal_nvm_db_start__, __pal_nvm_db_end__;
 
+extern void PalSysAssertTrap(void);
 
 /**************************************************************************************************
   Functions: Initialization

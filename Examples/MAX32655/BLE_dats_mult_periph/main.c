@@ -1,26 +1,24 @@
 /*************************************************************************************************/
 /*!
  * @file    main.c
- * @brief   Simple BLE Data Client for unformatted data exchange.
- *
- *  Copyright (c) 2013-2019 Arm Ltd. All Rights Reserved.
- *
- *  Copyright (c) 2019 Packetcraft, Inc.
- *
- *  Portions Copyright (c) 2022-2023 Analog Devices, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
+ * @brief   Simple BLE Data Server for unformatted data exchange.
+*
+*  Copyright (c) 2013-2019 Arm Ltd. All Rights Reserved.
+*
+*  Copyright (c) 2019 Packetcraft, Inc.
+*
+*  Licensed under the Apache License, Version 2.0 (the "License");
+*  you may not use this file except in compliance with the License.
+*  You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+*  Unless required by applicable law or agreed to in writing, software
+*  distributed under the License is distributed on an "AS IS" BASIS,
+*  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*  See the License for the specific language governing permissions and
+*  limitations under the License.
+*/
 /*************************************************************************************************/
 
 #include <string.h>
@@ -57,10 +55,8 @@
 
 #include "pal_bb.h"
 #include "pal_cfg.h"
-#include "pal_timer.h"
-#include "pal_sys.h"
 
-#include "datc_api.h"
+#include "dats_api.h"
 #include "app_ui.h"
 
 /**************************************************************************************************
@@ -89,7 +85,7 @@ volatile int wutTrimComplete;
 **************************************************************************************************/
 
 /*! \brief  Stack initialization for app. */
-extern void StackInitDatc(void);
+extern void StackInitDats(void);
 
 /*************************************************************************************************/
 /*!
@@ -134,7 +130,7 @@ static void mainWsfInit(void)
 /*!
 *  \fn     WUT_IRQHandler
 *
-*  \brief  WUT interrupt handler.
+*  \brief  WUY interrupt handler.
 *
 *  \return None.
 */
@@ -157,7 +153,7 @@ void WUT_IRQHandler(void)
 /*************************************************************************************************/
 void wutTrimCb(int err)
 {
-    /* //@? 
+    /* //@?
     if (err != E_NO_ERROR) {
         APP_TRACE_INFO1("32 kHz trim error %d\n", err);
     } else {
@@ -210,9 +206,6 @@ int main(void)
     PalCfgLoadData(PAL_CFG_ID_BLE_PHY, &mainLlRtCfg.phy2mSup, 4);
 #endif
 
-    //! change maxConn
-    mainLlRtCfg.maxConn = DM_CONN_MAX;
-
     /* Set the 32k sleep clock accuracy into one of the following bins, default is 20
       HCI_CLOCK_500PPM
       HCI_CLOCK_250PPM
@@ -224,11 +217,6 @@ int main(void)
       HCI_CLOCK_20PPM
     */
     mainBbRtCfg.clkPpm = 20;
-
-    /* Increase the default ACL buffer size and count */
-    mainLlRtCfg.numTxBufs = 8;
-    mainLlRtCfg.numRxBufs = 8;
-    mainLlRtCfg.maxAclLen = 256;
 
     /* Set the default connection power level */
     mainLlRtCfg.defTxPwrLvl = DEFAULT_TX_POWER;
@@ -244,6 +232,7 @@ int main(void)
     AppTerminalInit();
 
 #if defined(HCI_TR_EXACTLE) && (HCI_TR_EXACTLE == 1)
+
     WsfCsEnter();
     LlInitRtCfg_t llCfg = { .pBbRtCfg = &mainBbRtCfg,
                             .wlSizeCfg = 4,
@@ -259,7 +248,6 @@ int main(void)
 
     bdAddr_t bdAddr;
     PalCfgLoadData(PAL_CFG_ID_BD_ADDR, bdAddr, sizeof(bdAddr_t));
-    bdAddr[0] = 8;  //@? Y8
     LlSetBdAddr((uint8_t *)&bdAddr);
 
     /* Start the 32 MHz crystal and the BLE DBB counter to trim the 32 kHz crystal */
@@ -277,8 +265,8 @@ int main(void)
     PalBbDisable();
 #endif
 
-    StackInitDatc();
-    DatcStart();
+    StackInitDats();
+    DatsStart();
 
     WsfOsEnterMainLoop();
 

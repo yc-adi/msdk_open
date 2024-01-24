@@ -221,7 +221,7 @@ uint8_t LlSetScanRespData(uint8_t len, const uint8_t *pData)
   WSF_CS_INIT(cs);
 
   LL_TRACE_INFO1("### LlApi ###  LlSetScanRespData, len=%u", len);
-
+  
   if ((LL_API_PARAM_CHECK == 1) &&
       !LmgrIsLegacyCommandAllowed())
   {

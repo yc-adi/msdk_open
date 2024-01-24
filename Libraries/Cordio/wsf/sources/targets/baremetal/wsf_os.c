@@ -106,6 +106,12 @@ wsfHandlerId_t WsfActiveHandler;
 static osThreadId_t wsfOsThreadId;
 #endif
 
+OCMP_ST_t ocmpSt = OCMP_ST_INIT;
+
+uint32_t gu32EvtNdx = 0;
+
+extern uint8_t gu8Debug;
+
 /*************************************************************************************************/
 /*!
  *  \brief  Check if the WSF OS is active.

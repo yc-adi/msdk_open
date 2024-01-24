@@ -155,12 +155,14 @@ void WUT_IRQHandler(void)
 /*************************************************************************************************/
 void wutTrimCb(int err)
 {
+    /* //@?
     if (err != E_NO_ERROR) {
         APP_TRACE_INFO1("32 kHz trim error %d\n", err);
     } else {
         APP_TRACE_INFO1("32kHz trimmed to 0x%x", (MXC_TRIMSIR->rtc & MXC_F_TRIMSIR_RTC_X1TRIM) >>
                                                      MXC_F_TRIMSIR_RTC_X1TRIM_POS);
     }
+    */
     wutTrimComplete = 1;
 }
 

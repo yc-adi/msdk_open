@@ -33,6 +33,8 @@
 extern "C" {
 #endif
 
+#define DBG_CHAR_BUF_SIZE  1024
+
 /**************************************************************************************************
   Constants
 **************************************************************************************************/
@@ -76,6 +78,7 @@ bool_t SchInsertLateAsPossible(BbOpDesc_t *pBod, uint32_t min, uint32_t max);
 bool_t SchRemove(BbOpDesc_t *pBod);
 void SchReload(BbOpDesc_t *pBod);
 bool_t SchIsBodCancellable(BbOpDesc_t *pBod);
+void SchPrintBod(void);
 
 #ifdef __cplusplus
 };

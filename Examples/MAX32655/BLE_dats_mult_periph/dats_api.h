@@ -2,13 +2,11 @@
 /*!
  *  \file
  *
- *  \brief  Proprietary data transfer client sample application.
+ *  \brief  Proprietary data transfer server sample application.
  *
  *  Copyright (c) 2012-2018 Arm Ltd. All Rights Reserved.
  *
  *  Copyright (c) 2019 Packetcraft, Inc.
- *
- *  Portions Copyright (c) 2022-2023 Analog Devices, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -23,9 +21,8 @@
  *  limitations under the License.
  */
 /*************************************************************************************************/
-
-#ifndef EXAMPLES_MAX32655_BLUETOOTH_BLE_DATC_DATC_API_H_
-#define EXAMPLES_MAX32655_BLUETOOTH_BLE_DATC_DATC_API_H_
+#ifndef EXAMPLES_MAX32655_BLE_DATS_DATS_API_H_
+#define EXAMPLES_MAX32655_BLE_DATS_DATS_API_H_
 
 #include "wsf_os.h"
 
@@ -43,7 +40,7 @@ extern "C" {
  *  \return None.
  */
 /*************************************************************************************************/
-void DatcStart(void);
+void DatsStart(void);
 
 /*************************************************************************************************/
 /*!
@@ -54,7 +51,7 @@ void DatcStart(void);
  *  \return None.
  */
 /*************************************************************************************************/
-void DatcHandlerInit(wsfHandlerId_t handlerId);
+void DatsHandlerInit(wsfHandlerId_t handlerId);
 
 /*************************************************************************************************/
 /*!
@@ -66,12 +63,10 @@ void DatcHandlerInit(wsfHandlerId_t handlerId);
  *  \return None.
  */
 /*************************************************************************************************/
-void DatcHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg);
+void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg);
 
-void ShowConns(void);
- 
 #ifdef __cplusplus
 };
 #endif
 
-#endif // EXAMPLES_MAX32655_BLUETOOTH_BLE_DATC_DATC_API_H_
+#endif // EXAMPLES_MAX32655_BLE_DATS_DATS_API_H_

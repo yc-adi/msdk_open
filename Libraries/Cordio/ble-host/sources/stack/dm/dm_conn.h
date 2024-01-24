@@ -25,6 +25,7 @@
 #define DM_CONN_H
 
 #include "dm_api.h"
+#include "dm_main.h"
 
 #ifdef __cplusplus
 extern "C" {

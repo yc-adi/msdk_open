@@ -8,8 +8,6 @@
  *
  *  Copyright (c) 2019-2020 Packetcraft, Inc.
  *
- *  Portions Copyright (c) 2022-2023 Analog Devices, Inc.
- *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
@@ -398,13 +396,12 @@ static void datcDmCback(dmEvt_t *pDmEvt)
             reportLen = 0;
         }
 
-        /* @?
         MSG_t msgType = MSG_T_EMPTY;
         if (pDmEvt->hdr.event == DM_SCAN_REPORT_IND) {
             msgType = MSG_T_DM_SCAN_REPORT_IND;
         }
-        */
-        if ((pMsg = WsfMsgAlloc(len + reportLen)) != NULL) {
+
+        if ((pMsg = WsfMsgAlloc(len + reportLen, msgType)) != NULL) {
             memcpy(pMsg, pDmEvt, len);
             if (pDmEvt->hdr.event == DM_SCAN_REPORT_IND) {
                 pMsg->scanReport.pData = (uint8_t *)((uint8_t *)pMsg + len);
@@ -428,7 +425,7 @@ static void datcAttCback(attEvt_t *pEvt)
 {
     attEvt_t *pMsg;
 
-    if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen)) != NULL) {
+    if ((pMsg = WsfMsgAlloc(sizeof(attEvt_t) + pEvt->valueLen, MSG_T_EMPTY)) != NULL) {
         memcpy(pMsg, pEvt, sizeof(attEvt_t));
         pMsg->pValue = (uint8_t *)(pMsg + 1);
         memcpy(pMsg->pValue, pEvt->pValue, pEvt->valueLen);
@@ -616,12 +613,11 @@ static void datcScanReport(dmEvt_t *pMsg)
     pData = DmFindAdType(DM_ADV_TYPE_LOCAL_NAME, pMsg->scanReport.len, pMsg->scanReport.pData);
     if (pData != NULL) {
         if (!connected) {
-        /* check length and device name */
-        if (pData[DM_AD_LEN_IDX] >= 4 && (pData[DM_AD_DATA_IDX] == 'D') &&
-            (pData[DM_AD_DATA_IDX + 1] == 'A') && (pData[DM_AD_DATA_IDX + 2] == 'T') &&
-            (pData[DM_AD_DATA_IDX + 3] == 'S')) {
+            /* check length and device name */
+            if (pData[DM_AD_LEN_IDX] >= 4 && (pData[DM_AD_DATA_IDX] == 'D') &&
+                (pData[DM_AD_DATA_IDX + 1] == 'A') && (pData[DM_AD_DATA_IDX + 2] == 'T') &&
+                (pData[DM_AD_DATA_IDX + 3] == 'S')) {
                 need_to_connect = TRUE;
-                WsfTrace("find one");
             }
         } else {
             WsfTrace("already connected");
@@ -1018,7 +1014,7 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         }
 
         else if (strcmp(argv[1], "show_scan_report_on") == 0) {
-            datcCb.showScanReport = TRUE;
+            //@? datcCb.showScanReport = TRUE;
             TerminalTxPrint("start to show scan report\r\n");
         } 
         else if (strcmp(argv[1], "show_scan_report_off") == 0) {
@@ -1489,7 +1485,6 @@ void DatcHandlerInit(wsfHandlerId_t handlerId)
     uint8_t addr[6] = { 0 };
 
     AppGetBdAddr(addr);
-    addr[0] = 8;  //@?
     APP_TRACE_INFO6("MAC Addr: %02x:%02x:%02x:%02x:%02x:%02x", addr[5], addr[4], addr[3], addr[2],
                     addr[1], addr[0]);
 

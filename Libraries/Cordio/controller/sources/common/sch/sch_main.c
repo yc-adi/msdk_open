@@ -47,6 +47,21 @@ enum
 
 /*! \brief      Scheduler control block. */
 SchCtrlBlk_t schCb;
+extern uint8_t gu8Debug;
+
+uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];  
+uint32_t gu32DbgCharBufNdx = 0;
+
+/*************************************************************************************************/
+/*!
+ *  \brief      Display debug buffer contents.
+ *  \param len  length of the data to show
+ */
+/*************************************************************************************************/
+void PrintDbgBuf(uint32_t len)
+{
+  APP_TRACE_INFO1("%s", gu8DbgCharBuf);
+}
 
 /*************************************************************************************************/
 /*!

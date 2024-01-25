@@ -40,8 +40,8 @@
  */
 /*************************************************************************************************/
 
-#ifndef EXAMPLES_MAX32655_BLE_DATS_SERVICES_SVC_SDS_H_
-#define EXAMPLES_MAX32655_BLE_DATS_SERVICES_SVC_SDS_H_
+#ifndef EXAMPLES_MAX32655_BLUETOOTH_MULT_PERIPH_BLE_DATS_MULT_PERIPH_SERVICES_SVC_SDS_H_
+#define EXAMPLES_MAX32655_BLUETOOTH_MULT_PERIPH_BLE_DATS_MULT_PERIPH_SERVICES_SVC_SDS_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -117,4 +117,4 @@ void SvcSecDataCbackRegister(attsReadCback_t readCback, attsWriteCback_t writeCb
 };
 #endif
 
-#endif // EXAMPLES_MAX32655_BLE_DATS_SERVICES_SVC_SDS_H_
+#endif // EXAMPLES_MAX32655_BLUETOOTH_MULT_PERIPH_BLE_DATS_MULT_PERIPH_SERVICES_SVC_SDS_H_

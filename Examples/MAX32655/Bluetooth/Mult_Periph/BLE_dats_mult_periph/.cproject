@@ -74,12 +74,12 @@
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="BLE_dats.null.923778415" name="BLE_dats"/>
+		<project id="BLE_dats_mult_periph.null.923778415" name="BLE_dats_mult_periph"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Default">
-			<resource resourceType="PROJECT" workspacePath="/BLE_dats"/>
+			<resource resourceType="PROJECT" workspacePath="/BLE_dats_mult_periph"/>
 		</configuration>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>

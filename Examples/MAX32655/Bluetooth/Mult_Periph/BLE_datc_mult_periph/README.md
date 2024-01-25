@@ -1,4 +1,4 @@
-# BLE_datc
+# BLE_datc_mult_periph
 
 Refer to the [BLE_datc_dats](../../../Libraries/Cordio/docs/Applications/BLE_datc_dats.md) documentation in the Cordio Library.
 

@@ -99,7 +99,7 @@ void AppUiAction(uint8_t event)
       break;
 
     case APP_UI_CONN_OPEN:
-      APP_TRACE_INFO0(">>> Connection opened <<<");
+      APP_TRACE_INFO0(">>> Connection opened <<< 18 @?");
       gu8Debug = 18;  //@?
       break;
 

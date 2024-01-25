@@ -304,6 +304,7 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
       BbBleTxData(&bbDesc[0], bbDescCnt);
       numTxBytes = LL_DATA_HDR_LEN + bbDesc[0].pBuf[LCTR_DATA_PDU_LEN_OFFSET];
       //PRINT_BUF(TX, bbDesc[0].pBuf, bbDesc[0].len);
+      /*@?
       gu32DbgCharBufNdx += sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "T: ");
       for (uint32_t i = 0; i < bbDesc[0].len && gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 4; ++i)
       {
@@ -315,6 +316,7 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
         gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\n';
       }
       gu8DbgCharBuf[DBG_CHAR_BUF_SIZE - 1] = 0;
+      */
     }
     else
     {

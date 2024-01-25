@@ -23,6 +23,7 @@
 /*************************************************************************************************/
 
 #include <string.h>
+#include "sch_api.h"
 #include "wsf_types.h"
 #include "wsf_msg.h"
 #include "wsf_assert.h"
@@ -33,6 +34,8 @@
 
 uint8_t gu8Debug = 0;
 uint32_t gu32MsgEnqNdx=0;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
 
 /**************************************************************************************************
   Data Types
@@ -137,12 +140,17 @@ void WsfMsgEnq(wsfQueue_t *pQueue, wsfHandlerId_t handlerId, void *pMsg)
   if (gu8Debug == 18)
   {
     gu32MsgEnqNdx++;
-    WsfTrace("@? Enq=%03d msgType=%d", gu32MsgEnqNdx, p->msgType);
-    if (p->msgType == 0)
+    //WsfTrace("@? Enq=%03d msgType=%d", gu32MsgEnqNdx, p->msgType);
+    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
-      __asm("nop");
-      __asm("nop");
+      gu32DbgCharBufNdx += sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "Enq=%d msgType=%d", gu32MsgEnqNdx, p->msgType);
     }
+    if (gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 2)
+    {
+      gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\r';
+      gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\n';
+    }
+    gu8DbgCharBuf[DBG_CHAR_BUF_SIZE - 1] = 0;
   }
 
   WsfQueueEnq(pQueue, p);
@@ -165,18 +173,6 @@ void *WsfMsgDeq(wsfQueue_t *pQueue, wsfHandlerId_t *pHandlerId)
   if ((pMsg = WsfQueueDeq(pQueue)) != NULL)
   {
     *pHandlerId = pMsg->handlerId;
-
-    if (gu8Debug == 3 && pMsg->msgType == MSG_T_DM_CONN_MSG_API_OPEN)
-    {
-      __asm("nop");
-      __asm("nop");
-    }
-
-    if (pMsg->msgType == MSG_T_LCTR_CONN_LLCP_PROC_CMPL)
-    {
-      __asm("nop");
-      __asm("nop");
-    }
 
     /* hide header */
     pMsg++;

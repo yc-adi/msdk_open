@@ -954,13 +954,7 @@ void lctrRxEnq(uint8_t *pBuf, uint16_t eventCounter, uint16_t connHandle)
 
   /* Queue LE Data PDU. */
   PRINT_BLE_RX_BUFF(pBuf[2], pBuf[3]);
-  //@?
-  if (pBuf[4] == 0x15)
-  {
-    __asm("nop");
-    __asm("nop");
-  }
-  
+  /*@?
   gu32DbgCharBufNdx += sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "R: ");
   for (uint32_t i = 0; i < pBuf[3] && gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 4; ++i)
   {
@@ -972,7 +966,7 @@ void lctrRxEnq(uint8_t *pBuf, uint16_t eventCounter, uint16_t connHandle)
     gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\n';
   }
   gu8DbgCharBuf[DBG_CHAR_BUF_SIZE - 1] = 0;
-
+  */
   WsfMsgEnq(&lmgrConnCb.rxDataQ, connHandle, pBuf);
   WsfSetEvent(lmgrPersistCb.handlerId, (1 << LCTR_EVENT_RX_PENDING));
 }

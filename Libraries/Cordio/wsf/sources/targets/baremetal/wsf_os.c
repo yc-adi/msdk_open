@@ -26,6 +26,7 @@
 #include <intrinsics.h>
 #endif
 #include <string.h>
+#include "sch_api.h"
 #include "wsf_types.h"
 #include "wsf_os.h"
 #include "wsf_assert.h"
@@ -111,6 +112,8 @@ OCMP_ST_t ocmpSt = OCMP_ST_INIT;
 uint32_t gu32EvtNdx = 0;
 
 extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
 
 /*************************************************************************************************/
 /*!
@@ -171,7 +174,12 @@ void WsfSetEvent(wsfHandlerId_t handlerId, wsfEventMask_t event)
   WSF_TRACE_INFO2("WsfSetEvent handlerId:%u event:%u", handlerId, event);
   if (gu8Debug == 18)
   {
-    WsfTrace("@? Evt=%03d hndId=%d evt=%d", ++gu32EvtNdx, handlerId, event);
+    //WsfTrace("@? Evt=%03d hndId=%d evt=%d", ++gu32EvtNdx, handlerId, event);
+    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+    {
+      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "Evt=%d hndId=%d evt=%d\n", ++gu32EvtNdx, handlerId, event);
+    }
+    gu8DbgCharBuf[DBG_CHAR_BUF_SIZE - 1] = 0;
   }
 
   WSF_CS_ENTER(cs);

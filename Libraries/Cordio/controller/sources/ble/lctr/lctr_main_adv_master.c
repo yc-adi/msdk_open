@@ -44,7 +44,6 @@
 lctrMstScanCtx_t lctrMstScan;
 
 extern uint8_t appCodedPhyDemo;
-extern uint8_t gu8Debug;
 
 /*************************************************************************************************/
 /*!

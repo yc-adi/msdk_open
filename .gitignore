@@ -1,6 +1,7 @@
 Examples/*/*/build
 Examples/*/*/buildrv
 Examples/*/*/*/build
+Examples/*/*/*/*/build
 Examples/*/*/*/buildrv
 .vscode/settings.json
 Libraries/PeriphDrivers/Documentation/MAX*

@@ -48,6 +48,7 @@ enum
 /*! \brief      Scheduler control block. */
 SchCtrlBlk_t schCb;
 
+extern uint8_t gu8Debug;
 uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];  
 uint32_t gu32DbgCharBufNdx = 0;
 
@@ -203,6 +204,7 @@ static void schBodLoadHandler(void)
 /*************************************************************************************************/
 void SchLoadHandler(void)
 {
+  if (gu8Debug == 28) WsfTrace("@? sch load hndlr");
   WsfSetEvent(schCb.handlerId, SCH_EVENT_BOD_LOAD);
 }
 
@@ -285,7 +287,10 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
     {
       WSF_ASSERT(schCb.state == SCH_STATE_EXEC);
       WSF_ASSERT(schCb.eventSetFlagCount);
-
+      if (gu8Debug == 28)
+      {
+        WsfTrace("@? sch done");
+      }
       /*** Complete current BOD ***/
 
       schCb.state = SCH_STATE_IDLE;
@@ -306,7 +311,10 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
     {
       WSF_ASSERT(schCb.state == SCH_STATE_IDLE);
       WSF_ASSERT(schCb.eventSetFlagCount);
-
+      if (gu8Debug == 28)
+      {
+        WsfTrace("@? sch abort");
+      }
       /*** Abort current BOD ***/
 
       schRemoveHead();
@@ -325,7 +333,10 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
     else if (event & SCH_EVENT_BOD_CURTAIL)
     {
       WSF_ASSERT(schCb.eventSetFlagCount);
-
+      if (gu8Debug == 28)
+      {
+        WsfTrace("@? sch curtail");
+      }
       /*** Complete previous BOD ***/
       schRemoveHead();
       if (pBod->endCback)
@@ -338,6 +349,10 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 
     else if (event & SCH_EVENT_BOD_LOAD)
     {
+      if (gu8Debug == 28)
+      {
+        WsfTrace("@? sch load");
+      }
       schBodLoadHandler();
       event &= ~SCH_EVENT_BOD_LOAD;
     }

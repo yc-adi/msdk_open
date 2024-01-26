@@ -95,6 +95,7 @@ static uint8_t *pLctrTxCompBuf;
 /*! \brief      Completed transmit buffer handle ID. */
 static wsfHandlerId_t lctrTxCompBufHandlerId;
 
+extern uint8_t gu8Debug;
 extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
 extern uint32_t gu32DbgCharBufNdx;
 
@@ -953,20 +954,12 @@ void lctrRxEnq(uint8_t *pBuf, uint16_t eventCounter, uint16_t connHandle)
   UINT16_TO_BUF(pBuf, eventCounter);
 
   /* Queue LE Data PDU. */
-  PRINT_BLE_RX_BUFF(pBuf[2], pBuf[3]);
-  /*@?
-  gu32DbgCharBufNdx += sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "R: ");
-  for (uint32_t i = 0; i < pBuf[3] && gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 4; ++i)
+  PRINT_BLE_RX_BUFF(pBuf[2], pBuf[3]);  // buffer, len
+  if (pBuf[3] == 0x09 && pBuf[4] == 0x15 && pBuf[5] == 0xFB)
   {
-    gu32DbgCharBufNdx += sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "%02X ", pBuf[2 + i]);
+    gu8Debug = 28;
   }
-  if (gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 2)
-  {
-    gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\r';
-    gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\n';
-  }
-  gu8DbgCharBuf[DBG_CHAR_BUF_SIZE - 1] = 0;
-  */
+
   WsfMsgEnq(&lmgrConnCb.rxDataQ, connHandle, pBuf);
   WsfSetEvent(lmgrPersistCb.handlerId, (1 << LCTR_EVENT_RX_PENDING));
 }

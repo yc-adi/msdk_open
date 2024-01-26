@@ -41,6 +41,7 @@
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t gu8Debug;
 
 /*! \brief      Master connection ISR control block. */
 static struct
@@ -297,6 +298,7 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
     WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs);
 
     pCtx->connEst = TRUE;
+    if (gu8Debug == 28) WsfTrace("@? connEst");
   }
   else if (lctrMstConnIsr.rxFromSlave)
   {
@@ -401,6 +403,8 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
   {
     pBle->chan.txPower = LCTR_GET_TXPOWER(pCtx, pBle->chan.txPhy, pBle->chan.initTxPhyOptions);
   }
+
+  if (gu8Debug == 28) WsfTrace("@? anchor=%d", anchorPointUsec);
 
   while (TRUE)
   {
@@ -536,7 +540,8 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
     if (status == BB_STATUS_RX_TIMEOUT)
     {
       //@? LL_TRACE_WARN3("lctrMstConnRxCompletion: BB failed with status=RX_TIMEOUT, eventCounter=%u, bleChan=%u, handle=%u", pCtx->eventCounter, pCtx->bleData.chan.chanIdx, LCTR_GET_CONN_HANDLE(pCtx));
-      WsfTrace("@? X");
+      WsfTrace("@? X %d", gu8Debug);
+      if (gu8Debug == 28) gu8Debug = 29;
     }
 
     if (status == BB_STATUS_FAILED)

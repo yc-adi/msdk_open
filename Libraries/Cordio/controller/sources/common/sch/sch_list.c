@@ -620,6 +620,7 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       /* If HEAD BOD due time is not close, add scheduler timer to load it in the future.
        * Always stop existing timer first for simplicity.
        */
+      if (gu8Debug == 28) WsfTrace("@? head stop start");
       PalTimerStop();
       PalTimerStart(execTimeUsec);
     }
@@ -643,6 +644,7 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       /* If BOD due time is not close, add scheduler timer to load it in the future.
        * Always stop existing timer first for simplicity.
        */
+      if (gu8Debug == 28) WsfTrace("@? not head stop start");
       PalTimerStop();
       PalTimerStart(execTimeUsec);
     }

@@ -261,6 +261,8 @@ void lctrProcessTxAckCleanup(lctrConnCtx_t *pCtx)
 /*************************************************************************************************/
 uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
 {
+  WsfTrace("@? lctrSetupForTx %d %d %d %d %d", PalBbGetCurrentTime(),
+    rxStatus, pCtx->rxHdr.md, pCtx->txHdr.md, reqTx);
   uint16_t numTxBytes = 0;
 
   if ((rxStatus != BB_STATUS_SUCCESS) ||

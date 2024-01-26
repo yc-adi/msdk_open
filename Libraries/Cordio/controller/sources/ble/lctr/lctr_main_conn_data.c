@@ -955,7 +955,7 @@ void lctrRxEnq(uint8_t *pBuf, uint16_t eventCounter, uint16_t connHandle)
 
   /* Queue LE Data PDU. */
   PRINT_BLE_RX_BUFF(pBuf[2], pBuf[3]);  // buffer, len
-  if (pBuf[3] == 0x09 && pBuf[4] == 0x15 && pBuf[5] == 0xFB)
+  if (pBuf[3] == 0x09 && pBuf[4] == 0x15 && pBuf[5] == 0xFB && gu8Debug != 9)  //@? central only
   {
     gu8Debug = 28;
   }

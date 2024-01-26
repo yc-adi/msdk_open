@@ -74,6 +74,7 @@ typedef struct
 **************************************************************************************************/
 
 extern SchCtrlBlk_t schCb;
+extern uint8_t gu8Debug;
 
 /**************************************************************************************************
   Function Declarations
@@ -114,6 +115,7 @@ static inline uint32_t schGetTimeToExecBod(BbOpDesc_t *pBod)
   const uint32_t curTime = PalBbGetCurrentTime();
 
   result = BbGetTargetTimeDelta(pBod->dueUsec, curTime);
+  if (gu8Debug == 28) WsfTrace("@? %d - %d = %d", pBod->dueUsec, curTime, result);
 
   if (result >= SCH_LOAD_DELAY_US)
   {

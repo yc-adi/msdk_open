@@ -404,7 +404,7 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
     pBle->chan.txPower = LCTR_GET_TXPOWER(pCtx, pBle->chan.txPhy, pBle->chan.initTxPhyOptions);
   }
 
-  if (gu8Debug == 28) WsfTrace("@? anchor=%d", anchorPointUsec);
+  if (gu8Debug == 28) WsfTrace("@? anchor=%d intvl=%d", anchorPointUsec, pCtx->connInterval * 1250);
 
   while (TRUE)
   {
@@ -442,6 +442,7 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
 
     if (SchInsertAtDueTime(pOp, lctrConnResolveConflict))
     {
+      if (gu8Debug == 18) WsfTrace("@? inserted");
       break;
     }
 
@@ -507,6 +508,7 @@ void lctrMstConnTxCompletion(BbOpDesc_t *pOp, uint8_t status)
 /*************************************************************************************************/
 void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
 {
+  //if (gu8Debug == 18 || gu8Debug == 28) WsfTrace("@? lctrMstConnRxCompletion");
   lctrConnCtx_t * const pCtx = pOp->pCtx;
   pCtx->lastRxStatus = status;
 
@@ -516,6 +518,8 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
   bool_t txPduIsAcked = FALSE;
 
   /*** LLCP instant completion processing ***/
+
+  static uint8_t tmpCnt = 0;
 
   if (pCtx->llcpInstantComp)
   {
@@ -540,8 +544,8 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
     if (status == BB_STATUS_RX_TIMEOUT)
     {
       //@? LL_TRACE_WARN3("lctrMstConnRxCompletion: BB failed with status=RX_TIMEOUT, eventCounter=%u, bleChan=%u, handle=%u", pCtx->eventCounter, pCtx->bleData.chan.chanIdx, LCTR_GET_CONN_HANDLE(pCtx));
-      WsfTrace("@? X %d", gu8Debug);
-      if (gu8Debug == 28) gu8Debug = 29;
+      WsfTrace("@? X %d %d", gu8Debug, ++tmpCnt);
+      if (gu8Debug == 28 && tmpCnt == 5) gu8Debug = 29;
     }
 
     if (status == BB_STATUS_FAILED)

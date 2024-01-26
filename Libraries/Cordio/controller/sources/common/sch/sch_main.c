@@ -289,7 +289,7 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
       WSF_ASSERT(schCb.eventSetFlagCount);
       if (gu8Debug == 28)
       {
-        WsfTrace("@? sch done");
+        WsfTrace("@? sch done %d", PalBbGetCurrentTime());
       }
       /*** Complete current BOD ***/
 

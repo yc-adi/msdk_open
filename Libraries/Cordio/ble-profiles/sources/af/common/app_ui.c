@@ -60,6 +60,7 @@ void AppUiAction(uint8_t event)
 
     case APP_UI_ADV_START:
       APP_TRACE_INFO0(">>> Advertising started <<<");
+      gu8Debug = 9;  //@? peripheral
       break;
 
     case APP_UI_ADV_STOP:
@@ -91,7 +92,8 @@ void AppUiAction(uint8_t event)
       {
         ocmpSt = OCMP_ST_CONN;
       }
-      APP_TRACE_INFO1(">>> Scanning stopped, ocmp=%d <<<", ocmpSt);
+      APP_TRACE_INFO1(">>> Scanning stopped, ocmp=%d <<< 18 @?", ocmpSt);
+      gu8Debug = 18;  //@?
       break;
 
     case APP_UI_SCAN_REPORT:
@@ -99,8 +101,7 @@ void AppUiAction(uint8_t event)
       break;
 
     case APP_UI_CONN_OPEN:
-      APP_TRACE_INFO0(">>> Connection opened <<< 18 @?");
-      gu8Debug = 18;  //@?
+      APP_TRACE_INFO0(">>> Connection opened <<<");
       break;
 
     case APP_UI_CONN_CLOSE:

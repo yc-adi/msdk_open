@@ -506,7 +506,6 @@ static void datcScanStopConnStart(dmEvt_t *pMsg)
             APP_TRACE_INFO1("%s", str);
             
             dmConnId_t connId = AppConnOpen(datcConnInfo.addrType, datcConnInfo.addr, datcConnInfo.dbHdl);
-            //@? gu8Debug = 18;
             if (connId == DM_CONN_ID_NONE)
             {
                 WsfTrace("AppConnOpen failed!");

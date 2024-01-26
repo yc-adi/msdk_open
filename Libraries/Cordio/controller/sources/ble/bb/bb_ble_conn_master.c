@@ -31,7 +31,7 @@
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
-
+extern uint8_t gu8Debug;
 extern BbBleDataPktStats_t  bbConnStats;    /*!< Connection packet statistics. */
 
 /*************************************************************************************************/
@@ -143,6 +143,9 @@ static void bbMstConnTxCompCback(uint8_t status)
 /*************************************************************************************************/
 static void bbMstConnRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint32_t timestamp, uint8_t rxPhyOptions)
 {
+  if (gu8Debug == 18) {
+    WsfTrace("@? bbMstConnRxComCback %d", PalBbGetCurrentTime());
+  }
   BbOpDesc_t * const pCur = BbGetCurrentBod();
   if (pCur == NULL)
   {

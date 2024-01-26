@@ -620,7 +620,7 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       /* If HEAD BOD due time is not close, add scheduler timer to load it in the future.
        * Always stop existing timer first for simplicity.
        */
-      if (gu8Debug == 28) WsfTrace("@? head stop start");
+      if (gu8Debug == 28) WsfTrace("@? head stop start %d", execTimeUsec);
       PalTimerStop();
       PalTimerStart(execTimeUsec);
     }
@@ -735,6 +735,7 @@ bool_t SchInsertAtDueTime(BbOpDesc_t *pBod, BbConflictAct_t conflictCback)
 
   if (!schDueTimeInFuture(pBod))
   {
+    WsfTrace("@? due time passed");
     return FALSE;
   }
 
@@ -770,6 +771,12 @@ bool_t SchInsertAtDueTime(BbOpDesc_t *pBod, BbConflictAct_t conflictCback)
         {
           /* Resolve conflict here otherwise delay conflict resolution when BOD is executed. */
           result = SchResolveConflict(pBod, pCur);
+        }
+
+        if (!result)
+        {
+          WsfTrace("@? resolve conflict failed");
+          return FALSE;
         }
         break;
       }

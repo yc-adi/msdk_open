@@ -82,6 +82,8 @@
 #endif
 
 extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
 
 #if (SCH_CHECK_LIST_INTEGRITY)
 /*************************************************************************************************/
@@ -620,7 +622,12 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       /* If HEAD BOD due time is not close, add scheduler timer to load it in the future.
        * Always stop existing timer first for simplicity.
        */
-      if (gu8Debug == 28) WsfTrace("@? head stop start %d", execTimeUsec);
+      if (gu8Debug == 28) {  //@?
+        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+        {
+          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@10 %d", execTimeUsec);
+        }
+      }
       PalTimerStop();
       PalTimerStart(execTimeUsec);
     }
@@ -644,7 +651,12 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       /* If BOD due time is not close, add scheduler timer to load it in the future.
        * Always stop existing timer first for simplicity.
        */
-      if (gu8Debug == 28) WsfTrace("@? not head stop start");
+      if (gu8Debug == 28) {  //@?
+        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+        {
+          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@11 %d", execTimeUsec);
+        }
+      }
       PalTimerStop();
       PalTimerStart(execTimeUsec);
     }

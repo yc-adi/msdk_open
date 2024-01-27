@@ -42,6 +42,8 @@
   Global Variables
 **************************************************************************************************/
 extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
 
 /*! \brief      Master connection ISR control block. */
 static struct
@@ -298,7 +300,12 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
     WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs);
 
     pCtx->connEst = TRUE;
-    if (gu8Debug == 28) WsfTrace("@? connEst");
+    if (gu8Debug == 28) {  //@?
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+      {
+        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@7,");
+      }
+    }
   }
   else if (lctrMstConnIsr.rxFromSlave)
   {
@@ -404,7 +411,12 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
     pBle->chan.txPower = LCTR_GET_TXPOWER(pCtx, pBle->chan.txPhy, pBle->chan.initTxPhyOptions);
   }
 
-  if (gu8Debug == 28) WsfTrace("@? anchor=%d intvl=%d", anchorPointUsec, pCtx->connInterval * 1250);
+  if (gu8Debug == 28) {  //@?
+    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+    {
+      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@8 %d %d,", anchorPointUsec, pCtx->connInterval * 1250);
+    }
+  }
 
   while (TRUE)
   {
@@ -442,7 +454,12 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
 
     if (SchInsertAtDueTime(pOp, lctrConnResolveConflict))
     {
-      if (gu8Debug == 18) WsfTrace("@? inserted");
+      if (gu8Debug == 18) {
+        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+        {
+          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@12 %d", PalBbGetCurrentTime());
+        }
+      }
       break;
     }
 
@@ -508,7 +525,12 @@ void lctrMstConnTxCompletion(BbOpDesc_t *pOp, uint8_t status)
 /*************************************************************************************************/
 void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
 {
-  //if (gu8Debug == 18 || gu8Debug == 28) WsfTrace("@? lctrMstConnRxCompletion");
+  if (gu8Debug == 18 || gu8Debug == 28) {  //@?
+    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+    {
+      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@1 %d,", PalBbGetCurrentTime());
+    }
+  }
   lctrConnCtx_t * const pCtx = pOp->pCtx;
   pCtx->lastRxStatus = status;
 
@@ -523,6 +545,12 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
 
   if (pCtx->llcpInstantComp)
   {
+    if (gu8Debug == 18 || gu8Debug == 28) {  //@?
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+      {
+        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@2,");
+      }
+    }
     pCtx->llcpInstantComp = FALSE;
     lctrSendConnMsg(pCtx, LCTR_CONN_LLCP_PROC_CMPL);
   }

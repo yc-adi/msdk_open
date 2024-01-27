@@ -102,6 +102,10 @@ void AppUiAction(uint8_t event)
 
     case APP_UI_CONN_OPEN:
       APP_TRACE_INFO0(">>> Connection opened <<<");
+      if (gu8Debug == 18) {
+        //gu8Debug = 28;  //@?
+        //WsfTrace("@? C 28");
+      }
       break;
 
     case APP_UI_CONN_CLOSE:

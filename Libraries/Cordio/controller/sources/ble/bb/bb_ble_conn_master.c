@@ -27,11 +27,15 @@
 #include "bb_ble_int.h"
 #include <string.h>
 #include "bb_ble_sniffer_api.h"
+#include "sch_api.h"
 
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
 extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
+
 extern BbBleDataPktStats_t  bbConnStats;    /*!< Connection packet statistics. */
 
 /*************************************************************************************************/
@@ -144,12 +148,15 @@ static void bbMstConnTxCompCback(uint8_t status)
 static void bbMstConnRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint32_t timestamp, uint8_t rxPhyOptions)
 {
   if (gu8Debug == 18) {
-    WsfTrace("@? bbMstConnRxComCback %d", PalBbGetCurrentTime());
+    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+    {
+      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@5 %d,", PalBbGetCurrentTime());
+    }
   }
   BbOpDesc_t * const pCur = BbGetCurrentBod();
   if (pCur == NULL)
   {
-    APP_TRACE_INFO0("@? !!! bbMstConnRxCompCback bbCb.pOpInProgress=NULL");
+    WsfTrace("@? bbMstConnRxCompCback bbCb.pOpInProgress=NULL");
     return;
   }
   //@? WSF_ASSERT(BbGetCurrentBod());
@@ -186,7 +193,7 @@ static void bbMstConnRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint
   bbBleCb.pRxDataBuf = NULL;
 
   /* Set Tx buffer or BOD cancel expected to be called during this routine. */
-  pConn->rxDataCback(pCur, pBuf, status);
+  pConn->rxDataCback(pCur, pBuf, status);  // lctrMstConnRxCompletion
 
   if (BbGetBodTerminateFlag())
   {

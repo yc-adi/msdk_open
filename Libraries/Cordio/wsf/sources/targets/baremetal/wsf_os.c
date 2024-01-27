@@ -172,7 +172,7 @@ void WsfSetEvent(wsfHandlerId_t handlerId, wsfEventMask_t event)
   WSF_ASSERT(WSF_HANDLER_FROM_ID(handlerId) < WSF_MAX_HANDLERS);
 
   WSF_TRACE_INFO2("WsfSetEvent handlerId:%u event:%u", handlerId, event);
-  if (gu8Debug == 18)
+  if (0 && gu8Debug == 18)  //@?
   {
     //WsfTrace("@? Evt=%03d hndId=%d evt=%d", ++gu32EvtNdx, handlerId, event);
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)

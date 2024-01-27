@@ -39,6 +39,7 @@
 **************************************************************************************************/
 extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
 extern uint32_t gu32DbgCharBufNdx;
+extern uint8_t gu8Debug;
 
 /*! \brief      Slave connection ISR control block. */
 static union
@@ -261,8 +262,6 @@ void lctrProcessTxAckCleanup(lctrConnCtx_t *pCtx)
 /*************************************************************************************************/
 uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
 {
-  WsfTrace("@? lctrSetupForTx %d %d %d %d %d", PalBbGetCurrentTime(),
-    rxStatus, pCtx->rxHdr.md, pCtx->txHdr.md, reqTx);
   uint16_t numTxBytes = 0;
 
   if ((rxStatus != BB_STATUS_SUCCESS) ||
@@ -301,6 +300,13 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
 #if (LL_ENABLE_TESTER)
       bbDesc[0].pBuf[0] ^= llTesterCb.pktLlId & 0x03;
 #endif
+      if (gu8Debug == 18 || gu8Debug == 28)
+      {
+        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+        {
+          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@4 %d,", PalBbGetCurrentTime());
+        }
+      }
 
       lctrSetBbPacketCounterTx(pCtx);
       BbBleTxData(&bbDesc[0], bbDescCnt);
@@ -343,6 +349,13 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
         /* Transmit empty PDU. */
         lctrBuildEmptyPdu(pCtx);
 
+        if (gu8Debug == 18 || gu8Debug == 28) {
+          if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+          {
+            gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@5 %d,", PalBbGetCurrentTime());
+          }
+        }
+
         PalBbBleTxBufDesc_t desc = {.pBuf = lctrConnIsr.emptyPdu, .len = sizeof(lctrConnIsr.emptyPdu)};
         BbBleTxData(&desc, 1);
         numTxBytes = desc.len;
@@ -353,6 +366,14 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
     }
   }
   /* else nothing to transmit */
+  else
+  {
+    if (gu8Debug == 18 || gu8Debug == 28) {  //@?
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE) {
+        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@3,");
+      }
+    }
+  }
 
   return numTxBytes;
 }

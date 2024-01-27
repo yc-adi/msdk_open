@@ -992,7 +992,7 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
 
             ShowConns();
 
-            PrintDbgBuf(0);
+            PrintDbgBuf(gu32DbgCharBufNdx);
             gu32DbgCharBufNdx = 0;
         }
 

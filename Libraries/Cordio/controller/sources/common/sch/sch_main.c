@@ -289,7 +289,10 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
       WSF_ASSERT(schCb.eventSetFlagCount);
       if (gu8Debug == 28)
       {
-        WsfTrace("@? sch done %d", PalBbGetCurrentTime());
+        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+        {
+          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@6 %d", PalBbGetCurrentTime());
+        }
       }
       /*** Complete current BOD ***/
 

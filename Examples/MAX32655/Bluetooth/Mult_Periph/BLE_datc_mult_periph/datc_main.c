@@ -1027,12 +1027,22 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         else if (strcmp(argv[1], "test") == 0) {
             if (argc >= 3)
             {
-                if (argv[2][0] == '1')  // cmd test 1 0/1
+                if (argv[2][0] == '1')  // cmd test 1
+                                        // cmd test 1 n
                 {
-                    gu8Debug = atoi((const char *)argv[3]);
-                    TerminalTxPrint("gu8Debug = %d\r\n", gu8Debug);
+                    if (argc == 3)
+                    {
+                        //
+                    }
+                    else
+                    {
+                        gu8Debug = atoi((const char *)argv[3]);
+                    }
+                    TerminalTxPrint("gu8Debug=%d\r\n", gu8Debug);
                 }
-                else if (argv[2][0] == '2')
+                else if (argv[2][0] == '2')  // cmd test 2
+                                             // cmd test 2 0
+                                             // cmd test 2 1
                 {
                     if (argc == 3)
                     {
@@ -1041,14 +1051,15 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
                     else if (argv[3][0] == '0')
                     {
                         PalSysAssertTrapEnable = 0;
+                        TerminalTxPrint("PalSysAssertTrapEnable=%d\r\n", PalSysAssertTrapEnable);
                     }
                     else if (argv[3][0] == '1')
                     {
                         PalSysAssertTrapEnable = 1;
+                        TerminalTxPrint("PalSysAssertTrapEnable=%d\r\n", PalSysAssertTrapEnable);
                     }
-                    TerminalTxPrint("PalSysAssertTrapEnable=%d\r\n", PalSysAssertTrapEnable);
                 }
-                else if (argv[2][0] == '3')
+                else if (argv[2][0] == '3')     // cmd test 3
                 {
                     ocmpSt = OCMP_ST_INIT;
                 }
@@ -1056,6 +1067,19 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
                 {
                     StackInitDatc();
                     DatcStart();
+                }
+                else if (argv[2][0] == '5')     // cmd test 5
+                                                // cmd test 5 n
+                {
+                    if (argc == 3)
+                    {
+                        //
+                    }
+                    else
+                    {
+                        gu32DbgCharBufNdx = atoi((const char *)argv[3]);
+                    }
+                    TerminalTxPrint("gu32DbgCharBufNdx=%d\r\n", gu32DbgCharBufNdx);
                 }
             }
         }

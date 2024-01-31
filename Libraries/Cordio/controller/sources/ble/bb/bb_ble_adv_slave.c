@@ -238,7 +238,7 @@ Cleanup:
         break;
     }
 
-    BbTerminateBod();
+    BbTerminateBod(8);
   }
 
 #if (BB_SNIFFER_ENABLED == TRUE)
@@ -385,7 +385,7 @@ static void bbSlvAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint3
         break;
     }
 
-    BbTerminateBod();
+    BbTerminateBod(9);
   }
 
 #if (BB_SNIFFER_ENABLED == TRUE)
@@ -425,7 +425,7 @@ static void bbSlvExecuteAdvOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
 
   if (bbSetupAdvOp(pBod, pAdv, BB_STATUS_SUCCESS, TRUE))
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(2);
   }
 }
 

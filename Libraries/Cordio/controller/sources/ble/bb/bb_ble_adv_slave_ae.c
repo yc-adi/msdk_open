@@ -195,7 +195,7 @@ Cleanup:
         break;
     }
 
-    BbTerminateBod();
+    BbTerminateBod(6);
   }
 
 
@@ -334,7 +334,7 @@ static void bbSlvAuxAdvRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, ui
         break;
     }
 
-    BbTerminateBod();
+    BbTerminateBod(7);
   }
 
 #if (BB_SNIFFER_ENABLED == TRUE)

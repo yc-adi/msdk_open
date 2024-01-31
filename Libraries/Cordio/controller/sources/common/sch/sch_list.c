@@ -625,7 +625,7 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       if (gu8Debug == 28) {  //@?
         if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
         {
-          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@10 %d", execTimeUsec);
+          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@10 %d,\r\n", execTimeUsec);
         }
       }
       PalTimerStop();
@@ -1087,7 +1087,7 @@ bool_t SchRemove(BbOpDesc_t *pBod)
     }
     else
     {
-      BbSetBodTerminateFlag();
+      BbSetBodTerminateFlag(37);
     }
   }
 #else
@@ -1109,7 +1109,7 @@ bool_t SchRemove(BbOpDesc_t *pBod)
     }
     else
     {
-      BbSetBodTerminateFlag();
+      BbSetBodTerminateFlag(38);
     }
   }
   else if (schCb.pHead->pNext == pBod && schCb.state == SCH_STATE_EXEC)

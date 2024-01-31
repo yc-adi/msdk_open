@@ -304,7 +304,7 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
       {
         if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
         {
-          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@4 %d,", PalBbGetCurrentTime());
+          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@4 %d,\r\n", PalBbGetCurrentTime());
         }
       }
 
@@ -370,7 +370,7 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
   {
     if (gu8Debug == 18 || gu8Debug == 28) {  //@?
       if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE) {
-        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@3,");
+        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@3,\r\n");
       }
     }
   }

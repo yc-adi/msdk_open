@@ -120,7 +120,7 @@ static inline uint32_t schGetTimeToExecBod(BbOpDesc_t *pBod)
   if (gu8Debug == 28) {
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
-      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@9 %d - %d = %d", pBod->dueUsec, curTime, result);
+      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@9 %d-%d=%d,\r\n", pBod->dueUsec, curTime, result);
     }
   }
 

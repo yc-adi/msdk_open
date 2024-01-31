@@ -327,7 +327,7 @@ BbOpDesc_t *BbGetCurrentBod(void);
  *              flag will help to decide if BbTerminateBod() should be called.
  */
 /*************************************************************************************************/
-void BbSetBodTerminateFlag(void);
+void BbSetBodTerminateFlag(uint8_t src);
 
 /*************************************************************************************************/
 /*!
@@ -346,7 +346,7 @@ bool_t BbGetBodTerminateFlag(void);
  *              current executing BOD, typically in the related ISRs.
  */
 /*************************************************************************************************/
-void BbTerminateBod(void);
+void BbTerminateBod(uint8_t src);
 
 /*************************************************************************************************/
 /*!

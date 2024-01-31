@@ -542,7 +542,7 @@ bool_t lctrSlvRxLegacyReqHandler(BbOpDesc_t *pOp, const uint8_t *pReqBuf)
         /* Stop advertising. */
         pAdvSet->connIndRcvd = TRUE;
         pAdvSet->isAuxConnReq = FALSE;
-        BbSetBodTerminateFlag();
+        BbSetBodTerminateFlag(4);
       }
       break;
     default:

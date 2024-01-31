@@ -26,6 +26,7 @@
 #include "bb_api.h"
 #include "bb_int.h"
 #include "pal_bb.h"
+#include "sch_api.h"
 
 /**************************************************************************************************
   Globals
@@ -34,6 +35,9 @@
 BbCtrlBlk_t bbCb;                       /*!< BB control block. */
 const BbRtCfg_t *pBbRtCfg = NULL;       /*!< Runtime configuration. */
 
+extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
 /**************************************************************************************************
   Functions
 **************************************************************************************************/
@@ -232,7 +236,11 @@ void BbExecuteBod(BbOpDesc_t *pBod)
   if (bbCb.termBod)
   {
     bbCb.pOpInProgress = NULL;
-    WsfTrace("@? BbExecuteBod pOpInProgress=NULL");
+    //WsfTrace("@? BbExecuteBod pOpInProgress=NULL");
+    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+    {
+      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@14 %d,\r\n", PalBbGetCurrentTime());
+    }
   }
 }
 
@@ -278,11 +286,15 @@ BbOpDesc_t *BbGetCurrentBod(void)
  *              flag will help to decide if BbTerminateBod() should be called.
  */
 /*************************************************************************************************/
-void BbSetBodTerminateFlag(void)
+void BbSetBodTerminateFlag(uint8_t src)
 {
   if (bbCb.pOpInProgress)
   {
     bbCb.termBod = TRUE;
+    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+    {
+      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@15 %d %d,\r\n", src, PalBbGetCurrentTime());
+    }
   }
 }
 
@@ -306,7 +318,7 @@ bool_t BbGetBodTerminateFlag(void)
  *              current executing BOD, typically in the related ISRs.
  */
 /*************************************************************************************************/
-void BbTerminateBod(void)
+void BbTerminateBod(uint8_t src)
 {
   WSF_ASSERT(bbCb.bodCompCback);
 
@@ -319,6 +331,12 @@ void BbTerminateBod(void)
 
   bbCb.pOpInProgress = NULL;
   bbCb.termBod = TRUE;
+  if (gu8Debug == 18 || gu8Debug == 28) {
+    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+    {
+      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@16 %d %d,\r\n", src, PalBbGetCurrentTime());
+    }
+  }
   bbCb.bodCompCback();
 }
 

@@ -302,7 +302,7 @@ void lctrSlvConnBeginOp(BbOpDesc_t *pOp)
 
   if (lctrCheckForLinkTerm(pCtx))
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(27);
     return;
   }
 
@@ -326,7 +326,7 @@ void lctrSlvConnBeginOp(BbOpDesc_t *pOp)
   else
   {
     LL_TRACE_ERR1("!!! OOM while initializing receive buffer at start of CE, handle=%u", LCTR_GET_CONN_HANDLE(pCtx));
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(28);
   }
 }
 
@@ -710,7 +710,7 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
       WsfTrace("lctrSlvConnRxCompletion BB failed FAILED, handle=%u bleChan=%u eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pBle->chan.chanIdx, pCtx->eventCounter);
     }
 
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(29);
     lctrRxPduFree(pRxBuf);
     goto Done;
   }
@@ -759,7 +759,7 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
     if ((pCtx->data.slv.consCrcFailed >= LCTR_MAX_CONS_CRC) || (status == BB_STATUS_FRAME_FAILED))
     {
       /* Close connection event. */
-      BbSetBodTerminateFlag();
+      BbSetBodTerminateFlag(30);
       lctrRxPduFree(pRxBuf);
       goto Done;
     }
@@ -767,7 +767,7 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
     if(lctrGetConnOpFlag(pCtx, LL_OP_MODE_FLAG_SLV_CRC_CLOSE))
     {
       /* Close connection event. */
-      BbSetBodTerminateFlag();
+      BbSetBodTerminateFlag(31);
       lctrRxPduFree(pRxBuf);
       goto Done;
     }
@@ -809,7 +809,7 @@ SetupTx:
   /* Slave always transmits after receiving. */
   if ((txLen = lctrSetupForTx(pCtx, status, TRUE)) == 0)
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(32);
     goto PostProcessing;
   }
 

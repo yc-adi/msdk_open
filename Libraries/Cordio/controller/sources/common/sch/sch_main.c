@@ -291,7 +291,7 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
       {
         if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
         {
-          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@6 %d", PalBbGetCurrentTime());
+          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@6 %d,\r\n", PalBbGetCurrentTime());
         }
       }
       /*** Complete current BOD ***/

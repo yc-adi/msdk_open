@@ -954,10 +954,20 @@ void lctrRxEnq(uint8_t *pBuf, uint16_t eventCounter, uint16_t connHandle)
   UINT16_TO_BUF(pBuf, eventCounter);
 
   /* Queue LE Data PDU. */
-  PRINT_BLE_RX_BUFF(pBuf[2], pBuf[3]);  // buffer, len
+  //PRINT_BLE_RX_BUFF(pBuf[2], pBuf[3]);  // buffer, len
   if (pBuf[3] == 0x09 && pBuf[4] == 0x15 && pBuf[5] == 0xFB && gu8Debug != 9)  //@? central only
   {
     gu8Debug = 28;
+  }
+
+  if (gu32DbgCharBufNdx + 100 < DBG_CHAR_BUF_SIZE)
+  {
+    gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@13 %d,", PalBbGetCurrentTime());
+    for (uint8_t j = 0; j < pBuf[3]; ++j)
+    {
+      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], " %02X", pBuf[2 + j]);
+    }
+    gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], ",\r\n");
   }
 
   WsfMsgEnq(&lmgrConnCb.rxDataQ, connHandle, pBuf);

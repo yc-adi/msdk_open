@@ -81,7 +81,7 @@ static void bbTestTxCompCback(uint8_t status)
 
   if (bodComplete)
   {
-    BbTerminateBod();
+    BbTerminateBod(25);
   }
   else
   {
@@ -149,7 +149,7 @@ static void bbTestRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint32_
 
   if (bodComplete)
   {
-    BbTerminateBod();
+    BbTerminateBod(26);
   }
   else
   {
@@ -213,7 +213,7 @@ static void bbTestRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint32_
 static void bbTestCleanupOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
 {
   PalBbBleCancelData();
-  BbTerminateBod();
+  BbTerminateBod(27);
 }
 
 /*************************************************************************************************/

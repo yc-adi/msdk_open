@@ -29,7 +29,9 @@
 
 extern OCMP_ST_t ocmpSt;
 extern uint8_t gu8Debug;
+extern uint32_t gu32DbgCharBufNdx;
 
+extern void SchPrintBod(void);
 /**************************************************************************************************
   Local Variables
 **************************************************************************************************/
@@ -94,6 +96,8 @@ void AppUiAction(uint8_t event)
       }
       APP_TRACE_INFO1(">>> Scanning stopped, ocmp=%d <<< 18 @?", ocmpSt);
       gu8Debug = 18;  //@?
+      gu32DbgCharBufNdx = 0;
+      SchPrintBod(); // @?
       break;
 
     case APP_UI_SCAN_REPORT:

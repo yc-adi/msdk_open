@@ -66,11 +66,16 @@ void PrintDbgBuf(uint32_t len)
   uint32_t j = 0;
   for (i = 0, j = 0; i < len; ++i, ++j)
   {
+    if (j >= 100)
+    {
+      j = 0;
+    }
+
     temp[j] = gu8DbgCharBuf[i];
+    
     if (j >= 99)
     {
       APP_TRACE_INFO1("%s", temp);
-      j = 0;
     }
   }
 }
@@ -204,7 +209,13 @@ static void schBodLoadHandler(void)
 /*************************************************************************************************/
 void SchLoadHandler(void)
 {
-  if (gu8Debug == 28) WsfTrace("@? sch load hndlr");
+  if (gu8Debug == 28) {
+    //WsfTrace("@? sch load hndlr");
+    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+    {
+      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@21 %d,\r\n", PalBbGetCurrentTime());
+    }
+  }
   WsfSetEvent(schCb.handlerId, SCH_EVENT_BOD_LOAD);
 }
 
@@ -354,7 +365,11 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
     {
       if (gu8Debug == 28)
       {
-        WsfTrace("@? sch load");
+        //WsfTrace("@? sch load");
+        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+        {
+          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@22 %d,\r\n", PalBbGetCurrentTime());
+        }
       }
       schBodLoadHandler();
       event &= ~SCH_EVENT_BOD_LOAD;

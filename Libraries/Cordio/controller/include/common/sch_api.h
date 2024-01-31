@@ -33,7 +33,7 @@
 extern "C" {
 #endif
 
-#define DBG_CHAR_BUF_SIZE  1024
+#define DBG_CHAR_BUF_SIZE  2048
 
 /**************************************************************************************************
   Constants

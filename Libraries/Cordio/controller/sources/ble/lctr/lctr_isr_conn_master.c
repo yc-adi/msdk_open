@@ -303,7 +303,7 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
     if (gu8Debug == 28) {  //@?
       if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
       {
-        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@7,\r\n");
+        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@7 %d,\r\n", PalBbGetCurrentTime());
       }
     }
   }
@@ -528,7 +528,7 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
   if (gu8Debug == 18 || gu8Debug == 28) {  //@?
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
-      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@1 %d,\r\n", PalBbGetCurrentTime());
+      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@1 %d %d,\r\n", PalBbGetCurrentTime(), status);
     }
   }
   lctrConnCtx_t * const pCtx = pOp->pCtx;
@@ -572,7 +572,11 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
     if (status == BB_STATUS_RX_TIMEOUT)
     {
       //@? LL_TRACE_WARN3("lctrMstConnRxCompletion: BB failed with status=RX_TIMEOUT, eventCounter=%u, bleChan=%u, handle=%u", pCtx->eventCounter, pCtx->bleData.chan.chanIdx, LCTR_GET_CONN_HANDLE(pCtx));
-      WsfTrace("@? X %d %d", gu8Debug, ++tmpCnt);
+      //WsfTrace("@? X %d %d", gu8Debug, ++tmpCnt);
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+      {
+        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@20 %d,\r\n", ++tmpCnt);
+      }
       if (gu8Debug == 28 && tmpCnt == 5) gu8Debug = 29;
     }
 

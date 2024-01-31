@@ -28,6 +28,7 @@
 #include "dm_api.h"
 #include "dm_main.h"
 #include "dm_conn.h"
+#include "sch_api.h"
 
 /**************************************************************************************************
   Macros
@@ -114,6 +115,9 @@ static const uint8_t dmConnStateTbl[DM_CONN_SM_NUM_STATES][DM_CONN_NUM_MSGS][DM_
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
 
 /*! State machine action set array */
 dmConnAct_t *dmConnActSet[DM_CONN_NUM_ACT_SETS];
@@ -146,11 +150,20 @@ void dmConnSmExecute(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
   // 24 DM_CONN_MSG_API_OPEN
   // 28 DM_CONN_MSG_HCI_LE_CONN_CMPL
   // 0  DM_CONN_SM_ST_IDLE
-  // evt=24(0) st=0 act=16 nxtSt=1 mainMstSlv=1 actSetNdx=0 DM_CONN_SM_ACT_OPEN
-  // evt=28(4) st=1 act=2 nxtSt=3 mainMstSlv=0 actSetNdx=2
-  // evt=29 st=3 act=
-  WsfTrace("dmConnSmExecute evt=%d(%d) st=%d act=%d nxtSt=%d mainMstSlv=%d actSetNdx=%d", pMsg->hdr.event, event, pCcb->state, action, nextSt, mainMstSlv, actSetNdx);
 
+  // evt=24(0) st=0 act=16 nxtSt=1 mainMstSlv=1 actSetNdx=0 DM_CONN_SM_ACT_OPEN
+  // 24 0 0 16 1 1 0
+
+  // evt=28(4) st=1 act=2 nxtSt=3 mainMstSlv=0 actSetNdx=2
+  // 28 4 1 2 3 0 2
+  
+  // evt=29 st=3 act=
+  //@? WsfTrace("dmConnSmExecute evt=%d(%d) st=%d act=%d nxtSt=%d mainMstSlv=%d actSetNdx=%d", pMsg->hdr.event, event, pCcb->state, action, nextSt, mainMstSlv, actSetNdx);
+  if (gu32DbgCharBufNdx + 60 < DBG_CHAR_BUF_SIZE)
+  {
+    gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@17 %d %d %d %d %d %d %d %d,\r\n",
+      PalBbGetCurrentTime(), pMsg->hdr.event, event, pCcb->state, action, nextSt, mainMstSlv, actSetNdx);
+  }
   /* set next state */
   pCcb->state = nextSt;
 

@@ -23,6 +23,7 @@
 /*************************************************************************************************/
 
 #include "lctr_int_conn_slave.h"
+#include "sch_api.h"
 #include "wsf_trace.h"
 
 /**************************************************************************************************
@@ -60,6 +61,9 @@ enum
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
 
 /*! \brief      Slave LLCP state machine table. */
 LctrLlcpHdlr_t lctrSlvLlcpSmTbl[LCTR_LLCP_SM_TOTAL];
@@ -654,7 +658,12 @@ void lctrLlcpStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
 /*************************************************************************************************/
 void lctrSlvLlcpExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 {
-  WsfTrace("@? lctrSlvLlcpExecuteSm evt=%d", event);
+  //WsfTrace("@? lctrSlvLlcpExecuteSm evt=%d", event);
+  if (gu32DbgCharBufNdx + 60 < DBG_CHAR_BUF_SIZE)
+  {
+    gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@18 %d %d,\r\n",
+      PalBbGetCurrentTime(), event);
+  }
   /* Override state machine */
   switch (event)
   {

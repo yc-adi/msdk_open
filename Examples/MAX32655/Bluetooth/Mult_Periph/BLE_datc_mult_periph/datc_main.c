@@ -445,7 +445,7 @@ static void datcAttCback(attEvt_t *pEvt)
 void datcRestartScanningHandler(void)
 {
     WsfTimerStop(&ocmpConnectingTimer);
-    WsfTrace("@? start scanning, stop connecting timer");
+    WsfTrace("@? stop OCMP connecting timer, start scanning, ocmp=%d", ocmpSt);
     datcConnInfo.doConnect = FALSE;
     AppScanStart(datcMasterCfg.discMode, datcMasterCfg.scanType, datcMasterCfg.scanDuration);
 }

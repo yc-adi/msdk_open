@@ -164,6 +164,11 @@ void dmConnSmExecute(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
     gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@17 %d %d %d %d %d %d %d %d,\r\n",
       PalBbGetCurrentTime(), pMsg->hdr.event, event, pCcb->state, action, nextSt, mainMstSlv, actSetNdx);
   }
+  if (pMsg->hdr.event == 28 && event == 4 && pCcb->state ==1 && action == 2 && nextSt ==3 && mainMstSlv == 0 && actSetNdx == 2)
+  {
+    gu8Debug = 18;
+  }
+
   /* set next state */
   pCcb->state = nextSt;
 

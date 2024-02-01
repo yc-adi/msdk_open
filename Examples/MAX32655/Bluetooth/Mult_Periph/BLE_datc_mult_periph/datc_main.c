@@ -986,8 +986,9 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         }
 
         else if (strcmp(argv[1], "qry") == 0) {
-            TerminalTxPrint("ocmp=%d check=%d scanInterval=%d\r\n", ocmpSt, datcCb.check, dmConnCb.scanInterval[0]);
-
+            TerminalTxPrint("ocmp=%d check=%d scanInterval=%d %d %d\r\n", ocmpSt, datcCb.check, dmConnCb.scanInterval[0], gu32DbgCharBufNdx, gu8Debug);
+            gu8Debug = 0;
+            
             SchPrintBod();
 
             ShowConns();

@@ -95,7 +95,7 @@ void AppUiAction(uint8_t event)
         ocmpSt = OCMP_ST_CONN;
       }
       APP_TRACE_INFO1(">>> Scanning stopped, ocmp=%d <<< 18 @?", ocmpSt);
-      gu8Debug = 18;  //@?
+      //gu8Debug = 18;  //@?
       gu32DbgCharBufNdx = 0;
       SchPrintBod(); // @?
       break;
@@ -106,14 +106,10 @@ void AppUiAction(uint8_t event)
 
     case APP_UI_CONN_OPEN:
       APP_TRACE_INFO0(">>> Connection opened <<<");
-      if (gu8Debug == 18) {
-        //gu8Debug = 28;  //@?
-        //WsfTrace("@? C 28");
-      }
       break;
 
     case APP_UI_CONN_CLOSE:
-      APP_TRACE_INFO0(">>> Connection closed <<<");
+      APP_TRACE_INFO1(">>> Connection closed <<< @? %d->0", gu8Debug);
       gu8Debug = 0;  //@?
       break;
 

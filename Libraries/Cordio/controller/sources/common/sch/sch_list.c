@@ -49,7 +49,7 @@
 #define SCH_IS_DUE_AFTER(a, b)          (BbGetTargetTimeDelta(SCH_END_TIME(b), ((a)->dueUsec)) == 0)
 
 /*! \brief      Minimum time in microseconds to start scheduler timer. */
-#define SCH_MIN_TIMER_USEC      200
+#define SCH_MIN_TIMER_USEC      260  //@? 200
 
 /*! \brief      Margin in microseconds to cancel a BOD. */
 #define SCH_CANCEL_MARGIN_USEC           15

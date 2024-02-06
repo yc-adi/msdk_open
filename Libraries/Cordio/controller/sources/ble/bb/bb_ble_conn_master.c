@@ -53,6 +53,12 @@ static void bbMstConnTxCompCback(uint8_t status)
   if (pCur == NULL)
   {
     APP_TRACE_INFO0("@? bbMstConnTxCompCback bbCb.pOpInProgress=NULL");
+    if (gu8Debug == 18 || gu8Debug == 28) {  //@?
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+      {
+        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@29 %d,\r\n", PalBbGetCurrentTime());
+      }
+    }
     return;
   }
   //@? WSF_ASSERT(BbGetCurrentBod());
@@ -60,7 +66,6 @@ static void bbMstConnTxCompCback(uint8_t status)
   BB_ISR_START();
   
   BbBleMstConnEvent_t * const pConn = &pCur->prot.pBle->op.mstConn;
-
 
 #if (BB_SNIFFER_ENABLED == TRUE)
   uint8_t evtState = bbBleCb.evtState;

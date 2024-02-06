@@ -320,7 +320,7 @@ WSF_CT_ASSERT(DATC_DISC_CFG_LIST_LEN <= DATC_DISC_HDL_LIST_LEN);
 
 extern uint32_t gu32DbgCharBufNdx;
 extern void SchPrintBod(void);
-extern void PrintDbgBuf(uint32_t len);
+extern void PrintDbgBuf(uint32_t start, uint32_t len);
 
 /*************************************************************************************************/
 /*!
@@ -951,7 +951,7 @@ void ShowConns(void)
 uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
 {
     char Resp[TERM_CMD_RESP_BUF_SIZE];
-    uint8_t i;
+    uint32_t i;
 
     Resp[0] = 0;
 
@@ -993,14 +993,24 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
 
             ShowConns();
 
-            PrintDbgBuf(gu32DbgCharBufNdx);
-            gu32DbgCharBufNdx = 0;
+            if (argc == 2)
+            {
+                PrintDbgBuf(0, gu32DbgCharBufNdx);
+            }
+            else
+            {
+                i = (uint32_t)atoi((const char *)argv[2]);
+                TerminalTxPrint("i=%d %s\r\n", i, argv[2]);
+                PrintDbgBuf(i, gu32DbgCharBufNdx - i);
+
+                gu32DbgCharBufNdx = 0;
+            }
         }
 
         else if (strcmp(argv[1], "send") == 0) {
             if (argc != 4)
             {
-                TerminalTxPrint("invalid cmd. \"cmd send_data <connId> <data in string without whitespace>\"\r\n");
+                TerminalTxPrint("invalid cmd. \"cmd send <connId> <data in string without whitespace>\"\r\n");
             }
             else
             {

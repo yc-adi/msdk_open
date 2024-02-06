@@ -58,13 +58,13 @@ uint32_t gu32DbgCharBufNdx = 0;
  *  \param len  length of the data to show
  */
 /*************************************************************************************************/
-void PrintDbgBuf(uint32_t len)
+void PrintDbgBuf(uint32_t start, uint32_t len)
 {
   char temp[101];
   temp[100] = 0;
   uint32_t i = 0;
   uint32_t j = 0;
-  for (i = 0, j = 0; i < len; ++i, ++j)
+  for (i = start, j = 0; i < len; ++i, ++j)
   {
     if (j >= 100)
     {

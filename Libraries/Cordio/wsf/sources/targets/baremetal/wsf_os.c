@@ -177,7 +177,7 @@ void WsfSetEvent(wsfHandlerId_t handlerId, wsfEventMask_t event)
     //WsfTrace("@? Evt=%03d hndId=%d evt=%d", ++gu32EvtNdx, handlerId, event);
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
-      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "Evt=%d hndId=%d evt=%d\n", ++gu32EvtNdx, handlerId, event);
+      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "Evt=%d hndId=%d evt=%d\n", ++gu32EvtNdx, handlerId, event);
     }
     gu8DbgCharBuf[DBG_CHAR_BUF_SIZE - 1] = 0;
   }

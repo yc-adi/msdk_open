@@ -57,6 +57,8 @@ typedef BbOpDesc_t*(*BbConflictAct_t)(BbOpDesc_t *pNewBod, BbOpDesc_t *pExistBod
   Function Declarations
 **************************************************************************************************/
 
+int my_sprintf(char *buffer, const char *format, ...);
+
 /* Initialization */
 void SchInit(void);
 void SchHandlerInit(wsfHandlerId_t handlerId);

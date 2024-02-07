@@ -56,7 +56,7 @@ static void bbMstConnTxCompCback(uint8_t status)
     if (gu8Debug == 18 || gu8Debug == 28) {  //@?
       if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
       {
-        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@29 %d,\r\n", PalBbGetCurrentTime());
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@29 %d,\r\n", PalBbGetCurrentTime());
       }
     }
     return;
@@ -155,7 +155,7 @@ static void bbMstConnRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint
   if (gu8Debug == 18) {
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
-      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@23 %d,\r\n", PalBbGetCurrentTime());
+      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@23 %d,\r\n", PalBbGetCurrentTime());
     }
   }
   BbOpDesc_t * const pCur = BbGetCurrentBod();

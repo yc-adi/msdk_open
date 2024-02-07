@@ -239,7 +239,7 @@ void BbExecuteBod(BbOpDesc_t *pBod)
     //WsfTrace("@? BbExecuteBod pOpInProgress=NULL");
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
-      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@14 %d,\r\n", PalBbGetCurrentTime());
+      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@14 %d,\r\n", PalBbGetCurrentTime());
     }
   }
 }
@@ -293,7 +293,7 @@ void BbSetBodTerminateFlag(uint8_t src)
     bbCb.termBod = TRUE;
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
-      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@15 %d %d,\r\n", src, PalBbGetCurrentTime());
+      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@15 %d %d,\r\n", src, PalBbGetCurrentTime());
     }
   }
 }
@@ -334,7 +334,7 @@ void BbTerminateBod(uint8_t src)
   if (gu8Debug == 18 || gu8Debug == 28) {
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
-      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@16 %d %d,\r\n", src, PalBbGetCurrentTime());
+      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@16 %d %d,\r\n", src, PalBbGetCurrentTime());
     }
   }
   bbCb.bodCompCback();

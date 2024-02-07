@@ -22,11 +22,13 @@
  */
 /*************************************************************************************************/
 
+#include <stdio.h>
+#include <stdarg.h>
+#include <string.h>
 #include "sch_int.h"
 #include "pal_timer.h"
 #include "bb_api.h"
 #include "wsf_trace.h"
-#include <string.h>
 
 /**************************************************************************************************
   Constants
@@ -51,6 +53,109 @@ SchCtrlBlk_t schCb;
 extern uint8_t gu8Debug;
 uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];  
 uint32_t gu32DbgCharBufNdx = 0;
+
+/*************************************************************************************************/
+/*!
+ *  \brief      Display debug buffer contents.
+ *  \param len  length of the data to show
+ */
+/*************************************************************************************************/
+int my_sprintf(char *buffer, const char *format, ...) {
+    va_list args;
+    va_start(args, format);
+
+    char *buf_ptr = buffer;
+    int chars_written = 0;
+
+    while (*format != '\0') {
+        if (*format == '%') {
+            format++; // Move past '%'
+            switch (*format) {
+                case 'd': {
+                    int num = va_arg(args, int);
+                    int num_copy = num;
+                    int num_digits = 0;
+
+                    // Count the number of digits
+                    if (num_copy == 0) {
+                        num_digits = 1;
+                    } else {
+                        while (num_copy != 0) {
+                            num_digits++;
+                            num_copy /= 10;
+                        }
+                    }
+
+                    // Convert the integer to string and store it in the buffer
+                    char temp_buf[12]; // Maximum length of a 32-bit integer string + null terminator
+                    char *temp_buf_ptr = temp_buf + num_digits;
+
+                    // Handle negative numbers
+                    if (num < 0) {
+                        *buf_ptr++ = '-';
+                        num = -num;
+                    }
+                    else if (num == 0) {
+                        *buf_ptr++ = '0';
+                    } else {
+                        // Convert the digits to characters
+                        while (num != 0) {
+                            *--temp_buf_ptr = '0' + (num % 10);
+                            num /= 10;
+                        }
+                    }
+
+                    // Copy the string from temp_buf to buffer
+                    while (temp_buf_ptr < temp_buf + num_digits) {
+                        *buf_ptr++ = *temp_buf_ptr++;
+                    }
+
+                    break;
+                }
+                case 'x': {
+                    unsigned int num = va_arg(args, unsigned int);
+                    char temp_buf[12]; // Maximum length of a 32-bit integer string + null terminator
+                    char *temp_buf_ptr = temp_buf;
+
+                    // Convert the integer to hexadecimal string and store it in the buffer
+                    do {
+                        int digit = num % 16;
+                        *temp_buf_ptr++ = (digit < 10) ? ('0' + digit) : ('A' + digit - 10);
+                        num /= 16;
+                    } while (num != 0);
+
+                    // Copy the string from temp_buf to buffer in reverse order
+                    while (temp_buf_ptr > temp_buf) {
+                        *buf_ptr++ = *--temp_buf_ptr;
+                    }
+
+                    break;
+                }
+                case 's': {
+                    char *str = va_arg(args, char*);
+                    while (*str != '\0') {
+                        *buf_ptr++ = *str++;
+                    }
+                    break;
+                }
+                default:
+                    *buf_ptr++ = *format; // Copy the character directly
+            }
+        } else {
+            *buf_ptr++ = *format; // Copy non-format characters directly
+        }
+        format++;
+    }
+
+    *buf_ptr = '\0'; // Null-terminate the string
+
+    va_end(args);
+
+    // Calculate the number of characters written to the buffer
+    chars_written = buf_ptr - buffer;
+
+    return chars_written;
+}
 
 /*************************************************************************************************/
 /*!
@@ -213,7 +318,7 @@ void SchLoadHandler(void)
     //WsfTrace("@? sch load hndlr");
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
-      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@21 %d,\r\n", PalBbGetCurrentTime());
+      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@21 %d,\r\n", PalBbGetCurrentTime());
     }
   }
   WsfSetEvent(schCb.handlerId, SCH_EVENT_BOD_LOAD);
@@ -302,7 +407,7 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
       {
         if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
         {
-          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@6 %d,\r\n", PalBbGetCurrentTime());
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@6 %d,\r\n", PalBbGetCurrentTime());
         }
       }
       /*** Complete current BOD ***/
@@ -368,7 +473,7 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
         //WsfTrace("@? sch load");
         if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
         {
-          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@22 %d,\r\n", PalBbGetCurrentTime());
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@22 %d,\r\n", PalBbGetCurrentTime());
         }
       }
       schBodLoadHandler();

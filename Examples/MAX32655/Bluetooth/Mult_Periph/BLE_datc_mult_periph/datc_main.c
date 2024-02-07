@@ -445,7 +445,7 @@ static void datcAttCback(attEvt_t *pEvt)
 void datcRestartScanningHandler(void)
 {
     WsfTimerStop(&ocmpConnectingTimer);
-    WsfTrace("@? stop OCMP connecting timer, start scanning, ocmp=%d", ocmpSt);
+    //WsfTrace("@? stop OCMP connecting timer, start scanning, ocmp=%d", ocmpSt);
     datcConnInfo.doConnect = FALSE;
     AppScanStart(datcMasterCfg.discMode, datcMasterCfg.scanType, datcMasterCfg.scanDuration);
 }
@@ -1000,7 +1000,6 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
             else
             {
                 i = (uint32_t)atoi((const char *)argv[2]);
-                TerminalTxPrint("i=%d %s\r\n", i, argv[2]);
                 PrintDbgBuf(i, gu32DbgCharBufNdx - i);
 
                 gu32DbgCharBufNdx = 0;

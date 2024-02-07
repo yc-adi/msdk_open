@@ -962,12 +962,12 @@ void lctrRxEnq(uint8_t *pBuf, uint16_t eventCounter, uint16_t connHandle)
 
   if (gu32DbgCharBufNdx + 100 < DBG_CHAR_BUF_SIZE)
   {
-    gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@13 %d,", PalBbGetCurrentTime());
+    gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@13 %d,", PalBbGetCurrentTime());
     for (uint8_t j = 0; j < pBuf[3]; ++j)
     {
-      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], " %02X", pBuf[2 + j]);
+      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], " %x", pBuf[2 + j]);
     }
-    gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], ",\r\n");
+    gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], ",\r\n");
   }
 
   WsfMsgEnq(&lmgrConnCb.rxDataQ, connHandle, pBuf);

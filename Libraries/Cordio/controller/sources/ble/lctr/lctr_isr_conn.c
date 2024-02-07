@@ -304,7 +304,7 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
       {
         if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
         {
-          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@4 %d,\r\n", PalBbGetCurrentTime());
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@4 %d,\r\n", PalBbGetCurrentTime());
         }
       }
 
@@ -315,10 +315,10 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
       //PRINT_BLE_BUF(TX, bbDesc[0].pBuf, bbDesc[0].len);
       if (gu32DbgCharBufNdx + 80 < DBG_CHAR_BUF_SIZE)
       {
-        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "%d T: ", PalBbGetCurrentTime());
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "%d T: ", PalBbGetCurrentTime());
         for (uint32_t i = 0; i < bbDesc[0].len && gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 4; ++i)
         {
-          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "%02X ", bbDesc[0].pBuf[i]);
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "%x ", bbDesc[0].pBuf[i]);
         }
         if (gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 2)
         {
@@ -354,7 +354,7 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
         if (gu8Debug == 18 || gu8Debug == 28) {
           if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
           {
-            gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@5 %d,\r\n", PalBbGetCurrentTime());
+            gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@5 %d,\r\n", PalBbGetCurrentTime());
           }
         }
 
@@ -372,7 +372,7 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
   {
     if (gu8Debug == 18 || gu8Debug == 28) {  //@?
       if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE) {
-        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@3 %d,\r\n", PalBbGetCurrentTime());
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@3 %d,\r\n", PalBbGetCurrentTime());
       }
     }
   }

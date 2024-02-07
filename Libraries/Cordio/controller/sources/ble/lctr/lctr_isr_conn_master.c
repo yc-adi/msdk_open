@@ -303,7 +303,7 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
     if (gu8Debug == 28) {  //@?
       if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
       {
-        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@7 %d,\r\n", PalBbGetCurrentTime());
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@7 %d,\r\n", PalBbGetCurrentTime());
       }
     }
   }
@@ -414,7 +414,7 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
   if (gu8Debug == 28) {  //@?
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
-      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@8 %d %d,\r\n", anchorPointUsec, pCtx->connInterval * 1250);
+      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@8 %d %d,\r\n", anchorPointUsec, pCtx->connInterval * 1250);
     }
   }
 
@@ -457,7 +457,7 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
       if (gu8Debug == 18) {
         if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
         {
-          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@12 %d,\r\n", PalBbGetCurrentTime());
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@12 %d,\r\n", PalBbGetCurrentTime());
         }
       }
       break;
@@ -528,7 +528,7 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
   if (gu8Debug == 18 || gu8Debug == 28) {  //@?
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
-      gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@1 %d %d,\r\n", PalBbGetCurrentTime(), status);
+      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@1 %d %d,\r\n", PalBbGetCurrentTime(), status);
     }
   }
   lctrConnCtx_t * const pCtx = pOp->pCtx;
@@ -548,7 +548,7 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
     if (gu8Debug == 18 || gu8Debug == 28) {  //@?
       if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
       {
-        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@2,");
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@2,");
       }
     }
     pCtx->llcpInstantComp = FALSE;
@@ -575,7 +575,7 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
       //WsfTrace("@? X %d %d", gu8Debug, ++tmpCnt);
       if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
       {
-        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@20 %d,\r\n", ++tmpCnt);
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@20 %d,\r\n", ++tmpCnt);
       }
       if (gu8Debug == 28 && tmpCnt == 5) gu8Debug = 29;
     }

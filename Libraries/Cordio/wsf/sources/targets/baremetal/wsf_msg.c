@@ -144,7 +144,7 @@ void WsfMsgEnq(wsfQueue_t *pQueue, wsfHandlerId_t handlerId, void *pMsg)
     /*@?
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
-      gu32DbgCharBufNdx += sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "Enq=%d msgType=%d", gu32MsgEnqNdx, p->msgType);
+      gu32DbgCharBufNdx += my_sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "Enq=%d msgType=%d", gu32MsgEnqNdx, p->msgType);
     }
     if (gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 2)
     {

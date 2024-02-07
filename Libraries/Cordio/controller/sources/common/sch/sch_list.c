@@ -625,7 +625,7 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       if (gu8Debug == 28) {  //@?
         if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
         {
-          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@10 %d,\r\n", execTimeUsec);
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@10 %d,\r\n", execTimeUsec);
         }
       }
       PalTimerStop();
@@ -654,7 +654,7 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       if (gu8Debug == 28) {  //@?
         if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
         {
-          gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@11 %d", execTimeUsec);
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@11 %d", execTimeUsec);
         }
       }
       PalTimerStop();

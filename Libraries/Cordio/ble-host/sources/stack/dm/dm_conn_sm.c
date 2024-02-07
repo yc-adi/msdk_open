@@ -151,17 +151,17 @@ void dmConnSmExecute(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
   // 28 DM_CONN_MSG_HCI_LE_CONN_CMPL
   // 0  DM_CONN_SM_ST_IDLE
 
-  // evt=24(0) st=0 act=16 nxtSt=1 mainMstSlv=1 actSetNdx=0 DM_CONN_SM_ACT_OPEN
+  // evt=24(0) st=0 act=16 nxtSt=1 mainMstSlv=1 actSetNdx=0 DM_CONN_SM_ACT_OPEN dmConnActSetMaster dmConnSmActOpen dmConnOpen
   // 24 0 0 16 1 1 0
 
-  // evt=28(4) st=1 act=2 nxtSt=3 mainMstSlv=0 actSetNdx=2
+  // evt=28(4) st=1 act=2 nxtSt=3 mainMstSlv=0 actSetNdx=2  dmConnSmActConnOpened, DM_CONN_OPEN_IND, 
   // 28 4 1 2 3 0 2
   
   // evt=29 st=3 act=
   //@? WsfTrace("dmConnSmExecute evt=%d(%d) st=%d act=%d nxtSt=%d mainMstSlv=%d actSetNdx=%d", pMsg->hdr.event, event, pCcb->state, action, nextSt, mainMstSlv, actSetNdx);
   if (gu32DbgCharBufNdx + 60 < DBG_CHAR_BUF_SIZE)
   {
-    gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@17 %d %d %d %d %d %d %d %d,\r\n",
+    gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@17 %d %d %d %d %d %d %d %d,\r\n",
       PalBbGetCurrentTime(), pMsg->hdr.event, event, pCcb->state, action, nextSt, mainMstSlv, actSetNdx);
   }
   if (pMsg->hdr.event == 28 && event == 4 && pCcb->state ==1 && action == 2 && nextSt ==3 && mainMstSlv == 0 && actSetNdx == 2)
@@ -173,7 +173,7 @@ void dmConnSmExecute(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
   pCcb->state = nextSt;
 
   /* look up action set */
-  actSet = dmConnActSet[mainMstSlv];
+  actSet = dmConnActSet[mainMstSlv];  // dmConnActSetMain, dmConnActSetMaster, dmConnActSetSlave
 
   /* if action set present */
   if (actSet != NULL)

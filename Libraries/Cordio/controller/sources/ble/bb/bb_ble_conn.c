@@ -74,7 +74,7 @@ void BbBleTxData(PalBbBleTxBufDesc_t descs[], uint8_t cnt)
     {
       if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
       {
-        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@24 %d,\r\n", PalBbGetCurrentTime());
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@24 %d,\r\n", PalBbGetCurrentTime());
       }
     }
     PalBbBleTxData(descs, cnt);
@@ -89,7 +89,7 @@ void BbBleTxData(PalBbBleTxBufDesc_t descs[], uint8_t cnt)
     {
       if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
       {
-        gu32DbgCharBufNdx += sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@25 %d,\r\n", PalBbGetCurrentTime());
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@25 %d,\r\n", PalBbGetCurrentTime());
       }
     }
     PalBbBleTxTifsData(descs, cnt);

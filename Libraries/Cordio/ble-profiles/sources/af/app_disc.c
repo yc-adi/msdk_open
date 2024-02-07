@@ -73,6 +73,7 @@ static appDiscCb_t appDiscCb[DM_CONN_MAX];
 /*! Discovery callback */
 static appDiscCback_t appDiscCback;
 
+extern uint8_t gu8Debug;
 extern OCMP_ST_t ocmpSt;
 
 extern void datcRestartScanningHandler(void);
@@ -739,6 +740,7 @@ void AppDiscComplete(dmConnId_t connId, uint8_t status)
 
     ocmpSt = OCMP_ST_CONN;
     APP_TRACE_INFO2("AppDiscComplete connId=%d st=%d ocmp=3(CONNECTED)", connId, status);
+    gu8Debug = 0;
 
     datcRestartScanningHandler();
   }

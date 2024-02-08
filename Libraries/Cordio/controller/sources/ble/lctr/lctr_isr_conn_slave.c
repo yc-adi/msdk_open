@@ -696,18 +696,12 @@ void lctrSlvConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
   {
     if (status == BB_STATUS_RX_TIMEOUT)
     {
-      //@? LL_TRACE_WARN3("lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=%u, bleChan=%u, eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pBle->chan.chanIdx, pCtx->eventCounter);
-      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
-      {
-        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "X\n");
-      }
-      gu8DbgCharBuf[DBG_CHAR_BUF_SIZE - 1] = 0;
+      LL_TRACE_WARN3("lctrSlvConnRxCompletion: BB failed with status=RX_TIMEOUT, handle=%u, bleChan=%u, eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pBle->chan.chanIdx, pCtx->eventCounter);
     }
 
     if (status == BB_STATUS_FAILED)
     {
-      //@? LL_TRACE_ERR3("lctrSlvConnRxCompletion: BB failed with status=FAILED, handle=%u, bleChan=%u, eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pBle->chan.chanIdx, pCtx->eventCounter);
-      WsfTrace("lctrSlvConnRxCompletion BB failed FAILED, handle=%u bleChan=%u eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pBle->chan.chanIdx, pCtx->eventCounter);
+      LL_TRACE_ERR3("lctrSlvConnRxCompletion: BB failed with status=FAILED, handle=%u, bleChan=%u, eventCounter=%u", LCTR_GET_CONN_HANDLE(pCtx), pBle->chan.chanIdx, pCtx->eventCounter);
     }
 
     BbSetBodTerminateFlag(29);

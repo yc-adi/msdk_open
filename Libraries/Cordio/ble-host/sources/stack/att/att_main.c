@@ -90,7 +90,7 @@ static void attL2cDataCback(uint16_t handle, uint16_t len, uint8_t *pPacket)
 {
   uint8_t pduType;
 
-  /* parse PDU type */WsfTrace("@? attL2cDataCback");
+  /* parse PDU type */
   pduType = *(pPacket + L2C_PAYLOAD_START);
 
   /* if from server */
@@ -420,7 +420,7 @@ void *attMsgAlloc(uint16_t len)
  */
 /*************************************************************************************************/
 void attL2cDataReq(attCcb_t *pCcb, uint8_t slot, uint16_t len, uint8_t *pPacket)
-{ WsfTrace("@? attL2cDataReq");
+{
   if (slot == ATT_BEARER_SLOT_ID)
   {
     /* send packet to L2CAP via ATT channel */

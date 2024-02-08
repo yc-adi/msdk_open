@@ -658,7 +658,6 @@ void lctrLlcpStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
 /*************************************************************************************************/
 void lctrSlvLlcpExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 {
-  //WsfTrace("@? lctrSlvLlcpExecuteSm evt=%d", event);
   if (gu32DbgCharBufNdx + 60 < DBG_CHAR_BUF_SIZE)
   {
     gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@18 %d %d,\r\n",

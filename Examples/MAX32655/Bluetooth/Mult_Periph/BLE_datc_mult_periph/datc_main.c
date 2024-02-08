@@ -445,7 +445,7 @@ static void datcAttCback(attEvt_t *pEvt)
 void datcRestartScanningHandler(void)
 {
     WsfTimerStop(&ocmpConnectingTimer);
-    //WsfTrace("@? stop OCMP connecting timer, start scanning, ocmp=%d", ocmpSt);
+
     datcConnInfo.doConnect = FALSE;
     AppScanStart(datcMasterCfg.discMode, datcMasterCfg.scanType, datcMasterCfg.scanDuration);
 }
@@ -476,12 +476,7 @@ static void datcRestartScanning(void)
 /*************************************************************************************************/
 static void datcScanStart(dmEvt_t *pMsg)
 {
-    /*
-    if (pMsg->hdr.status == HCI_SUCCESS) {
-        APP_TRACE_INFO0("@? datcCb.check = TRUE");
-        datcCb.check = TRUE;
-    }
-    */
+    //
 }
 
 /*************************************************************************************************/
@@ -986,24 +981,11 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         }
 
         else if (strcmp(argv[1], "qry") == 0) {
-            TerminalTxPrint("ocmp=%d check=%d scanInterval=%d %d %d\r\n", ocmpSt, datcCb.check, dmConnCb.scanInterval[0], gu32DbgCharBufNdx, gu8Debug);
-            gu8Debug = 0;
-            
+            TerminalTxPrint("ocmp=%d check=%d scanInterval=%d\r\n", ocmpSt, datcCb.check, dmConnCb.scanInterval[0]);
+
             SchPrintBod();
 
             ShowConns();
-
-            if (argc == 2)
-            {
-                PrintDbgBuf(0, gu32DbgCharBufNdx);
-            }
-            else
-            {
-                i = (uint32_t)atoi((const char *)argv[2]);
-                PrintDbgBuf(i, gu32DbgCharBufNdx - i);
-
-                gu32DbgCharBufNdx = 0;
-            }
         }
 
         else if (strcmp(argv[1], "send") == 0) {
@@ -1023,7 +1005,7 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         }
 
         else if (strcmp(argv[1], "show_scan_report_on") == 0) {
-            //@? datcCb.showScanReport = TRUE;
+            datcCb.showScanReport = TRUE;
             TerminalTxPrint("start to show scan report\r\n");
         } 
         else if (strcmp(argv[1], "show_scan_report_off") == 0) {
@@ -1035,63 +1017,7 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         }
 
         else if (strcmp(argv[1], "test") == 0) {
-            if (argc >= 3)
-            {
-                if (argv[2][0] == '1')  // cmd test 1
-                                        // cmd test 1 n
-                {
-                    if (argc == 3)
-                    {
-                        //
-                    }
-                    else
-                    {
-                        gu8Debug = atoi((const char *)argv[3]);
-                    }
-                    TerminalTxPrint("gu8Debug=%d\r\n", gu8Debug);
-                }
-                else if (argv[2][0] == '2')  // cmd test 2
-                                             // cmd test 2 0
-                                             // cmd test 2 1
-                {
-                    if (argc == 3)
-                    {
-                        //
-                    }
-                    else if (argv[3][0] == '0')
-                    {
-                        PalSysAssertTrapEnable = 0;
-                        TerminalTxPrint("PalSysAssertTrapEnable=%d\r\n", PalSysAssertTrapEnable);
-                    }
-                    else if (argv[3][0] == '1')
-                    {
-                        PalSysAssertTrapEnable = 1;
-                        TerminalTxPrint("PalSysAssertTrapEnable=%d\r\n", PalSysAssertTrapEnable);
-                    }
-                }
-                else if (argv[2][0] == '3')     // cmd test 3
-                {
-                    ocmpSt = OCMP_ST_INIT;
-                }
-                else if (argv[2][0] == '4')     // cmd test 4
-                {
-                    StackInitDatc();
-                    DatcStart();
-                }
-                else if (argv[2][0] == '5')     // cmd test 5
-                                                // cmd test 5 n
-                {
-                    if (argc == 3)
-                    {
-                        //
-                    }
-                    else
-                    {
-                        gu32DbgCharBufNdx = atoi((const char *)argv[3]);
-                    }
-                    TerminalTxPrint("gu32DbgCharBufNdx=%d\r\n", gu32DbgCharBufNdx);
-                }
-            }
+            //
         }
         else
         {
@@ -1618,7 +1544,7 @@ void DatcHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
         if (datcCb.speedTestCounter == 0 && pMsg->event != DM_SCAN_REPORT_IND) {
-            //@? APP_TRACE_INFO1("Datc got evt %d", pMsg->event);
+            //APP_TRACE_INFO1("Datc got evt %d", pMsg->event);
         }
 
         if (pMsg->event <= ATT_CBACK_END) { /* process ATT messages */
@@ -1702,5 +1628,5 @@ void DatcStart(void)
     /* Reset the device */
     DmDevReset();
 
-    PalSysAssertTrapEnable = false;  //@?
+    PalSysAssertTrapEnable = false;
 }

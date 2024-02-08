@@ -14,7 +14,7 @@ LIB_CORDIO = 1
 INIT_PERIPHERAL = 0
 INIT_CENTRAL = 1
 
-DEBUG = 1
+DEBUG = 0
 
 # TRACE option
 # Set to 0 to disable

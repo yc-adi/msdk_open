@@ -225,7 +225,7 @@ static void appMasterScanStop(dmEvt_t *pMsg)
 {
   if (pMsg->hdr.status == HCI_SUCCESS)
   {
-    //@? APP_TRACE_INFO1("appMasterScanStop results=%d", AppScanGetNumResults());
+    //APP_TRACE_INFO1("appMasterScanStop results=%d", AppScanGetNumResults());
   }
 }
 

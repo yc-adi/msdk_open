@@ -1224,7 +1224,7 @@ void DatcHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
     if (datcCb.streaming[pMsg->param -1] != TRUE)
 #endif /*WDXC_INCLUDED  */
     {
-      APP_TRACE_INFO1("Datc got evt %d", pMsg->event);
+      //APP_TRACE_INFO1("Datc got evt %d", pMsg->event);
     }
 
     /* process ATT messages */

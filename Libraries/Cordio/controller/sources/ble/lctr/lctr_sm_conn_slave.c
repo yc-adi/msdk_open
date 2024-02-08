@@ -41,7 +41,7 @@
 /*************************************************************************************************/
 void lctrSlvConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 {
-  /* State-specific events. */ WsfTrace("@? lctrSlvConnExecuteSm evt=%d st=%d", event, pCtx->state);
+  /* State-specific events. */
   switch (pCtx->state)
   {
     case LCTR_CONN_STATE_ESTABLISHED_READY:
@@ -190,7 +190,6 @@ void lctrSlvConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
       break;
 
     case LCTR_CONN_STATE_TERMINATING:
-      WsfTrace("@? LCTR_CONN_STATE_TERMINATING reason=%d", pCtx->termReason);
       switch (event)
       {
         case LCTR_CONN_TMR_LLCP_RSP_EXP:
@@ -234,7 +233,6 @@ void lctrConnStatelessEventHandler(lctrConnCtx_t *pCtx, uint8_t event)
       lctrFreeConnCtx(pCtx);
       break;
     case LCTR_CONN_TERM_SUP_TIMEOUT:
-      WsfTrace("@? lctrConnStatelessEventHandler");
       LL_TRACE_WARN2("lctrConnStatelessEventHandler: handle=%u, state=%u, event=SUP_TIMEOUT", LCTR_GET_CONN_HANDLE(pCtx), pCtx->state);
       /* lctrStoreConnFailEstablishTerminateReason or lctrStoreConnTimeoutTerminateReason */  /* already set as termination reason */
       lctrFlagLinkTerm(pCtx);

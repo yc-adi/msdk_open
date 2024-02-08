@@ -137,24 +137,6 @@ void WsfMsgEnq(wsfQueue_t *pQueue, wsfHandlerId_t handlerId, void *pMsg)
   /* set handler ID */
   p->handlerId = handlerId;
 
-  if (gu8Debug == 18)
-  {
-    gu32MsgEnqNdx++;
-    //WsfTrace("@? Enq=%03d msgType=%d", gu32MsgEnqNdx, p->msgType);
-    /*@?
-    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
-    {
-      gu32DbgCharBufNdx += my_sprintf(&gu8DbgCharBuf[gu32DbgCharBufNdx], "Enq=%d msgType=%d", gu32MsgEnqNdx, p->msgType);
-    }
-    if (gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 2)
-    {
-      gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\r';
-      gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\n';
-    }
-    gu8DbgCharBuf[DBG_CHAR_BUF_SIZE - 1] = 0;
-    */
-  }
-
   WsfQueueEnq(pQueue, p);
 }
 

@@ -236,7 +236,6 @@ void BbExecuteBod(BbOpDesc_t *pBod)
   if (bbCb.termBod)
   {
     bbCb.pOpInProgress = NULL;
-    //WsfTrace("@? BbExecuteBod pOpInProgress=NULL");
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
       gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@14 %d,\r\n", PalBbGetCurrentTime());

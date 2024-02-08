@@ -314,13 +314,6 @@ static void schBodLoadHandler(void)
 /*************************************************************************************************/
 void SchLoadHandler(void)
 {
-  if (gu8Debug == 28) {
-    //WsfTrace("@? sch load hndlr");
-    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
-    {
-      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@21 %d,\r\n", PalBbGetCurrentTime());
-    }
-  }
   WsfSetEvent(schCb.handlerId, SCH_EVENT_BOD_LOAD);
 }
 
@@ -430,10 +423,7 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
     {
       WSF_ASSERT(schCb.state == SCH_STATE_IDLE);
       WSF_ASSERT(schCb.eventSetFlagCount);
-      if (gu8Debug == 28)
-      {
-        WsfTrace("@? sch abort");
-      }
+
       /*** Abort current BOD ***/
 
       schRemoveHead();
@@ -452,10 +442,7 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
     else if (event & SCH_EVENT_BOD_CURTAIL)
     {
       WSF_ASSERT(schCb.eventSetFlagCount);
-      if (gu8Debug == 28)
-      {
-        WsfTrace("@? sch curtail");
-      }
+
       /*** Complete previous BOD ***/
       schRemoveHead();
       if (pBod->endCback)
@@ -468,14 +455,6 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 
     else if (event & SCH_EVENT_BOD_LOAD)
     {
-      if (gu8Debug == 28)
-      {
-        //WsfTrace("@? sch load");
-        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
-        {
-          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@22 %d,\r\n", PalBbGetCurrentTime());
-        }
-      }
       schBodLoadHandler();
       event &= ~SCH_EVENT_BOD_LOAD;
     }

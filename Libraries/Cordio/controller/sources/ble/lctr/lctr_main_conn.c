@@ -148,7 +148,7 @@ uint16_t LctrInitConnMem(uint8_t *pFreeMem, uint32_t freeMemSize)
   }
 
   /* Allocate memory. */
-  //@? APP_TRACE_INFO2("    RAM: %u x %u bytes -- connection context: pLctrConnTbl", pLctrRtCfg->maxConn, sizeof(lctrConnCtx_t));
+  //APP_TRACE_INFO2("    RAM: %u x %u bytes -- connection context: pLctrConnTbl", pLctrRtCfg->maxConn, sizeof(lctrConnCtx_t));
   pLctrConnTbl = (lctrConnCtx_t *)pAvailMem;
   pAvailMem += sizeof(lctrConnCtx_t) * pLctrRtCfg->maxConn;
 
@@ -376,9 +376,7 @@ lctrConnCtx_t *lctrAllocConnCtx(void)
   for (connIdx = 0; connIdx < pLctrRtCfg->maxConn; connIdx++)
   {
     if (!pLctrConnTbl[connIdx].enabled)
-    {
-      //APP_TRACE_INFO0("@? lctrAllocConnCtx - fill in the conn context");
-      
+    { 
       lctrConnCtx_t *pCtx = LCTR_GET_CONN_CTX(connIdx);
 
       memset(&pLctrConnTbl[connIdx], 0, sizeof(lctrConnCtx_t));
@@ -683,7 +681,7 @@ void lctrConnRxPendingHandler(void)
 
     WSF_ASSERT(connHandle < pLctrRtCfg->maxConn);
     lctrConnCtx_t *pCtx = LCTR_GET_CONN_CTX(connHandle);
-    //@? PRINT_BUF(RX, pRxBuf, pRxBuf[1] + 2);
+
     if (!pCtx->enabled)
     {
       LL_TRACE_ERR1("!!! Data received on terminated connHandle=%u", connHandle);
@@ -717,7 +715,7 @@ void lctrConnRxPendingHandler(void)
         continue;
       }
     }
-    WsfTrace("@? llid=%d nesn=%d sn=%d md=%d len=%d", rxHdr.llid, rxHdr.nesn, rxHdr.sn, rxHdr.md, rxHdr.len);
+
     /* Demux PDU. */
     switch (rxHdr.llid)
     {

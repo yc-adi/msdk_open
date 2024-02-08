@@ -85,7 +85,7 @@ void lctrInitActInitiate(void)
   lctrMstInit.data.init.connInterval = LCTR_US_TO_CONN_IND(connInterUsec);
   lctrMstInit.scanParam = pInitMsg->scanParam;
 
-  BbStart(BB_PROT_BLE);  //@? it has been called in lctrAllocConnCtx(), why here again?
+  BbStart(BB_PROT_BLE);
 
   LmgrIncResetRefCount();
   lmgrCb.numInitEnabled = 1;
@@ -101,7 +101,6 @@ void lctrInitActInitiate(void)
   lctrMstInit.backoffCount = 1;
   lctrMstInit.upperLimit = 1;
   
-  //APP_TRACE_INFO1("@? lctrInitActInitiate peerAddr=%X", pInitMsg->peerAddr);
   lctrMstInitiateBuildOp(&pInitMsg->connSpec, pInitMsg->peerAddrType, pInitMsg->peerAddr);
   lctrMstConnBuildOp(pCtx, &lctrMstInit.data.init.connInd);
 

@@ -824,13 +824,6 @@ uint8_t lctrDecodeCtrlPdu(lctrDataPdu_t *pPdu, const uint8_t *pBuf, uint8_t role
   pBuf += lctrUnpackDataPduHdr(&pPdu->hdr, pBuf);
   pPdu->opcode = *pBuf;
 
-  //WsfTrace("@? lctrDecodeCtrlPdu opcode=0x%02X", pPdu->opcode);
-  if (gu32DbgCharBufNdx + 60 < DBG_CHAR_BUF_SIZE)
-  {
-    gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@19 %d 0X%x,\r\n",
-      PalBbGetCurrentTime(), pPdu->opcode);
-  }
-
   switch (pPdu->opcode)
   {
     case LL_PDU_CONN_UPDATE_IND:

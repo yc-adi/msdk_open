@@ -695,7 +695,7 @@ bool_t lctrLlcpExecuteCommonSm(lctrConnCtx_t *pCtx, uint8_t event)
   switch (pCtx->llcpState)
   {
     case LCTR_LLCP_STATE_IDLE:
-      LL_TRACE_INFO3("lctrLlcpExecuteCommonSm: handle=%u, proc=%u, state=IDLE, event=%u", LCTR_GET_CONN_HANDLE(pCtx), proc, event);
+      LL_TRACE_INFO3("lctrLlcpExecuteCommonSm hndl=%u proc=%u st=IDLE, evt=%u", LCTR_GET_CONN_HANDLE(pCtx), proc, event);
 
       switch (event)
       {
@@ -758,7 +758,7 @@ bool_t lctrLlcpExecuteCommonSm(lctrConnCtx_t *pCtx, uint8_t event)
       break;
 
     case LCTR_LLCP_STATE_BUSY:
-      LL_TRACE_INFO3("lctrLlcpExecuteCommonSm: handle=%u, proc=%u, state=BUSY, event=%u", LCTR_GET_CONN_HANDLE(pCtx), proc, event);
+      LL_TRACE_INFO3("lctrLlcpExecuteCommonSm hndl=%u proc=%u st=BUSY evt=%u", LCTR_GET_CONN_HANDLE(pCtx), proc, event);
 
       switch (event)
       {

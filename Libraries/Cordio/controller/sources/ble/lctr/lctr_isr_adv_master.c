@@ -40,8 +40,6 @@
 extern bool_t bbTxAccAddrShiftMask;
 #endif
 
-extern uint8_t gu8Debug;
-
 /*************************************************************************************************/
 /*!
  *  \brief  End a discovery scan operation in the master role.
@@ -65,7 +63,13 @@ void lctrMstDiscoverEndOp(BbOpDesc_t *pOp)
     lctrMsgHdr_t *pMsg;
 
     /* Send SM a scan termination event. */
-    if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
+    MSG_t msgType = MSG_T_LCTR_INIT_MSG_TERMINATE;
+    if (pCtx == &lctrMstScan)
+    {
+      msgType = MSG_T_LCTR_SCAN_MSG_TERMINATE;
+    }
+    
+    if ((pMsg = (lctrMsgHdr_t *)WsfMsgAlloc(sizeof(*pMsg), msgType)) != NULL)
     {
       if (pCtx == &lctrMstScan)
       {
@@ -160,14 +164,6 @@ void lctrMstDiscoverEndOp(BbOpDesc_t *pOp)
         LL_TRACE_WARN1("!!!                           scanWindowUsec=%u", LCTR_BLE_TO_US(pCtx->scanParam.scanWindow));
       }
     }
-  }
-
-  //@?
-  if (gu8Debug == 1)
-  {
-    __asm("nop");
-    __asm("nop");
-    SchPrintBod();
   }
 }
 

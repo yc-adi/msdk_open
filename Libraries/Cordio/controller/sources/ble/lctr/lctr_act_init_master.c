@@ -125,7 +125,7 @@ void lctrInitActConnect(void)
     lctrConnEstablish_t *pMsg;
     lctrConnCtx_t *pCtx;
 
-    if ((pMsg = (lctrConnEstablish_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_EMPTY)) != NULL)
+    if ((pMsg = (lctrConnEstablish_t *)WsfMsgAlloc(sizeof(*pMsg), MSG_T_LCTR_CONN_MST_ESTABLISH)) != NULL)
     {
       pCtx = LCTR_GET_CONN_CTX(lctrMstInit.data.init.connHandle);
 

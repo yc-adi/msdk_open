@@ -28,7 +28,10 @@
 #include "app_ui.h"
 
 extern OCMP_ST_t ocmpSt;
+extern uint8_t gu8Debug;
+extern uint32_t gu32DbgCharBufNdx;
 
+extern void SchPrintBod(void);
 /**************************************************************************************************
   Local Variables
 **************************************************************************************************/
@@ -59,6 +62,7 @@ void AppUiAction(uint8_t event)
 
     case APP_UI_ADV_START:
       APP_TRACE_INFO0(">>> Advertising started <<<");
+      gu8Debug = 9;  //@? peripheral
       break;
 
     case APP_UI_ADV_STOP:
@@ -90,7 +94,10 @@ void AppUiAction(uint8_t event)
       {
         ocmpSt = OCMP_ST_CONN;
       }
-      APP_TRACE_INFO1(">>> Scanning stopped, ocmp=%d <<<", ocmpSt);
+      APP_TRACE_INFO1(">>> Scanning stopped, ocmp=%d <<< 18 @?", ocmpSt);
+      //gu8Debug = 18;  //@?
+      gu32DbgCharBufNdx = 0;
+      SchPrintBod(); // @?
       break;
 
     case APP_UI_SCAN_REPORT:
@@ -102,7 +109,8 @@ void AppUiAction(uint8_t event)
       break;
 
     case APP_UI_CONN_CLOSE:
-      APP_TRACE_INFO0(">>> Connection closed <<<");
+      APP_TRACE_INFO1(">>> Connection closed <<< @? %d->0", gu8Debug);
+      gu8Debug = 0;  //@?
       break;
 
     case APP_UI_SEC_PAIR_CMPL:

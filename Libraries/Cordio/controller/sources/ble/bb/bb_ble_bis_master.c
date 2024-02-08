@@ -69,7 +69,7 @@ static void bbMstBisRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint3
   if (BbGetBodTerminateFlag())
   {
     PalBbBleCancelTifs();
-    BbTerminateBod();
+    BbTerminateBod(10);
   }
 
   /* Update statistics. */
@@ -133,7 +133,7 @@ static void bbMstExecuteBisOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
   if (BbGetBodTerminateFlag() &&    /* Client signaled cancel. */
       BbGetCurrentBod())            /* Termination still pending. */
   {
-    BbTerminateBod();
+    BbTerminateBod(11);
   }
 }
 

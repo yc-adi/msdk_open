@@ -95,6 +95,10 @@ static uint8_t *pLctrTxCompBuf;
 /*! \brief      Completed transmit buffer handle ID. */
 static wsfHandlerId_t lctrTxCompBufHandlerId;
 
+extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
+
 /*************************************************************************************************/
 /*!
  *  \brief      Check to see whether it is necessary to abort slave latency when slave
@@ -590,7 +594,10 @@ void lctrTxDataPduQueue(lctrConnCtx_t *pCtx, uint16_t fragLen, lctrAclHdr_t *pAc
     fragCnt++;
   }
 #endif
-
+  wsfMsg_t *p;
+  /* get message header */
+  p = ((wsfMsg_t *) pDesc) - 1;
+  p->msgType = 88;
   WsfMsgEnq(&pCtx->txArqQ, pAclHdr->connHandle, (uint8_t *)pDesc);
 
   lctrCheckAbortSlvLatency(pCtx);
@@ -683,11 +690,11 @@ static uint8_t lctrAssembleCtrlPdu(uint8_t *pBuf, uint8_t len)
  *  \return Pointer to the start of the PDU data buffer.
  */
 /*************************************************************************************************/
-uint8_t *lctrTxCtrlPduAlloc(uint8_t pduLen)
+uint8_t *lctrTxCtrlPduAlloc(uint8_t pduLen, MSG_t msgType)
 {
   uint8_t *pPdu;
 
-  if ((pPdu = WsfMsgAlloc(LCTR_DATA_TX_PDU_START_OFFSET + LCTR_DATA_PDU_LEN(pduLen), MSG_T_EMPTY)) != NULL)
+  if ((pPdu = WsfMsgAlloc(LCTR_DATA_TX_PDU_START_OFFSET + LCTR_DATA_PDU_LEN(pduLen), msgType)) != NULL)
   {
     pPdu += LCTR_DATA_TX_PDU_START_OFFSET;
     pPdu += lctrAssembleCtrlPdu(pPdu, pduLen);
@@ -907,7 +914,7 @@ uint8_t *lctrRxPduAlloc(uint16_t maxRxLen)
   uint8_t *pBuf;
 
   /* Include ACL header headroom. */
-  if ((pBuf = WsfMsgAlloc(HCI_ACL_HDR_LEN + allocLen, MSG_T_EMPTY)) != NULL)
+  if ((pBuf = WsfMsgAlloc(HCI_ACL_HDR_LEN + allocLen, MSG_T_LCTR_RX_PDU)) != NULL)
   {
     /* Return start of data PDU. */
     pBuf += LCTR_DATA_PDU_START_OFFSET;
@@ -947,11 +954,8 @@ void lctrRxEnq(uint8_t *pBuf, uint16_t eventCounter, uint16_t connHandle)
   UINT16_TO_BUF(pBuf, eventCounter);
 
   /* Queue LE Data PDU. */
-  //@? PRINT_BLE_RX_BUFF(pBuf[2], pBuf[3]);
-  if (pBuf[2] == 0x13 && pBuf[3] == 0x09 && pBuf[4] == 0x14)
-  {
-    __asm("nop");
-  }
+  //PRINT_BLE_RX_BUFF(pBuf[2], pBuf[3]);  // print RX packet
+  
   WsfMsgEnq(&lmgrConnCb.rxDataQ, connHandle, pBuf);
   WsfSetEvent(lmgrPersistCb.handlerId, (1 << LCTR_EVENT_RX_PENDING));
 }

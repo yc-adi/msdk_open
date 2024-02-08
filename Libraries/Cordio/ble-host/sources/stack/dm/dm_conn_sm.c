@@ -28,6 +28,7 @@
 #include "dm_api.h"
 #include "dm_main.h"
 #include "dm_conn.h"
+#include "sch_api.h"
 
 /**************************************************************************************************
   Macros
@@ -114,6 +115,9 @@ static const uint8_t dmConnStateTbl[DM_CONN_SM_NUM_STATES][DM_CONN_NUM_MSGS][DM_
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
 
 /*! State machine action set array */
 dmConnAct_t *dmConnActSet[DM_CONN_NUM_ACT_SETS];
@@ -139,21 +143,43 @@ void dmConnSmExecute(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
 
   /* get action */
   action = dmConnStateTbl[pCcb->state][event][DM_CONN_ACTION];
+  uint8_t nextSt = dmConnStateTbl[pCcb->state][event][DM_CONN_NEXT_STATE];
+  uint8_t mainMstSlv = DM_CONN_ACT_SET_ID(action);
+  uint8_t actSetNdx = DM_CONN_ACT_ID(action);
 
+  // 24 DM_CONN_MSG_API_OPEN
+  // 28 DM_CONN_MSG_HCI_LE_CONN_CMPL
+  // 0  DM_CONN_SM_ST_IDLE
+
+  // evt=24(0) st=0 act=16 nxtSt=1 mainMstSlv=1 actSetNdx=0 DM_CONN_SM_ACT_OPEN dmConnActSetMaster dmConnSmActOpen dmConnOpen
+  // 24 0 0 16 1 1 0
+
+  // evt=28(4) st=1 act=2 nxtSt=3 mainMstSlv=0 actSetNdx=2  dmConnSmActConnOpened, DM_CONN_OPEN_IND, 
+  // 28 4 1 2 3 0 2
+  
   // evt=29 st=3 act=
-  //@? DM_TRACE_INFO4("dmConnSmExecute evt=%d(%d) st=%d act=%d", pMsg->hdr.event, event, pCcb->state, action);
+  //@? WsfTrace("dmConnSmExecute evt=%d(%d) st=%d act=%d nxtSt=%d mainMstSlv=%d actSetNdx=%d", pMsg->hdr.event, event, pCcb->state, action, nextSt, mainMstSlv, actSetNdx);
+  if (gu32DbgCharBufNdx + 60 < DBG_CHAR_BUF_SIZE)
+  {
+    gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@17 %d %d %d %d %d %d %d %d,\r\n",
+      PalBbGetCurrentTime(), pMsg->hdr.event, event, pCcb->state, action, nextSt, mainMstSlv, actSetNdx);
+  }
+  if (pMsg->hdr.event == 28 && event == 4 && pCcb->state ==1 && action == 2 && nextSt ==3 && mainMstSlv == 0 && actSetNdx == 2)
+  {
+    gu8Debug = 18;
+  }
 
   /* set next state */
-  pCcb->state = dmConnStateTbl[pCcb->state][event][DM_CONN_NEXT_STATE];
+  pCcb->state = nextSt;
 
   /* look up action set */
-  actSet = dmConnActSet[DM_CONN_ACT_SET_ID(action)];
+  actSet = dmConnActSet[mainMstSlv];  // dmConnActSetMain, dmConnActSetMaster, dmConnActSetSlave
 
   /* if action set present */
   if (actSet != NULL)
   {
     /* execute action function in action set */
-    (*actSet[DM_CONN_ACT_ID(action)])(pCcb, pMsg);
+    (*actSet[actSetNdx])(pCcb, pMsg);
   }
   else
   {

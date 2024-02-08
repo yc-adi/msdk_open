@@ -49,7 +49,7 @@
 #define SCH_IS_DUE_AFTER(a, b)          (BbGetTargetTimeDelta(SCH_END_TIME(b), ((a)->dueUsec)) == 0)
 
 /*! \brief      Minimum time in microseconds to start scheduler timer. */
-#define SCH_MIN_TIMER_USEC      200
+#define SCH_MIN_TIMER_USEC      260  //@? 200
 
 /*! \brief      Margin in microseconds to cancel a BOD. */
 #define SCH_CANCEL_MARGIN_USEC           15
@@ -82,6 +82,8 @@
 #endif
 
 extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
 
 #if (SCH_CHECK_LIST_INTEGRITY)
 /*************************************************************************************************/
@@ -620,6 +622,12 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       /* If HEAD BOD due time is not close, add scheduler timer to load it in the future.
        * Always stop existing timer first for simplicity.
        */
+      if (gu8Debug == 28) {  //@?
+        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+        {
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@10 %d,\r\n", execTimeUsec);
+        }
+      }
       PalTimerStop();
       PalTimerStart(execTimeUsec);
     }
@@ -643,6 +651,12 @@ static inline void SchInsertTryLoadBod(BbOpDesc_t *pBod)
       /* If BOD due time is not close, add scheduler timer to load it in the future.
        * Always stop existing timer first for simplicity.
        */
+      if (gu8Debug == 28) {  //@?
+        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+        {
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@11 %d", execTimeUsec);
+        }
+      }
       PalTimerStop();
       PalTimerStart(execTimeUsec);
     }
@@ -733,6 +747,7 @@ bool_t SchInsertAtDueTime(BbOpDesc_t *pBod, BbConflictAct_t conflictCback)
 
   if (!schDueTimeInFuture(pBod))
   {
+    WsfTrace("@? due time passed");
     return FALSE;
   }
 
@@ -768,6 +783,12 @@ bool_t SchInsertAtDueTime(BbOpDesc_t *pBod, BbConflictAct_t conflictCback)
         {
           /* Resolve conflict here otherwise delay conflict resolution when BOD is executed. */
           result = SchResolveConflict(pBod, pCur);
+        }
+
+        if (!result)
+        {
+          WsfTrace("@? resolve conflict failed");
+          return FALSE;
         }
         break;
       }
@@ -1066,7 +1087,7 @@ bool_t SchRemove(BbOpDesc_t *pBod)
     }
     else
     {
-      BbSetBodTerminateFlag();
+      BbSetBodTerminateFlag(37);
     }
   }
 #else
@@ -1088,7 +1109,7 @@ bool_t SchRemove(BbOpDesc_t *pBod)
     }
     else
     {
-      BbSetBodTerminateFlag();
+      BbSetBodTerminateFlag(38);
     }
   }
   else if (schCb.pHead->pNext == pBod && schCb.state == SCH_STATE_EXEC)

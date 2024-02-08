@@ -139,7 +139,7 @@ static void bbSlvCisTxCompCback(uint8_t status)
       if (bbBleCb.evtState == BB_EVT_STATE_IDLE)
       {
         /* Avoid double terminating BOD */
-        BbTerminateBod();
+        BbTerminateBod(16);
         bbBleCb.evtState = BB_EVT_STATE_TERMINATING;
       }
     }
@@ -161,7 +161,7 @@ static void bbSlvCisTxCompCback(uint8_t status)
       if (bbBleCb.evtState == BB_EVT_STATE_IDLE)
       {
         /* Avoid double terminating BOD */
-        BbTerminateBod();
+        BbTerminateBod(17);
         bbBleCb.evtState = BB_EVT_STATE_TERMINATING;
       }
     }
@@ -178,7 +178,7 @@ static void bbSlvCisTxCompCback(uint8_t status)
     if (bbBleCb.evtState == BB_EVT_STATE_IDLE)
     {
       /* Avoid double terminating BOD */
-      BbTerminateBod();
+      BbTerminateBod(18);
       bbBleCb.evtState = BB_EVT_STATE_TERMINATING;
     }
   }
@@ -278,7 +278,7 @@ static void bbSlvCisRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint3
     if (bbBleCb.evtState == BB_EVT_STATE_IDLE)
     {
       /* Avoid double terminating BOD */
-      BbTerminateBod();
+      BbTerminateBod(19);
       bbBleCb.evtState = BB_EVT_STATE_TERMINATING;
     }
   }

@@ -580,7 +580,7 @@ void lctrSendRejectInd(lctrConnCtx_t *pCtx, uint8_t reason, bool_t forceRejectEx
 /* Tx data path */
 uint16_t lctrTxFragLen(lctrConnCtx_t *pTx);
 uint16_t lctrTxInitMem(uint8_t *pFreeMem, uint32_t freeMemSize);
-uint8_t *lctrTxCtrlPduAlloc(uint8_t pduLen);
+uint8_t *lctrTxCtrlPduAlloc(uint8_t pduLen, MSG_t msgType);
 void lctrTxDataPduQueue(lctrConnCtx_t *pCtx, uint16_t fragLen, lctrAclHdr_t *pAclHdr, uint8_t *pAclBuf);
 void lctrTxCtrlPduQueue(lctrConnCtx_t *pCtx, uint8_t *pBuf);
 uint8_t lctrTxQueuePeek(lctrConnCtx_t *pCtx, PalBbBleTxBufDesc_t *bbDescs, bool_t *pMd);

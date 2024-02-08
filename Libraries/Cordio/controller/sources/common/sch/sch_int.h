@@ -74,6 +74,9 @@ typedef struct
 **************************************************************************************************/
 
 extern SchCtrlBlk_t schCb;
+extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
 
 /**************************************************************************************************
   Function Declarations
@@ -114,7 +117,14 @@ static inline uint32_t schGetTimeToExecBod(BbOpDesc_t *pBod)
   const uint32_t curTime = PalBbGetCurrentTime();
 
   result = BbGetTargetTimeDelta(pBod->dueUsec, curTime);
-
+  /*
+  if (gu8Debug == 28) {
+    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+    {
+      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@9 %d-%d=%d,\r\n", pBod->dueUsec, curTime, result);
+    }
+  }
+  */
   if (result >= SCH_LOAD_DELAY_US)
   {
     result -= SCH_LOAD_DELAY_US;

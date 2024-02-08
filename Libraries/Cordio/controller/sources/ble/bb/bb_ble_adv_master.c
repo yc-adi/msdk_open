@@ -278,7 +278,7 @@ static void bbMstScanTxCompCback(uint8_t status)
 
   if (bodComplete)
   {
-    BbTerminateBod();
+    BbTerminateBod(4);
   }
 
 #if (BB_SNIFFER_ENABLED == TRUE)
@@ -494,7 +494,7 @@ static void bbMstScanRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint
 
   if (bodComplete)
   {
-    BbTerminateBod();
+    BbTerminateBod(5);
   }
 
 #if (BB_SNIFFER_ENABLED == TRUE)
@@ -534,7 +534,7 @@ static void bbMstExecuteScanOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
 
   if ((scanDurUsec = bbBleCalcScanDurationUsec(pBod, pScan, pBod->dueUsec, 0)) == 0)
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(1);
     return;
   }
 

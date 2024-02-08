@@ -41,6 +41,9 @@
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
 
 /*! \brief      Master connection ISR control block. */
 static struct
@@ -208,7 +211,7 @@ void lctrMstConnBeginOp(BbOpDesc_t *pOp)
 
   if (lctrCheckForLinkTerm(pCtx))
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(21);
     return;
   }
 
@@ -249,7 +252,7 @@ void lctrMstConnBeginOp(BbOpDesc_t *pOp)
   else
   {
     LL_TRACE_ERR1("!!! OOM while initializing receive buffer at start of CE, handle=%u", LCTR_GET_CONN_HANDLE(pCtx));
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(22);
   }
 }
 
@@ -297,6 +300,12 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
     WsfTimerStartMs(&pCtx->tmrSupTimeout, pCtx->supTimeoutMs);
 
     pCtx->connEst = TRUE;
+    if (gu8Debug == 28) {  //@?
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+      {
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@7 %d,\r\n", PalBbGetCurrentTime());
+      }
+    }
   }
   else if (lctrMstConnIsr.rxFromSlave)
   {
@@ -332,7 +341,7 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
   {
     uint8_t *pPdu;
 
-    if ((pPdu = lctrTxCtrlPduAlloc(LL_CONN_UPD_IND_PDU_LEN)) != NULL)
+    if ((pPdu = lctrTxCtrlPduAlloc(LL_CONN_UPD_IND_PDU_LEN, MSG_T_EMPTY)) != NULL)
     {
       pCtx->data.mst.sendConnUpdInd = FALSE;
 
@@ -402,6 +411,13 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
     pBle->chan.txPower = LCTR_GET_TXPOWER(pCtx, pBle->chan.txPhy, pBle->chan.initTxPhyOptions);
   }
 
+  if (gu8Debug == 28) {  //@?
+    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+    {
+      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@8 %d %d,\r\n", anchorPointUsec, pCtx->connInterval * 1250);
+    }
+  }
+
   while (TRUE)
   {
     numIntervals += 1;
@@ -438,6 +454,12 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
 
     if (SchInsertAtDueTime(pOp, lctrConnResolveConflict))
     {
+      if (gu8Debug == 18) {
+        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+        {
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@12 %d,\r\n", PalBbGetCurrentTime());
+        }
+      }
       break;
     }
 
@@ -503,6 +525,12 @@ void lctrMstConnTxCompletion(BbOpDesc_t *pOp, uint8_t status)
 /*************************************************************************************************/
 void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
 {
+  if (gu8Debug == 18 || gu8Debug == 28) {  //@?
+    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+    {
+      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@1 %d %d,\r\n", PalBbGetCurrentTime(), status);
+    }
+  }
   lctrConnCtx_t * const pCtx = pOp->pCtx;
   pCtx->lastRxStatus = status;
 
@@ -513,8 +541,16 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
 
   /*** LLCP instant completion processing ***/
 
+  static uint8_t tmpCnt = 0;
+
   if (pCtx->llcpInstantComp)
   {
+    if (gu8Debug == 18 || gu8Debug == 28) {  //@?
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+      {
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@2,");
+      }
+    }
     pCtx->llcpInstantComp = FALSE;
     lctrSendConnMsg(pCtx, LCTR_CONN_LLCP_PROC_CMPL);
   }
@@ -535,15 +571,22 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
   {
     if (status == BB_STATUS_RX_TIMEOUT)
     {
-      LL_TRACE_WARN3("lctrMstConnRxCompletion: BB failed with status=RX_TIMEOUT, eventCounter=%u, bleChan=%u, handle=%u", pCtx->eventCounter, pCtx->bleData.chan.chanIdx, LCTR_GET_CONN_HANDLE(pCtx));
+      //@? LL_TRACE_WARN3("lctrMstConnRxCompletion: BB failed with status=RX_TIMEOUT, eventCounter=%u, bleChan=%u, handle=%u", pCtx->eventCounter, pCtx->bleData.chan.chanIdx, LCTR_GET_CONN_HANDLE(pCtx));
+      //WsfTrace("@? X %d %d", gu8Debug, ++tmpCnt);
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+      {
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@20 %d,\r\n", ++tmpCnt);
+      }
+      if (gu8Debug == 28 && tmpCnt == 5) gu8Debug = 29;
     }
 
     if (status == BB_STATUS_FAILED)
     {
-      LL_TRACE_ERR3("lctrMstConnRxCompletion: BB failed with status=FAILED, eventCounter=%u, bleChan=%u, handle=%u", pCtx->eventCounter, pCtx->bleData.chan.chanIdx, LCTR_GET_CONN_HANDLE(pCtx));
+      //@? LL_TRACE_ERR3("lctrMstConnRxCompletion: BB failed with status=FAILED, eventCounter=%u, bleChan=%u, handle=%u", pCtx->eventCounter, pCtx->bleData.chan.chanIdx, LCTR_GET_CONN_HANDLE(pCtx));
+      WsfTrace("lctrMstConnRxCompletion BB failed FAILED, eventCounter=%u bleChan=%u handle=%u", pCtx->eventCounter, pCtx->bleData.chan.chanIdx, LCTR_GET_CONN_HANDLE(pCtx));
     }
 
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(23);
     lctrRxPduFree(pRxBuf);
     goto Done;
   }
@@ -567,7 +610,7 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
     if (lctrMstConnIsr.consCrcFailed >= LCTR_MAX_CONS_CRC)
     {
       /* Close connection event. */
-      BbSetBodTerminateFlag();
+      BbSetBodTerminateFlag(24);
       lctrRxPduFree(pRxBuf);
       goto Done;
     }
@@ -592,7 +635,7 @@ void lctrMstConnRxCompletion(BbOpDesc_t *pOp, uint8_t *pRxBuf, uint8_t status)
 
   if (lctrExceededMaxDur(pCtx, pOp->dueUsec, pCtx->effConnDurUsec))
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(25);
     goto PostProcessing;
   }
 
@@ -603,7 +646,7 @@ SetupTx:
   txPduIsAcked = txPduIsAcked || !lctrGetConnOpFlag(pCtx, LL_OP_MODE_FLAG_MST_RETX_AFTER_RX_NACK);
   if (lctrSetupForTx(pCtx, status, !txPduIsAcked) == 0)
   {
-    BbSetBodTerminateFlag();
+    BbSetBodTerminateFlag(26);
     goto PostProcessing;
   }
 

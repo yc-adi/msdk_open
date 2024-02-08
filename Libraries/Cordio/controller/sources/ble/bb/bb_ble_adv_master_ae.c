@@ -118,7 +118,7 @@ static void bbMstAuxScanTxCompCback(uint8_t status)
 
   if (bodComplete)
   {
-    BbTerminateBod();
+    BbTerminateBod(1);
   }
 
 #if (BB_SNIFFER_ENABLED == TRUE)
@@ -478,7 +478,7 @@ static void bbMstAuxScanRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, u
 
   if (bodComplete)
   {
-    BbTerminateBod();
+    BbTerminateBod(2);
   }
 
 #if (BB_SNIFFER_ENABLED == TRUE)
@@ -758,7 +758,7 @@ static void bbMstPerScanRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, u
 
   if (bodComplete)
   {
-    BbTerminateBod();
+    BbTerminateBod(3);
   }
 
 #if (BB_SNIFFER_ENABLED == TRUE)

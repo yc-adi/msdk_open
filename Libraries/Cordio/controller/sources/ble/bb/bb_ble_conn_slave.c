@@ -78,7 +78,7 @@ static void bbSlvConnTxCompCback(uint8_t status)
       PalBbBleCancelTifs();
 
       /* Tx completion is end of BOD. */
-      BbTerminateBod();
+      BbTerminateBod(22);
     }
   }
   else
@@ -91,7 +91,7 @@ static void bbSlvConnTxCompCback(uint8_t status)
     }
 
     /* Tx failure is end of BOD. */
-    BbTerminateBod();
+    BbTerminateBod(23);
   }
 
   /* Update statistics. */
@@ -190,7 +190,7 @@ static void bbSlvConnRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint
         break;
     }
 
-    BbTerminateBod();
+    BbTerminateBod(24);
   }
 
   /* Update statistics. */

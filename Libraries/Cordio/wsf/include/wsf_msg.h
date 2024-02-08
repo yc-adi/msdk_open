@@ -33,6 +33,13 @@ extern "C" {
 
 /*! \addtogroup WSF_MSG_API
  *  \{ */
+/* Internal message buf structure */
+typedef struct wsfMsg_tag
+{
+  struct wsfMsg_tag   *pNext;
+  wsfHandlerId_t      handlerId;
+  MSG_t               msgType;
+} wsfMsg_t;
 
 /**************************************************************************************************
   Function Declarations

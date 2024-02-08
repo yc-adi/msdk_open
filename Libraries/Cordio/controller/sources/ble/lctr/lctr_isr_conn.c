@@ -30,12 +30,16 @@
 #include "wsf_math.h"
 #include "wsf_msg.h"
 #include "wsf_os.h"
+#include "wsf_trace.h"
 #include "util/bstream.h"
 #include <string.h>
 
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
+extern uint8_t gu8Debug;
 
 /*! \brief      Slave connection ISR control block. */
 static union
@@ -296,11 +300,18 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
 #if (LL_ENABLE_TESTER)
       bbDesc[0].pBuf[0] ^= llTesterCb.pktLlId & 0x03;
 #endif
+      if (gu8Debug == 18 || gu8Debug == 28)
+      {
+        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+        {
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@4 %d,\r\n", PalBbGetCurrentTime());
+        }
+      }
 
       lctrSetBbPacketCounterTx(pCtx);
       BbBleTxData(&bbDesc[0], bbDescCnt);
       numTxBytes = LL_DATA_HDR_LEN + bbDesc[0].pBuf[LCTR_DATA_PDU_LEN_OFFSET];
-      //@? PRINT_BUF(TX, bbDesc[0].pBuf, bbDesc[0].len);
+      //PRINT_BLE_BUF(TX, bbDesc[0].pBuf, bbDesc[0].len);  // print TX packet
     }
     else
     {
@@ -325,6 +336,13 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
         /* Transmit empty PDU. */
         lctrBuildEmptyPdu(pCtx);
 
+        if (gu8Debug == 18 || gu8Debug == 28) {
+          if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+          {
+            gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@5 %d,\r\n", PalBbGetCurrentTime());
+          }
+        }
+
         PalBbBleTxBufDesc_t desc = {.pBuf = lctrConnIsr.emptyPdu, .len = sizeof(lctrConnIsr.emptyPdu)};
         BbBleTxData(&desc, 1);
         numTxBytes = desc.len;
@@ -335,6 +353,14 @@ uint16_t lctrSetupForTx(lctrConnCtx_t *pCtx, uint8_t rxStatus, bool_t reqTx)
     }
   }
   /* else nothing to transmit */
+  else
+  {
+    if (gu8Debug == 18 || gu8Debug == 28) {  //@?
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE) {
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@3 %d,\r\n", PalBbGetCurrentTime());
+      }
+    }
+  }
 
   return numTxBytes;
 }

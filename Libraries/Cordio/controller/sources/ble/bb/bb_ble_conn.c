@@ -27,6 +27,7 @@
 #include "pal_bb.h"
 #include "bb_ble_int.h"
 #include "bb_ble_sniffer_api.h"
+#include "sch_api.h"
 
 #if BB_DATA_PLD_MAX_LEN < LL_MAX_DATA_LEN_MIN
 #error "Unsupported BB_DATA_PLD_MAX_LEN value, must be greater than 27 bytes"
@@ -39,6 +40,9 @@
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
+extern uint8_t gu8Debug;
 
 BbBleDataPktStats_t bbConnStats;          /*!< Connection packet statistics. */
 
@@ -66,6 +70,13 @@ void BbBleTxData(PalBbBleTxBufDesc_t descs[], uint8_t cnt)
       (bbBleCb.evtState == 0))
   {
     bbBleSetTifs();     /* master always Rx's after Tx */
+    if (gu8Debug == 18 || gu8Debug == 28)
+    {
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+      {
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@24 %d,\r\n", PalBbGetCurrentTime());
+      }
+    }
     PalBbBleTxData(descs, cnt);
   }
   else
@@ -74,6 +85,13 @@ void BbBleTxData(PalBbBleTxBufDesc_t descs[], uint8_t cnt)
 
     /* TODO set only if master or if slave and Rx may follow in CE. */
     bbBleSetTifs();
+    if (gu8Debug == 18 || gu8Debug == 28)
+    {
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+      {
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@25 %d,\r\n", PalBbGetCurrentTime());
+      }
+    }
     PalBbBleTxTifsData(descs, cnt);
   }
 }

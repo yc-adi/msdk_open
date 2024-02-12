@@ -260,7 +260,7 @@ dmConnCcb_t *dmConnCcbByBdAddr(uint8_t *pAddr)
     }
   }
 
-  DM_TRACE_INFO0("dmConnIdByBdAddr not found");
+  //DM_TRACE_INFO0("dmConnIdByBdAddr not found");
 
   return NULL;
 }

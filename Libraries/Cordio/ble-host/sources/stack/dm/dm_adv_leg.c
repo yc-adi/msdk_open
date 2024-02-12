@@ -494,7 +494,7 @@ void dmAdvStopDirected(void)
 /*************************************************************************************************/
 void dmAdvConnected(void)
 {
-  DM_TRACE_INFO1("dmAdvConnected st=%d", dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT]);
+  //DM_TRACE_INFO1("dmAdvConnected st=%d", dmAdvCb.advState[DM_ADV_HANDLE_DEFAULT]);
 
   WsfTimerStop(&dmAdvCb.advTimer);
 

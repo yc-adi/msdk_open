@@ -290,10 +290,12 @@ void BbSetBodTerminateFlag(uint8_t src)
   if (bbCb.pOpInProgress)
   {
     bbCb.termBod = TRUE;
+    /*
     if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
     {
       gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@15 %d %d,\r\n", src, PalBbGetCurrentTime());
     }
+    */
   }
 }
 

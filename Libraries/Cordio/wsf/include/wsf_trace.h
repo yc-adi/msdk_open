@@ -40,15 +40,15 @@ extern "C" {
   Macros
 **************************************************************************************************/
 
-#define PRINT_BLE_RX_BUFF(hdr, n) {char str[200]; uint8_t pos = 0; pos=sprintf(str, "RX: %02X %02X ", hdr, n); \
+#define PRINT_BLE_RX_BUFF(hdr, n) {char str[200]; uint8_t pos = 0; pos=my_sprintf(str, "RX: %x %x ", hdr, n); \
           for (int ii = 0; ii < ((n)); ii++) { \
-          pos+=sprintf(&str[pos], "%02X ", *(volatile uint8_t *)(0x40053180 + ii)); } \
-          sprintf(&str[pos], "\n"); APP_TRACE_INFO1("%s", str);}
+          pos+=my_sprintf(&str[pos], "%x ", *(volatile uint8_t *)(0x40053180 + ii)); } \
+          my_sprintf(&str[pos], "\n"); APP_TRACE_INFO1("%s", str);}
 
-#define PRINT_BLE_BUF(prompt, addr, n) {char *p = (char *)(addr); char str[1024]; uint8_t pos = 0; pos = sprintf(str, "%s: ", #prompt); \
+#define PRINT_BLE_BUF(prompt, addr, n) {char *p = (char *)(addr); char str[1024]; uint8_t pos = 0; pos = my_sprintf(str, "%s: ", #prompt); \
           for (int ii = 0; ii < ((n)) && pos < 1020; ii++) { \
-          pos += sprintf(&str[pos], "%02X ", p[ii]);}  \
-          sprintf(&str[pos], "\n"); APP_TRACE_INFO1("%s", str);}
+          pos += my_sprintf(&str[pos], "%x ", p[ii]);}  \
+          my_sprintf(&str[pos], "\n"); APP_TRACE_INFO1("%s", str);}
 
 #ifndef WSF_TRACE_ENABLED
 /*! \brief      Trace enable flag (default is disabled, override with compile-time directive). */

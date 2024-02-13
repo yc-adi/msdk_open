@@ -739,7 +739,7 @@ void AppDiscComplete(dmConnId_t connId, uint8_t status)
     pAppDiscCb->connCfgStatus = APP_DISC_CFG_CMPL;
 
     ocmpSt = OCMP_ST_CONN;
-    APP_TRACE_INFO2("AppDiscComplete connId=%d st=%d ocmp=3(CONNECTED)", connId, status);
+    APP_TRACE_INFO2("AppDiscComplete connId=%d st=%d ocmp=3(CONNECTED)\r\n", connId, status);
     gu8Debug = 0;
 
     datcRestartScanningHandler();

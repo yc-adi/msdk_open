@@ -33,6 +33,7 @@
 #include "dm_dev.h"
 #include "dm_main.h"
 #include "dm_conn.h"
+#include "sch_api.h"
 
 /**************************************************************************************************
   Macros
@@ -110,6 +111,9 @@ static const uint8_t dmConnUpdActTbl[DM_CONN_UPD_NUM_MSGS] =
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
+extern uint8_t gu8Debug;
 
 /*! Connection update action set array */
 dmConnAct_t *dmConnUpdActSet[DM_CONN_NUM_ACT_SETS];
@@ -528,7 +532,7 @@ void dmConnSmActConnFailed(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
       dmDevPassEvtToDevPriv(DM_DEV_PRIV_MSG_RPA_STOP, DM_CONN_CLOSE_IND, 0 , 0);
     }
   }
-
+  WsfTrace("@? dmConnSmActConnFailed");
   pMsg->hdr.event = DM_CONN_CLOSE_IND;
   pMsg->hciLeConnCmpl.handle = pMsg->hciLeConnCmpl.role = 0;
   dmConnExecCback(pMsg);
@@ -559,6 +563,11 @@ void dmConnSmActConnClosed(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
     dmDevPassEvtToDevPriv(DM_DEV_PRIV_MSG_RPA_STOP, DM_CONN_CLOSE_IND, 0, 0);
   }
 
+  if (gu8Debug > 1 && (gu32DbgCharBufNdx + 80 < DBG_CHAR_BUF_SIZE))
+  {
+    gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@30.%d,\r\n", gu8Debug);
+  }
+  
   pMsg->hdr.event = DM_CONN_CLOSE_IND;
   dmConnExecCback(pMsg);
 }

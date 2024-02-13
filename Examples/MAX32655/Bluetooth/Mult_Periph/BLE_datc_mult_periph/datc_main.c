@@ -27,6 +27,7 @@
 #include <string.h>
 #include "app_db.h"
 #include "bb_api.h"
+#include "sch_api.h"
 #include "wsf_types.h"
 #include "util/bstream.h"
 #include "wsf_msg.h"
@@ -495,10 +496,15 @@ static void datcScanStopConnStart(dmEvt_t *pMsg)
         if (datcConnInfo.doConnect) {
             char str[100];
             ocmpSt = OCMP_ST_CONNECTING;  // start connecting
-            sprintf(str, "doConnect %02X:%02X:%02X:%02X:%02X:%02X ocmp=2",
+            my_sprintf(str, "doConnect %x:%x:%x:%x:%x:%x ocmp=2",
                          datcConnInfo.addr[5], datcConnInfo.addr[4], datcConnInfo.addr[3], 
                          datcConnInfo.addr[2], datcConnInfo.addr[1], datcConnInfo.addr[0]);
             APP_TRACE_INFO1("%s", str);
+
+            if (gu8Debug == 2)
+            {
+                gu8Debug = 3;
+            }
             
             dmConnId_t connId = AppConnOpen(datcConnInfo.addrType, datcConnInfo.addr, datcConnInfo.dbHdl);
             if (connId == DM_CONN_ID_NONE)
@@ -981,11 +987,15 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         }
 
         else if (strcmp(argv[1], "qry") == 0) {
-            TerminalTxPrint("ocmp=%d check=%d scanInterval=%d\r\n", ocmpSt, datcCb.check, dmConnCb.scanInterval[0]);
+            TerminalTxPrint("ocmp=%d check=%d scanInterval=%d DbgBufNdx=%d\r\n", ocmpSt, datcCb.check, dmConnCb.scanInterval[0], gu32DbgCharBufNdx);
 
             SchPrintBod();
 
             ShowConns();
+
+            PrintDbgBuf(0, gu32DbgCharBufNdx);
+            gu32DbgCharBufNdx = 0;
+            gu8Debug = 0;
         }
 
         else if (strcmp(argv[1], "send") == 0) {
@@ -1017,7 +1027,14 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         }
 
         else if (strcmp(argv[1], "test") == 0) {
-            //
+            if (argc >= 3)  // cmd test <n>
+            {
+                if (argv[2][0] == '1' && argv[2][1] == 0)
+                {
+                    gu8Debug = 2;
+                    TerminalTxPrint("gu8Debug=2\r\n");
+                }
+            }
         }
         else
         {

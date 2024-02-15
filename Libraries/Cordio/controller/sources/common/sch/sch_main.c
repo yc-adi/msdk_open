@@ -118,6 +118,10 @@ int my_sprintf(char *buffer, const char *format, ...) {
                     char *temp_buf_ptr = temp_buf;
 
                     // Convert the integer to hexadecimal string and store it in the buffer
+                    if (num <= 0x0F) {  // %02x
+                      *temp_buf_ptr++ = '0';
+                    }
+
                     do {
                         int digit = num % 16;
                         *temp_buf_ptr++ = (digit < 10) ? ('0' + digit) : ('A' + digit - 10);
@@ -396,11 +400,12 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
     {
       WSF_ASSERT(schCb.state == SCH_STATE_EXEC);
       WSF_ASSERT(schCb.eventSetFlagCount);
-      if (gu8Debug == 28)
+      if (gu8Debug >= 113)  //@?
       {
         if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
         {
-          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@6 %d,\r\n", PalBbGetCurrentTime());
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@6  %d %d,\r\n", PalBbGetCurrentTime(), pBod->bodType);
+          if (++gu8Debug >= 9) gu8Debug = 2;  // no need to record too much
         }
       }
       /*** Complete current BOD ***/

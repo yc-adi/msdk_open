@@ -28,6 +28,7 @@
 #include "bb_ble_int.h"
 #include "sch_api.h"
 #include "wsf_math.h"
+#include "wsf_trace.h"
 #include <string.h>
 #include "bb_ble_sniffer_api.h"
 
@@ -38,6 +39,9 @@
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
+extern uint8_t gu8Debug;
 
 BbBleScanPktStats_t bbScanStats;          /*!< Scan packet statistics. */
 
@@ -353,11 +357,29 @@ static void bbMstScanRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint
           {
             WSF_ASSERT(pScan->pTxReqBuf);
 
-            BB_ISR_MARK(bbScanStats.txSetupUsec);
+            //BB_ISR_MARK(bbScanStats.txSetupUsec);
 
             PalBbBleTxBufDesc_t desc = {.pBuf = pScan->pTxReqBuf, .len = pScan->txReqLen};
+            if (desc.pBuf[0] == 0x25 && desc.pBuf[1] == 0x22)  //@? CONN_IND
+            {
+              if (gu32DbgCharBufNdx + 80 < DBG_CHAR_BUF_SIZE)
+              {
+                gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@CONN_IND %d: ", PalBbGetCurrentTime());
+                for (uint32_t i = 0; i < 4 && gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 4; ++i)
+                {
+                  gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "%x ", desc.pBuf[i]);
+                }
+                if (gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 2)
+                {
+                  gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\r';
+                  gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\n';
+                }
+                gu8DbgCharBuf[DBG_CHAR_BUF_SIZE - 1] = 0;
+              }
+            }
 
             bbBleSetTifs();
+            
             PalBbBleTxTifsData(&desc, 1);
 
             /* Tx may fail; no more important statements in the !bodComplete code path */

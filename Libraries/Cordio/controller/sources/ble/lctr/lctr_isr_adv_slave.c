@@ -84,7 +84,7 @@ void lctrConnIndHandler(BbOpDesc_t *pOp, uint8_t reqLen, const uint8_t *pReqBuf)
 
     /*** Received advertising PDU post-processing. ***/
     // display the connection indication packet
-    //PRINT_BLE_RX_BUFF(pReqBuf[0], pReqBuf[1]);  // PRINT CONN_IND packet
+    //PRINT_BLE_RX_BUFF(pReqBuf[0], pReqBuf[1]);  // print CONN_IND packet
     
     if ((lctrSlvAdv.advBuf[0] & (1 << LCTR_ADV_HDR_CH_SEL_SHIFT)) &&   /* local advertiser supports CS#2 */
         (pReqBuf[0] & (1 << LCTR_ADV_HDR_CH_SEL_SHIFT)))               /* peer initiator supports CS#2 */
@@ -95,6 +95,10 @@ void lctrConnIndHandler(BbOpDesc_t *pOp, uint8_t reqLen, const uint8_t *pReqBuf)
     {
       lctrSlvAdv.usedChSel = LL_CH_SEL_1;
     }
+  }
+  else
+  {
+    WsfTrace("@? %d %d", lctrMsgDispTbl[LCTR_DISP_CONN], reqLen);
   }
 }
 

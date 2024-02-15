@@ -746,7 +746,7 @@ void AppDiscComplete(dmConnId_t connId, uint8_t status)
   }
   else
   {
-    APP_TRACE_INFO2("AppDiscComplete connId=%d st=%d", connId, status);
+    //APP_TRACE_INFO2("AppDiscComplete connId=%d st=%d", connId, status);
   }
 }
 

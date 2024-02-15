@@ -156,11 +156,6 @@ void dmConnSmExecute(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
   //     29(5)    3     4       0            0           4  dmConnSmActConnClosed, DM_CONN_CLOSE_IND
   
   //WsfTrace("dmConnSmExecute evt=%d(%d) st=%d act=%d nxtSt=%d mainMstSlv=%d actSetNdx=%d", pMsg->hdr.event, event, pCcb->state, action, nextSt, mainMstSlv, actSetNdx);
-  if (gu8Debug > 1 && (gu32DbgCharBufNdx + 80 < DBG_CHAR_BUF_SIZE))
-  {
-    gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@31.%d %d(%d) %d %d %d %d %d,\r\n",
-                                    gu8Debug, pMsg->hdr.event, event, pCcb->state, action, nextSt, mainMstSlv, actSetNdx);
-  }
 
   /* set next state */
   pCcb->state = nextSt;

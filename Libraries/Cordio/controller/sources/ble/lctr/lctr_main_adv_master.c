@@ -270,7 +270,7 @@ void lctrMstDiscoverBuildOp(void)
   uint8_t *pBuf;
 
   /*** General Setup ***/
-  pOp->bodType = 2;
+  pOp->bodType = 1;  // lctrMstDiscoverBuildOp
   pOp->reschPolicy = BB_RESCH_MOVEABLE;
   pOp->protId = BB_PROT_BLE;
   pOp->prot.pBle = pBle;

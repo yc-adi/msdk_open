@@ -70,7 +70,14 @@ void BbBleTxData(PalBbBleTxBufDesc_t descs[], uint8_t cnt)
       (bbBleCb.evtState == 0))
   {
     bbBleSetTifs();     /* master always Rx's after Tx */
-    if (gu8Debug == 18 || gu8Debug == 28)
+
+    //if (descs->pBuf[0] == 0x25 && descs->pBuf[1] == 0x22 && descs->pBuf[2] == 0x11)
+    if (cnt > 1)
+    {
+      PRINT_BLE_BUF(TIFS, descs->pBuf, cnt > 4 ? 4 : cnt);  //@? print TX packet
+    }
+
+    if (gu8Debug > 200)  //@?
     {
       if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
       {
@@ -85,7 +92,11 @@ void BbBleTxData(PalBbBleTxBufDesc_t descs[], uint8_t cnt)
 
     /* TODO set only if master or if slave and Rx may follow in CE. */
     bbBleSetTifs();
-    if (gu8Debug == 18 || gu8Debug == 28)
+    if (cnt > 1)
+    {
+      PRINT_BLE_BUF(TIFS, descs->pBuf, cnt > 4 ? 4 : cnt);  //@? print TX packet
+    }
+    if (gu8Debug > 222)
     {
       if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
       {

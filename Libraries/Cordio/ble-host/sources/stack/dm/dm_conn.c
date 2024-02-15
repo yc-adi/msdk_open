@@ -562,11 +562,6 @@ void dmConnSmActConnClosed(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
     /* pass conn close event to dev priv */
     dmDevPassEvtToDevPriv(DM_DEV_PRIV_MSG_RPA_STOP, DM_CONN_CLOSE_IND, 0, 0);
   }
-
-  if (gu8Debug > 1 && (gu32DbgCharBufNdx + 80 < DBG_CHAR_BUF_SIZE))
-  {
-    gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@30.%d,\r\n", gu8Debug);
-  }
   
   pMsg->hdr.event = DM_CONN_CLOSE_IND;
   dmConnExecCback(pMsg);

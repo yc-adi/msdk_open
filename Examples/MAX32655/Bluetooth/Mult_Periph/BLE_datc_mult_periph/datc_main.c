@@ -503,7 +503,7 @@ static void datcScanStopConnStart(dmEvt_t *pMsg)
 
             if (gu8Debug == 2)
             {
-                gu8Debug = 3;
+                gu8Debug = 3;  //@?
             }
             
             dmConnId_t connId = AppConnOpen(datcConnInfo.addrType, datcConnInfo.addr, datcConnInfo.dbHdl);
@@ -1029,7 +1029,7 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
         else if (strcmp(argv[1], "test") == 0) {
             if (argc >= 3)  // cmd test <n>
             {
-                if (argv[2][0] == '1' && argv[2][1] == 0)
+                if (argv[2][0] == '1' && argv[2][1] == 0)  // cmd test 1
                 {
                     gu8Debug = 2;
                     TerminalTxPrint("gu8Debug=2\r\n");

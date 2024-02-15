@@ -37,6 +37,10 @@
 #include "util/bstream.h"
 #include <string.h>
 
+extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
+
 /*************************************************************************************************/
 /*!
  *  \brief  End an initiate scan operation in the master role.
@@ -187,6 +191,12 @@ bool_t lctrMstInitiateAdvPktHandler(BbOpDesc_t *pOp, const uint8_t *pAdvBuf)
 
     /*** Update due time of first CE. ***/
     pConnBod->dueUsec = refTime + txWinOffsetUsec;
+
+    if (gu32DbgCharBufNdx + 80 < DBG_CHAR_BUF_SIZE)
+    {
+      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@32 %d %d %d %d %d,\r\n", PalBbGetCurrentTime(), pScan->advStartTsUsec, advEndTs, pConnBod->dueUsec, pConnBod->bodType);
+      if (gu8Debug == 2) gu8Debug = 3;  //@? after reset, try to send out CONN_IND
+    }
 
 #if (LL_ENABLE_TESTER)
     switch (llTesterCb.connFirstCePos)

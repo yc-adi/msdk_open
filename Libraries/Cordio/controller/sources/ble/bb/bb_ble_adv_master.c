@@ -362,19 +362,9 @@ static void bbMstScanRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint
             PalBbBleTxBufDesc_t desc = {.pBuf = pScan->pTxReqBuf, .len = pScan->txReqLen};
             if (desc.pBuf[0] == 0x25 && desc.pBuf[1] == 0x22)  //@? CONN_IND
             {
-              if (gu32DbgCharBufNdx + 80 < DBG_CHAR_BUF_SIZE)
+              if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
               {
-                gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@CONN_IND %d: ", PalBbGetCurrentTime());
-                for (uint32_t i = 0; i < 4 && gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 4; ++i)
-                {
-                  gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "%x ", desc.pBuf[i]);
-                }
-                if (gu32DbgCharBufNdx < DBG_CHAR_BUF_SIZE - 2)
-                {
-                  gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\r';
-                  gu8DbgCharBuf[gu32DbgCharBufNdx++] = '\n';
-                }
-                gu8DbgCharBuf[DBG_CHAR_BUF_SIZE - 1] = 0;
+                gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@33 %d,\r\n", PalBbGetCurrentTime());
               }
             }
 

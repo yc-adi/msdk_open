@@ -71,19 +71,6 @@ void BbBleTxData(PalBbBleTxBufDesc_t descs[], uint8_t cnt)
   {
     bbBleSetTifs();     /* master always Rx's after Tx */
 
-    //if (descs->pBuf[0] == 0x25 && descs->pBuf[1] == 0x22 && descs->pBuf[2] == 0x11)
-    if (cnt > 1)
-    {
-      PRINT_BLE_BUF(TIFS, descs->pBuf, cnt > 4 ? 4 : cnt);  //@? print TX packet
-    }
-
-    if (gu8Debug > 200)  //@?
-    {
-      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
-      {
-        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@24 %d,\r\n", PalBbGetCurrentTime());
-      }
-    }
     PalBbBleTxData(descs, cnt);
   }
   else
@@ -92,17 +79,7 @@ void BbBleTxData(PalBbBleTxBufDesc_t descs[], uint8_t cnt)
 
     /* TODO set only if master or if slave and Rx may follow in CE. */
     bbBleSetTifs();
-    if (cnt > 1)
-    {
-      PRINT_BLE_BUF(TIFS, descs->pBuf, cnt > 4 ? 4 : cnt);  //@? print TX packet
-    }
-    if (gu8Debug > 222)
-    {
-      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
-      {
-        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@25 %d,\r\n", PalBbGetCurrentTime());
-      }
-    }
+
     PalBbBleTxTifsData(descs, cnt);
   }
 }

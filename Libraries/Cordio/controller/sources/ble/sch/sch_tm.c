@@ -174,6 +174,7 @@ bool_t SchTmCheckConflict(uint32_t refBegin, uint32_t interUsec, uint32_t durUse
 /*************************************************************************************************/
 uint32_t SchTmGetFirstAnchor(uint32_t refTime, uint32_t defOffsUsec, uint32_t interUsec, uint32_t durUsec)
 {
+  WsfTrace("@? %d %d %d %d", refTime, defOffsUsec, interUsec, durUsec);
   schTmNodeCb_t schTmNodeCb;
   uint8_t i, numNode, refLink, curLink, bestIndex;
   uint32_t lastEnd, curBegin, rangeBegin, rangeEnd;
@@ -224,6 +225,7 @@ uint32_t SchTmGetFirstAnchor(uint32_t refTime, uint32_t defOffsUsec, uint32_t in
   if (numNode == 0)
   {
     /* Nothing to do. */
+    WsfTrace("@? numNode=0 %d", defOffsUsec);
     return defOffsUsec;
   }
 
@@ -344,9 +346,9 @@ uint32_t SchTmGetFirstAnchor(uint32_t refTime, uint32_t defOffsUsec, uint32_t in
     anchorTime -= commInterUsec;
   }
 
-  LL_TRACE_INFO1("Topology SchTmGetFirstAnchor, refTime=%u", refTime);
-  LL_TRACE_INFO1("Topology SchTmGetFirstAnchor, anchorTime=%u", anchorTime);
-
+  //LL_TRACE_INFO1("Topology SchTmGetFirstAnchor, refTime=%u", refTime);
+  //LL_TRACE_INFO1("Topology SchTmGetFirstAnchor, anchorTime=%u", anchorTime);
+  WsfTrace("@? SchTmGetFirstAnchor anchorTime-refTime=%d-%d=%d", anchorTime, refTime, (anchorTime - refTime));
   /* Return value should be 0 ~ defOffsecUsec. */
   return (anchorTime - refTime);
 }

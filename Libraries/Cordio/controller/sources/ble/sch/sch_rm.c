@@ -55,6 +55,8 @@
  */
 /*************************************************************************************************/
 
+#include "../lctr/lctr_int_conn.h"
+#include "sch_api.h"
 #include "sch_int_rm.h"
 #include "sch_int_tm.h"
 #include "wsf_assert.h"
@@ -77,6 +79,9 @@ WSF_CT_ASSERT((SCH_RM_MAX_RSVN <= 32));
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/
+extern uint8_t gu8Debug;
+extern uint8_t gu8DbgCharBuf[DBG_CHAR_BUF_SIZE];
+extern uint32_t gu32DbgCharBufNdx;
 
 /*! \brief      Scheduler resource manager control block. */
 SchRmCb_t schRmCb;
@@ -832,6 +837,7 @@ uint32_t SchRmCalcCommonPeriodicityUsec(uint32_t peerPerUsec)
 /*************************************************************************************************/
 bool_t SchRmAdd(uint8_t handle, uint8_t pref, uint32_t minUsec, uint32_t maxUsec, uint32_t durUsec, uint32_t *pInterUsec, GetRefTimeCb_t refTimeCb)
 {
+  WsfTrace("@? SchRmAdd hndl=%d", handle);
   bool_t status = FALSE;
   uint32_t perfPerUsec = SCH_RM_PREF_PER_CONN_USEC;
 
@@ -973,13 +979,29 @@ uint32_t SchRmGetOffsetUsec(uint32_t defOffsUsec, uint8_t handle, uint32_t refTi
   {
     /* We do not have reference anchor point yet for the 1st reservation. */
     /* First anchor point will be chosen to avoid conflict with TM links. */
+    WsfTrace("@? numRsvn=%d", schRmCb.numRsvn);
     return SchTmGetFirstAnchor(refTime, defOffsUsec, schRmCb.rsvn[handle].interUsec, schRmCb.rsvn[handle].durUsec);
+  }
+
+  if (handle == 0 && schRmCb.refHandle == 0)  //@?
+  {
+    __asm("nop");
+    schRmCb.refHandle = 1;
   }
 
   /* rmRefTime is the time for offset bit 0. */
   if (schRmCb.rsvn[schRmCb.refHandle].refTimeCb != NULL)
   {
-    rmRefTime = schRmCb.rsvn[schRmCb.refHandle].refTimeCb(schRmCb.refHandle, NULL);
+    rmRefTime = schRmCb.rsvn[schRmCb.refHandle].refTimeCb(schRmCb.refHandle, NULL);  // lctrGetConnRefTime
+    if (gu8Debug >= 0)  //@?
+    {
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+      {
+        lctrConnCtx_t *pCtx = LCTR_GET_CONN_CTX(schRmCb.refHandle);
+        
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "refHndl=%d pCtx=%d %d %d rmRefTime=%d,\r\n", schRmCb.refHandle, pCtx, pCtx->enabled, pCtx->bleData.chan.opType, rmRefTime);
+      }
+    }
   }
 
   if ((schRmCb.commonInt != 0) && (schRmCb.rsvn[handle].commIntUsed == TRUE))
@@ -988,14 +1010,21 @@ uint32_t SchRmGetOffsetUsec(uint32_t defOffsUsec, uint8_t handle, uint32_t refTi
     offsUsec = offsetUnitUs * schRmCb.rsvn[handle].offsetBit;
     if (offsUsec == 0)
     {
-      offsUsec += schRmCb.rsvn[handle].interUsec;
+      offsUsec = schRmCb.rsvn[handle].interUsec;
     }
 
     targetTime = rmRefTime + offsUsec;
 
-    LL_TRACE_INFO2("SchRmGetOffsetUsec, handle = %u, refHandle = %u", handle, schRmCb.refHandle);
-    LL_TRACE_INFO1("                    refTime = %u", refTime);
-    LL_TRACE_INFO1("                    targetTime = %u", targetTime);
+    //LL_TRACE_INFO2("SchRmGetOffsetUsec, handle = %u, refHandle = %u", handle, schRmCb.refHandle);
+    //LL_TRACE_INFO1("                    refTime = %u", refTime);
+    //LL_TRACE_INFO1("                    targetTime = %u", targetTime);
+    if (gu8Debug >= 0)  //@?
+    {
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+      {
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "1, %d %d, %d %d %d,\r\n", handle, schRmCb.refHandle, rmRefTime, offsUsec, targetTime);
+      }
+    }
   }
   else
   {
@@ -1027,9 +1056,10 @@ uint32_t SchRmGetOffsetUsec(uint32_t defOffsUsec, uint8_t handle, uint32_t refTi
     /* Place the uncommon handle away from each common ones to avoid conflicts. */
     targetTime = rmRefTime + (offsetBit * offsetUnitUs) + uncommonOffsetUs;
 
-    LL_TRACE_INFO2("SchRmGetOffsetUsec, uncommon handle = %u, refHandle = %u", handle, schRmCb.refHandle);
-    LL_TRACE_INFO1("                    refTime = %u", rmRefTime);
-    LL_TRACE_INFO1("                    targetTime = %u", targetTime);
+    //LL_TRACE_INFO2("SchRmGetOffsetUsec, uncommon handle = %u, refHandle = %u", handle, schRmCb.refHandle);
+    //LL_TRACE_INFO1("                    refTime = %u", rmRefTime);
+    //LL_TRACE_INFO1("                    targetTime = %u", targetTime);
+    WsfTrace("@? 2 %d %d %d %d", handle, schRmCb.refHandle, refTime, targetTime);
   }
 
   /* Time to return has to be future from refTime. */
@@ -1044,6 +1074,7 @@ uint32_t SchRmGetOffsetUsec(uint32_t defOffsUsec, uint8_t handle, uint32_t refTi
     targetTime -= schRmCb.rsvn[handle].interUsec;
   }
 
-  LL_TRACE_INFO1("                    offsUsec = %u", (targetTime - refTime));
-  return BbGetTargetTimeDelta(targetTime, refTime);
+  //LL_TRACE_INFO1("                    offsUsec = %u", (targetTime - refTime));
+  uint32_t ret = BbGetTargetTimeDelta(targetTime, refTime);
+  return ret;
 }

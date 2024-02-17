@@ -73,6 +73,13 @@ void lctrMstInitiateEndOp(BbOpDesc_t *pOp)
       uint32_t connInterUsec = LCTR_CONN_IND_US(numIntervals * pCtx->connInterval);
 
       pConnBod->dueUsec = anchorPointUsec + connInterUsec;
+      if (gu8Debug >= 0)  //@?
+      {
+        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+        {
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "pConnBod->dueUsec=%d,\r\n", pConnBod->dueUsec);
+        }
+      }
     }
   }
 

@@ -30,6 +30,9 @@
 #include "sch_api_ble.h"
 #include "wsf_assert.h"
 #include "wsf_trace.h"
+#include "../sch/sch_int_rm.h"
+
+extern SchRmCb_t schRmCb;
 
 /*************************************************************************************************/
 /*!
@@ -41,6 +44,8 @@
 /*************************************************************************************************/
 void lctrMstConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
 {
+  uint8_t i, handle;
+
   switch (pCtx->state)
   {
     case LCTR_CONN_STATE_ESTABLISHED_READY:
@@ -127,17 +132,13 @@ void lctrMstConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
   {
     case LCTR_CONN_TERMINATED:
       LL_TRACE_INFO2("lctrMstConnExecuteSm: handle=%u, state=%u, event=TERMINATED", LCTR_GET_CONN_HANDLE(pCtx), pCtx->state);
-
-      // if case of multiple peripheral connections
-      if (TRUE)  // TODO
-      {
-        WsfTrace("@? here");
-        SchRmRemove(LCTR_GET_CONN_HANDLE(pCtx));  //@?
-      }
       lctrNotifyHostDisconnectInd(pCtx);
+      
       /* Fallthrough. */
     case LCTR_CONN_INIT_CANCELED:
-      SchRmRemove(LCTR_GET_CONN_HANDLE(pCtx));
+      /* remove all reservations */
+      SchRmInit();
+     
       lctrFreeConnCtx(pCtx);
       break;
     default:

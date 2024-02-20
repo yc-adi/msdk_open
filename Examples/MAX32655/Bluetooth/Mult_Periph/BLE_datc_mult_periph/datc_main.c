@@ -917,8 +917,7 @@ void ShowConns(void)
  * 
  *  \param  argc      The number of arguments passed to the command.
  *  \param  argv      The array of arguments; the 0th argument is the command.
- *      cmd check_on                        start checking
- *      cmd check_off                       stop checking
+ *      cmd check <on/off>                  start/stop checking
  *      cmd qry                             query status
  *      cmd send <connID> <data>            send data (in string without space) to the device with <connId>
  *      cmd test
@@ -954,14 +953,18 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
             AppDbNvmDeleteAll();
         }
 
-        else if (strcmp(argv[1], "check_on") == 0) {
-            datcCb.check = TRUE;
-            TerminalTxPrint("start to check\r\n");
+        else if (strcmp(argv[1], "check") == 0) {
+            if (strcmp(argv[2], "on") == 0)
+            {
+                datcCb.check = TRUE;
+                TerminalTxPrint("start to check\r\n");
+            }
+            else
+            {
+                datcCb.check = FALSE;
+                TerminalTxPrint("stop checking\r\n");
+            }
         } 
-        else if (strcmp(argv[1], "check_off") == 0) {
-            datcCb.check = FALSE;
-            TerminalTxPrint("stop checking\r\n");
-        }
 
         else if (strcmp(argv[1], "qry") == 0) {
             TerminalTxPrint("ocmp=%d check=%d scanInterval=%d DbgBufNdx=%d\r\n", ocmpSt, datcCb.check, dmConnCb.scanInterval[0], gu32DbgCharBufNdx);

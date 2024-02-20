@@ -57,7 +57,7 @@ void WsfAssert(const char *pFile, uint16_t line)
 #if WSF_TOKEN_ENABLED == TRUE
   WSF_TRACE_ERR2("Assertion detected on %s:%u", modId, line);
 #else
-  WSF_TRACE_ERR2("Assertion detected on %s:%u", pFile, line);
+  WSF_TRACE_ERR2("Assertion detected on %s : %u", pFile, line);
 #endif
 
   PalSysAssertTrap();

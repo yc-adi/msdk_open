@@ -294,19 +294,21 @@ void oobRxCback(void)
  *  \brief  Send notification containing data.
  *
  *  \param  connId      DM connection ID.
+ *  \param  pStr        Received string.
  *
  *  \return None.
  */
 /*************************************************************************************************/
-static void datsSendData(dmConnId_t connId)
+static void datsSendData(dmConnId_t connId, char *pStr)
 {
     uint8_t addr[6];
     AppGetBdAddr(addr);
 
     uint8_t str[50];
-    sprintf((char *)str, "back from %s %02X:%02X:%02X:%02X:%02X:%02X",
+    sprintf((char *)str, "back from %s %02X:%02X:%02X:%02X:%02X:%02X, \"%s\"",
             (char *)&datsScanDataDisc[2], 
-            addr[5], addr[4], addr[3], addr[2], addr[1], addr[0]);
+            addr[5], addr[4], addr[3], addr[2], addr[1], addr[0],
+            pStr);
 
     if (AttsCccEnabled(connId, DATS_WP_DAT_CCC_IDX)) {
         /* send notification */
@@ -456,7 +458,7 @@ uint8_t datsWpWriteCback(dmConnId_t connId, uint16_t handle, uint8_t operation, 
         APP_TRACE_INFO1("datsWpWriteCback rcvd: %s", (const char *)pValue);
 
         /* send back some data */
-        datsSendData(connId);
+        datsSendData(connId, (char *)pValue);
     } else {
         APP_TRACE_INFO1("Speed test packet Count [%d]", packetCount++);
         if (packetCount >= 5000) {

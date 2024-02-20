@@ -532,7 +532,7 @@ void dmConnSmActConnFailed(dmConnCcb_t *pCcb, dmConnMsg_t *pMsg)
       dmDevPassEvtToDevPriv(DM_DEV_PRIV_MSG_RPA_STOP, DM_CONN_CLOSE_IND, 0 , 0);
     }
   }
-  WsfTrace("@? dmConnSmActConnFailed");
+
   pMsg->hdr.event = DM_CONN_CLOSE_IND;
   pMsg->hciLeConnCmpl.handle = pMsg->hciLeConnCmpl.role = 0;
   dmConnExecCback(pMsg);

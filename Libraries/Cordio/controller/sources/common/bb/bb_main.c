@@ -236,10 +236,6 @@ void BbExecuteBod(BbOpDesc_t *pBod)
   if (bbCb.termBod)
   {
     bbCb.pOpInProgress = NULL;
-    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
-    {
-      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@14 %d,\r\n", PalBbGetCurrentTime());
-    }
   }
 }
 
@@ -290,12 +286,6 @@ void BbSetBodTerminateFlag(uint8_t src)
   if (bbCb.pOpInProgress)
   {
     bbCb.termBod = TRUE;
-    /*
-    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
-    {
-      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@15 %d %d,\r\n", src, PalBbGetCurrentTime());
-    }
-    */
   }
 }
 
@@ -332,12 +322,7 @@ void BbTerminateBod(uint8_t src)
 
   bbCb.pOpInProgress = NULL;
   bbCb.termBod = TRUE;
-  if (gu8Debug == 18 || gu8Debug == 28) {
-    if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
-    {
-      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@16 %d %d,\r\n", src, PalBbGetCurrentTime());
-    }
-  }
+
   bbCb.bodCompCback();
 }
 

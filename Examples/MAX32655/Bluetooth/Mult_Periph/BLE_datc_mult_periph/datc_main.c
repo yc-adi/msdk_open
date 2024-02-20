@@ -56,6 +56,7 @@
 #include "util/terminal.h"
 #include "pal_btn.h"
 #include "pal_uart.h"
+#include "..\\sch\\sch_int_rm.h"
 #include "tmr.h"
 #include "sdsc_api.h"
 #include "wsf_os.h"
@@ -81,7 +82,7 @@ Macros
 #define SCAN_START_MS 1000
 
 #define OCMP_CONNECTING_TMR_EVT 0x9A    // for ocmpConnectingTimer
-#define OCMP_CONNECTING_TMR_MS  12000
+#define OCMP_CONNECTING_TMR_MS  18000
 
 /* Down sample the number of scan reports we print */
 #define SCAN_REPORT_DOWN_SAMPLE 20
@@ -98,6 +99,7 @@ extern uint8_t gu8Debug;
 extern appDb_t appDb;
 extern OCMP_ST_t ocmpSt;
 extern bool_t PalSysAssertTrapEnable;
+extern SchRmCb_t schRmCb;
 
 extern void StackInitDatc(void);
 
@@ -903,32 +905,7 @@ void ShowConns(void)
                      pCcb->peerAddr[2], pCcb->peerAddr[1], pCcb->peerAddr[0]);
         }
     }
-
-    /*
-    appConnCb_t *pCcb = appConnCb;
-    uint8_t       i;
-    uint8_t       cnt = 0;
-
-    for (i = DM_CONN_MAX; i > 0; i--, pCcb++)
-    {
-        if (pCcb->connId != DM_CONN_ID_NONE)
-        {
-            cnt++;
-            WsfTrace("%d: connId=%d", cnt, pCcb->connId);
-        }
-    }
-
-    appDbRec_t *pRec = appDb.rec;
-    // find matching record
-    for (i = APP_DB_NUM_RECS; i > 0; i--, pRec++)
-    {
-        if (pRec->inUse)
-        {
-            PreparePeerAddrStr(pRec->peerAddr, pRec->peerAddrStr);
-            WsfTrace("%d, %s", i, pRec->peerAddrStr);
-        }
-    }
-    */
+    WsfTrace("");
 }
 
 /*************************************************************************************************/
@@ -996,6 +973,12 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
             PrintDbgBuf(0, gu32DbgCharBufNdx);
             gu32DbgCharBufNdx = 0;
             gu8Debug = 0;
+
+            //@?
+            TerminalTxPrint("numRsvn=%d refHndl=%d ofstDepth=%d rmSt=%d commonInt=%d, 0: %d %d 1: %d %d\r\n",
+                            schRmCb.numRsvn, schRmCb.refHandle, schRmCb.offsetDepth, schRmCb.rmStatus, schRmCb.commonInt,
+                            schRmCb.rsvn[0].handle, schRmCb.rsvn[0].durUsec,
+                            schRmCb.rsvn[1].handle, schRmCb.rsvn[1].durUsec);
         }
 
         else if (strcmp(argv[1], "send") == 0) {

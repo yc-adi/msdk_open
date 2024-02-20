@@ -187,6 +187,12 @@ void PrintDbgBuf(uint32_t start, uint32_t len)
       APP_TRACE_INFO1("%s", temp);
     }
   }
+
+  if (j != 0)
+  {
+    temp[j] = '\0';
+    APP_TRACE_INFO1("%s", temp);
+  }
 }
 
 /*************************************************************************************************/
@@ -400,14 +406,7 @@ void SchHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
     {
       WSF_ASSERT(schCb.state == SCH_STATE_EXEC);
       WSF_ASSERT(schCb.eventSetFlagCount);
-      if (gu8Debug >= 113)  //@?
-      {
-        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
-        {
-          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@6  %d %d,\r\n", PalBbGetCurrentTime(), pBod->bodType);
-          if (++gu8Debug >= 9) gu8Debug = 2;  // no need to record too much
-        }
-      }
+
       /*** Complete current BOD ***/
 
       schCb.state = SCH_STATE_IDLE;

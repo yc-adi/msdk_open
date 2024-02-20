@@ -93,7 +93,7 @@ void AppUiAction(uint8_t event)
       {
         ocmpSt = OCMP_ST_CONN;
       }
-      APP_TRACE_INFO1(">>> Scanning stopped, ocmp=%d <<<", ocmpSt);
+      //APP_TRACE_INFO1(">>> Scanning stopped, ocmp=%d <<<", ocmpSt);
       break;
 
     case APP_UI_SCAN_REPORT:

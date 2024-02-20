@@ -127,6 +127,13 @@ void lctrMstConnExecuteSm(lctrConnCtx_t *pCtx, uint8_t event)
   {
     case LCTR_CONN_TERMINATED:
       LL_TRACE_INFO2("lctrMstConnExecuteSm: handle=%u, state=%u, event=TERMINATED", LCTR_GET_CONN_HANDLE(pCtx), pCtx->state);
+
+      // if case of multiple peripheral connections
+      if (TRUE)  // TODO
+      {
+        WsfTrace("@? here");
+        SchRmRemove(LCTR_GET_CONN_HANDLE(pCtx));  //@?
+      }
       lctrNotifyHostDisconnectInd(pCtx);
       /* Fallthrough. */
     case LCTR_CONN_INIT_CANCELED:

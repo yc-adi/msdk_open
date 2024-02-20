@@ -96,10 +96,6 @@ void lctrConnIndHandler(BbOpDesc_t *pOp, uint8_t reqLen, const uint8_t *pReqBuf)
       lctrSlvAdv.usedChSel = LL_CH_SEL_1;
     }
   }
-  else
-  {
-    WsfTrace("@? %d %d", lctrMsgDispTbl[LCTR_DISP_CONN], reqLen);
-  }
 }
 
 /*************************************************************************************************/

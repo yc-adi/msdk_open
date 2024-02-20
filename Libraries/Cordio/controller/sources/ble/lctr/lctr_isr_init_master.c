@@ -77,7 +77,7 @@ void lctrMstInitiateEndOp(BbOpDesc_t *pOp)
       {
         if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
         {
-          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "pConnBod->dueUsec=%d,\r\n", pConnBod->dueUsec);
+          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@? lctrMstInitiateEndOp selfTerm hndl=%d pCtx=%x dueUsec=%d,\r\n", lctrMstInit.data.init.connHandle, pCtx, pConnBod->dueUsec);
         }
       }
     }
@@ -198,11 +198,12 @@ bool_t lctrMstInitiateAdvPktHandler(BbOpDesc_t *pOp, const uint8_t *pAdvBuf)
 
     /*** Update due time of first CE. ***/
     pConnBod->dueUsec = refTime + txWinOffsetUsec;
-
-    if (gu32DbgCharBufNdx + 80 < DBG_CHAR_BUF_SIZE)
+    if (gu8Debug >= 0)  //@?
     {
-      gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@32 %d %d %d %d %d,\r\n", PalBbGetCurrentTime(), pScan->advStartTsUsec, advEndTs, pConnBod->dueUsec, pConnBod->bodType);
-      if (gu8Debug == 2) gu8Debug = 3;  //@? after reset, try to send out CONN_IND
+      if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
+      {
+        gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@? lctrMstInitiateAdvPktHandler pCtx=%x dueUsec=%d,\r\n", pCtx, pConnBod->dueUsec);
+      }
     }
 
 #if (LL_ENABLE_TESTER)

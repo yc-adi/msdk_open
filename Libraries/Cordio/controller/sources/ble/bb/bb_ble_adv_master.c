@@ -357,16 +357,9 @@ static void bbMstScanRxCompCback(uint8_t status, int8_t rssi, uint32_t crc, uint
           {
             WSF_ASSERT(pScan->pTxReqBuf);
 
-            //BB_ISR_MARK(bbScanStats.txSetupUsec);
+            BB_ISR_MARK(bbScanStats.txSetupUsec);
 
             PalBbBleTxBufDesc_t desc = {.pBuf = pScan->pTxReqBuf, .len = pScan->txReqLen};
-            if (desc.pBuf[0] == 0x25 && desc.pBuf[1] == 0x22)  //@? CONN_IND
-            {
-              if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
-              {
-                gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@33 %d,\r\n", PalBbGetCurrentTime());
-              }
-            }
 
             bbBleSetTifs();
             

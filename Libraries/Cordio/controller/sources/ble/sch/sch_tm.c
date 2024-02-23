@@ -350,10 +350,6 @@ uint32_t SchTmGetFirstAnchor(uint32_t refTime, uint32_t defOffsUsec, uint32_t in
 
   LL_TRACE_INFO1("Topology SchTmGetFirstAnchor, refTime=%u", refTime);
   LL_TRACE_INFO1("Topology SchTmGetFirstAnchor, anchorTime=%u", anchorTime);
-  if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
-  {
-    gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@? Topology SchTmGetFirstAnchor anchor=%d ref=%d %d\r\n", anchorTime, refTime, (anchorTime - refTime));
-  }
 
   /* Return value should be 0 ~ defOffsecUsec. */
   return (anchorTime - refTime);

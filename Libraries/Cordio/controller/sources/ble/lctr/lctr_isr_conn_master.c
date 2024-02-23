@@ -441,12 +441,6 @@ void lctrMstConnEndOp(BbOpDesc_t *pOp)
 
     if (SchInsertAtDueTime(pOp, lctrConnResolveConflict))
     {
-      if (gu8Debug == 18) {
-        if (gu32DbgCharBufNdx + 40 < DBG_CHAR_BUF_SIZE)
-        {
-          gu32DbgCharBufNdx += my_sprintf((char *)&gu8DbgCharBuf[gu32DbgCharBufNdx], "@12 %d,\r\n", PalBbGetCurrentTime());
-        }
-      }
       break;
     }
 

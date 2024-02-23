@@ -56,7 +56,6 @@
 #include "util/terminal.h"
 #include "pal_btn.h"
 #include "pal_uart.h"
-#include "..\\sch\\sch_int_rm.h"
 #include "tmr.h"
 #include "sdsc_api.h"
 #include "wsf_os.h"
@@ -99,7 +98,6 @@ extern uint8_t gu8Debug;
 extern appDb_t appDb;
 extern OCMP_ST_t ocmpSt;
 extern bool_t PalSysAssertTrapEnable;
-extern SchRmCb_t schRmCb;
 
 extern void StackInitDatc(void);
 
@@ -502,11 +500,6 @@ static void datcScanStopConnStart(dmEvt_t *pMsg)
                          datcConnInfo.addr[5], datcConnInfo.addr[4], datcConnInfo.addr[3], 
                          datcConnInfo.addr[2], datcConnInfo.addr[1], datcConnInfo.addr[0]);
             APP_TRACE_INFO1("%s", str);
-
-            if (gu8Debug == 2)
-            {
-                gu8Debug = 3;  //@?
-            }
             
             dmConnId_t connId = AppConnOpen(datcConnInfo.addrType, datcConnInfo.addr, datcConnInfo.dbHdl);
             if (connId == DM_CONN_ID_NONE)
@@ -976,12 +969,6 @@ uint8_t appTerminalCmdHandler(uint32_t argc, char **argv)
             PrintDbgBuf(0, gu32DbgCharBufNdx);
             gu32DbgCharBufNdx = 0;
             gu8Debug = 0;
-
-            //@?
-            TerminalTxPrint("numRsvn=%d refHndl=%d ofstDepth=%d rmSt=%d commonInt=%d, 0: %d %d 1: %d %d\r\n",
-                            schRmCb.numRsvn, schRmCb.refHandle, schRmCb.offsetDepth, schRmCb.rmStatus, schRmCb.commonInt,
-                            schRmCb.rsvn[0].handle, schRmCb.rsvn[0].durUsec,
-                            schRmCb.rsvn[1].handle, schRmCb.rsvn[1].durUsec);
         }
 
         else if (strcmp(argv[1], "send") == 0) {

@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,11 +31,27 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 /**
  * @file    main.c
- * @brief   Parallel camera example with the OV7692/OV5642/HM01B0/HM0360 camera sensors as defined in the makefile.
+ * @brief   Parallel camera example with the OV7692/OV5642/OV5640/HM01B0/HM0360/PAG7920 camera sensors as defined in the makefile.
  *
  * @details This example uses the UART to stream out the image captured from the camera.
  *          Alternatively, it can display the captured image on TFT is it is enabled in the make file.
@@ -58,8 +76,10 @@
 #include "led.h"
 #include "board.h"
 #include "camera.h"
+#include "mipi_camera.h"
 #include "utils.h"
 #include "dma.h"
+
 #ifdef TFT_ADAFRUIT
 #include "adafruit_3315_tft.h"
 #endif
@@ -75,17 +95,18 @@
 #if defined(CAMERA_HM01B0)
 #define IMAGE_XRES 324 / 2
 #define IMAGE_YRES 244 / 2
+#define CAMERA_MONO
 #endif
 
-#if defined(CAMERA_HM0360_MONO)
+#if defined(CAMERA_HM0360_MONO) || defined(CAMERA_PAG7920)
 #define IMAGE_XRES 320
 #define IMAGE_YRES 240
+#define CAMERA_MONO
 #endif
 
-#if defined(CAMERA_OV7692) || defined(CAMERA_OV5642)
+#if defined(CAMERA_OV7692) || defined(CAMERA_OV5642) || defined(CAMERA_OV5640)
 #define IMAGE_XRES 320
 #define IMAGE_YRES 240
-
 #endif
 
 #define CON_BAUD \
@@ -109,13 +130,19 @@ void process_img(void)
     // to an image file
     utils_send_img_to_pc(raw, imgLen, w, h, camera_get_pixel_format());
 #else
+#ifdef TFT_NEWHAVEN
+    MXC_TFT_Stream(X_START, Y_START, IMAGE_XRES, IMAGE_YRES);
+    // Stream captured image to TFT display
+    TFT_SPI_Transmit(raw, IMAGE_XRES * IMAGE_YRES * 2);
+#else //#ifdef TFT_NEWHAVEN
 #ifndef CAMERA_MONO
     // Send the image to TFT
-    MXC_TFT_ShowImageCameraRGB565(X_START, Y_START, raw, w, h);
+    MXC_TFT_WriteBufferRGB565(X_START, Y_START, raw, w, h);
 #else
     MXC_TFT_ShowImageCameraMono(X_START, Y_START, raw, w, h);
 #endif // #ifndef CAMERA_MONO
-#endif // ##ifndef ENABLE_TFT
+#endif //#ifdef TFT_NEWHAVEN
+#endif // #ifndef ENABLE_TFT
 }
 
 // *****************************************************************************
@@ -160,7 +187,8 @@ int main(void)
 
     printf("Camera ID detected: %04x\n", id);
 
-#if defined(CAMERA_HM01B0) || defined(CAMERA_HM0360_MONO) || defined(CAMERA_OV5642)
+#if defined(CAMERA_HM01B0) || defined(CAMERA_HM0360_MONO) || defined(CAMERA_OV5642) || \
+    defined(CAMERA_OV5640)
     camera_set_vflip(0);
 #ifdef TFT_NEWHAVEN
     // Newhaven display needs a horizontal flip to match orientation
@@ -179,25 +207,30 @@ int main(void)
     printf("Init TFT\n");
     /* Initialize TFT display */
 #ifdef TFT_ADAFRUIT
-    /* Initialize touch screen */
-    if (MXC_TS_Init(MXC_SPI0, -1, NULL, NULL) != E_NO_ERROR) {
-        printf("Touch screen initialization failed\n");
+    if (MXC_TFT_Init(MXC_SPI0, 1, NULL, NULL) != E_NO_ERROR) {
+        printf("TFT initialization failed\n");
         return E_ABORT;
     }
 #else
     /* Initialize TFT display */
     if (MXC_TFT_Init(NULL, NULL) != E_NO_ERROR) {
-        printf("Touch screen initialization failed\n");
+        printf("TFT initialization failed\n");
         return E_ABORT;
     }
 #endif
+    MXC_TFT_SetRotation(ROTATE_90);
+    MXC_TFT_SetBackGroundColor(4);
 #endif
-    MXC_TFT_SetBackGroundColor(0);
 
     // Setup the camera image dimensions, pixel format and data acquiring details.
 #ifndef CAMERA_MONO
+#if defined(OV5640_DVP)
+    ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXEL_FORMAT_RGB565, FIFO_FOUR_BYTE, USE_DMA,
+                       dma_channel); // RGB565
+#else
     ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_RGB565, FIFO_FOUR_BYTE, USE_DMA,
                        dma_channel); // RGB565
+#endif
 #else
     ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_BAYER, FIFO_FOUR_BYTE, USE_DMA,
                        dma_channel); // Mono
@@ -208,22 +241,24 @@ int main(void)
         return -1;
     }
 
-    // Start capturing a first camera image frame.
-    printf("Capture image\n");
+#if defined(OV5640_DVP)
+    camera_write_reg(0x503d, 0x0); // workaround: disable test pattern: color bar
+#endif
+
+    // Start capturing a first  camera image frame.
     camera_start_capture_image();
+    printf("Capture image\n");
 
     while (1) {
         // Check if image is acquired.
-#ifndef STREAM_ENABLE
-        if (camera_is_image_rcv())
-#endif
-        {
+        if (camera_is_image_rcv()) {
             // Process the image, send it through the UART console.
             process_img();
 
             // Prepare for another frame capture.
             LED_Toggle(LED1);
             camera_start_capture_image();
+            printf(".\n");
         }
     }
 

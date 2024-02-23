@@ -4,8 +4,10 @@
  *             Secure Digital High Capacity (SDHC) peripheral module.
  */
 
-/* *****************************************************************************
- * Copyright (C) 2017 Maxim Integrated Products, Inc., All Rights Reserved.
+/******************************************************************************
+ *
+ * Copyright (C) 2017-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -35,10 +37,23 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
- * $Date: 2017-03-01 09:46:57 -0600 (Wed, 01 Mar 2017) $
- * $Revision: 26777 $
+ ******************************************************************************
  *
- **************************************************************************** */
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************/
 
 #ifndef LIBRARIES_SDHC_INCLUDE_SDHC_LIB_H_
 #define LIBRARIES_SDHC_INCLUDE_SDHC_LIB_H_
@@ -51,6 +66,17 @@
 #include "mxc_sys.h"
 #include "sdhc.h"
 #include "sdhc_resp_regs.h"
+
+#ifndef SDHC_CLK_FREQ
+/**
+ * @brief SDHC target clock frequency.
+ * @details Max freq. is limited by GCR register to be @ref SystemCoreClock / 2 or @ref SystemCoreClock / 4.
+ * This field is used as a target for the SDHC peripheral's internal clock divider.
+ * R/W reliability issues can sometimes be eliminated by reducing the clock frequency, which is a good first step for troubleshooting.
+ */
+#define SDHC_CLK_FREQ 40000000
+#endif
+
 
 /**
  * @ingroup sdhc
@@ -91,7 +117,7 @@ int MXC_SDHC_Lib_SetRCA(void);
 int MXC_SDHC_Lib_GetCSD(mxc_sdhc_csd_regs_t *csd);
 
 /* ************************************************************************** */
-unsigned int MXC_SDHC_Lib_GetCapacity(mxc_sdhc_csd_regs_t* csd);
+unsigned long long MXC_SDHC_Lib_GetCapacity(mxc_sdhc_csd_regs_t* csd);
 
 /* ************************************************************************** */
 unsigned int MXC_SDHC_Lib_GetSectors(mxc_sdhc_csd_regs_t* csd);

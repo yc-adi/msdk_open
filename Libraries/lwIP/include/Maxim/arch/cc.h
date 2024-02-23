@@ -1,17 +1,15 @@
-/*
- * @file cc.h
+
+/******************************************************************************
  *
- ******************************************************************************
- * Copyright (C) 2019 Maxim Integrated Products, Inc., All rights Reserved.
+ * Copyright (C) 2019-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
- * This software is protected by copyright laws of the United States and
- * of foreign countries. This material may also be protected by patent laws
- * and technology transfer regulations of the United States and of foreign
- * countries. This software is furnished under a license agreement and/or a
- * nondisclosure agreement and may only be used or reproduced in accordance
- * with the terms of those agreements. Dissemination of this information to
- * any party or parties not specified in the license agreement and/or
- * nondisclosure agreement is expressly prohibited.
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included
  * in all copies or substantial portions of the Software.
@@ -33,10 +31,27 @@
  * trademarks, maskwork rights, or any other form of intellectual
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
+ *
  ******************************************************************************
- */
-#ifndef _MXC_CC_H_
-#define _MXC_CC_H_
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************/
+
+#ifndef LIBRARIES_LWIP_INCLUDE_MAXIM_ARCH_CC_H_
+#define LIBRARIES_LWIP_INCLUDE_MAXIM_ARCH_CC_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -65,19 +80,24 @@ typedef uintptr_t   mem_ptr_t;
 
 /* Compiler hints for packing structures */
 #define PACK_STRUCT_FIELD(x)    x
-#define PACK_STRUCT_STRUCT  	__attribute__((packed))
+#define PACK_STRUCT_STRUCT      __attribute__((packed))
 #define PACK_STRUCT_BEGIN
 #define PACK_STRUCT_END
 
+#if !NO_SYS
+#define LWIP_ERRNO_INCLUDE  <sys/errno.h>
+#define LWIP_TIMEVAL_PRIVATE 0
+#endif
+
 /* Platform specific diagnostic output */
-#define LWIP_PLATFORM_DIAG(x)   do {                		\
-        printf x;                   						\
+#define LWIP_PLATFORM_DIAG(x)   do {                        \
+        printf x;                                           \
     } while (0)
 
-#define LWIP_PLATFORM_ASSERT(x) do {                		\
+#define LWIP_PLATFORM_ASSERT(x) do {                        \
         printf("Assert \"%s\" failed at line %d in %s\n",   \
-                x, __LINE__, __FILE__);             		\
-        while (1);                        					\
+                x, __LINE__, __FILE__);                     \
+        while (1) {}                                        \
     } while (0)
 
-#endif /* _MXC_CC_H_ */
+#endif // LIBRARIES_LWIP_INCLUDE_MAXIM_ARCH_CC_H_

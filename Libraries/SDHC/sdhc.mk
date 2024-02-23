@@ -1,5 +1,7 @@
-################################################################################
- # Copyright (C) 2016 Maxim Integrated Products, Inc., All Rights Reserved.
+###############################################################################
+ #
+ # Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ # (now owned by Analog Devices, Inc.)
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
  # copy of this software and associated documentation files (the "Software"),
@@ -29,10 +31,23 @@
  # property whatsoever. Maxim Integrated Products, Inc. retains all
  # ownership rights.
  #
- # $Date: 2016-05-26 16:10:11 -0500 (Thu, 26 May 2016) $ 
- # $Revision: 23077 $
+ ##############################################################################
  #
- ###############################################################################
+ # Copyright 2023 Analog Devices, Inc.
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+ ##############################################################################
 
 ################################################################################
 # This file can be included in a project makefile to build the library for the 
@@ -57,6 +72,7 @@ SDHC_DRIVER_BUILD_DIR := ${abspath ${SDHC_DRIVER_BUILD_DIR}}
 export TOOL_DIR := ${abspath ${TOOL_DIR}}
 export CMSIS_ROOT := ${abspath ${CMSIS_ROOT}}
 export PERIPH_DRIVER_DIR := ${abspath ${PERIPH_DRIVER_DIR}}
+export MISC_DRIVERS_DIR=$(LIBS_DIR)/MiscDrivers
 
 # Export other variables needed by the peripheral driver makefile
 export TARGET
@@ -67,7 +83,7 @@ export PROJ_LDFLAGS
 export MXC_OPTIMIZE_CFLAGS
 export BOARD_DIR
 export USE_NATIVE_SDHC
-
+export EXTERNAL_FLASH
 # Add to library list
 LIBS += ${SDHC_DRIVER_BUILD_DIR}/sdhc.a
 
@@ -76,5 +92,5 @@ IPATH += ${SDHC_DRIVER_DIR}/Include
 
 # Add rule to build the Driver Library
 ${SDHC_DRIVER_BUILD_DIR}/sdhc.a: FORCE
-	$(MAKE) -C ${SDHC_DRIVER_DIR} lib BUILD_DIR=${SDHC_DRIVER_BUILD_DIR}
+	$(MAKE) -C ${SDHC_DRIVER_DIR} lib BUILD_DIR=${SDHC_DRIVER_BUILD_DIR} BOARD=${BOARD}
 

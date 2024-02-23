@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,12 +31,27 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 /**
  * @file        main.c
- * @brief       Configures and starts the RTC and demonstrates the use of the
- * alarms.
+ * @brief       Demonstrates the alarm functionality of the Real-Time Clock (RTC)
  * @details     The RTC is enabled and the sub-second alarm set to trigger every
  * 250 ms. P2.25 (LED0) is toggled each time the sub-second alarm triggers.  The
  *              time-of-day alarm is set to 2 seconds.  When the time-of-day
@@ -126,24 +143,10 @@ void printTime()
 int configureRTC()
 {
     int rtcTrim;
-    volatile int i;
+    MXC_Delay(MXC_DELAY_SEC(2)); // Delay to give debugger a window to connect
 
-    for (i = 0; i < 0xFFFFFF; i++) {}
-    // Prevent bricks
-
-    if (!(MXC_GCR->clkctrl &
-          MXC_F_GCR_CLKCTRL_ERFO_RDY)) { // Enable 32Mhz clock if not already enabled
-        MXC_SIMO->vrego_d = (0x3c << MXC_F_SIMO_VREGO_D_VSETD_POS); // Power VREGO_D
-        while (!(MXC_SIMO->buck_out_ready & MXC_F_SIMO_BUCK_OUT_READY_BUCKOUTRDYD)) {}
-
-        MXC_GCR->btleldoctrl = 0x3055; // Restore btleldoctrl setting
-        while (!(MXC_SIMO->buck_out_ready & MXC_F_SIMO_BUCK_OUT_READY_BUCKOUTRDYD)) {}
-
-        MXC_GCR->clkctrl |= MXC_F_GCR_CLKCTRL_ERFO_EN; // Enable 32Mhz oscillator
-        while (!(MXC_GCR->clkctrl & MXC_F_GCR_CLKCTRL_ERFO_RDY)) {}
-    }
-
-    MXC_SYS_Clock_Select(MXC_SYS_CLOCK_ERFO); // Set 32MHz clock as system clock
+    /* Switch the system clock to the 32 MHz oscillator */
+    MXC_SYS_ClockSourceEnable(MXC_SYS_CLOCK_ERFO);
     MXC_SYS_SetClockDiv(MXC_SYS_CLOCK_DIV_1);
     SystemCoreClockUpdate();
 

@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,6 +31,22 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 /**
@@ -54,6 +72,7 @@
 #include "pb.h"
 
 /***** Definitions *****/
+#define WORDS_PER_FLASH_PG (MXC_FLASH_PAGE_SIZE / 4)
 #define TEST_ADDRESS (MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (1 * MXC_FLASH_PAGE_SIZE)
 /*
     ^ Points to last page in flash, which is guaranteed to be unused by this small example.
@@ -205,12 +224,12 @@ int erase_magic()
         Therefore, the entire page must be buffered, erased, then modified.
     */
     int err;
-    uint32_t buffer[MXC_FLASH_PAGE_SIZE >> 2] = {
+    uint32_t buffer[WORDS_PER_FLASH_PG] = {
         0xFFFFFFFF
     }; // 8192 bytes per page / 4 bytes = 2048 uint32_t
 
     printf("Buffering page...\n");
-    memcpy(buffer, (uint32_t *)TEST_ADDRESS, MXC_FLASH_PAGE_SIZE);
+    MXC_FLC_Read(TEST_ADDRESS, buffer, MXC_FLASH_PAGE_SIZE);
 
     printf("Erasing page...\n");
     err = MXC_FLC_PageErase(TEST_ADDRESS);
@@ -220,10 +239,7 @@ int erase_magic()
     }
 
     printf("Erasing magic in buffer...\n");
-    // Calculate buffer index based on flash address (4 bytes per 32-bit word)
-    unsigned int target_address = TEST_ADDRESS;
-    unsigned int buffer_index = (target_address - TEST_ADDRESS) >> 2;
-    buffer[buffer_index] = 0xABCD1234; // Erase magic value
+    buffer[0] = 0xABCD1234; // Erase magic value
 
     printf("Re-writing from buffer...\n");
     for (int i = 0; i < (MXC_FLASH_PAGE_SIZE >> 2); i++) {

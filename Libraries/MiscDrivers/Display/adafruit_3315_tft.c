@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,6 +31,22 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 #include <stdint.h>
@@ -44,7 +62,7 @@
   The SPI interface is shared by the TFT and touchscreen controllers.
 
   The touchscreen events generate an external interrupt.  The TFT driver
-  disables interrupts to prevent the touchscreen driver from accessing the 
+  disables interrupts to prevent the touchscreen driver from accessing the
   SPI bus during TFT activity.  Firmware control of the TFT Data/Command signal
   and the use of GPIO as device delect signals bars a interrupt SPI interface.
 
@@ -621,6 +639,28 @@ void MXC_TFT_ShowImageCameraRGB565(int x0, int y0, uint8_t *image, int width, in
     __enable_irq();
 }
 
+/* This function writes an image data line by line, required by most UI libraries like LVGL */
+void MXC_TFT_WriteBufferRGB565(int x0, int y0, uint8_t *image, int width, int height)
+{
+    __disable_irq();
+
+    if (tft_rotation == ROTATE_0 || tft_rotation == ROTATE_180) {
+        window(x0, y0, height, width);
+    } else {
+        window(x0, y0, width, height);
+    }
+
+    write_command(MEM_WRITE); // send pixel
+
+    for (unsigned int y = 0; y < width * height; y += width) { //height
+        spi_transmit_data_buf(&image[y * 2], width * 2); //width
+    }
+
+    window_max();
+
+    __enable_irq();
+}
+
 void MXC_TFT_PrintPalette(void)
 {
     area_t area = { 10, 10, 2, 25 };
@@ -860,4 +900,13 @@ void MXC_TFT_WriteReg(unsigned char command, unsigned char data)
     write_data(data);
 
     __enable_irq();
+}
+
+void MXC_TFT_Stream(int x0, int y0, int width, int height)
+{
+    if (tft_rotation == ROTATE_0 || tft_rotation == ROTATE_180)
+        window(x0, y0, height, width);
+    else
+        window(x0, y0, width, height);
+    write_command(MEM_WRITE); // send pixel
 }

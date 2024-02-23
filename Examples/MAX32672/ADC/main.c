@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -28,6 +30,22 @@
  * trademarks, maskwork rights, or any other form of intellectual
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
+ *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  ******************************************************************************/
 
@@ -147,7 +165,7 @@ void adc_dma_callback(int ch, int err)
     dma_done = 1;
 }
 
-void DMA0_IRQHandler(void)
+void DMA_IRQHandler(void)
 {
     MXC_DMA_Handler();
 }
@@ -375,7 +393,6 @@ int main(void)
 
 #ifdef DMA
     MXC_DMA_Init();
-    NVIC_EnableIRQ(DMA0_IRQn);
 #endif
 
     while (1) {
@@ -383,7 +400,6 @@ int main(void)
         LED_On(0);
         MXC_TMR_Delay(MXC_TMR0, MSEC(10));
         LED_Off(0);
-
 #ifdef POLLING
         adc_temp_conversion();
         WaitforConversionComplete();
@@ -414,10 +430,16 @@ int main(void)
             MXC_TMR_Delay(MXC_TMR0, USEC(500));
         }
 
-        MXC_DMA_ReleaseChannel(0);
+        int dma_channel = MXC_DMA_AcquireChannel();
+        adc_conv.dma_channel = dma_channel;
+
+        MXC_NVIC_SetVector(MXC_DMA_CH_GET_IRQ(dma_channel), DMA_IRQHandler);
+        NVIC_EnableIRQ(MXC_DMA_CH_GET_IRQ(dma_channel));
         MXC_ADC_StartConversionDMA(&adc_conv, &adc_val[0], adc_dma_callback);
 
         while (!dma_done) {}
+
+        MXC_DMA_ReleaseChannel(adc_conv.dma_channel);
 #endif
         ShowAdcResult();
 

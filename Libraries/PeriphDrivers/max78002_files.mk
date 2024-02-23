@@ -1,5 +1,7 @@
-################################################################################
- # Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+###############################################################################
+ #
+ # Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ # (now owned by Analog Devices, Inc.)
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
  # copy of this software and associated documentation files (the "Software"),
@@ -29,7 +31,23 @@
  # property whatsoever. Maxim Integrated Products, Inc. retains all
  # ownership rights.
  #
- ###############################################################################
+ ##############################################################################
+ #
+ # Copyright 2023 Analog Devices, Inc.
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+ ##############################################################################
 
 # This is the name of the build output file
 
@@ -56,7 +74,7 @@ PERIPH_DIR := $(LIBS_DIR)/PeriphDrivers
 SOURCE_DIR := $(PERIPH_DIR)/Source
 INCLUDE_DIR := $(PERIPH_DIR)/Include
 
-PERIPH_DRIVER_INCLUDE_DIR  += $(INCLUDE_DIR)/$(TARGET_UC)/
+PERIPH_DRIVER_INCLUDE_DIR += $(INCLUDE_DIR)/$(TARGET_UC)/
 
 # Source files
 PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/SYS/mxc_assert.c
@@ -136,9 +154,26 @@ PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/SDHC/sdhc_ai87.c
 PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/SDHC/sdhc_reva.c
 USE_NATIVE_SDHC = yes
 
+MXC_SPI_VERSION ?= v1
+# Selects the SPI drivers to build with.  Acceptable values are:
+# - v1
+# - v2
 PERIPH_DRIVER_INCLUDE_DIR += $(SOURCE_DIR)/SPI
+export MXC_SPI_VERSION
+ifeq ($(MXC_SPI_VERSION),v1)
+# SPI v1 (Legacy) Implementation
 PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/SPI/spi_ai87.c
-PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/SPI/spi_reva.c
+PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/SPI/spi_reva1.c
+PROJ_CFLAGS+=-DMXC_SPI_V1
+else
+ifeq ($(MXC_SPI_VERSION),v2)
+# SPI v2 Implementation
+PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/SPI/spi_ai87_v2.c
+PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/SPI/spi_reva2.c
+else
+$(error Invalid value for MXC_SPI_VERSION = "$(MXC_SPI_VERSION)"  Acceptable values are "v1" or "v2")
+endif
+endif
 
 PERIPH_DRIVER_INCLUDE_DIR += $(SOURCE_DIR)/TRNG
 PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/TRNG/trng_ai87.c
@@ -163,5 +198,4 @@ PERIPH_DRIVER_INCLUDE_DIR += $(SOURCE_DIR)/WUT
 PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/WUT/wut_ai87.c
 PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/WUT/wut_reva.c
 
-# Where to find header files for this project
-PERIPH_DRIVER_H_FILES +=  $(shell find $(PERIPH_DRIVER_INCLUDE_DIR) -name '*.h')
+

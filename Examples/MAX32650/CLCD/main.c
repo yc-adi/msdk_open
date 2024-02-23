@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,12 +31,28 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 /**
  * @file
  * @brief      CLCD Example
- * @details    Shows the Maxim Integrated Logo and then shows a gray screen.
+ * @details    Shows the ADI Logo and then shows a blank white screen.
  *             When running this example make sure none of the pins used have
  *             jumpers connected to them otherwise the color may be wrong or may
  *             not work properly.
@@ -106,8 +124,8 @@ void display_logo(void)
     /** Align */
     base_addr = ((unsigned int)framebuffer + 31) & ~0x1f;
 
-    /** Clear to background color */
-    memset((void *)base_addr, 0, (panel.width * panel.height * LOGO_BPP) >> 3);
+    /** Clear to background color white */
+    memset((void *)base_addr, 0x0F, (panel.width * panel.height * LOGO_BPP) >> 3);
 
     /** Center logo in frame buffer */
     xoffs = (panel.width - LOGO_W) >> 1;
@@ -122,7 +140,7 @@ void display_logo(void)
         dest += (panel.width * LOGO_BPP) >> 3;
     }
 
-    /** Set image to Maxim logo */
+    /** Set image to ADI logo */
     MXC_CLCD_SetFrameAddr((void *)base_addr);
 
     /** Enable the CLCD to display the image */
@@ -131,8 +149,8 @@ void display_logo(void)
     /** Leave the display on 3 seconds */
     MXC_Delay(MXC_DELAY_SEC(3));
 
-    /** Set image to all gray on the display */
-    memset((void *)base_addr, 0, (panel.width * panel.height * LOGO_BPP) >> 3);
+    /** Set image to all white on the display */
+    memset((void *)base_addr, 0x0F, (panel.width * panel.height * LOGO_BPP) >> 3);
 }
 
 /**
@@ -146,7 +164,7 @@ void SysTick_Handler(void)
 /**
  * @brief      Main function that drives the CLCD display.
  *
- * @details    This example displays the Maxim logo on the CLCD display of the
+ * @details    This example displays the ADI logo on the CLCD display of the
  *             evaluation kit for 3 seconds, disables the CLCD display for
  *             3 seconds and then shuts down the CLCD display and then repeats
  *             the process.

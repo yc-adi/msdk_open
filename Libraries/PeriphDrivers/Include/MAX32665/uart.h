@@ -4,7 +4,9 @@
  */
 
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -34,6 +36,22 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 /* Define to prevent redundant inclusion */
@@ -41,6 +59,7 @@
 #define LIBRARIES_PERIPHDRIVERS_INCLUDE_MAX32665_UART_H_
 
 /***** Definitions *****/
+#include <stdbool.h>
 #include "uart_regs.h"
 #include "mxc_sys.h"
 #include "mxc_pins.h"
@@ -157,11 +176,17 @@ struct _mxc_uart_req_t {
  * UART Clock        - 7.37MHz Clock (for baud > 7372800, PCLK is used)
  *
  * These parameters can be modified after initialization using low level functions
+ * 
+ * @note    On default this function enables UART peripheral clock.
+ *          if you wish to manage clock and gpio related things in upper level instead of here.
+ *          Define MSDK_NO_GPIO_CLK_INIT flag in project.mk file. 
+ *          By this flag this function will remove clock and gpio related codes from file.
  *
  * @param   uart            Pointer to UART registers (selects the UART block used.)
  * @param   baud            The requested clock frequency. The actual clock frequency
  *                          will be returned by the function if successful.
- * @param   map            	MAP_A or MAP_B uart pins select
+ * @param   map            	MAP_A or MAP_B uart pins select, Has no effect incase of 
+ *                          MSDK_NO_GPIO_CLK_INIT has been defined.
  *
  * @return  If successful, the actual clock frequency is returned. Otherwise, see
  *          \ref MXC_Error_Codes for a list of return codes.
@@ -638,19 +663,23 @@ void MXC_UART_DMACallback(int ch, int error);
  *
  * @param      uart    The uart
  * @param[in]  retVal  The ret value
+ * 
+ * @return  See \ref MXC_Error_Codes for the list of error return codes.
  */
-void MXC_UART_AsyncCallback(mxc_uart_regs_t *uart, int retVal);
-void MXC_UART_TxAsyncCallback(mxc_uart_regs_t *uart, int retVal);
-void MXC_UART_RxAsyncCallback(mxc_uart_regs_t *uart, int retVal);
+int MXC_UART_AsyncCallback(mxc_uart_regs_t *uart, int retVal);
+int MXC_UART_TxAsyncCallback(mxc_uart_regs_t *uart, int retVal);
+int MXC_UART_RxAsyncCallback(mxc_uart_regs_t *uart, int retVal);
 
 /**
  * @brief   stop any async callbacks
  *
  * @param   uart  The uart
+ * 
+ * @return  See \ref MXC_Error_Codes for the list of error return codes.
  */
-void MXC_UART_AsyncStop(mxc_uart_regs_t *uart);
-void MXC_UART_TxAsyncStop(mxc_uart_regs_t *uart);
-void MXC_UART_RxAsyncStop(mxc_uart_regs_t *uart);
+int MXC_UART_AsyncStop(mxc_uart_regs_t *uart);
+int MXC_UART_TxAsyncStop(mxc_uart_regs_t *uart);
+int MXC_UART_RxAsyncStop(mxc_uart_regs_t *uart);
 
 /**
  * @brief   Abort any asynchronous requests in progress.
@@ -660,10 +689,12 @@ void MXC_UART_RxAsyncStop(mxc_uart_regs_t *uart);
  * has been terminated.
  *
  * @param   uart         Pointer to UART registers (selects the UART block used.)
+ * 
+ * @return  See \ref MXC_Error_Codes for the list of error return codes.
  */
-void MXC_UART_AbortAsync(mxc_uart_regs_t *uart);
-void MXC_UART_TxAbortAsync(mxc_uart_regs_t *uart);
-void MXC_UART_RxAbortAsync(mxc_uart_regs_t *uart);
+int MXC_UART_AbortAsync(mxc_uart_regs_t *uart);
+int MXC_UART_TxAbortAsync(mxc_uart_regs_t *uart);
+int MXC_UART_RxAbortAsync(mxc_uart_regs_t *uart);
 
 /**
  * @brief   The processing function for asynchronous transactions.
@@ -693,6 +724,69 @@ uint32_t MXC_UART_GetAsyncTXCount(mxc_uart_req_t *req);
  * @return  Returns receive bytes (in FIFO).
  */
 uint32_t MXC_UART_GetAsyncRXCount(mxc_uart_req_t *req);
+
+/**
+ * @brief Enable or disable automatic DMA interrupt handlers for the UART module.
+ * 
+ * The @ref MXC_UART_TransactionDMA functions require special interrupt handlers to work.
+ *  
+ * When "Auto" DMA handlers are enabled, the UART drivers will acquire DMA channels
+ * and assign the appropriate handlers automatically.  The acquired channels are
+ * released after each transaction.
+ * 
+ * If "Auto" DMA handlers are disabled, the user must acquire DMA channels manually
+ * and assign them to the drivers with the @ref MXC_UART_SetTXDMAChannel and
+ * @ref MXC_UART_SetRXDMAChannel functions.
+ *
+ * @param uart Pointer to the UART module's registers.
+ * @param enable true to enable Auto DMA handlers, false to disable.
+ * @return 0 on success, or a non-zero error code on failure.
+ */
+int MXC_UART_SetAutoDMAHandlers(mxc_uart_regs_t *uart, bool enable);
+
+/**
+ * @brief Set the TX (Transmit) DMA channel for a UART module.
+ *
+ * This function assigns the DMA channel for transmitting data
+ * when @ref is MXC_UART_SetAutoDMAHandlers disabled.
+ *
+ * @param uart Pointer to the UART module's registers.
+ * @param channel The DMA channel number to be used for @ref MXC_UART_TransactionDMA.
+ */
+int MXC_UART_SetTXDMAChannel(mxc_uart_regs_t *uart, unsigned int channel);
+
+/**
+ * @brief Get the TX (Transmit) DMA channel for a UART module.
+ *
+ * This function retrieves the currently assigned DMA channel for transmitting data
+ * when @ref is MXC_UART_SetAutoDMAHandlers disabled.
+ *
+ * @param uart Pointer to the UART module's registers.
+ * @return The currently assigned TX DMA channel.
+ */
+int MXC_UART_GetTXDMAChannel(mxc_uart_regs_t *uart);
+
+/**
+ * @brief Set the RX (Receive) DMA channel for a UART module.
+ *
+ * This function assigns the DMA channel for receiving data
+ * when @ref is MXC_UART_SetAutoDMAHandlers disabled.
+ *
+ * @param uart Pointer to the UART module's registers.
+ * @param channel The DMA channel number to be used for @ref MXC_UART_TransactionDMA.
+ */
+int MXC_UART_SetRXDMAChannel(mxc_uart_regs_t *uart, unsigned int channel);
+
+/**
+ * @brief Get the RX (Receive) DMA channel for a UART module.
+ *
+ * This function retrieves the currently configured DMA channel for receiving data
+ * when @ref is MXC_UART_SetAutoDMAHandlers disabled.
+ *
+ * @param uart Pointer to the UART module's registers.
+ * @return The currently configured RX DMA channel.
+ */
+int MXC_UART_GetRXDMAChannel(mxc_uart_regs_t *uart);
 
 /**@} end of group uart */
 

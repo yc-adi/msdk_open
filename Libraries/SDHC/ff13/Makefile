@@ -1,5 +1,7 @@
-################################################################################
- # Copyright (C) 2016 Maxim Integrated Products, Inc., All Rights Reserved.
+###############################################################################
+ #
+ # Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ # (now owned by Analog Devices, Inc.)
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
  # copy of this software and associated documentation files (the "Software"),
@@ -29,10 +31,23 @@
  # property whatsoever. Maxim Integrated Products, Inc. retains all
  # ownership rights.
  #
- # $Date: 2017-05-25 16:18:58 -0500 (Thu, 25 May 2017) $
- # $Revision: 28232 $
+ ##############################################################################
  #
- ###############################################################################
+ # Copyright 2023 Analog Devices, Inc.
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+ ##############################################################################
 
 # This is the name of the build output file
 override PROJECT=FAT32
@@ -40,8 +55,8 @@ override PROJECT=FAT32
 ifeq "$(TARGET)" ""
 $(error TARGET must be specified)
 endif
-TARGET_UC:=$(shell echo $(TARGET) | tr a-z A-Z)
-TARGET_LC:=$(shell echo $(TARGET) | tr A-Z a-z)
+TARGET_UC := $(subst m,M,$(subst a,A,$(subst x,X,$(TARGET))))
+TARGET_LC := $(subst M,m,$(subst A,a,$(subst X,x,$(TARGET))))
 
 ifeq "$(COMPILER)" ""
 $(error COMPILER must be specified)
@@ -74,6 +89,14 @@ SRCS += diskio.c
 SRCS += ff.c
 SRCS += ffsystem.c
 SRCS += ffunicode.c
+ifdef EXTERNAL_FLASH
+SRCS += mscmem.c
+SRCS += mx25_64MB.c
+endif
+
+ifdef EXTERNAL_FLASH
+PROJ_CFLAGS += -DEXTERNAL_FLASH
+endif
 
 ifdef USE_NATIVE_SDHC
 PROJ_CFLAGS += -DNATIVE_SDHC
@@ -81,6 +104,7 @@ endif
 
 # Where to find source files for this project
 VPATH  = Source
+VPATH += $(MISC_DRIVERS_DIR)/ExtMemory
 
 # Where to find header files for this project
 IPATH  = Source
@@ -89,6 +113,11 @@ IPATH += $(CMSIS_ROOT)/Device/Maxim/$(TARGET)/Include
 IPATH += $(CMSIS_ROOT)/Include
 IPATH += $(PERIPH_DRIVER_DIR)/Include/$(TARGET_UC)
 IPATH += $(BOARD_DIR)/Include
+IPATH += $(MISC_DRIVERS_DIR)/ExtMemory
+
+# Since the diskio.c implementation file has some dependencies
+# on board files, we must set up the board build system as well
+include $(BOARD_DIR)/board.mk
 
 # Include the rules for building for this target
 include $(CMSIS_ROOT)/Device/Maxim/$(TARGET_UC)/Source/$(COMPILER)/$(TARGET_LC).mk

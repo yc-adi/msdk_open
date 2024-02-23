@@ -1,13 +1,16 @@
 ## Description
 
-This example configures the SPI to send data between the MISO (P0.22) and
-MOSI (P0.21) pins.  Connect these two pins together.
+This example configures the SPI to send data between the MISO (P0.22) and MOSI (P0.21) pins.  Connect these two pins together.
 
 Multiple word sizes (2 through 16 bits) are demonstrated.
 
-By default, the example performs blocking SPI transactions.  To switch to non-blocking (asynchronous) transactions, undefine the MASTERSYNC macro and define the MASTERASYNC macro.  To use DMA transactions, define the MASTERDMA macro instead.
+By default, the example performs blocking SPI transactions.  To switch to non-blocking (asynchronous) transactions, reset the `CONTROLLER_SYNC` macro to 0 and set the `CONTROLLER_ASYNC` macro to 1.  To use DMA transactions, set the `CONTROLLER_DMA` macro to 1 instead.
+
+This example uses the Hardware Target Select control scheme (application does not assert the TS pins).
 
 ## Software
+
+This project uses the SPI v2 library. More information on the SPI v2 library can be found in the **[MSDK User Guide Developer Notes](https://analog-devices-msdk.github.io/msdk/USERGUIDE/#spi-v2-library)**.
 
 ### Project Usage
 
@@ -15,7 +18,7 @@ Universal instructions on building, flashing, and debugging this project can be 
 
 ### Project-Specific Build Notes
 
-(None - this project builds as a standard example)
+Set `MXC_SPI_VERSION=v2` to build the SPI v2 libraries.
 
 ## Required Connections
 
@@ -23,13 +26,14 @@ Universal instructions on building, flashing, and debugging this project can be 
 -   Connect the 5V power cable at (5V IN).
 -   Close jumper (RX - P0.0) and (TX - P0.1) at Headers JP23 (UART 0 EN).
 -   Open an terminal application on the PC and connect to the EV kit's console UART at 115200, 8-N-1.
+-   Connect P0.21 (MOSI) to P0.22 (MISO).
 
 ## Expected Output
 
 The Console UART of the device will output these messages:
 
 ```
-**************************** SPI MASTER TEST *************************
+**************************** SPI CONTROLLER TEST *************************
 This example configures the SPI to send data between the MISO (P0.22) and
 MOSI (P0.21) pins.  Connect these two pins together.
 

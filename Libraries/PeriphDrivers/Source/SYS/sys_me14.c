@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -28,6 +30,22 @@
  * trademarks, maskwork rights, or any other form of intellectual
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
+ *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  ******************************************************************************/
 
@@ -91,24 +109,24 @@ int MXC_SYS_GetUSN(uint8_t *usn, uint8_t *checksum)
 
     // Compute the checksum
     if (checksum != NULL) {
-        uint8_t info_checksum[2];
+        uint8_t check_csum[MXC_SYS_USN_CHECKSUM_LEN];
         uint8_t key[MXC_SYS_USN_CHECKSUM_LEN];
 
         /* Initialize the remainder of the USN and key */
         memset(key, 0, MXC_SYS_USN_CHECKSUM_LEN);
-        memset(checksum, 0, MXC_SYS_USN_CHECKSUM_LEN);
+        memset(checksum, 0, MXC_SYS_USN_CSUM_FIELD_LEN);
 
         /* Read the checksum from the info block */
-        info_checksum[0] = ((infoblock[3] & 0x7F800000) >> 23);
-        info_checksum[1] = ((infoblock[4] & 0x007F8000) >> 15);
+        checksum[1] = ((infoblock[3] & 0x7F800000) >> 23);
+        checksum[0] = ((infoblock[4] & 0x007F8000) >> 15);
 
         MXC_TPU_Cipher_Config(MXC_TPU_MODE_ECB, MXC_TPU_CIPHER_AES128);
         MXC_TPU_Cipher_AES_Encrypt((const char *)usn, NULL, (const char *)key,
                                    MXC_TPU_CIPHER_AES128, MXC_TPU_MODE_ECB, MXC_AES_DATA_LEN,
-                                   (char *)checksum);
+                                   (char *)check_csum);
 
         /* Verify the checksum */
-        if ((checksum[1] != info_checksum[0]) || (checksum[0] != info_checksum[1])) {
+        if ((checksum[0] != check_csum[0]) || (checksum[1] != check_csum[1])) {
             MXC_FLC_LockInfoBlock(MXC_INFO0_MEM_BASE);
             return E_UNKNOWN;
         }
@@ -399,7 +417,7 @@ void MXC_SYS_Reset_Periph(mxc_sys_reset_t reset)
 /* ************************************************************************** */
 uint8_t MXC_SYS_GetRev(void)
 {
-    uint8_t serialNumber[MXC_SYS_USN_LEN];
+    uint8_t serialNumber[MXC_SYS_USN_CHECKSUM_LEN];
     MXC_SYS_GetUSN(serialNumber, NULL);
 
     if ((serialNumber[0] < 0x9F) | ((serialNumber[0] & 0x0F) > 0x09)) {

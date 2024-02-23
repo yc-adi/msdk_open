@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,6 +31,22 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 #include <stdio.h>
@@ -49,17 +67,21 @@
 /***** Global Variables *****/
 mxc_uart_regs_t *ConsoleUart = MXC_UART_GET_UART(CONSOLE_UART);
 extern uint32_t SystemCoreClock;
+
+// clang-format off
 const mxc_gpio_cfg_t pb_pin[] = {
-    { MXC_GPIO2, MXC_GPIO_PIN_6, MXC_GPIO_FUNC_IN, MXC_GPIO_PAD_PULL_UP, MXC_GPIO_VSSEL_VDDIOH },
-    { MXC_GPIO2, MXC_GPIO_PIN_7, MXC_GPIO_FUNC_IN, MXC_GPIO_PAD_PULL_UP, MXC_GPIO_VSSEL_VDDIOH },
+    { MXC_GPIO2, MXC_GPIO_PIN_6, MXC_GPIO_FUNC_IN, MXC_GPIO_PAD_PULL_UP, MXC_GPIO_VSSEL_VDDIOH, MXC_GPIO_DRVSTR_0},
+    { MXC_GPIO2, MXC_GPIO_PIN_7, MXC_GPIO_FUNC_IN, MXC_GPIO_PAD_PULL_UP, MXC_GPIO_VSSEL_VDDIOH, MXC_GPIO_DRVSTR_0},
 };
 const unsigned int num_pbs = (sizeof(pb_pin) / sizeof(mxc_gpio_cfg_t));
 
 const mxc_gpio_cfg_t led_pin[] = {
-    { MXC_GPIO0, MXC_GPIO_PIN_2, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH },
-    { MXC_GPIO0, MXC_GPIO_PIN_3, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH },
+    { MXC_GPIO0, MXC_GPIO_PIN_2, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH, MXC_GPIO_DRVSTR_0},
+    { MXC_GPIO0, MXC_GPIO_PIN_3, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH, MXC_GPIO_DRVSTR_0},
 };
 const unsigned int num_leds = (sizeof(led_pin) / sizeof(mxc_gpio_cfg_t));
+// clang-format on
+
 /***** File Scope Variables *****/
 // const uart_cfg_t uart_cfg = {
 //     UART_PARITY_DISABLE,
@@ -96,6 +118,16 @@ void mxc_assert(const char *expr, const char *file, int line)
 __weak void GPIO2_IRQHandler(void)
 {
     MXC_GPIO_Handler(MXC_GPIO_GET_IDX(MXC_GPIO2));
+}
+
+/******************************************************************************/
+/** 
+ * NOTE: This weak definition is included to support Touchscreen interrupts in
+ *       case the user does not define this interrupt handler in their application.
+ **/
+__weak void GPIO0_IRQHandler(void)
+{
+    MXC_GPIO_Handler(MXC_GPIO_GET_IDX(MXC_GPIO0));
 }
 
 #ifndef __riscv
@@ -196,14 +228,14 @@ int Board_Init(void)
     mxc_tft_spi_config tft_spi_config = {
         .regs = MXC_SPI0,
         .gpio = { MXC_GPIO0, MXC_GPIO_PIN_5 | MXC_GPIO_PIN_6 | MXC_GPIO_PIN_7 | MXC_GPIO_PIN_11,
-                  MXC_GPIO_FUNC_ALT1, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH },
+                  MXC_GPIO_FUNC_ALT1, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH, MXC_GPIO_DRVSTR_0 },
         .freq = 25000000,
         .ss_idx = 1,
     };
 
     /* TFT reset signal */
-    mxc_gpio_cfg_t tft_reset_pin = { MXC_GPIO0, MXC_GPIO_PIN_19, MXC_GPIO_FUNC_OUT,
-                                     MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH };
+    mxc_gpio_cfg_t tft_reset_pin = { MXC_GPIO0,         MXC_GPIO_PIN_19,       MXC_GPIO_FUNC_OUT,
+                                     MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH, MXC_GPIO_DRVSTR_0 };
     /* Initialize TFT display */
     MXC_TFT_PreInit(&tft_spi_config, &tft_reset_pin, NULL);
 
@@ -213,17 +245,17 @@ int Board_Init(void)
     mxc_ts_spi_config ts_spi_config = {
         .regs = MXC_SPI0,
         .gpio = { MXC_GPIO0, MXC_GPIO_PIN_5 | MXC_GPIO_PIN_6 | MXC_GPIO_PIN_7 | MXC_GPIO_PIN_10,
-                  MXC_GPIO_FUNC_ALT1, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH },
+                  MXC_GPIO_FUNC_ALT1, MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH, MXC_GPIO_DRVSTR_0 },
         .freq = 1000000,
         .ss_idx = 2,
     };
 
     /* Touch screen controller interrupt signal */
-    mxc_gpio_cfg_t int_pin = { MXC_GPIO0, MXC_GPIO_PIN_17, MXC_GPIO_FUNC_IN, MXC_GPIO_PAD_NONE,
-                               MXC_GPIO_VSSEL_VDDIOH };
+    mxc_gpio_cfg_t int_pin = { MXC_GPIO0,         MXC_GPIO_PIN_17,       MXC_GPIO_FUNC_IN,
+                               MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH, MXC_GPIO_DRVSTR_0 };
     /* Touch screen controller busy signal */
-    mxc_gpio_cfg_t busy_pin = { MXC_GPIO0, MXC_GPIO_PIN_16, MXC_GPIO_FUNC_IN, MXC_GPIO_PAD_NONE,
-                                MXC_GPIO_VSSEL_VDDIOH };
+    mxc_gpio_cfg_t busy_pin = { MXC_GPIO0,         MXC_GPIO_PIN_16,       MXC_GPIO_FUNC_IN,
+                                MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIOH, MXC_GPIO_DRVSTR_0 };
     /* Initialize Touch Screen controller */
     MXC_TS_PreInit(&ts_spi_config, &int_pin, &busy_pin);
 

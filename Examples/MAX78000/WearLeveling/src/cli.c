@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,6 +31,22 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 #include <stdbool.h>
@@ -43,6 +61,21 @@
 #include "mxc_device.h"
 #include "mxc_errors.h"
 #include "uart.h"
+
+/* ASCII macros */
+#define END_OF_TEXT 0x03
+#define BACK_SPACE 0x08
+#define SPACE_BAR 0x20
+#define NULL_TERMINATION 0x00
+#define ARROW_KEY_CODE_1 0x1B
+#define ARROW_KEY_CODE_2 0x5B
+#define ARROW_KEY_CODE_LEFT 0x44
+#define ARROW_KEY_CODE_RIGHT 0x43
+#define ARROW_KEY_CODE_UP 0x41
+#define ARROW_KEY_CODE_DOWN 0x42
+#define TAB_SPACE 0x09
+#define POWER_OF 0x5E
+#define CAPITAL_C 0x43
 
 /********************************************************************************/
 /******************************* Private Functions ******************************/
@@ -241,6 +274,55 @@ static int swl_CmdHandler(lfs_t *lfs, char *args)
     return E_NO_ERROR;
 }
 
+/* =| checkArrowKeys |======================================
+ *
+ * Function to check for the presence of arrow keys in the 
+ *  input command.
+ *
+ * NOTE: The cmd should have atleast 3 bytes of data to 
+ *  check for the arrow keys. Sanity check should be done 
+ *  before calling this function.
+ * 
+ * =============================================================
+ */
+bool checkArrowKeys(char *cmd)
+{
+    if (((cmd[0] == ARROW_KEY_CODE_1) && (cmd[1] == ARROW_KEY_CODE_2)) &&
+        ((cmd[2] == ARROW_KEY_CODE_UP) || (cmd[2] == ARROW_KEY_CODE_DOWN) ||
+         (cmd[2] == ARROW_KEY_CODE_RIGHT) || (cmd[2] == ARROW_KEY_CODE_LEFT)))
+        return true;
+    else
+        return false;
+}
+
+/* =| checkLeadingSpaces |======================================
+ *
+ * Function to check for the leading spaces in the 
+ *  input command.
+ *
+ * If any Leading spaces are present, the function would remove 
+ *  those spaces and returns a valid Null terminated command 
+ *  in the same input cmd.
+ * 
+ * =============================================================
+ */
+void checkLeadingSpaces(char *cmd, unsigned int *num_recv)
+{
+    unsigned int leadingZerosCount = 0;
+    for (leadingZerosCount = 0; leadingZerosCount < (*num_recv); leadingZerosCount++) {
+        if (cmd[leadingZerosCount] != SPACE_BAR)
+            break;
+    }
+    if (leadingZerosCount > 0) {
+        memmove(cmd, cmd + leadingZerosCount, (*num_recv) - leadingZerosCount);
+        *num_recv = *num_recv - leadingZerosCount;
+        cmd[*num_recv] = NULL_TERMINATION;
+        ++(*num_recv);
+    }
+}
+
+uint8_t backSpaceSequence[3] = { BACK_SPACE, SPACE_BAR, BACK_SPACE };
+uint8_t abortSequence[2] = { POWER_OF, CAPITAL_C };
 /********************************************************************************/
 /******************************* Public Functions *******************************/
 /********************************************************************************/
@@ -252,20 +334,50 @@ int cmd_get(char *cmd, size_t size)
         return E_BAD_PARAM;
     }
 
+    /* Clear the buffer before storing the command */
+    memset(cmd, 0x00, CMD_MAX_SIZE);
+
     bool eoc = false;
-    int num_recv = 0;
+    unsigned int num_recv = 0;
     int next_ch;
+    int backSpaceLen = (int)(sizeof(backSpaceSequence) / sizeof(backSpaceSequence[0]));
+    int abortLen = (int)(sizeof(abortSequence) / sizeof(abortSequence[0]));
 
     while (!eoc) {
         // Read character from RX FIFO, wait here until 1 is available
         while ((next_ch = MXC_UART_ReadCharacter(MXC_UART_GET_UART(CONSOLE_UART))) < E_NO_ERROR) {}
 
-        if (next_ch == 0x08) { // backspace
-            if (num_recv != 0) {
+        if (next_ch == BACK_SPACE) { // backspace
+            if (num_recv > 0) {
                 num_recv--;
+                MXC_UART_Write(MXC_UART_GET_UART(CONSOLE_UART), backSpaceSequence, &backSpaceLen);
+                cmd[num_recv] = NULL_TERMINATION;
             }
-        } else { // Store character
+        } else if (next_ch == TAB_SPACE) {
+            /* Ignore Tab Space input */
+            continue;
+        } else if (next_ch == END_OF_TEXT) {
+            /* ^C abort */
+            num_recv = 0;
+            MXC_UART_Write(MXC_UART_GET_UART(CONSOLE_UART), abortSequence, &abortLen);
+            break;
+        } else {
+            /* Store character */
             cmd[num_recv++] = (char)next_ch;
+            bool arrowKey = false;
+            if (num_recv >= 3) {
+                arrowKey = checkArrowKeys(cmd + num_recv - 3);
+                if (arrowKey) {
+                    /* Remove the arrow key from the cmd */
+                    cmd[num_recv - 3] = NULL_TERMINATION;
+                    num_recv -= 3;
+                }
+            }
+            if ((!arrowKey) && ((char)next_ch != ARROW_KEY_CODE_1) &&
+                ((char)next_ch != ARROW_KEY_CODE_2)) {
+                /* Echo out if not an arrow key */
+                MXC_UART_WriteCharacter(MXC_UART_GET_UART(CONSOLE_UART), next_ch);
+            }
         }
 
         // if buffer full or EOC received, exit loop
@@ -273,7 +385,8 @@ int cmd_get(char *cmd, size_t size)
             eoc = true;
         }
     }
-
+    cmd[num_recv] = NULL_TERMINATION;
+    checkLeadingSpaces(cmd, &num_recv);
     return num_recv;
 }
 

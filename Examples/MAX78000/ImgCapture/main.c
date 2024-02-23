@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -28,6 +30,22 @@
  * trademarks, maskwork rights, or any other form of intellectual
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
+ *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  ******************************************************************************/
 /**
@@ -115,10 +133,11 @@ img_data_t capture_img(uint32_t w, uint32_t h, pixformat_t pixel_format, dmamode
     // camera.h drivers will allocate an SRAM buffer whose size is equal to
     // width * height * bytes_per_pixel.  See camera.c for implementation details.
     printf("Configuring camera\n");
+    fifomode_t fifo_mode = (pixel_format == PIXFORMAT_RGB888) ? FIFO_THREE_BYTE : FIFO_FOUR_BYTE;
     int ret = camera_setup(w, // width
                            h, // height
                            pixel_format, // pixel format
-                           FIFO_FOUR_BYTE, // FIFO mode (four bytes is suitable for most cases)
+                           fifo_mode, // FIFO mode (four bytes is suitable for most cases)
                            dma_mode, // DMA (enabling DMA will drastically decrease capture time)
                            dma_channel); // Allocate the DMA channel retrieved in initialization
 
@@ -239,10 +258,11 @@ cnn_img_data_t stream_img(uint32_t w, uint32_t h, pixformat_t pixel_format, int 
     // 1. Configure the camera.  This is the same as the standard blocking capture, except
     // the DMA mode is set to "STREAMING_DMA".
     printf("Configuring camera\n");
+    fifomode_t fifo_mode = (pixel_format == PIXFORMAT_RGB888) ? FIFO_THREE_BYTE : FIFO_FOUR_BYTE;
     int ret = camera_setup(w, // width
                            h, // height
                            pixel_format, // pixel format
-                           FIFO_FOUR_BYTE, // FIFO mode
+                           fifo_mode, // FIFO mode
                            STREAMING_DMA, // Set streaming mode
                            dma_channel); // Allocate the DMA channel retrieved in initialization
 
@@ -334,7 +354,7 @@ void transmit_stream_uart(cnn_img_data_t img_data)
         // quadrant boundaries is required.
         for (int i = 0; i < img_data.imglen; i += transfer_len) {
             cnn_addr = read_bytes_from_cnn_sram((uint8_t *)g_serial_buffer, transfer_len, cnn_addr);
-            MXC_UART_Write(Con_Uart, (uint8_t *)g_serial_buffer, &transfer_len);
+            MXC_UART_WriteBytes(Con_Uart, (uint8_t *)g_serial_buffer, transfer_len);
         }
 
         int elapsed = MXC_TMR_SW_Stop(MXC_TMR0);
@@ -469,6 +489,7 @@ void service_console()
                 if (g_app_settings.bayer_function == BAYER_FUNCTION_PASSTHROUGH) {
                     bayer_passthrough(img_data.raw, img_data.w, img_data.h, (uint16_t *)bayer_data);
                 } else if (g_app_settings.bayer_function == BAYER_FUNCTION_BILINEAR) {
+                    color_correct(img_data.raw, img_data.w, img_data.h);
                     bayer_bilinear_demosaicing(img_data.raw, img_data.w, img_data.h,
                                                (uint16_t *)bayer_data);
                 }
@@ -620,7 +641,7 @@ int main(void)
     g_app_settings.dma_mode = USE_DMA;
     g_app_settings.imgres_w = IMAGE_XRES;
     g_app_settings.imgres_h = IMAGE_YRES;
-    g_app_settings.pixel_format = PIXFORMAT_RGB565; // This default may change during initialization
+    g_app_settings.pixel_format = PIXFORMAT_RGB888; // This default may change during initialization
 
 #if defined(CAMERA_MONO)
     g_app_settings.pixel_format = PIXFORMAT_BAYER;

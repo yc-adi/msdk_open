@@ -4,7 +4,9 @@
  */
 
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -34,6 +36,22 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 /* Define to prevent redundant inclusion */
@@ -52,6 +70,7 @@ extern "C" {
 /**
  * @defgroup adc ADC
  * @ingroup periphlibs
+ * @details API for Analog to Digital Converter (ADC).
  * @{
  */
 
@@ -224,6 +243,9 @@ typedef enum {
 ///< Callback used when a conversion event is complete
 typedef void (*mxc_adc_complete_cb_t)(void *req, int error);
 
+/**
+ * @brief  ADC Settings
+ */
 typedef struct {
     mxc_adc_clock_t clock; ///< clock to use
     mxc_adc_clkdiv_t clkdiv; ///< clock divider
@@ -233,12 +255,18 @@ typedef struct {
     uint32_t idleCount; ///< Sample Clock Low time
 } mxc_adc_req_t;
 
+/**
+ * @brief  ADC Slot Settings
+ */
 typedef struct {
     mxc_adc_chsel_t channel; ///< channel select
     mxc_adc_divsel_t div; ///< Analog input divider
     mxc_adc_dynamic_pullup_t pullup_dyn; ///< Dynamic Pullup
 } mxc_adc_slot_req_t;
 
+/**
+ * @brief  ADC Conversion Settings
+ */
 typedef struct {
     mxc_adc_conversion_mode_t mode; ///< conversion mode
     mxc_adc_trig_mode_t trig; ///< trigger mode
@@ -248,6 +276,7 @@ typedef struct {
     mxc_adc_avg_t avg_number; ///< no of samples to average
     mxc_adc_div_lpmode_t lpmode_divder; ///< Divide by 2 control in lpmode
     uint8_t num_slots; ///< num of slots in the sequence
+    int8_t dma_channel; ///<The channel to use for DMA-enabled transactions
 } mxc_adc_conversion_req_t;
 
 /**
@@ -313,7 +342,11 @@ int MXC_ADC_StartConversion(void);
 int MXC_ADC_StartConversionAsync(mxc_adc_complete_cb_t callback);
 
 /**
- * @brief   Perform a conversion on a specific channel using a DMA transfer
+ * @brief   Perform a conversion on a specific channel using a DMA transfer.
+ *          DMA channel must be acquired using \ref MXC_DMA_AcquireChannel and should
+ *          be passed to this function via "dma_channel" member of "req" input struct.
+ *          DMA IRQ corresponding to that channel must be enabled using \ref MXC_NVIC_SetVector,
+ *          and the \ref MXC_DMA_Handler should be called from the respective ISR.
  *
  * @param   req \ref mxc_adc_conversion_req_t
  * @param   pointer to the variable to hold the conversion result

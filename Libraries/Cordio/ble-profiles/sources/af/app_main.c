@@ -31,6 +31,7 @@
 #include "wsf_assert.h"
 #include "util/bstream.h"
 #include "dm_api.h"
+#include "ll_api.h"
 #include "app_api.h"
 #include "app_main.h"
 #include "app_ui.h"
@@ -86,6 +87,9 @@ appReqActCfg_t *pAppMasterReqActCfg = (appReqActCfg_t *) &appReqActCfg;
 
 /*! Configurable pointer for incoming request actions on slave */
 appReqActCfg_t *pAppSlaveReqActCfg = (appReqActCfg_t *) &appReqActCfg;
+
+/*! For long distance test, use CODED PHY */
+uint8_t appCodedPhyDemo = 0;
 
 /*************************************************************************************************/
 /*!
@@ -518,4 +522,19 @@ void AppUpdatePrivacyMode(appDbHdl_t hdl)
       AppDbSetPeerAddedToRl(hdl, FALSE);
     }
   }
+}
+
+/*************************************************************************************************/
+/*!
+ *  \brief      Get Bluetooth device address currently used by LL 
+ *              or all zeros if address is not set.
+ *
+ *  \param      pBdAddr Pointer where address will be stored.
+ *
+ *  \return None.
+ */
+/*************************************************************************************************/
+void AppGetBdAddr(uint8_t *pBdAddr)
+{
+  LlGetBdAddr(pBdAddr);
 }

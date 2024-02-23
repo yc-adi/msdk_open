@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,11 +31,27 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 /**
  * @file    main.c
- * @brief   Demo
+ * @brief   This example demonstrates the use of the TFT Display, UART Terminal, RTC, Pushbuttons, and LEDs.
  * @details This example displays the uptime to the TFT Display and Terminal,
  *          toggles the LED at 1-2Hz depending on pushbutton press, and shows
  *          the chip information if the pushbutton is pressed 5 times.
@@ -89,8 +107,11 @@ int main(void)
     area_t units_printf_area;
     area_t uptime_printf_area;
     int hr, min;
-    uint32_t sec, rtc_readout;
+    uint32_t sec;
     int error;
+
+    MXC_SYS_ClockSourceEnable(MXC_SYS_CLOCK_IPO);
+    MXC_SYS_Clock_Select(MXC_SYS_CLOCK_IPO);
 
     printf("**** MAX32662 EV Kit Demo ****\n");
 
@@ -111,7 +132,19 @@ int main(void)
 
     MXC_TFT_SetBackGroundColor(WHITE);
 
-    MXC_TFT_SetFont((int)&SansSerif16x16[0]);
+    MXC_TFT_SetFont((int)&Liberation_Sans16x16[0]);
+
+    error = MXC_RTC_Init(0, 0);
+    if (error != E_NO_ERROR) {
+        printf("Failed RTC Initialization\n");
+        return error;
+    }
+
+    error = MXC_RTC_Start();
+    if (error != E_NO_ERROR) {
+        printf("Failed RTC_Start\n");
+        return error;
+    }
 
     // Set print area
     units_printf_area.x = 24;
@@ -127,23 +160,8 @@ int main(void)
     uptime_printf_area.h = 30;
     MXC_TFT_ConfigPrintf(&uptime_printf_area);
 
-    error = MXC_RTC_Init(0, 0);
-    if (error != E_NO_ERROR) {
-        printf("Failed RTC Initialization\n");
-        return error;
-    }
-
-    error = MXC_RTC_Start();
-    if (error != E_NO_ERROR) {
-        printf("Failed RTC_Start\n");
-        return error;
-    }
-
     while (1) {
-        do {
-            error = MXC_RTC_GetSeconds(&rtc_readout);
-        } while (error != E_NO_ERROR);
-        sec = rtc_readout;
+        MXC_RTC_GetSeconds(&sec);
 
         hr = sec / SECS_PER_HR;
         sec -= hr * SECS_PER_HR;
@@ -177,8 +195,8 @@ int main(void)
             printf("\n\n");
 
             MXC_TFT_Printf("\nContinue in\n");
-            for (i = 3; i > 0; i--) {
-                MXC_TFT_Printf("%ds...", i);
+            for (i = 5; i > 0; i--) {
+                MXC_TFT_Printf("%d..", i);
                 MXC_Delay(MXC_DELAY_SEC(1));
             }
 

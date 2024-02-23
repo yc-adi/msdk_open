@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,6 +31,22 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 #ifndef LIBRARIES_CMSIS_DEVICE_MAXIM_MAX32670_INCLUDE_MAX32670_H_
@@ -52,7 +70,9 @@
 
 /* COMPILER SPECIFIC DEFINES (IAR, ARMCC and GNUC) */
 #if defined(__GNUC__)
+#ifndef __weak
 #define __weak __attribute__((weak))
+#endif
 
 #elif defined(__CC_ARM)
 
@@ -150,14 +170,14 @@ typedef enum {
     DMA5_IRQn, /* 0x55  0x0154  85: DMA5 */
     DMA6_IRQn, /* 0x56  0x0158  86: DMA6 */
     DMA7_IRQn, /* 0x57  0x015C  87: DMA7 */
-    DMA8_IRQn, /* 0x58  0x0160  88: DMA8 */
-    DMA9_IRQn, /* 0x59  0x0164  89: DMA9 */
-    DMA10_IRQn, /* 0x5A  0x0168  90: DMA10 */
-    DMA11_IRQn, /* 0x5B  0x016C  91: DMA11 */
-    DMA12_IRQn, /* 0x5C  0x0170  92: DMA12 */
-    DMA13_IRQn, /* 0x5D  0x0174  93: DMA13 */
-    DMA14_IRQn, /* 0x5E  0x0178  94: DMA14 */
-    DMA15_IRQn, /* 0x5F  0x017C  95: DMA15 */
+    RSV72_IRQn, /* 0x58  0x0160  88: Reserved */
+    RSV73_IRQn, /* 0x59  0x0164  89: Reserved */
+    RSV74_IRQn, /* 0x5A  0x0168  90: Reserved */
+    RSV75_IRQn, /* 0x5B  0x016C  91: Reserved */
+    RSV76_IRQn, /* 0x5C  0x0170  92: Reserved */
+    RSV77_IRQn, /* 0x5D  0x0174  93: Reserved */
+    RSV78_IRQn, /* 0x5E  0x0178  94: Reserved */
+    RSV79_IRQn, /* 0x5F  0x017C  95: Reserved */
     RSV80_IRQn, /* 0x60  0x0180  96: Reserved */
     RSV81_IRQn, /* 0x61  0x0184  97: Reserved */
     ECC_IRQn, /* 0x62  0x0188  98: Error Correction */
@@ -369,6 +389,7 @@ typedef enum {
 /*                                                                        I2C */
 #define MXC_I2C_INSTANCES (3)
 #define MXC_I2C_FIFO_DEPTH (8)
+#define MXC_I2C_NUM_TARGET_ADDR (4)
 
 #define MXC_BASE_I2C0 ((uint32_t)0x4001D000UL)
 #define MXC_I2C0 ((mxc_i2c_regs_t *)MXC_BASE_I2C0)
@@ -396,6 +417,17 @@ typedef enum {
 #define MXC_DMA ((mxc_dma_regs_t *)MXC_BASE_DMA)
 
 #define MXC_DMA_GET_IDX(p) ((p) == MXC_DMA ? 0 : -1)
+
+#define MXC_DMA_CH_GET_IRQ(i)             \
+    ((IRQn_Type)(((i) == 0) ? DMA0_IRQn : \
+                 ((i) == 1) ? DMA1_IRQn : \
+                 ((i) == 2) ? DMA2_IRQn : \
+                 ((i) == 3) ? DMA3_IRQn : \
+                 ((i) == 4) ? DMA4_IRQn : \
+                 ((i) == 5) ? DMA5_IRQn : \
+                 ((i) == 6) ? DMA6_IRQn : \
+                 ((i) == 7) ? DMA7_IRQn : \
+                              0))
 
 /******************************************************************************/
 /*                                                                        FLC */

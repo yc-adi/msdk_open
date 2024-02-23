@@ -1,5 +1,7 @@
-################################################################################
- # Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+###############################################################################
+ #
+ # Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ # (now owned by Analog Devices, Inc.)
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
  # copy of this software and associated documentation files (the "Software"),
@@ -29,7 +31,23 @@
  # property whatsoever. Maxim Integrated Products, Inc. retains all
  # ownership rights.
  #
-###############################################################################
+ ##############################################################################
+ #
+ # Copyright 2023 Analog Devices, Inc.
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+ ##############################################################################
 
 # ** Readme! **
 # Don't edit this file! This is the core Makefile for a MaximSDK 
@@ -72,7 +90,7 @@ TARGET_LC := $(subst M,m,$(subst A,a,$(subst X,x,$(TARGET))))
 endif
 
 # Default board.
-BOARD ?= EvKit_V1
+BOARD ?= FTHR_APPS_A
 
 # *******************************************************************************
 # Locate the MaximSDK
@@ -179,8 +197,9 @@ IPATH := $(IPATH)
 
 AUTOSEARCH ?= 1
 ifeq ($(AUTOSEARCH), 1)
-# Auto-detect all C source files on VPATH
+# Auto-detect all C/C++ source files on VPATH
 SRCS += $(wildcard $(addsuffix /*.c, $(VPATH)))
+SRCS += $(wildcard $(addsuffix /*.cpp, $(VPATH)))
 endif
 
 # Collapse SRCS before passing them on to the next stage
@@ -251,22 +270,6 @@ PROJ_CFLAGS += -DMXC_ASSERT_ENABLE
 MFLOAT_ABI ?= softfp
 # MFLOAT_ABI must be exported to other Makefiles
 export MFLOAT_ABI
-
-ifeq "$(RISCV_CORE)" ""
-# Default linkerfile is only specified for standard Arm-core projects.
-# Otherwise, gcc_riscv.mk sets the appropriate riscv linkerfile.
-LINKERFILE ?= $(TARGET_LC).ld
-LINKERPATH ?= $(CMSIS_ROOT)/Device/Maxim/$(TARGET_UC)/Source/GCC
-
-# Check if linkerfile exists
-ifeq ("$(wildcard $(LINKERPATH)/$(LINKERFILE))","")
-# Doesn't exists, attempt to use root project folder.
-LINKERPATH:=.
-endif
-
-# Form full path to linkerfile.  Works around MSYS2 edge case from (see MSDK-903).
-LINKERFILE:=$(LINKERPATH)/$(LINKERFILE)
-endif
 
 # This path contains system-level intialization files for the target micro.  Add to the build.
 VPATH += $(CMSIS_ROOT)/Device/Maxim/$(TARGET_UC)/Source

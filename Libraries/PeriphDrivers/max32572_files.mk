@@ -1,6 +1,7 @@
-
-################################################################################
- # Copyright (C) 2016 Maxim Integrated Products, Inc., All Rights Reserved.
+###############################################################################
+ #
+ # Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ # (now owned by Analog Devices, Inc.)
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
  # copy of this software and associated documentation files (the "Software"),
@@ -30,10 +31,23 @@
  # property whatsoever. Maxim Integrated Products, Inc. retains all
  # ownership rights.
  #
- # $Date: 2018-08-31 14:08:14 -0500 (Fri, 31 Aug 2018) $
- # $Revision: 37586 $
+ ##############################################################################
  #
- ###############################################################################
+ # Copyright 2023 Analog Devices, Inc.
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+ ##############################################################################
 
 # This is the name of the build output file
 
@@ -41,8 +55,8 @@ ifeq "$(TARGET)" ""
 $(error TARGET must be specified)
 endif
 
-TARGET_UC:=$(shell echo $(TARGET) | tr a-z A-Z)
-TARGET_LC:=$(shell echo $(TARGET) | tr A-Z a-z)
+TARGET_UC := $(subst m,M,$(subst a,A,$(subst x,X,$(TARGET))))
+TARGET_LC := $(subst M,m,$(subst A,a,$(subst X,x,$(TARGET))))
 ifeq "$(COMPILER)" ""
 $(error COMPILER must be specified)
 endif
@@ -117,7 +131,7 @@ PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/SMON/smon_reva.c
 
 PERIPH_DRIVER_INCLUDE_DIR += $(SOURCE_DIR)/SPI
 PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/SPI/spi_me55.c
-PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/SPI/spi_reva.c
+PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/SPI/spi_reva1.c
 
 PERIPH_DRIVER_INCLUDE_DIR += $(SOURCE_DIR)/SPIXF
 PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/SPIXF/spixf_me55.c
@@ -143,5 +157,4 @@ PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/WDT/wdt_common.c
 PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/WDT/wdt_me55.c
 PERIPH_DRIVER_C_FILES += $(SOURCE_DIR)/WDT/wdt_revb.c
 
-# Where to find header files for this project
-PERIPH_DRIVER_H_FILES +=  $(shell find $(PERIPH_DRIVER_INCLUDE_DIR) -name '*.h')
+

@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,6 +31,22 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 /* **** Includes **** */
@@ -42,6 +60,7 @@
 #include "dma.h"
 #include "dma_reva.h"
 #include "mcr_regs.h"
+#include "nvic_table.h"
 
 /* **** Definitions **** */
 
@@ -56,13 +75,30 @@
 int MXC_CSI2_Init(mxc_csi2_req_t *req, mxc_csi2_ctrl_cfg_t *ctrl_cfg,
                   mxc_csi2_vfifo_cfg_t *vfifo_cfg)
 {
-    MXC_SYS_ClockSourceEnable(MXC_SYS_CLOCK_IPLL);
+    int error = E_NO_ERROR;
+#ifdef __riscv
+#warning "RISC-V Core does not have access to CSI2 IRQ.  Drivers are not supported on RISC-V"
+    return E_NOT_SUPPORTED;
+#else
+    error = MXC_SYS_ClockSourceEnable(MXC_SYS_CLOCK_IPLL);
+    if (error)
+        return error;
+
     MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_CSI2);
+    if (error)
+        return error;
 
     // Turn on LDO2P5
     MXC_MCR->ldoctrl |= MXC_F_MCR_LDOCTRL_2P5EN;
 
-    return MXC_CSI2_RevA_Init((mxc_csi2_reva_regs_t *)MXC_CSI2, req, ctrl_cfg, vfifo_cfg);
+    error = MXC_CSI2_RevA_Init((mxc_csi2_reva_regs_t *)MXC_CSI2, req, ctrl_cfg, vfifo_cfg);
+    if (error)
+        return error;
+
+    MXC_NVIC_SetVector(CSI2_IRQn, MXC_CSI2_RevA_Handler);
+    NVIC_EnableIRQ(CSI2_IRQn);
+#endif
+    return error;
 }
 
 int MXC_CSI2_Shutdown(void)
@@ -87,9 +123,9 @@ int MXC_CSI2_CaptureFrame(int num_data_lanes)
     return MXC_CSI2_RevA_CaptureFrameDMA(num_data_lanes);
 }
 
-int MXC_CSI2_CaptureFrameDMA(int num_data_lanes)
+int MXC_CSI2_CaptureFrameDMA()
 {
-    return MXC_CSI2_RevA_CaptureFrameDMA(num_data_lanes);
+    return MXC_CSI2_RevA_CaptureFrameDMA();
 }
 
 int MXC_CSI2_SetLaneCtrlSource(mxc_csi2_lane_src_t *src)
@@ -102,9 +138,9 @@ int MXC_CSI2_GetLaneCtrlSource(mxc_csi2_lane_src_t *src)
     return MXC_CSI2_RevA_GetLaneCtrlSource((mxc_csi2_reva_regs_t *)MXC_CSI2, src);
 }
 
-void MXC_CSI2_GetImageDetails(uint8_t **img, uint32_t *imgLen, uint32_t *w, uint32_t *h)
+void MXC_CSI2_GetImageDetails(uint32_t *imgLen, uint32_t *w, uint32_t *h)
 {
-    MXC_CSI2_RevA_GetImageDetails(img, imgLen, w, h);
+    MXC_CSI2_RevA_GetImageDetails(imgLen, w, h);
 }
 
 int MXC_CSI2_Callback(mxc_csi2_req_t *req, int retVal)
@@ -112,10 +148,10 @@ int MXC_CSI2_Callback(mxc_csi2_req_t *req, int retVal)
     return MXC_CSI2_RevA_Callback(req, retVal);
 }
 
-int MXC_CSI2_Handler(void)
-{
-    return MXC_CSI2_RevA_Handler((mxc_csi2_reva_regs_t *)MXC_CSI2);
-}
+// int MXC_CSI2_Handler(void)
+// {
+//     return MXC_CSI2_RevA_Handler((mxc_csi2_reva_regs_t *)MXC_CSI2);
+// }
 
 /********************************/
 /* CSI2 RX Controller Functions */
@@ -288,6 +324,23 @@ int MXC_CSI2_PPI_Stop(void)
 /************************************/
 /* CSI2 DMA - Used for all features */
 /************************************/
+
+bool MXC_CSI2_DMA_Frame_Complete(void)
+{
+    return MXC_CSI2_RevA_DMA_Frame_Complete();
+}
+
+mxc_csi2_capture_stats_t MXC_CSI2_GetCaptureStats()
+{
+    mxc_csi2_reva_capture_stats_t stats = MXC_CSI2_RevA_DMA_GetCaptureStats();
+    mxc_csi2_capture_stats_t ret = { .success = stats.success,
+                                     .ctrl_err = stats.ctrl_err,
+                                     .ppi_err = stats.ppi_err,
+                                     .vfifo_err = stats.vfifo_err,
+                                     .frame_size = stats.frame_size,
+                                     .bytes_captured = stats.bytes_captured };
+    return ret;
+}
 
 int MXC_CSI2_DMA_Config(uint8_t *dst_addr, uint32_t byte_cnt, uint32_t burst_size)
 {

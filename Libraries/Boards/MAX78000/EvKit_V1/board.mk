@@ -1,5 +1,7 @@
-################################################################################
- # Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+###############################################################################
+ #
+ # Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ # (now owned by Analog Devices, Inc.)
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
  # copy of this software and associated documentation files (the "Software"),
@@ -29,7 +31,23 @@
  # property whatsoever. Maxim Integrated Products, Inc. retains all
  # ownership rights.
  #
- ###############################################################################
+ ##############################################################################
+ #
+ # Copyright 2023 Analog Devices, Inc.
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+ ##############################################################################
 
 ifeq "$(BOARD_DIR)" ""
 # This Makefile will self-locate if BOARD_DIR is not specified.
@@ -61,11 +79,16 @@ PROJ_CFLAGS+=-DCAMERA_HM0360_MONO
 PROJ_CFLAGS+=-DCAMERA_MONO
 else ifeq "$(CAMERA)" "HM0360_COLOR"
 SRCS += hm0360_color.c
+SRCS += debayering.c
 PROJ_CFLAGS+=-DCAMERA_BAYER
 PROJ_CFLAGS+=-DCAMERA_HM0360_COLOR
 else ifeq "$(CAMERA)" "OV5642"
 SRCS += ov5642.c
 PROJ_CFLAGS+=-DCAMERA_OV5642
+else ifeq "$(CAMERA)" "OV5640"
+SRCS += ov5640.c
+PROJ_CFLAGS+=-DCAMERA_OV5640
+PROJ_CFLAGS+=-DOV5640_DVP
 else ifeq "$(CAMERA)" "OV7692"
 SRCS += ov7692.c
 PROJ_CFLAGS+=-DCAMERA_OV7692
@@ -79,7 +102,7 @@ PROJ_CFLAGS+=-DCAMERA_OV7692
 endif
 SRCS += sccb.c
 
-MISC_DRIVERS_DIR=$(LIBS_DIR)/MiscDrivers
+MISC_DRIVERS_DIR ?= $(MAXIM_PATH)/Libraries/MiscDrivers
 
 # Where to find BSP source files
 VPATH += $(BOARD_DIR)/Source
@@ -99,3 +122,5 @@ IPATH += $(MISC_DRIVERS_DIR)/Display
 IPATH += $(MISC_DRIVERS_DIR)/LED
 IPATH += $(MISC_DRIVERS_DIR)/PushButton
 IPATH += $(MISC_DRIVERS_DIR)/Touchscreen
+
+include $(MISC_DRIVERS_DIR)/Display/fonts/fonts.mk

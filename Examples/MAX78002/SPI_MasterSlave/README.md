@@ -8,13 +8,15 @@ Once the master ends the transaction, the data received by the master and the sl
 
 ## Software
 
+This project uses the SPI v2 library. More information on the SPI v2 library can be found in the **[MSDK User Guide Developer Notes](https://analog-devices-msdk.github.io/msdk/USERGUIDE/#spi-v2-library)**.
+
 ### Project Usage
 
 Universal instructions on building, flashing, and debugging this project can be found in the **[MSDK User Guide](https://analog-devices-msdk.github.io/msdk/USERGUIDE/)**.
 
 ### Project-Specific Build Notes
 
-(None - this project builds as a standard example)
+Set `MXC_SPI_VERSION=v2` to build the SPI v2 libraries.
 
 ## Required Connections
 

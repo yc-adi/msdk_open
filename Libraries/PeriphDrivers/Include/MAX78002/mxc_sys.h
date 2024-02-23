@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -28,6 +30,22 @@
  * trademarks, maskwork rights, or any other form of intellectual
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
+ *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  ******************************************************************************/
 
@@ -200,7 +218,9 @@ typedef enum {
         MXC_V_GCR_CLKCTRL_SYSCLK_SEL_EXTCLK /**< Use the external system clock input. */
 } mxc_sys_system_clock_t;
 
-#define MXC_SYS_USN_CHECKSUM_LEN 16
+#define MXC_SYS_USN_CHECKSUM_LEN 16 // Length of the USN + padding for checksum compute
+#define MXC_SYS_USN_CSUM_FIELD_LEN 2 // Size of the checksum field in the USN
+#define MXC_SYS_USN_LEN 13 // Size of the USN including the checksum
 
 /***** Function Prototypes *****/
 
@@ -306,10 +326,10 @@ static inline int MXC_SYS_In_Crit_Section(void)
 // clang-format on
 
 /**
- * @brief Reads the device USN.
- * @param usn       Pointer to store the USN.
- * @param checksum  Optional pointer to store the AES checksum.
- * @returns       E_NO_ERROR if everything is successful.
+ * @brief Reads the device USN and verifies the checksum.
+ * @param usn       Pointer to store the USN. Array must be at least MXC_SYS_USN_LEN bytes long.
+ * @param checksum  Optional pointer to store the AES checksum. If not NULL, checksum is verified with AES engine.
+ * @returns         E_NO_ERROR if everything is successful.
  */
 int MXC_SYS_GetUSN(uint8_t *usn, uint8_t *checksum);
 
@@ -378,6 +398,16 @@ int MXC_SYS_Clock_Timeout(uint32_t ready);
  * @param           Enumeration for what to reset. Can reset multiple items at once.
  */
 void MXC_SYS_Reset_Periph(mxc_sys_reset_t reset);
+
+/**
+ * @brief Setup and run RISCV core 
+ */
+void MXC_SYS_RISCVRun(void);
+
+/**
+ * @brief Shutdown the RISCV core 
+ */
+void MXC_SYS_RISCVShutdown(void);
 
 /**
  * @brief Returns the clock rate (in Hz) of the Risc-V core.

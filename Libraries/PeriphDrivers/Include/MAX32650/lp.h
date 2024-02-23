@@ -4,7 +4,9 @@
  */
 
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -33,6 +35,22 @@
  * trademarks, maskwork rights, or any other form of intellectual
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
+ *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  ******************************************************************************/
 
@@ -380,6 +398,19 @@ void MXC_LP_EnterDeepSleepMode(void);
  *             Instead, the device will restart once an RTC, USB wakeup, or external interrupt occur. 
  */
 void MXC_LP_EnterBackupMode(void);
+
+/**
+ * @brief      Places the USB block into its initial state where the operating current is at its minimum.
+ *             This function must be called when the USB block is not used in order to achieve low power 
+ *             current readings.
+ */
+void MXC_LP_USBClearPONRST(void);
+
+/**
+ * @brief      Enables the USB (clock generator) if the USB PONRST (0x410) register was previously cleared
+ *             to put the device into a low power mode.
+ */
+void MXC_LP_USBSetPONRST(void);
 
 /**@} end of group lp */
 

@@ -28,7 +28,7 @@ ifeq "$(BOARD)" "EvKit_V1"
 VPATH += TFT/evkit
 endif
 ifeq "$(BOARD)" "FTHR_RevA"
-VPATH += TFT/fthr
+FONTS = LiberationSans16x16
 endif
 
 IPATH += TFT/evkit
@@ -36,3 +36,8 @@ IPATH += TFT/evkit
 ifeq ($(BOARD),Aud01_RevA)
 $(error ERR_NOTSUPPORTED: This project is not supported for the Audio board)
 endif
+
+ifeq ($(BOARD),CAM01_RevA)
+$(error ERR_NOTSUPPORTED: This project is not supported for the CAM01 board)
+endif
+

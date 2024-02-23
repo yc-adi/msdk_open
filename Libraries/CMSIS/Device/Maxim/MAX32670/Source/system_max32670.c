@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,6 +31,22 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 #include <string.h>
@@ -44,6 +62,21 @@ extern void (*const __vector_table[])(void);
 extern void (*const __isr_vector[])(void);
 
 uint32_t SystemCoreClock = HIRC_FREQ;
+
+/*
+The libc implementation from GCC 11+ depends on _getpid and _kill in some places.
+There is no concept of processes/PIDs in the baremetal PeriphDrivers, therefore
+we implement stub functions that return an error code to resolve linker warnings.
+*/
+int _getpid(void)
+{
+    return E_NOT_SUPPORTED;
+}
+
+int _kill(void)
+{
+    return E_NOT_SUPPORTED;
+}
 
 __weak void SystemCoreClockUpdate(void)
 {
@@ -117,7 +150,7 @@ __weak void SystemInit(void)
 {
     /* Configure the interrupt controller to use the application vector table in */
     /* the application space */
-#if defined(__CC_ARM) || defined(__GNUC__)
+#if defined(__CC_ARM) || defined(__ARMCC_VERSION) || defined(__GNUC__)
     /* IAR sets the VTOR pointer incorrectly and causes stack corruption */
     SCB->VTOR = (uint32_t)__isr_vector;
 #endif /* __CC_ARM || __GNUC__ */
@@ -149,7 +182,7 @@ __weak void SystemInit(void)
     Board_Init();
 }
 
-#if defined(__CC_ARM)
+#if defined(__CC_ARM) || defined(__ARMCC_VERSION)
 /* Global variable initialization does not occur until post scatterload in Keil tools.*/
 
 /* External function called after our post scatterload function implementation. */

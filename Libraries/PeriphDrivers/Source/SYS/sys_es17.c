@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -28,6 +30,22 @@
  * trademarks, maskwork rights, or any other form of intellectual
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
+ *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  ******************************************************************************/
 
@@ -258,18 +276,20 @@ int MXC_SYS_GetUSN(uint8_t *serialNumber, int len)
 {
     if (len != 13) {
         return E_BAD_PARAM;
+    } else if (serialNumber == NULL) {
+        return E_NULL_PTR;
     }
 
     uint32_t infoblock[6];
 
-    MXC_FLC_UnlockInfoBlock(0x0000);
+    MXC_FLC_UnlockInfoBlock(MXC_INFO_MEM_BASE);
     infoblock[0] = *(uint32_t *)MXC_INFO_MEM_BASE;
     infoblock[1] = *(uint32_t *)(MXC_INFO_MEM_BASE + 4);
     infoblock[2] = *(uint32_t *)(MXC_INFO_MEM_BASE + 8);
     infoblock[3] = *(uint32_t *)(MXC_INFO_MEM_BASE + 12);
     infoblock[4] = *(uint32_t *)(MXC_INFO_MEM_BASE + 16);
     infoblock[5] = *(uint32_t *)(MXC_INFO_MEM_BASE + 20);
-    MXC_FLC_LockInfoBlock(0x0000);
+    MXC_FLC_LockInfoBlock(MXC_INFO_MEM_BASE);
 
     serialNumber[0] = (infoblock[0] & 0x007F8000) >> 15;
     serialNumber[1] = (infoblock[0] & 0x7F800000) >> 23;

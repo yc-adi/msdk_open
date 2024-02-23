@@ -4,7 +4,9 @@
  */
 
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -33,6 +35,22 @@
  * trademarks, maskwork rights, or any other form of intellectual
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
+ *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  ******************************************************************************/
 
@@ -137,6 +155,16 @@ typedef enum {
 } mxc_gpio_vssel_t;
 
 /**
+ * @brief   Enumeration type for drive strength configuration.
+ */
+typedef enum {
+    MXC_GPIO_DRVSTR_0, /**< Drive Strength 0 */
+    MXC_GPIO_DRVSTR_1, /**< Drive Strength 1 */
+    MXC_GPIO_DRVSTR_2, /**< Drive Strength 2 */
+    MXC_GPIO_DRVSTR_3, /**< Drive Strength 3 */
+} mxc_gpio_drvstr_t;
+
+/**
  * @brief   Enumeration type for the type of GPIO pad on a given pin.
  */
 typedef enum {
@@ -156,6 +184,7 @@ typedef struct {
     mxc_gpio_func_t func; /**< Function type */
     mxc_gpio_pad_t pad; /**< Pad type */
     mxc_gpio_vssel_t vssel; /**< Voltage select */
+    mxc_gpio_drvstr_t drvstr; /**< Drive Strength select */
 } mxc_gpio_cfg_t;
 
 /**
@@ -350,6 +379,15 @@ void MXC_GPIO_ClearWakeEn(mxc_gpio_regs_t *port, uint32_t mask);
  * @returns    The value of the wake enable register.
  */
 uint32_t MXC_GPIO_GetWakeEn(mxc_gpio_regs_t *port);
+
+/**
+ * @brief      Set Drive Strength for pins.
+ *
+ * @param      port   The GPIO port.
+ * @param[in]  ds     Drive strength level. Ref /mxc_gpio_ds_t enum type.
+ * @param[in]  mask   Pins in the GPIO port that will be set to the voltage.
+ */
+int MXC_GPIO_SetDriveStrength(mxc_gpio_regs_t *port, mxc_gpio_drvstr_t drvstr, uint32_t mask);
 
 /**@} end of group gpio */
 

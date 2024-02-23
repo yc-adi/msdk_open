@@ -4,7 +4,9 @@
  */
 
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -34,6 +36,22 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 /* Define to prevent redundant inclusion */
@@ -41,6 +59,7 @@
 #define LIBRARIES_PERIPHDRIVERS_INCLUDE_MAX78002_CSI2_H_
 
 /* **** Includes **** */
+#include <stdbool.h>
 #include "csi2_regs.h"
 
 #ifdef __cplusplus
@@ -218,12 +237,32 @@ typedef enum {
     MXC_CSI2_DMA_LINE_BY_LINE, ///< DMA line by line per frame
 } mxc_csi2_dma_frame_t;
 
+typedef struct _mxc_csi2_capture_stats_t {
+    bool success;
+    uint32_t ctrl_err;
+    uint32_t ppi_err;
+    uint32_t vfifo_err;
+    size_t frame_size;
+    size_t bytes_captured;
+} mxc_csi2_capture_stats_t;
+
 /**
- * @brief   The callback routine used to indicate to indicate transaction has terminated.
+ * @brief   The callback routine used to indicate to indicate transaction has terminated.  This is currently unused until multi-frame exposures are implemented.
  * @param   req          The details of the image capture.
  * @param   result       See \ref MXC_Error_Codes for the list of error codes.
  */
-typedef void (*mxc_csi2_complete_cb_t)(mxc_csi2_req_t *req, int result);
+typedef void (*mxc_csi2_frame_handler_cb_t)(mxc_csi2_req_t *req, int result);
+
+/**
+ * @brief   The callback routine used to handle incoming image data from the camera sensor.
+ *          It is triggered once per row. Application code should implement this
+ *          and ensure that the callback is fast enough to keep up with the incoming data.
+ * @param[in] data  Pointer to the received bytes in memory.
+ * @param[in] len   The number of bytes received.
+ * 
+ * @return  This function should return 0 on success.  If non-zero, the CSI-2 controller will end the frame capture
+ */
+typedef int (*mxc_csi2_line_handler_cb_t)(uint8_t *data, unsigned int len);
 
 /**
  * @brief  Selects control source signals for data and clock lanes.
@@ -269,13 +308,13 @@ typedef struct {
  * @brief  The information required to capture images.
  */
 struct _mxc_csi2_req_t {
-    uint8_t *img_addr; ///< Destination Address for Captured Image
     uint32_t pixels_per_line; ///< Image Width
     uint32_t lines_per_frame; ///< Image Height
     uint32_t bits_per_pixel_odd; ///< Bits Per Pixel Odd
     uint32_t bits_per_pixel_even; ///< Bits Per Pixel Even
     uint32_t frame_num; ///< Number of frames to capture
-    mxc_csi2_complete_cb_t callback; ///< RX Callback for DMA requests
+    mxc_csi2_line_handler_cb_t
+        line_handler; ///< Callback triggered for each image row.  Application code must implement this to offload data.
 
     uint8_t process_raw_to_rgb; ///< Select if processing RAW data to RGB type
     mxc_csi2_rgb_type_t rgb_type; ///< Select final processed RGB type
@@ -332,7 +371,7 @@ int MXC_CSI2_CaptureFrame(int num_data_lanes);
  * @param      num_data_lanes    Number of data lanes used.
  * @return     #E_NO_ERROR if everything is successful.
  */
-int MXC_CSI2_CaptureFrameDMA(int num_data_lanes);
+int MXC_CSI2_CaptureFrameDMA();
 
 /**
  * @brief      Select Lane Control Source for D0-D4 and C0.
@@ -350,26 +389,11 @@ int MXC_CSI2_GetLaneCtrlSource(mxc_csi2_lane_src_t *src);
 
 /**
  * @brief      Grab the configured image details.
- * @param      img      Pointer to image buffer.
- * @param      imgLen   Pointer to byte length of image.
- * @param      w        Pointer to Image Width.
- * @param      h        Pointer to Image Height.
+ * @param[out]      imgLen   Pointer to the total length of the image (in bytes).
+ * @param[out]      w        Pointer to image width (in pixels).
+ * @param[out]      h        Pointer to image height (in pixels).
  */
-void MXC_CSI2_GetImageDetails(uint8_t **img, uint32_t *imgLen, uint32_t *w, uint32_t *h);
-
-/**
- * @brief      Callback function for CSI2.
- * @param      req        The details of the image capture (holds callback).
- * @param      retVal    Return value for callback function, usually error code.
- * @return     #E_NO_ERROR if everything is successful.
- */
-int MXC_CSI2_Callback(mxc_csi2_req_t *req, int retVal);
-
-/**
- * @brief      Interrupt Handler Function.
- * @return     #E_NO_ERROR if everything is successful.
- */
-int MXC_CSI2_Handler(void);
+void MXC_CSI2_GetImageDetails(uint32_t *imgLen, uint32_t *w, uint32_t *h);
 
 /********************************/
 /* CSI2 RX Controller Functions */
@@ -592,6 +616,10 @@ int MXC_CSI2_PPI_Stop(void);
 /************************************/
 /* CSI2 DMA - Used for all features */
 /************************************/
+
+bool MXC_CSI2_DMA_Frame_Complete(void);
+
+mxc_csi2_capture_stats_t MXC_CSI2_GetCaptureStats();
 
 /**
  * @brief      Clears the interrupt flags for PPI.

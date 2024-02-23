@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,12 +31,27 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 /**
- * @file    main.c
- * @brief   FreeRTOSDemo
- * @details This example demonstrates FreeRTOS.
+ * @file        main.c
+ * @brief       FreeRTOS Example Application.
  */
 
 #include <stdio.h>
@@ -77,6 +94,9 @@ mxc_gpio_cfg_t uart_cts = { MXC_GPIO1, MXC_GPIO_PIN_7, MXC_GPIO_FUNC_IN, MXC_GPI
                             MXC_GPIO_VSSEL_VDDIOH };
 mxc_gpio_cfg_t uart_rts = { MXC_GPIO1, MXC_GPIO_PIN_8, MXC_GPIO_FUNC_OUT, MXC_GPIO_PAD_NONE,
                             MXC_GPIO_VSSEL_VDDIOH };
+#elif (CONSOLE_UART == 0)
+#define UARTx_IRQHandler UART0_IRQHandler
+#define UARTx_IRQn UART0_IRQn
 #else
 #error "Please update ISR macro for UART CONSOLE_UART"
 #endif
@@ -373,12 +393,14 @@ int main(void)
     volatile int i;
     for (i = 0; i < 0xFFFFFF; i++) {}
 
+#if defined(EvKit_V1)
     /* Setup manual CTS/RTS to lockout console and wake from deep sleep */
     MXC_GPIO_Config(&uart_cts);
     MXC_GPIO_Config(&uart_rts);
 
     /* Enable incoming characters */
     MXC_GPIO_OutClr(uart_rts.port, uart_rts.mask);
+#endif
 
 #if configUSE_TICKLESS_IDLE
 

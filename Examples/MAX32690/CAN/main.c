@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,12 +31,27 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 /**
  * @file    main.c
- * @brief   Hello World!
- * @details This example uses the UART to print to a terminal and flashes an LED.
+ * @brief   Demonstrates Controller Area Network (CAN) drivers and transactions.
  */
 
 /***** Includes *****/
@@ -91,7 +108,7 @@ int main(void)
     printf("well as receiving a CAN message (any type except CAN FD). These\n");
     printf("operations can be performed with either blocking, non-blocking or\n");
     printf("DMA methods (selectable with the macros defined above.)\n\n");
-    printf("Connect CAN signals on header JH8 to CAN bus.\n\n");
+    printf("Connect CAN signals on CAN header to CAN bus.\n\n");
 
 #if ASYNC || DMA
     NVIC_EnableIRQ(CAN0_IRQn);
@@ -122,8 +139,8 @@ int main(void)
         data_tx[i] = i;
     }
 
-    printf("Press button SW2 to begin example.\n");
-    while (!PB_Get(0)) {}
+    printf("Press any user push button to begin example.\n");
+    while (!PB_IsPressedAny()) {}
     MXC_Delay(MXC_DELAY_MSEC(500));
 
 #if SEND_CAN

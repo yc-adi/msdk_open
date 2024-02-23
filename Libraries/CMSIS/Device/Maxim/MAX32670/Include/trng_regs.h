@@ -6,7 +6,9 @@
  */
 
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -35,6 +37,22 @@
  * trademarks, maskwork rights, or any other form of intellectual
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
+ *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  ******************************************************************************/
 
@@ -119,11 +137,8 @@ typedef struct {
 #define MXC_F_TRNG_CTRL_HEALTH_EN_POS                  2 /**< CTRL_HEALTH_EN Position */
 #define MXC_F_TRNG_CTRL_HEALTH_EN                      ((uint32_t)(0x1UL << MXC_F_TRNG_CTRL_HEALTH_EN_POS)) /**< CTRL_HEALTH_EN Mask */
 
-#define MXC_F_TRNG_CTRL_AESKG_USR_POS                  3 /**< CTRL_AESKG_USR Position */
-#define MXC_F_TRNG_CTRL_AESKG_USR                      ((uint32_t)(0x1UL << MXC_F_TRNG_CTRL_AESKG_USR_POS)) /**< CTRL_AESKG_USR Mask */
-
-#define MXC_F_TRNG_CTRL_AESKG_SYS_POS                  4 /**< CTRL_AESKG_SYS Position */
-#define MXC_F_TRNG_CTRL_AESKG_SYS                      ((uint32_t)(0x1UL << MXC_F_TRNG_CTRL_AESKG_SYS_POS)) /**< CTRL_AESKG_SYS Mask */
+#define MXC_F_TRNG_CTRL_KEYGEN_POS                     3 /**< CTRL_KEYGEN Position */
+#define MXC_F_TRNG_CTRL_KEYGEN                         ((uint32_t)(0x1UL << MXC_F_TRNG_CTRL_KEYGEN_POS)) /**< CTRL_KEYGEN Mask */
 
 #define MXC_F_TRNG_CTRL_KEYWIPE_POS                    15 /**< CTRL_KEYWIPE Position */
 #define MXC_F_TRNG_CTRL_KEYWIPE                        ((uint32_t)(0x1UL << MXC_F_TRNG_CTRL_KEYWIPE_POS)) /**< CTRL_KEYWIPE Mask */

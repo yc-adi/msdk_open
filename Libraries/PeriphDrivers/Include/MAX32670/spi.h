@@ -4,7 +4,9 @@
  */
 
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -33,6 +35,22 @@
  * trademarks, maskwork rights, or any other form of intellectual
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
+ *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  ******************************************************************************/
 
@@ -153,6 +171,11 @@ struct _mxc_spi_req_t {
  * SPI Width - SPI_WIDTH_STANDARD (even if quadModeUsed is set)
  *
  * These parameters can be modified after initialization using low level functions
+ * 
+ * @note    On default this function enables SPI peripheral clock and spi gpio pins.
+ * if you wish to manage clock and gpio related things in upper level instead of here.
+ * Define MSDK_NO_GPIO_CLK_INIT flag in project.mk file. 
+ * By this flag this function will remove clock and gpio related codes from file.
  *
  * @param   spi             Pointer to SPI registers (selects the SPI block used.)
  * @param   masterMode      Whether to put the device in master or slave mode. Use
@@ -644,6 +667,18 @@ void MXC_SPI_AbortAsync(mxc_spi_regs_t *spi);
  * @param   spi         Pointer to SPI registers (selects the SPI block used.)
  */
 void MXC_SPI_AsyncHandler(mxc_spi_regs_t *spi);
+
+/**
+ * @brief   Enable/Disable HW CS control feature.
+ *
+ * Depending on the application, the user might need to manually drive the slave select pin.
+ * The SPI driver automatically drives the SS pin and this function enables/disables this
+ * feature.
+ *
+ * @param   spi             Pointer to SPI registers (selects the SPI block used.)
+ * @param   state           Non-zero values: enable HW SS mode. Zero: disable HW SS mode.
+ */
+void MXC_SPI_HWSSControl(mxc_spi_regs_t *spi, int state);
 
 /**@} end of group spi */
 

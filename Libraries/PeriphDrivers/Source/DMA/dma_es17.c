@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,6 +31,22 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 /****** Includes *******/
@@ -45,12 +63,19 @@
 
 int MXC_DMA_Init(void)
 {
+#ifndef MSDK_NO_GPIO_CLK_INIT
     if (!MXC_SYS_IsClockEnabled(MXC_SYS_PERIPH_CLOCK_DMA)) {
         MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_DMA);
         MXC_SYS_Reset_Periph(MXC_SYS_RESET_DMA);
     }
+#endif
 
     return MXC_DMA_RevA_Init((mxc_dma_reva_regs_t *)MXC_DMA);
+}
+
+void MXC_DMA_DeInit(void)
+{
+    return MXC_DMA_RevA_DeInit((mxc_dma_reva_regs_t *)MXC_DMA);
 }
 
 int MXC_DMA_AcquireChannel(void)

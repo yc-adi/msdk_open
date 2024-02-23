@@ -1,5 +1,7 @@
-################################################################################
- # Copyright (C) Maxim Integrated Products, Inc., All Rights Reserved.
+###############################################################################
+ #
+ # Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ # (now owned by Analog Devices, Inc.)
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
  # copy of this software and associated documentation files (the "Software"),
@@ -29,55 +31,45 @@
  # property whatsoever. Maxim Integrated Products, Inc. retains all
  # ownership rights.
  #
- ###############################################################################
+ ##############################################################################
+ #
+ # Copyright 2023 Analog Devices, Inc.
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #     http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+ ##############################################################################
 
-# This is the name of the build output file
-PROJECT_NAME=liblwip
-
-# Specify the project variant.
-ifeq "$(MFLOAT_ABI)" "hardfp"
-PROJECT_VARIANT=hardfp
-else
-ifeq "$(MFLOAT_ABI)" "hard"
-PROJECT_VARIANT=hardfp
-else
-PROJECT_VARIANT=softfp
-endif
-endif
-
-# Use these to specify the project.
-ifeq "$(PROJECT_VARIANT)" ""
-PROJECT=$(PROJECT_NAME)
-else
-PROJECT=$(PROJECT_NAME)_$(PROJECT_VARIANT)
+ifeq "$(LWIP_DIR)" ""
+# If the location of the library is not specified, this Makefile will locate itself.
+LWIP_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 endif
 
 ifeq "$(TARGET)" ""
 $(error TARGET must be specified)
 endif
 
-TARGET_UC:=$(shell echo $(TARGET) | tr a-z A-Z)
-TARGET_LC:=$(shell echo $(TARGET) | tr A-Z a-z)
+TARGET_UC := $(subst m,M,$(subst a,A,$(subst x,X,$(TARGET))))
+TARGET_LC := $(subst M,m,$(subst A,a,$(subst X,x,$(TARGET))))
 $(info $(TARGET_UC))
-
 
 ifeq "$(COMPILER)" ""
 $(error COMPILER must be specified)
 endif
 
+include ${LWIP_DIR}/lwip_files.mk
 
-ifeq "$(BUILD_DIR)" ""
-BUILD_DIR=./Build
-endif
-
-# This is the path to the CMSIS root directory
-ifeq "$(CMSIS_ROOT)" ""
-CMSIS_ROOT=../CMSIS
-endif
-
-include ${CMSIS_ROOT}/../lwIP/lwip_files.mk
-
-# # Where to find header files for this project
+# Add library files to the build.  Since this file drives the
+# actual build of the library, we add them to IPATH, SRCS, and VPATH.
 IPATH += $(LWIP_INCLUDE_DIR)
 SRCS  += $(LWIP_C_FILES)
 VPATH += $(dir $(SRCS))

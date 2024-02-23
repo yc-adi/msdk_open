@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,6 +31,22 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 #ifndef LIBRARIES_MISCDRIVERS_CAMERA_CAMERA_H_
@@ -46,11 +64,15 @@
 #include "hm0360_regs.h"
 #elif defined(CAMERA_OV5642)
 #include "ov5642_regs.h"
+#elif defined(CAMERA_OV5640)
+#include "ov5640_regs.h"
 #elif defined(CAMERA_OV7692)
 #include "ov7692_regs.h"
 #elif defined(CAMERA_PAG7920)
 #include "pag7920_regs.h"
 #endif
+
+#include "debayering.h"
 
 #include "tmr_regs.h"
 
@@ -98,7 +120,7 @@ typedef struct _camera {
     int (*reset)(void);
     int (*sleep)(int enable);
 #if defined(CAMERA_HM01B0) || (CAMERA_HM0360_MONO) || (CAMERA_HM0360_COLOR) || \
-    defined(CAMERA_OV5642)
+    defined(CAMERA_OV5642) || defined(CAMERA_OV5640)
     int (*read_reg)(uint16_t reg_addr, uint8_t *reg_data);
     int (*write_reg)(uint16_t reg_addr, uint8_t reg_data);
 #else //(CAMERA_OV7692) || (CAMERA_PAG7920)
@@ -150,28 +172,8 @@ int camera_sleep(int enable);
 // Shutdown mode.
 int camera_shutdown(int enable);
 
-#ifdef CAMERA_BAYER
-/**
-* @brief Formulate a bayer "passthrough" image that splits an HM0360 bayer pattern into its RGB channels while preserving the bayer pattern.  Useful for debugging and demosaicing algorithm development.
-* @param[in] srcimg Pointer to the raw bayer pattern
-* @param[in] w Width of the bayer pattern (in pixels)
-* @param[in] h Height of the bayer pattern (in pixels)
-* @param[out] dstimg Output pointer for converted RGB565 image.
-****************************************************************************/
-void bayer_passthrough(uint8_t *srcimg, uint32_t w, uint32_t h, uint16_t *dstimg);
-
-/**
-* @brief Color-correct and demosaic a raw HM0360 bayer-patterned image array and convert to RGB565.
-* @param[in] srcimg Pointer to the raw bayer pattern
-* @param[in] w Width of the bayer pattern (in pixels)
-* @param[in] h Height of the bayer pattern (in pixels)
-* @param[out] dstimg Output pointer for converted RGB565 image.
-****************************************************************************/
-void bayer_bilinear_demosaicing(uint8_t *srcimg, uint32_t w, uint32_t h, uint16_t *dstimg);
-#endif
-
 #if defined(CAMERA_HM01B0) || (CAMERA_HM0360_MONO) || (CAMERA_HM0360_COLOR) || \
-    defined(CAMERA_OV5642)
+    defined(CAMERA_OV5642) || defined(CAMERA_OV5640)
 // Write a sensor register.
 int camera_write_reg(uint16_t reg_addr, uint8_t reg_data);
 int camera_read_reg(uint16_t reg_addr, uint8_t *reg_data);

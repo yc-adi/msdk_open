@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -28,6 +30,22 @@
  * trademarks, maskwork rights, or any other form of intellectual
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
+ *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  ******************************************************************************/
 
@@ -365,6 +383,9 @@ int MXC_TFT_Init(mxc_gpio_cfg_t *reset_ctrl, mxc_gpio_cfg_t *bl_ctrl)
 
     MXC_TFT_Backlight(1);
 
+    // This TFT is a vertical display.  Rotate it to horizontal to match a typical expected oritentation.
+    MXC_TFT_SetRotation(ROTATE_270);
+
     return E_NO_ERROR;
 }
 
@@ -522,6 +543,24 @@ void MXC_TFT_ShowImageCameraRGB565(int x0, int y0, uint8_t *image, int width, in
     window_max();
 
     __enable_irq();
+}
+
+/* This function writes an image data line by line, required by most UI libraries like LVGL */
+void MXC_TFT_WriteBufferRGB565(int x0, int y0, uint8_t *image, int width, int height)
+{
+    if (tft_rotation == ROTATE_0 || tft_rotation == ROTATE_180) {
+        window(x0, y0, height, width);
+    } else {
+        window(x0, y0, width, height);
+    }
+
+    write_command(MEM_WRITE); // send pixel
+
+    for (unsigned int y = 0; y < width * height; y += width) { //height
+        TFT_SPI_Transmit(&image[y * 2], width * 2);
+    }
+
+    window_max();
 }
 
 void MXC_TFT_PrintPalette(void)
@@ -797,4 +836,15 @@ void MXC_TFT_WriteReg(unsigned char command, unsigned char data)
     if (irq_enabled) { // Re-enable IRQs if they were previously
         __enable_irq();
     }
+}
+
+void MXC_TFT_Stream(int x0, int y0, int width, int height)
+{
+    if (tft_rotation == ROTATE_0 || tft_rotation == ROTATE_180) {
+        window(x0, y0, height, width);
+    } else {
+        window(x0, y0, width, height);
+    }
+
+    write_command(MEM_WRITE); // send pixel
 }

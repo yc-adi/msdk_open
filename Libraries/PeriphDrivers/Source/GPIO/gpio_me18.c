@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -29,6 +31,22 @@
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
  *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  ******************************************************************************/
 
 /* **** Includes **** */
@@ -45,15 +63,15 @@
 /* **** Definitions **** */
 #define GPIO4_PIN_MASK 0x00000003
 #define GPIO4_RESET_MASK 0xFFFFFF77
-#define GPIO4_OUTEN_MASK(mask)                                      \
-    (((mask & MXC_GPIO_PIN_0) << MXC_F_MCR_GPIO4_CTRL_P40_OE_POS) | \
-     ((mask & MXC_GPIO_PIN_1) << (MXC_F_MCR_GPIO4_CTRL_P41_OE_POS - 1)))
-#define GPIO4_PULLDIS_MASK(mask)                                    \
-    (((mask & MXC_GPIO_PIN_0) << MXC_F_MCR_GPIO4_CTRL_P40_PE_POS) | \
-     ((mask & MXC_GPIO_PIN_1) << (MXC_F_MCR_GPIO4_CTRL_P41_PE_POS - 1)))
-#define GPIO4_DATAOUT_MASK(mask)                                    \
-    (((mask & MXC_GPIO_PIN_0) << MXC_F_MCR_GPIO4_CTRL_P40_DO_POS) | \
-     ((mask & MXC_GPIO_PIN_1) << (MXC_F_MCR_GPIO4_CTRL_P41_DO_POS - 1)))
+#define GPIO4_OUTEN_MASK(mask)                                \
+    (((mask & (1 << 0)) << MXC_F_MCR_GPIO4_CTRL_P40_OE_POS) | \
+     ((mask & (1 << 1)) << (MXC_F_MCR_GPIO4_CTRL_P41_OE_POS - 1)))
+#define GPIO4_PULLDIS_MASK(mask)                              \
+    (((mask & (1 << 0)) << MXC_F_MCR_GPIO4_CTRL_P40_PE_POS) | \
+     ((mask & (1 << 1)) << (MXC_F_MCR_GPIO4_CTRL_P41_PE_POS - 1)))
+#define GPIO4_DATAOUT_MASK(mask)                              \
+    (((mask & (1 << 0)) << MXC_F_MCR_GPIO4_CTRL_P40_DO_POS) | \
+     ((mask & (1 << 1)) << (MXC_F_MCR_GPIO4_CTRL_P41_DO_POS - 1)))
 #define GPIO4_DATAOUT_GET_MASK(mask)                                                             \
     ((((MXC_MCR->gpio4_ctrl & MXC_F_MCR_GPIO4_CTRL_P40_DO) >> MXC_F_MCR_GPIO4_CTRL_P40_DO_POS) | \
       ((MXC_MCR->gpio4_ctrl & MXC_F_MCR_GPIO4_CTRL_P41_DO) >>                                    \
@@ -64,9 +82,9 @@
       ((MXC_MCR->gpio4_ctrl & MXC_F_MCR_GPIO4_CTRL_P41_IN) >>                                    \
        (MXC_F_MCR_GPIO4_CTRL_P41_IN_POS - 1))) &                                                 \
      mask)
-#define GPIO4_AFEN_MASK(mask)                                        \
-    (((mask & MXC_GPIO_PIN_0) << MXC_F_MCR_OUTEN_PDOWN_OUT_EN_POS) | \
-     ((mask & MXC_GPIO_PIN_1) >> (MXC_F_MCR_OUTEN_SQWOUT_EN_POS + 1)))
+#define GPIO4_AFEN_MASK(mask)                                  \
+    (((mask & (1 << 0)) << MXC_F_MCR_OUTEN_PDOWN_OUT_EN_POS) | \
+     ((mask & (1 << 1)) >> (MXC_F_MCR_OUTEN_SQWOUT_EN_POS + 1)))
 
 /* **** Globals **** */
 
@@ -251,7 +269,17 @@ int MXC_GPIO_Config(const mxc_gpio_cfg_t *cfg)
 
     // Configure the vssel
     if (port < 4) {
-        return MXC_GPIO_SetVSSEL(gpio, cfg->vssel, cfg->mask);
+        error = MXC_GPIO_SetVSSEL(gpio, cfg->vssel, cfg->mask);
+        if (error != E_NO_ERROR) {
+            return error;
+        }
+    }
+
+    // Configure the drive strength
+    if (cfg->func == MXC_GPIO_FUNC_IN) {
+        return E_NO_ERROR;
+    } else {
+        return MXC_GPIO_SetDriveStrength(gpio, cfg->drvstr, cfg->mask);
     }
 
     return E_NO_ERROR;
@@ -305,7 +333,8 @@ void MXC_GPIO_OutPut(mxc_gpio_regs_t *port, uint32_t mask, uint32_t val)
     if (port == MXC_GPIO4) {
         uint32_t gpio4_cp = MXC_MCR->gpio4_ctrl;
 
-        MXC_MCR->gpio4_ctrl = (gpio4_cp & ~mask) | GPIO4_DATAOUT_MASK((mask & val));
+        MXC_MCR->gpio4_ctrl = (gpio4_cp & ~GPIO4_DATAOUT_MASK(mask)) |
+                              GPIO4_DATAOUT_MASK((mask & val));
         return;
     }
 
@@ -430,4 +459,10 @@ uint32_t MXC_GPIO_GetWakeEn(mxc_gpio_regs_t *port)
     }
 
     return MXC_GPIO_RevA_GetWakeEn((mxc_gpio_reva_regs_t *)port);
+}
+
+/* ************************************************************************** */
+int MXC_GPIO_SetDriveStrength(mxc_gpio_regs_t *port, mxc_gpio_drvstr_t drvstr, uint32_t mask)
+{
+    return MXC_GPIO_RevA_SetDriveStrength((mxc_gpio_reva_regs_t *)port, drvstr, mask);
 }

@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -28,6 +30,22 @@
  * trademarks, maskwork rights, or any other form of intellectual
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
+ *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  ******************************************************************************/
 
@@ -151,7 +169,18 @@ int MXC_GPIO_Config(const mxc_gpio_cfg_t *cfg)
         return E_BAD_PARAM;
     }
 
-    return MXC_GPIO_SetVSSEL(gpio, cfg->vssel, cfg->mask);
+    // Configure the vssel
+    err = MXC_GPIO_SetVSSEL(gpio, cfg->vssel, cfg->mask);
+    if (err != E_NO_ERROR) {
+        return err;
+    }
+
+    // Configure the drive strength
+    if (cfg->func == MXC_GPIO_FUNC_IN) {
+        return E_NO_ERROR;
+    } else {
+        return MXC_GPIO_SetDriveStrength(gpio, cfg->drvstr, cfg->mask);
+    }
 }
 
 /* ************************************************************************** */
@@ -254,4 +283,10 @@ void MXC_GPIO_ClearWakeEn(mxc_gpio_regs_t *port, uint32_t mask)
 uint32_t MXC_GPIO_GetWakeEn(mxc_gpio_regs_t *port)
 {
     return MXC_GPIO_RevA_GetWakeEn((mxc_gpio_reva_regs_t *)port);
+}
+
+/* ************************************************************************** */
+int MXC_GPIO_SetDriveStrength(mxc_gpio_regs_t *port, mxc_gpio_drvstr_t drvstr, uint32_t mask)
+{
+    return MXC_GPIO_RevA_SetDriveStrength((mxc_gpio_reva_regs_t *)port, drvstr, mask);
 }

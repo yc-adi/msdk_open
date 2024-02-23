@@ -1,5 +1,7 @@
 /******************************************************************************
- * Copyright (C) 2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -28,6 +30,22 @@
  * trademarks, maskwork rights, or any other form of intellectual
  * property whatsoever. Maxim Integrated Products, Inc. retains all
  * ownership rights.
+ *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  ******************************************************************************/
 
@@ -135,7 +153,9 @@ int formatSDHC()
 
     printf("FORMATTING DRIVE\n");
 
-    if ((err = f_mkfs("", FM_ANY, 0, work, sizeof(work))) !=
+    MKFS_PARM format_options = { .fmt = FM_ANY };
+
+    if ((err = f_mkfs("", &format_options, work, sizeof(work))) !=
         FR_OK) { //Format the default drive to FAT32
         printf("Error formatting SD card: %s\n", FF_ERRORS[err]);
     } else {
@@ -543,15 +563,6 @@ int main(void)
         printf("Card type: SDHC\n");
     } else {
         printf("Card type: MMC/eMMC\n");
-    }
-
-    /* Configure for fastest possible clock, must not exceed 52 MHz for eMMC */
-    if (SystemCoreClock > 96000000) {
-        printf("SD clock ratio (at card) 4:1\n");
-        MXC_SDHC_Set_Clock_Config(1);
-    } else {
-        printf("SD clock ratio (at card) 2:1\n");
-        MXC_SDHC_Set_Clock_Config(0);
     }
 
     while (run) {

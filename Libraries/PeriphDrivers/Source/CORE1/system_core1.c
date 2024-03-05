@@ -51,6 +51,7 @@ __weak int Core1_Main(void)
     // The user should declare this in application code, so we'll just spin
     while (1) {}
 }
+
 __weak void PreInit_Core1(void)
 {
     return;

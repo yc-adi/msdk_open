@@ -71,14 +71,6 @@ endif
 LIBS_DIR := $(abspath $(MAXIM_PATH)/Libraries)
 CMSIS_ROOT := $(LIBS_DIR)/CMSIS
 
-
-ifeq ($(MAKECMDGOALS),sla)
-SECURE_BOOT_TOOLS_DIR=$(LIBS_DIR)/../NDALibraries/SecureBootTools
-CA_SIGN_BUILD=$(SECURE_BOOT_TOOLS_DIR)/script/sign_application.sh
-BUILD_SESSION=$(SECURE_BOOT_TOOLS_DIR)/script/build_application.sh
-TEST_KEY=$(SECURE_BOOT_TOOLS_DIR)/key/maximtestcrk.key
-endif
-
 # Source files for this test (add path to VPATH below)
 SRCS  = main.c
 SRCS += $(LIBS_DIR)/PeriphDrivers/Source/SEMA/sema_me14.c
@@ -93,20 +85,11 @@ ifeq ($(MAKECMDGOALS),sla)
 VPATH += $(SECURE_BOOT_TOOLS_DIR)/sla_header
 endif
 VPATH += $(LIBS_DIR)/MiscDrivers
-VPATH += $(LIBS_DIR)/MiscDrivers/LED
-VPATH += $(LIBS_DIR)/MiscDrivers/PushButton
-VPATH += $(LIBS_DIR)/MiscDrivers/ExtMemory
-VPATH += $(LIBS_DIR)/MiscDrivers/Display
-VPATH += $(LIBS_DIR)/MiscDrivers/CODEC
 
 # Where to find header files for this project
 IPATH += .
 IPATH += include
 IPATH := $(IPATH)
-IPATH += $(LIBS_DIR)/MiscDrivers/LED
-IPATH += $(LIBS_DIR)/MiscDrivers/PushButton
-IPATH += $(LIBS_DIR)/MiscDrivers/ExtMemory
-IPATH += $(LIBS_DIR)/MiscDrivers/Display
 
 # Enable assertion checking for development
 PROJ_CFLAGS+=-DMXC_ASSERT_ENABLE 
@@ -117,20 +100,6 @@ VPATH += $(CMSIS_ROOT)/Device/Maxim/$(TARGET_UC)/Source/GCC
 # Use this to enable or disable Core 1
 # Enabling Core 1 reserves RAM for its stack
 DUAL_CORE=1
-
-# Specify the target revision to override default
-# "A2" in ASCII
-# TARGET_REV=0x4132
-
-# Use this variables to specify and alternate tool path
-#TOOL_DIR=/opt/gcc-arm-none-eabi-4_8-2013q4/bin
-
-# Use these variables to add project specific tool options
-#PROJ_CFLAGS+=--specs=nano.specs
-#PROJ_LDFLAGS+=--specs=nano.specs
-
-# Point this variable to a startup file to override the default file
-#STARTUPFILE=start.S
 
 # Set MXC_OPTIMIZE to override the default optimization level 
 MXC_OPTIMIZE=-O1
@@ -160,10 +129,6 @@ include $(LIBS_DIR)/libs.mk
 # included before this one.
 include $(CMSIS_ROOT)/Device/Maxim/$(TARGET_UC)/Source/$(COMPILER)/$(TARGET_LC).mk
 
-# The rule to clean out all the build products.
-distclean: clean
-	$(MAKE) -C ${PERIPH_DRIVER_DIR} clean
-	rm -rf scp_packets
 
 
 sla: all
@@ -172,3 +137,12 @@ sla: all
 	arm-none-eabi-objcopy  $(BUILD_DIR)/$(PROJECT).elf --update-section .sig=$(BUILD_DIR)/$(PROJECT).bin.sig
 	arm-none-eabi-objcopy $(BUILD_DIR)/$(PROJECT).elf -O binary $(BUILD_DIR)/$(PROJECT).bin.sbin
 	$(BUILD_SESSION) $(BUILD_DIR)/$(PROJECT).bin.sbin scp_packets $(TEST_KEY)
+
+libclean: 
+	$(MAKE)  -f ${PERIPH_DRIVER_DIR}/periphdriver.mk clean.periph
+	
+clean: 
+#	Extend the functionality of the "clean" recipe here
+
+# The rule to clean out all the build products.
+distclean: clean libclean

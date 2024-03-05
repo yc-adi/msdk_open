@@ -56,13 +56,21 @@ ifeq "$(BOARD)" ""
 BOARD=EvKit_V1
 endif
 
-# This is the path to the CMSIS root directory
 ifeq "$(MAXIM_PATH)" ""
-LIBS_DIR=../../../Libraries
+# MAXIM_PATH is still not defined...
+DEPTH := ../../../
+MAXIM_PATH := $(abspath $(DEPTH))
+$(warning Warning:  MAXIM_PATH is not set!  Set MAXIM_PATH in your environment or in project.mk to clear this warning.)
+$(warning Warning:  Attempting to use $(MAXIM_PATH) calculated from relative path)
 else
-LIBS_DIR=/$(subst \,/,$(subst :,,$(MAXIM_PATH))/Firmware/$(TARGET_UC)/Libraries)
+# Sanitize MAXIM_PATH for backslashes
+MAXIM_PATH := $(subst \,/,$(MAXIM_PATH))
 endif
-CMSIS_ROOT=$(LIBS_DIR)/CMSIS
+
+# Final recalculation of LIBS_DIR/CMSIS_ROOT
+LIBS_DIR := $(abspath $(MAXIM_PATH)/Libraries)
+CMSIS_ROOT := $(LIBS_DIR)/CMSIS
+
 
 ifeq ($(MAKECMDGOALS),sla)
 SECURE_BOOT_TOOLS_DIR=$(LIBS_DIR)/../NDALibraries/SecureBootTools
@@ -73,6 +81,9 @@ endif
 
 # Source files for this test (add path to VPATH below)
 SRCS  = main.c
+SRCS += $(LIBS_DIR)/PeriphDrivers/Source/SEMA/sema_me14.c
+SRCS += $(LIBS_DIR)/PeriphDrivers/Source/SYS/mxc_delay.c
+
 ifeq ($(MAKECMDGOALS),sla)
 SRCS += sla_header.c
 endif
@@ -81,11 +92,27 @@ VPATH=.
 ifeq ($(MAKECMDGOALS),sla)
 VPATH += $(SECURE_BOOT_TOOLS_DIR)/sla_header
 endif
-# Where to find header files for this test
-IPATH = .
+VPATH += $(LIBS_DIR)/MiscDrivers
+VPATH += $(LIBS_DIR)/MiscDrivers/LED
+VPATH += $(LIBS_DIR)/MiscDrivers/PushButton
+VPATH += $(LIBS_DIR)/MiscDrivers/ExtMemory
+VPATH += $(LIBS_DIR)/MiscDrivers/Display
+VPATH += $(LIBS_DIR)/MiscDrivers/CODEC
+
+# Where to find header files for this project
+IPATH += .
+IPATH += include
+IPATH := $(IPATH)
+IPATH += $(LIBS_DIR)/MiscDrivers/LED
+IPATH += $(LIBS_DIR)/MiscDrivers/PushButton
+IPATH += $(LIBS_DIR)/MiscDrivers/ExtMemory
+IPATH += $(LIBS_DIR)/MiscDrivers/Display
 
 # Enable assertion checking for development
 PROJ_CFLAGS+=-DMXC_ASSERT_ENABLE 
+
+VPATH += $(CMSIS_ROOT)/Device/Maxim/$(TARGET_UC)/Source
+VPATH += $(CMSIS_ROOT)/Device/Maxim/$(TARGET_UC)/Source/GCC
 
 # Use this to enable or disable Core 1
 # Enabling Core 1 reserves RAM for its stack
@@ -117,12 +144,16 @@ endif
 # Include external library makefiles here
 
 # Include the BSP
-BOARD_DIR=$(LIBS_DIR)/Boards/$(BOARD)
+BOARD_DIR=$(LIBS_DIR)/Boards/$(TARGET_UC)/$(BOARD)
 include $(BOARD_DIR)/board.mk
 
 # Include the peripheral driver
-PERIPH_DRIVER_DIR=$(LIBS_DIR)/$(TARGET_UC)PeriphDriver
-include $(PERIPH_DRIVER_DIR)/periphdriver.mk
+PERIPH_DRIVER_DIR=$(LIBS_DIR)/PeriphDrivers
+include $(PERIPH_DRIVER_DIR)/$(TARGET_LC)_files.mk
+
+IPATH += $(PERIPH_DRIVER_DIR)/Include/$(TARGET_UC)
+
+include $(LIBS_DIR)/libs.mk
 
 ################################################################################
 # Include the rules for building for this target. All other makefiles should be

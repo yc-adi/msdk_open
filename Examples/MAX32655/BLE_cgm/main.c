@@ -580,6 +580,25 @@ int main(void)
     printf("SystemCoreClock = %d MHz\n\n", SystemCoreClock/1000000);
     MXC_Delay(10000);
 
+
+    // in order to get clean VDDIO
+    MXC_GPIO0->inen = 0x0;
+    MXC_GPIO1->inen = 0x0;
+    MXC_GPIO2->inen = 0x0;
+    MXC_GPIO3->inen = 0x0;
+
+#if 1
+    mxc_gpio_cfg_t lpGpio;
+    /* Set the wakeup pins high */
+    lpGpio.port = MXC_GPIO3;
+    lpGpio.mask = (0x3);
+    lpGpio.func = MXC_GPIO_FUNC_OUT;
+    lpGpio.pad = MXC_GPIO_PAD_NONE;
+    lpGpio.vssel = MXC_GPIO_VSSEL_VDDIO;
+    MXC_GPIO_Config(&lpGpio);
+    MXC_GPIO_OutSet(MXC_GPIO3, 0x3);
+#endif
+
     uint32_t memUsed;
 
 #if USE_RTC == 1
@@ -731,7 +750,7 @@ int main(void)
     StackInitCgm();
 
     CgmStart();
-
+    printf("SystemCoreClock = %d MHz\n\n", SystemCoreClock/1000000);
     // WsfOsEnterMainLoop();
     while(TRUE)
     {

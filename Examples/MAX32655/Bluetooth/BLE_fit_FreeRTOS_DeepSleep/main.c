@@ -20,7 +20,7 @@
 
 /**
  * @file    main.c
- * @brief   BLE_fit_FreeRTOS
+ * @brief   BLE_fit_FreeRTOS_DeepSleep
  * @details This example demonstrates FreeRTOS with BLE capabilities.
  */
 
@@ -41,6 +41,10 @@
 #define STRING_(x) #x
 
 extern void btStartup(void);
+
+#ifndef DEBUG
+#define printf(...)
+#endif
 
 /***** Functions *****/
 
@@ -103,7 +107,19 @@ int main(void)
 #if configUSE_TICKLESS_IDLE
     printf("Tickless idle is enabled\n");
     /* Initialize CPU Active LED */
+    volatile int m, n;
+    for (m = 0; m < 6; m++)
+    {
+        for (n = 0; n < 0x3FFFFF; n++){}
+        LED_Toggle(SLEEP_LED);
+    }
     LED_On(SLEEP_LED);
+
+    for (m = 0; m < 6; m++)
+    {
+        for (n = 0; n < 0x3FFFFF; n++) {}
+        LED_Toggle(DEEPSLEEP_LED);
+    }
     LED_On(DEEPSLEEP_LED);
 #endif
 

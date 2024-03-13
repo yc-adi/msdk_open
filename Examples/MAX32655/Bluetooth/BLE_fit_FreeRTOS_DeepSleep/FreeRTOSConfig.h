@@ -42,18 +42,28 @@
 #define SLEEP_LED 1
 #define DEEPSLEEP_LED 0
 
-// #define configUSE_TICKLESS_IDLE     1
+/* Tick-less idle forces a 32768 Hz RTC-derived SysTick source, and a 256 Hz task tick */
+#ifdef USE_TICKLESS_IDLE
+#define configUSE_TICKLESS_IDLE     1
+#endif
 
+/* Faster tick rate will result in more CPU interrupts while not in standby mode, but will
+increase the amount of time spent in standby mode, thus reducing average power consumption. */
+#ifdef configUSE_TICKLESS_IDLE
+#define configTICK_RATE_HZ ((portTickType)10000)
+#else
 #define configTICK_RATE_HZ ((portTickType)1000)
+#endif
+
 #define configRTC_TICK_RATE_HZ (32768)
 
-#define configTOTAL_HEAP_SIZE ((size_t)(100 * 1024))
+#define configTOTAL_HEAP_SIZE ((size_t)(108 * 1024))
 
 #define configMINIMAL_STACK_SIZE ((uint16_t)128)
 
 #define configMAX_PRIORITIES 5
 #define configUSE_PREEMPTION 1
-#define configUSE_IDLE_HOOK 0
+#define configUSE_IDLE_HOOK 1
 #define configUSE_TICK_HOOK 0
 #define configUSE_CO_ROUTINES 0
 #define configUSE_16_BIT_TICKS 0
@@ -65,7 +75,7 @@
 #define configTIMER_TASK_STACK_DEPTH configMINIMAL_STACK_SIZE
 
 /* Run time and task stats gathering related definitions. */
-#define configGENERATE_RUN_TIME_STATS 1
+#define configGENERATE_RUN_TIME_STATS 0
 
 #if configGENERATE_RUN_TIME_STATS == 1
 #define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()

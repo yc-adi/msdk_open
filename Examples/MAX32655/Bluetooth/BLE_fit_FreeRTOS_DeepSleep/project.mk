@@ -10,7 +10,10 @@
 # Enable FreeRTOS library
 LIB_FREERTOS = 1
 
-# Enable Cordio library
+# Un-comment this line to enable tickless mode, standby mode between events
+#PROJ_CFLAGS += -DUSE_TICKLESS_IDLE=1
+
+# Enable CORDIO library
 LIB_CORDIO = 1
 
 # Cordio library options

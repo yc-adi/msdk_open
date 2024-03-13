@@ -708,7 +708,9 @@ uint8_t CmdPsStats(char *pResp, size_t xWriteBufferLen)
 
     /* Generate a table of task stats. */
     snprintf(pResp, xWriteBufferLen, "%s", pcHeader);
+#if configGENERATE_RUN_TIME_STATS == 1
     vTaskGetRunTimeStats(pResp + strlen(pcHeader));
+#endif
 
     return ret;
 }

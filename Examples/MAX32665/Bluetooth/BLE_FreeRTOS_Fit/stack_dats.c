@@ -141,7 +141,7 @@ void StackInitDats(void)
     SmpHandlerInit(handlerId);
     SmprInit();
     SmprScInit();
-    HciSetMaxRxAclLen(100);
+    HciSetMaxRxAclLen(256);
 
     handlerId = WsfOsSetNextHandler(AppHandler);
     AppHandlerInit(handlerId);
@@ -203,7 +203,6 @@ void WUT_IRQHandler(void)
     MXC_WUT_IntClear();
     NVIC_ClearPendingIRQ(WUT_IRQn);
     MXC_WUT_Handler();
-    PalTimerIRQCallBack();
 }
 
 /*************************************************************************************************/

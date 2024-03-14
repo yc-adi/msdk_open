@@ -21,7 +21,7 @@
 
 /**
  * @file    main.c
- * @brief   BLE_FreeRTOS
+ * @brief   BLE_FreeRTOS Fit demo
  * @details This example demonstrates FreeRTOS with BLE capabilities.
  */
 
@@ -122,13 +122,14 @@ void turnOffUnused(void)
 int main(void)
 {
     /* Print banner (RTOS scheduler not running) */
-    printf("\n-=- %s BLE FreeRTOS (%s) Demo -=-\n", STRING(TARGET), tskKERNEL_VERSION_NUMBER);
+    printf("\n-=- %s BLE FreeRTOS (%s) Fit Demo -=-\n", STRING(TARGET), tskKERNEL_VERSION_NUMBER);
 #if configUSE_TICKLESS_IDLE
     printf("Tickless idle is enabled\n");
     /* Initialize CPU Active LED */
     LED_On(SLEEP_LED);
     LED_On(DEEPSLEEP_LED);
 #endif
+
     printf("SystemCoreClock = %d\n", SystemCoreClock);
 
     /* Delay to prevent bricks */

@@ -146,7 +146,7 @@ static void wsfTimerInsert(wsfTimer_t *pTimer, wsfTimerTicks_t ticks)
  *  \return The number of ticks until the next timer expiration.
  */
 /*************************************************************************************************/
-static wsfTimerTicks_t wsfTimerNextExpiration(void)
+wsfTimerTicks_t wsfTimerNextExpiration(void)
 {
   wsfTimerTicks_t ticks;
 

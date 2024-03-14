@@ -24,6 +24,7 @@
  */
 /*************************************************************************************************/
 
+#include <stdio.h>
 #include <string.h>
 #include "wsf_types.h"
 #include "util/bstream.h"
@@ -112,7 +113,7 @@ enum {
 /*! configurable parameters for advertising */
 static const appAdvCfg_t datsAdvCfg = {
     { 0, 0, 0 }, /*! Advertising durations in ms */
-    { 300, 1600, 0 } /*! Advertising intervals in 0.625 ms units */
+    { 800, 800, 0 } /*! Advertising intervals in 0.625 ms units */
 };
 
 /*! configurable parameters for slave */
@@ -227,14 +228,21 @@ static const uint8_t datsAdvDataDisc[] = {
 };
 
 /*! scan data, discoverable mode */
-static const uint8_t datsScanDataDisc[] = {
+static uint8_t datsScanDataDisc[13] = {
     /*! device name */
-    5, /*! length */
+    11, /*! length */
     DM_ADV_TYPE_LOCAL_NAME, /*! AD type */
-    'f',
-    'i',
-    't',
-    's'
+    'F',
+    'I',
+    'T',
+    '-',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    0
 };
 
 /**************************************************************************************************
@@ -866,6 +874,8 @@ void DatsHandlerInit(wsfHandlerId_t handlerId)
     AppGetBdAddr(addr);
     APP_TRACE_INFO6("MAC Addr: %02x:%02x:%02x:%02x:%02x:%02x", addr[5], addr[4], addr[3], addr[2],
                     addr[1], addr[0]);
+    sprintf((char *)&datsScanDataDisc[6], "%02X%02X%02X", addr[2], addr[1], addr[0]);
+
     APP_TRACE_INFO1("Adv local name: %s", &datsScanDataDisc[2]);
 
     /* store handler ID */

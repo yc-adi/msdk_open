@@ -20,26 +20,27 @@
  * @file    main.c
  * @brief   Demonstrate multiple wake-up sources for DEEPSLEEP mode.
  *
- * @details using either the RTC alarm or a GPIO to wake up from DEEPSLEEP
+ * @details using either the WUT timer or a GPIO to wake up from DEEPSLEEP
  *          mode.
  */
 
 #include <stdio.h>
 #include <stdint.h>
 
-#include "mxc_delay.h"
 #include "mxc_device.h"
+#include "mxc_sys.h"
+#include "mxc_delay.h"
 #include "mxc_errors.h"
-#include "nvic_table.h"
 #include "pb.h"
-#include "led.h"
+#include "board.h"
+#include "wut.h"
 #include "lp.h"
-#include "icc.h"
-#include "rtc.h"
 #include "uart.h"
-#include "simo.h"
 
 #define DELAY_IN_SEC 15
+#define MILLISECONDS_WUT (DELAY_IN_SEC * 1000)
+
+#define SLEEP_TIME_IN_SEC   10
 
 volatile int triggered;
 
@@ -48,19 +49,11 @@ void buttonHandler(void *pb)
     triggered = 1;
 }
 
-void alarmHandler(void)
+void WUT_IRQHandler(void)
 {
-    int flags = MXC_RTC->ctrl;
-
     triggered = 2;
 
-    if ((flags & MXC_F_RTC_CTRL_ALSF) >> MXC_F_RTC_CTRL_ALSF_POS) {
-        MXC_RTC->ctrl &= ~(MXC_F_RTC_CTRL_ALSF);
-    }
-
-    if ((flags & MXC_F_RTC_CTRL_ALDF) >> MXC_F_RTC_CTRL_ALDF_POS) {
-        MXC_RTC->ctrl &= ~(MXC_F_RTC_CTRL_ALDF);
-    }
+    MXC_WUT_IntClear();
 }
 
 void waitTrigger(int waitForTrigger)
@@ -69,15 +62,8 @@ void waitTrigger(int waitForTrigger)
 
     triggered = 0;
 
-    while (MXC_RTC_Init(0, 0) == E_BUSY) {}
-
-    while (MXC_RTC_DisableInt(MXC_F_RTC_CTRL_ADE) == E_BUSY) {}
-
-    while (MXC_RTC_SetTimeofdayAlarm(DELAY_IN_SEC) == E_BUSY) {}
-
-    while (MXC_RTC_EnableInt(MXC_F_RTC_CTRL_ADE) == E_BUSY) {}
-
-    while (MXC_RTC_Start() == E_BUSY) {}
+    NVIC_EnableIRQ(WUT_IRQn);
+    MXC_WUT_Enable();
 
     if (waitForTrigger) {
         while (!triggered) {}
@@ -96,21 +82,33 @@ void waitTrigger(int waitForTrigger)
 
 int main(void)
 {
+    mxc_wut_cfg_t cfg;
+    uint32_t ticks;
+
     printf("\n\n****Low Power DEEPSLEEP Mode Example****\n\n");
-
-    PB_RegisterCallback(0, (pb_callback)buttonHandler);
-    MXC_NVIC_SetVector(RTC_IRQn, alarmHandler);
-
     MXC_Delay(5000000);     // during development leave enought time to use emulator to erash flash
 
-    printf("Running in ACTIVE mode. Start the test after %d secs or button press\n\n", DELAY_IN_SEC);
+    PB_RegisterCallback(0, (pb_callback)buttonHandler);
 
+    // init and config WUT
+    MXC_WUT_GetTicks(MILLISECONDS_WUT, MXC_WUT_UNIT_MILLISEC, &ticks);  // Get ticks based off of milliseconds
+
+    // config structure for one shot timer to trigger in a number of ticks
+    cfg.mode = MXC_WUT_MODE_ONESHOT;
+    cfg.cmp_cnt = ticks;
+
+    // Init WUT
+    MXC_WUT_Init(MXC_WUT_PRES_1);
+
+    //Config WUT
+    MXC_WUT_Config(&cfg);
+
+    printf("Running in ACTIVE mode. Start the test after %d secs or button press\n\n", DELAY_IN_SEC);
     waitTrigger(1); // start the demo after 30 secs or button press
 
     // enable the wake-up sources
     MXC_LP_EnableGPIOWakeup((mxc_gpio_cfg_t *)&pb_pin[0]);
     MXC_LP_EnableWUTAlarmWakeup();
-    MXC_LP_EnableRTCAlarmWakeup();
 
     while (1) {
         printf("Entering DEEPSLEEP mode, wake up by timer (%d secs) or button press.\n", DELAY_IN_SEC);
@@ -118,7 +116,8 @@ int main(void)
 
         MXC_LP_EnterDeepSleepMode();
 
-        printf("Waked up from DEEPSLEEP mode by %s. Then delay 10 secs to enter DEEPSLEEP again.\n\n", triggered == 1? "button" : "timer");
-        MXC_Delay(10 * 1000000);
+        printf("Waked up from DEEPSLEEP mode by %s. Then delay %d secs to enter DEEPSLEEP again.\n\n",
+               triggered == 1? "button" : "timer", SLEEP_TIME_IN_SEC);
+        MXC_Delay(SLEEP_TIME_IN_SEC * 1000000);
     }
 }

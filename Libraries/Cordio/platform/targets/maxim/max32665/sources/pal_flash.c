@@ -38,6 +38,7 @@
 #include "pal_sys.h"
 #include "mxc_device.h"
 #include "flc.h"
+#include "wsf_cs.h"
 
 /**************************************************************************************************
   Macros

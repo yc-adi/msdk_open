@@ -24,6 +24,7 @@
  */
 /*************************************************************************************************/
 
+#include <stdio.h>
 #include <string.h>
 #include "wsf_types.h"
 #include "util/bstream.h"
@@ -101,7 +102,7 @@ enum {
     FIT_BATT_LVL_CCC_IDX, /*! Battery service, battery level characteristic */
     FIT_RSCS_SM_CCC_IDX, /*! Runninc speed and cadence measurement characteristic */
     DATS_NUM_CCC_IDX // total number of CCCD
-    
+
 
 };
 
@@ -112,7 +113,7 @@ enum {
 /*! configurable parameters for advertising */
 static const appAdvCfg_t datsAdvCfg = {
     { 0, 0, 0 }, /*! Advertising durations in ms */
-    { 300, 1600, 0 } /*! Advertising intervals in 0.625 ms units */
+    { 800, 800, 0 } /*! Advertising intervals in 0.625 ms units */
 };
 
 /*! configurable parameters for slave */
@@ -737,7 +738,7 @@ static void datsProcMsg(dmEvt_t *pMsg)
         break;
 
     case DM_CONN_OPEN_IND:
-   
+
         HrpsProcMsg(&pMsg->hdr);
         BasProcMsg(&pMsg->hdr);
         uiEvent = APP_UI_CONN_OPEN;
@@ -953,7 +954,7 @@ static void datsBtnCback(uint8_t btn)
 #endif /* BT_VER */
 
         default:
-            APP_TRACE_INFO0(" - No action assigned");
+            APP_TRACE_INFO1(" - No action assigned for connId %d", connId);
             break;
         }
     } else {
@@ -1093,7 +1094,7 @@ void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
         /* perform profile and user interface-related operations */
         datsProcMsg((dmEvt_t *)pMsg);
           /* perform profile and user interface-related operations */
-        
+
     }
 }
 

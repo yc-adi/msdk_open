@@ -31,11 +31,13 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "semphr.h"
+#include "mxc_delay.h"
 #include "mxc_device.h"
 #include "wut.h"
 #include "lp.h"
 #include "led.h"
 #include "board.h"
+#include "pb.h"
 
 /* Shadow register definitions */
 #define MXC_R_SIR_SHR13 *((uint32_t *)(0x40005434))
@@ -51,7 +53,7 @@ extern void bleStartup(void);
 
 /* =| vAssertCalled |==============================
  *
- *  Called when an assertion is detected. Use debugger to backtrace and 
+ *  Called when an assertion is detected. Use debugger to backtrace and
  *  continue.
  *
  * =======================================================
@@ -122,18 +124,24 @@ void turnOffUnused(void)
 int main(void)
 {
     /* Print banner (RTOS scheduler not running) */
-    printf("\n-=- %s BLE FreeRTOS (%s) Demo -=-\n", STRING(TARGET), tskKERNEL_VERSION_NUMBER);
+    printf("\n\n-=- %s BLE FreeRTOS (%s) Demo -=-\n", STRING(TARGET), tskKERNEL_VERSION_NUMBER);
 #if configUSE_TICKLESS_IDLE
     printf("Tickless idle is enabled\n");
     /* Initialize CPU Active LED */
+    for (int j = 0; j < 10; ++j) {
+        LED_Toggle(SLEEP_LED);
+        LED_Toggle(DEEPSLEEP_LED);
+        MXC_Delay(500000);
+    }
     LED_On(SLEEP_LED);
     LED_On(DEEPSLEEP_LED);
-#endif
-    printf("SystemCoreClock = %d\n", SystemCoreClock);
-
+#else
+    printf("Tickless idle is not enabled.\n");
     /* Delay to prevent bricks */
     volatile int i;
     for (i = 0; i < 0x3FFFFF; i++) {}
+#endif
+    printf("SystemCoreClock = %d\n", SystemCoreClock);
 
     /* Turn off unused hardware to conserve power */
     turnOffUnused();

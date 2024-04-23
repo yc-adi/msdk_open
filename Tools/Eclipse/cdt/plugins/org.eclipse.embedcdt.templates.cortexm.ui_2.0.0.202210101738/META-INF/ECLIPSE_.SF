@@ -1,0 +1,108 @@
+Signature-Version: 1.0
+Created-By: 11.0.16.1 (Eclipse Adoptium)
+SHA-256-Digest-Manifest: IBSa8v1D2vUgYE7/m7Iic3Tpexk07hTiwr/iZ+GMSJM=
+SHA-256-Digest-Manifest-Main-Attributes: ZrqgckiOdge9UsvCoXftaRfjVQOLjuw
+ Rr7CxxqcbcrM=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.cortexm.ui/pom.properties
+SHA-256-Digest: 9ebyaHSj8LFDeyRS1hpPn9wsXPFWBT1PvZveIgu+B8E=
+
+Name: templates/cortexm_project/src/main-50-none.c
+SHA-256-Digest: adIjTdiriDZUBppU9b8CVNVctgNs3kp2E/so2YKpVCg=
+
+Name: templates/cortexm_project/src/main-40-timer-sleep.c
+SHA-256-Digest: 60aahoLqx9MvxIwxtwdkcm22+hFvY7YTJQhNJI+1E+I=
+
+Name: plugin.xml
+SHA-256-Digest: uDrutKSHKeUsCUsxnBKjUAZ7Yhoc2W3VfrSTETT5yWk=
+
+Name: templates/cortexm_project/src/main-40-timer-sleep.cpp
+SHA-256-Digest: xBvkx4CP4xTV12Wj0dv/zzPII6WP5eTIUAoNAkoNhcU=
+
+Name: templates/cortexm_project/Vendor/DRIVERS/src/README_DRIVERS.txt
+SHA-256-Digest: 4GfzpzvakEqPb0HzoeYU0Zo/zS43GzQASFbOhbatHCU=
+
+Name: templates/cortexm_project/template.xml
+SHA-256-Digest: sXoxi+MZMc5ALyv9PD8MHg/zprp/G5O5bT+ykKFkngE=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.cortexm.ui/pom.xml
+SHA-256-Digest: wDQ3syPN6b6QwYihp3lCkOXLxsLIXW3YciIXbIfaIE8=
+
+Name: templates/cortexm_project/src/main-30-semihosting.c
+SHA-256-Digest: MdYJzkIrSjJMq8vv5+zDrh8BwAwub6VARGDroqtxDOg=
+
+Name: templates/cortexm_project/LICENSE
+SHA-256-Digest: 8Bc/W2uFboHCXXb1yCHvMFPCfaGVsmF0opyjbWKNIwQ=
+
+Name: templates/cortexm_project/Vendor/DEVICE/src/vectors_DEVICE.c
+SHA-256-Digest: EIA73tl3S748vRj7yzi3rrtckfitIqFB46jtXUv2N+s=
+
+Name: templates/cortexm_project/src/main-15.c
+SHA-256-Digest: 6coRA/IbCinzxchpBUIpBE9Q8+oGX+xFyTV6yMHMAK0=
+
+Name: templates/cortexm_project/README.txt
+SHA-256-Digest: eirl9W528LYDbs4l28u0fbmQCvo7GiD32ohrObwrEos=
+
+Name: plugin.properties
+SHA-256-Digest: 5+rQyPyXvJhLhuiCzZ9dJISeoqGo71/gOkZgGO94vlc=
+
+Name: templates/cortexm_project/src/main-30-retarget.c
+SHA-256-Digest: ggjso48dcTmQhA11RyRryaCxpNdX/82TCAWohIqokyU=
+
+Name: templates/cortexm_project/Vendor/DEVICE/src/README_DEVICE.txt
+SHA-256-Digest: 9galyJjW9d5AuATBSkUwJR1gXAUZcUosYOfwla+gYyE=
+
+Name: templates/cortexm_project/Vendor/DEVICE/src/system_DEVICE.c
+SHA-256-Digest: nzztyxEDCZz0BPRMvvWKL91YUbzsdiJFrth7FGTsc2U=
+
+Name: templates/cortexm_project/include/cmsis_device.h
+SHA-256-Digest: lw3Q4bQT0ydymm+RsPhVtxlunqCXyMG7JZaWajAyL+I=
+
+Name: templates/cortexm_project/template.properties
+SHA-256-Digest: a523xpx0wmkG7V0DSxkx+n59BWlwNGE88i/siP0cAqo=
+
+Name: templates/cortexm_project/src/main-30-none.c
+SHA-256-Digest: i6xpKGKosLet8HN5FIaA9ScGOs42edjV6af4L5gdTq0=
+
+Name: about.html
+SHA-256-Digest: ncO+WCNUIJ0JLCOl/ot53yopwTqvvtVu0qSgblesdYo=
+
+Name: templates/cortexm_project/src/main-50.c
+SHA-256-Digest: GMCMkbYSoycPxhwiY6AoN4I8SwnH9SNfadmr/zUR/6s=
+
+Name: templates/cortexm_project/Vendor/DEVICE/include/DEVICE.h
+SHA-256-Digest: UacUjiKAxN1QwyWjas66+BM3XOzynSy8L4OuO05YYyY=
+
+Name: templates/cortexm_project/src/main-10.c
+SHA-256-Digest: M3T2B8RZkrXYpddGuecbFtqSu5PAr3aDKzasZe9vhN8=
+
+Name: templates/cortexm_project/src/main-20-timer-init.c
+SHA-256-Digest: U8A5D+o1+MSoekBwLnOOVxZxrcc0y07TTw+MhnYh8U8=
+
+Name: templates/cortexm_project/src/main-30.c
+SHA-256-Digest: int2yh1497zBiaixPvW8co3qroXRVNc7DIO85+t1k1M=
+
+Name: templates/cortexm_project/src/main-50-retarget.c
+SHA-256-Digest: /lB9wL0TxnhbN/+LypdbF6En5x4Y/gjBwWwhGMsYtM0=
+
+Name: templates/cortexm_project/src/main-20-timer-init.cpp
+SHA-256-Digest: eXK6Uj6eSVbZ7bMeAA1cY1Q84sBinu/aO0ArgzSVOOY=
+
+Name: templates/cortexm_project/src/main-50-semihosting.c
+SHA-256-Digest: tdFVtIGiTK+HaWWk9lYpw2onNxEqCXiwIILouaBZNAI=
+
+Name: templates/cortexm_project/Vendor/DEVICE/include/system_DEVICE.h
+SHA-256-Digest: 6IOf1WtAw4pzibEka/m6TX5jwi5H0VVGhmYcOpTLX7g=
+
+Name: templates/cortexm_project/Vendor/DRIVERS/include/README_DRIVERS.tx
+ t
+SHA-256-Digest: /bsLY2iolMjMANRXP2f3Y7abFXztCa20Mj/edS1M7bE=
+
+Name: templates/cortexm_project/Vendor/DEVICE/include/README_DEVICE.txt
+SHA-256-Digest: oAWWw4hg08QcRD4dLNj3lHOPIlm5Zbo42AHS/fvA+4I=
+
+Name: templates/cortexm_project/ldscripts/mem.ld
+SHA-256-Digest: Vr8LrTbtM0rme9SBiS+c3phD/LCez2ZM7tWLLWqfoDA=
+

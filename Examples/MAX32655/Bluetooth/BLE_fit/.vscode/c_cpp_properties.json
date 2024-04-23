@@ -9,7 +9,8 @@
                 "${default}"
             ],
             "intelliSenseMode": "gcc-arm",
-            "compilerPath": "${config:ARM_GCC_path}/bin/arm-none-eabi-gcc.exe",
+            //"compilerPath": "${config:ARM_GCC_path}/bin/arm-none-eabi-gcc.exe",
+            "compilerPath": "${config:MAXIM_PATH}/Tools/GNUTools/10.3/bin/arm-none-eabi-gcc.exe",
             "browse": {
                 "path": [
                     "${default}"

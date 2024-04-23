@@ -1,0 +1,12 @@
+!SESSION 2024-04-02 14:49:58.322 -----------------------------------------------
+eclipse.buildId=4.26.0.20221201-1200
+java.version=17.0.5
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product -application org.eclipse.equinox.p2.director -repository file:C:/MaximSDK/Tools/Eclipse/maximProject_updates -installIU com.maxim.projects.feature.feature.group
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product -application org.eclipse.equinox.p2.director -repository file:C:/MaximSDK/Tools/Eclipse/maximProject_updates -installIU com.maxim.projects.feature.feature.group
+
+!ENTRY org.eclipse.equinox.p2.director 0 0 2024-04-02 14:50:04.793
+!MESSAGE Overall install request is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2024-04-02 14:50:04.793
+!MESSAGE Add request for ADI Project Wizard 1.2.0 (com.maxim.projects.feature.feature.group 1.2.0) is satisfiable

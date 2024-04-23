@@ -1,0 +1,41 @@
+Signature-Version: 1.0
+Created-By: 11.0.16.1 (Eclipse Adoptium)
+SHA-256-Digest-Manifest: 6wasd+3gZWco/4Z1b+bjcqeHlelQ/W8wCQM/N0bp9B4=
+SHA-256-Digest-Manifest-Main-Attributes: 5Ji+x096HycCkJLKqKAKZ/bynmKzDfK
+ Uxecb4AotAAU=
+
+Name: templates/hello-world-riscv-qemu-xpack-project/qemu-liquid.launch
+SHA-256-Digest: 4h6RZBZP3i6hdo+7La7OvmAvvtxGz+ssgyVsmLWOzXM=
+
+Name: about.html
+SHA-256-Digest: ncO+WCNUIJ0JLCOl/ot53yopwTqvvtVu0qSgblesdYo=
+
+Name: plugin.xml
+SHA-256-Digest: buN9Zm5jGdUXtOCe6x6bpUyOthm7f3e+7oxlKgRa9IM=
+
+Name: templates/hello-world-arm-qemu-xpack-project/template.xml
+SHA-256-Digest: lKyhVEkVq3Qy248kG3tl/MhDu0WmbznTSHL+1MLTQe8=
+
+Name: templates/hello-world-riscv-qemu-xpack-project/template.properties
+SHA-256-Digest: avbsaU+hKmB1iiqFCgH78yPe61g3SbDeHV7tyEv7ioU=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.xpack.ui/pom.xml
+SHA-256-Digest: l0AZX3l8z2+QQafQW1XHdCoyeH4Jmr4sUlcfID2MvaU=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.xpack.ui/pom.properties
+SHA-256-Digest: o7wVIq8Qf/hkFGfGpsQBF+utaI2OV5B8thGdZHOxrBk=
+
+Name: templates/hello-world-riscv-qemu-xpack-project/template.xml
+SHA-256-Digest: 3mY0q8xZObBNoLssX5B1mmdxMFvZGh/A/qPgcZsH4pw=
+
+Name: plugin.properties
+SHA-256-Digest: yZa7SdaW7Jd8CC9vpXAG2bZEZiMkEEgW0QfnnfAFCkI=
+
+Name: templates/hello-world-arm-qemu-xpack-project/template.properties
+SHA-256-Digest: stzEvnFkH+50SzNG2EEFfDO13ecka8MFpM7Knu9hRPs=
+
+Name: templates/hello-world-arm-qemu-xpack-project/qemu-liquid.launch
+SHA-256-Digest: yPyOHjCgmUudCEYfuLvMU4hzlCHqvtsM1OE5f0VB8ns=
+

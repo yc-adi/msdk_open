@@ -1,0 +1,288 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.5.0
+Build-Jdk-Spec: 11
+Bundle-ManifestVersion: 2
+Bundle-Name: %bundle.name
+Bundle-SymbolicName: org.eclipse.embedcdt.templates.freescale.ui;singlet
+ on:=true
+Bundle-Version: 3.0.0.202210101738
+Require-Bundle: org.eclipse.embedcdt.templates.core;bundle-version="3.1.
+ 1"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %bundle.vendor
+Bundle-Localization: plugin
+Eclipse-BundleShape: dir
+Automatic-Module-Name: org.eclipse.embedcdt.templates.freescale.ui
+Eclipse-SourceReferences: scm:git:https://github.com/eclipse-embed-cdt/e
+ clipse-plugins.git;path="plugins/org.eclipse.embedcdt.templates.freesca
+ le.ui";commitId=0f45977fb295c9f84260b9c2680a8d4e17696c2a
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/lptmr.h
+SHA-256-Digest: gAxzRtQgsYC2R/RquL1N5J/RMO9F5p585X9KiACbhT8=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/adc16.h
+SHA-256-Digest: QawiV5qeKn7GG37SxYEX9H0kIq32cjMcU6JbHUDBWUI=
+
+Name: plugin.xml
+SHA-256-Digest: ei1ImR+oDrUcYKENqZvfpuHIbEza5Af1REtnl5qLV9U=
+
+Name: templates/micro-os-plus/kl25-sc/src/kl25-sc/pmc.c
+SHA-256-Digest: M/y/YhU2/OfYar3J/HHup4W+C93v3GuE2ifYUYGJBok=
+
+Name: templates/micro-os-plus/kl46-sc/src/kl46-sc/README.txt
+SHA-256-Digest: 0FcfW908xi2Xf7XlA8ICtd1YojMv+NP9665r2WmrOqA=
+
+Name: templates/klxx_exe_c_project/include/led-50-c.h
+SHA-256-Digest: XwDv2G62PgBeMCxM/FUtY06BBhki+yBsre+wJMM90X8=
+
+Name: templates/micro-os-plus/klxx/src/cmsis/system_MKL46Z4.c
+SHA-256-Digest: xpcmh0LrKP13932V8v4Rw0RqwwYcT5yhQWGIUePlJag=
+
+Name: templates/micro-os-plus/kl25-sc/src/kl25-sc/mcg.c
+SHA-256-Digest: 4uYp7jwsqApXgdcMtpMD1CItCHviXgQaiMgxWCvaLHY=
+
+Name: templates/micro-os-plus/kl46-sc/src/kl46-sc/llwu.c
+SHA-256-Digest: PMNZHQqzoAJ/uUTiG54rhboaqI+IyrEXQwzubm+93tU=
+
+Name: templates/klxx_exe_c_project/template.properties
+SHA-256-Digest: w/HukAg48+87dbLeC1STndQIxEwb8gOjhuXf/GDCBvo=
+
+Name: templates/klxx_exe_c_project/include/led-40-defs-MKL25Z4.h
+SHA-256-Digest: +bVGaa9dS5dGfRxJHKCnDB8SZdIZCoYcTwg2DXl3q3A=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/rcm.h
+SHA-256-Digest: GD12cqsYUq1h648iglWJe5Yng290sQh0wAiKr8Qb65o=
+
+Name: templates/micro-os-plus/kl25-sc/src/kl25-sc/llwu.c
+SHA-256-Digest: /XinIweVpO4vTvjbvmzWbEDFMws68RSjrTDCiOyoSDk=
+
+Name: templates/micro-os-plus/kl25-sc/src/kl25-sc/adc16.c
+SHA-256-Digest: IeYMeBWXHs/8sBtfwHdDNI9ExV2VFOB1LbywW3oKrgs=
+
+Name: templates/micro-os-plus/kl25-sc/src/kl25-sc/rtc.c
+SHA-256-Digest: 9F3D+UiIgtqYeT8cI85h4ciwszZeGb4vd12lhSZ+ej4=
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/pmc.h
+SHA-256-Digest: P0mMHsjK+spHLyGfRPvCO7wXPgSDZvz1EBEsjlmOLZM=
+
+Name: templates/klxx_exe_c_project/include/freedom-MKL46Z4.h
+SHA-256-Digest: 680m56Yyw3cBpHpa2MD5OI/X44w14taJJ3LqroYLbcE=
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/mcg.h
+SHA-256-Digest: NcAEBu3P0yuVpM4mV83RAJ7Pvh+Jz8IlEmVJ0obBhDE=
+
+Name: templates/micro-os-plus/klxx/include/cmsis/MKL25Z4.h
+SHA-256-Digest: 5wirY7q36FNJfjhnkXLY+baaisVy3C+v9YNY2sris10=
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/vectors.h
+SHA-256-Digest: 2pLGagxrxUK/v/ASy5OMyN8X/ah6nJkvMyCMezmdzuA=
+
+Name: templates/micro-os-plus/kl25-sc/src/kl25-sc/lptmr.c
+SHA-256-Digest: r5rK8WJw/l7FNiChD/YkXne6ohMF9w4p6UZ4Tk0TDyg=
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/cmp.h
+SHA-256-Digest: RL2oLhfZ4ri8HEF5UnnMcOK/b1K9UBfnnebLROqQP5U=
+
+Name: templates/micro-os-plus/klxx/src/cmsis/README_DEVICE_MKL46Z4.txt
+SHA-256-Digest: SwHacQzw8ZRnVeMTwOJtaGj+2bJ0YyXwbLK48HrvMm4=
+
+Name: plugin.properties
+SHA-256-Digest: OswrAUysa+cn6vZmexW4tg2wuHI2xApVq6YY+3urxrg=
+
+Name: templates/klxx_exe_c_project/include/led-50-cpp.h
+SHA-256-Digest: vLzHl9c6DfvM0DBgEbf9ajj1kXYHT8B6zcgsIoFEHAg=
+
+Name: templates/klxx_exe_c_project/include/common-MKL46Z4.h
+SHA-256-Digest: 4W+D5uAM5fTELS12CL4gBFz08/J7EPUYSCBH+yGbJq0=
+
+Name: templates/micro-os-plus/kl46-sc/src/kl46-sc/rcm.c
+SHA-256-Digest: 5aXfZBeoVj1tFZGf2GQ5d3rLdnOhxtIL22cN/o/jOj4=
+
+Name: templates/micro-os-plus/kl46-sc/src/kl46-sc/smc.c
+SHA-256-Digest: fDBd3XiE0ppVSenHooj55oVNfQdTBdSwZMQV9iLmuWQ=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/smc.h
+SHA-256-Digest: 74ozrC5VeMKu84zNHgyNX6dhZRFCSQM6xiA8mMOIUgk=
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/README.txt
+SHA-256-Digest: Gjt6YSSGYbVCnIrzloNGqqD1jRhYUJoiBhLXuvuf5ww=
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/uart.h
+SHA-256-Digest: nKFDB8uICXU1zRSwpVVKJYil4lwuPhWa8zjJU1D6wa8=
+
+Name: templates/micro-os-plus/klxx/src/cmsis/vectors_MKL25Z4.c
+SHA-256-Digest: lyB6yYDw/0oyqg8z3y0nHLJYV8CgTX+bhAq4dQ7cAzc=
+
+Name: templates/micro-os-plus/kl25-sc/src/kl25-sc/retarget-layer.c
+SHA-256-Digest: VnX5NkteFs5+YFM6QRbLyftc9MKcVkMlxvqEIuUTWK4=
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/adc16.h
+SHA-256-Digest: Z1aY6lf5oWSGNnv34/s5aM5zlbbejvuimh8mbV4R+HA=
+
+Name: templates/klxx_exe_c_project/template.xml
+SHA-256-Digest: AaFEHEldTQPY9qogPmzOPlRXfvvTtENqk6X2sVz0yaE=
+
+Name: templates/micro-os-plus/kl25-sc/src/kl25-sc/README.txt
+SHA-256-Digest: L72trqvIwXeh/zymFBHnPPz2Pc8wuwjC12sN8nOKTdc=
+
+Name: templates/micro-os-plus/klxx/include/cmsis/system_MKL46Z4.h
+SHA-256-Digest: H9uok/XUuugZLOCwxxVlbsyOLUFGnt2tXouyMafoYWU=
+
+Name: templates/micro-os-plus/kl25-sc/src/kl25-sc/i2c.c
+SHA-256-Digest: DC+vQg+/VYK4L5uyr+qhOuMN9gy9B/+UAbINn7aMRuc=
+
+Name: templates/micro-os-plus/kl46-sc/src/kl46-sc/lptmr.c
+SHA-256-Digest: QaAkkJ+QCI/QQ+78ZNwTnU/NyXvjZXrHp9l79g6SyGE=
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/mcg_readme.txt
+SHA-256-Digest: YmDpzhcYF85PzMYxed7lwUTF/y3Is9VWcaURliptOJc=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/MemMapPtr_KL25Z4.h
+SHA-256-Digest: 3RvSgpUGAQqThCC3OdOS54aYdY3H3CDJ0eQn9wNp9Es=
+
+Name: templates/klxx_exe_c_project/ldscripts/mem.ld
+SHA-256-Digest: ElKidtJ3w6oItV0XD0PnigMivy905kQihcSXkP9z2bo=
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/rcm.h
+SHA-256-Digest: GD12cqsYUq1h648iglWJe5Yng290sQh0wAiKr8Qb65o=
+
+Name: templates/klxx_exe_c_project/src/led.c
+SHA-256-Digest: ukNwLNncdeZ4Xd2dc/BvbLAx+FuFKKWW1qlRibaWYwY=
+
+Name: templates/micro-os-plus/kl25-sc/src/kl25-sc/cmp.c
+SHA-256-Digest: 1iaVrTPKZbBBujRCoSzCzEymEnHxDIXUQQi+G+YCuV8=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/llwu.h
+SHA-256-Digest: CMHvQwDQVtXqop3ZNjFhlLXbR3uHgag2t8+AY2KyXZ0=
+
+Name: templates/micro-os-plus/klxx/src/cmsis/system_MKL25Z4.c
+SHA-256-Digest: C2GtKDD/Yzq/YZm+y3DbSS+1221sJ2pZoKMTPXxFQ30=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/mcg.h
+SHA-256-Digest: TTJZYH1UDkHg3dBIH7AUizx6MRYW5uuUd5UTKWxwbbo=
+
+Name: templates/micro-os-plus/kl46-sc/src/kl46-sc/rtc.c
+SHA-256-Digest: 7v5N/sj05C2EQKPiieD1jSO10AGrEGfDnA2i8u+idEU=
+
+Name: templates/klxx_exe_c_project/include/common-MKL25Z4.h
+SHA-256-Digest: EE6rlRRfx1JX+2Sob6Rpp6NbJN/E7g4C+Wl2hqO5Rx0=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/vectors.h
+SHA-256-Digest: DHV+XAxIGJYHpd5lcnjKr92byOgog1jbVBA2z74opd8=
+
+Name: templates/klxx_exe_c_project/include/led-40-defs-MKL46Z4.h
+SHA-256-Digest: U7fJmuny4/tNWQeXwNCCVAlVtK6hDi0U0xopldO/1qE=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/cmp.h
+SHA-256-Digest: RL2oLhfZ4ri8HEF5UnnMcOK/b1K9UBfnnebLROqQP5U=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/rtc.h
+SHA-256-Digest: YDJ8dMOCFYoSZgYWlRp58ID7zHNCYnjyae+K7ycQslQ=
+
+Name: templates/micro-os-plus/kl46-sc/src/kl46-sc/pmc.c
+SHA-256-Digest: M/y/YhU2/OfYar3J/HHup4W+C93v3GuE2ifYUYGJBok=
+
+Name: templates/micro-os-plus/kl46-sc/src/kl46-sc/mcg.c
+SHA-256-Digest: c7YfP7B8T9n98gP4o8BG7pUPk96BjB+FSn5jl9cRTI0=
+
+Name: templates/micro-os-plus/kl25-sc/src/kl25-sc/uart.c
+SHA-256-Digest: nVvepZKxI4aFq0lJzs+l/skXvJq7Y7IO+KJR4h9l4eU=
+
+Name: templates/klxx_exe_c_project/README.txt
+SHA-256-Digest: bSxrI4rI54cybBj0sx0yFXNRWAkFsAjtRANODW0HP3s=
+
+Name: templates/micro-os-plus/kl25-sc/src/kl25-sc/smc.c
+SHA-256-Digest: Js7WEsYA0lhP2UeIllkI5X8N+kbb85LP0AZhft9M0bg=
+
+Name: templates/micro-os-plus/kl46-sc/src/kl46-sc/uart.c
+SHA-256-Digest: nVvepZKxI4aFq0lJzs+l/skXvJq7Y7IO+KJR4h9l4eU=
+
+Name: templates/micro-os-plus/kl25-sc/src/kl25-sc/rcm.c
+SHA-256-Digest: 5aXfZBeoVj1tFZGf2GQ5d3rLdnOhxtIL22cN/o/jOj4=
+
+Name: templates/micro-os-plus/klxx/include/cmsis/cmsis_device.h
+SHA-256-Digest: KoQxdOZQfO0esW6MX/nFFvvMFPmhPjX1XSyd9njnZ0Q=
+
+Name: templates/micro-os-plus/klxx/include/cmsis/MKL46Z4.h
+SHA-256-Digest: Mdm+Qk2i393847Lsoj4iLGTOnVk9fIH2Lp3DuFh9vaI=
+
+Name: templates/micro-os-plus/klxx/src/cmsis/vectors_MKL46Z4.c
+SHA-256-Digest: FHweCEw1bH+fl5JC+W+40VTN1PxuDVpX7Ev2dn5XELA=
+
+Name: templates/micro-os-plus/klxx/include/cmsis/README_DEVICE_MKL25Z4.t
+ xt
+SHA-256-Digest: wOKgw1FstunLq4iB36Ad38m/G53u1qOEDE3KR/fUhvQ=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/uart.h
+SHA-256-Digest: nKFDB8uICXU1zRSwpVVKJYil4lwuPhWa8zjJU1D6wa8=
+
+Name: templates/micro-os-plus/klxx/src/cmsis/README_DEVICE_MKL25Z4.txt
+SHA-256-Digest: o3CoEdI+5IjdSEihlI4QATdPHSGMYp/KUufzC/0DwfU=
+
+Name: about.html
+SHA-256-Digest: 7mbS+ztMDS7S5/aYvJ7U49bPd/pcr0CtAylhJdsaxfA=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.freescale.ui/pom.xml
+SHA-256-Digest: pl+V9ZnWepdFS9gWlggfUVsMvFG5flpmy0XpUHeBHVk=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/i2c.h
+SHA-256-Digest: TNl5IDtTehHP5CdCbl0KNottHQb6aJItG3khHp9Su/0=
+
+Name: templates/klxx_exe_c_project/src/led.cpp
+SHA-256-Digest: 872+9JT13V3p6OcaGa0XXHZwp+MC7zr7Y1ORgyuqu3w=
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/MemMapPtr_KL46Z4.h
+SHA-256-Digest: 78DsVXtjxYh837whgJTIX7iMHJ4dk6o93jWms/JshQs=
+
+Name: templates/micro-os-plus/klxx/include/cmsis/system_MKL25Z4.h
+SHA-256-Digest: EsS+89P6Ak/2JPgtR8fR2Ym2mMgsQ1O5P99xzV4LqT8=
+
+Name: templates/klxx_exe_c_project/LICENSE
+SHA-256-Digest: 2X3e04IXrsTO1R4Ou8zdJW4tw2P8EG8Gi1qJnQfpNHg=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/README.txt
+SHA-256-Digest: HhXW7GhJjXuievJ2AlBgy6JB8s6eX2ZwF0iHzTxfZTg=
+
+Name: templates/micro-os-plus/kl46-sc/src/kl46-sc/retarget-layer.c
+SHA-256-Digest: VnX5NkteFs5+YFM6QRbLyftc9MKcVkMlxvqEIuUTWK4=
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/llwu.h
+SHA-256-Digest: CMHvQwDQVtXqop3ZNjFhlLXbR3uHgag2t8+AY2KyXZ0=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.freescale.ui/pom.properties
+SHA-256-Digest: L466lt+xImlCAA4rtmLweuNtbJSOvc2ZnhU0sqBm74A=
+
+Name: templates/klxx_exe_c_project/include/freedom-MKL25Z4.h
+SHA-256-Digest: NUZ1xTgLTr8zIp00InEO1orELovPZWY9XmhskMnZsek=
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/smc.h
+SHA-256-Digest: 74ozrC5VeMKu84zNHgyNX6dhZRFCSQM6xiA8mMOIUgk=
+
+Name: templates/micro-os-plus/kl46-sc/src/kl46-sc/adc16.c
+SHA-256-Digest: yM49hURJDdQKpKyH5eJdN31kMzUNZVvyUmIdpXlM3L4=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/mcg_readme.txt
+SHA-256-Digest: YmDpzhcYF85PzMYxed7lwUTF/y3Is9VWcaURliptOJc=
+
+Name: templates/micro-os-plus/kl46-sc/include/kl46-sc/rtc.h
+SHA-256-Digest: YDJ8dMOCFYoSZgYWlRp58ID7zHNCYnjyae+K7ycQslQ=
+
+Name: templates/micro-os-plus/klxx/include/cmsis/README_DEVICE_MKL46Z4.t
+ xt
+SHA-256-Digest: h4B+QvPg3O9YVN/WRuBkWYkdsNh3hiZg1L1pCqn2QWU=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/pmc.h
+SHA-256-Digest: P0mMHsjK+spHLyGfRPvCO7wXPgSDZvz1EBEsjlmOLZM=
+
+Name: templates/micro-os-plus/kl25-sc/include/kl25-sc/lptmr.h
+SHA-256-Digest: gAxzRtQgsYC2R/RquL1N5J/RMO9F5p585X9KiACbhT8=
+
+Name: templates/klxx_exe_c_project/include/led-20-headers.h
+SHA-256-Digest: 47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+
+Name: templates/micro-os-plus/kl46-sc/src/kl46-sc/cmp.c
+SHA-256-Digest: 1iaVrTPKZbBBujRCoSzCzEymEnHxDIXUQQi+G+YCuV8=
+

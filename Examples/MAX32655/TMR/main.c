@@ -46,6 +46,8 @@
 
 #define PB2 1
 
+#define CMP_TMR_REGS     MXC_TMR0
+
 // Parameters for PWM output
 #define OST_CLOCK_SOURCE MXC_TMR_ERTCO_CLK // \ref mxc_tmr_clock_t
 #define PWM_CLOCK_SOURCE MXC_TMR_APB_CLK // \ref mxc_tmr_clock_t
@@ -228,6 +230,20 @@ void PB1Handler(void)
     MXC_NVIC_SetVector(TMR1_IRQn, ContinuousTimerHandler);
     NVIC_EnableIRQ(TMR1_IRQn);
     ContinuousTimer();
+}
+
+void CmpTmrHandler(void)
+{
+    static uint32_t cnt = 0;
+    printf("cmp tmr cnt=%d\n", ++cnt);
+}
+
+void CmpTmr(void)
+{
+    mxc_tmr_cfg_t cmpTmr;
+
+    MXC_TMR_Shutdown(CMP_TMR_REGS);
+
 }
 
 // *****************************************************************************

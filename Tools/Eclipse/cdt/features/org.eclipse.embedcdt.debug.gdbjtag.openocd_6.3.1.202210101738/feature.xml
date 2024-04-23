@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (c) 2012, 2017 Liviu Ionescu.
+  This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License 2.0
+  which accompanies this distribution, and is available at
+  https://www.eclipse.org/legal/epl-2.0/
+
+  SPDX-License-Identifier: EPL-2.0
+
+  Contributors:
+    Liviu Ionescu
+-->
+<feature
+      id="org.eclipse.embedcdt.debug.gdbjtag.openocd"
+      label="%featureName"
+      version="6.3.1.202210101738"
+      provider-name="%providerName"
+      plugin="org.eclipse.embedcdt.debug.gdbjtag.openocd">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <requires>
+      <import feature="org.eclipse.embedcdt.debug.gdbjtag" version="6.3.1" match="compatible"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.embedcdt.debug.gdbjtag.openocd"
+         download-size="16"
+         install-size="21"
+         version="6.3.1.202210101738"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.embedcdt.debug.gdbjtag.openocd.core"
+         download-size="57"
+         install-size="114"
+         version="5.0.0.202210101738"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.embedcdt.debug.gdbjtag.openocd.ui"
+         download-size="92"
+         install-size="170"
+         version="5.0.0.202210101738"
+         unpack="false"/>
+
+<license url="%licenseURL">
+      %license
+   </license></feature>

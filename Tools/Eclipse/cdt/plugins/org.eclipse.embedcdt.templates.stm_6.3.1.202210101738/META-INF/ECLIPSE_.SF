@@ -1,0 +1,32 @@
+Signature-Version: 1.0
+Created-By: 11.0.16.1 (Eclipse Adoptium)
+SHA-256-Digest-Manifest: 6X1EABfaEgy87A+A1wqTigSo4R6Mj8AhFKgpRyAYty0=
+SHA-256-Digest-Manifest-Main-Attributes: teRsXzdfjUUqWPoloVu7xhTQWjIb0Cz
+ G1ZnOX0rUKRE=
+
+Name: about.properties
+SHA-256-Digest: p+NTCst2zyl+O6jjrZFagCuJ8exidIj9DEKUdh0Pwc4=
+
+Name: about.html
+SHA-256-Digest: ncO+WCNUIJ0JLCOl/ot53yopwTqvvtVu0qSgblesdYo=
+
+Name: GME-32.png
+SHA-256-Digest: l2gFwKMEMxpHuXNJ7TuY6wrJ/DE40WNOqjzasctghpA=
+
+Name: about.ini
+SHA-256-Digest: hnnIHDC82GY4Mc++VGpuMGtLzGPP8IB7/HPNFoBwjas=
+
+Name: plugin.properties
+SHA-256-Digest: WvU9sAw3HBDNe28PfBi5A7YQbYrYcyl/BJFpSev2KNU=
+
+Name: META-INF/maven/org.eclipse.embedcdt.branding/org.eclipse.embedcdt.
+ templates.stm/pom.xml
+SHA-256-Digest: Fd0qxD45wjGHOKwBq3x/pzIoV3GJ9Rq39ySjBGJEpq4=
+
+Name: about.mappings
+SHA-256-Digest: cGx/XRGu6or577+MQ/cYHX/VVOMgxfb0noPoOcxMHOg=
+
+Name: META-INF/maven/org.eclipse.embedcdt.branding/org.eclipse.embedcdt.
+ templates.stm/pom.properties
+SHA-256-Digest: L/SgwAJMTvObz0IpG+SahB04HE8Enqr5YC+uh/nDhts=
+

@@ -1,0 +1,276 @@
+Signature-Version: 1.0
+Created-By: 11.0.16.1 (Eclipse Adoptium)
+SHA-256-Digest-Manifest: WCA9F2BuiiB/9DYWoybFo7lUBiJeH3smLm+Ljzp+nc8=
+SHA-256-Digest-Manifest-Main-Attributes: ut0jsTkMbNjOWWZcKML4ssllIme1iUs
+ 6mXNaaEXXEYk=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/U
+ rtLib.h
+SHA-256-Digest: SLZ65L3Et7v9YSVhHcu6u6Kysf9/meZjJDfe3rtx9zw=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/D
+ maLib.h
+SHA-256-Digest: aDt+Uq8CVzXXJ+RCwJYkvia+lz47NWGrJO0Dix8Ap+8=
+
+Name: plugin.xml
+SHA-256-Digest: m8IOu8nB+VN1niLb9yp11KLT5B2jup9Iwf8la8Oz/W4=
+
+Name: templates/aducm36x_exe_c_project/src/main-201-start-timer.c
+SHA-256-Digest: KrwoIXECZcHQEL+9dJsReq1O3Mqv1wohwYNYv8xjNA8=
+
+Name: templates/aducm36x_exe_c_project/src/main-202-retarget.c
+SHA-256-Digest: pbH/nEUu5/nNJzXNcR4MPdyKJfU9M1WTiEfzucqAX9A=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/DacLi
+ b.c
+SHA-256-Digest: zzOQfiCjDxzZJMOd4ZIE1NTM3HSgaCuuKcFt0udHX/o=
+
+Name: templates/aducm36x_exe_c_project/README.txt
+SHA-256-Digest: 2QmwhqMrcuf3b+U9BsW2KtxTXhEpfKn3KemeH8QVji8=
+
+Name: templates/aducm36x_exe_c_project/src/main-202.c
+SHA-256-Digest: uh2LQDgTV+k+UYXxdbAj3KNhiUS+SM06KEy07ybIucM=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/W
+ utLib.h
+SHA-256-Digest: OcTYpzOIrNEeR2oA3oUzHkn3CPnB8QpMJqmjQ1bUdYQ=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/P
+ wrLib.h
+SHA-256-Digest: PYgA8pXbJpvkHZI/CfXn8jdAnar+qVqnQZDsXDswKec=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/W
+ dtLib.h
+SHA-256-Digest: RjqC58WLl4IGvd8NpnTaE+SxXQIUGr5wrWoMFXsUv/I=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/src/vectors_ADuCM36
+ 3.c
+SHA-256-Digest: g8yid4DfHjdAJsXTdd4zZTd6Aob0V321Dok3bq0NEo0=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/WdtLi
+ b.c
+SHA-256-Digest: IBmA0IetczYqZCXuvsES7nXrjtVO/q7qAJrmctNEQ0w=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/src/vectors_ADuCM36
+ 1.c
+SHA-256-Digest: z6GQGf6fkPgoqKHboeGphkVMh6cJEcEkqBGL1toIDuU=
+
+Name: plugin.properties
+SHA-256-Digest: cstZdewqWcySGQNaeBTTcxKRCLdDUVY4+oMTi8QyuHE=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/G
+ ptLib.h
+SHA-256-Digest: bX3sqXnfe2sAgr6zGjVEQwaFKJec8JlyMKaxOcai27U=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/IexcL
+ ib.c
+SHA-256-Digest: xklp55r3LZ99coOwjycEbic6ATwJq52k0/G5+LDVpr0=
+
+Name: templates/aducm36x_exe_c_project/template.xml
+SHA-256-Digest: wxtDzg4lREdqhTF1FVAkl9FfJYLaDM3lZmp3d+XrNoI=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/IntLi
+ b.c
+SHA-256-Digest: 1g21W743PKzEhskMuBTkLCkVytzIInWnHARbU0nvuFo=
+
+Name: templates/aducm36x_exe_c_project/src/main-201-start-timer.cpp
+SHA-256-Digest: 72uhw3vTlzuuU4mWdKBXZOW6N69VFz6PBADtw2T/It8=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/I
+ 2cLib.h
+SHA-256-Digest: us5DVibZvUj1hydNnFoZM6cMJeEp9QkVQSId7i9I6bc=
+
+Name: templates/aducm36x_exe_c_project/src/main-101-include-timer.c
+SHA-256-Digest: 5pP/5RIbJAiZVoF4SU1ngB1dRpvajU1tuDFNo1mLunM=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/SpiLi
+ b.c
+SHA-256-Digest: h4flfZU7ysmTyGz6xHtKxXwh1Hm5axpDkiyGKWvgIZ0=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/include/sys/platfor
+ m.h
+SHA-256-Digest: kXHnkyJRdMH+NaEwf8y3Yzb32nvlQHliqqC0Ym9/4vg=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/I
+ excLib.h
+SHA-256-Digest: KwoP+iC2R1QhDBvDzaP67D6UicN/23FFlG742wbJXJY=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.ad.ui/pom.xml
+SHA-256-Digest: cOsR9rS7o70EuJ2wwW+Uh5P1OFnSsPROR/K/+qhbnvU=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/include/ADuCM360.h
+SHA-256-Digest: xn8PIj2OlutaE9r77dKNj36MrKbqbdmzFBCqMsaexac=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/include/adi_process
+ or.h
+SHA-256-Digest: d5IGDWZlE4EoDZCO8oCBiMxcJRmT25bVEt5BlDuQtgg=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/WutLi
+ b.c
+SHA-256-Digest: 3dYn/K2KeLfVKP2QIl5DBmHQ6f2Tqie2JYxkZmDCczQ=
+
+Name: templates/aducm36x_exe_c_project/src/main-202-none.c
+SHA-256-Digest: M7xTaHzqcYNRylOdzlHZENR40DNSNCUsRZat2wChKDs=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/include/ADuCM362.h
+SHA-256-Digest: I8uS6cUUthIxWZLlFrR42+38ZKdXA4CDv9jUUtRDLu0=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/D
+ acLib.h
+SHA-256-Digest: B/gFJ+DQ7JaHKJVVUDWIyZR0uE9QfaBxzPzqTMk7CAs=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/src/system_ADuCM362
+ .c
+SHA-256-Digest: cW3PYLrYyEFV+i6gWTnqAS2JaYTOEnxIzV6SEQww4gs=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/UrtLi
+ b.c
+SHA-256-Digest: YcnMVjH6PvHh/gJuvYMI6jxObjDs0buBd6f7sZ9prig=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/include/system_ADuC
+ M361.h
+SHA-256-Digest: U6FLL5nn/KxmMnWrgkNwMNoqBoVTEM+EZ3d5suvPwT8=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.ad.ui/pom.properties
+SHA-256-Digest: MBjf5Q4ebPa+4y2djzM9y0GXYEkYSft+fd0g8GNGD5E=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/include/system_ADuC
+ M363.h
+SHA-256-Digest: CCEfOeFP+kCMOWCz9KvX2IU8X7BfDhRx3b8s0zIT2Og=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/src/system_ADuCM360
+ .c
+SHA-256-Digest: klMmfFgF1fo6ExiK4Mq6h7/A27nekZHMCmp5vfaWw0s=
+
+Name: templates/aducm36x_exe_c_project/src/main-203-timer-sleep.cpp
+SHA-256-Digest: 4MPtObMpFukiucB5H1e6UEEP0Z6uU3QuXh7nqSzZUVw=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/S
+ piLib.h
+SHA-256-Digest: RRKiOZNLDdA3yGi1FAdfOS27ZZJoKk1TT6tndZL3p3s=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/I2cLi
+ b.c
+SHA-256-Digest: 5IFqNauuVDfZU2VsAMdHzF9VfiR7xkh4A63g5UA4YTM=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/DioLi
+ b.c
+SHA-256-Digest: kginRD1sTEl4gj/qXduLqSTgNVqJH6LXEJDB5CYxLKg=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/FeeLi
+ b.c
+SHA-256-Digest: 9okczZrKfOC5Iofk5SYqm5P0QuzoevzIM30Cfja/wYA=
+
+Name: templates/aducm36x_exe_c_project/LICENSE
+SHA-256-Digest: /nsHs88IoZJoe+M4zLBa6Tt47sX0WiDlcAD3lrzifUU=
+
+Name: templates/aducm36x_exe_c_project/include/cmsis_device.h
+SHA-256-Digest: zjQ46RDH6GBwnbxdhLKUqggvXup/zooLsZkEyDfNeMY=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/GptLi
+ b.c
+SHA-256-Digest: xx/hJYprihaVbSid3mYDLNmoznL68J3uQhkxeq/8WFs=
+
+Name: templates/aducm36x_exe_c_project/ldscripts/mem.ld
+SHA-256-Digest: DNJZVhF+HOX7XlZXT70PO3uoPTsOJrW/8WpH2otufz8=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/ClkLi
+ b.c
+SHA-256-Digest: s1iVPnY7c8hw92kmsWh5jHxmysiHocB5JfDIR3icte0=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/src/vectors_ADuCM36
+ 0.c
+SHA-256-Digest: ySgCd4Fq0GtgqeriMy9y9W9UBR6lk4zblPQ+7QmM8kg=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/C
+ lkLib.h
+SHA-256-Digest: bZ4NgvMuZmH9dgsiiW7OhWSAwzse++ascdcQH5iS0AE=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/src/vectors_ADuCM36
+ 2.c
+SHA-256-Digest: SMkHlaRoRsM2NF6m5XxeoS7KIm/5xurwXsFG0RPmnEQ=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/I
+ ntLib.h
+SHA-256-Digest: ltsM8dTOLwCDafycN/g0REOWWEskjyOk5b8dYF9qzag=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/RstLi
+ b.c
+SHA-256-Digest: bUciRn00pRZVYy/kobzRdMbs45frpq/OBOK3islngxM=
+
+Name: templates/aducm36x_exe_c_project/src/main-203-timer-sleep.c
+SHA-256-Digest: Q4SVK+LrgKszSnketoClDkWc521tiIKgDj3kAfAkVpE=
+
+Name: about.html
+SHA-256-Digest: ncO+WCNUIJ0JLCOl/ot53yopwTqvvtVu0qSgblesdYo=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/R
+ stLib.h
+SHA-256-Digest: w4Y8WCPODc3r532hEQdJjQCtwpnMXALl65NVOEkfxqA=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/PwrLi
+ b.c
+SHA-256-Digest: 27gVOQEG/s3a4Cq6m22CPo2me40/mco6aiEe1okO1D4=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/D
+ ioLib.h
+SHA-256-Digest: ss29P3HXxOZ3Xao4Nj04cUhddpF05F4XBFtFwhxmRwU=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/P
+ wmLib.h
+SHA-256-Digest: 6Wx7rgHysuzPlcl9bayezFW4d/P8mHkA3o6p5BYPqUo=
+
+Name: templates/aducm36x_exe_c_project/template.properties
+SHA-256-Digest: vWSgq+64jPtpq+xujOo8FvMkvqpSw0ng/K24g5RzJ04=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/PwmLi
+ b.c
+SHA-256-Digest: aNzumqLRkBlxHqeQpuL9aRmg4y6gmi/odVVesp1T18s=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/F
+ eeLib.h
+SHA-256-Digest: pXAsU46ZRXwNpmju1O6gnu2XagMqvXObLwxJXe3gnww=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/AdcLi
+ b.c
+SHA-256-Digest: E9oipzJ2C0SG7MUUhsCQBHu3ph2gILSFuq/tsehHnkY=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/include/ADuCM361.h
+SHA-256-Digest: B1UXrS7CtxwTI6FWuyVhRK7p86njnGgYDNJ+ay6Ltsk=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/D
+ asLib.h
+SHA-256-Digest: TUyEGT4emzQxnMfIjx030VRRPxECpbgzvBKMcdT/oLA=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/include/ADuCM363.h
+SHA-256-Digest: KFyWMmWu+tqqeAhS4mHZ7R1dHmKGrN/xjxhuR/yvhPU=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/src/system_ADuCM363
+ .c
+SHA-256-Digest: nVHH0KfnJXi750s70lMJ0WbEcFdKylSCKn9zRJuVmgI=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/include/aducm36x/A
+ dcLib.h
+SHA-256-Digest: UxbU+0x5OAQ04NgstYDhMwkvL1tYJ4oQFXyU2eFp2vE=
+
+Name: templates/aducm36x_exe_c_project/src/main-202-semihosting.c
+SHA-256-Digest: tLGozBKj8Q6a0FjNzCGuaWMoC81g9d3EvxI97aqz2lI=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/include/system_ADuC
+ M360.h
+SHA-256-Digest: F0eV0YpoCh1Adx0rmzfFhsHkm1ZDhc5WG66KfIMpfRA=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/include/system_ADuC
+ M362.h
+SHA-256-Digest: aMrTSwQP5DdXVuLQ8aJeBEI1BEmcE5JC8O+YHRjHntg=
+
+Name: templates/aducm36x_exe_c_project/vendor/drivers/src/aducm36x/DmaLi
+ b.c
+SHA-256-Digest: iZOFnE86hd+sxp5jzUAmvW0tWzLHmgMSVpPr5Ea1Bgc=
+
+Name: templates/aducm36x_exe_c_project/vendor/device/src/system_ADuCM361
+ .c
+SHA-256-Digest: QOZdv1AE/fZBE4nS+RAku0OnYWRSoE9HfMMd4P0ZsZ4=
+

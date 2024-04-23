@@ -1,0 +1,7 @@
+
+# add update sites
+instructions.configure=\
+ org.eclipse.equinox.p2.touchpoint.eclipse.addRepository(location:https${#58}//download.eclipse.org/embed-cdt/updates/v6/,type:0,name:Embedded C/C++ v6.x Updates);\
+ org.eclipse.equinox.p2.touchpoint.eclipse.addRepository(location:https${#58}//download.eclipse.org/embed-cdt/updates/v6/,type:1,name:Embedded C/C++ v6.x Updates);
+
+# eof

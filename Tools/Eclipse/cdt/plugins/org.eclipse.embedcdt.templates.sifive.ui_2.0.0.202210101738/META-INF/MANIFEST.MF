@@ -1,0 +1,694 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.5.0
+Build-Jdk-Spec: 11
+Bundle-ManifestVersion: 2
+Bundle-Name: %bundle.name
+Bundle-SymbolicName: org.eclipse.embedcdt.templates.sifive.ui;singleton:
+ =true
+Bundle-Version: 2.0.0.202210101738
+Require-Bundle: org.eclipse.embedcdt.templates.core;bundle-version="3.1.
+ 1"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %bundle.vendor
+Bundle-Localization: plugin
+Eclipse-BundleShape: dir
+Automatic-Module-Name: org.eclipse.embedcdt.templates.sifive.ui
+Eclipse-SourceReferences: scm:git:https://github.com/eclipse-embed-cdt/e
+ clipse-plugins.git;path="plugins/org.eclipse.embedcdt.templates.sifive.
+ ui";commitId=0f45977fb295c9f84260b9c2680a8d4e17696c2a
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/core-functions-inlines.h
+SHA-256-Digest: IdwSzQM5t2uH6MJNWJ0FeEVwOh33U5jWdykMQUis2us=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-startup/packag
+ e-lock.json
+SHA-256-Digest: CT21rZfh2/crHEU93B6sgfK9uKYdmNdB5JWpD9z8yvY=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/fe310/defines.h
+SHA-256-Digest: qVn1CvHbtOGzxn0wi5F/JO3TxUjPnTNSnvKYqZ976o0=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/device-peripherals.h
+SHA-256-Digest: No5QBCWjQ1OrJl6jTTQFIOt7XpMOE2S9ov5VrRDz5iI=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/bin/README.
+ md
+SHA-256-Digest: x4G8b3C5s0/uB0RX7BEs9YrWgHFxCMF4nDLnFLkwc+A=
+
+Name: plugin.xml
+SHA-256-Digest: +0jqncF8pPf7DkIqc1KIXTvkdkGa3sM2FBwxKLc7COM=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/index.js
+SHA-256-Digest: RTtbdnzUYFrlftOQOhyK7fze8BjJMwBjKLDot+hE+Is=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-hifive1-board/include
+ /sifive-hifive1-board/defines.h
+SHA-256-Digest: US60zeAAFGOGi8efaRWsOWkqtuTcIVeBrgkqVNoy1W4=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/src/initialize-hardware.c.cpp.liquid
+SHA-256-Digest: gNDQtQ7hj0OxULcO0fOObacnaumvzMW6x3ll7Fe3Rnk=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/plic-functions.h
+SHA-256-Digest: yfN80Ub1LzGWTlzw4fveLRsybmK79szkV/Dp8tH7peA=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-semihosting/LI
+ CENSE
+SHA-256-Digest: +NTqbcqGzu/TMTAK0bXAobCkQCVGydvQmEstHq2ViCQ=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-c-libs/src/std
+ lib/atexit.cpp
+SHA-256-Digest: W0X4dW74hyd1dqPJj5WlkACcTM6vc0pHRMDxTHTZNV4=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-arty-boards/package-l
+ ock.json
+SHA-256-Digest: HV/t0KtPQry8UCwBxx5WW0H/JTCG9SUW7SdGVxIi4Wo=
+
+Name: templates/sifive_exe_c_project/template.xml
+SHA-256-Digest: zHsqoLsssMQ0MmCg5csIsZ0Kcg5f5wiyQHnJieTZDx0=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-c-libs/src/std
+ lib/atexit.h
+SHA-256-Digest: xq1g6w8XC5aDWSGS3N5E08qVXTkjKCxEzMaqi8i1R+E=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-cpp-libs/packa
+ ge-lock.json
+SHA-256-Digest: k7G8PA6UrRznPAGabB891bM1UYXMKi5qX4aWk7FTxs0=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-semihosting/sr
+ c/trace-semihosting.cpp
+SHA-256-Digest: Y6lumcrW9RqREnhtank8ce3vDBvSMPvqG4qMHNjZwKY=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-arty-boards/src/trace
+ -uart.cpp
+SHA-256-Digest: TNIjQOXsYTJ1MJSIIlTwoBDYxxKBhimvT72a4cGlq0w=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-hifive1-board/include
+ /sifive-hifive1-board/functions-inlines.h
+SHA-256-Digest: u38rPK/gRW6O5e6AJnPeJ7SMTuq9CHrIJwIQo4Hpl6E=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-semihosting/sr
+ c/posix-functions.h
+SHA-256-Digest: 9BEZuS86V71wGLnUj6V/kqUH1/CiABCbuQgrUnpNOOw=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-semihosting/pa
+ ckage.json
+SHA-256-Digest: kq/wBcZ3LHkq1nzxw86AX/P4A1+aE43cZYC9s1/0aHk=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/src/main.c.cpp.liquid
+SHA-256-Digest: kWyIx33/CtiXKum3IQNdZ5/GGFHowJ3Al1WC8DLex9I=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-hifive1-board/CHANGEL
+ OG.md
+SHA-256-Digest: Sed518gIaq/VZ/gUgusmVkzv5tTgPyiUyEpUONsndwc=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.sifive.ui/pom.xml
+SHA-256-Digest: 3zLQQwqAnluSQnfH845Z/YhtbwKBimqqzGCoEGFdJkA=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-cpp-libs/READM
+ E.md
+SHA-256-Digest: NyoX453yET9tWQUkjwsoKnvtOeUeepAJtNClCP06BXo=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/arch-instructions-inlines.h
+SHA-256-Digest: qSoitHjaykNV0w+5m6TTr2MZztBZfRq00tsfxnZ2TMU=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/CHA
+ NGELOG.md
+SHA-256-Digest: tJ1OC05R3M9vDMA33XslNLKfi6uLeCWWhy3qCgzVB8E=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/package.jso
+ n
+SHA-256-Digest: PGPQKmeLJzHc22UBDt5FX/YFYkol9GTEEIbApCdi7Ow=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/ldscripts/sections.ld
+SHA-256-Digest: PSxC43msM4r3QgXxthmUuVqkZoh9/Slf0+lAERZutWE=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/.appveyor.y
+ ml
+SHA-256-Digest: A0GayfNz8a62UAWeUJH1UPIi47Fq4067/kcZ/SQzES4=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/csr-functions.h
+SHA-256-Digest: JaPjQi5d36knaHZVGHWK/RplQF1oOr7gCstUcPFRC0k=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/device-functions-inlines.h
+SHA-256-Digest: knPulmu/VKo82tQyB+T8Ue9PE7zmrroc94EntJ23Xuc=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/src/plic-func
+ tions.cpp
+SHA-256-Digest: 7/wrdmJEBHo9qh8Kz/PYfyO/3plki6UVTOlJJGZPi9s=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/LICENSE.liquid
+SHA-256-Digest: nfOoWlXFjvu9AVc1nTJfU9FeI1JbTN9ivC8jb6XMJac=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-c-libs/include
+ /newlib/c-syscalls.h
+SHA-256-Digest: Fg5lXUdwiS0deAwZBNne2koyIG32uEnij40I6D6BXHY=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-startup/includ
+ e/micro-os-plus/startup/initialize-hooks.h
+SHA-256-Digest: gAsZc/UIPW5Vy/TdRAaLmrAegWyiLLROMf8spEGGflE=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/package-loc
+ k.json
+SHA-256-Digest: Aj+9eYCMemWGh0cyYDWE9Xa+jayllounXoBIvM8LDcc=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-semihosting/in
+ clude/micro-os-plus/semihosting.h
+SHA-256-Digest: MxOMrhBPEqN8UtTSe+TFq93l7UgsZOBb8QL+sl01GcQ=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-startup/README
+ .md
+SHA-256-Digest: qPfovxuljsoN27G1r5A/3gXCTurqzd7hMQilNnrBWtw=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/arty/e51/defines.h
+SHA-256-Digest: MnWkwPX2WTnAC6bGFj/LFUw1PPMuKn6txfdexXJOS6A=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/devices-xcdl.
+ json
+SHA-256-Digest: POUZG5S/4ksoOEbcwIz9AYdjo0YRwDgjMRiuhmYYfiw=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/oocd.launch.liquid
+SHA-256-Digest: zGAXRPAn0AxKjHueFbvajNTLh74uG4dzxY5yDPHRrmw=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-cpp-libs/LICEN
+ SE
+SHA-256-Digest: GDVg6tDPtaiIqNABQAhotaNpzv0R4ifyh+c43xOPdn8=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/src/led.c
+SHA-256-Digest: ojNBOrVb7PihMQytPLW33a9zlEWkrLO1b5/BqHJsEJo=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-cpp-libs/inclu
+ de/.gitkeep
+SHA-256-Digest: 47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/board-functions-inlines.h
+SHA-256-Digest: ssozlVaJd3LR6b+rMyp/sx9kqJB/jI8IGJNVImMDnl0=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/fe310/device-peripherals.h
+SHA-256-Digest: P28yvlypOi0F9pDhjuBdvF0FIA9sv9xeJlPCdeurXQE=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-c-libs/src/_sb
+ rk.c
+SHA-256-Digest: NbsgDswE8i1VZprXw9cpnnto3OaUKaV2DC0vYGDeTgU=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-diag-trace/src
+ /trace.cpp
+SHA-256-Digest: mem9DqyzXdTqUoFAvI09fUANDWSOFpsO/84EYLqWudA=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/jlink.launch.liquid
+SHA-256-Digest: 3qm814h+veA8sw3xOXn1jIMqOS6bADJIDbWl2UHYvxQ=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/TODO.md
+SHA-256-Digest: yC4rtUOLhMUv6kPCLiWFAPCzQhprrmTSfgVlMVSsfiY=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/lib/command
+ .js
+SHA-256-Digest: 8nF+hNPfUAE+v8WfEKiMXWQEGX7O3hYO3vfiU9fpIcs=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-arty-boards/README.md
+SHA-256-Digest: e6EBJ4kM3M8J1w9UhOwqs2TEuMmy8CrPB9kKDqVE7N0=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/README.md.liquid
+SHA-256-Digest: TWWxXmyrrONRm8EfWBEaGrqAdXCUhK5xUw0a4AkGKJU=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-c-libs/README.
+ md
+SHA-256-Digest: s1FtYeuKKxKeoZuAJfpJxYIpQsJSGkG7bWfwt/3DMzU=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-arty-boards/LICENSE
+SHA-256-Digest: GDVg6tDPtaiIqNABQAhotaNpzv0R4ifyh+c43xOPdn8=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/src/fe310/dev
+ ice-interrupts.cpp
+SHA-256-Digest: Nc08pMUFMXeq9+1Wo8ILcrkKPAbr7bq5xR8pb7B/TS8=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/include/sysclock-cpp.h
+SHA-256-Digest: 9qx2h+fxj6JbyzI12vBYwzoNvqX/e34LaM7QXqICAAE=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/xmake.json.liquid
+SHA-256-Digest: xGwICVLz2h/mD0P7oZqlNw1UauDcTejuDJcc05xVQXg=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-arty-boards/include/s
+ ifive-arty-boards/defines.h
+SHA-256-Digest: T2msF0GcyHqiPwdNkycQBCz17hgfxOP+vhSFpyyz47o=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-c-libs/src/std
+ lib/assert.c
+SHA-256-Digest: 0chyufMFZVXEjdduSLZnDcRDagM3Vk7XHmEa+pnSDUg=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/bin/xpm-ini
+ t-sifive-project.js
+SHA-256-Digest: MVIA4N4txXlzsH5CIGCbR9ehSqJzQrjrTcG3fJB0a7s=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-diag-trace/REA
+ DME.md
+SHA-256-Digest: HFmHZ9T66V6X5QzQkSRz1uqGZhaYoy+FbDZMyCHYmpU=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/arty/e51/device-interrupts-handlers.h
+SHA-256-Digest: QSHaUqYSCWGaDux68+n92imtppZJ3HBjg+12qZZncPQ=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/ldscripts/mem-e31arty.ld
+SHA-256-Digest: yp178LJpR1VO4NtcchhSk4iVy3+zkcYiVMaLhQKuBQE=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-hifive1-board/LICENSE
+SHA-256-Digest: GDVg6tDPtaiIqNABQAhotaNpzv0R4ifyh+c43xOPdn8=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/package.json
+SHA-256-Digest: f3cCmhtqOV6fMaBC4FUiIhtUZiV4a8ebfiX39F2Ld1k=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-c-libs/package
+ .json
+SHA-256-Digest: 3r18cpnbLowHziugig2L7Nayg50Ch27UwlCtPIA47hs=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/test/test.j
+ s
+SHA-256-Digest: LuMcqIiAKhboCAEjI/b9jYuA44P/XgqIGjeUTbcOLvY=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-c-libs/LICENSE
+SHA-256-Digest: GDVg6tDPtaiIqNABQAhotaNpzv0R4ifyh+c43xOPdn8=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/pac
+ kage-lock.json
+SHA-256-Digest: OrayF2aHDuobi3VM5gJSbJ+jueCnR9sy6lIsydT2ono=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/ldscripts/mem-hifive1.ld
+SHA-256-Digest: FTaXOionGmVJ3w/hPZq5F7llwYAZEM5TnGqVb2zpP04=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/src
+ /trap-entry.S
+SHA-256-Digest: /toCzbqFyX4kkn7YLxG5Hmgn9kLTuooSf87P7Xas6Cc=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/plic-functions-inlines.h
+SHA-256-Digest: pOB8cP0WctAz+htxdZwKOWZW6EA4vAoYu9g8xbrESug=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-hifive1-board/boards-
+ xcdl.json
+SHA-256-Digest: YCQ9KYbSmcleIIu1+tQOv9XwrBv5kXLGyAION8id8qE=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/csr-functions-inlines.h
+SHA-256-Digest: tSHUvg+kl4WkSzrW1xj2MgocEOX/7iXtgwRaVPs/g48=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/include/led-c.h.liquid
+SHA-256-Digest: hXhkgL02iEc0smYDvyOajjGICGrCu3Ca8MlySf2IpKA=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-c-libs/src/c-s
+ yscalls-empty.cpp
+SHA-256-Digest: J/mz6Y446RgPQ0XxYw0KN8SNpx8v4H388/NC3Gf5dgg=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/device-functions.h
+SHA-256-Digest: iLiC+hgaSjqszcDGI0ar1XHSmbuk49DH/gVvT+RMDY8=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/arch-types.h
+SHA-256-Digest: eFVrUtdKQdjWVdFGoKScBrTe2BAn6HG63XhZYZGvPt8=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-semihosting/in
+ clude/micro-os-plus/semihosting-inlines.h
+SHA-256-Digest: nlIFleJ212w88TBA/rf5fTub9BzZwx6O6KTL4eK/chg=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/device-interrupts-handlers.h
+SHA-256-Digest: 5Bqbx3Mg7OO4S0uSdfj1WWVfPZOe15gUbEIGsbKXiZw=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-c-libs/package
+ -lock.json
+SHA-256-Digest: tzEgLA7cWLOUao+NgtlW//Gh+mmpsK+d5TyduH40bt8=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-diag-trace/pac
+ kage.json
+SHA-256-Digest: UYCeurdnsk8TAZct7Qw0eMuCgqnhlAT/IUfbOs3XQ6M=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/src
+ /reset-entry.S
+SHA-256-Digest: BnTkQxBJDkeGzQrhT1ka3zaBqVVIP5s8QGixYI/PxkQ=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-semihosting/sr
+ c/syscalls-semihosting.cpp
+SHA-256-Digest: 9Wu8RHNfKS15+9hXeS2LSdowrDTXI5pmo3yU4kTDv/Q=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-diag-trace/LIC
+ ENSE
+SHA-256-Digest: GDVg6tDPtaiIqNABQAhotaNpzv0R4ifyh+c43xOPdn8=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-hifive1-board/src/tra
+ ce-uart.cpp
+SHA-256-Digest: RRORnfD8WRadp3xtHZUq8ZqIk9y0jGgJXs76ZEqC/RM=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/src/newlib-syscalls.c
+SHA-256-Digest: 91rqXOgMH+crGzcLYx90/GDUex7KFNLXqyvFEPhApuw=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/lib/templat
+ e.js
+SHA-256-Digest: ZYlh1soxxoKmBzyuM7mZJKjWCgUqyZ/UvYlLKcrPf9M=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/defines.h
+SHA-256-Digest: PE36uLEYndKdmsFGvJxIHX6wqtGvz7C0nsotrFHja/k=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-diag-trace/pac
+ kage-lock.json
+SHA-256-Digest: GM1AnzzJaQT1wP13JVqzg1IhhGLmZop0s2Lei42XY0w=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/micro
+ -os-plus/device.h
+SHA-256-Digest: QcF439iUP+UMgKJCC1+T+PQ0SvRsYAVgVL4iuuxE64k=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/include/sysclock-c.h
+SHA-256-Digest: lL1DQpqxo4PzTWykzuBcA3KOll1TD7tIcBHVAZdLGvA=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-arty-boards/package.j
+ son
+SHA-256-Digest: d3ShbfSMsp1q8GajDFW8FHNFB0swgjbCMdpNj8fXpaM=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-hifive1-board/package
+ .json
+SHA-256-Digest: CNIgTKyB04jMcchd9f6FjQOtxUId4yVWrnVz/7e1sNw=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-semihosting/RE
+ ADME.md
+SHA-256-Digest: PWsTIF03J2SyJSRPQRG28zMJUlbCQaIx4oY4RIZcXQA=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/.npmignore
+SHA-256-Digest: 7enMY2kqWpnIhCzr/ZaEwqGjVCqBlnEm2iJ/E8fVIiE=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-diag-trace/inc
+ lude/micro-os-plus/diag/trace.h
+SHA-256-Digest: ffaWU6loAm2sD2Vhx7qOwcIlus3Zr4pKlHb/H4kXrHI=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/src
+ /traps.cpp
+SHA-256-Digest: q37fIPtXgiTkbZPVW8AEd5755j6TTMGRofD9QdB8gww=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/functions.h
+SHA-256-Digest: 8RrpqmA3RjFqx3ABwlqjEQ6FVwufJRNPF86dCByai6s=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/xsvd/e51arty-
+ xsvd.json
+SHA-256-Digest: fUfTZnBlhwkDXJ7QZydOuq6gVyU6A11C8aqZ5DhG7O8=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/.travis.yml
+SHA-256-Digest: CmWBzKIq1ujHiiOoG7XDusrtp5G/Z2B1Z0nj10NGL7E=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-c-libs/src/std
+ lib/exit.c
+SHA-256-Digest: n0aE7wZWK/yJCRuBN+7yJiu5qXhJ8BUa1EAwtGMhRkQ=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-arty-boards/boards-xc
+ dl.json
+SHA-256-Digest: t01NwdYWw1+uxBgtvgSKPfRFTPMstJkxUFNhcn2kHoI=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/src/arty/e31/
+ device-interrupts.cpp
+SHA-256-Digest: /P8M0yY1M0cfGOL484Y7NHr6rakSNzGJrN2Q/iQwZYA=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-arty-boards/include/s
+ ifive-arty-boards/functions.h
+SHA-256-Digest: 2xr+o6GskmwmFn5LpRiaCys2PsGTC5FPlhUUorfommE=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-startup/src/st
+ artup.cpp
+SHA-256-Digest: 7E5CRqDICE9+USUXaVwnAaGOKKdoB7mxWma23kqNgJc=
+
+Name: plugin.properties
+SHA-256-Digest: Xrb+P5n3Qgl4ooLgpbubkf+0LysL/4bIYhetzMo6KnM=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-cpp-libs/CHANG
+ ELOG.md
+SHA-256-Digest: b2ysLcNWBvM9THlH4rTSwVSeDJplR/pI7z9T9uqrF3A=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-startup/packag
+ e.json
+SHA-256-Digest: sdWI79IBEUBrpIBt4zAB8tC7RtW27in0Dq8eIxqBxmE=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-arty-boards/src/board
+ -functions.cpp
+SHA-256-Digest: swwr/ePiX7LGSvWwuUVf4/4vNTY0djwGt2aAyRYgOWA=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-startup/LICENS
+ E
+SHA-256-Digest: GDVg6tDPtaiIqNABQAhotaNpzv0R4ifyh+c43xOPdn8=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/ldscripts/libs.ld
+SHA-256-Digest: mXaJXiun/Rz71aG3HZoRwA/eFWga0qtpEfQMJguUkFE=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/LICENSE
+SHA-256-Digest: GDVg6tDPtaiIqNABQAhotaNpzv0R4ifyh+c43xOPdn8=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/REA
+ DME.md
+SHA-256-Digest: 2/vh56fdbUKF2S7iA+L4Et+Fb+2m08YWw5fLHAWr+s0=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-hifive1-board/src/boa
+ rd-functions.cpp
+SHA-256-Digest: swwr/ePiX7LGSvWwuUVf4/4vNTY0djwGt2aAyRYgOWA=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/src
+ /arch-functions.cpp
+SHA-256-Digest: rPeMQTRqg1i1U/LN2zyB2gY9Mm046ql9ZFJTer0x6gw=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/arty/e31/device-interrupts-handlers.h
+SHA-256-Digest: WvH7AzYANM5+H711Q8GzPDYRTdj7cYoYRG+ZQWmFnxs=
+
+Name: templates/sifive_exe_c_project/template.properties
+SHA-256-Digest: iLG7qvmrY+rZt5RYBSLX4RHngnaNwj8PdFEOuA1b6/0=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/arch-semihosting-inlines.h
+SHA-256-Digest: YVXfB9+d1ocpv+Sx34YZeED+EKKZUa1TQK6A9enf6x8=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-arty-boards/CHANGELOG
+ .md
+SHA-256-Digest: MxNS1P1gTZByrFkbp5dG+4g2fxw9laXAPGuoHExNWyQ=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/include/led-cpp.h.liquid
+SHA-256-Digest: MMIdV0xM0kHBZlG5IaWSmhypGJ6XkqMeDWW+7JW0STE=
+
+Name: templates/sifive_exe_c_project/LICENSE
+SHA-256-Digest: GDVg6tDPtaiIqNABQAhotaNpzv0R4ifyh+c43xOPdn8=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/functions-inlines.h
+SHA-256-Digest: 0iYpaJ3ZL7xyWUPj8ZOUWZQqJOENjNiSAsO2ASxfYsg=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/xsvd/fe310-xs
+ vd.json
+SHA-256-Digest: esSNXlf/OR6z1LHmg1FH9kh7xG3g894JP3TzIc8ba5g=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/src/led.cpp
+SHA-256-Digest: AnvhiK92IJxDbwT+6KwkpoaQl65GykJQUAsgMJJVvuQ=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.sifive.ui/pom.properties
+SHA-256-Digest: Kl08fYAxVuHUAAbtK12nVj9OkA9Pd7PcxoFuAnckui0=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/src/interrupts-handlers.c.cpp.liquid
+SHA-256-Digest: QpRq7SCTigz1YEgCKoVd8o6Ppga9tnxj8YdT0pvGXtc=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/arty/e31/device-peripherals.h
+SHA-256-Digest: ivX+9FwIvAyjFRhEDPUxqXIm9uBs3w/npkYpiJfmEfo=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/arch-defines.h
+SHA-256-Digest: kdHbJi874fMiwu121s+DUeCT71ft08EgmxWDWLVltik=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-semihosting/CH
+ ANGELOG.md
+SHA-256-Digest: c7Db/0A5HIC5UMWDTgSU0qAKVGWpEsY0/vR48/c7H6w=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/ldscripts/mem-e51arty.ld
+SHA-256-Digest: 9aNr+9UhzRenhOZw4nWc5x2Y6eH72XFJmkrjtg4cxu8=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/package.json.liquid
+SHA-256-Digest: YG5wU/iBuh2/S85B2YlEj8ijLLDV9La0zy2LW4wM6QA=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-arty-boards/include/m
+ icro-os-plus/board.h
+SHA-256-Digest: al6h2krqanHMdCTWuUcLr/X1u2UE63ipwWFwJLnkks8=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/arty/e31/defines.h
+SHA-256-Digest: VDHFpCJFKR1Czw+1ra2AchuKNs8ssCQAfO6QqgxI9pA=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-cpp-libs/packa
+ ge.json
+SHA-256-Digest: 8mzS2Wm2eujDDXq9Cka8AP/Fc5WbYe6Z+qLNYClVaH8=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/LIC
+ ENSE
+SHA-256-Digest: GDVg6tDPtaiIqNABQAhotaNpzv0R4ifyh+c43xOPdn8=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/fe310/device-interrupts-handlers.h
+SHA-256-Digest: 7Db4Xua6A3SzZ53BbGnnvnk9KeCAuTv9Q60pXZ8Sq14=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/CHANGELOG.m
+ d
+SHA-256-Digest: vRk5IXVYglhrRjwrZJe0/pSAKGStBGFt544QRujL8/A=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/pac
+ kage.json
+SHA-256-Digest: qJp4MvaDi4WtQ0y84lDoVaIz0+Hx+gq3Cm1OTL7gzT0=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-semihosting/pa
+ ckage-lock.json
+SHA-256-Digest: DTXfv8pTgC4hvFdm2TqGY+PvjCelwPPUnh8ZchWccbg=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/src/sysclock.c
+SHA-256-Digest: 88ZoyXcI8bwOa4RiF2XTtDGVdx25j/oI9oov4OZYY3Y=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-cpp-libs/src/c
+ xx.cpp
+SHA-256-Digest: shN71zCfve5I6LqEZFWpJQ2VvY4Q6GAbqWB4uUiYWoo=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-hifive1-board/include
+ /micro-os-plus/board.h
+SHA-256-Digest: mP1lmJao9PXjPLZ3g8FCXREpemokU2QPqUqs+jYe21M=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/xsvd/README.m
+ d
+SHA-256-Digest: 2AQvpQQuGUcWV8UlDmFa1bzq+MV3q3FUWBpF/6+QWto=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-diag-trace/CHA
+ NGELOG.md
+SHA-256-Digest: XzakSL41DMHynvwI8oURHqAh5XEeHhGWrGSS9eX+f2o=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/LICENSE
+SHA-256-Digest: GDVg6tDPtaiIqNABQAhotaNpzv0R4ifyh+c43xOPdn8=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-c-libs/src/std
+ lib/init-fini.c
+SHA-256-Digest: dlZNqN3CO0GtGV5XE1zFJmLtxvUlCXWT/dZqiiCJBmI=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/board-functions.h
+SHA-256-Digest: mQioiIm9yzqmfL2xZ0+8QgK5tcoO0dsVwZ8o+HTYYxI=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/arty/e51/device-peripherals.h
+SHA-256-Digest: IqbDaqdvR6eTDIo8a2QOG+YWZZcMeH9TimA1W4KglVw=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/README.md
+SHA-256-Digest: uo3nDUc37McC94+g6JRW0ECYlw+CQt+C23cOowWIxQk=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-c-libs/CHANGEL
+ OG.md
+SHA-256-Digest: +Go11hw6jo6XzC9sKpSFXorEUDnFxHFz/VqNvEhl7r8=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-hifive1-board/include
+ /sifive-hifive1-board/functions.h
+SHA-256-Digest: SdMQVZ6Pbgwfxq5k53kHu2M0cyYAE0WiXhBj5k31W78=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-hifive1-board/README.
+ md
+SHA-256-Digest: B6MQmxde0BG1E3yq1Twj5jbqsgCdWxw+MLWDaDnbwWg=
+
+Name: about.html
+SHA-256-Digest: 7mbS+ztMDS7S5/aYvJ7U49bPd/pcr0CtAylhJdsaxfA=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/README.md
+SHA-256-Digest: S1uFxOKUvHqU9nop/bTZ4Vi61UBBP19G7CC/8EQoeJw=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/xsvd/e31arty-
+ xsvd.json
+SHA-256-Digest: +xVZJhU1YGTrMnPXQC1Jcl7PF0tlKPmE1k3MllNNXkQ=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/README.md
+SHA-256-Digest: Q/uL8RyHSr6yg9r7Gf8zdVx91iPSvCvmC4bTiegY/KA=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/package-lock.
+ json
+SHA-256-Digest: E5Y+iSJS7GTyPvl8QhoRkNdVgeru1fqwBvdE5x2qaIY=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/src/device-fu
+ nctions.cpp
+SHA-256-Digest: +zeyjvYJRajy6UX8IuRBbSKrn4LtDeQlgoZXjCXMaOU=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/src/arty/e51/
+ device-interrupts.cpp
+SHA-256-Digest: kkzAeuWCWW67lFWjInaDMakGarkBRtBOFGMK8gMdGgE=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/assets/sour
+ ces/src/sysclock.cpp
+SHA-256-Digest: lF3x9jVqEkRj80hB920I+qFHwzhMp5kIoHLFh1LcOto=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/core-functions.h
+SHA-256-Digest: F3HUJTpOWAtJlNEpDCJFtqY+zkPdQxMBq/nSN0rhdt0=
+
+Name: templates/sifive_exe_c_project/README.md
+SHA-256-Digest: 0MiY0+Tn9/DonP76EH8J3xzUd3sNtY0YK4CeHHpXK+c=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-startup/CHANGE
+ LOG.md
+SHA-256-Digest: LDAMXf+n2m9df4j6dBhNlNmKdBgcnqaj4a+Y3X2YDnc=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-hifive1-board/package
+ -lock.json
+SHA-256-Digest: KHg2WlhWPAIxc0JWVSC2dgVkWxOywsu+itWu+GoPP1Y=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/arch-declarations.h
+SHA-256-Digest: OaWtcopWuNZnfU5bE8slTA4NuLRhM5VXtENs/RnSC1Q=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/include/sifiv
+ e-devices/types.h
+SHA-256-Digest: nL2hmdFppAYCCnXjdfIzpdz7nUrFbsKM6RqbDIS4AI4=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/micro-os-plus/architecture.h
+SHA-256-Digest: 1i3ONlrvqNKRqKLHi/W3kWGJ02DPOTCJvY6NdEiIWSE=
+
+Name: templates/sifive_exe_c_project/xpacks/micro-os-plus-riscv-arch/inc
+ lude/riscv-arch/arch-instructions.h
+SHA-256-Digest: 06Q9rSnKrbaOGrrgV5DR7LpkgxwNajs9RirMP6sr928=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-devices/CHANGELOG.md
+SHA-256-Digest: TgfCfNiR02zh0AsqaHtKvKtKGOH9vJYLt95d1wg87CI=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-arty-boards/include/s
+ ifive-arty-boards/functions-inlines.h
+SHA-256-Digest: nl+/cBTNdANqYnnFeDe9+/Gt9EouZEIaIn5aU+jX1KE=
+
+Name: templates/sifive_exe_c_project/xpacks/sifive-templates/lib/main.js
+SHA-256-Digest: Nx+bLGpvk5NCAn3w5YglDU04juyppBDXH0HLnM/1IcQ=
+

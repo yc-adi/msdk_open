@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.maxim.projects.feature"
+      label="ADI Project Wizard"
+      version="1.2.0"
+      provider-name="ANALOG">
+
+   <description url="http://www.analog.com">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="">
+      SOFTWARE LICENSE AGREEMENT
+
+This is a legal agreement between you (as an authorized representative of your employer) and Maxim Integrated Products (&quot;Company&quot;). It concerns your rights to use this file and any accompanying written materials (the &quot;Software&quot;). In consideration for COMPANY allowing you to access the Software, you are agreeing to be bound by the terms of this Agreement. If you do not agree to all of the terms of this Agreement, do not download the Software. If you change your mind later, stop using the Software and delete all copies of the Software in your possession or control. Any copies of the Software that you have already distributed, where permitted, and do not destroy will continue to be governed by this Agreement. Your prior use will also continue to be governed by this Agreement.
+
+LICENSE GRANT. COMPANY grants to you, the non-exclusive, non-transferable, non-sublicensable right (1) to copy the Software, create revisions or modifications to any source code elements of the Software delivered to you (the &quot;Revisions&quot;) and distribute the object code version only of the Software and any Revisions to end-users, provided the Software as distributed is incorporated in or bundled with either (i) a COMPANY Bluetooth low energy system-on-chip product; or (ii) a Bluetooth low energy radio and a COMPANY microcontroller product (each of (i) and (ii) are a &quot;Company Product&quot;) that is then incorporated in your product. In no event may you distribute a copy of the Software unless bundled with the Company Product. You may not translate, reverse engineer, decompile, or disassemble the Software except to the extent applicable law specifically prohibits such restriction. You agree not to use or copy the Software for any other purpose other than as described in this Agreement. Additionally, you must reproduce and apply any copyright or other proprietary rights notices included on or embedded in the Software to any copies made thereof, in whole or in part, if any. If you violate any of the terms or restrictions of this Agreement, COMPANY may immediately terminate this Agreement, and require that you stop using and delete all copies of the Software in your possession or control.
+
+OWNERSHIP. COMPANY represents that it has the right to license the Software to you under the terms of this license Agreement. You agree and acknowledge that Company and its licensor&apos;s own the Software and United States copyright laws and international treaty provisions protect the Software and you have no right, title or interest in the Software, other than the limited license rights described above. To the extent you creates any Revisions or other modifications of, revisions or improvements to or derivative works of any the Software or Documentation, all right, title and interest in and to all such Revisions are licensed under this Agreement only and such Revisions shall be owned by Company and its licensors and you hereby assign to Company sole and exclusive ownership rights therein. You agree to execute any documents necessary to perfect such assignment. Upon Company&apos;s written request, you shall disclose to Company any bug fixes developed by you or your subcontractors during the previous calendar quarter.
+
+SUPPORT. Neither COMPANY nor its licensors are obligated to provide any support, upgrades or new releases of the Software. If you wish, you may contact COMPANY and report problems and provide suggestions regarding the Software. COMPANY has no obligation whatsoever to respond in any way to such a problem report or suggestion. COMPANY may make changes to the Software at any time, without any obligation to notify or provide updated versions of the Software to you.
+
+NO WARRANTY. TO THE MAXIMUM EXTENT PERMITTED BY LAW, COMPANY AND ITS LICENSORS EXPRESSLY DISCLAIM ANY WARRANTY FOR THE SOFTWARE. THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NONINFRINGEMENT. YOU ASSUME THE ENTIRE RISK ARISING OUT OF THE USE OR PERFORMANCE OF THE SOFTWARE, OR ANY SYSTEMS YOU DESIGN USING THE SOFTWARE (IF ANY). NOTHING IN THIS AGREEMENT MAY BE CONSTRUED AS A WARRANTY OR REPRESENTATION BY COMPANY OR ITS LICENSORS THAT THE SOFTWARE OR ANY DERIVATIVE WORK DEVELOPED WITH OR INCORPORATING THE SOFTWARE Will BE FREE FROM INFRINGEMENT OF THE INTEllECTUAL PROPERTY RIGHTS OF THIRD PARTIES.
+
+INDEMNITY. You agree to fully defend and indemnify COMPANY and its employees, subcontractors, licensors and agents from any and all claims, liabilities, and costs (including reasonable attorney&apos;s fees) related to (1) your use (including your sublicensee&apos;s use, if permitted) of the Software or (2) your violation of the terms and conditions of this Agreement.
+
+LIMITATION OF LIABILITY. IN NO EVENT WILL COMPANY OR ITS LICENSORS BE LIABLE, WHETHER IN CONTRACT, TORT, OR OTHERWISE, FOR ANY INCIDENTAL, SPECIAL, INDIRECT, CONSEQUENTIAL OR PUNITIVE DAMAGES, INCLUDING, BUT NOT LIMITED TO, DAMAGES FOR ANY LOSS OF USE, LOSS OF TIME, INCONVENIENCE, COMMERCIAL LOSS, OR LOST PROFITS, SAVINGS, OR REVENUES TO THE FULL EXTENT SUCH MAY BE DISCLAIMED BY LAW.
+
+CONFIDENTIAL INFORMATION. The term &quot;Confidential Information&quot; shall mean any information disclosed by Company to you that is written, graphic, machine readable or other tangible form and is marked &quot;Confidential&quot;, &quot;Proprietary&quot; or in some other manner to indicate its confidential nature or if disclosed orally, is identified as confidential at the time of such disclosure. The parties agree that Company&apos;s Confidential Information specifically includes the Software, and any derivatives thereof, whether marked or unmarked, and the terms of this Agreement. Notwithstanding the foregoing, Confidential Information does not include information that:
+
+(i) was publicly known at the time it was disclosed or becomes publicly known through no fault or action of the receiving party or any breach of any confidentiality obligation,
+
+(ii) was known to the receiving party, without restriction, at the time of disclosure, provided the receiving party can demonstrate such prior knowledge with adequate evidence,
+
+(iii) was independently developed by the receiving party without any use of the Confidential Information and by employees or other agents of the receiving party who have not been exposed to the Confidential Information, provided that the receiving party can demonstrate such independent development with adequate evidence, or
+
+(iv) becomes known to the receiving party, without restriction, from a source other than the disclosing party without breach of this Agreement by the receiving party and without, to the best of the receiving party&apos;s knowledge, breach of another agreement or otherwise in violation of the disclosing party&apos;s rights.
+
+Obligations. You agree that it will (i) use the Confidential Information only in connection with fulfilling your rights and obligations under this Agreement, and (ii) not duplicate without authorization, misuse or remove the Confidential Information marking and will not disclose such Confidential Information to any third party, except as may be necessary, required or permitted in connection with your rights and obligations under this Agreement. Without limiting the foregoing, you agree to hold the Confidential Information in confidence and to use at least the same procedures and degree of care that you use to prevent disclosure of your own confidential information of like importance but in no instance less than reasonable care. You agree to obtain executed confidentiality agreements with your employees and contractors having access to Confidential Information and to take steps to enforce such agreements or be responsible for the actions of such employees and contractors in this respect.
+
+COMPLIANCE WITH LAWS; EXPORT RESTRICTIONS. You must use the Software in accordance with all applicable U.S. laws, regulations and statutes. You agree that neither you nor your licensees (if any) intend to or will, directly or indirectly, export or transmit the Software to any country in violation of U.S. export restrictions.
+
+GOVERNMENT USE. Use of the Software and any corresponding documentation, if any, is provided with RESTRICTED RIGHTS. Use, duplication or disclosure by the Government is subject to restrictions as set forth in subparagraph (c)(1)(ii) of The Rights in Technical Data and Computer Software clause at DFARS 252.227-7013 or subparagraphs (c)(I) and (2) of the Commercial Computer Software--Restricted Rights at 48 CFR 52.227-19, as applicable.
+
+HIGH RISK ACTIVITIES. You acknowledge that the Software is not fault tolerant and is not designed, manufactured or intended by COMPANY for incorporation into products intended for use or resale in on-line control equipment in hazardous, dangerous to life or potentially life-threatening environments requiring fail-safe performance, such as in the operation of nuclear facilities, aircraft navigation or communication systems, air traffic control, direct life support machines or weapons systems, in which the failure of products could lead directly to death, personal injury or severe physical or environmental damage (&quot;High Risk Activities&quot;). You specifically represent and warrant that you will not use the Software or any derivative work of the Software for High Risk Activities.
+
+CHOICE OF LAW; VENUE; LIMITATIONS. You agree that the statutes and laws of the United States and the State of California, USA, without regard to conflicts of laws principles, will apply to all matters relating to this Agreement or the Software. You agree that regardless of any statute or law to the contrary, any claim or cause of action arising out of or related to this Agreement or the Software must be filed within one (1) year after such claim or cause of action arose or be forever barred.
+
+PRODUCT LABELING. You are not authorized to use any COMPANY trademarks, brand names, or logos.
+
+ENTIRE AGREEMENT. This Agreement constitutes the entire agreement between you and COMPANY regarding the subject matter of this Agreement, and supersedes all prior communications, negotiations, understandings, agreements or representations, either written or oral, if any. This Agreement may only be amended in written form, executed by you and COMPANY.
+
+SEVERABILITY. If any provision of this Agreement is held for any reason to be invalid or unenforceable, then the remaining provisions of this Agreement will be unimpaired and, unless a modification or replacement of the invalid or unenforceable provision is further held to deprive you or COMPANY of a material benefit, in which case the Agreement will immediately terminate, the invalid or unenforceable provision will be replaced with a provision that is valid and enforceable and that comes closest to the intention underlying the invalid or unenforceable provision.
+
+NO WAIVER. The waiver by COMPANY of any breach of any provision of this Agreement will not operate or be construed as a waiver of any other or a subsequent breach of the same or a different provision.
+   </license>
+
+   <plugin
+         id="com.maxim.projects"
+         download-size="0"
+         install-size="0"
+         version="1.2.0"
+         unpack="false"/>
+
+</feature>

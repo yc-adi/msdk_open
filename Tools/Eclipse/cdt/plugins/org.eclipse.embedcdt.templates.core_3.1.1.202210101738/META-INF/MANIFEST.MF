@@ -1,0 +1,445 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.5.0
+Build-Jdk-Spec: 11
+Bundle-ManifestVersion: 2
+Bundle-Name: %bundle.name
+Bundle-SymbolicName: org.eclipse.embedcdt.templates.core;singleton:=true
+Bundle-Version: 3.1.1.202210101738
+Bundle-Activator: org.eclipse.embedcdt.internal.templates.core.Activator
+Require-Bundle: org.eclipse.embedcdt.core;bundle-version="6.3.1",org.ecl
+ ipse.cdt.core;bundle-version="7.0.0",org.eclipse.cdt.managedbuilder.cor
+ e;bundle-version="9.0.0",org.eclipse.core.resources;bundle-version="3.1
+ 3.800",org.eclipse.core.runtime;bundle-version="3.19.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-Vendor: %bundle.vendor
+Bundle-Localization: plugin
+Eclipse-BundleShape: dir
+Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: org.eclipse.embedcdt.templates.core
+Export-Package: org.eclipse.embedcdt.internal.templates.core;x-internal:
+ =true,org.eclipse.embedcdt.templates.core,org.eclipse.embedcdt.template
+ s.core.processes
+Eclipse-SourceReferences: scm:git:https://github.com/eclipse-embed-cdt/e
+ clipse-plugins.git;path="plugins/org.eclipse.embedcdt.templates.core";c
+ ommitId=0f45977fb295c9f84260b9c2680a8d4e17696c2a
+
+Name: plugin.xml
+SHA-256-Digest: WJsdSK8kQzLmDPBg0c40GLEW4dEGDpfeuAWjxGNygM4=
+
+Name: templates/common/src/main/main-100-include.c
+SHA-256-Digest: svV+XC4wm5gElP8x2X/kGNN3LT60QRcbkVjJXnU+NkI=
+
+Name: org/eclipse/embedcdt/templates/core/processes/SetMBSStringListOpti
+ onValues.class
+SHA-256-Digest: xHjEVurn9yWt+LW5aUzOIdaftZLqHMPDR2P+rt0tIHE=
+
+Name: templates/common/src/main/main-140-defs-blinky.cpp
+SHA-256-Digest: dmMmjSPcn9K+X1/I+4YPznh74BXRINaOWF6PMi+/3Yk=
+
+Name: templates/common/system/include/cmsis/arm_math.h
+SHA-256-Digest: 7OMGERRP/Rtpj1bjgJPSIxvk3Dx/zYhVbI3rtpMW0/U=
+
+Name: templates/common/include/timer-c.h
+SHA-256-Digest: 3Bj9rOj37j6jUXeKQhEd14XiobskU05LtokHCistgOY=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalAppendCre
+ ate.class
+SHA-256-Digest: cITKcrBrcFhKbrB2Lj5AtRhvTxkYAPxIl9GhDLArE9c=
+
+Name: org/eclipse/embedcdt/templates/core/processes/SetMBSStringOptionVa
+ lue.class
+SHA-256-Digest: oq/OzJTPTwOAjC/mnjGMNV1WYgYJTC7Ovs2YlJnlrD0=
+
+Name: templates/common/src/main/main-120-retarget-blinky.c
+SHA-256-Digest: oeJu+OLrf6UTEoNIDrUtnijiul8B0weEK3d8pOU0vAs=
+
+Name: templates/common/src/main/main-200-retarget-loop-blinky.cpp
+SHA-256-Digest: hwnJ9klmEypMMhqQRRrKVRwehmw5qdD90DskG6O5fOw=
+
+Name: templates/common/src/main/main-230-retarget-end.c
+SHA-256-Digest: ArawHWWTv5pMtzvyCYD90VD4qqrLf18G8wCGFqtzc7Y=
+
+Name: templates/common/system/include/cmsis/cmsis_compiler.h
+SHA-256-Digest: A6uAxCaoNg6qrYM6yBZGKp84yy5NvcSQkUiArQcRgf4=
+
+Name: templates/common/system/include/cmsis/core_sc300.h
+SHA-256-Digest: Kj7ALUuUfW6wmnuYYKT76bn0XuGpEfFnSkJP1tP6poM=
+
+Name: templates/common/src/main/main-130-trace-via-m0.c
+SHA-256-Digest: n9aifsP3EFvr2JBEmg3iZO6mV/OxY7BAEMd8jh9ZD04=
+
+Name: templates/common/system/src/write.c
+SHA-256-Digest: scM/izPpeK6JwbFvsKI0XMpYRHOZh73qYurvxOmFZiU=
+
+Name: org/eclipse/embedcdt/templates/core/processes/AppendToMBSStringLis
+ tOptionValues.class
+SHA-256-Digest: kDNMpmurph0lHQEh3/vQE4evmjJQGbgycx3vaABlm/w=
+
+Name: templates/common/src/main/main-120-retarget-empty.c
+SHA-256-Digest: HZdOGGajOCTTMRlrRbcAiPf5iFotXzygYOGnQcGaxL0=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalCopyFolde
+ rs.class
+SHA-256-Digest: EuHRI7V2xrOGeGXO9CaqTkN+lg5k3B+KCJDg70VsRmI=
+
+Name: templates/common/system/include/cmsis/arm_const_structs.h
+SHA-256-Digest: u/YZUjKJMwNL31hB0RQSY4pTwwersKVpPumsAMVTdfw=
+
+Name: templates/common/src/timer.c
+SHA-256-Digest: vEulcu6sM8d04qRuliRKM2Q5PqtKy0OBCKshkZX61lU=
+
+Name: templates/common/system/include/cmsis/core_cm7.h
+SHA-256-Digest: Tmc1WyhBf+uqlVEgq9Ufzc9NWBxeFSLs4eZzw4zRdyg=
+
+Name: templates/common/include/stm32_assert.h
+SHA-256-Digest: axmvAy9Xz/QUKIRz2rgtYXTSReqbdtd0HIwM/a4+lb4=
+
+Name: org/eclipse/embedcdt/templates/core/Utils.class
+SHA-256-Digest: ZwAUuVIpcv5OgJQdpecfw/8hgf8GIZ5xS0TGlfrFLwo=
+
+Name: templates/common/system/include/cmsis/core_cm3.h
+SHA-256-Digest: ZVuwjpR0Q43sixh06mxjdJ3CeHuF8GoJh8SHC8tYDyE=
+
+Name: templates/common/system/include/cmsis/core_cm0plus.h
+SHA-256-Digest: n9brrXnybusl9cuij9h77cnhMhPNRCabBJzx83nVqzY=
+
+Name: templates/common/system/src/diag/trace-impl.c
+SHA-256-Digest: Q9ohQBE2zWC98hlj0NNReGA3LI9v8EBkfNw8mtiaB28=
+
+Name: templates/common/src/main/main-120-semihosting-blinky.c
+SHA-256-Digest: S465QMlg+/AUeU6bRgsgyFAaY2oetw8Q8VnJet3p18E=
+
+Name: templates/common/system/src/diag/trace.c
+SHA-256-Digest: X8mh2VSgXkxu5B3MbMirnIsqvVfjPsr62SofbRixhKg=
+
+Name: templates/common/src/main/main-110-include-blinky.cpp
+SHA-256-Digest: mbpIIrJglIt0goE1REKTe4JDX4fCzn1LAQYY7xnyZCk=
+
+Name: templates/common/system/src/cortexm/exception-handlers.c
+SHA-256-Digest: 0kwldIMZL6rDhTqgvh2Glw4CvQMOseLb4/sOVDQ4IOo=
+
+Name: templates/common/system/src/newlib/cxx.cpp
+SHA-256-Digest: h60P6s99iAy1LiFPPTaF07dIIdKA/3DnuQSS9qBLtog=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalAppendToM
+ BSStringOptionValue.class
+SHA-256-Digest: 7QJzsymKKs67RY9YCfW1jubDiLBK1ugyZNRfG372ZeU=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.core/pom.xml
+SHA-256-Digest: aNlHeQlCEkufxeaLv7aWslSRlCYfyk8Xt1S/ma59LPo=
+
+Name: templates/common/src/main/main-220-semihosting-loopend.c
+SHA-256-Digest: SJP0DjeB64lsgtBGoIBnoR41zfLx368m/qkLjbZnZBM=
+
+Name: templates/common/system/include/cmsis/mpu_armv8.h
+SHA-256-Digest: jlqEsYbzA+s/Ls4M2E8BOsMe1ov/3k/upQKs0LR0xA8=
+
+Name: org/eclipse/embedcdt/templates/core/processes/SetMBSBooleanOptionV
+ alue.class
+SHA-256-Digest: JwhZpBG1yXwU8Pj6vn57cYS9KaXlQOJJh2zMAmEb+4I=
+
+Name: templates/common/system/include/cmsis/core_cm23.h
+SHA-256-Digest: SS6e68zGNBc6koJpZsQMmAYYeNquc8Z1l+NwqN72hfU=
+
+Name: templates/common/system/src/newlib/sbrk.c
+SHA-256-Digest: F3D3ECUgVwLi4aAfuXecG50hNVKClmefDqgXbeXIhyc=
+
+Name: templates/common/src/main/main-230-end.c
+SHA-256-Digest: ArawHWWTv5pMtzvyCYD90VD4qqrLf18G8wCGFqtzc7Y=
+
+Name: templates/common/src/main/main-200-retarget-loop-empty.c
+SHA-256-Digest: 80oHnXSMXLgOIedxFNOtwhwhlx4BPibryPZL+Bs3nUE=
+
+Name: templates/common/src/main/main-230-none-end.c
+SHA-256-Digest: ArawHWWTv5pMtzvyCYD90VD4qqrLf18G8wCGFqtzc7Y=
+
+Name: templates/common/system/include/cmsis/core_cmSimd.h
+SHA-256-Digest: XTONNnMMy9E4EmB44X9pwwigFfCojYW9Y5rwcuUn1T0=
+
+Name: org/eclipse/embedcdt/templates/core/processes/AppendToMBSStringOpt
+ ionValue.class
+SHA-256-Digest: SGY8/tLEKmf3gZE8i3xtPDrknc9SLHyYnY7VtNn5asA=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalSetProper
+ ty.class
+SHA-256-Digest: h8q95jF/EvSjsBOXvRfXPaL0JVsjpqjRolHenaU59uo=
+
+Name: templates/common/src/main/main-200-loop-blinky.c
+SHA-256-Digest: KXYCZDUKX67rdfkg+h3DOmp3H6HOsSqTSAGvE+ABOqE=
+
+Name: templates/common/system/include/cmsis/core_armv8mbl.h
+SHA-256-Digest: axphaF9Ji4C+zU3xIZxQ/Ufx6Owj7igYRYWxAlOHdks=
+
+Name: templates/common/ldscripts/libs.ld
+SHA-256-Digest: mXaJXiun/Rz71aG3HZoRwA/eFWga0qtpEfQMJguUkFE=
+
+Name: templates/common/src/main/main-include.xcdl.cpp
+SHA-256-Digest: y+ZdtCsUrCbm+lbog9carnRNAl+ngISKh+SfDBgw4U8=
+
+Name: templates/common/src/main/main-210-print.c
+SHA-256-Digest: SJvqF80Yi4TrWPKb+XB8K9SDCUhuHgny5T1wnmiGLAs=
+
+Name: .options
+SHA-256-Digest: 7MiswQpebpP4nkiCSDC8LBD5vhZ15E+0qGsaU50tYbI=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalCopyFolde
+ rsRecursive.class
+SHA-256-Digest: gUHT/npW5Qo2b9fnhqY8SwVgzNgWYkiSDSN35ZN3H9Y=
+
+Name: templates/common/system/src/newlib/startup.c
+SHA-256-Digest: gtGQjTsoOKEoOt4hRB4mU7tgshjOaaB4LJ4D5UADYhg=
+
+Name: templates/common/src/main/main-200-loop-empty.c
+SHA-256-Digest: 80oHnXSMXLgOIedxFNOtwhwhlx4BPibryPZL+Bs3nUE=
+
+Name: templates/common/system/include/cmsis/core_cm0.h
+SHA-256-Digest: H+33nhHGx/fAL8LG2TrdD4a2L628uRPa7OJA2Xpwcgw=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalRunComman
+ d.class
+SHA-256-Digest: /4G2zaf63vnCNTPJKBCVqznjLm6n1u6VYCG6a9/xIas=
+
+Name: templates/common/system/include/cmsis/cmsis_armclang.h
+SHA-256-Digest: OjPIPddTPNKCcWS4nmbcfA+Ddu9OLSVexQwaWLNvZws=
+
+Name: templates/common/system/include/cmsis/core_armv8mml.h
+SHA-256-Digest: Kp9wKuveSRtae5bVOUE7Ld7x6mhysJ+Tl2ODia6obQw=
+
+Name: templates/common/system/include/cmsis/cmsis_armcc.h
+SHA-256-Digest: M3HGeSmLfbfKriMhWrjv25X+O1xsGnk/gATlvhaUAUk=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.core/pom.properties
+SHA-256-Digest: t+VN3SSmFf4je6XcT5U/oQRugF8uj1bGEXuX4VY9Yeo=
+
+Name: templates/common/src/main/main.xcdl.cpp
+SHA-256-Digest: 5w4Z4QopLEIeY/KQ7Je1qagRkbHI7ayaX2yginueWcc=
+
+Name: templates/common/system/include/cmsis/core_cm4.h
+SHA-256-Digest: U3Etiu+srr8/qiNwvox8YGUyipdCQvnjFf/Iaz7oUsU=
+
+Name: templates/common/system/include/cortexm/exception-handlers.h
+SHA-256-Digest: 7xgvqKZQ5C5OsCeinP6XHnn+WwcXd07KXL+U2Zm4+Vg=
+
+Name: templates/common/system/include/cmsis/cmsis_armcc_V6.h
+SHA-256-Digest: PgJe23RPDKeeGa/JHE3kPytBfeWPN0VIc4RjtW0ZZN8=
+
+Name: templates/common/src/main/main-200-semihosting-loop-empty.c
+SHA-256-Digest: 8Q0VSBlS3sJgKyUtxIxAkYvLpLA0VL4P4gPMZdzzid8=
+
+Name: templates/common/system/src/newlib/exit.c
+SHA-256-Digest: 2vy34VaBA2TszyMG1x0v5sN8Qnz0tZ8a40AMHh+6DO0=
+
+Name: templates/common/src/main/main-130-trace-via.c
+SHA-256-Digest: 5JRx1631uUFvGgPac/aepWXCzHTmqS1VrP3umokeFgI=
+
+Name: org/eclipse/embedcdt/internal/templates/core/Activator.class
+SHA-256-Digest: Mfg2C8CtLMM4R0rm1kMzGdR7JwUe2u4mxdbLmIL+Ce4=
+
+Name: templates/common/system/src/newlib/syscalls.c
+SHA-256-Digest: D1DXA9kyjKyCQDU/g/eW/queuZkcqqXu3WbvH43tsEU=
+
+Name: templates/common/src/main/main-120-none-blinky.c
+SHA-256-Digest: m12JbFs9ZaEcFpxgFhRZTJA3lqbOE/B48xz9d/prCEo=
+
+Name: templates/common/system/include/cmsis/mpu_armv7.h
+SHA-256-Digest: 5JaOYn3wheTr9GvlFAvmV+A12XiuGTjBwuPuSfveUDA=
+
+Name: templates/common/system/include/cmsis/arm_common_tables.h
+SHA-256-Digest: voOqExucu9d2i183jp/xqTDp7lYE6jns7PnxOo/Y7tw=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalAppendToM
+ BSStringListOptionValues.class
+SHA-256-Digest: P4VegBi5eGDBFqsWZXcRUoT1HvoAxjtDzKoDaUiLy+0=
+
+Name: templates/common/include/led-60-end.h
+SHA-256-Digest: w2sOwOim9h4hompWDQuC9yN+lEs07OQjT/3L0wyG/UM=
+
+Name: templates/common/src/main/main-200-semihosting-loop-blinky.cpp
+SHA-256-Digest: qaRVQBV9vTehoTH3umhtzY3U3Nh1HW+gLiX+tlJD1IM=
+
+Name: templates/common/src/main/main-120-semihosting-empty.c
+SHA-256-Digest: q3K+9cZzUH/Fj1/Ceeo58oI4CKu42ft/LSXv/g404zc=
+
+Name: templates/common/src/main/main-220-none-loopend.c
+SHA-256-Digest: ZRj4+fbb6dFdjHrzPdCi7qLOs2MJI0ZqIaqDfX1grjU=
+
+Name: org/eclipse/embedcdt/templates/core/processes/SetPropertyToPluginR
+ esource.class
+SHA-256-Digest: OamCFNPQxPhrc9iZD4TIUua3Cl04BYaOZje0pa5Wot4=
+
+Name: templates/common/src/main/main-200-loop-blinky.cpp
+SHA-256-Digest: hwnJ9klmEypMMhqQRRrKVRwehmw5qdD90DskG6O5fOw=
+
+Name: templates/common/include/led-30-defs.h
+SHA-256-Digest: pihhPtC8hSmcbnfgVFa2elRH1/EohOjGiABHuC++vdU=
+
+Name: templates/common/system/src/cortexm/initialize-hardware.c
+SHA-256-Digest: xexNryAyTs+7omj8jZRNNDU9Bfkg6LGGksw6WZgJrtE=
+
+Name: templates/common/system/include/cmsis/core_cm33.h
+SHA-256-Digest: 9LjfXjMn84SXsYk8S21175dYpUQ0I/GbRfH/4fUez/4=
+
+Name: templates/common/src/main/main-180-semihosting-hello.c
+SHA-256-Digest: a/jLhiK+SCSPXXX1xKDQvOU7ZNh4nC5KVV1hD9ZkQVk=
+
+Name: templates/common/src/main/main-135-clock-comment.c
+SHA-256-Digest: i7aEZXT/Sm3VGpbSg2ERDsVGVzZ7jCGhBxwv2vwH+ds=
+
+Name: templates/common/src/main/main-180-none-hello.c
+SHA-256-Digest: uzoPkJVOl/VG8sXr3HtwuGDiME9klIou6DogLFRev70=
+
+Name: templates/common/system/include/cmsis/core_cm1.h
+SHA-256-Digest: HKJQNAdvSVKvTSNfLEMCvcgdEjz1W8Mp0vqWTZvA7OE=
+
+Name: plugin.properties
+SHA-256-Digest: iP20W3OLXXsuoSfmBPYxz0bILoswFN+xk+Yatp5ICIc=
+
+Name: templates/common/system/include/cmsis/README.md
+SHA-256-Digest: gupJnIhUBO9VL6SxHvvWMYBbOAGuoGpNivfJmhuw9JA=
+
+Name: templates/common/system/include/cmsis/core_sc000.h
+SHA-256-Digest: yzoLh727cPVSdzvEQv2stsWbBiM7Xw1rLg6PVv1WE5Y=
+
+Name: templates/common/src/main/main-150-begin.c
+SHA-256-Digest: ht+rnJtBmJgnyaijdsPMgyhlzB9UeTRPcmWXzzEfUBo=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalSetUpperC
+ aseProperty.class
+SHA-256-Digest: 72REiZys8dRwqIQfy13jbQo1zS/bcsrXXXu18AB3GFM=
+
+Name: templates/common/ldscripts/sections.ld
+SHA-256-Digest: ULIFSnTXT2phbZFcCn38JyXNBYi9PwZWTW21he+sIts=
+
+Name: org/eclipse/embedcdt/templates/core/processes/AddAbsolutePathFiles
+ .class
+SHA-256-Digest: u296g7zGcDtUpuY2gzwmbq1tByNHrQoUh4OHBJUPfNo=
+
+Name: templates/common/src/main/main-120-none-empty.c
+SHA-256-Digest: qvdrZcUtSy+0nA7pqcHkH+MjnMz/rptJCHCK1spXorY=
+
+Name: templates/common/system/include/cmsis/cmsis_version.h
+SHA-256-Digest: wlcNVu6F1PLsD7YvMdCA083fOgFVAKTtWgBqVxY3tDw=
+
+Name: templates/common/system/include/cmsis/core_cmFunc.h
+SHA-256-Digest: H90ibYK94qkCMbpHpZN3FYuJB+TK2ipiFfMtzxOrNc0=
+
+Name: templates/common/system/include/cmsis/cmsis_iccarm.h
+SHA-256-Digest: A+Eg2zYkgNwMV7nrJXSXICkyH7jZ6ZPkWNv/aeb0+R4=
+
+Name: templates/common/system/include/cmsis/tz_context.h
+SHA-256-Digest: RVZcjLBMZTqrrzzO3fyEi2oN4owg1Pfj1HWpksfu54g=
+
+Name: templates/common/system/src/cortexm/reset-hardware.c
+SHA-256-Digest: bm2givW/ywfD7guszTXtlDfAk23baJfaeQCV3xboerI=
+
+Name: templates/LICENSE
+SHA-256-Digest: 2X3e04IXrsTO1R4Ou8zdJW4tw2P8EG8Gi1qJnQfpNHg=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalSetMBSBoo
+ leanOptionValue.class
+SHA-256-Digest: mAMwDloVsIQiZ7CW5tRMyvvZyitm2d31AAfYSfMc+go=
+
+Name: templates/common/src/main/main-190-clock-empty.c
+SHA-256-Digest: SITRKJdfRLB7goukcDNFEzUtsrcdPQMwRPnM9fMni84=
+
+Name: templates/common/src/main/main-230-semihosting-end.c
+SHA-256-Digest: GR6EKneVCJXKcBtUI9GVFcVO1MnAbbaywHiYZhwIAnA=
+
+Name: templates/common/system/include/diag/trace.h
+SHA-256-Digest: f49UUf1+RKnY/BJ66jWUtuYyzH9BSdEO1ef6f1CcaU0=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalSetLowerC
+ aseProperty.class
+SHA-256-Digest: +OeQ0Ir+lCAdB7Kza+q6J0Q7AD7Alph5fr4DhBaO8rc=
+
+Name: templates/common/system/src/newlib/README.txt
+SHA-256-Digest: 8v09TFkm/xtGTsgAwkwp+KvsABz+3UbLs8qTWdtyRAs=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalAddSource
+ Folders.class
+SHA-256-Digest: UPAGNg7qnfTnX1sy7s8MbYaQSAuLzNrH97AYr+D3tss=
+
+Name: templates/common/include/led-10-begin.h
+SHA-256-Digest: XztxWTpvlY0zHC2HETlm8gaTKUfvTNApJYGndmk7w8U=
+
+Name: templates/common/system/src/newlib/assert.c
+SHA-256-Digest: yDBN2BOiIm6yNz59uEfSgnHLO8ebOx+uLoEtkJgZ1kg=
+
+Name: templates/common/src/main/main-200-none-loop-empty.c
+SHA-256-Digest: 80oHnXSMXLgOIedxFNOtwhwhlx4BPibryPZL+Bs3nUE=
+
+Name: templates/common/src/main/main-220-loopend.c
+SHA-256-Digest: ZRj4+fbb6dFdjHrzPdCi7qLOs2MJI0ZqIaqDfX1grjU=
+
+Name: templates/common/system/include/cmsis/cmsis_gcc.h
+SHA-256-Digest: NBmC5tbJERkhTEfXoEsx8fjOCXDEXiyf4IcMgNCHbig=
+
+Name: templates/common/src/timer.cpp
+SHA-256-Digest: HtX7bmFfPeET2rI4GCv4hioI3cEkIJs6Vp6TpnVfsyQ=
+
+Name: templates/common/system/include/arm/semihosting.h
+SHA-256-Digest: EfsvS5hzLvKbcnnfYBARXGaBAwGx2NBD1rzq4JuhnFI=
+
+Name: templates/common/src/main/main.xcdl-js.cpp
+SHA-256-Digest: U/egSbIiBjYEdoTNdMaKpIUcKj8GjQObkpTy3tL1+xs=
+
+Name: templates/common/system/include/cmsis/core_cmInstr.h
+SHA-256-Digest: ybjjbQUJfaXUk/GXqn+BzlF/RTJTaSW1aMy9biwB64o=
+
+Name: org/eclipse/embedcdt/templates/core/processes/SetPropertyIfHasNatu
+ re.class
+SHA-256-Digest: MfWGP65kgteVZhMDDdoPUtRKs4/Yj84Lm+QmLuefT5Y=
+
+Name: templates/common/src/main/main-190-clock-blinky.c
+SHA-256-Digest: +y8k15iO+GvX7752xx7igM1/3SRxRi8/E17gwUyRSck=
+
+Name: templates/common/src/main/main-200-none-loop-blinky.c
+SHA-256-Digest: KXYCZDUKX67rdfkg+h3DOmp3H6HOsSqTSAGvE+ABOqE=
+
+Name: templates/common/system/include/cmsis/LICENSE.txt
+SHA-256-Digest: tAkwu8+AdEyGxGoSvJ2gVmQdcicWw3j1ZZueVV74M+E=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalSetMBSStr
+ ingOptionValue.class
+SHA-256-Digest: YnMFkAPa6snivoQ7KImfXq8y1ZcjUlD0a685ZKn+jds=
+
+Name: about.html
+SHA-256-Digest: 7mbS+ztMDS7S5/aYvJ7U49bPd/pcr0CtAylhJdsaxfA=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalAddLiquid
+ Files.class
+SHA-256-Digest: HG2Yq4LBBCBrZvceSDVmgr40BjgtLKYQ1UPCK3HNU+M=
+
+Name: templates/common/src/main/main-200-semihosting-loop-blinky.c
+SHA-256-Digest: HlBxoDhVxcCU8r+trtcOtVvKNEOzIhKqJrvc8hmFuzM=
+
+Name: templates/common/src/main/main-200-retarget-loop-blinky.c
+SHA-256-Digest: KXYCZDUKX67rdfkg+h3DOmp3H6HOsSqTSAGvE+ABOqE=
+
+Name: templates/common/src/main/main-140-defs-blinky.c
+SHA-256-Digest: n7ocptE72GyjgKR8Gs3zfJ5MGsWptcJNZYEuJ1IoGpU=
+
+Name: org/eclipse/embedcdt/templates/core/processes/ConditionalAddFiles.
+ class
+SHA-256-Digest: IGtlWBXmjALpmmSn2dj50dFbg29AaYAyK8sgUOVbMCQ=
+
+Name: templates/common/include/timer-cpp.h
+SHA-256-Digest: TX0aSEnBNaq/Cb4Y01r6kMuwOqVdtkFBZHlDwQtOJ4I=
+
+Name: templates/common/src/main/main-180-retarget-hello.c
+SHA-256-Digest: jO5Z8M7MTT0lOb9s3AbbgwwYMXiK8KGx6gjRmIDuxBY=
+
+Name: templates/common/src/main/main-200-none-loop-blinky.cpp
+SHA-256-Digest: UIc6Peu17aJRx3lKUqesHmPe1G4uyLPI+4jCbwV7f78=
+
+Name: templates/common/src/main/main-110-include-blinky.c
+SHA-256-Digest: mbpIIrJglIt0goE1REKTe4JDX4fCzn1LAQYY7xnyZCk=
+
+Name: templates/common/src/main/main-220-retarget-loopend.c
+SHA-256-Digest: ZRj4+fbb6dFdjHrzPdCi7qLOs2MJI0ZqIaqDfX1grjU=
+
+Name: templates/README.txt
+SHA-256-Digest: /CcSRCGo0V7ov+iJo3ifWfnaN6KT934izwT12cPirVg=
+

@@ -1,0 +1,4908 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.5.0
+Build-Jdk-Spec: 11
+Bundle-ManifestVersion: 2
+Bundle-Name: %bundle.name
+Bundle-SymbolicName: org.eclipse.embedcdt.templates.stm.ui;singleton:=tr
+ ue
+Bundle-Version: 3.0.1.202210101738
+Require-Bundle: org.eclipse.embedcdt.templates.core;bundle-version="3.1.
+ 1"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %bundle.vendor
+Bundle-Localization: plugin
+Eclipse-BundleShape: dir
+Automatic-Module-Name: org.eclipse.embedcdt.templates.stm.ui
+Eclipse-SourceReferences: scm:git:https://github.com/eclipse-embed-cdt/e
+ clipse-plugins.git;path="plugins/org.eclipse.embedcdt.templates.stm.ui"
+ ;commitId=0f45977fb295c9f84260b9c2680a8d4e17696c2a
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_usart.h
+SHA-256-Digest: zIqLGI4x56EXFYXK+htRhd9tmcwFa+E3sbbFsNxQbA4=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_cortex.h
+SHA-256-Digest: SR3bjyHKCHjvz7NqJI+R3LYenwkcYR5/Tv5iH8gaKsA=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_wwdg.h
+SHA-256-Digest: o3kA9VTMelpqjjQqm3NDPsTWSSrmdqz0LDXgYWe4NnU=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ tim.c
+SHA-256-Digest: WbZhH6VvXSNFnc0vozj0Dc1iSKUlRhhVhuh6yLnHkfo=
+
+Name: templates/stm32f4xx_exe_c_project/src/led-40-defs.h
+SHA-256-Digest: 5S9zT49Gz2uU1q/ibDOirTQ5GN6NkWRxlpdg5gV1rqE=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_exti.h
+SHA-256-Digest: fXwk+E+OfInFM0lgBVbg+pcQzob5eKBd/MXTlMNJScY=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_flash_ex.h
+SHA-256-Digest: o6238Xi7LUR5GrDEd42ibC/ICJ3rC0zds0GMbPXjgTI=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f031x6.c
+SHA-256-Digest: VHvyKEshgspwoD3WpNcHiTh7azhtVxjSzY7Ani0MIOA=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ adc.c
+SHA-256-Digest: pkwlEq64pNVyj16ulc4xzQnUcVSskTWwJOHyitjjWpo=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_rtc.h
+SHA-256-Digest: C35nYDXxn5oS+YKgrM7999KsTfVpmsFTVdfrWb/cHdA=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_t
+ im.c
+SHA-256-Digest: IfHAdq3viIT+YMDtitrumUJo+kedPrwt9jjtXdMNSUY=
+
+Name: templates/micro-os-plus/stm32f2-hal/Release_Notes.html
+SHA-256-Digest: JqyFyicJHNTJbQAYPPc6zJcjhu2oyVyI2ja221tbKgY=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ uart_ex.c
+SHA-256-Digest: Io7/nB32tYCYXRk5Yevkhn7OFwlKQw+sQg2UhC2gRFY=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_pcd_ex.h
+SHA-256-Digest: MspJrow+DZuwhyC/b1nHuclCmx5HfXr/5rpsnp/HEuE=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f302xc.h
+SHA-256-Digest: yVlY0zozoVKrAJBjl4/23RKUgukaHsFhN1U1JcUJfHg=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal.
+ c
+SHA-256-Digest: BUK9kKMT36nkLEhjAsM4jahGWhbvTTEvdWkULXNauIw=
+
+Name: templates/stm32f3xx_exe_c_project/src/led.c
+SHA-256-Digest: cGKMsJcBvHFyu2xXn+cIvRRuu1iC3bBQj6Cj2ONH86I=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_fmc.h
+SHA-256-Digest: /mdijclT1c7whND6Mtkz5EIXyh0SMymVoOkG/S6J6e0=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_lptim.h
+SHA-256-Digest: Zck+MKDDCC5ntP+BeCikXwTGJKsqMO5MycAAJ56M8Gs=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ hash_ex.c
+SHA-256-Digest: DtuEkD9qnExfqd0Ft0+R6uCCcULqWJs72c/NQ03lmJE=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ pcd.c
+SHA-256-Digest: Ft8XDgWFA5sPecPWPOPkIkTz8gQSGpka/CEFRDFaR58=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/README-DEVICE.md
+SHA-256-Digest: i8qU2u6smnq+kNTPSEop7OY2c6jfLYIqBlecgZwY5RM=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f722xx.c
+SHA-256-Digest: x0jtUxwUTv0NIsg19wbP6uVn6EYUfXk9BpVAgX7I3nk=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_bus.h
+SHA-256-Digest: Rlil0MSN3qZ63vEiuPTlCGnddkkNwynyrcsOpbRn4Jg=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_adc.h
+SHA-256-Digest: VsfkwlTbPEM9XpC43YLtlHzR8wl8S64nXemJFDKYbqc=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/README-DEVICE.md
+SHA-256-Digest: FmQ1hMbMIFbEkPRGWkyPW8xnGzOQ98CkbVSB7wCIXNM=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ tsc.c
+SHA-256-Digest: LRpVZOm5Wa+UZZcnii1EbJD+OgDMEJkOhez9a3oxZ6I=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_rcc_ex.h
+SHA-256-Digest: qXDMhATOUuzzh8nx0RpMiNUd9csFoI/z/xIcg7JT8Ww=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ i2c_ex.c
+SHA-256-Digest: r4j64vzWzF5quJBloSv2qgZ3OLWVQ08fsEfSlA1NGVI=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f412zx.h
+SHA-256-Digest: GKZjTf97Zh0XjnuBw4YifuaGTso15eNvBRWzvC8ppJ8=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f373xc.h
+SHA-256-Digest: ClxeS69tdyUSE1JCCSnsT5Esf3NXt+QcHqLpkYJGGuQ=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f030x8.c
+SHA-256-Digest: trRtFukeR5sxKeCHEUSXUBqRsQRHccNZ3DtAxwrMftw=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/README-DEVICE.md
+SHA-256-Digest: laYOJANp3nS97FSfcTsZzMHsMR3uMam3xOfPMDf4krY=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_sram.h
+SHA-256-Digest: xDuHJ/cpVWvrLRGExtv/App16y2avQOWp3R4YyerzCY=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f101xe.c
+SHA-256-Digest: +6V6u44eIbctXdFXH8MyCwLtyIYUxyP3K89nCJ9Zbto=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ mmc.c
+SHA-256-Digest: QpEsIWrpkfwJXLDPF3N+PJuHaEQqfaOW8lo5IEMKsb0=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ flash_ex.c
+SHA-256-Digest: QlG08OpfBRDUZrlUDmYS28TtL4y7pFqcCbDlfkjcKro=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ spi.c
+SHA-256-Digest: TsLxxG2Pvg0SAq4oropxM+kPVQTxWmnhEpRrLOMnkbY=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_c
+ rc.c
+SHA-256-Digest: cK0rEmK8aSHC6phJ2aRuxyU8ljiduZHhmnNyuoocSAE=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ ltdc_ex.c
+SHA-256-Digest: KoCu6tVgXG9COEZrz/QDOhNaE0SRruQsNlUSoNr30XE=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_pccard.h
+SHA-256-Digest: BSzURWAkkymFNSPek08RhlWgAW6SplGnYy6wqs0mYYs=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ i2s.c
+SHA-256-Digest: wmEDFY4wMu2LRv134J2cPgr/pGEfKypG0f9aZwgmRHQ=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/Legacy/stm
+ 32f1xx_hal_can_ex_legacy.h
+SHA-256-Digest: 8+QouuBv+AX7Bkc4rMLl/DIKQu5ivtKlHWg6Tz2JWgc=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ pccard.c
+SHA-256-Digest: 7olSfgiUJmD5xSpa5wNQ1C9HYDN8eIREVwGXhPCySTo=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_fmpi2c.h
+SHA-256-Digest: qa/5RAvqOGMSFbKD51SmD4CqyFGl7viIueth/Wj6qH8=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_gpio.h
+SHA-256-Digest: IRJTKdiY4962Vg51lG7RSVyTf5vw8Rb9R+AzZwRh9cM=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_tim.h
+SHA-256-Digest: PryhVv7BYk7NdU4ZIdagudm1LwxMl25hIS8bEih9Vms=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_wwdg.h
+SHA-256-Digest: zbSlcbb22bRlAM7j747WJDHO+udzl8vHNd1V9GyvOFs=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_rcc.h
+SHA-256-Digest: AqrxBTlhhQ2VsfZ5Wils4/cwd4yFefxaJTlOdP+IbOY=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ iwdg.c
+SHA-256-Digest: +9T3YHoOXLrKdEeMrAgKSWza1gL1ekpVcogiu/0dXEM=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/system_stm32f3xx.h
+SHA-256-Digest: t+MAoYF9pRXeZt7pXemmXIdDg7GljW91Filoz/8IamM=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_spi_ex.h
+SHA-256-Digest: Prn08FCLSFAfYFwHrvPEO2Yuq3uFruSNxHYeR9Uli6U=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_hcd.h
+SHA-256-Digest: f5L5qfVcX8eo7ty+uyWOJdL6eaWud4jWahfIaFr0FYA=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f412cx.c
+SHA-256-Digest: YkxIW4MSKMZwf8co+bU7KeibAf5BLg+FYwrXrSNSwVA=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f303xe.c
+SHA-256-Digest: myxq67679F/gmuQ15heAaDMmOHo3u8mGuDCWSMkuipo=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/Legacy/stm
+ 32_hal_legacy.h
+SHA-256-Digest: QsXP7VHSo1m0FFq+ee0oIJUdYgFLjMhGpiQw5aZT8W8=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_r
+ tc.c
+SHA-256-Digest: RqPxrnH0JvBNv2EcDttbp2daLIn+ZkRtZXJPu3U/R+M=
+
+Name: templates/micro-os-plus/stm32f2-hal/README.md
+SHA-256-Digest: TfYwWr/QhnKR16wbILhhI4baMtYsXteB5ptQdn6dl50=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f427xx.c
+SHA-256-Digest: S2A8lB5pvthf4WLNpxZd9omNypKwKlOdWTxR/f7A8Xw=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_u
+ sart.c
+SHA-256-Digest: nUNTnQ5Y8qKspCnZXkvkgAkQ7xkMTEJ0dx6dSQ07Xl0=
+
+Name: templates/stm32f4xx_exe_c_project/src/led-20-headers.h
+SHA-256-Digest: TZeOhVu6kDzSrv8l3tR3TgdmURWrxQ8n+CGL/cueJcU=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ flash.c
+SHA-256-Digest: kfwyNo1DnInifq+SdKEJM6K9/aeR2xTOugLW9MFTGSI=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_d
+ ac.c
+SHA-256-Digest: qs6DR2FF7EcyE3ixLG1woyP5hiZztrP9RgtfqmFvLIk=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ rtc_ex.c
+SHA-256-Digest: 7IIuuYq8Ow8erULFce9tEY5hFZpvXfu6hcwwR2AGeSo=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_can.h
+SHA-256-Digest: bdPHtfs5t0fv9QK/jQRJ/FNncqVrTfXOq3oV3JpPFBk=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_u
+ tils.c
+SHA-256-Digest: h9oCUxCIwQDtQ4zy2eR5p6TWDXWUJxcijP65wkQMtXQ=
+
+Name: templates/stm32f7xx_exe_c_project/UPDATE.md
+SHA-256-Digest: 4JxxN+J0G9h3WXQkaAjlZZG4Y1VdaS3KiyPgYAvNVdQ=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32_asse
+ rt_template.h
+SHA-256-Digest: ULL0gxZEVuUwzKuPGwrsxJ76dQmUOiQDgyEHeEds9tY=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f030x8.h
+SHA-256-Digest: 9r+E3ccyNusNCZPwOTUmkt+4EnRH9qrrpk/AZNscoUM=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_exti.h
+SHA-256-Digest: 5Zy/2emlh5NbXc7jxPIm3QZ99MCPvoMYLFppF9QlVWs=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f072xb.h
+SHA-256-Digest: VDym7wrPJshHX8k5YkapxxHbMlTZuI8+K15Dfh1vij4=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ usart_ex.c
+SHA-256-Digest: mxPy+z83fehb4RE5ApklDk7aFnxiLNWs0sXdXNEaxtU=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_g
+ pio.c
+SHA-256-Digest: 2XpqcpTn9h835ZNy4vNyCfEr2WFz77Lh9pW4ZdQH/0s=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/README-DEV
+ ICE.md
+SHA-256-Digest: 7Pgmc7x8ROR7f+ITfV1Fn+iuBwjz/MZ+tDNYt32lXQU=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_d
+ ma.c
+SHA-256-Digest: 1DReTyUu+TU4XwtO3DikRcCMJXu1X8giQzMQrt8Dygw=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f031x6.h
+SHA-256-Digest: AeRPx0ClIVyjlnqdHoNFqq7cM+gYuGRUiVe8EBpKzDQ=
+
+Name: templates/micro-os-plus/stm32f3-hal/README.md
+SHA-256-Digest: kdme9fSGRp4vUfLk+RhY4eUm+t34ZRN3NhFsswOCQEk=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_i2c.h
+SHA-256-Digest: rs3lYSCHO1ObewYDOIs2Ks7qUbBy6a9cpjVu/sue70Y=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ nor.c
+SHA-256-Digest: Jo9vfxN2doZu9SVSfzp6cc1GHrTLm0SaNjjQ5ooD/WE=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_pwr.h
+SHA-256-Digest: JuWMa+llQjzlcFeZHhORhUHbEzMaHg+4+16l7x8U6js=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_rng.h
+SHA-256-Digest: w+tMpGB6eUghS7jRzH2KfoTLSlN8IKfb4jEOQFQy7Ow=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_r
+ ng.c
+SHA-256-Digest: d0GtzxT2iyP18nDKm/KRnr1kRkGSFgvlSqNzDhaxyKQ=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ rng.c
+SHA-256-Digest: O6pJyk6UMaqd8lKQZDHx1JwFtVtgjExOxa9Ef4ni00U=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ pwr.c
+SHA-256-Digest: k8HpZuATR+XJIW1YHlocX31FN7YOCVxJRmePqmrCk38=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f411xe.h
+SHA-256-Digest: w6JKUkR8IZNrwDwNQdrdl0encwMQsrzqfKlEA4HSYjg=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ can.c
+SHA-256-Digest: 8J9yCWL47h4Q01iE+x8YXGFZuQ2Tpb32VuL3xJ3YAvQ=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_gpio_ex.h
+SHA-256-Digest: 5GQOOHWvPsoXm3QfLgp0TGNxqlNBACpSKbf8qaR43ro=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_u
+ sb.c
+SHA-256-Digest: x3XLy5PE13URcAgqbK0tLrRLbaq+TJ2yzziIMPkja24=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_dac.h
+SHA-256-Digest: 4cyB8WH9YIB+LihBiWug9xdxblAAlTZvk31tyLKWnlU=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_dma.h
+SHA-256-Digest: +zEEBGic7iiwuE+S9UfiH0r50V7mh7kEROSICs3YG8c=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_dac.h
+SHA-256-Digest: tD12n1lAYofI6ynsqUevopnok3DEdQfR9dwLyINTyoo=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_spi.h
+SHA-256-Digest: FpYBzAeHKRi6HtYuoGfq6H8CMs1xuD2LNdUs2CBDqFU=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_dac.h
+SHA-256-Digest: imHjGEmxpFWvX7ASSBFb8JPaETnis9XvsTM0J86jtFc=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_adc.h
+SHA-256-Digest: bK9cSto7NaN76fHL4ESHmYiZzSJBnOuQxU1z4aX4864=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_spi.h
+SHA-256-Digest: njPwr8sJGGtxmtuYW3Ftzrx56VnOSNmfxodnSZbHrHA=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_crc.h
+SHA-256-Digest: A++IaRoI2j7HJEqSu18KjeQZWWh3BytOTHgNGmjIfxw=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_lptim.h
+SHA-256-Digest: vxG8temUKykIkYeCVMTDHCCJRSFdHPjfJCv0xNVxD+0=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_o
+ pamp.c
+SHA-256-Digest: EC5nj4z9SlJ/xpxqwSzhHYFsvFa9loLEQaiPMJlyDYo=
+
+Name: templates/stm32f0xx_exe_c_project/template.xml
+SHA-256-Digest: qPAezHRr+W3Cu0/tEWRl1dHr0oTdvy1D6HwoVh1z65I=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ usart.c
+SHA-256-Digest: sOHesYrfId8AwcfHyrv4et5om4ZVDS8YM3uZX7CXwvw=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_pccard.h
+SHA-256-Digest: zBarxmga505KbpiSj1htxM6G2nXKG2hQOjR2wtu5cr0=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ gpio.c
+SHA-256-Digest: D7hFLVh5eve0kuBdIjDMVYmpoaFDySsGBZyDeQZWVU0=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_sai.h
+SHA-256-Digest: hPSQs5A1HiYqIxdtG3eITROlso/3lVdom9fwvENRSBA=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_adc_ex.h
+SHA-256-Digest: Znao0oqH072n9TA3hQ8lBBf7rjGywtz0xYZh5Hu5vDI=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_d
+ ma.c
+SHA-256-Digest: d9rs/DMxrPu2LEhnlWeR2WWB+DXwglC8rPlkJsh8hKU=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ adc_ex.c
+SHA-256-Digest: OMPLpncZftLazjYy9K/6vn3bxoo0szhdDtKPbiWHZcU=
+
+Name: templates/common/src/led.xcdl.cpp
+SHA-256-Digest: CzP6j4QteZbeLZ2GPIs7mS2DiVUpt045za4Aa5PSe2w=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f103xb.h
+SHA-256-Digest: udUCZWvXI0aF2F3si0Z7V2YjButzuBeicpypcEII9mw=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_crc.h
+SHA-256-Digest: DRlpi596KOa9QOG5vPxb95ZpSbEy7Q2ZFhl7xsTj/qk=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_cortex.h
+SHA-256-Digest: bl4jYCcKRKeN/b90IpFlKbzaxRdHDK4kMP2s7HpnuHs=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_cec.h
+SHA-256-Digest: nLHA72jcNNtXS62mOcoaV+OmNb63iFQ6QuIG+iplrz4=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ iwdg.c
+SHA-256-Digest: o8UaUBG64/bPYNZ8tqVizBJkXdPXi1vVdPzvOzgnh0k=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ exti.c
+SHA-256-Digest: AgtYhDpyNQ6rhd2CxX0oTGDK7Npt7OkfP0d21ail3nI=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_i2s_ex.h
+SHA-256-Digest: /61sawxf92TQTukoVbMfhwtGJmH+X8hZ2KAggbJBQ4o=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_comp.h
+SHA-256-Digest: pg8cFfdakpw0tONGDo2xPgvA/AcSmJjXpkKNoe1GTBQ=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f101xg.c
+SHA-256-Digest: JdC7xPWTd15jyLr6CEhdJY/vZbcI6OOkEaewZ2UmxO4=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ irda.c
+SHA-256-Digest: bgq9FdUMauJiQIcg1mnJjGb7jw27c8z63j2UWX/q1sk=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f769xx.c
+SHA-256-Digest: k5bCTaMQ0c0qlKWc0KnN3gl0xY7AhxGx2w29oo+6S2o=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ tim.c
+SHA-256-Digest: 76Abr9pTqEfwJPUzCUzIBWQRDsv74e22HMMEFCj0qgA=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f302xe.c
+SHA-256-Digest: XFcOAgU8/WqGhfqJXtGvpeAFFEYXAeJ0XbDZmyMqqEI=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_adc_ex.h
+SHA-256-Digest: yeE7fukiEtjhiMSw+/5LAobFmoXCfNOGfMwKUp/mdcY=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_tim.h
+SHA-256-Digest: AoyhrMPmbc4SdgEmn377UPfGqLpPKhyinbFbyhFZYts=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_f
+ mc.c
+SHA-256-Digest: LPCgHatH/vvgYPHFRnYFVKyb3D3fNozW69X4NVMCAbw=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_f
+ mc.c
+SHA-256-Digest: EAmibIr/0v5OKIwYYxzzw0DkZhmEiVahGmeuEzU1Mv8=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ dcmi_ex.c
+SHA-256-Digest: mp/kTUVZMbK/zWdqvlEsTdAOUmDxySl7ZpwILI+/XgY=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_sd.h
+SHA-256-Digest: JJIdziMqyOt5xYdbls511KyOBehDYVTLVwgilhKvDQk=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f101x6.c
+SHA-256-Digest: xNb+lWLL2hiqoMW8+g5dWvIjRIEoA9+rVamN7Td7d0A=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f358xx.c
+SHA-256-Digest: H0KDmbkXSoI41YeOU1eQ0Z/69oZdRJ9jGgAjLq14TiE=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_spi.h
+SHA-256-Digest: Q2PiM96P+YUgz8Q5u8pKBJecHxCbYDgpri0TW6hRwgY=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ hash.c
+SHA-256-Digest: 5xyEnw7Ou9DQaWWeLc7xF+0BfAumNzPSGUfLs5vUPQE=
+
+Name: templates/micro-os-plus/stm32f2/src/cmsis/vectors_stm32f215xx.c
+SHA-256-Digest: SYgrD1nkRnWpJCW47+m3vDx12V6cDE7pCg1RPuzPCKY=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_s
+ pi.c
+SHA-256-Digest: 6gj9eQFBbolLKcPvznCvIBqFeXpEZlYlIVs9GEGyFu4=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ usart.c
+SHA-256-Digest: 9Wem4vGcGYI6Sqb5hBhOg6kZ8kbal2h7uUhywJImYjA=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ timebase_rtc_wakeup_template.c
+SHA-256-Digest: KnFwWWrdBvRWYDP/EJKxnsX9bC39/fUM5jbMd2FxiJo=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_cortex.h
+SHA-256-Digest: cAVk722gHOt4FFXGDm/nzCRUouZzqb9tT8YoRjof6Xw=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ exti.c
+SHA-256-Digest: M52dWKk9M7kKCOOcerE7mFv/r1Lb0KHZrF8l+CLG5Tw=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ nor.c
+SHA-256-Digest: XzS5NbIqCGNBwAM2dNsaJsVOvQ3kawO6f9vX0RBnkVI=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f303xc.c
+SHA-256-Digest: m88E35OjlpMQMYk+GoiWUqAt2+lq0dyQKgWCbR51ZVY=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_sram.h
+SHA-256-Digest: 5H7XyabLHQi8beeUEIBV5mDAHzMlMzc3Y8uvLR+8dBM=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_cortex.h
+SHA-256-Digest: 7st82Ij/BzC3pJvyLibFzymlv4Su6+8Zr7B5MZCQfOk=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ timebase_rtc_wakeup_template.c
+SHA-256-Digest: R6uMe3FBYooEjX9XNZ+DMS13qidn3r2IOQWBPYrBd4Y=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_rtc.h
+SHA-256-Digest: 8OzT4StUcCo/yh48IxqlNV0Q3tiku8/I1vyfAc/9+Ms=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_p
+ wr.c
+SHA-256-Digest: Z6QFFV5fhPx8f0LnHXZ+YUGR+9Stq1TZOAXHmsxOJ8k=
+
+Name: templates/micro-os-plus/stm32f3-hal/License.md
+SHA-256-Digest: Dwi6J6MVJtcK5r4gdiPGP2fKNGmAQ8TBK7ufzEyzTl0=
+
+Name: templates/stm32f4xx_exe_c_project/src/led2.cpp
+SHA-256-Digest: Ay4t2aIhPIXbNNVpp31T4btg52xWUM4uFXxph55E+Q8=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ spi.c
+SHA-256-Digest: ZFy6wicIY5AQqgXemjqdc+a+FwN3MC5RR2hK6XAetcc=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_bus.h
+SHA-256-Digest: mMr+o0rCdgYy3ik6RCq/G9c3C+L7hjaBkJccJMm9q5A=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_can.h
+SHA-256-Digest: jmQ05IqV4mRXKDCrj2T+Iv0X1wMCYW73ZSMeuHleOjM=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_rng.h
+SHA-256-Digest: 6sP3lIF0ElqA9IJf7GREZHuBqdO+LPU+PGsygN8975w=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ timebase_rtc_wakeup_template.c
+SHA-256-Digest: juVoAd3h1I6s9PW+SfC5HOuVh14vmZDEqSPSNn+hY8k=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_gpio_ex.h
+SHA-256-Digest: GejJrMgQ/VafisJLDlemCV94ifwD1odlUq/CxYqbJmA=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ crc_ex.c
+SHA-256-Digest: mKmVDeDWyX7Y01pMzICV0Jj6MrmRAZN6oo3zZZn8RBY=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/Legacy/stm
+ 32_hal_legacy.h
+SHA-256-Digest: jSN+hAlUZ5mSQk5s2JD3g+zxPklkCp4XHVZQbX7+6DI=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f4xx.h
+SHA-256-Digest: eOiSkB9htn4bYCVofA+9qqvxLlGUkhSLevQYrgYNEPM=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_pwr_ex.h
+SHA-256-Digest: XgkW5knNrqZnyYOoepHv6Dk8NTExAxOou+rMyUKGwH8=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/cmsis_device.h
+SHA-256-Digest: npWBwHLGxgOovLCtjDnJZS+esADHU2kVvVNMH26b+t4=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ spi.c
+SHA-256-Digest: FAtPAK4CA1sOWUnzTUVZtEOodbwAkRrO1MqzVquoNmo=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ flash.c
+SHA-256-Digest: xnWjZxqXAM2H0xoh65nwnuNe7dVSmfMyYkQL3F2bCPQ=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_dma_ex.h
+SHA-256-Digest: BzlP5lqZvKen/xRUtKuY9gC36JYVtkWCVrgaJzJZONY=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_tim.h
+SHA-256-Digest: VglvhkhAL7HS8hexIH3oNsBfpqEXAiTdyorIGXFc1xI=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal.
+ c
+SHA-256-Digest: XMAApOwBGBvxnvpT2TtzBYBDmOCyhn0GDY02UVIwnZ0=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_rtc.h
+SHA-256-Digest: ZVRUFQxFsh20G2yEY1GXx8c8cY9+FECKWuTVBlQgg3w=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f373xc.c
+SHA-256-Digest: fSLfazARkLx3Lfs9Jrd+vJKfjSfT6cPsDJSTpRLj6/g=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_r
+ tc.c
+SHA-256-Digest: 04hDh4u8/ZcqQ7oke6gn1TFO8Hz3+p9B751brvbRJ1U=
+
+Name: templates/micro-os-plus/stm32f0-hal/README.md
+SHA-256-Digest: pgTwL/taY1Ukgd2/960i6ks0ff/B9vP9d37KlF/nb14=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ adc_ex.c
+SHA-256-Digest: dD09hl84pyKiakfTq6kxzbdursSxeeD2ogs8dLylUoA=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_utils.h
+SHA-256-Digest: ddefemb/brfORLHg9b2egkOUOnQbmJeigutMVkrNZok=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/cmsis_device.h
+SHA-256-Digest: 0egL+t2Ek23Yo1pNP+QroMBFqGOaqqCppY4wfrh9jCI=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_rtc_ex.h
+SHA-256-Digest: SQ4TcaAVD+VgqA/gEDhCn3r5ge1/B1cW0GvDXJ+cM0w=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_pwr_ex.h
+SHA-256-Digest: JM8u4B2StisVeT/eJ3Qu8F/bAWtacabPPmaYGVDR0VU=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ smartcard.c
+SHA-256-Digest: FMbSTrukCdggN1oP7zoFu5hCyaX4D6otTqbMpG+C4Ho=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/Legacy/stm
+ 32_hal_legacy.h
+SHA-256-Digest: vIufJfuRK66QdMT5Y5nrSOK6pTEvZUZyKD/QBg34Cbw=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ crc.c
+SHA-256-Digest: wukLlVFFSf+BqKxy0zqz5R2qt38moszbAu3hLFI0xPM=
+
+Name: templates/stm32f1xx_exe_c_project/src/led.cpp
+SHA-256-Digest: Ha4+7Qjkkes/9GKYbtY61EoombYAnGozWzrI9msJuF4=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_r
+ tc.c
+SHA-256-Digest: SPKx2hD9fD8MOlck0F7xfElLCCsb6xaBZQ/Xzbne6kY=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ smartcard.c
+SHA-256-Digest: hGAZPIFe8DWzKhabsOaun8qu04R1owunO6/3z7V00TQ=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ i2c_ex.c
+SHA-256-Digest: 5PndpiJeQIpsJG/9Pzcg8myq67BK79XUqwIXDVct17g=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_hash.h
+SHA-256-Digest: FJwCBTYyZ0Yi/ePTvhGLrfwqbZDXaBCyu9oNt+/Fv1Q=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ gpio.c
+SHA-256-Digest: 7bHd97H28P/Aab1AeqKmjjnVD2dK976ropQToEuLLHY=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ dcmi.c
+SHA-256-Digest: /hmEJwTDcPRerK8EqjHqlNo1KWzcrM8l3GcbcUaVg6Y=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f102xb.h
+SHA-256-Digest: aO00gfJGctG4YGEIECdmM9tMqJYHTHmoBPmxqwC0vuY=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_usart_ex.h
+SHA-256-Digest: 3BZpd4yR98smFc32ASJbAEXKv2TYJR8GGSnQ0M8Ji2E=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_rcc.h
+SHA-256-Digest: 4zTUaKmK1oguG/9HAlL3K4JVyAtOfINvCcMIWuZQz88=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_d
+ ma.c
+SHA-256-Digest: mL8CztMmDVZLwCrHb3sG17k92URFFfysikgvPnk0N1Q=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ qspi.c
+SHA-256-Digest: IEikMA0I0yoTatEil8jUXBPH0a7YjcyZt0UZ6asrdk8=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_flash_ex.h
+SHA-256-Digest: aadvPS6/gPkFQWAz5Yc/skOTiRpsuKPpwkG9x4qSTEY=
+
+Name: templates/stm32f3xx_exe_c_project/src/led.cpp
+SHA-256-Digest: Sqzxk7z7pLMpX1ZL2ZkOlcclDsHuNdnz8vVIj5KRuYg=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f100xe.c
+SHA-256-Digest: xHfDhiBmEwsUbedI7F50HQQcj0f8KaH4F9llf/SHCF0=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_smbus.h
+SHA-256-Digest: WTn+5P/oOAyFqF2CSL1IRqMiGf3GryyfgIjvdFArK5o=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ dac.c
+SHA-256-Digest: c7EKg4JY7Nv35QysWDKeVtI1lTnwd653zBtNYFzbc/A=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f302xc.c
+SHA-256-Digest: vQApdm/yRm+G1s61HOKebpzI6uMR9Uwufzz/AaZMunU=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_e
+ xti.c
+SHA-256-Digest: nfM3BtWDDCLaIZYWCHgOKT1B+aJJDgZDFhtX20WdTww=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f439xx.h
+SHA-256-Digest: ks7wI0I0Jmn2g8Sf6ApD8gOyvwsOxFaKS2eQvKmP4cI=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_pcd.h
+SHA-256-Digest: K78LTWhCFbblvVWqRC/ge675xRmgvbx8EzNLKrOYS/U=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/README-DEVICE.md
+SHA-256-Digest: 83waJ8DahyrUckF3j/oH8cRvyXtGa+290ZzrhyOS3lQ=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_nand.h
+SHA-256-Digest: m92WuazTm1mjFI+WWrxgh197j4j7cRI80AD3ChVD6+k=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_tim.h
+SHA-256-Digest: J3l52lxaV3qhjoFt6HaWE6PCL9bs25pYQOpVvf68Ojc=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_smartcard.h
+SHA-256-Digest: WJ6S5CyAo2xP+1wAI7z7pESp3+dSksEdkIWxRCNZWE8=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_i2c.h
+SHA-256-Digest: 1qmmqnAlbDbzsDuXlG17yiL81d1B5iRWaSO5J57zmW0=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ tim.c
+SHA-256-Digest: lqLZyrpUEFhsfQ1XK25JXk4X5HTfGOwdKqr0OBUmVvw=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f3xx.h
+SHA-256-Digest: 7CcOoklaUTfOaO41xnOgna3NGLUFE37BTL6HEb3R3Ww=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ tim_ex.c
+SHA-256-Digest: DarZAERT+2aZmExQ6dxfP+I3cPHkjti8U9nbnsty9MI=
+
+Name: templates/micro-os-plus/stm32f4-hal/README.md
+SHA-256-Digest: cH1tEezgMUuBq/ehr1UlrJ8H7z23wJKXg++YOIVYUbs=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_wwdg.h
+SHA-256-Digest: jb1LAx7GK/JWNrxgCrUTuwh5RBgfahQsdEp2MrolVSI=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_u
+ sart.c
+SHA-256-Digest: ZxbfOK8fBRFi2xsakT3NEI3IueXnF8BOuTvXKs4CYTg=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_bus.h
+SHA-256-Digest: zOTXpa0pmt2mZoBoCv3Mzap+FlqGKfOYLpt60vWjemc=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_pcd_ex.h
+SHA-256-Digest: CHOm1a6v2nvpHiRr3jGgtCU2+DOX0UdfjoopScxIhG8=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal.h
+SHA-256-Digest: 0K81Ul4b59QQikmOUmSL+1U3hRgSayImXScYCfltzcc=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/README-DEVICE.md
+SHA-256-Digest: ec5vKv4F4M0jbghDEBOkJoEx4hNRNuFJ8z0IDsigWY8=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_r
+ tc.c
+SHA-256-Digest: CbzyzFw86f7O1s0YTDV5V2vF/ndv1JaTBUf5nMoLR6k=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_nor.h
+SHA-256-Digest: 5LM1desvEWGNbvT9J+IR6VzsDSBSWDKPl/Gur0I1j1s=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_u
+ tils.c
+SHA-256-Digest: 5WCsDv4tpVc+KJPmhiKcIOsixsSlgY2wNEtTc0bSDjs=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_crc.h
+SHA-256-Digest: 8TQZVkJHeZUedoSmi98r3Vaz8mCaNVRD7p+F2pK9UkY=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ smartcard.c
+SHA-256-Digest: Isfb7Q7Fho5ix0JEuO0Q4s5DGP8yBs+IM1zVUm4eNFM=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_pwr.h
+SHA-256-Digest: iBM6ty14212sfRNRn689sk+qxX6SdaEjhw+NdAmvemU=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_rtc_ex.h
+SHA-256-Digest: 8CHq2AO+Ej3pTXFYbotuLHeJk7S8ad048aulrhzB6mE=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_crc_ex.h
+SHA-256-Digest: /OPgPBpmlH3lpvulOH4gbgAp8PslaBh45fSmmnKcPnQ=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal.h
+SHA-256-Digest: tERN8uY5nb1HN13u+tAz3XTZ3ZHeYxg//5dXJaJZ2cQ=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f410cx.c
+SHA-256-Digest: UNXFQJD9tp5SBG8dsQuwa07cJxCuN58mGtR6wp2BiKk=
+
+Name: templates/stm32f4xx_exe_c_project/ldscripts/mem256.ld
+SHA-256-Digest: IU1HEtEdyLC5tbqx0koO9AoGMevvvO2fp6Hf7mVnCUg=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ nor.c
+SHA-256-Digest: fWIZBYSZX6tn4dbH11p/yAIq2M6R+bH0L1eutlXHi9k=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ ltdc.c
+SHA-256-Digest: 6XfC74SZr4bezw6jXjo0PwbHuuG4uB50RZ+bRe4bnbw=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_exti.h
+SHA-256-Digest: XSXWo3qykYy+SVIbAE3Bdpl7VIFlfv6TF07UnNtxJOE=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ smartcard.c
+SHA-256-Digest: wPeoyC2fo7fGbDUVfNHMQfHpQ5mTobsEveYIO4h9ku4=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_irda_ex.h
+SHA-256-Digest: BtnaPf4mpmg5t6fP4a3j4ayROaolUb+3+SFipB2x1Eo=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32_asse
+ rt_template.h
+SHA-256-Digest: ovJhlrQ6Jxdqg3pzhQRCUEhX4eqTtgzDS8qDK7RyxyI=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ hash_ex.c
+SHA-256-Digest: kvel1k6wwBLEBugsu+T5XHzc8bSnhAvOfIbeUYUPhHk=
+
+Name: templates/micro-os-plus/stm32f2/include/cmsis/stm32f217xx.h
+SHA-256-Digest: THGO+ArfU0NSv+nt70PxPjHyqYbUMiFZ/PpyeinxAOs=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_sai_ex.h
+SHA-256-Digest: xet57MOswmmJnXSRdXVlzGu7neIaVYPvOqRNobuHfrg=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_exti.h
+SHA-256-Digest: 6kVG13mXOjiSfYq36gJwNZziYfq33nsFv6E8C9mAfXg=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_can.h
+SHA-256-Digest: bWxCYJ7k/AVRfLiPwzl6AU4KsMhNLNFLyjtXyNh9Qy8=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ exti.c
+SHA-256-Digest: /OEAOztnfnmy7QG14t4P7latOTHoa1reHJV31WA8CwE=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/system_stm32f7xx.h
+SHA-256-Digest: 7pm8wx3ZwJ1gtil4yEAIb6n5Q5kyS5yzNO2fkpKStX8=
+
+Name: templates/micro-os-plus/stm32f2/include/cmsis/README-DEVICE.md
+SHA-256-Digest: +sx3/gPUyRhVVLqJYMagcuFT4CB7cWIuDfJJ2KIDz9A=
+
+Name: templates/stm32f2xx_exe_c_project/src/led-20-headers.h
+SHA-256-Digest: 47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/README-DEV
+ ICE.md
+SHA-256-Digest: lO8ZFo6ipMbm71RX5q2/MioiDIWoPZsfKX3aBDUPCws=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ rtc_ex.c
+SHA-256-Digest: Q2IH2EpJqE2HwcEezTVSJtlqEkRWi1ILKaUzF590r+Y=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ timebase_rtc_alarm_template.c
+SHA-256-Digest: Ixl8zo4EkEH6A/WqE9ch5MXp9MLPwPMwmpk6Kx7gpKo=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_tim_ex.h
+SHA-256-Digest: FdHrhF0pIcst/OErtktkS27WA9za+tOT6F5Z9wWO9+4=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ hcd.c
+SHA-256-Digest: IaJEFWNkKka4IHZNyfBxwBWbIp0zTFZ2v6QLt/01KJA=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ rcc.c
+SHA-256-Digest: qp7Nw4ImM74/t+D6ZGm5I/GVfqzCewJ5zqdtEOeQcwU=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_spi.h
+SHA-256-Digest: tZ+wFik2474nCt4i87piVgRwR+ZvEiTekWRTEQi14a4=
+
+Name: templates/micro-os-plus/stm32f2/src/cmsis/system_stm32f2xx.c
+SHA-256-Digest: p4QxSgi6M+6iefzEQnenCbfL5jnSnW9+GS8KLp8ix9c=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_dma.h
+SHA-256-Digest: luklLohRiiGJRW4jElVeDwi0IgA3w4KqmNZTY9WxcC8=
+
+Name: templates/stm32f4xx_exe_c_project/src/main/main-200-retarget-loop-
+ blinky.c
+SHA-256-Digest: X+wZaNhCK2P25Ujwnuyk2lUJKn//FjXNvxI1KnEz/0o=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.stm.ui/pom.xml
+SHA-256-Digest: m/l35wb0xJg1sat1CskAM1yhjwd5BdxM2kR1OD1FGNs=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_dma.h
+SHA-256-Digest: 3uXn05mveq2+8/CKCV3AIIziINTOTqPdrhsWFhJlqr8=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ dma2d.c
+SHA-256-Digest: mNMO0MvPzF+fqyIAuvHZsJnCM8drI61OUySKSAw7niM=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_i2c.h
+SHA-256-Digest: mccJqcqCUD1t9P4M44AVf2TjyO0gwUSS5SC5B/zNlJk=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ timebase_tim_template.c
+SHA-256-Digest: Gsl+Quv2PCEDCc+s/EYsPLrz0t7PsN1FkjwYKxkKOmk=
+
+Name: templates/stm32f3xx_exe_c_project/src/led-50-cpp.h
+SHA-256-Digest: M21n6jpw5iwC6NhYZg7X8a1P2mX666cOGfplCZfTTdM=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ tim_ex.c
+SHA-256-Digest: NwSMjPz66sTonwm6f6pYcIMOmEvD8gGP73HwEazcDcw=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ sram.c
+SHA-256-Digest: 0A3dSjFocGIN0dbVg9q5ohKz/Ib07XA7MhycgC1/4XA=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_dac_ex.h
+SHA-256-Digest: 5+PzEXtLRvOOVbYTpYpI3gg40NoHSmia+SjT4oprHag=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ wwdg.c
+SHA-256-Digest: m1o+Z9bmAF4uF8RWQ8xusCs3tP8xkKuYZvh4WPIdVZI=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_gpio.h
+SHA-256-Digest: dXCcLWFsO5sJg+NS5iU21ENMuIWMiLgbib3lpcx96es=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ i2c.c
+SHA-256-Digest: QXE0u27RIter0tKmD+U4lPEOKykBbQmFBQkSroU0hZs=
+
+Name: templates/micro-os-plus/stm32f1-hal/README.md
+SHA-256-Digest: axXIttzf4AwPaq51xKdNmmn7WKR1Ixa18m8bANC/M5A=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_i2c.h
+SHA-256-Digest: IDAYdKOWEBZcpUh1N+KFvcay82D6wnvAMTShzK4xbQ4=
+
+Name: templates/micro-os-plus/stm32f2/src/cmsis/vectors_stm32f217xx.c
+SHA-256-Digest: EoAxB1C1J1J/VF1FmthxClYAETTZB7qYBtlWUaPcV5Q=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f417xx.c
+SHA-256-Digest: SwDlZPaqrj6uShCvCsNll3Ry3Z3MXUXy5QPFmoKJFak=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f328xx.h
+SHA-256-Digest: xIcnHj6FeuU+R7hW+xRcfN1IaTXZE6JdgKktA6EEyWo=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_iwdg.h
+SHA-256-Digest: QkUQoSBd3ARXSC5Mxxihy/4jbJF/LPJtW1oDv5jOpm8=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_hash_ex.h
+SHA-256-Digest: vXN2RSSoP+Sil3SCGQivg92lVjzY5L+37/9VQT5E3jE=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f030x6.c
+SHA-256-Digest: pev46cBkdG3fspkgxn2MCVHR2FZvDp/osMCfZjXsARM=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ msp_template.c
+SHA-256-Digest: KBTxOuk6sOctn3+Xb3oZIUYvdl1lQst2ozaru9tr6KU=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ dac.c
+SHA-256-Digest: wc177dp38femhuni5EcMc6QQNrBK2b95v7adjf3d4vY=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f412rx.c
+SHA-256-Digest: auwvROVMmd2YaxPGO/So4NCh9R7ir5SB+dR1BPiGnH4=
+
+Name: templates/stm32f7xx_exe_c_project/template.properties
+SHA-256-Digest: L5cgsMxbqXbxWE9Qe6WkALWm4TL1k0We1c9il4J1M1w=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ i2c.c
+SHA-256-Digest: iOn9AOWZfWfSLYjLRKHUsmyldMElmHEfIpCZHZ8oaJk=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f777xx.c
+SHA-256-Digest: 7oXlRKz9MOrs3AUHvlKpu/tY+OtQeSSabHHSa8XUh50=
+
+Name: templates/stm32f4xx_exe_c_project/src/led2-cpp.h
+SHA-256-Digest: XKamyp/KZTMBxlU+6c04ovzY7VY3eEKpt6tQJuhgvmA=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ sai_ex.c
+SHA-256-Digest: sHndWo0uPze/JBShjZZWExdLn2q5GW6pWH6r3tUoUlM=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f733xx.h
+SHA-256-Digest: 9ruPFHAMZk5pz0WDQ9ObtsnyAOE5BsaHgibEL/0j8+g=
+
+Name: templates/stm32f4xx_exe_c_project/src/main/main-200-none-loop-blin
+ ky.c
+SHA-256-Digest: X+wZaNhCK2P25Ujwnuyk2lUJKn//FjXNvxI1KnEz/0o=
+
+Name: templates/stm32f1xx_exe_c_project/src/led.c
+SHA-256-Digest: vj908jJgYxo68NjCU2JC5HGEIB7cYHKeo38KutlXWT4=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ dma_ex.c
+SHA-256-Digest: UiuHdqei95dbIOiTWuHjSvtapEQ9zEkRUMLX/Bpa280=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ mmc.c
+SHA-256-Digest: d3gFtGVx5mNpqgv6x7E8Mbc82YWNeKhNFy1DOCdNt2Q=
+
+Name: templates/micro-os-plus/stm32f2/include/cmsis/system_stm32f2xx.h
+SHA-256-Digest: BtMcGtkdhnhjUwQ/N4ObN5M8lLbmIjk6QqGPOwD0NXI=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/README-DEVICE.
+ md
+SHA-256-Digest: 5nIoYOnvS4mhAMN9jzu2vCmRrgwLSOaxWVxOQvEDxoQ=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_cec.h
+SHA-256-Digest: Run173LhlnYd/C5eVfEds8neCftMvcWVw1iTCBqCBmM=
+
+Name: templates/stm32f7xx_exe_c_project/src/main/main-145-leds-blinky.cp
+ p
+SHA-256-Digest: IUWaVFXY+jMLtLzH2rnNRtoxFYZWEx+CfIQPvEqi1GA=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_smartcard.h
+SHA-256-Digest: zPPRXDh+9mO3NnFMaSE6DroxElJ66iu1N+xQvdONOkY=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_crc.h
+SHA-256-Digest: OVVHNBHF+JLDDK55AZwRX/4qwFTXqxbSn3Yh2cpLvVY=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_rcc.h
+SHA-256-Digest: KuRNi589C80xJB2j/lgBH4k4hYoHVFPsYg4FWx/62/g=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_mmc.h
+SHA-256-Digest: v6fU9dK2kZ0vgqk8kNk6KjHdHZVq7Ku5r3Lk3YYFa24=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_pwr.h
+SHA-256-Digest: ujsG9rWcn2+cSdm2ea8qfHVGOq53Cve4TuVjiuplU/U=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_i
+ 2c.c
+SHA-256-Digest: QNDk7vV3U6H2k+9LzRugdCiPSQoAUcqpPu7b7pCVe1I=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_g
+ pio.c
+SHA-256-Digest: wwIzon5NZrNx02W+TpPoO8z2VBlMxWF4Lp4tQSxujRU=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/README-DEVICE.md
+SHA-256-Digest: aaapbDmGyLZx++0a588R9OMY2yrdyC40L6w0yDpUcx0=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f030x6.h
+SHA-256-Digest: CZv0jK8T3BjbRhuqRYhEVs0tUN8UZjDaohsXHz/upAs=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_gpio.h
+SHA-256-Digest: PQJ5wMH505mVJ9Ioi1U4i6Gl7DKwd0o6syBze3Dc5KY=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_dcmi_ex.h
+SHA-256-Digest: /Amt7mlAPqwPPRsAQLd4kykNuDznHhj9QSKYWInsEgk=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_hcd.h
+SHA-256-Digest: V2RQHLcsGh4l0+8hRB4NSoVwpqXlllUaHo3CCpLAOcY=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f398xx.h
+SHA-256-Digest: zhk0n+ssQzxN6SYLmHr5c5GaeqwC6CKVpKG8T+JBJHA=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_iwdg.h
+SHA-256-Digest: GUWDqXKtSHtr5k2DhfoAnTY3UkBQMhUs4agOTwVM5OA=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_dac.h
+SHA-256-Digest: nmagZavZW0aXBiwW8zyK1dGpXqRRhhy44eeQzcuaGxk=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_sdmmc.h
+SHA-256-Digest: y53ypQS0Vdu1CzWld3eazXUPYvk6HyrotfO0l5eIAT8=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ adc.c
+SHA-256-Digest: fyFQpUloQq/OuB02Kox+431ddORMNP9eGTdXhcWmm8o=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ uart.c
+SHA-256-Digest: ZYZOGqWQQWzNOsz+ZaElNc9Aov598LCwTkJVZgLToag=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_e
+ xti.c
+SHA-256-Digest: Hu/o+V4rGK0xmrlsQDB0QeTCxrXqka+OrxQrNbNX0tc=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ irda.c
+SHA-256-Digest: QXloKPSe0Y46glkr8DpsbasRrhL0QcHK6j30ejPryKI=
+
+Name: templates/stm32f7xx_exe_c_project/src/main/main-200-retarget-loop-
+ blinky.c
+SHA-256-Digest: X+wZaNhCK2P25Ujwnuyk2lUJKn//FjXNvxI1KnEz/0o=
+
+Name: templates/README.txt
+SHA-256-Digest: H1r3RUX6IX42bhH4jq12S0I//AjaUuUwuyKZiTTet5Q=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/Legacy/stm32f7
+ xx_hal_can.c
+SHA-256-Digest: QfgusWC+f1x7a1QohgQ/56dpRWw0h24qK8F9BcqgQZs=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_f
+ mc.c
+SHA-256-Digest: YcvGa2BioI/XmGy2bd/z9Ih6FarraYKTDpvc2LptZdI=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f446xx.c
+SHA-256-Digest: 03ewk+QKa9qGS25s2S83V0THDPUE3d3DHlP6W80ZYJk=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_dac.h
+SHA-256-Digest: mzVcesz20TWxulyrr2wWgKYO89ZFuead7ADFqYV1F8c=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_rtc.h
+SHA-256-Digest: psBOOBYTbt/N1sVVZTN+zdU9aCxY1qgvU1FK6+6cFhU=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_r
+ cc.c
+SHA-256-Digest: UjR0QGEIRZYY8XkP7wLcVhJKum7pEPZ7Y7+7vw+nUkw=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_nor.h
+SHA-256-Digest: w1HS6YwP3DN3bWC2faNjeOCSy0zeKMjr+YDZ0mYxqV4=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ msp_template.c
+SHA-256-Digest: 1KCGfNL9q4j+lSPUmNE1mArMh+QfO5503kwDkAKUYyk=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ dac.c
+SHA-256-Digest: X88UR3sWn44CXgf/GeI316tXOjrpenWzfkWFULTyf6I=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_flash.h
+SHA-256-Digest: yHBnmW2gfXAm4NMTSDM2fLftmlN5E6ERBNVbx3cp8qo=
+
+Name: templates/common/src/led-30-defs.h
+SHA-256-Digest: pihhPtC8hSmcbnfgVFa2elRH1/EohOjGiABHuC++vdU=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ irda.c
+SHA-256-Digest: PH7aMdVmlNs2SyZrEguoOBJ3AGmgiPPbuwU6nCOIiYQ=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f469xx.h
+SHA-256-Digest: HyEY1rwzrIhPIUULtTUybtQ49PLTLwShpUuACccfk/Y=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_def.h
+SHA-256-Digest: QP9KUMU5qD5M2bd0TYInwSTrliwecw4h6yUQOrP+dRA=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_exti.h
+SHA-256-Digest: 817EGi2gnqDVPb/Um5UwknNcRRMzpTISAdfNGA71kr0=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_rtc_ex.h
+SHA-256-Digest: t0UWCwe2GLBSnCoQY34GMLEq6Dr277BnetoYGp+1GvE=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_dcmi.h
+SHA-256-Digest: KTsv7ttYQSiy9GCegW1NcvdmMoYiE4ov8Qo27AkPWCs=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ smbus.c
+SHA-256-Digest: ZvYyWe2RGQX934APngFuZK05eMJYz149fWzTsiR/XBM=
+
+Name: templates/stm32f7xx_exe_c_project/src/led-20-headers.h
+SHA-256-Digest: TZeOhVu6kDzSrv8l3tR3TgdmURWrxQ8n+CGL/cueJcU=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_flash_ex.h
+SHA-256-Digest: 8iNG31Py8Yn9YvFELKb+RKPNOFWQp4f4DbklLG5iGXM=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ dma.c
+SHA-256-Digest: XYBaneFDsL1+pO7vk1SAAMMJUsDxCmcWQHBVgN4xyGY=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_s
+ pi.c
+SHA-256-Digest: vrb5naDqKZRcMkO1Z8vqp9RH5YqpuUJCe+/VbG3qRRw=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ smartcard.c
+SHA-256-Digest: GbpYvRvtjGLXp6Udd4e6fACClPs+F0yMWDBLpwXby2c=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_usart.h
+SHA-256-Digest: x4NLHzQBwl0CPBvjUfclc6B4lHwgNpMFTFjXbI1y5u8=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ can.c
+SHA-256-Digest: 2RAMOWFDEMqBBge+P3zfJbjFZPoK+cWt22O5wA4ALis=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_rng.h
+SHA-256-Digest: gdDh8LibTr58jWrGnDDSfQm8sRY3pt589JHgxp+JeKU=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_nand.h
+SHA-256-Digest: q+RLj1P8IqrLii7MGl6Qnsg/H0ErVYbB78ZUnOFagzg=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ i2c.c
+SHA-256-Digest: yv5xuLG4PWBe4+Ir5+oUuozAr3zaH6qt3Om5RNj4J0o=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_cortex.h
+SHA-256-Digest: ZM5/BzqsgnqUSPIFVRasBfhJbiN4QMC4GJegsX5FNkY=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_usart.h
+SHA-256-Digest: 3189bZdP3bdHbndKj4RXJTq/TZ8hqCNfzkykEckChXI=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_hrtim.h
+SHA-256-Digest: lFiweufGThCxhO2V9fIE4VWWcdukVncwz2gqVjViPDU=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ cryp.c
+SHA-256-Digest: XxhipJJzPUYfPLALJXvhrT2jncczB25vfQ1wGNhtqAM=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f401xc.h
+SHA-256-Digest: rGGGZaiicH5IlXJiNSfiushuqFYmRsM6gTsk6fKp/GY=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f358xx.h
+SHA-256-Digest: tNDrs4Ml5fykRz2dw0C6IEVvpdJtH5Let8eXNx/CbiM=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ smbus.c
+SHA-256-Digest: dUUYkUW9G8OTlUAoDzdeVDPgkMGs8FVRm4vH5Z1twKE=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_dma.h
+SHA-256-Digest: cXY7tjDF++LzKEiOvbBBfgKU5uYeLwxOEtGi4XMsT0g=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f101xb.h
+SHA-256-Digest: lI6ieIAiYe4CnvB5Z2OR3MonAya5SWEtjLM13mH3aEw=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ spi.c
+SHA-256-Digest: G1yQfHKnKlEWVX7zB41xExbM6/tU0d+O0l/Iiu/Okis=
+
+Name: templates/stm32f2xx_exe_c_project/template.xml
+SHA-256-Digest: SsRz2oYniupt5JL75DNBomr3CyoHjbxB4GsHmwm3N94=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/Legacy/stm32f1
+ xx_hal_can.c
+SHA-256-Digest: bifjIBvmTvJOhfdPmvgDAL5D9MUFIozzm0h+xd4I9zE=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f410rx.h
+SHA-256-Digest: xUU6Z582qNN4LRe394ahNq27tbnLolXSu4Bc1Z2hZPc=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_lptim.h
+SHA-256-Digest: P2ye+AMENrWQZU+gFLMY98oG4PRfDFhL7cSzAg0DT+Q=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f733xx.c
+SHA-256-Digest: 5qQDBBXnolXPF6SyWLAL4QlqdW9uwsS6HQTDaWknqOg=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_wwdg.h
+SHA-256-Digest: ipZy93ELzu8AlWBUhkjtyazFc8ldiWfmFo6bCYUC1ww=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_gpio.h
+SHA-256-Digest: ibFgk63l8WwnDEwNbJ1Svei/AVZeRpY38p3sn7Gdxq0=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_rcc_ex.h
+SHA-256-Digest: WVCHhE+bt4Fh2t8JbB8PAkRm2sQwuydisivRvkxf9P0=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f732xx.h
+SHA-256-Digest: vyrSpgmBCu+op7K9KrVuoOlGg3oO/ISHH+WZ1giFPiQ=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ hrtim.c
+SHA-256-Digest: 7uT5Yzn3/hmUEs1VJZu1XWAPxlsAyVOZE/d4mds5UQw=
+
+Name: templates/stm32f4xx_exe_c_project/template.properties
+SHA-256-Digest: JyWKX/ecRx1t8gWWnShh5uEMDLzSmr/hmWFEk5a9ZHY=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_s
+ dmmc.c
+SHA-256-Digest: gqwhsyvsNOPhGNRsla+js/QxU6zIJ70ysPCJ04N/BAA=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f423xx.c
+SHA-256-Digest: eceqGq8mVwLtVTt+6Ki31h5qXqeysKOEYorXJF/FjHg=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_uart_ex.h
+SHA-256-Digest: ybR2rs2ufQ4vwmCb1QM8or1YgezKzlIqpxy9OU8wbSE=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ adc_ex.c
+SHA-256-Digest: B0nXCTZxW80HXGWL1t95/gn5a0GVoaT0KtNDoQFYfd0=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.stm.ui/pom.properties
+SHA-256-Digest: qemuxLpDuoOKC9evXfc0OeOwL+WlngOXeTqz6wCye78=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f042x6.h
+SHA-256-Digest: PozyFhSqDD+NXx+Tr0Kz2I7hscDIEAL+V6ZmCu3SThI=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_usb.h
+SHA-256-Digest: LNXrRXHGmcEcXt7UzwZMvWAH9liaugb2PO4NGCcIlJM=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_i2c_ex.h
+SHA-256-Digest: 0SeNX53aWx1VRUm1WoWzWA49Q2n/7LhIu/rYwB1Dx8c=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/system_stm32f4xx.h
+SHA-256-Digest: gUXPj8b/IdyrHE5xYSz5fLTj+VpZru9h3e0Fq+gJu9U=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_usart.h
+SHA-256-Digest: MCqB7/EWtljr83Z9f/pTyjszNEm0zV5+fbLBSr5vBwE=
+
+Name: templates/stm32f3xx_exe_c_project/template.properties
+SHA-256-Digest: 2bsPnDQXIadGhZws1do1EwHCTmeidhwqc5PrmHUS7rs=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ tim.c
+SHA-256-Digest: iMQVHCqrH3yxqnb9VCNQ0dAIQy5kVJCSUpLaf8PY3i8=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ sdram.c
+SHA-256-Digest: K51yM6+qcHtfqXcXxNsTorxAxE7ZXxyyg4M0mviqhq8=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_rtc.h
+SHA-256-Digest: B6Pd0r/ij/T032JN5bnspUzJXK7MZAsMuikddlNK3Gc=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_s
+ dmmc.c
+SHA-256-Digest: aPMSBMlspmZ07nST2kLv97h3gz2OcHe+lx8o38EroGA=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ flash_ex.c
+SHA-256-Digest: /8FjOz4lcfEwdch51wrTxv5JCK4iZSqvcs9m7q7rgNk=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ rcc.c
+SHA-256-Digest: +0H+x4XhYxSsdTJSEpL6RIPk87gAD3eDD7ewzYYnTLA=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_irda.h
+SHA-256-Digest: COmIPFQkCEnPGZK4boy47Ij1Tf4Wh5bILNRnxrKxAnU=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ cec.c
+SHA-256-Digest: UUUEsP7wFUDaXZzblkvy0WAgSAnTGgxpwZfIynS162E=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_p
+ wr.c
+SHA-256-Digest: go2D9hL9BAUJuQjpkS1EfWROP1n3SbslHBHF+i6D4eU=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/Legacy/stm
+ 32_hal_legacy.h
+SHA-256-Digest: vIufJfuRK66QdMT5Y5nrSOK6pTEvZUZyKD/QBg34Cbw=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_usb.h
+SHA-256-Digest: 3ViTqi/6cUOdP7J7LmHwGMcrkt1ol4bagfZBB2AaBPA=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ crc_ex.c
+SHA-256-Digest: toobJYrpec5TNMHTlAfQEvcnl7jjED6v9KvxsPxT9QY=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_smartcard.h
+SHA-256-Digest: gTQkZyFKmxelWrA5frTcU03Y2zlWokmcVx8D5DEoAJI=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ rtc_ex.c
+SHA-256-Digest: c/5UEA6bXG01Y138EiQM0AHY8V0osveYJSwKmE0j28A=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ pcd_ex.c
+SHA-256-Digest: edZpER5EA50QVoCp885WteRVHSYtgHeguKaM3WvefzA=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ flash_ramfunc.c
+SHA-256-Digest: 8qWHu6eBhM9vp2Eg1tHfBLY7HhAvtn6zxVPsknAhkHM=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ smartcard.c
+SHA-256-Digest: HiaHDE5zVeIrSqJadO0DRwBc0EEqylZHycTobIjcRJs=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_u
+ sb.c
+SHA-256-Digest: w85iuxypFF9MQb3fIMSEaPHM4+eOMznFbgdz5x8r/ps=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f318xx.h
+SHA-256-Digest: 0hKFYMpjJvTUQkOtrYBr3FmLFi3HDWQfhtoCFuNEHb4=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f746xx.h
+SHA-256-Digest: X55IurChNzPLR7zwAY25ZW3ixb6QHaB2DywXbwv8Ljo=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_i2c.h
+SHA-256-Digest: OiYqB0FiJUEIC5FCM5V0uo4NdirWV4U8jkcssqoCKVM=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_s
+ pi.c
+SHA-256-Digest: UotJgg+DMBQdaE2su1qXrilmYg4QErPRgwn8XJA1unw=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/Legacy/stm32f0
+ xx_hal_can.c
+SHA-256-Digest: tysxpLm782xDC+yPLxlXPvXNWMutNN4UOECXEEupEHM=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_rng.h
+SHA-256-Digest: PXvYaV6m3xSgOMkis7ohffJaMuLePQTW9XibLfDBnxA=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ spi.c
+SHA-256-Digest: Rk0HFekfb2x1XBzPbARGUzNJNeE7ZdDTqBfT0YmxxY4=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f437xx.c
+SHA-256-Digest: 1czkQs+Sssi7F6bxJgKKohXIal8MvCxoHrnDjPJrhxU=
+
+Name: templates/micro-os-plus/README-ORIGIN.md
+SHA-256-Digest: vbzjOVm1h+SikgzFbYjHUN2AzeVx7rLOlWKmmfF2S8c=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_mmc.h
+SHA-256-Digest: lB5enLBoaITbU463u2o6ShflL6kRDLoJzduSzkVf9eg=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ dfsdm.c
+SHA-256-Digest: dF479NddWIedHDA7ZoEZXiRrvJoB7pUj5NRDQc3FiVk=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32_asse
+ rt_template.h
+SHA-256-Digest: ovJhlrQ6Jxdqg3pzhQRCUEhX4eqTtgzDS8qDK7RyxyI=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f058xx.h
+SHA-256-Digest: lNDB5z0XSgoPWt4YpidZPZMuuvkzsxnYjj31y2Y7QsU=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_crc.h
+SHA-256-Digest: dpeULwiOp/a7/KOTd3L/MeAtmBNsB7Uwlt0gDZuXm5M=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_pcd.h
+SHA-256-Digest: vr5p6rHyGGjZ5G3m5Jpc+rMMCHED6Hef/FzI/jHiWII=
+
+Name: templates/stm32f4xx_exe_c_project/ldscripts/mem32.ld
+SHA-256-Digest: GJ30UKmo0CpcJKzpLCbFUZdH1mUlZzH7Ef/bR5T0x58=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ uart_ex.c
+SHA-256-Digest: BWs3jIgm49fqWkXf6uYiDdZYfpx25gNMsXWw96BvtEM=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_gpio_ex.h
+SHA-256-Digest: ehgYtZIT6BxocVKxh5FK0t4sfZPo/uDQO6obP+3n7YI=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ sai.c
+SHA-256-Digest: 7OebNGGIwzod534MmwnllOgrZLgxvfo7JyDp0sNTW3I=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ tim.c
+SHA-256-Digest: AJZYZd66tmJN3Eo+U7weVCdNYeWjB5cjlJOkRqn6ZTA=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_rcc.h
+SHA-256-Digest: L5oTW9mDfHCEf2ZXG/3SvSqkW3FC35zB1z7NV5o2UrY=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_cortex.h
+SHA-256-Digest: O46G7aNaaut+FexEENGKNs10uJo2p/vhph/KiI8c7QE=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_smartcard.h
+SHA-256-Digest: d/zSXi5A82ex4/zBPYq2rOxBFyq+nArSu06URAga93s=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_dac.h
+SHA-256-Digest: EbudsozkaMU9/a166F8LSFRq0Fxk/gKspbWmUu+uyVw=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_dac.h
+SHA-256-Digest: gyP/OXIfmfef8XlzLWQG9yNLCZeqcHaWHyspE8fJsPE=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_dac_ex.h
+SHA-256-Digest: FlN21zy2fRkONLO5bxizVDBj1tfLVb56Kt+Y0MIxuuI=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_adc_ex.h
+SHA-256-Digest: JdcLKjX5yk9aRqDhm5zbDl/ympRHYW+BRQT4scRTpQE=
+
+Name: templates/stm32f1xx_exe_c_project/src/led-50-cpp.h
+SHA-256-Digest: mF2Q470lEGzMO6BQwz5FBKInHIbNrXVQjo33gT5NSv0=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ tsc.c
+SHA-256-Digest: Lo+NhEE5bVvx1UjHKj70/10QKUSyWoRSMA/9bJPtBfE=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_pwr.h
+SHA-256-Digest: jaYwnYwnEhiiGMyCyz0MGn5XL9xl75kOFJcXJEi8sNA=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_c
+ omp.c
+SHA-256-Digest: s+eK5Es224G2Ss2Srf6DRFysNEDT04V6fIVM3ibVD9s=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_gpio.h
+SHA-256-Digest: PCGP93OZq9lQgHEvAgBoQxzJOphfuUAeoCKnCnXdHC8=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f412vx.h
+SHA-256-Digest: Nzn4qb3FusuPXrt0ZmDOBrEU52uBYZuhlW9MQrNlj1c=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_adc.h
+SHA-256-Digest: k5kbPWmQ7L9xX5B5LzP9oIctsyUlpWQLgol9gJtOd80=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_u
+ sb.c
+SHA-256-Digest: pbxR1co4SudsDS32BubdJkKPia675XVKWWWruYgF+ug=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ eth.c
+SHA-256-Digest: V/Z35ILIniFx76VRmDcpGDyeXQvfuYJ93mU3rGAuaIg=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ eth.c
+SHA-256-Digest: n86k+T6XDAyd2Tzo6p6JwsOPW9t3t0QHaHPwsKE+8J0=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_usart_ex.h
+SHA-256-Digest: dmQrkrhjCPwrzSgeZbrpuxHZewEU7iGx9URPy79eRpM=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f401xe.h
+SHA-256-Digest: AqqzKmM2OOQi1t6Q+Jyvm8yOQMFScFbaA7EcSmFqlgo=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ can.c
+SHA-256-Digest: ky/DrZZI2EGreZB4pfcKwD2nkuimNLzRGVSglbpO8BU=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f091xc.c
+SHA-256-Digest: Cbpbe00YZmgQ8xDimVvns10770Y6ENJJkEbPVKagUYE=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_eth.h
+SHA-256-Digest: JABMho51QvdFzZe0qtMbmRN3gvma7M8pszbZz1Rmr1A=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_u
+ sb.c
+SHA-256-Digest: z35JdLdqvh1xgJNK8GoLD/lQYlhjow3Sjv35hn+FmCo=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f415xx.h
+SHA-256-Digest: uvVCgJXLAw3uI32ZGVc0kOKZThTww+/w/X9ZMcnUn4g=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ flash.c
+SHA-256-Digest: +HLvnPwueHCxI7svY2cBmkS79wFgqtny5viLKV8rqX8=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ pcd.c
+SHA-256-Digest: MnY6PxIcs/ek4yK/00Rgrui14cDE0rc7QOLh/ozE0qc=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f070xb.c
+SHA-256-Digest: AnNHe7nSdojtBjl8U9oRk8H6IB/zHo1QsiIkLpru7dw=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_cec.h
+SHA-256-Digest: WWQTig3QF29xHf+Zl3XGP355PQ0j5Hl579BJAKxgv2U=
+
+Name: templates/stm32f4xx_exe_c_project/UPDATE.md
+SHA-256-Digest: Z6mIhqWZf5bkvL2je1mSJ4pLvwwjFqDZaVCu81xfM/I=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f429xx.h
+SHA-256-Digest: Jk5jMY6MlNzas8UACQg1XZe2HxBVKnba9mLd20ElVQE=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ i2s_ex.c
+SHA-256-Digest: a1kTMyRmqDejhpxxXXDyRYu0aOhNN67Fw0mPScMquFU=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_crs.h
+SHA-256-Digest: CvOsDZ5quANloX0BohvnhkMyfna5SeMCF0PhCmqYpng=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_h
+ rtim.c
+SHA-256-Digest: SI5wxMj+yzKbQ5ix5YIH1YvLPRvaIsIMy0AkBJxFoak=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_conf_template.h
+SHA-256-Digest: +GLm9IiEGMOKeK0WeUS6TEtRrLywMyMZhUSBQ5S9ItM=
+
+Name: templates/stm32f1xx_exe_c_project/src/led-40-defs.h
+SHA-256-Digest: IN3jlrArzf06J+xngBMdxMsOiQTGp4SPz5naVBBoKhY=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_t
+ im.c
+SHA-256-Digest: f6VZ7SAr6dJrnJFdGh9lpNYEy394JXwJ3TSz2EfYrwg=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f030xc.h
+SHA-256-Digest: fUwEkjxa5LGflKMj88GeiljmTrTnNywJEFKuosWlyGE=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ pcd.c
+SHA-256-Digest: dpdTrhhyxdaKK80XOBWXUwmWSM0PTpAStri0E8ZHjU4=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_can.h
+SHA-256-Digest: +JiVi1d9zREuhegG8h+wU/QyOc114ZsKBAc5F6nmNuw=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_comp.h
+SHA-256-Digest: pn75XFg1t7JSXaEZm7m069dLTskpy9ZUqjzVj+ecWLI=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ pcd_ex.c
+SHA-256-Digest: J9jKBP3Oku48X+4e+AqeB2llsZOw92dF90/l1m7ujwM=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ cec.c
+SHA-256-Digest: 7pDmJeuF8UBY3UKdwsEg7BVokid5GYXbmlgk7owTo7Y=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_tim_ex.h
+SHA-256-Digest: 8PWrc9O/mRJTmTlQULc60D95LBlFcF2kK8V10grhbxo=
+
+Name: templates/micro-os-plus/stm32f7-hal/README.md
+SHA-256-Digest: ScAsyKUo1W+LUVEQ2nr0JyqX6pjao1+joY6vMKPBWJ4=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_p
+ wr.c
+SHA-256-Digest: hxBeNE4u+1AYJqf5s4tEmsDpX7s+UsNF48+ZjBXbMV4=
+
+Name: templates/micro-os-plus/stm32f0-hal/Release_Notes.html
+SHA-256-Digest: f8ChfOeYBAx4sv4pihp+PMbIbqYNfYHykvwqSb8d/yo=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_usart_ex.h
+SHA-256-Digest: qyCRK6tgeezq7clHYS3AUld3u1EbMKxM9rxcFzsmTkM=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ fmpsmbus.c
+SHA-256-Digest: 6s0DpzhjTxlxtZ1iY+hOQ9TXgbg4/KeXgFsq7+uUxmA=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_irda.h
+SHA-256-Digest: +584i36WwkEx160ZUhV2eZUMjDZWjNjjC4tGsN4Q3Zs=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_mdios.h
+SHA-256-Digest: YzXK5kO3Qgh1OO2drENUjsZCNMVbPT4gFsQR0lXu0RM=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_spi.h
+SHA-256-Digest: tEW9ycD2x46RkTfzAZ5902IENzKg5VrpE2rORnHUshw=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f732xx.c
+SHA-256-Digest: 5qQDBBXnolXPF6SyWLAL4QlqdW9uwsS6HQTDaWknqOg=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_sram.h
+SHA-256-Digest: ycM1WHVY67ze5e289dWe9YM7XyehbNFqEM/HvMu+E7M=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ cryp.c
+SHA-256-Digest: 5NUmgwGDB/e17MthgkcKxJV6jJw3Auk/rKfu5j4Gt4I=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ rng.c
+SHA-256-Digest: fKZP+lQ9aGZnjU5KkXqXYe8AZG4kSlf2Z9WYthIUPdI=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_sd.h
+SHA-256-Digest: Axz0RlVveeZoyERyeGGU//Qx8Fao/yCTSZxLVp3wVYQ=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_l
+ ptim.c
+SHA-256-Digest: H3Xb7RRZ7VprZN6Mzvz2Ux21UzGK0M6KijgJPAP9r5c=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_gpio.h
+SHA-256-Digest: 0xzNO2T8m4eMjI39GrwFdfosx+WLYcXcCj/F9oykhJQ=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_p
+ wr.c
+SHA-256-Digest: 9bhQ4IdxWCTDpvXZcVdXA1BteoZAQ7StCdiF/1GTHqU=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/cmsis_device.h
+SHA-256-Digest: RgMWwcND933W1Splzg59XOXXBG9IiXkMK6HRhYqG5CI=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ dac_ex.c
+SHA-256-Digest: DwXEM6FeRZjutv950WKI+Q5XkEgHx5iaRvFsuJtJb0Q=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_u
+ sb.c
+SHA-256-Digest: PV1FBRwGaeM2mmlE1UJNqdVXOazEiy4p3ktEaVX1UD8=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f303x8.h
+SHA-256-Digest: VopLEoLW13EAljfAi3fChNS1TjR9V/MVPsvI+j4P5cI=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_i2c.h
+SHA-256-Digest: 7/qcjBCPAHwgVM/suMOuMdz0L/W7z+bWalsL7M0FM+Y=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_flash.h
+SHA-256-Digest: 9BFhCHZXb2rmKTtVeWA6OkJMX25BfFa9BCmx0I8PUuI=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_utils.h
+SHA-256-Digest: +1+OEU/I42syFp/g8E7pTlb6csJpYaSrhvGxrn9TvDo=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ jpeg.c
+SHA-256-Digest: n9wv+aPUBBOSB4IWM8+9aDTnRhy9Dc7V63nWNYojctk=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/Legacy/stm
+ 32f7xx_hal_can_legacy.h
+SHA-256-Digest: sqvyT9RPGMyCYqV78nNqzxzBKKG9li7m1X7neZuGI5Q=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_t
+ im.c
+SHA-256-Digest: pzQnpSQ0mepv0MvbFXK6bmiuQ6lJMB5rtXVVXSbOUBo=
+
+Name: templates/stm32f0xx_exe_c_project/src/led.cpp
+SHA-256-Digest: Sqzxk7z7pLMpX1ZL2ZkOlcclDsHuNdnz8vVIj5KRuYg=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_hash.h
+SHA-256-Digest: ZNiEPwqEdXAjmbP0j5d07QPsOqyyhdlB7qboJMMtpJI=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_d
+ ma2d.c
+SHA-256-Digest: 79ifEDFAeZ4o0FJSo+8RtM8ifpSOfXPtgHpXFHqQbWw=
+
+Name: templates/common/src/led-10-begin.h
+SHA-256-Digest: XztxWTpvlY0zHC2HETlm8gaTKUfvTNApJYGndmk7w8U=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ rcc.c
+SHA-256-Digest: a2FTOorEReMwbjxxQckqTSMTHiCxGtyoiZ2/PzoIRJc=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ cortex.c
+SHA-256-Digest: 7R2t85vB7sK78eRZL8uX6uA9XTYMH2kVyjG3/YD2JZk=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ exti.c
+SHA-256-Digest: gFB90b/gOV74GVEm9rZlhIuydRUjCkaC7bQaDTLXbaI=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ hcd.c
+SHA-256-Digest: idCg9eAsBk8lHCy0kspH9gjUC0eoVdqmz9upBcrjjrM=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ iwdg.c
+SHA-256-Digest: oM9adZsWL498CTYGW9i8l5/ZL7o6p+xfPCSOqOrmpok=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal.
+ c
+SHA-256-Digest: fy6ifXVsc7NYqJepqZmImsHk2z+5fUumXI/PmBt7G2U=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f303xe.h
+SHA-256-Digest: oE4++52y0z817z0hc2hZEUSRJ6QqJ1/L9Ek0huCVoyE=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_irda.h
+SHA-256-Digest: qAlr77/b0Ygdalitdjb2VzqBlZkK5ql5qHU5KlgaUOU=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f410tx.h
+SHA-256-Digest: 2Qq9cEJ79n4KCLmshpBZsjlO32Y9a4eoU2Waxjpao5g=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_pcd_ex.h
+SHA-256-Digest: DIYXIU7zZWf2n2cUZoNNiMlp90uFXRend1IumWgPjMk=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ adc_ex.c
+SHA-256-Digest: afCbjnifeOgIxU2j6qdztB1s1a2x5obyfBxl2GtoEms=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ timebase_tim_template.c
+SHA-256-Digest: PJeC2dlbsDfD2LPCV9JjzFVZi4WFxUAYG0g7vMANxpc=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ dcmi.c
+SHA-256-Digest: CChCJFb0DcI3tP7HsgPFWegAvf8IM2vxZOPyzsa2kPU=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ rcc_ex.c
+SHA-256-Digest: mfH1VU603YxbQTJ8FrvyHvF3rdbXAj6XBu8834q5XSQ=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f745xx.h
+SHA-256-Digest: +uP4wrJci0aFpGgtMIJV7Lw3knMTUk91M5L+ApWcNBs=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_r
+ ng.c
+SHA-256-Digest: vfbfsVstkc07dyEYvRZMWLt3btJHNy3iHJm5c3ynb9U=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f479xx.c
+SHA-256-Digest: wxC+aCKbh3M3M+L5Ok2SPezDtJq4ly3+bkErSzdHU7k=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ pwr.c
+SHA-256-Digest: 1q8fppLwtzaN1g2nxiOkQKuQrdjXAGXIDXVkQz0ZmCU=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_mmc.h
+SHA-256-Digest: yMKtnxoA7zQFTZDsOXj5WyfZe86rmo8hYSR2M0B66PE=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ i2s.c
+SHA-256-Digest: lH8RwmXol1IKXJpJJY0RU8caQtacygHsi/vhG8h6T4Y=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ dac_ex.c
+SHA-256-Digest: VdMeAemXrt3NwYg7wG4xX7QhCWNJMroQh9waRcT7kfM=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_uart.h
+SHA-256-Digest: imTdpXZYM3fKSVYh2pR3erQvJQAZhYr56Y/nxV0AVWc=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_r
+ cc.c
+SHA-256-Digest: 0rRL9EYLUzMBSCFFFLi5lUm3frIebvJMVv2VxD1rEJM=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_fsmc.h
+SHA-256-Digest: ctePkZDd0xX6ylUcO2eSYsB/iNTLnb7pOrpdyq1Frh4=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ pccard.c
+SHA-256-Digest: NRMcjRzJes56EMVbjxr50OLFR9ClgUV1Y6WGALwDMYg=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_tim.h
+SHA-256-Digest: 4fPCHSxaS6xTxmzGkALkRxdsFks8aSN65iKncO8j5q8=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f071xb.c
+SHA-256-Digest: vXwihrAQ1o+EM+1PT6C2jy6nxuwGo+iWFBF/g3dAe4A=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f405xx.c
+SHA-256-Digest: +wPMD2uyzhkZH1oNHk/e7miSlVWSDtjOSZ3FAxOd/RY=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_fmpi2c.h
+SHA-256-Digest: QwgqpqiH42UWpJa6JXUJwi4EDgEkAbI53R/pA8ARRJI=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ adc.c
+SHA-256-Digest: ISxEFJhY272tB4mvOmgRkCJ9qpJGp477p4+Fh3JIsrA=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f048xx.c
+SHA-256-Digest: LQGQzq9PwLkmBgFbP3Ye5uxDjCPw5wecQLbHLIq1fxs=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ pwr_ex.c
+SHA-256-Digest: Qq6ldDmyYxGNqZHho2BpQ83MQMI5sUKaEgrkWtR9BzI=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ sram.c
+SHA-256-Digest: x6xM5xW5TbK1T5ZNrvHmPbZNq37Wp2L2q4lhBK4aqI8=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_r
+ cc.c
+SHA-256-Digest: mdMV6pHHC6y+HxdGURZKZSYgrFhuJiqb+G4qykWj/5o=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ cec.c
+SHA-256-Digest: HncKT1sGG2FdlsMiBLcuNbSqJQQDd1HLJTOg56LFqYY=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f303x8.c
+SHA-256-Digest: FG0FjP6rZE3A1IJJOoWLyteJoEakDxJrBM7q5K6uerE=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_uart_ex.h
+SHA-256-Digest: Hxl6q0ZL9ov8JqbdUqRGaU+Sxa95OTyiHmgBcDybmvk=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_i2s.h
+SHA-256-Digest: ZEsgLUqdOWg1lToz8NaP2bHTR8O0qN8SHoB+bbdrRgE=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_sd.h
+SHA-256-Digest: YnmyNFW/a0wJ2r0rztL/c7VPCWxFF3SjuNkYdF0DaZk=
+
+Name: templates/micro-os-plus/stm32f3-hal/Release_Notes.html
+SHA-256-Digest: cCGXQiaIrzz2UAVSteM5ELJHPT4ATfUjHuY4IfC4hvg=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ usart.c
+SHA-256-Digest: qNyM9ser/B573M5ep6ao6ONotSWj/9339eQe0Eo2ZYc=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_uart_ex.h
+SHA-256-Digest: djKAfyJshGKThJw/en+eN0QEJI7rV6ciCcpY6nTt8LI=
+
+Name: templates/micro-os-plus/stm32f2/Release_Notes.html
+SHA-256-Digest: lJ078B+vJzjSChYIjPY7p0d0orDQnI3VrZpO1lxSH6w=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_pwr.h
+SHA-256-Digest: UxrImIXAV13btdY4tZSW4oojFlor46QWp0tPFJnwTG4=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_p
+ wr.c
+SHA-256-Digest: toqyUJXqiEITfjg8UxPG1+BJAZWbuG1SW27QkXZFP2w=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_rcc_ex.h
+SHA-256-Digest: pcR4xf3NoJ6fochuEBg3fy1iCU6Y5QAZGN465lDedAI=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ gpio.c
+SHA-256-Digest: 2XGuhFGrk9GsrI7UFKpLXMsQj0IdHwOSNdRuSsf+UKo=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_i2c.h
+SHA-256-Digest: ARbSGX56UpBLh8y9txdDVFHaOjgG7t90+CBp0CAmGOs=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_r
+ cc.c
+SHA-256-Digest: N746/4aQXMjyqRBmcY2nFVGnWB6cmo6ZbZhlcGBt5G8=
+
+Name: templates/micro-os-plus/stm32f7-hal/License.md
+SHA-256-Digest: eL0mhMO6vIPNu5jpsL0EFd1s4S7QA0rO4vU5Q9IHVWw=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f413xx.h
+SHA-256-Digest: HmdbIWwjN9tP+oJ8IEjD5JbyKh3Ok9ed8Ftt0W9oQxY=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ flash_ex.c
+SHA-256-Digest: a/q3MT7Aa+kCfN+GCdOo2rc0TZel1tywBhnpi4cI86g=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_c
+ rc.c
+SHA-256-Digest: GTCoF1XIF++qW9drdxXyKSEQLbFzQYDrvWyrCDvBDFU=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_u
+ tils.c
+SHA-256-Digest: PyvTnrizjOCAaWft4Hcjy3wI0gXzmxYs6+2skrvWEeM=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ timebase_rtc_alarm_template.c
+SHA-256-Digest: WP5MO3vITPlz3Cqq/plIY+tQ4K2sp8CoO0twy++lEYE=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_dfsdm.h
+SHA-256-Digest: psj90NsVQ0WaH/e134fWk2B+Hlaz4RX6AD9xb3mkpD8=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ ltdc.c
+SHA-256-Digest: LJSgE+BCkdevd15ORo+CULeTmqNJFzyTtpPWmYgtMq8=
+
+Name: templates/stm32f3xx_exe_c_project/src/led-20-headers.h
+SHA-256-Digest: 47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_g
+ pio.c
+SHA-256-Digest: dItxInIY3kD2GhjwKhNd0VGI0ua7pfz5iF2z0ZQ0Eiw=
+
+Name: templates/stm32f2xx_exe_c_project/src/led-50-cpp.h
+SHA-256-Digest: M21n6jpw5iwC6NhYZg7X8a1P2mX666cOGfplCZfTTdM=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f302x8.h
+SHA-256-Digest: 7m2c+d75R+25jXnkmaIOlk64bKFX2fg8vJQWZxMxqSU=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_c
+ rc.c
+SHA-256-Digest: WcKTBfLJ2RnUn9Cp9PnD502zKeN7ddco8mdD+Z8e6+M=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/README-DEVICE.
+ md
+SHA-256-Digest: 7Ije4CG/gunIVdZKov7eaft/z+Rlqu9yr6Z7o9NPmLM=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_c
+ rc.c
+SHA-256-Digest: p7ML3Ms/Y3M76tk2gmk9KMcX4PCAhtVzbxNn/iMIX60=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_uart.h
+SHA-256-Digest: 0zK7HjnUHjOFq2xs6bpghNwJGwR2zyRM4wnGQTS59vE=
+
+Name: templates/micro-os-plus/stm32f2/include/cmsis/stm32f207xx.h
+SHA-256-Digest: 8bZnYF0XRJqi6um6XYLR+pLkK7WQOBSepwQZZ5zLpK8=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_tim_ex.h
+SHA-256-Digest: nkAWPAv1eDZybDqR9Sv9LL/46tKMDeh//5Z6lHw9ZCY=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_exti.h
+SHA-256-Digest: Zkju6EyTwmfpCnbH49uZJh5U9YbfC/yUGsCdja/ecFY=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f730xx.h
+SHA-256-Digest: VjXJt6uRSBjNw6HMJan86oDaSK7UohnnAWYjvtOp2Wg=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ spi_ex.c
+SHA-256-Digest: qQM4AE+t7p0Y+4aGmoaEZ89/jY0KF1t9s3updD1kmfQ=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal.h
+SHA-256-Digest: AJBPgQc5Qvl1Xz2+B5rDSvMzJy8hmbI2YApixi92PNg=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_nor.h
+SHA-256-Digest: 1mW2Ok2fPmutmyLqK4cU7/sAdwV4y8RO2tmuNqb8kzc=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_c
+ rc.c
+SHA-256-Digest: YV8GTJnbeKESPoJ/AP/dh8DxiEo01cK/TQzKVnjTOo4=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f303xc.h
+SHA-256-Digest: M2mPQbdnt7fv3ZQdL8HUpwbIi74XI8jWkLz4XzqT6Ig=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_uart.h
+SHA-256-Digest: dgtZwpBlQnacabEApPlj9s9tSuzd34tVzM+GHv6oEag=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f427xx.h
+SHA-256-Digest: tshg+eR4HgDFiJK/7167+BqdXPKs+2fJxtBJ25XtKyA=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ dcmi_ex.c
+SHA-256-Digest: iR0TYRKosinNIU/n0Y5osffcKz3KTPZaaFlfb1skP1E=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_hash_ex.h
+SHA-256-Digest: C6Xmp6L/I/+Gsle6Slyf3DPNlZ8NSkPsT61NHQq1Mdo=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_adc.h
+SHA-256-Digest: +OntdaO2WFu1ZYYuvrUiqMJuHKJohaapHoVATzcgPj0=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ rcc_ex.c
+SHA-256-Digest: fZ1IPtN4TOX6IvSoxb1jbpajgZi0wC9tlF/j1SUizGU=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f746xx.c
+SHA-256-Digest: dtIN711z4ycwkfeWZzIxfN3YBTYW/IBsSWSD+S+r3wo=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ comp.c
+SHA-256-Digest: D4twnzyPjv9AgB5qLRD1dPts6WXI2oCNjY2vOvtnmk0=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f302xe.h
+SHA-256-Digest: 3VVNT2/4jezACp81ExtZPmArRSE50CJq0uSRl4ApB4I=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_pwr.h
+SHA-256-Digest: aiUga96pyzl80/+sUUS/XZUPsgOqMzmlLSHKCj3qhUY=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ i2c.c
+SHA-256-Digest: Bxrmlwswd9NnVSXJtqB1DJBqUSh9bDO6J08jNJrvwtc=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ gpio.c
+SHA-256-Digest: u1+RrhMRDjdsHuu9+RZpC7NNAYchZzwRDJVx2R4E7FI=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_sram.h
+SHA-256-Digest: 7MnK6+eEreJYgd2O7i10hYHPeI9GEVA63HrSIJQ0y6Y=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ dac.c
+SHA-256-Digest: PMsixCNB2oBs2r7fnWz12B+KGaHFMkjbBTeuXjWDV60=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_crc.h
+SHA-256-Digest: 5i6S8iXnSH4jO8zD28YM0WAupdEB6t29KIr06uasLM0=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/Legacy/stm
+ 32f3xx_hal_can_legacy.h
+SHA-256-Digest: qSh6iot0Qg0PPoKOoGoZMB2oOdpP96kr1z/UixTyO9w=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_pwr.h
+SHA-256-Digest: ZYTCyriA3jB9FNpdgjzUrE8aNKHUZXUzDbGj4BWC+l4=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ spi_ex.c
+SHA-256-Digest: 4UlZbMT76QaCpTjc/2cRnkrkdpH+pBjNbbK9sBMBKGs=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_irda.h
+SHA-256-Digest: 2Kznrdc29aro/8JxiHBCSQpYZR4E8K5WV8rkVLkIJRA=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ gpio_ex.c
+SHA-256-Digest: 85ZlNtWfKbjM9IpH9af+qDsMxv3e/KegR+pwHkynTc8=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_tsc.h
+SHA-256-Digest: KzfCi/TqVMfLYuqrSzRwD+G1CcpKJB9OKK2rmzAumyk=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ spdifrx.c
+SHA-256-Digest: z0pd7cLv63RK0fJo22e53/aPEp/k2sCVuJLtkwMZDSU=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_rcc.h
+SHA-256-Digest: 7yyk4WrgoMhOz/emVQ9M3lnb+j8HjaFsnwJ585v0dz8=
+
+Name: templates/stm32f0xx_exe_c_project/ldscripts/mem.ld
+SHA-256-Digest: YWY9ijMettZlFMQ/tVRoxaISHnE3oWHwmdnKraNj1XY=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_rtc.h
+SHA-256-Digest: ZT4JQ0pmGmoDIfCE6nWj1YL+eYZAmas/wY/6H+0r0W8=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f318xx.c
+SHA-256-Digest: DtFQhIjl25MW2HvDZe2A+t5h0Q/CwqQXvvKXizwzirs=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_e
+ xti.c
+SHA-256-Digest: +XlDOF3V26GKLqqHnGf5LkyvWlNMKmoISkxwI8kPPRg=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f301x8.c
+SHA-256-Digest: fmgGqUNUJYZVWve28KMH9oTw31W9TrpuOYxGNBaB+t0=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_dac_ex.h
+SHA-256-Digest: GiXt2eql3HhHzgWwh0S/PeGuNRfVjaZ2DYHkQiyYvxU=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_adc.h
+SHA-256-Digest: BME+vHS3TQ/p67emkOOuLnoNehoPPeq62xzT+o6VkIA=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f078xx.c
+SHA-256-Digest: Yd4eWcKcCLJszJ8IHlYQ/Lwh2DcSYDYja7XuDu3GZKk=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_cortex.h
+SHA-256-Digest: giiQj5NQYr/hrBBofFQi2jQWP4THEis2VH36tNJYgko=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_r
+ cc.c
+SHA-256-Digest: Mqaev46oVEMLyN4xNeFljwu4EPNqTAvwZ1cl8I2CTf8=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_dcmi.h
+SHA-256-Digest: NRhOdkEQgO7aI42k356TEfQ6PTBDN+z9C3edVijwkbk=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_i2c_ex.h
+SHA-256-Digest: G4nmBQwF1IM3zp1bhF2KJvdqd0p85guilV1sJ0cuN04=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_sai_ex.h
+SHA-256-Digest: k9NyBX8J0wIJ1SYldOCT2wUb3WANHmU6zzso5ztYVHI=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ crc.c
+SHA-256-Digest: 4AVywJb65OxRBkKNGyjRO9FhufkGB9RESxzdMNwBOoA=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_nand.h
+SHA-256-Digest: e6qWOYBm5sQCi/rxm3pCe16XOold0N+BdwY9Lqp/Ywk=
+
+Name: templates/stm32f4xx_exe_c_project/src/led.cpp
+SHA-256-Digest: K8ukrOWb0cz7ACBg7/QFf7SLy/wN0hsnbBJcOt3sVic=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_iwdg.h
+SHA-256-Digest: ZxeH9UupoWN2ao4TgfHP52Mm1SStYgfCEMWh0vGrgoU=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_i2c.h
+SHA-256-Digest: JusM+X/44+8f5fmXz2wbEjM/DWoPgUg1qSMmU0Ygl9k=
+
+Name: templates/stm32f0xx_exe_c_project/src/led-40-defs.h
+SHA-256-Digest: 3PcMNWGBI59cdmjPhcrW+fr2J6pa3t1ZWaBnaJDBCv8=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_rng.h
+SHA-256-Digest: F/ywGx0KiXqExafdc/JVyFp17aiCYlsdeVJ0jpNf1LU=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal.
+ c
+SHA-256-Digest: 4KtBYHMa8Ebt7NWPCS+NTbU48w2Egg9gvppXF4EMdrk=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ rcc.c
+SHA-256-Digest: aVbmLq0qgoMQDDUHlth24ryNZQ3XmzkbZ/Q0llDNdbY=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ nor.c
+SHA-256-Digest: vSjLVeyqm/6uyBxPWTYdkepGWwMvgqvujQxENBfS5B0=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_sdadc.h
+SHA-256-Digest: b/X3Jvv84ZvNF3a2ganljbwTm6C8Zp9u2hIe4QPzWt8=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_gpio.h
+SHA-256-Digest: TeA1eR3QIgBFVtDAF43Civ5TFdNCtPECQFXo7rlYQ3Y=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_hash.h
+SHA-256-Digest: JAe31XQ68VvucSeYjI++Dd1qeqZRZgVPzdpc+J10tms=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ pwr_ex.c
+SHA-256-Digest: ki7oGGXFKvkPLDdcg0iaEo/k1QyYdJBJHYGCkWJ7oSk=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f407xx.c
+SHA-256-Digest: OIhZeZZt10MOq6iy5rNRk7fF5n3YoWKZX02Ji5yH1ZQ=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_dma_ex.h
+SHA-256-Digest: XPTUbm5rJKEHUe4UGE39ZQjooeoTAnD+byKB5xcz8Zw=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_system.h
+SHA-256-Digest: 5OP2z8WEpSjOjdquCeTo/Xg0mZeMCDhFilewIKNX38c=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_tim.h
+SHA-256-Digest: 5fhaOG0hN520Zc0ZujzNIKnap4XV7u5xMvUqTGBLxHA=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f072xb.c
+SHA-256-Digest: T+wKzlV4M2k6AyT5KI6PdwlN3vtZYjJc7VSc2RIlWM4=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_spi.h
+SHA-256-Digest: svvaF7/zWlPp0Wh8sjdgMxRdDU0hAsgClkRdHZlY12E=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_r
+ cc.c
+SHA-256-Digest: Er3iQ2TuPrNGpF6UMTH+FS76FAbSV6OemyPyxTE4qEs=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f301x8.h
+SHA-256-Digest: ViIvX5z8fmNe/LdS/blJLiwXhpK+CuNiwr5JBsxOyrE=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ opamp.c
+SHA-256-Digest: JkSGWppb79jDwqOTliDZ3UELz0r6uJJiwgqjUbHSAjQ=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/README-DEV
+ ICE.md
+SHA-256-Digest: iQC/kat2QCQSThuvv9gimB4absVjRtdaMULMY57ER44=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f302x8.c
+SHA-256-Digest: LFvWCdvk9rmDqL4wyM2BZoXBGWBmXNAqjJ0pmqTbD20=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_usb.h
+SHA-256-Digest: +w38XCEnFJVuiAsXIlHxbb9e7R8A21OeBykLHNp4uGk=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ cortex.c
+SHA-256-Digest: 1dlqY3RR1IPPQg2W4mxDMmaZMWeM0xuicYqUhrQctEk=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f098xx.h
+SHA-256-Digest: O0ymvrFeSuZJ5aIhqDmKtgx4AepVt0ffnNiLzC0s354=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ sram.c
+SHA-256-Digest: ER5ufmWSH6SQIMM3bKHpDe9z9dqhmS8GUnm24Cnrw5k=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_crc.h
+SHA-256-Digest: 2WXVLu4z25GG5K6+qWxUGH3AY0htm+YUlPdwWIMAWAQ=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ smbus.c
+SHA-256-Digest: dX8qZMvvo38rwbOPYNO/kquhhUTTUX9a+LDKi46x6rg=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_exti.h
+SHA-256-Digest: jPj/o01i5feVwViaZS1gSdEkjSufQqC9caw4eQ/YKns=
+
+Name: templates/stm32f1xx_exe_c_project/src/initialize-hardware.c
+SHA-256-Digest: 8milBnBpyP0yEeZtKhMqzDeD4tE0I0Ut99hOmQK+S+4=
+
+Name: templates/stm32f2xx_exe_c_project/src/led.c
+SHA-256-Digest: xYIhYBYh6Ul6AmQYFY35C9NTA+nG/kXOP/LLcs2zqNs=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ uart.c
+SHA-256-Digest: QW1LAeLVMTMavBe9KCWl2LLPLKoQr9lWKVX3hYFkros=
+
+Name: templates/stm32f7xx_exe_c_project/src/initialize-hardware.c
+SHA-256-Digest: K6nn5UENxKDd8nAUHxRVOmungyrO0ERSq9wy+vH+MR8=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_hcd.h
+SHA-256-Digest: oPbUkr/y0/Lo9qba6cP781d6RTfXyogBi/mYNf02dIk=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_rcc.h
+SHA-256-Digest: XQ4apk+ufQ9ISE/Jn46vBjNZwB/A9lly5CeqsbS7QkA=
+
+Name: templates/stm32f3xx_exe_c_project/src/initialize-hardware.c
+SHA-256-Digest: kPlCXQT1bxTa3+Eym3SiaoJt2p6YIkf+Gw7MiWCD9/k=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_irda.h
+SHA-256-Digest: 1e6eAJeJNGZQ9dahLyja2iMv6/29m9Jh+LNMn9z4b3o=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_dcmi_ex.h
+SHA-256-Digest: 1oxayrfqO74JujElsYEPMmY3m3G5upcsUjgPfRjLDBg=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_smartcard_ex.h
+SHA-256-Digest: De9CCK072+W9WxoWiw6q5jP8w5wIdJv48g+/Ndeu+AI=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_d
+ ma2d.c
+SHA-256-Digest: M8D0BloD3mjky/O0JTR36Y1xtWo5toMKBlAfPtyYPSM=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_c
+ rc.c
+SHA-256-Digest: ykgrex6bQTEIWZYiajpruNYhchPE2QxEBma0Hw8qJJQ=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_adc_ex.h
+SHA-256-Digest: rucXVG+bzYyyzt/6uihW8IaX7B80qtUJUIlsBsyv/MM=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f730xx.c
+SHA-256-Digest: 5qQDBBXnolXPF6SyWLAL4QlqdW9uwsS6HQTDaWknqOg=
+
+Name: templates/stm32f4xx_exe_c_project/src/main/main-145-leds-blinky.c
+SHA-256-Digest: 47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_usart.h
+SHA-256-Digest: Bpepg3AVxahkQLi/cquMI60BBYBsi4PvC1zbdEU490g=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ rcc_ex.c
+SHA-256-Digest: 4n8yD3AXzfTzr6Zqop0CRHfFSJ/y6dm+SGGw4zASxtM=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_dac.h
+SHA-256-Digest: uGFLQn7P/cwOHnwm5b1Nti261xn6agu32EGlG8xyxDw=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ cortex.c
+SHA-256-Digest: n1gMVndwfSLn4RqiGgHocYHjsUFF0cNERapxbJYErZA=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ cec.c
+SHA-256-Digest: 94v5DqUeeKjKUHFmClYs7beHNKiTlKm0hViRsk/z65c=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ wwdg.c
+SHA-256-Digest: kF6STi1X5KkPmAFjq7jQMI102dzWxl8nYT+jaFkTjyI=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ crc.c
+SHA-256-Digest: e9gaErYQKhKHsuizD7RMw350Eon8XZZsCiNFuBgo5Bk=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f070x6.h
+SHA-256-Digest: 4jlQlg5EZ73GSlfoTS8Y5HNcr7CEEj92ZiHd6hDl7Y0=
+
+Name: templates/stm32f7xx_exe_c_project/src/led.cpp
+SHA-256-Digest: nZC4a9pUFLK4pOmfa2ktg9r/lEi5IEL+6brX/fgscxY=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ eth.c
+SHA-256-Digest: jrkc4i/ywGdrRXtczD3BAh16bxXOQnLHabYU3mKHrlg=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_r
+ ng.c
+SHA-256-Digest: X8RSlr9fNQ71zTmAEQej7QEPOhl+5YhCEl+/4rgA01c=
+
+Name: templates/stm32f7xx_exe_c_project/src/main/main-200-semihosting-lo
+ op-blinky.c
+SHA-256-Digest: oMIdgkgt2CABacT0ILyMV8iHjITUYNMvSYZAhmfjq3U=
+
+Name: templates/micro-os-plus/stm32f2/include/cmsis/cmsis_device.h
+SHA-256-Digest: QQbE81x8ANr6edeWIs2Rc5motKrZmEHF0lqUnLD+qco=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_rtc_ex.h
+SHA-256-Digest: 4o3/Z5VlstLyQYlouSkRlDmPlgA4NqKngQqtKdi7tlQ=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ tim.c
+SHA-256-Digest: uILpfkXaekkbvd29icSEsOEqVl7i3WzgL/FzpsV3uAQ=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_c
+ omp.c
+SHA-256-Digest: /up4irPF+YUvFHUvXBVBFQN6F7FjOkILdC/6uU6ISV4=
+
+Name: templates/stm32f2xx_exe_c_project/src/led.cpp
+SHA-256-Digest: K8ukrOWb0cz7ACBg7/QFf7SLy/wN0hsnbBJcOt3sVic=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f745xx.c
+SHA-256-Digest: orhOXFe5Z7S6kG0+nw1bG91cCqm2zk3gLIXtKy8uc/c=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_tim_ex.h
+SHA-256-Digest: ec4oyXKv3UEFbRiuwDbEiIgFAtKx0NIlNjrsw2g6+xA=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f378xx.h
+SHA-256-Digest: kGKIKg+Hq7Viiewsmzq/gY78C4QB/NBy6NG+f4PspoI=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_pcd.h
+SHA-256-Digest: ZPUKkiXSgIpu60m125rQI69n0uqjiwAyTME9NTd71po=
+
+Name: templates/stm32f4xx_exe_c_project/template.xml
+SHA-256-Digest: qQnOFEaz6Wvuu2hwnvvAqVvGS4SWnD2Ff/MBICGygn0=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ pcd_ex.c
+SHA-256-Digest: evtjlc8F2DCi46jCeFpaitOds5LO84mEF+SGjaeymno=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_flash.h
+SHA-256-Digest: VTwNojrf/WYyVoVRe9k51Uw3HBRK8JLoDJ8vDYfTxrg=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ i2s_ex.c
+SHA-256-Digest: kp6G+ROQ0tACNBw4jh2WFt0S7lMn+O/p3CInyz22MFc=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_u
+ sart.c
+SHA-256-Digest: mhiO0ZBmicFOxRr5yCUAzcpaBENieJFQ/gNNe076e6w=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ dsi.c
+SHA-256-Digest: yg0iBrntoM63CpAj3wGU7JhIvcgYn5vQQ2QWjbFvg/I=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ fmpi2c.c
+SHA-256-Digest: V5eRhQ7O795OvGkrJB/hfjJzAMB+1qftViOUzdlthQU=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ timebase_rtc_alarm_template.c
+SHA-256-Digest: puOE4CwHhwqamgMDdl0cXPHXOPWsmcMsvcfV7D0ILsI=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_lptim.h
+SHA-256-Digest: DsmwYkmnqztrNE/tGLEN7AgN6IfZFNZx4b7FsHvicJs=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ can.c
+SHA-256-Digest: 7enjj5jIe032OuHNdhMfIteXSkAgUUHWQouOvAjXnJA=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_opamp.h
+SHA-256-Digest: /MTFCBgm40+5Sv52pAO4LOEsxrxww2oJ0Rf3ptMm7aA=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ pwr.c
+SHA-256-Digest: +069oGZQGLbmRR5KuCTkDnJcPT2JMjZ8GiZ8aJF69DU=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_spi_ex.h
+SHA-256-Digest: IVOmJ5Jc9wwBsj+ipX6hsS3NhquwMkKDZc2O9KS/Ue8=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_wwdg.h
+SHA-256-Digest: X49PAN/hubdLt7Muu2J0BvejvFR9y5vv1UWpbk0B3/o=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f412zx.c
+SHA-256-Digest: auwvROVMmd2YaxPGO/So4NCh9R7ir5SB+dR1BPiGnH4=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ i2c.c
+SHA-256-Digest: MiQCY/2rJbx+wJr0YNDvKy9Aui07W7tSQ8qgYcLWtr4=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ timebase_tim_template.c
+SHA-256-Digest: iLRL3pDfPMlqrrdJ9zJn94uEPjtwIIvnLRMFyQrzNTE=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_spdifrx.h
+SHA-256-Digest: bqT8eacbCZT88RkuOABH5ERCv7QhS/4MmS4p7pE+h9c=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_fmc.h
+SHA-256-Digest: 55/B7X4abVY5Hn2xz/0hAQXTdHFyQFg2d5eQqkCEm2k=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_system.h
+SHA-256-Digest: NxuPavblWDlQWkkutwR1DcaUsCDZjP0sDOq3xchiNIE=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_adc.h
+SHA-256-Digest: AAvUnXYkqZPKdjABSeq6PpnhNE4uwAaBEeTLptqWaH0=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_bus.h
+SHA-256-Digest: zmzhxyGJG74Dk+bVRw3FOAFuNw8Kd45ECGUqv7uq3p4=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_d
+ ac.c
+SHA-256-Digest: zU6Vdm79leDfSiXralvVfXUto3vHG58Y72b4gfavVBI=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_d
+ ac.c
+SHA-256-Digest: Arrh8bjSbC0fabrJpHXCJiiDmZdukc2gG9spM35ghvs=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_f
+ smc.c
+SHA-256-Digest: BkF/S5ng4N8cXY6pZD3jH0ykEcO6lsgxTP0L9JiIwpo=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_tim.h
+SHA-256-Digest: 9I8s5XWzONVwYtpL0rR59GI7ZImo5xSDztzq38dQiSw=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_g
+ pio.c
+SHA-256-Digest: 7xFd0wIQh3pjpAdHnt0H9aK1w148ZrQ7Xo84cPY1vsg=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_sdram.h
+SHA-256-Digest: k/1wf2n5zz7VcnsQu89CHQjTFcFMGQGP0bmt99nWYTQ=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_qspi.h
+SHA-256-Digest: T8U6IS04FZ/YHc6EsVG3WoJRhRA5LM2i6PwaT/D98r0=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_i
+ 2c.c
+SHA-256-Digest: X0wQgLeMIt7fx+zsqbIg6aVViqTDWT2eucJACrIjt0I=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ pwr_ex.c
+SHA-256-Digest: fI631GvY5C6xjwe5o3dQ2GmigoWnBUhAf+9pwxYhTZ4=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ mmc.c
+SHA-256-Digest: E3g2j/K6JtOGfXkz5q2kVSknFFNeyis8YGtg4FU03SM=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f070x6.c
+SHA-256-Digest: cNoC3L5sZiVIb+Rg73xkzF/eSrGgwmYXiFDxlVXdlPg=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_dma.h
+SHA-256-Digest: J0zaChyez57UpUa70JU0kptIvPVQrol+JbcrBbjYo1U=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/README-DEVICE.
+ md
+SHA-256-Digest: Thv03S80n/wVpuKqMaL+SjjZO6ly1lqe9Mu0DSR7Y7c=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ rtc.c
+SHA-256-Digest: 0MRwlPTQ89qqvK4Ko1US/d4pZMmUUhL+svryeC6NDXk=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_qspi.h
+SHA-256-Digest: S35xXvqmD2L7cnrw404jcAEs7t2Ubnb2kPypVAhYAgg=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ rtc_ex.c
+SHA-256-Digest: EhafLnjIpoBIqSRgzcKo3WI3j8aqPPVbtqJyQ8zfPDg=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ dma.c
+SHA-256-Digest: Ie5O7xhDnsyLOYIuihUcLnS/zEKwsA5g15DSOooCH54=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_uart.h
+SHA-256-Digest: GRJGUHsAZvSke3SrIIMaPgBiTqIRsN3eIa84aZqKq1U=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f767xx.h
+SHA-256-Digest: WuDkristpW1a1DEmE4kwiIbzbFLZSs45zUELNLiMdnU=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/system_stm32f7xx.c
+SHA-256-Digest: P6OdfNbvDw8nl5CMUdnlRicffF87NfmRoeFCTZgqVXc=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_dma_ex.h
+SHA-256-Digest: 6kpNuEP8lTAt67ncSw0+bdw95NzsYAthrhdLHOE6xB4=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_dac.h
+SHA-256-Digest: kxmkv0sYTylYewt5+VuZuEYWDQTx8umIYGcoGwFO2v0=
+
+Name: templates/stm32f4xx_exe_c_project/src/main/main-200-none-loop-blin
+ ky.cpp
+SHA-256-Digest: uRQgAbxhL0rMIvGoCEB6Y4lAA4FSxHPYhGUq5uh3JJQ=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_spi.h
+SHA-256-Digest: sTPIUKB0d0nlYPsrc2USWL8DxcMLh7UPs3jlrhg9VmY=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/system_stm32f0xx.c
+SHA-256-Digest: eKI1k9W2cmOO9oGw3/k2ST/fe4Xoz2UssAgLf2igm4I=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f102xb.c
+SHA-256-Digest: NHRLMEpO/3iPGbda+aSrWY/QEJc3ESocoNpLAPMEK7Y=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ spi.c
+SHA-256-Digest: Kh0lK1LtUIWN1YMJJsZ4uYlMwomClyENgqZud9PcXoE=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_spi.h
+SHA-256-Digest: V/e6EZR4lUKqbg3tGd7SiybQJCP34FvXfORiFjYxL4g=
+
+Name: templates/micro-os-plus/stm32f2/include/cmsis/stm32f205xx.h
+SHA-256-Digest: 1WGy8fBO0N0zvq3AffnFQUBv5rRhJTOvAZ3yT1w4Fz8=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_r
+ tc.c
+SHA-256-Digest: Fcq2IgoNKcIP/pBscewOK7QW3dIvlS7fNKe813R1lK4=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_tim.h
+SHA-256-Digest: FHGDB7vywsJURmZgeHhwQAznRdNTYksSOXWJiAV3Igg=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f0xx.h
+SHA-256-Digest: mz9DJO0jQE7iZzxHT0TLqmvNPCP3PgEmF6Dod/Hpw0c=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f038xx.c
+SHA-256-Digest: 53VsXjtmAkXtWtSpR7kYxAXdx72/M5Cq1LchuzuNGDs=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/README-DEVICE.
+ md
+SHA-256-Digest: leLGl3LGmcJrgvUp8jlLMNj9VFJmHCZ4erHVFn8NzKk=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ tim_ex.c
+SHA-256-Digest: /E2pZU5J6kZyoK9m5umfxuT5LtmqJIY/6oOmaVxCxN8=
+
+Name: templates/micro-os-plus/stm32f2-hal/License.md
+SHA-256-Digest: 1SQvDqxQ2VXJJ2LoLEeupkGXjafJQ/JSQN2dONwDxVU=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ spdifrx.c
+SHA-256-Digest: 9xuJ9YEYYThpzQre0U/Dh20TEdUI9DZ34Wscsd1jvJY=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_pcd_ex.h
+SHA-256-Digest: sfjOEfyxKNOZ1N0y+KqBjkBOH1e6eVYFK1/fY9WY6JM=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_gpio.h
+SHA-256-Digest: G1ng4oP8X9zVCN2IyqCng5qpdVVDMjYzzQpOtJdZnwU=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ i2c_ex.c
+SHA-256-Digest: eCa2L7q5VNqQoJBVb4YG9W/NDj/EeW9g6oLVfIcDaFM=
+
+Name: templates/stm32f7xx_exe_c_project/src/main/main-200-retarget-loop-
+ blinky.cpp
+SHA-256-Digest: uRQgAbxhL0rMIvGoCEB6Y4lAA4FSxHPYhGUq5uh3JJQ=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/Legacy/stm
+ 32f0xx_hal_can_legacy.h
+SHA-256-Digest: R9jNO59IvbCnTfyj4fznUkyhFMosTWvxx3+NAT/4KRs=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_p
+ wr.c
+SHA-256-Digest: Kl7OW8HYWT5haYCCE24bum7oaQs8CPZto32PjZUXxUM=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_wwdg.h
+SHA-256-Digest: JiNrN5+G8JjjGWhkn0iRehGpiL9P33p3QLvr+dy/3qc=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ cryp_ex.c
+SHA-256-Digest: Ux9Od3sqi4y/vF36r2Uav+J+8YF9mi/ap1Z8qv4BqT0=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ dma.c
+SHA-256-Digest: /+U/2fpT1JXgION5XOBV3h7Vm/8OYJPzPHlAZ/KJ+UM=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ rtc.c
+SHA-256-Digest: b4W4ZPsXMjhxBjkXEXKTekv802oDjk7hIl4jXzb2A3s=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_e
+ xti.c
+SHA-256-Digest: s3QbcrfNot67Pf207vIBfmWLHa//ElXDBNlXI+7e+uc=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/README-DEVICE.md
+SHA-256-Digest: rB766NkW0BUTtotGVe1RQ2VEBSO6o5TYC4QVoBKuNLU=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_utils.h
+SHA-256-Digest: 8NQQ6NRvuj+CgnOmBRJdCK6aPOL/ArkV45RXb1pJqXE=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_cec.h
+SHA-256-Digest: 7IPfMWFFPd+1/mW90HRJ8m4/tJ9ER0xGw/0Qtdg6lJA=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_i2c.h
+SHA-256-Digest: VCdQBF03uHn0ErKgKC/RelZboNiUZQTfT30KlmOlwhk=
+
+Name: templates/stm32f7xx_exe_c_project/ldscripts/mem320.ld
+SHA-256-Digest: egBWg+D6EwCvgwbUxYylCnZJVZkJDvfFUsBpNLdWQpQ=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_smbus.h
+SHA-256-Digest: D4lI6062sP6ZLRAqaO0gUDCB2O/Jaj+q4uhE/pUIQ1U=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal.
+ c
+SHA-256-Digest: dCiAw6lLR8tiAMVuHYrI8PLRYh6VVrJTHiNJ4xT13kQ=
+
+Name: templates/micro-os-plus/stm32f1/Release_Notes.html
+SHA-256-Digest: zgvcOHUsq65dILJ2BrZG8eXjvQjk9awAg+d5fAv/+kM=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_dsi.h
+SHA-256-Digest: YxBPxa/MoAlDKCuE3utPkro8uj2M3YKMaawptLLamhU=
+
+Name: templates/stm32f4xx_exe_c_project/src/main/main-200-retarget-loop-
+ blinky.cpp
+SHA-256-Digest: uRQgAbxhL0rMIvGoCEB6Y4lAA4FSxHPYhGUq5uh3JJQ=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ iwdg.c
+SHA-256-Digest: F5uOVCjPazyPrAtV7/Olrrh/YH3399ntX2Uzbvhq2hk=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_u
+ tils.c
+SHA-256-Digest: YhqwLo32zFB14yWuUIdZe1iJwPbayhmwdhzleuyvA2w=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/Legacy/stm
+ 32f1xx_hal_can_legacy.h
+SHA-256-Digest: hmYXtOFln43RgqNNAL2rGSy9/MKRcpTeCoerUr8E+hw=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ hcd.c
+SHA-256-Digest: SZ6zgzifKDswfLDqoX65E6xA0tmRC2swN2YdtvdmmSE=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_gpio_ex.h
+SHA-256-Digest: J2GfIjWzOqr+RlJ0qpWlayQ0tdVBy7Zac2FOJgJO0PE=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ pcd.c
+SHA-256-Digest: +QHYxGY2E0TCgrKJdvSbhXR+W4LZ7kjea9Wj97Ps+OU=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ rng.c
+SHA-256-Digest: qb27ji21kwQKb5Xke3fS075K1HOXlB6YOOh19O4Csio=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ flash_ex.c
+SHA-256-Digest: 2m283XAl/RKb3/PkFDCsdkmK0y62FGJcM9CcgEkGzuM=
+
+Name: templates/stm32f4xx_exe_c_project/ldscripts/mem64.ld
+SHA-256-Digest: tYTySGdAwvbsa+iJdW2l3b4/1RaqXegSfwYm3OO0KWQ=
+
+Name: templates/stm32f7xx_exe_c_project/src/led-50-cpp.h
+SHA-256-Digest: vLzHl9c6DfvM0DBgEbf9ajj1kXYHT8B6zcgsIoFEHAg=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ sram.c
+SHA-256-Digest: kGi3X06Ij5N1QtGElUujjED9EJLEafJuq8+h5k/qRek=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_rcc.h
+SHA-256-Digest: nrbZ3+sCnnyhq+W1AICQVvSSTpUm5iBTFYg0kJCQduQ=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_gpio.h
+SHA-256-Digest: 7M5vz9kYm8nXRW6OLQa1+WvvB8/HhXOdJE9OOGD/hDg=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ nand.c
+SHA-256-Digest: GUjHBp9WuKWA03tQqhGp/sUe5N2zOaOiRIfv14Rpj44=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ flash_ex.c
+SHA-256-Digest: cYNw5omPkf8sZLhcix8DVS7tzWTM7RMxky6k5jFK8ls=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_opamp_ex.h
+SHA-256-Digest: XHHgw6FrZEabDJ2W44ao+OiT4+OeH7QI5JE9r9Vlgnk=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_def.h
+SHA-256-Digest: XEmgMjOAA0Z0oeubgASVRZ6fQlkvP+EdFo00ylZGRoM=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ crc_ex.c
+SHA-256-Digest: mtFQQ7ySJg6QEE6E+MjAcMCPUUJNK388VDBFd6sUN48=
+
+Name: templates/stm32f7xx_exe_c_project/ldscripts/mem512.ld
+SHA-256-Digest: eF7FmRHHsohwK2TZYIBMF+AjaqxhpzsEM+tMIOa2ZHA=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_t
+ im.c
+SHA-256-Digest: Cu6MzZK1mq83j4pt67DYbxReVOzwGYoFxe/c/qZzdAE=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_pcd.h
+SHA-256-Digest: hKAYsytlEI8L2AD1W7prtFKdYayiVwXxpr1g38wvWCI=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_s
+ pi.c
+SHA-256-Digest: IlTOWRAYAnQ8o2jfrRpy1AbIIApd2rE3GqoUkZNlrXQ=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_t
+ im.c
+SHA-256-Digest: tlA7eaWFvV7uJHruXuLYDPrSH92BMKLLZnzU6A4FV4k=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_eth.h
+SHA-256-Digest: d62w8IFa+tpvdxAmjrAlTSlqdv8+T++dEpZUKkXi+AM=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_flash.h
+SHA-256-Digest: j/Ob6m/xjwfqPyGOoROpCTRQJI9pWh7P1eFQ88R8Sdw=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_s
+ pi.c
+SHA-256-Digest: 9eoQN14D+02Dh6sBjSvkQM3xW0kB+jCYtQ0Y2YCNUSA=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_exti.h
+SHA-256-Digest: vHK5+K4Zggec0IlQFIcsXTb1KOnUeB4te2B3kWz2hDE=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_s
+ pi.c
+SHA-256-Digest: hxZ4pxQdZJ0IY1qzUwuW2Fr+KdIVoTHB5Xf+//+6S1Q=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_can.h
+SHA-256-Digest: 6QbtHANQkkbfOsxXoS50A7LNnEUfePb3O4oe8tqdC4c=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ irda.c
+SHA-256-Digest: aUFv2WyqoGrnq7jUWPD8krloXr/Xb0GmlEYOKfsK4VQ=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ timebase_rtc_wakeup_template.c
+SHA-256-Digest: uYQzzHcs0ZzGtPRun9BXUJCKBqVNN3rtGVJhEXOy3NQ=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ msp_template.c
+SHA-256-Digest: d8PXThSKPoY4Cjbbt3x/zlOYnr/Vi8m0ICe7ROms9E0=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ irda.c
+SHA-256-Digest: cmeesIL+n+uMO5EA1DON138dn/EiM8mRW3grTYwNNF8=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ pccard.c
+SHA-256-Digest: coBJTLLVse/Fl7FXEUxw6o69ryRqCg+A4LXhUIc4O/Y=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ dac.c
+SHA-256-Digest: JsPT2+mWXk5hCBJZ40kvtQI69+kNX224b57GZCOyi3M=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_fsmc.h
+SHA-256-Digest: /NajDtqGncVdBLTMTilp5Lxx67xEi/vcCRe0MwIo+oA=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ crc.c
+SHA-256-Digest: k1qufabHN9rTTZNcnlgbYaLC9dZoQ1Gcsg3DWBlJoOU=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f410cx.h
+SHA-256-Digest: AvQ/rCZxhVwsjEqHUjT75FnonvgWmM4OzaKjuEtJMKY=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ comp.c
+SHA-256-Digest: 7M8vx2xcLcd6P/7cAQ5bzKWsKC/fvlTYNLYxG5KReiM=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_adc.h
+SHA-256-Digest: qybumC2Nrs+9Gki3YESISS6tNqWIlY/4Bq3z22E9MKc=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f103xb.c
+SHA-256-Digest: sRDRplNttjqWIhRnSpt/5RwMrp0qQCdHnOietcaA5pY=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_dac_ex.h
+SHA-256-Digest: s2q+OKoX5v8fyVzg9cbw0IIe8E033AUkKuFfUpQ2LQE=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ flash.c
+SHA-256-Digest: 3KGJ+dCrPDxsqjBaA2YTwOzLYiHE3eL5GTyrQ31S8QQ=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_dma.h
+SHA-256-Digest: rXxXP5tjVC2oDOA7YZW/NJBGsWa84Eqs5DbKCcEYR04=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ uart.c
+SHA-256-Digest: UzflOO5/90Vigg+0H6gGVu4mdiYPYHZ3mtQpROoMWiY=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ wwdg.c
+SHA-256-Digest: r+p+8LVDpFAkbP4SQeYZidXF0sxTb/dzXHD57qyyRBU=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ uart.c
+SHA-256-Digest: f7s1e1Qw9oLfCRdFZY6CCrGOcZC6PGnypA92LIBXaTs=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_t
+ im.c
+SHA-256-Digest: febO/LmbesQXlZ+nOzdtPGYBAjyhPOI0AONlXYArLiw=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_iwdg.h
+SHA-256-Digest: 4zD9Y05pA68Um5P+fvnD64953nqlJ4Z7CWS/BpEmG5g=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ dma2d.c
+SHA-256-Digest: s5JYiC2HY3pMG40gYEpEKheIt9nQd8zc+oV3ft/JL/0=
+
+Name: templates/stm32f4xx_exe_c_project/ldscripts/mem192.ld
+SHA-256-Digest: GcJkbxCcWF2YXIRiDxJYWo594njAJM99ppvv2jqv/rw=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_smartcard.h
+SHA-256-Digest: vTTkWUXC8vAcg7qZz6Th/ocC/S5sV3cwiYVtCfG+JbU=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_uart.h
+SHA-256-Digest: YTKPkfXzIDmFJZiKrsviwp4FEYpQDuyDmLSJRU9E24I=
+
+Name: templates/stm32f1xx_exe_c_project/template.xml
+SHA-256-Digest: uR7q/61EIS3ldJWu7P21rUTVUDfshbdvjJoG1NCJfpk=
+
+Name: templates/stm32f7xx_exe_c_project/src/led-50-c.h
+SHA-256-Digest: yVhbl+hmrHoLvAB2STjcp7+z/xHCNfWkPc4rw5Ws7BM=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_rcc.h
+SHA-256-Digest: C3ayKmVGE0lqzLqGrYIavHmwAnjFEpIALJFyF4+UvSY=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ dac_ex.c
+SHA-256-Digest: hhSkUQz97IpY+8HSGw/CYjIrvj7GvDMu8OwY5i5aAWQ=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_u
+ sb.c
+SHA-256-Digest: 819++1VRq6ougA9xH5HLDioxwOsWbkyrT9CHTkJtOCo=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_dac_ex.h
+SHA-256-Digest: nX3bvs+PYKAzfLDk95yGW07plTEzZNk/V+zfGBZGouU=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_d
+ ma.c
+SHA-256-Digest: LCqsJCHHek3j+KNfXG1xigG1yrGQplo/ffKTyYn9Xjo=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_dfsdm.h
+SHA-256-Digest: nP8ReQm9JmAywAmtCyCnyHGvBmrloxnj6aqJpiikn7A=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ qspi.c
+SHA-256-Digest: IwEGzFnnSiEcuMPI4df/oeWw9RqK1pFObrSHM04kHd0=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ can.c
+SHA-256-Digest: Hxr31Sf9nwHtN4Gdxah7QPoYp9Z91Y+N4Nz9YN619vY=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_f
+ smc.c
+SHA-256-Digest: XbOj8gH5vVtjhxs5sGcFtoq2K1weh4cL08uVeebI7Ww=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ sai.c
+SHA-256-Digest: ROOZIXWEODypltyyzinxL6pyXrY+irfmwn6Y92yp3DU=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_rcc_ex.h
+SHA-256-Digest: UsXgGPEDWr8/s6i9Lj9K4KBGwgszfucp9dva/UuhfDg=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f479xx.h
+SHA-256-Digest: uvh/6gVWEmBH+R+kBiEvgjWhwINSdiA5CEzNZVA/MXY=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f398xx.c
+SHA-256-Digest: 9WumwD6pZg5gsTSYTPViJ4iLCBT2VSzMWm+GXXz6lAQ=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_flash_ex.h
+SHA-256-Digest: ZHDv9j49ilz7/QtJoemkkr3dVOnhtuGR+/TTqlRhdUs=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ rtc_ex.c
+SHA-256-Digest: kjCiSiwPFq3+rdKbbCoFHHbUYinNWx3efWDQH6MuYrg=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_usart.h
+SHA-256-Digest: vvfYPDI1ojGL1D1KU9CCxYuSHtjYNZTulAbEaVDhwW4=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ flash.c
+SHA-256-Digest: tLxdBD8eNDqAaAZQypReeYBQHFuXR1xkRNwrbE7G/vo=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ dac_ex.c
+SHA-256-Digest: o5CXJCirA8fzHQ1WlgSujtdRDoC8R/xpa1Kp7oVXcGU=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ tim_ex.c
+SHA-256-Digest: D33Pe0o79IQOeEjJNw1MJ1OEBwWfEMFSiamTzL0SKBs=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_system.h
+SHA-256-Digest: 5R0Y2sdAP9MINfGuGu6reYcaXkDSPEI7HTWBafQabm8=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ adc.c
+SHA-256-Digest: HdupZrXD0jK0Vtl8upstEU2nxVlCuSbbGsVdb/MzSqo=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f1xx.h
+SHA-256-Digest: mdctdEF4NkWxj2zwtpeQQSK/D06bNAkk/cEKUFLDLo8=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f051x8.h
+SHA-256-Digest: g0rd0jAFxgpBjCN8ylE8I2zSgQxTF7blIv3GLzVJwOs=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f378xx.c
+SHA-256-Digest: AWUf/gS7lpe+Ly5IbsYYL+2fPiyDSikr0faPDKqBKnI=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f412rx.h
+SHA-256-Digest: sZgz17qVSsmDPBIqmgkQeULT4UbZrFcGE+wiUar9vG8=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_rtc.h
+SHA-256-Digest: 8BrWbe1AwYABD8xNUVTJyd/F3HEdTOOKYWp4bpjcT1g=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ nand.c
+SHA-256-Digest: Tl5eqJDGTiQiecNmILhjZAgNBNlnpm4WNduPFjHvgY8=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_sram.h
+SHA-256-Digest: QGCo+YP2Iq7YykMZb1X/sAo2SeTOkruA01VhSWq6yRI=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_rtc.h
+SHA-256-Digest: mK7xljExI7fskJ4UWPxEfdOnePFlDyzsDvOOrlkVndU=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_l
+ ptim.c
+SHA-256-Digest: B5HVT3TqVk9z3K0IgCByaOY1MKW5lVKSfV4xdQHZj7g=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_cryp_ex.h
+SHA-256-Digest: u19NVjC/PogOTz7DH8/uGG+PDxGVJbHWnG+TVkG3/w4=
+
+Name: templates/stm32f0xx_exe_c_project/src/led-20-headers.h
+SHA-256-Digest: TZeOhVu6kDzSrv8l3tR3TgdmURWrxQ8n+CGL/cueJcU=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_smartcard_ex.h
+SHA-256-Digest: tKhyypEJCz7SoDrZ6J934h2JiBz+d158KIxhrYHzFc4=
+
+Name: templates/micro-os-plus/stm32f1-hal/Release_Notes.html
+SHA-256-Digest: Xyg5kithEpqtC+7nKxXKM9iivvzsV85QM8SAxQFJ2Kc=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_spdifrx.h
+SHA-256-Digest: JnBdO1ilMuzVxz7Onrp8CWl+Z6YnLUUXJuTLuHIgWCE=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_crc_ex.h
+SHA-256-Digest: LnotmwNIh43XamlNPI8oqGIM99vELiG3qLOIonO6MGo=
+
+Name: templates/stm32f4xx_exe_c_project/src/main/main-145-leds-blinky.cp
+ p
+SHA-256-Digest: 85bInR21D/8/P/KiqcG2l3lA8uxrcobgVRSx6bFcIFY=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/README-DEVICE.
+ md
+SHA-256-Digest: RYUOIpGnfcV3SXbfw/xyYOKCZlFzYo2oiAsgSDQYEkk=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_i
+ 2c.c
+SHA-256-Digest: kkiM2Ot2Y/VmWBujVp2q5mCdFeCZXUGauCtrB/vofTw=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_wwdg.h
+SHA-256-Digest: SgQyTdljJC9i/dPC2bgk+tRDGLV5SQU65uSq1pKVH0g=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_pwr_ex.h
+SHA-256-Digest: RiOV+LnTN3E56khwiGPMakX2SlYh+nQtm3PRUSSsKSo=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ i2c_ex.c
+SHA-256-Digest: U4CSIesWVqhfY31SLFIEBMpwcAOnTn3yB63rgiaXXJk=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_pwr.h
+SHA-256-Digest: rBOOnoJVzan3//4fABbY2vkBMyh+/9VmMLWJECbFV/s=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_rtc_ex.h
+SHA-256-Digest: HIIgn0b9byVdesBIzwJzrx2UlEhTGnL+eacQxpPD/iM=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ usart.c
+SHA-256-Digest: 2pSpvz17Dd1uXjWn/wTYUN1NSxmG773V3zhesT89DlM=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ dma.c
+SHA-256-Digest: vX1RL3lf8d5SU5HhiWr1sQOEKSOIXhKMaIILVT+8o2A=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ iwdg.c
+SHA-256-Digest: QbywROMVHUWuIB9Ny8DdzfzAb/9dxQbV+kTgrSxJod4=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f777xx.h
+SHA-256-Digest: eaMW2WzK/kcfCV/Zaj4ClXZaK33svkxZvM7kjJdnjjg=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ cryp_ex.c
+SHA-256-Digest: B+jZMR2xZcRwGPhl+IPAv3usMWsa+uS85za+IpD1l8s=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_iwdg.h
+SHA-256-Digest: OrhDn1sIzMi+E/BdwLY84fPI8ySPYZbOAHCF3yj43IU=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_pccard.h
+SHA-256-Digest: 1vjBlojfZoNRa1T5dur44/Y9wC+YEuiMNRwST6vl77g=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_d
+ ma.c
+SHA-256-Digest: 4G6ZOBSeptR66tDk0wSekJPeJErN+4+PWhApxR6AY3o=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ uart_ex.c
+SHA-256-Digest: /3ej8+uRrS/1Su3QE606666+KdM4cjqqbAHprvIO/i4=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f411xe.c
+SHA-256-Digest: o1NxBj3fhiQHuPWDf+j1N69KvzdDZcGCGDucupuLtI4=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_spi_ex.h
+SHA-256-Digest: wymq7wX8Q364gjcr30xtmYhnDII5iKqzAIrufJ2SkAY=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_pcd_ex.h
+SHA-256-Digest: z2NJfJpeTKdWcA34roEI8VnBroVvuTEPtZvPGbxBVg4=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_wwdg.h
+SHA-256-Digest: 1+micqif/OI/nwbQvw4A2T80ETqxz5ut7lxaNt0Fov8=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal.h
+SHA-256-Digest: LKEMExjTD4ytqm+FfKbFPJHXE0vOWTLUAh04zjUof0I=
+
+Name: templates/stm32f1xx_exe_c_project/ldscripts/mem.ld
+SHA-256-Digest: b1QplOnxPA4nZHPXIOKiGMy5j87RpljtVPl3XEWTQpw=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ smbus.c
+SHA-256-Digest: TK4CzqTkzSAAlctkOu59rfdQKvFTPTQwu/VGICu4RaY=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_adc.h
+SHA-256-Digest: WV66lULVKGRK1sVVqTFlN9z1hGAhlvAioNhitj35FaU=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/Legacy/stm
+ 32_hal_legacy.h
+SHA-256-Digest: tOToRDAYfjsQq7WPKgitIlcx1S7+/BJvc9agtBliyZQ=
+
+Name: templates/micro-os-plus/stm32f7/Release_Notes.html
+SHA-256-Digest: H4Z/nImfRj3CMqo9c7hdH3pS2PnV95hFnlu1ArMWDUM=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_exti.h
+SHA-256-Digest: xD7VqUGsTMuOIVddu7XumsasX0vF0i2HKUW7LCDZFTY=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_dma2d.h
+SHA-256-Digest: ViTgX7Y4K1CTxObZkwUMIhcGulQkWGt3pVTo1QNkUQI=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ rcc.c
+SHA-256-Digest: 37wHNkSLeT9ERU/DMNqAoiy+ksZoAGlZxwOdGVnx2Ds=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f756xx.h
+SHA-256-Digest: 4aA9UzVEDN+DiYSZKU9bN9s2Trrlfq6xFABQJUeTynk=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_d
+ ac.c
+SHA-256-Digest: SK5HQ+RMCKE3JUVVHuOUEkv9pQZmn+DkD7nG8QNQb9Q=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal.h
+SHA-256-Digest: hor0nl6WUWN5m5PP4EPF7rwFk3b60ezKHHdZaaASTTo=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_pcd.h
+SHA-256-Digest: eQO4feeTI6g71hCpH0HPO4tX5YU03b/5FoOuqsYVHaE=
+
+Name: templates/stm32f7xx_exe_c_project/src/led-40-defs.h
+SHA-256-Digest: uziesoivg4PQsHaIO4lz3pGTJOe5CarZWh7m6gK4pvM=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_d
+ ac.c
+SHA-256-Digest: ydfXrn/yIsGTJfM2P0GnDin8JMQ42LMFvuF+asSDY20=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_bus.h
+SHA-256-Digest: vJbKgI2KD1V4eVwvh+LhF7HD47e5fOAeddiOu3SCyXA=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/README-DEV
+ ICE.md
+SHA-256-Digest: zUprrWCLkJfaYvaRxdfwV6KxSZg5dQdazwFzl4lXTYc=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f769xx.h
+SHA-256-Digest: MOvdBsQJ5hrOX97ZXVEQUsjeaMoMMTURmazq+pDHknU=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_i2s_ex.h
+SHA-256-Digest: 3UhiIv8Lg6pPtevEBjB+UUDtM/0jFZppFQVsOUnA9Tw=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ irda.c
+SHA-256-Digest: /EZhKLb7A9MUGpA7CWWZey4gjw6H49YPxCGOApZtDbM=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_gpio.h
+SHA-256-Digest: UzsG0GJgJ7V3SPAIJGq1YVhL4l2FnswxUBTVsdyB5VE=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_adc_ex.h
+SHA-256-Digest: E2b9QlZkvdwQar1HxK83VCfaEry2r+SwZthU8g7GHzU=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_tsc.h
+SHA-256-Digest: xgz4FYVY83KqgEVAxRBx2i7w+Nm0ol5Tf3h5o3W8M/s=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_dma.h
+SHA-256-Digest: B9JtzS0cHrst6nJbm90axNVFbsOOEx1GACW7aRHU0pA=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ msp_template.c
+SHA-256-Digest: GEKmA7yXsU671yrImIHWY2Z+IhXMagm4Q/A6dwdN+q8=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_dma.h
+SHA-256-Digest: M5JwGCr0fBhWA51pot5BC8L6cGiLlb946GnWXV3eLuc=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f100xb.c
+SHA-256-Digest: emKnkTd6zhY5MiJqZUFQNT0yoB4BIPc87xzZUKgxzFU=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ exti.c
+SHA-256-Digest: Xedbru4Vv4zCYJrpRe3NxK7K8lzlfkOksISCBDPLv/E=
+
+Name: templates/stm32f2xx_exe_c_project/template.properties
+SHA-256-Digest: JEUs6RYw9R9EqjEXdZtt55LnvRDU7Bby3gPOydOmvE4=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_nand.h
+SHA-256-Digest: GjuoVgPFkfB0dp+6dscGlMxyN+qRIO3grgJiw+7m2mY=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_i
+ 2c.c
+SHA-256-Digest: xpgB8QzBr4dHaSXLesk2NBEnPhtgCYafMSA0pE7nWV0=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_rcc.h
+SHA-256-Digest: 4xNqSPH8nezKYiWoJcrLRQCoYsbdZj/EE1lDqcrBJfc=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ usart.c
+SHA-256-Digest: QeWJOPHzMrCLJIawr2arFanEzn606HWs5eZQQmmbXw0=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ dcmi.c
+SHA-256-Digest: CssyFObx6oP+rIkza96pJA5T4QECevd1fKqghTbnRX8=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_dac.h
+SHA-256-Digest: lFNfi5sIoFmwT/YCyPnR7sBFHJAjdNqx2uwMdeIVNco=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_ltdc_ex.h
+SHA-256-Digest: jaOZO8JEK79mYe32XcmgVc8HzDxQqGghOGnfWMiVmeY=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_irda.h
+SHA-256-Digest: 6BFQyHCSxL3PnCT38n0JSYdlOIGntoSSepyDRl8HySg=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_spi.h
+SHA-256-Digest: VQG8ZIXFRxUPOhKF0mo6/u9KsRDqws1CfWUzgOE8P48=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_spi.h
+SHA-256-Digest: ZAz4WzDx8hgPZ+6rBK9dq0q33gLmwdkjTAazu6MQW20=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_fmpsmbus.h
+SHA-256-Digest: qcUynqL4ZS8uZrrF1P1nNBSJZT9Z4ckOUkaXwlChbds=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f328xx.c
+SHA-256-Digest: cI34h0FBPXPNGzA3wibmQsWApWeVKQss5pPIYrHqmRY=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_i2c.h
+SHA-256-Digest: UQCdYbCWhXrChOb0Q7Lv5AY7f5XhJzPfWid7R4a4BPo=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ sdram.c
+SHA-256-Digest: CrC64eKxXNQ1fv1yjMp6YYpz71CQ0FHThYtA+aOAZBM=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal.
+ c
+SHA-256-Digest: hxtYPz3BqylYDsrp1d6LWPIvhyj+wGsg06bYfjkKZqs=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ crc.c
+SHA-256-Digest: 3DPVkTaBDx8Opwg5bDnLwwcULMcmNwJwF0/jQLYkMtY=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_iwdg.h
+SHA-256-Digest: 9I0y5d1wIWo8P+bcBIoUK/2cfE6XHJM/YwnvQLQ6feo=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_u
+ sart.c
+SHA-256-Digest: FYI7vXfUnhsdiWrH5EI1WS129QhVEgMOUw+HckFGzds=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_uart.h
+SHA-256-Digest: FsjE5q//zk0yn25kp96aZ0HGyA5BRvPkWZuhX+eBOmY=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_tim_ex.h
+SHA-256-Digest: 0Se3W58ZmhsGEDMxts70qOCD+7g9wz/4m7uV9tiI9mw=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_i2s.h
+SHA-256-Digest: pBjYbEzkr5wvm65HhU5oiIrYWmnqvH9otm70HHNu9qA=
+
+Name: templates/micro-os-plus/stm32f4-hal/License.md
+SHA-256-Digest: 1SQvDqxQ2VXJJ2LoLEeupkGXjafJQ/JSQN2dONwDxVU=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f417xx.h
+SHA-256-Digest: hVztnkxG8NRWlvQy17OUTof6ApkMOwUkW0Gim4136TQ=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ usart_ex.c
+SHA-256-Digest: nfC/awfKrq7KozjoBeW5mqyMfmqKmY5uvTRuVmBRfZY=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_i2s.h
+SHA-256-Digest: nHj9Ne42D0jAkeplguY+pV4rw/x/qwkF/LzigjqfGPQ=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ flash.c
+SHA-256-Digest: 8wAE848uSs6lJxqJ4B3C3jKVNBzUCQn9Nuy61sWTIaM=
+
+Name: templates/LICENSE
+SHA-256-Digest: 2X3e04IXrsTO1R4Ou8zdJW4tw2P8EG8Gi1qJnQfpNHg=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ rtc_ex.c
+SHA-256-Digest: 36aMuQYndas1kDkmpANDL75EX1CZWsbW6Gh9/KyAPkg=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ cryp.c
+SHA-256-Digest: ruWAveQMPcjMEDOeric7WURcKTb2SXQtddEv946xlw8=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_rtc.h
+SHA-256-Digest: yCIbVBoD+28MWbl+3x6g5Nwmho64TbJwAfKpqZ+CxlQ=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ i2s.c
+SHA-256-Digest: BAypceYfm4H8ZkxKWhgLiQla24N3ptUCmXWiEp9w8M0=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_crc.h
+SHA-256-Digest: O332LJDbSumCFuC73yIQPIGMSSI473ex/9VAnmbeG5E=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ dma_ex.c
+SHA-256-Digest: sNfQbq5TaS6W0wQLpFxw2zoQHpK1pFqj+TZ4RFkWYro=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_usart.h
+SHA-256-Digest: PopYPgoVys3a7E0W49q2XspYNQgspn41dTpFEsDqQjw=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f423xx.h
+SHA-256-Digest: k34ymri41j6VbrDu7FFV1WXlwgKfBPXoNCx6cQfEu7A=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f038xx.h
+SHA-256-Digest: WA5nn/1aUAuoT2VFrRD+PkMTZNEHiMPGgZzw8/zp4K8=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ i2s.c
+SHA-256-Digest: P+E+kD0i8QvZuADL+LvgOHqmwFWsR1oRj/w+g2hEGC8=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ timebase_rtc_alarm_template.c
+SHA-256-Digest: UfvzNxWgGowWHTaQDQaV1jOFR3Kr6WLcn9CPrYkJOaE=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/system_stm32f4xx.c
+SHA-256-Digest: hJeukBWFHOA/SNW/ZNfnIFvXGlAY1W1OXVOlg4iLc74=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ sai_ex.c
+SHA-256-Digest: Lz1zKBK5pDIJt97hidRaYpUPkhH+AaNiYIDKKzv/Trk=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ timebase_tim_template.c
+SHA-256-Digest: icU811U1Bh013v88Rq6TkQmOrliW2xhS/FSLza+5/jA=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ cec.c
+SHA-256-Digest: h7gjGUxkELINyBOkb+wKRbPbPqF5jnfv0/vH4WD0OzI=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f100xb.h
+SHA-256-Digest: o/uwDNwgbIBcO2TKb5Gh2bgW1LBQqI/rWf20UukcHko=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_cryp.h
+SHA-256-Digest: 18hr4VnNUP860Spn7iOyWu9qKwjz2jVGWUUzDabnGf0=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_hcd.h
+SHA-256-Digest: LgE5PWgwBbGGIaTI5eQ9pLicF1zGo8VEcmA17IBWQ1c=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ pcd.c
+SHA-256-Digest: 4qHp9dDNN+SYZ/VewA5cQxjX26Dprlbj+mb4P7g20gQ=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_tim.h
+SHA-256-Digest: ogBPo693sbf486IbKEd4nvLDlLHFOFRjXxYyNujqnqU=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_tim.h
+SHA-256-Digest: xKYKyeXs2jCGRvokmuapFmfG/QxM5yLf9PIgK3Uo5f0=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_pccard.h
+SHA-256-Digest: 0e+C3iTa2pK7cjle7TbUBQ23rGAyjXK8BmMyDQnQ+PA=
+
+Name: templates/stm32f0xx_exe_c_project/src/led-50-cpp.h
+SHA-256-Digest: vLzHl9c6DfvM0DBgEbf9ajj1kXYHT8B6zcgsIoFEHAg=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ dma_ex.c
+SHA-256-Digest: 26U1T70+gstAURsu/HR3wbPeQ1lr0q3WyaSDt3dOIEI=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_exti.h
+SHA-256-Digest: 6tF8zm3Ev9Jmt935Bs3WL1TULfANfK1mK2GHPDT8Ojc=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f051x8.c
+SHA-256-Digest: /5MhyGFMAEBGalQigkJuMRRRMDpF5REm6ed3M41uL2o=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_def.h
+SHA-256-Digest: Uns9/5Z4u77e4vPCmjts72XOEEXbyCvXeUGrHGdt3nY=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_rtc.h
+SHA-256-Digest: rR2RaTJE9ftUxhCXGpmilMaPj6O3082iYowEYpmrvc4=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ uart.c
+SHA-256-Digest: q+rHbL1j70BxjZEVpjCTIMCi+3YSVrc9tdDsrbCmnbY=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_dcmi.h
+SHA-256-Digest: 6FDJCz74q+z4f6jlf9MHeV4bE6lU2Ryl4eLA9qQLCCg=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ wwdg.c
+SHA-256-Digest: NwVMaAW2W8FAON2txZ/seUFEgr7B9Su/jTzm+8iSsKc=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f439xx.c
+SHA-256-Digest: V3hGVlLkIRDHRQfSPQBEhyaKH0ZMQeznCy+8m2zoEY4=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_dma_ex.h
+SHA-256-Digest: Qg0vtXvMnxUvnkEoTFo0+KwQFs1pSGfnWMFmQ2a+L64=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_cortex.h
+SHA-256-Digest: iAMUoGGHroefUqwK3Mcg+vV0/8c3jKqNTUpYGCP5SKo=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_system.h
+SHA-256-Digest: tOGW+HVXtJGoVxoavehTa2WSMuRgqHlC9Y6HhUKYJvE=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_i
+ 2c.c
+SHA-256-Digest: 5o7LHDlRFz1GZ032CeeLvEYPvBnliXxt0R4ZLZcltkI=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ hash.c
+SHA-256-Digest: Pp32c3iMWW2El5DrMrBUA9SUOr3uJcLfH+APjNChcUY=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_usart.h
+SHA-256-Digest: tbmDz4DTfSObojTYNatpsppStCTudvL83A7c8i6uKBQ=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f101xb.c
+SHA-256-Digest: Og2d0Esj9sx1S0Ywf6q+DPSd5a7mMBdP8aXoQZSRxy4=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f756xx.c
+SHA-256-Digest: bDWFENY1f302S8Hi6fF+VJipC9Hir6XLAESWa/fE2HI=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_dcmi_ex.h
+SHA-256-Digest: 8YnLKGa5lVXKsUEAcDAI88sx+34wyNYrN1Zc7tAJkwg=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_comp_ex.h
+SHA-256-Digest: B2pquzC1Lov1myARzfcfXitN2UfFg8oukjOgt2PV4aI=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/vectors_stm32f334x8.c
+SHA-256-Digest: iPvVggUZDpjN/fa8ftQMhcfdVDxqKxbHK0+2kZSiGdA=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ timebase_tim_template.c
+SHA-256-Digest: lIYkaZBtKcU1V7W6+8VelH2jinJDbUhl9nFQy6nXkSU=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/system_stm32f3xx.c
+SHA-256-Digest: OmMg07d+sdYnuHwieKIE8Njqxog70/AW1vxFy1IVXS0=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_conf_template.h
+SHA-256-Digest: r262floE1+i9GECq++CE9cZn6lVthkOW1PH4pAti0LA=
+
+Name: plugin.xml
+SHA-256-Digest: XdAWhV/KLLOtrZLkZYDFLN8WgCOlm9KSX/roUfZDcyo=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_dma_ex.h
+SHA-256-Digest: K8lzRuc1DhU0WcMpihPNihDiNUFADBJIn7Z9qqaMjKQ=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/system_stm32f1xx.c
+SHA-256-Digest: zsYRI9Jk5ND7n6geMPHTJnQg9Kw7xS0F8vrjWBMmocE=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_e
+ xti.c
+SHA-256-Digest: PiCKOuEHcvwEj+QA2OEx64OrGB1uMLbPCli6KQ7UqXI=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_i
+ 2c.c
+SHA-256-Digest: wfK0tVnAQA2L490Tre4iZRoazYEiLDZit6P9ICPNCoE=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ rtc.c
+SHA-256-Digest: YE0R61h8WGFVTo8rbERP+NoDMCp2u0AgjN4F3fhN7pg=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_r
+ tc.c
+SHA-256-Digest: 0/3qP55+++ItPFTlaIPm331oCdFI3vnLS30swkibbAI=
+
+Name: templates/stm32f4xx_exe_c_project/ldscripts/mem128.ld
+SHA-256-Digest: aWNY0Tzl01Y+m/Jm9PH1QcBQtNK3RIyxY4jdhKthLec=
+
+Name: templates/stm32f2xx_exe_c_project/src/led-50-c.h
+SHA-256-Digest: yBqtONSQQEy/pB2tzQAdLPR1xJTiYFImtfkJ8f0fl0Q=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ sdadc.c
+SHA-256-Digest: QC2EpbmX851SAGA4c/VFrDOkvP1HnccOBfF9K+Y/UO0=
+
+Name: templates/micro-os-plus/stm32f3/Release_Notes.html
+SHA-256-Digest: GQMfxM/xjlvXJtqYB91Zo78YbSgztvo7fOn5tcjl/vQ=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/Legacy/stm32f2
+ xx_hal_can.c
+SHA-256-Digest: 9JQRlWY6EuOkjKaUw0YzKzBOW6ayhBtkci7gvDBkNC8=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_iwdg.h
+SHA-256-Digest: m6cUM54/D4JDdxV7yf3irrQVRfdpDLGxrtBPVtpu/Ic=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_sdram.h
+SHA-256-Digest: KaxDd+DPZO5r7tODWHbzkNkFu5/OfkJK047j80ZPjoo=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ i2s.c
+SHA-256-Digest: aEFWVnnAm7ZD31xfkWFzF5fIkHvRJG9OdMdK7CL/dyM=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_conf_template.h
+SHA-256-Digest: f3EaQGkAYzPnweJ4CLLApct/z2Ufx/QzoJJ8sir+A9s=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_comp.h
+SHA-256-Digest: 0ZkfGlJJEUJM+OpVERz0H+dRX3KHTyUmcOHQHKnXzOo=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_gpio.h
+SHA-256-Digest: naqZLdxHIoiha2sO9jhpeMaWt9Ic4+EsOrFHmVRtlEw=
+
+Name: templates/micro-os-plus/stm32f2/src/cmsis/vectors_stm32f205xx.c
+SHA-256-Digest: rZ5uVCHV2ADHUFjQR6Q18v3yXVcd9bHkc/CKNhIsZZA=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_adc.h
+SHA-256-Digest: 2RSnnYwWMHN4Ki41mHLoKD8KXiMEE+9EeqIZFT1+zBo=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ cortex.c
+SHA-256-Digest: gJacG3DjYgex/flxIKNFoIcwgbZB3pJi4KYw9ay5oU0=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ pwr.c
+SHA-256-Digest: Y1IOs3/Q2Vm/PbVqVCbykIHei6ulgNxk6PhF6FPANto=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ nand.c
+SHA-256-Digest: ehTVJxAHcKME8xUdzKhkJTcK4dfvlOFftnYG9S073po=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_bus.h
+SHA-256-Digest: JJngbC1i3kh8DmPGgEgsB4gTF2cPjn8XyedbVlop6dI=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ sd.c
+SHA-256-Digest: 44xS0q//a5RxQdNgh7bSQM6IYvYiMPrGuKBkeXAwwT4=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_rcc_ex.h
+SHA-256-Digest: 4GM/d7zMYaQJnMqtWBsEZbS0Yt7V7AgyBSwEfEtK648=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_d
+ ac.c
+SHA-256-Digest: ElgCMXCmrfLiu0ICwlgkRGNirZbIcSdtgvTzOL88KAI=
+
+Name: templates/stm32f4xx_exe_c_project/src/main/main-200-semihosting-lo
+ op-blinky.c
+SHA-256-Digest: oMIdgkgt2CABacT0ILyMV8iHjITUYNMvSYZAhmfjq3U=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/cmsis_device.h
+SHA-256-Digest: T0SVziLHj4vouXmqN8pKcxtCQEgRIGn8G1XcvrT+AuM=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f765xx.c
+SHA-256-Digest: 00cm9LiSKLdn4rk0lEffRUrtkQ4vvjpcA+qbsp95Qxw=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ gpio.c
+SHA-256-Digest: ODdwZkFsSZ/g3GGry3zmgPIykI3+u/G7GKJeOMIAHnw=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_utils.h
+SHA-256-Digest: vMm2dWfuqm4CBBrVSVNO23vk0DxKeSseMoadC723f3w=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_cortex.h
+SHA-256-Digest: pK5AbQrn+mYCMsxqTlsoSszAc1CrmB0/jrv4XJ1Lxj0=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_pcd_ex.h
+SHA-256-Digest: tmwSkPuPtqL8cHnvThZsAuJuPxScARIaY+JPFvzWxcc=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_usart.h
+SHA-256-Digest: e4oFjfoFTBMoLLr+jK1afp+QTgBx8U+mORn9ptYlcyU=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_g
+ pio.c
+SHA-256-Digest: 1zguTXjaUB44paJjJcqqtkwtzXtXD2ZSgE+BDJCo5Gg=
+
+Name: templates/micro-os-plus/stm32f2/include/cmsis/stm32f2xx.h
+SHA-256-Digest: odjLLsAfh4HW3GTLV31LqlgCzGETejCkEzXsA9SLZTg=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ sram.c
+SHA-256-Digest: UIah2mSNCvGP4mZ4y+cOxzdnnSjTPqvhKNHhryrajfE=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f401xe.c
+SHA-256-Digest: MuQeXFLZ1qVxDO8vUfcHOO6eAEhhhjA/+Kmx4T80idM=
+
+Name: templates/stm32f1xx_exe_c_project/src/led-20-headers.h
+SHA-256-Digest: 47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_rtc_ex.h
+SHA-256-Digest: J9LMczUcr0HPqGVerGvL18mWnSgrp7NzTIre/0UWMBc=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f107xc.h
+SHA-256-Digest: 4CiT5TYnzjQwCa7Tpsfiy+0AFPLLlK3fjeRS3eU3NWc=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_conf_template.h
+SHA-256-Digest: ckefGqPZcwUxFy5XteIRAHfkAqeRYosvBIJnW9EmJ2w=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_sdmmc.h
+SHA-256-Digest: h4z2g4sB2iVTvZmrpUiNG1ZNsn7bnAHJqAshUMrnFaU=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f446xx.h
+SHA-256-Digest: iLSbOQH8Q258hOwF2e1b6fAfH/hfTXnk0OUYefVZdDM=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_fmpi2c_ex.h
+SHA-256-Digest: p1UOwjG9OTzlDDcuSZCO7znKWNWsgq0DW89nY35PGMI=
+
+Name: templates/micro-os-plus/stm32f3/include/cmsis/stm32f334x8.h
+SHA-256-Digest: evEVf14rGli+o1fKdKio+6hESxIrQhgST1BiUuxPE5w=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/README-DEV
+ ICE.md
+SHA-256-Digest: HLL6PWOgPPiNmG3XWa7mI5vh6QeVSjP6kj3GMkWjlpI=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_rng.h
+SHA-256-Digest: z29tHBW8LUQnGs9WMCna5s+YriDbZHt+Yq9MZrYXuN8=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f750xx.c
+SHA-256-Digest: bDWFENY1f302S8Hi6fF+VJipC9Hir6XLAESWa/fE2HI=
+
+Name: templates/stm32f7xx_exe_c_project/src/led2-cpp.h
+SHA-256-Digest: XKamyp/KZTMBxlU+6c04ovzY7VY3eEKpt6tQJuhgvmA=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_smbus.h
+SHA-256-Digest: yk3+pugJ5wQdxHUq1DVt3yIz3+dYonbv49lXw7IzWvg=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_sd.h
+SHA-256-Digest: 9Zo2lc8LlxdGSJUrjtFCVMIc/PGnC5MldcN1vLiI/Hk=
+
+Name: templates/micro-os-plus/stm32f0/Release_Notes.html
+SHA-256-Digest: WF9pxaPfOuUaJrsPc3vCa70y2EwMGwA3xl3KL1j8EG4=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_conf_template.h
+SHA-256-Digest: dsHs/4fQs+XwpoSynfh2i0+5lz0loEFkrlVnOtElE3U=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_flash.h
+SHA-256-Digest: IXRAQuctsdMkEhq7iUu7TGuJp6Kat3J1URMyNnQ90iE=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_sdmmc.h
+SHA-256-Digest: RaEPZIOuWC0PLSS5ycXv7YmZFrvsUC9v0ARUX+xcJhA=
+
+Name: templates/stm32f7xx_exe_c_project/src/led.c
+SHA-256-Digest: qIEytjrH9NW0A8NxLiNugM/elzvsLxayecmdE4MMc7g=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ iwdg.c
+SHA-256-Digest: jmota85a0GeG6rjXX/qYoqIQrzDhempTYqQZ1XrMBnY=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_ltdc.h
+SHA-256-Digest: sGT6sFBI7Ib00nnYNwpltCxe7EIeHmytBW1bvuj18tk=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f091xc.h
+SHA-256-Digest: DyQUNiDYbrtriLU6UjHT4vy3rRw0yAz2g9Gc71zzQ5U=
+
+Name: templates/stm32f1xx_exe_c_project/src/led-50-c.h
+SHA-256-Digest: cY+77jnSlvZlXTpLbJntELO2h7uoWhS7XJa5qvGpOUA=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ timebase_rtc_alarm_template.c
+SHA-256-Digest: A/xDNO957Lf/63y0qBbmbQShl4Z1M9kMduMsUF+ZJWE=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_i2c_ex.h
+SHA-256-Digest: qgQBQ7KYk/qZB3YtY9q8eJJrF6oUjjIC9ItUl1FZJsk=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_comp.h
+SHA-256-Digest: CMiYFFkshENjDGaOJVLko1zWz1/mccHw+vdC+uuSahg=
+
+Name: templates/common/src/led.xcdl.h
+SHA-256-Digest: PCceXHwQhYpI3Sf4tejs3NFnb3YJAl+nYLV0cTVhcj8=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_usart.h
+SHA-256-Digest: XMJhBK4/L0Fg4n4sVxw/eH6LT5dlxKgAQNgBRuy/a8E=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_nand.h
+SHA-256-Digest: vekj+BtWBcsa8Rodi0Hhw7f2QhXIJZse6OPrZW3DdcY=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_tim.h
+SHA-256-Digest: pXmDaZ1Lcp2h7W/SAJqxc2bgnDjFJPsG8OHO2+auhoo=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_u
+ tils.c
+SHA-256-Digest: WIXk/H3yvH9qtbFYSGQN6ZLf10bCqXOkTRRSvmq/flk=
+
+Name: templates/stm32f2xx_exe_c_project/src/led-40-defs.h
+SHA-256-Digest: bbA4zj74e12G9r66xDQSAuQcv1FpxGHSoFzI0sf+lVg=
+
+Name: templates/common/src/led.xcdl.c
+SHA-256-Digest: JiDBEUVTsjs0WgMfxpuK/V/DW87s7QItbD6Di3D/YkY=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_irda_ex.h
+SHA-256-Digest: re9/QtdtLHPUKrTN62l0V8ahDJknloNG6UucG3P7XFo=
+
+Name: templates/micro-os-plus/stm32f4-hal/Release_Notes.html
+SHA-256-Digest: FO/H7MQTfdCFjLDuobjGp2NfUSMTYozczm3eICXVr2g=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_rcc.h
+SHA-256-Digest: mPYn+wz4CWyInKr690xtTy8pSIVojI6NRjvf/jOGTxo=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_d
+ ma.c
+SHA-256-Digest: DILzCmZ9KwgBYev55uqDCso+DqNeSW/65yPm16XsE88=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ can.c
+SHA-256-Digest: xvksmBrE1rKQBryOUAyGCNXMr4VbhjAlHxcBvLRv+AQ=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_cortex.h
+SHA-256-Digest: os9mNuUOuIHUN/NP/GQ7Y47WLMCm+VxaDhe7g4wSjd0=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f437xx.h
+SHA-256-Digest: m2sye+0KOYn3Ej69/khSK+JlhJC5adBiK36EF17XLxA=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_smartcard_ex.h
+SHA-256-Digest: o0XkXnjQMc8v/q8kvUIT+Mej8yFOhaiwT6e//7Tj0Fo=
+
+Name: templates/micro-os-plus/stm32f3/src/cmsis/README-DEVICE.md
+SHA-256-Digest: 2BoDv3qfVmJy8FUPrk8zvCocLnpKTP967GVENtOtkKs=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_spi.h
+SHA-256-Digest: zoxtjX7F+jpqD4oIryvfegov7VbGN/V4gx0aXZG0TYo=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ usart.c
+SHA-256-Digest: 6AdbjhTcxjoUcjVShiTa629pRxGjbDiHOnDiJUtnxLw=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f407xx.h
+SHA-256-Digest: 4v4boLCCwq02X+WY1kljHwdMbV8tmeblYJJUTB0PyEU=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f030xc.c
+SHA-256-Digest: Mn7lw5VOcJLXPgFeynwSd8uNDWLoxjX/Huot9PWaz6k=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_i2c.h
+SHA-256-Digest: PXHeebTrFm2nW/rIIHfy1fuzLavv+5h67g05vfcnsA0=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ tim_ex.c
+SHA-256-Digest: Anv68Aflof8er6s/q+GHK7Z9nnRJq+3llrulNIk01s4=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_dma.h
+SHA-256-Digest: YKzQv5gB23avI9ltymkw6EJ9maff2EzPl3lyUcIXTJ8=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_crc.h
+SHA-256-Digest: jrR3NUWNZlxqJ1GDFy/RhPC1XGdGTVtzg5Dyl37l0mA=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ dfsdm.c
+SHA-256-Digest: wEELdsKQQxM3G3yIDkGb0/VPR57DdkRGChNvzPVGjmk=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_gpio_ex.h
+SHA-256-Digest: c1ylxvpBuZNGi6SIALceydr8uTVpLH/WZwcqH5Famek=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_pwr.h
+SHA-256-Digest: f6lQDY9rzZpFGjMEVpX+A4DFZAO4bkFC0JwTIiZr4Nc=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_f
+ smc.c
+SHA-256-Digest: IgW2vwkUu95kMmPpT5EUup84BzHtXtvL8p7ua2LXXYU=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ rcc_ex.c
+SHA-256-Digest: JrnZ5kGZRy+JUHwC0CKyqkGDT+711qfWGQV1qPk2KWU=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_gpio_ex.h
+SHA-256-Digest: rR/XYu/Ty+nizMYf/u8aW21/z7rJHDAiIyVn44hjLoc=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_crc.h
+SHA-256-Digest: sHRwKAv64IpKu2mrEPM6vODIJB/O1uHOP7kbg/tj/nw=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/README-DEVICE.
+ md
+SHA-256-Digest: TjR2CiKxeI23NLyBcTy3+XvMsEqbzm2He+iPXyS009s=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f100xe.h
+SHA-256-Digest: K52Ih68q8iVQvIjtiDG0DlFAa7vpkyXUm/df/bmnYqY=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_i2c_ex.h
+SHA-256-Digest: shqNaDnLM2lK0YUpIdYNWFXcUDGmMuCaz2EVKhkGfuk=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_dsi.h
+SHA-256-Digest: J7KYIAW0PGpNfOnw2KpnyXPIcCo30v+7qKCODRdiVTQ=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f107xc.c
+SHA-256-Digest: TPJ8tJ1DzRwaMkBdAo5fKu2mcGQwJndoHzJUW+9UHCg=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_dac.h
+SHA-256-Digest: GX+hPt65NKc2VjhKv6cdOkLtwSVYpmPs13viuq2Bflw=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_def.h
+SHA-256-Digest: R8Pt8H57QRwDvh3IeoF3aYyUze/MrvIw4l0lOp7SgCE=
+
+Name: templates/stm32f2xx_exe_c_project/ldscripts/mem.ld
+SHA-256-Digest: X9C5rDROUNk5PeRY12/sPnM8ETImDVu5eMrFSfTHpj0=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f779xx.c
+SHA-256-Digest: 7aR9lIHlDQzO5ilTLVZ0jcaK5/Zlzisi9eEAUbKqazA=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_adc_ex.h
+SHA-256-Digest: YESHtWx+Rg629MKv0ENlF0uIh2pbVkqvqQ5Meauj+Vo=
+
+Name: templates/stm32f4xx_exe_c_project/src/led-50-c.h
+SHA-256-Digest: Mqz639MNghpWZ/Xb2s7cWnuxC8mWSRevZrJYXJYNxzE=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ fmpi2c_ex.c
+SHA-256-Digest: MY4agzwLOLsBONpSjTDUq3AYyMcE70OPBEXHq1cJYWo=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_dac.h
+SHA-256-Digest: K9mr6aN4qtbFZGsDHJYxpWeJATvlwY4xT7r0mbrFsV8=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ spi_ex.c
+SHA-256-Digest: N37hlYZJJlVUH51mLVNH3ne2JBJP7ONtEw7LZZAcJEw=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ pwr.c
+SHA-256-Digest: CPdyqRqlePOvIcvNErxKywo4MEY0Plgf+hjXMFaUxrE=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f779xx.h
+SHA-256-Digest: eCEiTKW9KTm2XUgMU36hL2GhUKSMDaMhkYkuCen/a8k=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ pcd_ex.c
+SHA-256-Digest: GwsfHKZMbbT1fRJIeeBxuDlzTHmLkfrJXd1rbPn018o=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_cryp.h
+SHA-256-Digest: TjgJFPLwr5hbrladRAfc6wMKWJ5vVmZdDhbd3AY5qQo=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_ltdc.h
+SHA-256-Digest: sjBDLqfLs2gc87/onmFrHrbqkMsa/nnwCU80TvZZvRk=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_s
+ dmmc.c
+SHA-256-Digest: 9js0+GlHEMgkgbVQ70yek+UIVyNmJOxrQ2MzR3V7Zo8=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ pccard.c
+SHA-256-Digest: Zg2pJXXtEHqaZbtpXtJlxaXvtAoOtdASv48fC5s91j0=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_eth.h
+SHA-256-Digest: b/ekF5hpUyJgVR7crgi3XLdVCpV+QZ76VXXPuT97t28=
+
+Name: templates/micro-os-plus/stm32f2/include/cmsis/stm32f215xx.h
+SHA-256-Digest: 7DtRb47rvdV4tEaf58RKFgIYX1Kl08oHl13jhkNAiNo=
+
+Name: templates/stm32f3xx_exe_c_project/src/led-50-c.h
+SHA-256-Digest: yBqtONSQQEy/pB2tzQAdLPR1xJTiYFImtfkJ8f0fl0Q=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_sai.h
+SHA-256-Digest: 6OF9PJbqtDaJN8K/Oc7bWMLSPdhJPkPzUCYDKW+xklk=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_opamp.h
+SHA-256-Digest: ORekAMUIXE2oWNoCuXivi9CEMXUYR44dksCRsvXnK4A=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ adc_ex.c
+SHA-256-Digest: RZHgAK1i01lZ99UDgJbOx26u/anxuREhJbLeDGyWOtA=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_exti.h
+SHA-256-Digest: KwSoIbNUzRv+6cC1ik/6eRo2r7i6l/ZEpkI8MTPzbx0=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ dac_ex.c
+SHA-256-Digest: y9ZKl8sjSit4KT6DBUsfMpA7f3a2CdsFkFZzkxalxEo=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f058xx.c
+SHA-256-Digest: l/13RnOCTpUaOSdtx/82zbbMQfPrkn2qZXRnF4Oic7Q=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ exti.c
+SHA-256-Digest: LPkhFI7ZeHu8pMgnWGJKWQQH4w+yEwjH+pvj24fQqkM=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ lptim.c
+SHA-256-Digest: PCmNydL4Iey3QDfEy7R/yGJpHgfXb6L/mFKexXScur4=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_utils.h
+SHA-256-Digest: NWjy8jBg/6YFR5d0jkeoFHfMEnP2WK+RVWLv8SZ8OVU=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ hash.c
+SHA-256-Digest: 4uKPZF09N0zD5jsF4TLtr/9yqqB00Pszp/y6+r/6+6w=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_cortex.h
+SHA-256-Digest: SFvBdcWCJvAq+XvnPM9q+94EhZ0HgiHLApir/zexnN0=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/Legacy/stm32f3
+ xx_hal_can.c
+SHA-256-Digest: PE/+iQo8nD3f6RzgucGAKvKnUQHizE53K4zMGpWJ7Jk=
+
+Name: templates/micro-os-plus/stm32f7-hal/Release_Notes.html
+SHA-256-Digest: 3L9hh+zW5MG2revTEh49Ck/Sp9JdgfHM0XuqoSzTQWk=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f415xx.c
+SHA-256-Digest: U4ENdi3aLaiRu1W513MJkh85IMPLQrSk6msAsV1tL7w=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_dma_ex.h
+SHA-256-Digest: sKIHaiYVew/DEjJ1HyN2M6qL4FMHcZR7hvpKKBeCIdA=
+
+Name: templates/stm32f1xx_exe_c_project/template.properties
+SHA-256-Digest: bPmwpcGlER4oWEpFbmsP/OGH5sXueaqf5hteAu3Cclg=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_flash.h
+SHA-256-Digest: iS+wEgG2+hJkiD9A2KtJJegOMLymjcNzv0lK4+yyZdY=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_wwdg.h
+SHA-256-Digest: JzHfDOnp1fbULqwCGO9xzofaPU8wSkNT2Zm6Hk1aiFc=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ tim_ex.c
+SHA-256-Digest: +nitOmdnef8lWzZRfy615uZesflLvc7K9BKcvby9HA8=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f410rx.c
+SHA-256-Digest: UNXFQJD9tp5SBG8dsQuwa07cJxCuN58mGtR6wp2BiKk=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_nor.h
+SHA-256-Digest: XJa1A+VxGffDHRnDq0uwNDHZ20RsGeQ3HFolGEYTXRs=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ flash_ex.c
+SHA-256-Digest: 3yWuhlBdeJM9h57bQ08QcJvTH60+pfKElBjVH4sU4bE=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_adc.h
+SHA-256-Digest: wzBPRO4gWg1tE4q5QKCZzsPG1l1DB9+eTYr6zaxFGio=
+
+Name: templates/stm32f4xx_exe_c_project/src/led-50-cpp.h
+SHA-256-Digest: vLzHl9c6DfvM0DBgEbf9ajj1kXYHT8B6zcgsIoFEHAg=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ nor.c
+SHA-256-Digest: dgjGY4t4r2bAYk1fiVZdEe4PV0YUqSAtqAgj4wKEA5w=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ dma.c
+SHA-256-Digest: ROTIdeTu92PoeHB4dB3/FzSMH1zlbiLG5LJzA0eq/NE=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ dcmi_ex.c
+SHA-256-Digest: IvBlNXFh3KZbE7jTH17wmX5IycrmOijxe9D383TXBs0=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_dma2d.h
+SHA-256-Digest: decWJMswGP4wre5OloRkthOkr0d3+a/ejqjuXGXzees=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32_asse
+ rt_template.h
+SHA-256-Digest: 2msjb0FiGA9V9A7wftoFUyWQ98BS2PAPuCQXGYXcgN4=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_fmc.h
+SHA-256-Digest: U8rarBWQfyFJcMUMJpX1zmhDFXxnXSS8i4l8xIbRNQw=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ nand.c
+SHA-256-Digest: AccU/cRuMtkahQIxb4G1xpZlUpOKCRk/SxGn4Nnv+Ts=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_usart.h
+SHA-256-Digest: m5IDGuEC+v+VZ7s3tWAQPUFKcs62HcMyUBbl4qkq1ow=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_flash_ex.h
+SHA-256-Digest: BmfnQuIOjY2zjZ15b9GlF8gvVBJ0SrRfnLngPETp9qE=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ timebase_rtc_alarm_template.c
+SHA-256-Digest: je034Rv2Svu64/MZpVipqetf9Xohi6auIcB9yx9QLUc=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_dma.h
+SHA-256-Digest: 21VXGB1Zo7+bOrQMOWaLHHFoA+MXyImFuoXDGfDg7V0=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_conf_template.h
+SHA-256-Digest: TRetJancLXeVATFS4MGpgihWcIcayJfyY57otXHeOX0=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ wwdg.c
+SHA-256-Digest: 53jRW0YAWqkD4DM9R7AgHqZkVFutnaCDrQdrzA2je6w=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_wwdg.h
+SHA-256-Digest: mHXdDr0KJh8JPJvSop7VXwIWTErc+VeIECGxL8xf79s=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f469xx.c
+SHA-256-Digest: wnT7NE7Hivo+MKQ1Hm71pPAEGQo+e/QAsw3fTe8cuD0=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ pwr.c
+SHA-256-Digest: 1iigZnpvdZDF08r/+VV0KDdDIVshW2hrovaWSHVOIAM=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ wwdg.c
+SHA-256-Digest: bFUTMpLFLL0gpxd70xpNPRD5tuJOPEHER7OUi5yl1fg=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ rtc.c
+SHA-256-Digest: VeBjd77X0ptB43ZVhv56owJvKcmO/8B1mqCsN4XDJOk=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ uart.c
+SHA-256-Digest: ay63GZdj3VCsOG/ELnc9ebzae0v0/cN4Q31TGYLyaB0=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/system_stm32f1xx.h
+SHA-256-Digest: RVBRlrUVO+dY+3FyZP6JdJMAOonhiJ8fuu7znUghElA=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ smartcard_ex.c
+SHA-256-Digest: Qk57wRKyLUGAXzAABvusctLj/Rywz+4QMOaInO4o9XE=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_i2s.h
+SHA-256-Digest: 5mWK0bIqHfGXWsphUEK/affB2Ts9hKU4GzAlUt6fyio=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ timebase_rtc_wakeup_template.c
+SHA-256-Digest: HQ6pKMxYLlTkmmFa5YGYIeykzZU8ryQaZOET/SsxZJs=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_tim.h
+SHA-256-Digest: j8kRQLjwTCaAQOkHPresGCyO7CtryGrU/biqToro2N4=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/README-DEV
+ ICE.md
+SHA-256-Digest: XDbNH499zgSwQGWX/YZD2igpI1iN6Prg+pDWAJtCNKc=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f101xe.h
+SHA-256-Digest: BsNWemHnThm/lvXNcgsKmTkgX3QL/wMB4Jk29nWzZYU=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_flash_ramfunc.h
+SHA-256-Digest: Ba6H3ij3QkwYvy2h5fXddQSiuxzHE5u1z/4feT3HwFo=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ mdios.c
+SHA-256-Digest: dBOpOM/bZ26TIkSNawPr2B/vAZnfkG3KUc/AYINgcQQ=
+
+Name: templates/stm32f3xx_exe_c_project/src/led-40-defs.h
+SHA-256-Digest: 8GXko2pShjnCLdNwDmPZy6S8gnl2NrYFgDQPwP3hEEo=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ i2c.c
+SHA-256-Digest: uhfYsKY4YBPbhIF3HWDx5VNmGsMloKCzj887wlXde94=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_dma.h
+SHA-256-Digest: BTq9niUwY5tVUYgnITSF6njWwoE5VDohYX5FiIaAbP4=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ cortex.c
+SHA-256-Digest: pKQ05nat92TDQZEE+c9WpehTEzcn0S7Zz3fRlBgEOXk=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_flash_ex.h
+SHA-256-Digest: 9eQeiJIdnzgdvOmCjJZjSxA1inrm8t6JVOtw7NP81gI=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f410tx.c
+SHA-256-Digest: kXrXG4vv2RimBQLkSDCJYySfNFHQQIjLEeJJhUwsLfg=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ dac_ex.c
+SHA-256-Digest: BqQrrKHrCPWmI7JxXFqx7WmSwjIqyyErCKaPVBF3R/Q=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ pcd.c
+SHA-256-Digest: wb1hFpIoeybvILCLzHUXMx7PRwOFhV/hLT2Dwki5H1E=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_pwr_ex.h
+SHA-256-Digest: rbDHrbAJ740Xj3BmmBStA/qpyllsHRYM15d+eM95Cg0=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_spi.h
+SHA-256-Digest: faQzw2+WancH6D7FurwINBob001FmmGCXryhsyqNY3k=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32_asse
+ rt_template.h
+SHA-256-Digest: 2msjb0FiGA9V9A7wftoFUyWQ98BS2PAPuCQXGYXcgN4=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_usb.h
+SHA-256-Digest: e2+1vkRJYQvB8HpqfI1rac0kIfRHeM03SAjpAYqG1bA=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_cryp.h
+SHA-256-Digest: b8IKIZxIfARXIbhKqA3wjR6Zk9EwjJJiRldMtOM7cwk=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_system.h
+SHA-256-Digest: 4MBoQTCyjxQcawMt1SJcEiTeJCEXRNyH2QvNm8cSGps=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_dma2d.h
+SHA-256-Digest: 27QYu0dF+C6sqTBc+YeL58Lw4UFO+rAkFDaep+Y3GGg=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ adc_ex.c
+SHA-256-Digest: 7fFG9+177wTeEoydRXk6h899YiCbsNbJPE2yCme5qfw=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_usb.h
+SHA-256-Digest: mDLCfTO1mQWq9+ttJp7DzFv3sjUBwDZWtsJA1xiI2+I=
+
+Name: templates/common/src/led-60-end.h
+SHA-256-Digest: w2sOwOim9h4hompWDQuC9yN+lEs07OQjT/3L0wyG/UM=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_smartcard.h
+SHA-256-Digest: SYzzjaX9MGucbA1MDNHmcFyYndIDtN/1PrnbwdAoS7s=
+
+Name: templates/stm32f7xx_exe_c_project/src/main/main-200-none-loop-blin
+ ky.cpp
+SHA-256-Digest: uRQgAbxhL0rMIvGoCEB6Y4lAA4FSxHPYhGUq5uh3JJQ=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f765xx.h
+SHA-256-Digest: QaIbjqiFBB0aMeyu1oUi3JOvy69eJw+Q/n5qiTRXz58=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ msp_template.c
+SHA-256-Digest: wP4mAUDZcoOA3FvMuRKFd9FcB7r5sj2u0Eduof3ZWiw=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f722xx.h
+SHA-256-Digest: fFhJK8+BDvIWfPzbhJj2uaFjq53A3e9wKFEToQP8UkQ=
+
+Name: templates/stm32f7xx_exe_c_project/template.xml
+SHA-256-Digest: 33ZKGDwBYyonca048drVwsIkujUdWzOpYH70xzY77f4=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f102x6.c
+SHA-256-Digest: V6hxoS7ypyjoos/EXX6jwmvqY+3LpXJ0T503DBNkZNQ=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_def.h
+SHA-256-Digest: +THqh49UGSNvJYR4tVBJynr6tFEcxEKQnWbsmzpPtlI=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_pcd.h
+SHA-256-Digest: kBVM0Yc1olyUPr5N93TBOTpjUQwH2AlSReA60MR1kCU=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ adc.c
+SHA-256-Digest: 1t6YXxF+i7sZUOkc2A3ow9BYNuU6UT47Y7AtvrKqBdQ=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_iwdg.h
+SHA-256-Digest: 3MA9PSTFY4MkVD4IznBvvON+LcO4Nm2S+WdVGKooUe4=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_iwdg.h
+SHA-256-Digest: lRuiN8k4T632qtscCD9WIJbLoIxKUjxGfUjsD19K6Gg=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_rtc.h
+SHA-256-Digest: r1ASsqp7A787bCXNhhRKvS8xyKcUjLtgcWG3r4PtzwA=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_nor.h
+SHA-256-Digest: 7otweEcxE4P+1lwzguYx8289eLOJg8G5mnvdD7q2SEc=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_rtc.h
+SHA-256-Digest: waZwvsU3jHbcxWHYTRX/1NWt+xwfrE1PKEESe8e57/k=
+
+Name: templates/micro-os-plus/stm32f0-hal/License.md
+SHA-256-Digest: vp+am1WMjlOkLz6JHgzFfh79JyK7U6XkC3hOmjwa8ZM=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ pcd_ex.c
+SHA-256-Digest: 8kzkx3wljJ/aAuzlmYctsmr4E0xyuF/cwUAynFRVGGE=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f105xc.h
+SHA-256-Digest: TxjUKcFd/Fszs5dtI9CqG5lX549s8S8rAEhSjVtdFzY=
+
+Name: templates/stm32f7xx_exe_c_project/src/main/main-145-leds-blinky.c
+SHA-256-Digest: 47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f070xb.h
+SHA-256-Digest: 2khsmYIDsQ0DwvO8qUo3zSi4w/W8T/K8iB2IeHHn35s=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_i2c.h
+SHA-256-Digest: EXeJk1P1my/T2YEn54/WVGZ+RY+x9xMJk2NbOw6+loo=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_c
+ rs.c
+SHA-256-Digest: Y/m/ae82SEEXo9qU6B2RhhCtELEKCM76vhIvJNKKa8c=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f405xx.h
+SHA-256-Digest: 7MBpBjS6ml2voCzum5MHdO5oUd+o8RMbxNd6y5VkDd8=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ timebase_tim_template.c
+SHA-256-Digest: ABg5qoDJF+k3cBer1mIKRGE/DntSHOYHKQV4PVijhWg=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_iwdg.h
+SHA-256-Digest: el88fRxt9t2FSQwnlHBuub/ZAlh2m6X7Jxpls7rQ5EQ=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_exti.h
+SHA-256-Digest: QPWYnUR8X687vwEaxg/xmh5gBciYxgAmipPHWEe4Uss=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_u
+ sart.c
+SHA-256-Digest: lNtkHXqZbf1FmMdWpkLfnbOs1gG2MTndJ4dBfE1SKDE=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f103xe.c
+SHA-256-Digest: pE5k+cqiEvjmSDMefqeFlkicF1vh7TAcZxIDwYU3n2k=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ msp_template.c
+SHA-256-Digest: rg/TIy70TN54jFZsIDEIXdUQF9tvmChLeEeHccwd6FI=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_rcc.h
+SHA-256-Digest: 355f/ynBQCiQrHoDWbjffuR1CRzhOenTj/2iavw/A8M=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_u
+ sart.c
+SHA-256-Digest: FyFnlcdkphze2JWJIlJsirJyW68PwY1UkuNY0hPikfE=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ mmc.c
+SHA-256-Digest: TyEFGzF7IyaP+UxCBX6CzTcUy/ULu7ZyaV3+GePx2Fk=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_smbus.h
+SHA-256-Digest: SI4GgPRU6jDSL6XBN04JGM8jSGiqZoUTOLPjMzso9bY=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_s
+ dmmc.c
+SHA-256-Digest: nkcq10Fr1aM5gBA6fyk8doI6aP4fEprDRotVMpH9gJA=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f098xx.c
+SHA-256-Digest: 3Bc6pTpMJjhZMwTJRRTl5mle4LXrXuxMHQ9jtzVXf6M=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_pwr.h
+SHA-256-Digest: jyh3YrH7jheazbJX+Di7qRB3BOsG16c2LBoOZPOx4hg=
+
+Name: templates/stm32f3xx_exe_c_project/template.xml
+SHA-256-Digest: x34hZEPIhGFe4XQxEXmRKkxs+Z/X7cPVMzXR2bnGkjk=
+
+Name: templates/stm32f0xx_exe_c_project/src/led-50-c.h
+SHA-256-Digest: Mqz639MNghpWZ/Xb2s7cWnuxC8mWSRevZrJYXJYNxzE=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_adc.h
+SHA-256-Digest: KrJ5t5ivf9xb0b3RPbtnkwApMo8rbRag8a/1AAVdpAk=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ crc.c
+SHA-256-Digest: 0ZExPMuHB/I7Vfy1rG0Y7IPnX067amRU1VQ6JqtEmRA=
+
+Name: templates/micro-os-plus/stm32f4/Release_Notes.html
+SHA-256-Digest: 16oCZ5S5rvZ5cSoR6PUD1T94I76/aXVJmJdQLMoc8PM=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_adc.h
+SHA-256-Digest: oHFHVJamStle3rHlwxsEqQswzfQKDY0zEk0m4fqIpMs=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ smartcard_ex.c
+SHA-256-Digest: 9aPv3otjir9D0IpKQrm3IhR7XEMHSjOj7tc7OEU0KZM=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f103xg.h
+SHA-256-Digest: l0knAtFudmwg056AeuuQuaMxNvGkG31108wBYkxZzJQ=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_hal_
+ pwr_ex.c
+SHA-256-Digest: QdpTZs/bKdW4bgrXSoiNNGY60LIRzRfY8UZnQJi5y0o=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f078xx.h
+SHA-256-Digest: Q7HXCyQkZaXcjKx7gadL6OqKE6GcFmNkJEYvvoeaQS8=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ rtc.c
+SHA-256-Digest: n44A2Q65AyzfxK4sMenJ7mXuHhRkoD+nBmaN4YT9UUg=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f048xx.h
+SHA-256-Digest: GGF0v+YHr/7qwyR7NAzTyIbxLfzFlEZHvFDDLwHuk14=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f101x6.h
+SHA-256-Digest: lhFrg+h1VfL7bah7eEo5jGt86IIeobnHIws/YiU0rgQ=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal.h
+SHA-256-Digest: HzKQ7udnOEt5yvJAi5V9xVnkCTETn7ycOVfewptcEwY=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ hcd.c
+SHA-256-Digest: GN7UKdAGvfv9JC0AIi63Pogcr/7G94ina4qNlYnrzGY=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ lptim.c
+SHA-256-Digest: qypi2ydXBFOrcCAR9wuA7xqfuwIbXRSGT1XwHWm6yHM=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ sd.c
+SHA-256-Digest: AymZvrUzSaraetquZw+o4jzRkuvWBocOcxHXSQaBPlA=
+
+Name: templates/micro-os-plus/stm32f1-hal/License.md
+SHA-256-Digest: vp+am1WMjlOkLz6JHgzFfh79JyK7U6XkC3hOmjwa8ZM=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ i2s.c
+SHA-256-Digest: /ozZFqYZRIgdMEdaQlGwGZyq6uPweS1EOm6VNCNNN/0=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_g
+ pio.c
+SHA-256-Digest: 03E1hklaEM4v0bt4SvYCLQaIqGOnWn64X2/r5F6j6uc=
+
+Name: templates/stm32f7xx_exe_c_project/src/main/main-200-semihosting-lo
+ op-blinky.cpp
+SHA-256-Digest: 50qkUDAfhr8op5Qv+RIk9DfVtA0kb33ZCyrGe1B1c4E=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/Legacy/stm32f4
+ xx_hal_can.c
+SHA-256-Digest: HZitya0FBA4R/Ve6vKZjrK6m2TdmmripfXzwlAh+pac=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ eth.c
+SHA-256-Digest: nVABPoyC+8KWd412X93ZohUGWVZXaUN9I/q4MmHI34g=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f103x6.h
+SHA-256-Digest: u0w+rP8dGNxvCsWUpAExf3eEeFt9vK3kvq83uXDKFHw=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f429xx.c
+SHA-256-Digest: Ybtn5s9tHv29FHzhuliZeV1ciwtCu+8w42K52YBzWkY=
+
+Name: templates/stm32f4xx_exe_c_project/src/led.c
+SHA-256-Digest: xYIhYBYh6Ul6AmQYFY35C9NTA+nG/kXOP/LLcs2zqNs=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_dac_ex.h
+SHA-256-Digest: z/1q5Ve8wwHw1Op/MKIKFiPF+s4hd/jIilA2qysxdws=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f101xg.h
+SHA-256-Digest: 9XdSPUh1oVOeTKbIHFZXi+XaN6RoE6SZOjxBG4Dx+8w=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ dsi.c
+SHA-256-Digest: QHnM2egqVUdeIs9/ugJca/RqCAAswe4KhQkDWqakFHI=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_a
+ dc.c
+SHA-256-Digest: 1mHk+pRAXThSgZPAIza9GkXkrBKfJ5x8+3ooAC+1dno=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_usart.h
+SHA-256-Digest: D0q5ucVTGuEnz31zgVWfGiwSrQBz/zndVm3rK44AN7c=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ cortex.c
+SHA-256-Digest: ByXmVp3gga2pUOPIj6GqjUSCJyVt/fWlqC7OQvRWWoU=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ gpio.c
+SHA-256-Digest: WW/1NDsqVxoo5MA0puK6Dz8b7huqwLhGNT7xgoIPpi0=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_crc.h
+SHA-256-Digest: gM/Xs7qogPlR7kVyvvqHmdCY8BwN20Id14TEJQmLEwM=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ sd.c
+SHA-256-Digest: 2PkowD2t6vcydqlUx+whVrYo0vrWA91EhzARKa+qLFU=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_pwr_ex.h
+SHA-256-Digest: 88Ggj+Q6CjSzXLcw1s1b9EEr0ktHsydAfCP8ksuBrYo=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_pwr.h
+SHA-256-Digest: M5g0a7/9/fNCSZDcO5WWCYqWrIEW9d0xeZbNplR8bXA=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ ltdc_ex.c
+SHA-256-Digest: 5HfFndBPLzlMPIy3Gr/hYk0NQWYHoeWnZi2LslSvXjw=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_ltdc_ex.h
+SHA-256-Digest: boY68wKiPXrLX/OGrXclWIY/GqXhvOzlOVRDurtsS1U=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ rtc.c
+SHA-256-Digest: ZRic0nRaT1S5zAUK+qRiZSfo8D+qSeDXn7OKn6cr3wo=
+
+Name: plugin.properties
+SHA-256-Digest: U/kfPpYrOIn3n+0QKiVBGM/oOZdKigmbhk9B3AV8lqA=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ nand.c
+SHA-256-Digest: lIf4Y8eIrzZO+N7TbNlHN42DvCSpF5sxhfiSZSPYkwc=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_wwdg.h
+SHA-256-Digest: qXPOMAPXgC3Wwlv1cgzI8qaBo2LrW/zok4HiGgYMASo=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_crc.h
+SHA-256-Digest: wh7tVhXFQdwn4DDeiPxQSMwSHqgFPydw9xRnIBrWZyE=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_pwr.h
+SHA-256-Digest: AMWkRuNZkdhXED3OtjcYIEr9uMS2nUSarSxU/N2swdE=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ adc.c
+SHA-256-Digest: fAmvXUwikhfCZVE4twO/UkPXbwEvTU+zQ5FNslp7Y1w=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/Legacy/stm
+ 32f2xx_hal_can_legacy.h
+SHA-256-Digest: OornHdlSm1u90NlCm2bGCblnGSEjfY5b5S7BcNOLOxs=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_crc_ex.h
+SHA-256-Digest: /gfm2NwcLoUN6j1iQkKmQuO8GK3S/bEJW7uojnW9WrI=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_i2s.h
+SHA-256-Digest: ML21daeX2J9TxTZEHbg+wKVkf5Rga6ly2pQRq6VGaNA=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f723xx.c
+SHA-256-Digest: x0jtUxwUTv0NIsg19wbP6uVn6EYUfXk9BpVAgX7I3nk=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_hal_
+ rcc.c
+SHA-256-Digest: 6VG770Eh6Fb/Y7qsdO6Ef4cah8i6owFker2fQhcUwUM=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/Legacy/stm
+ 32f4xx_hal_can_legacy.h
+SHA-256-Digest: R8ErP2+hvWBDJMCxV99fVRVKqKRDnjyYNgxZhqwZojA=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_a
+ dc.c
+SHA-256-Digest: BS1UvJ0mUNm8KwKCAH5E+6K7KQGiJuMsKGPt36V8IP0=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ pcd_ex.c
+SHA-256-Digest: qV7vzDOOEV32P6jqdVb5r656rP569F83JlM5PlbjoME=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_hal_
+ pwr_ex.c
+SHA-256-Digest: PiGMYt/KzWLBfm9a84l7CwwtnvUxCizoT30HT+v8r78=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_irda_ex.h
+SHA-256-Digest: pZm++CWIVtnLWyaR4LgWIpcnGBwEo97OCXNL9zp5tIs=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ hal_i2s.h
+SHA-256-Digest: CvfgbWHI4nAHmWIQ8HAUfXFBmyGbmObnESXgJ4d+YIc=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/system_stm32f0xx.h
+SHA-256-Digest: 6tPpUa5CutVh5dQtKjHNHLfaXNJc38cTpy22rjO0d+Y=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_iwdg.h
+SHA-256-Digest: OLYt95zfCS+1QIQhXJ/dDgXO9NiFK6Zf039+RNh3XMw=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_system.h
+SHA-256-Digest: 2rYBM9IZHS0X8IUh8zZLqd/yOzEJtizy9U0zPktjmKY=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ ll_hrtim.h
+SHA-256-Digest: 2KNNZfakvFzqgvYsKOm83e4ufsQ41chRBG5zEMh3iX0=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_dma.h
+SHA-256-Digest: kSRpelnhpL5AUATLhtwMMzF0LnpyzwrZvKvQ+W7LZFE=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ opamp_ex.c
+SHA-256-Digest: 2Gkqj+p9M7blR8gDXWmb/hdbkc3BftSEe0bcoCrEZ2E=
+
+Name: templates/micro-os-plus/stm32f4/include/cmsis/stm32f412cx.h
+SHA-256-Digest: 5jg9fkAHrz/eoYRgHqRDtr/qzSI/TewqzSzU0AVN2ZE=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f723xx.h
+SHA-256-Digest: OYF2YcNgKDXMa799uVm3Dm4LfWrZKOaFDVOoiii3yg4=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/vectors_stm32f042x6.c
+SHA-256-Digest: Kkg0Hxx5K72MyNdl+Pwar3i5kapwNKkW0jqafek+w/o=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ smartcard_ex.c
+SHA-256-Digest: eGoNMhLU0UnNiLi2BWxKuFON8dE+WlpJVwjElFUQABo=
+
+Name: templates/stm32f7xx_exe_c_project/src/led2.cpp
+SHA-256-Digest: Ay4t2aIhPIXbNNVpp31T4btg52xWUM4uFXxph55E+Q8=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/cmsis_device.h
+SHA-256-Digest: OT/XialKH7UyjbBsZRF/iVHWb/m3pdzxvULbL3OHZTU=
+
+Name: templates/stm32f4xx_exe_c_project/src/main/main-200-semihosting-lo
+ op-blinky.cpp
+SHA-256-Digest: 50qkUDAfhr8op5Qv+RIk9DfVtA0kb33ZCyrGe1B1c4E=
+
+Name: templates/stm32f7xx_exe_c_project/src/main/main-200-none-loop-blin
+ ky.c
+SHA-256-Digest: X+wZaNhCK2P25Ujwnuyk2lUJKn//FjXNvxI1KnEz/0o=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_f
+ mpi2c.c
+SHA-256-Digest: pd2mJrm33R2icivAQIQrBWMIJLjuFj7nHRUmzxCAEGA=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_sdmmc.h
+SHA-256-Digest: k5qOOD6BOMNR2G8KfVvICzOu3sVPRC55HNAekkbKs2Q=
+
+Name: templates/micro-os-plus/stm32f2/src/cmsis/README-DEVICE.md
+SHA-256-Digest: YcqWv7kcUJVf0vUOMGIkTFnFcVLeoLLYOemMX+DPf/M=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_jpeg.h
+SHA-256-Digest: rW8+0hndwLALcXhG2bFzSx2DlF/S2b87h6tB09wmbwI=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_ll_u
+ tils.c
+SHA-256-Digest: wBUNgHX58/KEvMQIXH05cmiyKRU/anZYxycqy33pYMY=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_dma2d.h
+SHA-256-Digest: 27Vc30UUzhFBt59yEqesaxPh4UTMyjgqhfr7kJ3592I=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_iwdg.h
+SHA-256-Digest: 9esnH+xUjvSdHkMqz5njHiDi6ol3+tyAfyRvk8b92Kg=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_can.h
+SHA-256-Digest: yzR/GQW95Ogh88iNtXd/PQDdbAk9InDAOt9r8jhMJaE=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f412vx.c
+SHA-256-Digest: auwvROVMmd2YaxPGO/So4NCh9R7ir5SB+dR1BPiGnH4=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f401xc.c
+SHA-256-Digest: MuQeXFLZ1qVxDO8vUfcHOO6eAEhhhjA/+Kmx4T80idM=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ ll_utils.h
+SHA-256-Digest: lnU92jBvBfn7lyTyCN3yuFxmabG2nHE7GM+FTq4EPck=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_hal_
+ rcc_ex.c
+SHA-256-Digest: xfzDC8KgwfvMGc/zK2/+I6DhvV/KR01zbEqf2Vs2Z0g=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f750xx.h
+SHA-256-Digest: OVTL2+EvJDaNSH2j0cn/YXmfRNVn8HGOBSQAcmesnRU=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_cortex.h
+SHA-256-Digest: j2zzigfc1ekLd1YBT/K8Mo5Zc0QzoYhbL12x06nAkio=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ sd.c
+SHA-256-Digest: WEWRmIN64oIHbBcDd7yjqhHVleS4dQUowSX+P9qdZx4=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ hal_eth.h
+SHA-256-Digest: lgTwVLMYSoOWqbsco0nRbW0b4tuc3litxBaT3kbxKYs=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32_asse
+ rt_template.h
+SHA-256-Digest: 2msjb0FiGA9V9A7wftoFUyWQ98BS2PAPuCQXGYXcgN4=
+
+Name: templates/micro-os-plus/stm32f4-hal/src/stm32f4-hal/stm32f4xx_ll_a
+ dc.c
+SHA-256-Digest: IENb9h5k+TeOgo4cNkB5tsyk7fOSi3gm5q+F7YEDb0U=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_tim_ex.h
+SHA-256-Digest: wCWu1MoymPWeFA6ATUQ8s0/cp9P/wQlvpyoOuXMoh4M=
+
+Name: templates/micro-os-plus/stm32f0-hal/src/stm32f0-hal/stm32f0xx_ll_e
+ xti.c
+SHA-256-Digest: Ukyo72lzF1jdZ0vx1Uy6aJoChzgDByyWl0GsSUEqzBY=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f103x6.c
+SHA-256-Digest: rmia7/GjNqm6vz9IPv6wJQsjsMq+w2rTZU7+4Jtzr8k=
+
+Name: templates/micro-os-plus/stm32f2/src/cmsis/vectors_stm32f207xx.c
+SHA-256-Digest: /On0KSYKpChVqOtQA5uLbfTF0CJlafRItXH7UGv/2dQ=
+
+Name: templates/common/src/led-include.xcdl.h
+SHA-256-Digest: 6ORPMw7z/58+xqJZeC0SPxRnPQGwCHQq7sE34jspgLo=
+
+Name: templates/micro-os-plus/stm32f3-hal/include/stm32f3-hal/stm32f3xx_
+ hal_cec.h
+SHA-256-Digest: QgneMTQNbICI2iMJujK5bShY1T5qU2egDIqOUaNtR0s=
+
+Name: templates/micro-os-plus/stm32f0/src/cmsis/README-DEVICE.md
+SHA-256-Digest: qbibZLRvsAorMgHvqRWE75hXaQwbjlQw5btcFNSwhUM=
+
+Name: templates/micro-os-plus/stm32f2-hal/include/stm32f2-hal/stm32f2xx_
+ ll_fsmc.h
+SHA-256-Digest: jq8MUiC9nfMTE21x1J0Dt7rRO+3tkPSaFSuzdcjvBdA=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_mmc.h
+SHA-256-Digest: LWPjgP4GzZWz7OgVkfWyxXk74CwtZ0Zwba6WhANnqI0=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ dac.c
+SHA-256-Digest: XBJuL6czOqpOmFw/p5sxKNOHgvhVl80N7phFxGpts9s=
+
+Name: templates/micro-os-plus/stm32f7/src/cmsis/vectors_stm32f767xx.c
+SHA-256-Digest: kzEXtLt1sWnI2aP3wm74BzUExmWFyAGMkLkz6vDY+eE=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/Legacy/stm
+ 32_hal_legacy.h
+SHA-256-Digest: tOToRDAYfjsQq7WPKgitIlcx1S7+/BJvc9agtBliyZQ=
+
+Name: templates/micro-os-plus/stm32f7-hal/src/stm32f7-hal/stm32f7xx_hal_
+ dma.c
+SHA-256-Digest: uy+zX4mwRNxzCcdOwwp/mPiaBoOYROsBg4L0pv9oLYU=
+
+Name: templates/micro-os-plus/stm32f0-hal/include/stm32f0-hal/stm32f0xx_
+ ll_usb.h
+SHA-256-Digest: Rp7PZbmOKEvowDcDI+8TmzaM8EinESRPrSUxEAOxJCg=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_ll_a
+ dc.c
+SHA-256-Digest: AHjER4a1nDXpj7XfJPxrUjQXFgCUFK79fSH9RRQ8mTk=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_cryp_ex.h
+SHA-256-Digest: 66qJ/x/zBuDV24/gRj8hUvMksEFFOw+T7euSfJpJkPU=
+
+Name: templates/stm32f0xx_exe_c_project/src/led.c
+SHA-256-Digest: vTb7LDlmPXENXzLBocHixv07hoK1ldQ6iYsSoP+TAgc=
+
+Name: templates/micro-os-plus/stm32f7/include/cmsis/stm32f7xx.h
+SHA-256-Digest: 24QLl+Yh+LoerYO3/pXWRwHVcCX4QqUNZuLl/FlL5xQ=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ hal_def.h
+SHA-256-Digest: YVZKytNKeEN4KyIY5b26POF+Nl9GksoXOAr4CaJbpyE=
+
+Name: templates/micro-os-plus/stm32f7-hal/include/stm32f7-hal/stm32f7xx_
+ ll_gpio.h
+SHA-256-Digest: RSSy1pE6a6NJTrV7hKeAUG3Ig1dIMS9KlSnJd53UWSY=
+
+Name: about.html
+SHA-256-Digest: 7mbS+ztMDS7S5/aYvJ7U49bPd/pcr0CtAylhJdsaxfA=
+
+Name: templates/stm32f3xx_exe_c_project/ldscripts/mem.ld
+SHA-256-Digest: t15LHpbPKS0phulBNJx0w/z32pG/StPJy2hE9SoT3XU=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f103xg.c
+SHA-256-Digest: t0occhUBwD7KJB4rScxDtsoWhyjUc/+COG7mLZ11ptM=
+
+Name: templates/micro-os-plus/stm32f1-hal/src/stm32f1-hal/stm32f1xx_hal_
+ rcc_ex.c
+SHA-256-Digest: U4V3jPX1Rm7W7lsnA6QRDJ8n7ybSCfJtGZdcO2PvpxM=
+
+Name: templates/stm32f0xx_exe_c_project/src/initialize-hardware.c
+SHA-256-Digest: DvAu9Pl63c4hMhAw1VfsaRgDR+ZCSAz1fow3pomeEUs=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/README-DEVICE.md
+SHA-256-Digest: JBlawe5b9qnyySEG1uo2y82U9qAm1ZvRmwf5tCqBZ+4=
+
+Name: templates/stm32f2xx_exe_c_project/src/initialize-hardware.c
+SHA-256-Digest: oV8c3DRCaYWXNjs72HruPJKzPLZ/XwRXCxca1cO4vDs=
+
+Name: templates/micro-os-plus/stm32f0/include/cmsis/stm32f071xb.h
+SHA-256-Digest: Qfx41Us9+GNpb8tScpNgpi1eiv87CnbB+fPNWavdffM=
+
+Name: templates/micro-os-plus/stm32f2-hal/src/stm32f2-hal/stm32f2xx_ll_a
+ dc.c
+SHA-256-Digest: iy2qukMfjYLxUjcIxUMHwxKlWSLR+nR2JTPem37BzJo=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ ll_rcc.h
+SHA-256-Digest: yvT3jCTEgxP48UYiPj5mWVwhN/OTo54ev1WuFgBI/NQ=
+
+Name: templates/micro-os-plus/stm32f1-hal/include/stm32f1-hal/stm32f1xx_
+ hal_rcc_ex.h
+SHA-256-Digest: DTkYsUQCjpUe5vYGEVinGelEr5mQ8nm4A0eehbecukM=
+
+Name: templates/stm32f4xx_exe_c_project/src/initialize-hardware.c
+SHA-256-Digest: N3xemSGv4RKxL119AgmrSuydpYBMsaxYBJ1cSeaBtoI=
+
+Name: templates/micro-os-plus/stm32f4-hal/include/stm32f4-hal/stm32f4xx_
+ hal_wwdg.h
+SHA-256-Digest: FA2K1LhLTvyuaMFCNr890hoIbQ9pIN5MRElaG4a1xKM=
+
+Name: templates/micro-os-plus/stm32f3-hal/src/stm32f3-hal/stm32f3xx_ll_a
+ dc.c
+SHA-256-Digest: mwLm5sg8prpTI2bd9ALgCigUYA8zR3uQ40Fj3AKhbhU=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f102x6.h
+SHA-256-Digest: RO/vIfHRQweig0YJ0uQ1+bxeaQ90U1iK81SfCtiizGo=
+
+Name: templates/micro-os-plus/stm32f4/src/cmsis/vectors_stm32f413xx.c
+SHA-256-Digest: APZ85VUTa+36ihiv2lVeP28TsMvVXgkv4ogobbqEKSU=
+
+Name: templates/micro-os-plus/stm32f1/include/cmsis/stm32f103xe.h
+SHA-256-Digest: UCgLeaTvhIUxI6XCG2sAXEcdBz0RmnodHI5M9wo7+nw=
+
+Name: templates/micro-os-plus/stm32f1/src/cmsis/vectors_stm32f105xc.c
+SHA-256-Digest: jB2OK7XTLOqNyGKTZEkqY4wNdRkUYYv9quKkwVvyll4=
+
+Name: templates/stm32f0xx_exe_c_project/template.properties
+SHA-256-Digest: Ssg4xLfnbMwqMsUaXLmUs0oqwSi174x7d82RHh945fA=
+

@@ -1,0 +1,42 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.5.0
+Build-Jdk-Spec: 11
+Bundle-ManifestVersion: 2
+Bundle-Name: %bundle.name
+Bundle-SymbolicName: org.eclipse.embedcdt.templates.stm;singleton:=true
+Bundle-Version: 6.3.1.202210101738
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %bundle.vendor
+Bundle-Localization: plugin
+Eclipse-BundleShape: dir
+Eclipse-SourceReferences: scm:git:https://github.com/eclipse-embed-cdt/e
+ clipse-plugins.git;path="branding/org.eclipse.embedcdt.templates.stm-br
+ anding";commitId=0f45977fb295c9f84260b9c2680a8d4e17696c2a
+
+Name: about.properties
+SHA-256-Digest: T3hgzcs+fqT8Z8rJQsAC3QNRP5m1q3SL0ccKetFWpKo=
+
+Name: about.html
+SHA-256-Digest: 7mbS+ztMDS7S5/aYvJ7U49bPd/pcr0CtAylhJdsaxfA=
+
+Name: GME-32.png
+SHA-256-Digest: IICt7VrIVcPlABz/OgvmJZECpAKpHNyBMiDnDywPKb0=
+
+Name: about.ini
+SHA-256-Digest: jvsgdftkQSA5dbstyn2gX5k6f8jgLdnI9jK/ICz175k=
+
+Name: plugin.properties
+SHA-256-Digest: LpHD2eQUsZdsl7n0Yw5hSpQATx6F16KvZAweIM8A5AM=
+
+Name: META-INF/maven/org.eclipse.embedcdt.branding/org.eclipse.embedcdt.
+ templates.stm/pom.xml
+SHA-256-Digest: qRqNo/jD5EOcB5P8giXaFuS2jO8vX3DrNbAL0aGIJpU=
+
+Name: about.mappings
+SHA-256-Digest: XP+lIm+Uyy7+K1nmYRjgz+N/2eLfMedzQPX2YJ9d1Bg=
+
+Name: META-INF/maven/org.eclipse.embedcdt.branding/org.eclipse.embedcdt.
+ templates.stm/pom.properties
+SHA-256-Digest: /AGGT2qPGx82xN7AolSyrzSADmEO93pyc5ugWZ2AhSE=
+

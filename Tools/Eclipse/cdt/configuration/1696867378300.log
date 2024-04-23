@@ -1,0 +1,76 @@
+!SESSION 2023-10-09 18:02:58.130 -----------------------------------------------
+eclipse.buildId=4.26.0.20221201-1200
+java.version=17.0.5
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product -application org.eclipse.equinox.p2.director -repository file:gnumcueclipse_updates -installIU org.eclipse.embedcdt.feature.group,org.eclipse.embedcdt.managedbuild.cross.arm.feature.group,org.eclipse.embedcdt.managedbuild.cross.arm.source.feature.group,org.eclipse.embedcdt.managedbuild.cross.riscv.feature.group,org.eclipse.embedcdt.managedbuild.cross.riscv.source.feature.group,org.eclipse.embedcdt.packs.feature.group,org.eclipse.embedcdt.packs.source.feature.group,org.eclipse.embedcdt.codered.feature.group,org.eclipse.embedcdt.codered.source.feature.group,org.eclipse.embedcdt.doc.user.feature.group,org.eclipse.embedcdt.doc.user.source.feature.group,org.eclipse.embedcdt.templates.cortexm.feature.group,org.eclipse.embedcdt.templates.cortexm.source.feature.group,org.eclipse.embedcdt.templates.ad.feature.group,org.eclipse.embedcdt.templates.ad.source.feature.group,org.eclipse.embedcdt.templates.freescale.feature.group,org.eclipse.embedcdt.templates.freescale.source.feature.group,org.eclipse.embedcdt.templates.sifive.feature.group,org.eclipse.embedcdt.templates.sifive.source.feature.group,org.eclipse.embedcdt.templates.stm.feature.group,org.eclipse.embedcdt.templates.stm.source.feature.group,org.eclipse.embedcdt.templates.xpack.feature.group,org.eclipse.embedcdt.templates.xpack.source.feature.group,org.eclipse.embedcdt.debug.gdbjtag.feature.group,org.eclipse.embedcdt.debug.gdbjtag.source.feature.group,org.eclipse.embedcdt.debug.gdbjtag.jlink.feature.group,org.eclipse.embedcdt.debug.gdbjtag.jlink.source.feature.group,org.eclipse.embedcdt.debug.gdbjtag.openocd.feature.group,org.eclipse.embedcdt.debug.gdbjtag.openocd.source.feature.group,org.eclipse.embedcdt.debug.gdbjtag.pyocd.feature.group,org.eclipse.embedcdt.debug.gdbjtag.pyocd.source.feature.group,org.eclipse.embedcdt.debug.gdbjtag.qemu.feature.group,org.eclipse.embedcdt.debug.gdbjtag.qemu.source.feature.group
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product -application org.eclipse.equinox.p2.director -repository file:gnumcueclipse_updates -installIU org.eclipse.embedcdt.feature.group,org.eclipse.embedcdt.managedbuild.cross.arm.feature.group,org.eclipse.embedcdt.managedbuild.cross.arm.source.feature.group,org.eclipse.embedcdt.managedbuild.cross.riscv.feature.group,org.eclipse.embedcdt.managedbuild.cross.riscv.source.feature.group,org.eclipse.embedcdt.packs.feature.group,org.eclipse.embedcdt.packs.source.feature.group,org.eclipse.embedcdt.codered.feature.group,org.eclipse.embedcdt.codered.source.feature.group,org.eclipse.embedcdt.doc.user.feature.group,org.eclipse.embedcdt.doc.user.source.feature.group,org.eclipse.embedcdt.templates.cortexm.feature.group,org.eclipse.embedcdt.templates.cortexm.source.feature.group,org.eclipse.embedcdt.templates.ad.feature.group,org.eclipse.embedcdt.templates.ad.source.feature.group,org.eclipse.embedcdt.templates.freescale.feature.group,org.eclipse.embedcdt.templates.freescale.source.feature.group,org.eclipse.embedcdt.templates.sifive.feature.group,org.eclipse.embedcdt.templates.sifive.source.feature.group,org.eclipse.embedcdt.templates.stm.feature.group,org.eclipse.embedcdt.templates.stm.source.feature.group,org.eclipse.embedcdt.templates.xpack.feature.group,org.eclipse.embedcdt.templates.xpack.source.feature.group,org.eclipse.embedcdt.debug.gdbjtag.feature.group,org.eclipse.embedcdt.debug.gdbjtag.source.feature.group,org.eclipse.embedcdt.debug.gdbjtag.jlink.feature.group,org.eclipse.embedcdt.debug.gdbjtag.jlink.source.feature.group,org.eclipse.embedcdt.debug.gdbjtag.openocd.feature.group,org.eclipse.embedcdt.debug.gdbjtag.openocd.source.feature.group,org.eclipse.embedcdt.debug.gdbjtag.pyocd.feature.group,org.eclipse.embedcdt.debug.gdbjtag.pyocd.source.feature.group,org.eclipse.embedcdt.debug.gdbjtag.qemu.feature.group,org.eclipse.embedcdt.debug.gdbjtag.qemu.source.feature.group
+
+!ENTRY org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Overall install request is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ Generic Arm Cortex-M Project Template 6.3.1.202210101738 (org.eclipse.embedcdt.templates.cortexm.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ Freescale Project Templates 6.3.1.202210101738 (org.eclipse.embedcdt.templates.freescale.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ OpenOCD Debugging 6.3.1.202210101738 (org.eclipse.embedcdt.debug.gdbjtag.openocd.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ xPack Arm & RISC-V Project Templates Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.templates.xpack.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ GDB JTAG Debugging 6.3.1.202210101738 (org.eclipse.embedcdt.debug.gdbjtag.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ STM32Fx Project Templates Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.templates.stm.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ GDB JTAG Debugging Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.debug.gdbjtag.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ PyOCD Debugging Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.debug.gdbjtag.pyocd.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ ADuCM360 Project Template 6.3.1.202210101738 (org.eclipse.embedcdt.templates.ad.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ Arm Cross Compiler 6.3.1.202210101738 (org.eclipse.embedcdt.managedbuild.cross.arm.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ xPack Arm & RISC-V Project Templates 6.3.1.202210101738 (org.eclipse.embedcdt.templates.xpack.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ Core 6.3.1.202210101738 (org.eclipse.embedcdt.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ CodeRed Debug Perspective 6.3.1.202210101738 (org.eclipse.embedcdt.codered.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ Documentation (Placeholder) Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.doc.user.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ Generic Arm Cortex-M Project Template Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.templates.cortexm.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ STM32Fx Project Templates 6.3.1.202210101738 (org.eclipse.embedcdt.templates.stm.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ CodeRed Debug Perspective Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.codered.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ PyOCD Debugging 6.3.1.202210101738 (org.eclipse.embedcdt.debug.gdbjtag.pyocd.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ QEMU Debugging Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.debug.gdbjtag.qemu.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ J-Link Debugging Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.debug.gdbjtag.jlink.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ SiFive RISC-V Project Template 6.3.1.202210101738 (org.eclipse.embedcdt.templates.sifive.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ J-Link Debugging 6.3.1.202210101738 (org.eclipse.embedcdt.debug.gdbjtag.jlink.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.552
+!MESSAGE Add request for Embedded C/C++ CMSIS Packs (Experimental) Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.packs.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.553
+!MESSAGE Add request for Embedded C/C++ Documentation (Placeholder) 6.3.1.202210101738 (org.eclipse.embedcdt.doc.user.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.553
+!MESSAGE Add request for Embedded C/C++ RISC-V Cross Compiler 6.3.1.202210101738 (org.eclipse.embedcdt.managedbuild.cross.riscv.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.553
+!MESSAGE Add request for Embedded C/C++ QEMU Debugging 6.3.1.202210101738 (org.eclipse.embedcdt.debug.gdbjtag.qemu.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.553
+!MESSAGE Add request for Embedded C/C++ CMSIS Packs (Experimental) 6.3.1.202210101738 (org.eclipse.embedcdt.packs.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.553
+!MESSAGE Add request for Embedded C/C++ OpenOCD Debugging Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.debug.gdbjtag.openocd.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.553
+!MESSAGE Add request for Embedded C/C++ RISC-V Cross Compiler Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.managedbuild.cross.riscv.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.553
+!MESSAGE Add request for Embedded C/C++ Freescale Project Templates Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.templates.freescale.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.553
+!MESSAGE Add request for Embedded C/C++ SiFive RISC-V Project Template Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.templates.sifive.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.553
+!MESSAGE Add request for Embedded C/C++ ADuCM360 Project Template Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.templates.ad.source.feature.group 6.3.1.202210101738) is satisfiable
+!SUBENTRY 1 org.eclipse.equinox.p2.director 0 0 2023-10-09 18:03:05.553
+!MESSAGE Add request for Embedded C/C++ Arm Cross Compiler Developer Resources 6.3.1.202210101738 (org.eclipse.embedcdt.managedbuild.cross.arm.source.feature.group 6.3.1.202210101738) is satisfiable

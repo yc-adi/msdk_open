@@ -1,0 +1,55 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.5.0
+Build-Jdk-Spec: 11
+Bundle-ManifestVersion: 2
+Bundle-Name: %bundle.name
+Bundle-SymbolicName: org.eclipse.embedcdt.templates.xpack.ui;singleton:=
+ true
+Bundle-Version: 1.0.0.202210101738
+Require-Bundle: org.eclipse.embedcdt.templates.core;bundle-version="3.1.
+ 1"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %bundle.vendor
+Bundle-Localization: plugin
+Eclipse-BundleShape: dir
+Automatic-Module-Name: org.eclipse.embedcdt.templates.xpack.ui
+Eclipse-SourceReferences: scm:git:https://github.com/eclipse-embed-cdt/e
+ clipse-plugins.git;path="plugins/org.eclipse.embedcdt.templates.xpack.u
+ i";commitId=0f45977fb295c9f84260b9c2680a8d4e17696c2a
+
+Name: templates/hello-world-riscv-qemu-xpack-project/qemu-liquid.launch
+SHA-256-Digest: qOqa3QNk7DSp3pzzFMK1L5PtlDSaiShanRrK91UGAuY=
+
+Name: about.html
+SHA-256-Digest: 7mbS+ztMDS7S5/aYvJ7U49bPd/pcr0CtAylhJdsaxfA=
+
+Name: plugin.xml
+SHA-256-Digest: ZQ9nZw2il49mLlheJtpbHhWY0uY27RFn3naGqzAnr7w=
+
+Name: templates/hello-world-arm-qemu-xpack-project/template.xml
+SHA-256-Digest: WJPTYF0bsjREGNLrnzr6EqP5SS021jgIB4xnOXJ7/a0=
+
+Name: templates/hello-world-riscv-qemu-xpack-project/template.properties
+SHA-256-Digest: EpZ8ys0lP11mepTUN1J5gok4F+kgbzCdXJvv6lA6kuU=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.xpack.ui/pom.xml
+SHA-256-Digest: uxaOiPUKELGhFeTB4gKxrjNg0O7qgF5MH+RlpepH09c=
+
+Name: META-INF/maven/org.eclipse.embedcdt.plugins/org.eclipse.embedcdt.t
+ emplates.xpack.ui/pom.properties
+SHA-256-Digest: 2uHUAiwJl7kgMHDY8ycd+fsbFgGASrGuIkZbDuW8/3M=
+
+Name: templates/hello-world-riscv-qemu-xpack-project/template.xml
+SHA-256-Digest: 8759P1R2BJdHZMukh+D2oWv3Y6Zd71j5xhQcl+efTS0=
+
+Name: plugin.properties
+SHA-256-Digest: jm1K0fw89VS08/L+vOatNp7m7peuYchIqmUKtvIY2hU=
+
+Name: templates/hello-world-arm-qemu-xpack-project/template.properties
+SHA-256-Digest: NKIIWzsCrrVdzqoo4FkCSIfQ46fVwEMsWs4GNVYvVdg=
+
+Name: templates/hello-world-arm-qemu-xpack-project/qemu-liquid.launch
+SHA-256-Digest: 6uGQykAX9vgCF5mO/vYBZ5xO02EFveAPDIw0b827lII=
+

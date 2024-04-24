@@ -57,6 +57,8 @@
  */
 #define MIN_SYSTICK (configCPU_CLOCK_HZ / 1000000 /* ticks / us */ * 10 /* us */)
 
+extern uint8_t advDisabled;
+
 /*
  * Sleep-check function
  *
@@ -236,8 +238,9 @@ void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTime)
 
     if (!schTimerActive) {
         uint32_t ts;
-        if (PalBbGetTimestamp(&ts)) {
-            /*Determine if PalBb is active, return if we get a valid time stamp indicating 
+        /*! after APP_UI_BTN_2_SHORT stops ADV, the last deep sleep will enable DBB */
+        if (PalBbGetTimestamp(&ts) && advDisabled == 0) {
+            /* Determine if PalBb is active, return if we get a valid time stamp indicating 
              * that the scheduler is waiting for a PalBb event */
 
             /* Re-enable interrupts - see comments above the cpsid instruction()
@@ -316,7 +319,7 @@ void vPortSuppressTicksAndSleep(TickType_t xExpectedIdleTime)
         LED_On(DEEPSLEEP_LED);
         LED_On(SLEEP_LED);
         
-        /* Enable and restore the BB hardware */
+    /* Enable and restore the BB hardware */
         PalBbEnable();
         PalBbRestore();
         

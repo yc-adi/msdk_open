@@ -106,6 +106,8 @@ enum {
 
 };
 
+uint8_t advDisabled = 0;
+
 /**************************************************************************************************
   Configurable Parameters
 **************************************************************************************************/
@@ -962,6 +964,7 @@ static void datsBtnCback(uint8_t btn)
         case APP_UI_BTN_1_SHORT:
             /* start advertising */
             AppAdvStart(APP_MODE_AUTO_INIT);
+            advDisabled = 0;
             break;
 
         case APP_UI_BTN_1_MED:
@@ -984,6 +987,7 @@ static void datsBtnCback(uint8_t btn)
         case APP_UI_BTN_2_SHORT:
             /* stop advertising */
             AppAdvStop();
+            advDisabled = 1;
             break;
 
         default:

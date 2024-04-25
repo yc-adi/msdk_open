@@ -25,12 +25,12 @@
 # Cordio Library Options
 DEBUG           ?= 1
 TRACE           ?= 1
-BT_VER          ?= 9
+BT_VER          ?= 11 # 9
 INIT_PERIPHERAL ?= 1
 INIT_CENTRAL    ?= 1
 INIT_ENCRYPTED  ?= 1
 INIT_OBSERVER   ?= 0
-INIT_BROADCASTER?= 0
+INIT_BROADCASTER?= 1  # @?
 USE_SHARED_WUT ?= 0
 
 WSF_HEAP_SIZE ?= 0x10000

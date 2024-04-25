@@ -14,6 +14,8 @@ LIB_CORDIO = 1
 BLE_HOST = 0
 BLE_CONTROLLER = 1
 
+INIT_BROADCASTER = 1
+
 # TRACE option
 # Set to 0 to disable
 # Set to 2 to enable serial port trace messages

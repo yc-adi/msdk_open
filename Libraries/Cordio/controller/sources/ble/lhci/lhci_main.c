@@ -109,7 +109,10 @@ void LhciHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
     while ((pCmdBuf = WsfMsgDeq(&lhciPersistCb.cmdQ, &handlerId)) != NULL)
     {
       uint8_t *pPldBuf = pCmdBuf + lhciUnpackHdr(&hdr, pCmdBuf);
-
+      WsfTrace("@? op=%04X", hdr.opCode);
+      if (hdr.opCode == 0x2068) {
+        __asm("nop");
+      }
       if (!lhciCommonDecodeCmdPkt(&hdr, pPldBuf))
       {
         unsigned int msg = 0;

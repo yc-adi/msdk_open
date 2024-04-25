@@ -407,7 +407,7 @@ static void bbSlvExecuteAuxAdvOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
   uint8_t const pos = 8;
   pData[pos]++;                     // the first byte of the 50-byte data
   pData[pos + 49] = pData[pos];     // the last byte
-  APP_TRACE_INFO1("%02X", pData[pos]);
+  //APP_TRACE_INFO1("%02X", pData[pos]);
 
   PalBbBleTxData(pAuxAdv->txAuxAdvPdu, 2);
 }

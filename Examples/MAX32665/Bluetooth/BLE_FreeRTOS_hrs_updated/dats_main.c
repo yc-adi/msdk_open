@@ -18,12 +18,13 @@
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONtimerDITIONS OF ANY KIND, either express or implied.
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
 /*************************************************************************************************/
 
+#include <stdio.h>
 #include <string.h>
 #include "wsf_types.h"
 #include "util/bstream.h"
@@ -106,6 +107,8 @@ enum {
 	SENSIO_SERVICE_IDX2,  /*! Sensio Service 2 Read Reserved */
     DATS_NUM_CCC_IDX // total number of CCCD
 };
+
+uint8_t advDisabled = 0;
 
 /**************************************************************************************************
   Configurable Parameters
@@ -218,7 +221,7 @@ static const uint8_t datsAdvDataDisc[] = {
     /*! tx power */
     2, /*! length */
     DM_ADV_TYPE_TX_POWER, /*! AD type */
-    -60, /*! tx power */
+    0, /*! tx power */
 
     /*! service UUID list */
     9, /*! length */
@@ -433,7 +436,7 @@ static uint8_t sensioWpReadCback(dmConnId_t connId, uint16_t handle, uint8_t ope
 {
     static int counter = 0;
     uint8_t str[3][10] = {"ECG DONE", "ECG BUSY", "ECG ERROR"};
-    uint8_t str2[12] = {"RESERVED DATA"};
+    uint8_t str2[] = {"RESERVED DATA"};
 
     /* print received data if not a speed test message */
     APP_TRACE_INFO0((const char *)pAttr);
@@ -465,7 +468,7 @@ static uint8_t sensioWpReadCback(dmConnId_t connId, uint16_t handle, uint8_t ope
     if(handle == HDL_DAT_sensio_Read_Only)
     {
     	 /*Send one of 3 messages stored in `str`*/
-    	datsReadNotifySensio(connId, 12 , str2, handle);
+    	datsReadNotifySensio(connId, strlen(str2) , str2, handle);
     }
 
 
@@ -1126,7 +1129,7 @@ static void datsBtnCback(uint8_t btn)
 #endif /* BT_VER */
 
         default:
-            APP_TRACE_INFO0(" - No action assigned");
+            APP_TRACE_INFO1(" - No action assigned for connId %d", connId);
             break;
         }
     } else {
@@ -1134,6 +1137,7 @@ static void datsBtnCback(uint8_t btn)
         case APP_UI_BTN_1_SHORT:
             /* start advertising */
             AppAdvStart(APP_MODE_AUTO_INIT);
+            advDisabled = 0;
             break;
 
         case APP_UI_BTN_1_MED:
@@ -1156,6 +1160,7 @@ static void datsBtnCback(uint8_t btn)
         case APP_UI_BTN_2_SHORT:
             /* stop advertising */
             AppAdvStop();
+            advDisabled = 1;
             break;
 
         default:

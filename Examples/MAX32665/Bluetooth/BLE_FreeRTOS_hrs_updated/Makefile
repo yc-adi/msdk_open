@@ -372,9 +372,8 @@ MAKECMDGOALS:=$(.DEFAULT_GOAL)
 endif
 
 
-APPBIN_DIR= ../AppBinary
-APPNAME = $(shell date +"%m%d%Y_%H%M_")$(PROJECT).bin
-
+APPBIN_DIR= .
+APPNAME = $(PROJECT).bin
 
 
 all:

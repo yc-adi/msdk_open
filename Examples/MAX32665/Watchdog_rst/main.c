@@ -1,0 +1,179 @@
+/******************************************************************************
+ *
+ * Copyright (C) 2022-2023 Maxim Integrated Products, Inc., All Rights Reserved.
+ * (now owned by Analog Devices, Inc.)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL MAXIM INTEGRATED BE LIABLE FOR ANY CLAIM, DAMAGES
+ * OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Except as contained in this notice, the name of Maxim Integrated
+ * Products, Inc. shall not be used except as stated in the Maxim Integrated
+ * Products, Inc. Branding Policy.
+ *
+ * The mere transfer of this software does not imply any licenses
+ * of trade secrets, proprietary technology, copyrights, patents,
+ * trademarks, maskwork rights, or any other form of intellectual
+ * property whatsoever. Maxim Integrated Products, Inc. retains all
+ * ownership rights.
+ *
+ ******************************************************************************
+ *
+ * Copyright 2023 Analog Devices, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************/
+
+/*
+ * @file    main.c
+ * @brief   Demonstrates a watchdog timer in run mode
+ *
+ * @details When the program starts LED1 blinks three times and stops.
+ *          Then LED0 start blinking continuously.
+ *          Open a terminal program to see interrupt messages.
+ *
+ *          SW1: Push SW1 to trigger a watchdog reset.
+ */
+
+/***** Includes *****/
+#include <stdio.h>
+#include <stdint.h>
+#include "mxc_device.h"
+#include "mxc_sys.h"
+#include "mxc_delay.h"
+#include "nvic_table.h"
+#include "wdt.h"
+#include "led.h"
+#include "board.h"
+
+/***** Definitions *****/
+#define SW2 0
+
+#define MXC_GPIO_PORT_INTERRUPT_IN MXC_GPIO1
+#define MXC_GPIO_PIN_INTERRUPT_IN MXC_GPIO_PIN_6
+
+/***** Globals *****/
+#if defined(BOARD_FTHR)
+static mxc_gpio_cfg_t pb_pin[] = {
+    { MXC_GPIO1, MXC_GPIO_PIN_10, MXC_GPIO_FUNC_IN, MXC_GPIO_PAD_PULL_UP, MXC_GPIO_VSSEL_VDDIO }
+};
+#elif defined(BOARD_FTHR2)
+static mxc_gpio_cfg_t pb_pin[] = {
+    { MXC_GPIO0, MXC_GPIO_PIN_24, MXC_GPIO_FUNC_IN, MXC_GPIO_PAD_PULL_UP, MXC_GPIO_VSSEL_VDDIO }
+};
+#else
+static mxc_gpio_cfg_t pb_pin[] = {
+    { MXC_GPIO1, MXC_GPIO_PIN_6, MXC_GPIO_FUNC_IN, MXC_GPIO_PAD_PULL_UP, MXC_GPIO_VSSEL_VDDIOH }
+};
+#endif
+
+uint8_t btnPressed = 0;
+
+// *****************************************************************************
+static void gpio_isr(void *cbdata)
+{
+    btnPressed = 1;
+}
+
+void WDT0_IRQHandler(void)
+{
+    //get and clear flag
+    MXC_WDT_GetIntFlag(MXC_WDT0);
+    MXC_WDT_ClearIntFlag(MXC_WDT0);
+
+    MXC_WDT_EnableInt(MXC_WDT0);
+    NVIC_DisableIRQ(WDT0_IRQn);
+
+    printf("\nWDT0 TIMEOUT! Do something here befor reset.\n");
+}
+
+void blinkled(int led, int num_of_blink)
+{
+    for (int i = 0; i < num_of_blink; i++) {
+        LED_On(led);
+        MXC_Delay(MXC_DELAY_MSEC(500));
+        LED_Off(led);
+        MXC_Delay(MXC_DELAY_MSEC(500));
+    }
+}
+
+// *****************************************************************************
+int main(void)
+{
+    mxc_gpio_cfg_t gpio_interrupt;
+
+    printf("\n***************** Watchdog Reset Demo ******************\n");
+    printf("Press SW2 to stop feeding watchdog to reset the program.\n");
+
+    //blink LED1 three times at startup
+    blinkled(1, 3);
+
+    MXC_WDT_Init(MXC_WDT0);
+
+    if (MXC_WDT_GetResetFlag(MXC_WDT0)) {
+        MXC_WDT_ClearResetFlag(MXC_WDT0);
+
+        MXC_WDT_DisableReset(MXC_WDT0);
+    }
+
+    MXC_WDT_Disable(MXC_WDT0);
+    MXC_WDT_Enable(MXC_WDT0);
+
+    MXC_WDT_SetResetPeriod(MXC_WDT0, MXC_WDT_PERIOD_2_26);
+    MXC_WDT_EnableReset(MXC_WDT0);
+
+    // Configure GPIO
+    MXC_GPIO_Config(&pb_pin[SW2]);
+
+    gpio_interrupt.port = MXC_GPIO_PORT_INTERRUPT_IN;
+    gpio_interrupt.mask = MXC_GPIO_PIN_INTERRUPT_IN;
+    gpio_interrupt.pad = MXC_GPIO_PAD_PULL_UP;
+    gpio_interrupt.func = MXC_GPIO_FUNC_IN;
+    gpio_interrupt.vssel = MXC_GPIO_VSSEL_VDDIO;
+    MXC_GPIO_RegisterCallback(&gpio_interrupt, gpio_isr, 0);
+    MXC_GPIO_IntConfig(&gpio_interrupt, MXC_GPIO_INT_FALLING);
+    MXC_GPIO_EnableInt(gpio_interrupt.port, gpio_interrupt.mask);
+    NVIC_EnableIRQ(MXC_GPIO_GET_IRQ(MXC_GPIO_GET_IDX(MXC_GPIO_PORT_INTERRUPT_IN)));
+
+    while (1) {
+        // Push SW2 to reset watchdog
+        if (btnPressed) {
+            printf("\nStop feeding watchdog and enable Watchdog timer.\n");
+            MXC_WDT_SetIntPeriod(MXC_WDT0, MXC_WDT_PERIOD_2_25);
+            MXC_WDT_EnableInt(MXC_WDT0);
+            NVIC_EnableIRQ(WDT0_IRQn);
+
+            while (1) {}
+        }
+
+        MXC_WDT_ResetTimer(MXC_WDT0);
+
+        LED_Toggle(0);
+        MXC_Delay(MXC_DELAY_MSEC(1000));
+    }
+}

@@ -188,3 +188,4 @@ int main(void)
         MXC_WDT_ResetTimer(MXC_WDT0);
     }
 }
+

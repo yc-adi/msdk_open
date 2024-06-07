@@ -32,14 +32,15 @@
 #include "FreeRTOSConfig.h"
 #include "task.h"
 #include "semphr.h"
+#include "mxc_delay.h"
 #include "mxc_device.h"
 #include "wut.h"
 #include "lp.h"
 #include "led.h"
 #include "board.h"
+#include "pb.h"
 #include "wsf_trace.h"
 #include "flc.h"
-#include "mxc_delay.h"
 
 #define BUILD_FOR_OTAS
 

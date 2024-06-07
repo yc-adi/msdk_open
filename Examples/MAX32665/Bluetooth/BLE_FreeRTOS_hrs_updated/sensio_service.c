@@ -9,7 +9,7 @@
  * are not permitted
  *
  * Additional Reuse Declaration :
-/*******************************************************************************
+*******************************************************************************
 * Copyright (C) Maxim Integrated Products, Inc., All rights Reserved.
 *
 * This software is protected by copyright laws of the United States and

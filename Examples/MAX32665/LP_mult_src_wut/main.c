@@ -27,6 +27,9 @@
 #include <stdio.h>
 #include <stdint.h>
 
+#include "gpio.h"
+#include "icc.h"
+#include "lp.h"
 #include "mxc_device.h"
 #include "mxc_sys.h"
 #include "mxc_delay.h"
@@ -35,14 +38,55 @@
 #include "board.h"
 #include "wut.h"
 #include "lp.h"
+#include "simo.h"
 #include "uart.h"
 
-#define DELAY_IN_SEC 15
-#define MILLISECONDS_WUT (DELAY_IN_SEC * 1000)
+#include "sharp_mip.h"
 
-#define SLEEP_TIME_IN_SEC   10
+#define CUSTOM_DS           1
+
+#define DS_IN_SEC           30
+#define MILLISECONDS_WUT    (DS_IN_SEC * 1000)
+
+#define DELAY_TIME_IN_SEC   30
+
+extern sharp_mip_dev ls013b7dh03_controller;
 
 volatile int triggered;
+
+/*
+ *  Switch the system clock to the HIRC / 4
+ *
+ *  Enable the HIRC, set the divide ration to /4, and disable the HIRC96 oscillator.
+ */
+void switchToHIRCD4(void)
+{
+    MXC_SETFIELD(MXC_GCR->clkcn, MXC_F_GCR_CLKCN_PSC, MXC_S_GCR_CLKCN_PSC_DIV4);
+    MXC_GCR->clkcn |= MXC_F_GCR_CLKCN_HIRC_EN;
+    MXC_SETFIELD(MXC_GCR->clkcn, MXC_F_GCR_CLKCN_CLKSEL, MXC_S_GCR_CLKCN_CLKSEL_HIRC);
+    /* Disable unused clocks */
+    while (!(MXC_GCR->clkcn & MXC_F_GCR_CLKCN_CKRDY)) {}
+    /* Wait for the switch to occur */
+    MXC_GCR->clkcn &= ~(MXC_F_GCR_CLKCN_HIRC96M_EN);
+    SystemCoreClockUpdate();
+}
+
+/*
+ *  Switch the system clock to the HIRC96
+ *
+ *  Enable the HIRC96, set the divide ration to /1, and disable the HIRC oscillator.
+ */
+void switchToHIRC(void)
+{
+    MXC_SETFIELD(MXC_GCR->clkcn, MXC_F_GCR_CLKCN_PSC, MXC_S_GCR_CLKCN_PSC_DIV1);
+    MXC_GCR->clkcn |= MXC_F_GCR_CLKCN_HIRC96M_EN;
+    MXC_SETFIELD(MXC_GCR->clkcn, MXC_F_GCR_CLKCN_CLKSEL, MXC_S_GCR_CLKCN_CLKSEL_HIRC96);
+    /* Disable unused clocks */
+    while (!(MXC_GCR->clkcn & MXC_F_GCR_CLKCN_CKRDY)) {}
+    /* Wait for the switch to occur */
+    MXC_GCR->clkcn &= ~(MXC_F_GCR_CLKCN_HIRC_EN);
+    SystemCoreClockUpdate();
+}
 
 void buttonHandler(void *pb)
 {
@@ -88,6 +132,9 @@ int main(void)
     printf("\n\n****Low Power DEEPSLEEP Mode Example****\n\n");
     MXC_Delay(5000000);     // during development leave enought time to use emulator to erash flash
 
+    //sharp_mip_init(&ls013b7dh03_controller);
+    //sharp_mip_onoff(&ls013b7dh03_controller, 0);
+
     PB_RegisterCallback(0, (pb_callback)buttonHandler);
 
     // init and config WUT
@@ -103,21 +150,81 @@ int main(void)
     //Config WUT
     MXC_WUT_Config(&cfg);
 
-    printf("Running in ACTIVE mode. Start the test after %d secs or button press\n\n", DELAY_IN_SEC);
+    printf("Running in ACTIVE mode. Start the test after %d secs or button press\n\n", DS_IN_SEC);
     waitTrigger(1); // start the demo after 30 secs or button press
 
     // enable the wake-up sources
     MXC_LP_EnableGPIOWakeup((mxc_gpio_cfg_t *)&pb_pin[0]);
     MXC_LP_EnableWUTAlarmWakeup();
 
+    MXC_LP_ROM0Shutdown();
+    MXC_LP_USBFIFOShutdown();
+    MXC_LP_CryptoShutdown();
+    MXC_LP_SRCCShutdown();
+    MXC_LP_ICacheXIPShutdown();
+    MXC_LP_ICache1Shutdown();
+    MXC_LP_SysRam5Shutdown();
+    MXC_LP_SysRam4Shutdown();
+    MXC_LP_SysRam3Shutdown();
+    MXC_LP_SysRam2Shutdown();
+    MXC_LP_SysRam1PowerUp();
+    MXC_LP_SysRam0PowerUp(); // Global variables are in RAM0 and RAM1
+
     while (1) {
-        printf("Entering DEEPSLEEP mode, wake up by timer (%d secs) or button press.\n", DELAY_IN_SEC);
+        printf("Entering DEEPSLEEP mode, wake up by timer (%d secs) or button press.\n", DS_IN_SEC);
         waitTrigger(0);
+
+#if CUSTOM_DS == 1
+        MXC_ICC_Disable();
+        MXC_LP_ICache0Shutdown();
+
+        /* Shutdown unused power domains */
+        MXC_PWRSEQ->lpcn |= MXC_F_PWRSEQ_LPCN_BGOFF;
+
+        /* Prevent SIMO soft start on wakeup */
+        MXC_LP_FastWakeupDisable();
+
+        /* Enable VDDCSWEN=1 prior to enter backup/deepsleep mode */
+        MXC_MCR->ctrl |= MXC_F_MCR_CTRL_VDDCSWEN;
+
+        /* Switch the system clock to a lower frequency to conserve power in deep sleep
+        and reduce current inrush on wakeup */
+        switchToHIRCD4();
+
+        /* Reduce VCOREB to 0.81v */
+        MXC_SIMO_SetVregO_B(810);
+#endif
 
         MXC_LP_EnterDeepSleepMode();
 
+#if CUSTOM_DS == 1
+        /*  If VCOREA not ready and VCOREB ready, switch VCORE=VCOREB 
+        (set VDDCSW=2’b01). Configure VCOREB=1.1V wait for VCOREB ready. */
+
+        /* Check to see if VCOREA is ready on  */
+        if (!(MXC_SIMO->buck_out_ready & MXC_F_SIMO_BUCK_OUT_READY_BUCKOUTRDYC)) {
+            /* Wait for VCOREB to be ready */
+            while (!(MXC_SIMO->buck_out_ready & MXC_F_SIMO_BUCK_OUT_READY_BUCKOUTRDYB)) {}
+
+            /* Move VCORE switch back to VCOREB */
+            MXC_MCR->ctrl = (MXC_MCR->ctrl & ~(MXC_F_MCR_CTRL_VDDCSW)) |
+                            (0x1 << MXC_F_MCR_CTRL_VDDCSW_POS);
+
+            /* Raise the VCORE_B voltage */
+            while (!(MXC_SIMO->buck_out_ready & MXC_F_SIMO_BUCK_OUT_READY_BUCKOUTRDYB)) {}
+            MXC_SIMO_SetVregO_B(1000);
+            while (!(MXC_SIMO->buck_out_ready & MXC_F_SIMO_BUCK_OUT_READY_BUCKOUTRDYB)) {}
+        }
+
+        MXC_LP_ICache0PowerUp();
+        MXC_ICC_Enable();
+
+        /* Restore the system clock */
+        switchToHIRC();
+#endif
+
         printf("Waked up from DEEPSLEEP mode by %s. Then delay %d secs to enter DEEPSLEEP again.\n\n",
-               triggered == 1? "button" : "timer", SLEEP_TIME_IN_SEC);
-        MXC_Delay(SLEEP_TIME_IN_SEC * 1000000);
+               triggered == 1? "button" : "timer", DELAY_TIME_IN_SEC);
+        MXC_Delay(DELAY_TIME_IN_SEC * 1000000);
     }
 }

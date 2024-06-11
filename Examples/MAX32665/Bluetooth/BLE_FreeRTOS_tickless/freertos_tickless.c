@@ -43,11 +43,11 @@
 #include "pal_uart.h"
 #include "pal_bb.h"
 
-#define CUSTOM_DS               (0)
+#define CUSTOM_DS               (1)
 
 #define MAX_WUT_TICKS (configRTC_TICK_RATE_HZ) /* Maximum deep sleep time, units of 32 kHz ticks */
 #define MIN_WUT_TICKS           (100) /* Minimum deep sleep time, units of 32 kHz ticks */
-#define WAKEUP_US               (750) /* Deep sleep recovery time, units of us */
+#define WAKEUP_US               (1000) /* Deep sleep recovery time, units of us */
 #define WAKEUP_IN_WUT_TICK      ((uint64_t)WAKEUP_US / (uint64_t)1000000 * (uint64_t)configRTC_TICK_RATE_HZ)
 #define RESTORE_OP_IN_WUT_TICK  (65)
 #define RESTORE_OP_IN_US        ((uint64_t)RESTORE_OP_IN_WUT_TICK / (uint64_t)configRTC_TICK_RATE_HZ * (uint64_t)1000000)

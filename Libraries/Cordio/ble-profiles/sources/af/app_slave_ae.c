@@ -395,7 +395,8 @@ static bool_t appSlaveExtAdvMode(void)
     }
   }
 
-  if (appSlaveCb.advStopCback == appSlaveExtAdvStop)
+  appAdvCback_t callback = appSlaveExtAdvStop; 
+  if (appSlaveCb.advStopCback == callback)
   {
     return TRUE;
   }

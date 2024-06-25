@@ -78,7 +78,7 @@ enum
 typedef void (*appMsgHandler_t)(wsfMsgHdr_t *pMsg);
 
 /*! \brief Advertising callback function type */
-typedef void(*appAdvCback_t)(dmEvt_t *pMsg);
+typedef void(* appAdvCback_t)(dmEvt_t *pMsg);
 
 /*! \brief Master control block */
 typedef struct

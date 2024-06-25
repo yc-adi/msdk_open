@@ -820,8 +820,9 @@ void FitHandlerInit(wsfHandlerId_t handlerId)
     fitHandlerId = handlerId;
 
     /* Set configuration pointers */
-    pAppAdvCfg = (appAdvCfg_t *)&fitExtAdvCfg;
     pAppSlaveCfg = (appSlaveCfg_t *)&fitSlaveCfg;
+    pAppAdvCfg = (appAdvCfg_t *)&fitExtAdvCfg;
+    pAppExtAdvCfg = (appExtAdvCfg_t *)&fitExtAdvCfg;
     pAppSecCfg = (appSecCfg_t *)&fitSecCfg;
     pAppUpdateCfg = (appUpdateCfg_t *)&fitUpdateCfg;
 

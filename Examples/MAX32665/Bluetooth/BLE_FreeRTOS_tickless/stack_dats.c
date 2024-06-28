@@ -334,6 +334,9 @@ void bleStartup(void)
     static BbRtCfg_t mainBbRtCfg;
 
     PalBbLoadCfg((PalBbCfg_t *)&mainBbRtCfg);
+
+    mainBbRtCfg.schSetupDelayUs = 125;  /// in order to lower the power consumption
+
     LlGetDefaultRunTimeCfg(&mainLlRtCfg);
 #if (BT_VER >= LL_VER_BT_CORE_SPEC_5_0)
     /* Set 5.0 requirements. */

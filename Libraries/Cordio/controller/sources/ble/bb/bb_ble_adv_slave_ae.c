@@ -415,6 +415,9 @@ static void bbSlvExecuteAuxAdvOp(BbOpDesc_t *pBod, BbBleData_t *pBle)
     APP_TRACE_INFO1("%02X", pData[pos]);
   }
 
+  uint32_t curr = PalBbGetCurrentTime();
+  ADD_DBG2(72, curr % 1000000000);
+  
   PalBbBleTxData(pAuxAdv->txAuxAdvPdu, 2);
 }
 

@@ -1,0 +1,7 @@
+
+halt
+loadbin bin/ble5-ctr.bin,0
+r
+g
+exit
+

@@ -143,6 +143,8 @@ static bool_t bbSetupAdvOp(BbOpDesc_t *pBod, BbBleSlvAdvEvent_t *pAdv, uint8_t s
     bbBleClrIfs();    /* non-connectable advertising */
   }
   PalBbBleTxBufDesc_t desc = {.pBuf = pAdv->pTxAdvBuf, .len = pAdv->txAdvLen};
+  uint32_t curr = PalBbGetCurrentTime();
+  ADD_DBG2(74, curr % 1000000000);
   PalBbBleTxData(&desc, 1);
 
   /* Tx may fail; no more important statements in the FALSE code path. */

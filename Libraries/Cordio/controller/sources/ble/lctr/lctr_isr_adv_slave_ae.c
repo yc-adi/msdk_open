@@ -961,6 +961,8 @@ void lctrSlvExtAdvAbortOp(BbOpDesc_t *pOp)
 /*************************************************************************************************/
 void lctrSlvAuxAdvEndOp(BbOpDesc_t *pOp)
 {
+  ADD_DBG1(85);
+
   lctrAdvSet_t * const pAdvSet = pOp->pCtx;
   BbBleData_t * const pBle = pOp->prot.pBle;
   WSF_ASSERT(pOp->protId == BB_PROT_BLE);

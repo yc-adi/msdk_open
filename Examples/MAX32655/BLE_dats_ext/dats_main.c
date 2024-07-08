@@ -281,7 +281,7 @@ void datsStartAdv(void)
     advHandles[2] = 2;
 
     /* start advertising; automatically set connectable/discoverable mode and bondable mode */
-    AppExtAdvStart(3, &advHandles[0], APP_MODE_AUTO_INIT);
+    AppExtAdvStart(1, &advHandles[1], APP_MODE_AUTO_INIT);
 }
 
 /*************************************************************************************************/

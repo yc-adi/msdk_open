@@ -69,6 +69,11 @@
 #define PLATFORM_UART_TERMINAL_BUFFER_SIZE 2048U
 #define DEFAULT_TX_POWER 0 /* dBm */
 
+uint32_t gDbgBuf[DBG_BUF_SIZE];
+uint32_t gDbgHead = 0;
+uint32_t gDbgTail = 0;
+uint32_t gDbgEnabled = 1;
+
 /**************************************************************************************************
   Global Variables
 **************************************************************************************************/

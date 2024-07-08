@@ -35,6 +35,31 @@ extern "C" {
 /*! \addtogroup WSF_TRACE_API
  *  \{ */
 
+#define DBG_BUF_SIZE	(512)
+
+extern uint32_t gDbgBuf[DBG_BUF_SIZE];
+extern uint32_t gDbgHead;
+extern uint32_t gDbgTail;
+extern uint32_t gDbgEnabled;
+
+#define ADD_DBG1(x)		if (gDbgEnabled && (x) > 70) { do {gDbgBuf[gDbgHead++]=(x);		\
+		if (gDbgHead >= DBG_BUF_SIZE) gDbgHead = 0;		                      \
+	} while(0); }
+#define ADD_DBG2(x, y)		if (gDbgEnabled && (x) > 70) { do {gDbgBuf[gDbgHead++]=(x);		\
+		if (gDbgHead >= DBG_BUF_SIZE) gDbgHead = 0;			\
+		gDbgBuf[gDbgHead++]=(y);								        \
+		if (gDbgHead >= DBG_BUF_SIZE) gDbgHead = 0;			\
+	} while(0); }
+#define ADD_DBG3(x, y, z)	if (gDbgEnabled && (x) > 70) { do {gDbgBuf[gDbgHead++]=(x);		\
+		if (gDbgHead >= DBG_BUF_SIZE) gDbgHead = 0;			\
+		gDbgBuf[gDbgHead++]=(y);								\
+		if (gDbgHead >= DBG_BUF_SIZE) gDbgHead = 0;			\
+		gDbgBuf[gDbgHead++]=(z);								\
+		if (gDbgHead >= DBG_BUF_SIZE) gDbgHead = 0;			\
+	} while(0); }
+#define GET_DBG_BUF_LEN(len, curr) if (curr >= gDbgTail) {len = curr - gDbgTail;}  \
+    else {len = DBG_BUF_SIZE - gDbgTail + curr;}
+
 /**************************************************************************************************
   Macros
 **************************************************************************************************/

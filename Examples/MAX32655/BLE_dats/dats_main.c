@@ -75,6 +75,13 @@
 #define BTN_1_TMR MXC_TMR2
 #define BTN_2_TMR MXC_TMR3
 
+extern uint32_t gu32MaxTxIsrGap;
+
+uint32_t gDbgBuf[512];
+uint32_t gDbgHead = 0;
+uint32_t gDbgTail = 0;
+uint32_t gDbgEnabled = 1;
+
 /*! Enumeration of client characteristic configuration descriptors */
 enum {
     DATS_GATT_SC_CCC_IDX, /*! GATT service, service changed characteristic */
@@ -959,7 +966,7 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
 void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
-        APP_TRACE_INFO1("Dats got evt %d", pMsg->event);
+        APP_TRACE_INFO2("Dats got evt %d %d", pMsg->event, gu32MaxTxIsrGap);
 
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {

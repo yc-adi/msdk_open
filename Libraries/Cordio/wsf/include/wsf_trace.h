@@ -42,15 +42,15 @@ extern uint32_t gDbgHead;
 extern uint32_t gDbgTail;
 extern uint32_t gDbgEnabled;
 
-#define ADD_DBG1(x)		if (gDbgEnabled && (x) > 70) { do {gDbgBuf[gDbgHead++]=(x);		\
+#define ADD_DBG1(x)		if (gDbgEnabled && (x) > 103) { do {gDbgBuf[gDbgHead++]=(x);		\
 		if (gDbgHead >= DBG_BUF_SIZE) gDbgHead = 0;		                      \
 	} while(0); }
-#define ADD_DBG2(x, y)		if (gDbgEnabled && (x) > 70) { do {gDbgBuf[gDbgHead++]=(x);		\
+#define ADD_DBG2(x, y)		if (gDbgEnabled && (x) > 103) { do {gDbgBuf[gDbgHead++]=(x);		\
 		if (gDbgHead >= DBG_BUF_SIZE) gDbgHead = 0;			\
 		gDbgBuf[gDbgHead++]=(y);								        \
 		if (gDbgHead >= DBG_BUF_SIZE) gDbgHead = 0;			\
 	} while(0); }
-#define ADD_DBG3(x, y, z)	if (gDbgEnabled && (x) > 70) { do {gDbgBuf[gDbgHead++]=(x);		\
+#define ADD_DBG3(x, y, z)	if (gDbgEnabled && (x) > 103) { do {gDbgBuf[gDbgHead++]=(x);		\
 		if (gDbgHead >= DBG_BUF_SIZE) gDbgHead = 0;			\
 		gDbgBuf[gDbgHead++]=(y);								\
 		if (gDbgHead >= DBG_BUF_SIZE) gDbgHead = 0;			\

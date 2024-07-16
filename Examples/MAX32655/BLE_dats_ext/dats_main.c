@@ -78,6 +78,8 @@
 #define BTN_1_TMR MXC_TMR2
 #define BTN_2_TMR MXC_TMR3
 
+uint32_t gDbgTemp0 = 0;
+
 /*! Enumeration of client characteristic configuration descriptors */
 enum {
     DATS_GATT_SC_CCC_IDX, /*! GATT service, service changed characteristic */
@@ -281,7 +283,7 @@ void datsStartAdv(void)
     advHandles[2] = 2;
 
     /* start advertising; automatically set connectable/discoverable mode and bondable mode */
-    AppExtAdvStart(1, &advHandles[1], APP_MODE_AUTO_INIT);
+    AppExtAdvStart(1, &advHandles[0], APP_MODE_AUTO_INIT);
 }
 
 /*************************************************************************************************/
@@ -1065,7 +1067,7 @@ static void btnPressHandler(uint8_t btnId, PalBtnPos_t state)
 void DatsHandler(wsfEventMask_t event, wsfMsgHdr_t *pMsg)
 {
     if (pMsg != NULL) {
-        APP_TRACE_INFO1("Dats got evt %d", pMsg->event);
+        APP_TRACE_INFO2("Dats got evt %d max=%d", pMsg->event, gDbgTemp0);
 
         /* process ATT messages */
         if (pMsg->event >= ATT_CBACK_START && pMsg->event <= ATT_CBACK_END) {

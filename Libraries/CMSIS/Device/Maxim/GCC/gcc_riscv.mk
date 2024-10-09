@@ -313,7 +313,8 @@ LDFLAGS+=-Xlinker --gc-sections       \
       -nostartfiles 	\
 	  -march=$(MARCH) 	\
 	  -mabi=$(MABI)		\
-      -Xlinker -Map -Xlinker ${BUILD_DIR}/$(PROJECT).map
+      -Xlinker -Map -Xlinker ${BUILD_DIR}/$(PROJECT).map \
+	  -Xlinker --print-memory-usage
 
 # Add --no-warn-rwx-segments on GCC 12+
 # This is not universally supported or enabled by default, so we need to check whether the linker supports it first
